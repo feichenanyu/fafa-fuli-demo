@@ -637,6 +637,38 @@ tr.off td{color:var(--text-3)}
 .ws-reopen svg{writing-mode:horizontal-tb}.ws-reopen b{writing-mode:horizontal-tb;font-size:11px;color:#fff;background:var(--brand);border-radius:999px;padding:1px 6px}
 .ws-reopen:hover{color:var(--brand-700);border-color:var(--brand-300)}
 body.ws-dragging{cursor:col-resize;user-select:none}
+.adr{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--border-subtle);background:var(--surface-subtle);border-radius:12px;padding:12px 14px}
+.adr-ic{width:32px;height:32px;border-radius:999px;background:var(--brand-soft);color:var(--brand-700);display:flex;align-items:center;justify-content:center;flex:none}
+.adr-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.adr-tx b{font-size:14px;font-weight:600}
+.adr-tx span{color:var(--text-2);line-height:19px}
+.adr-tag{display:inline-flex;height:20px;align-items:center;border-radius:4px;padding:0 6px;font-size:11px;background:var(--surface-muted);color:var(--text-2);margin-left:6px;font-weight:400}
+.adr-tag.def{background:var(--brand-soft);color:var(--brand-700)}
+.adr-empty{display:flex;align-items:center;gap:10px;border:1px dashed var(--border-strong,#c8d3d0);border-radius:12px;padding:14px;font-size:13px;color:var(--text-2)}
+.adr-it{border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;text-align:left;width:100%;font-family:inherit;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.adr-it:hover{border-color:var(--brand-300)}
+.adr-it.on{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+.adr-rd{width:16px;height:16px;border-radius:999px;border:1.5px solid var(--border-strong,#c8d3d0);flex:none;margin-top:2px;background:#fff}
+.adr-it.on .adr-rd{border:5px solid var(--brand)}
+.adr-ed{border:0;background:transparent;color:var(--brand-700);font-size:13px;cursor:pointer;font-family:inherit;padding:0;flex:none}
+.adr-list{display:flex;flex-direction:column;gap:8px;max-height:min(52vh,420px);overflow-y:auto;padding:2px}
+.adr-f{display:flex;flex-direction:column;gap:6px;font-size:13px}
+.adr-f>span{color:var(--text-2)}
+.adr-f>span i{color:var(--danger);font-style:normal}
+.adr-f small{color:var(--danger);font-size:12px}
+.adr-in{height:38px;border:1px solid var(--border);border-radius:10px;padding:0 12px;font-size:14px;font-family:inherit;outline:0;color:var(--ink);background:#fff;width:100%;min-width:0;box-sizing:border-box}
+.adr-in:focus{border-color:var(--brand-300);box-shadow:0 0 0 3px #0d948814}
+.adr-in.err{border-color:var(--danger)}
+textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
+.adr-reg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.adr-tags{display:flex;gap:6px;flex-wrap:wrap}
+.adr-tb{height:30px;border:1px solid var(--border);background:#fff;border-radius:999px;padding:0 14px;font-size:13px;cursor:pointer;font-family:inherit;color:var(--text-2)}
+.adr-tb.on{border-color:var(--brand);color:var(--brand-700);background:var(--brand-soft)}
+.adr-sw{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);border:0;background:transparent;cursor:pointer;font-family:inherit;padding:0}
+.adr-sw i{width:36px;height:20px;border-radius:999px;background:var(--border-strong,#c8d3d0);position:relative;flex:none;transition:background .2s}
+.adr-sw i::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:999px;background:#fff;transition:left .2s}
+.adr-sw.on i{background:var(--brand)}
+.adr-sw.on i::after{left:18px}
 </style>
 </helmet>
 
@@ -1816,9 +1848,17 @@ body.ws-dragging{cursor:col-resize;user-select:none}
 <div class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px">
 <div style="font-weight: 600">收货方式</div>
 <div style="display: flex; gap: 12px; flex-wrap: wrap">
-<button class="pay {{shipOneCls}}" style="flex: 1 1 220px; width: auto" onClick="{{shipOne}}"><div><div style="font-weight: 600">整批发到一处</div><div style="font-size: 12px; color: var(--text-2); margin-top: 4px">[公司地址] · 行政部 [联系人]</div></div></button>
+<button class="pay {{shipOneCls}}" style="flex: 1 1 220px; width: auto" onClick="{{shipOne}}"><div><div style="font-weight: 600">整批发到一处</div><div style="font-size: 12px; color: var(--text-2); margin-top: 4px">{{coAddrShort}}</div></div></button>
 <button class="pay {{shipListCls}}" style="flex: 1 1 220px; width: auto" onClick="{{shipList}}"><div><div style="font-weight: 600">上传名单代发</div><div style="font-size: 12px; color: var(--text-2); margin-top: 4px">按名单逐人发货 · 电子卡券按名单短信发放</div></div></button>
 </div>
+<sc-if value="{{coShowAddr}}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{coHasAddr}}" hint-placeholder-val="{{ true }}">
+<div class="adr fi"><span class="adr-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></span><div class="adr-tx"><div><b>{{coAddr.name}}</b>&nbsp;&nbsp;<span class="mono">{{coAddr.phone}}</span><span class="adr-tag">{{coAddr.tag}}</span><sc-if value="{{coAddr.def}}" hint-placeholder-val="{{ true }}"><span class="adr-tag def">默认</span></sc-if></div><span>{{coAddr.full}}</span></div><button class="btn btn-o" style="height: 32px; font-size: 13px; padding: 0 12px; flex: none" onClick="{{adrOpenPick}}">更换地址</button></div>
+</sc-if>
+<sc-if value="{{coNoAddr}}" hint-placeholder-val="{{ false }}">
+<div class="adr-empty fi"><span style="flex: 1">还没有收货地址，新增后即可下单</span><button class="btn btn-p" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{adrOpenNew}}">新增收货地址</button></div>
+</sc-if>
+</sc-if>
 <sc-if value="{{rosterOn}}" hint-placeholder-val="{{ false }}">
 <div class="ros fi">
 <div class="ros-steps"><sc-for list="{{rosSteps}}" as="rs" hint-placeholder-count="4"><span class="ros-step {{rs.cls}}"><i class="mono">{{rs.n}}</i>{{rs.label}}</span></sc-for></div>
@@ -2103,7 +2143,7 @@ body.ws-dragging{cursor:col-resize;user-select:none}
 <sc-if value="{{acEnt}}" hint-placeholder-val="{{ true }}">
 <div class="acw-rows"><sc-for list="{{entInfo}}" as="kv" hint-placeholder-count="5"><div><span>{{kv.k}}</span><b>{{kv.v}}</b></div></sc-for></div>
 <div class="acw-sec"><b>收货地址</b><div style="flex: 1"></div><button class="btn btn-o sm" onClick="{{acAddr}}">新增地址</button></div>
-<sc-for list="{{acAddrs}}" as="ad" hint-placeholder-count="2"><div class="ac-addr"><div><b>{{ad.name}}</b><sc-if value="{{ad.def}}" hint-placeholder-val="{{ false }}"><span class="tagb" style="margin-left: 6px">默认</span></sc-if></div><div style="font-size: 12px; color: var(--text-2); margin-top: 4px">{{ad.addr}}</div></div></sc-for>
+<sc-for list="{{acAddrs}}" as="ad" hint-placeholder-count="2"><div class="ac-addr" style="display: flex; gap: 10px; align-items: flex-start"><div style="flex: 1; min-width: 0"><div><b>{{ad.name}}</b><span class="adr-tag">{{ad.tag}}</span><sc-if value="{{ad.def}}" hint-placeholder-val="{{ false }}"><span class="tagb" style="margin-left: 6px">默认</span></sc-if></div><div style="font-size: 12px; color: var(--text-2); margin-top: 4px">{{ad.addr}}</div></div><button class="adr-ed" onClick="{{ad.edit}}">编辑</button></div></sc-for>
 </sc-if>
 </sc-if>
 
@@ -2180,6 +2220,31 @@ body.ws-dragging{cursor:col-resize;user-select:none}
 <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: var(--text-2)">期望交期</span><div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{inqDates}}" as="q" hint-placeholder-count="3"><button class="lchip {{q.cls}}" onClick="{{q.pick}}">{{q.label}}</button></sc-for></div></div>
 <div style="font-size: 12px; color: var(--text-3); line-height: 18px">提交后客户经理 2 小时内联系报价；大批量可议价、可定制包装，报价单在「资产库 › 订单 › 集采订单」查看。</div>
 <div style="display: flex; gap: 10px; justify-content: flex-end"><button class="btn btn-o" onClick="{{inqClose}}">取消</button><button class="btn btn-p" onClick="{{inqSubmit}}">提交询价</button></div>
+</div>
+</div>
+</sc-if>
+
+<!-- 收货地址：选择 / 新增 / 编辑 -->
+<sc-if value="{{adrOn}}" hint-placeholder-val="{{ false }}">
+<div class="fi" style="position: fixed; inset: 0; background: #0006; z-index: 26; display: flex; align-items: center; justify-content: center; padding: 16px" onClick="{{adrClose}}">
+<div class="fu" role="dialog" aria-label="{{adrTitle}}" style="width: 100%; max-width: 560px; max-height: calc(100vh - 32px); overflow-y: auto; background: #fff; padding: 24px; border-radius: 24px; display: flex; flex-direction: column; gap: 14px; box-shadow: var(--shadow-dialog)" onClick="{{stop}}">
+<div style="display: flex; align-items: center; gap: 8px"><sc-if value="{{adrCanBack}}" hint-placeholder-val="{{ false }}"><button class="adr-ed" style="color: var(--text-2)" onClick="{{adrBack}}" aria-label="返回地址列表">‹ 返回</button></sc-if><b style="font-size: 17px">{{adrTitle}}</b></div>
+<sc-if value="{{adrIsPick}}" hint-placeholder-val="{{ true }}">
+<div class="adr-list" role="radiogroup" aria-label="收货地址"><sc-for list="{{adrList}}" as="a" hint-placeholder-count="3"><div class="adr-it {{a.cls}}" role="radio" aria-checked="{{a.on}}" tabindex="0" onClick="{{a.pick}}"><span class="adr-rd"></span><div class="adr-tx"><div><b>{{a.name}}</b>&nbsp;&nbsp;<span class="mono">{{a.phone}}</span><span class="adr-tag">{{a.tag}}</span><sc-if value="{{a.def}}" hint-placeholder-val="{{ false }}"><span class="adr-tag def">默认</span></sc-if></div><span>{{a.full}}</span></div><button class="adr-ed" onClick="{{a.edit}}">编辑</button></div></sc-for></div>
+<div style="display: flex; gap: 10px; align-items: center"><button class="btn btn-o" onClick="{{adrOpenNew}}">＋ 新增收货地址</button><div style="flex: 1"></div><button class="btn btn-o" onClick="{{adrClose}}">取消</button><button class="btn btn-p" onClick="{{adrConfirm}}">使用该地址</button></div>
+</sc-if>
+<sc-if value="{{adrIsForm}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+<label class="adr-f"><span>收货人 <i>*</i></span><input class="adr-in {{adrF.nameCls}}" placeholder="姓名或部门联系人" value="{{adrF.name}}" onChange="{{adrF.onName}}"><sc-if value="{{adrF.nameErr}}" hint-placeholder-val="{{ false }}"><small>请填写收货人</small></sc-if></label>
+<label class="adr-f"><span>手机号 <i>*</i></span><input class="adr-in mono {{adrF.phoneCls}}" inputmode="numeric" maxlength="11" placeholder="11 位手机号" value="{{adrF.phone}}" onChange="{{adrF.onPhone}}"><sc-if value="{{adrF.phoneErr}}" hint-placeholder-val="{{ false }}"><small>请输入 11 位手机号</small></sc-if></label>
+</div>
+<div class="adr-f"><span>所在地区 <i>*</i></span><div class="adr-reg"><select class="adr-in" aria-label="省份" value="{{adrF.prov}}" onChange="{{adrF.onProv}}"><sc-for list="{{adrF.provs}}" as="o" hint-placeholder-count="5"><option value="{{o.v}}">{{o.v}}</option></sc-for></select><select class="adr-in" aria-label="城市" value="{{adrF.city}}" onChange="{{adrF.onCity}}"><sc-for list="{{adrF.cities}}" as="o" hint-placeholder-count="2"><option value="{{o.v}}">{{o.v}}</option></sc-for></select><select class="adr-in" aria-label="区县" value="{{adrF.dist}}" onChange="{{adrF.onDist}}"><sc-for list="{{adrF.dists}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.v}}</option></sc-for></select></div></div>
+<label class="adr-f"><span>详细地址 <i>*</i></span><textarea class="adr-in {{adrF.detailCls}}" placeholder="街道、门牌号、楼层、收货点（如：行政前台）" value="{{adrF.detail}}" onChange="{{adrF.onDetail}}"></textarea><sc-if value="{{adrF.detailErr}}" hint-placeholder-val="{{ false }}"><small>请填写详细地址（至少 5 个字）</small></sc-if></label>
+<div class="adr-f"><span>地址标签</span><div class="adr-tags"><sc-for list="{{adrF.tags}}" as="t" hint-placeholder-count="4"><button class="adr-tb {{t.cls}}" onClick="{{t.pick}}">{{t.t}}</button></sc-for></div></div>
+<button class="adr-sw {{adrF.defCls}}" role="switch" aria-checked="{{adrF.defOn}}" onClick="{{adrF.toggleDef}}"><i></i>设为默认收货地址</button>
+<div style="font-size: 12px; color: var(--text-3); line-height: 18px">地址保存在企业账户下，同企业成员下单时均可选择；大件或整批到货建议填写收货点与可收货时段。</div>
+<div style="display: flex; gap: 10px; align-items: center"><sc-if value="{{adrF.canDel}}" hint-placeholder-val="{{ false }}"><button class="adr-ed" style="color: var(--danger)" onClick="{{adrF.del}}">删除地址</button></sc-if><div style="flex: 1"></div><button class="btn btn-o" onClick="{{adrFormCancel}}">取消</button><button class="btn btn-p" onClick="{{adrF.save}}">{{adrF.saveLabel}}</button></div>
+</sc-if>
 </div>
 </div>
 </sc-if>
@@ -2332,8 +2397,96 @@ class Component extends DCLogic {
         { t: '10-10 11:20', acct: '预付款', type: '充值 · 对公转账', amt: 100000, ref: '', bal: 108982 },
         { t: '10-01 00:00', acct: '活动账户', type: '活动发放 · 秋冬福利季', amt: 20000, ref: '', bal: 20000 },
         { t: '09-28 10:06', acct: '支付宝', type: '订单支付', amt: -19920, ref: 'FM2609280012', bal: null }] },
-      toast: '', toastCart: false, pay: 'alipay', ship: 'one', showUpgrade: false, account: null,
+      toast: '', toastCart: false, pay: 'alipay', ship: 'one', addrs: this.seedAddrs(), addrId: 'a1', adr: null, showUpgrade: false, account: null,
       doneInfo: null, orders: this.seedOrders(), paying: false, payErr: '', tradeFrom: 'home' };
+  }
+
+  // ---------------- 收货地址 ----------------
+  seedAddrs() {
+    return [
+      { id: 'a1', name: '行政部 · 张 **', phone: '13816686612', prov: '上海市', city: '上海市', dist: '浦东新区', detail: '张江路 368 号 8 楼行政前台', tag: '公司', def: true },
+      { id: 'a2', name: '工会办公室 · 刘 **', phone: '13917723308', prov: '上海市', city: '上海市', dist: '闵行区', detail: '春东路 508 号 2 号楼 1 层', tag: '分支机构', def: false },
+      { id: 'a3', name: '苏州仓 · 王 **', phone: '13771826690', prov: '江苏省', city: '苏州市', dist: '工业园区', detail: '星湖街 328 号 C3 仓收货口（工作日 9:00–17:00）', tag: '仓库', def: false }
+    ];
+  }
+  regions() {
+    return {
+      '上海市': { '上海市': ['浦东新区', '闵行区', '徐汇区', '静安区'] },
+      '北京市': { '北京市': ['朝阳区', '海淀区', '东城区'] },
+      '江苏省': { '苏州市': ['工业园区', '姑苏区', '吴中区'], '南京市': ['秦淮区', '鼓楼区', '江宁区'] },
+      '浙江省': { '杭州市': ['西湖区', '余杭区', '滨江区'], '宁波市': ['鄞州区', '海曙区'] },
+      '广东省': { '深圳市': ['南山区', '福田区', '宝安区'], '广州市': ['天河区', '越秀区'] }
+    };
+  }
+  maskPhone(p) { p = String(p || ''); return p.length === 11 ? p.slice(0, 3) + ' **** ' + p.slice(-4) : p; }
+  addrFull(a) { if (!a) return ''; return (a.prov === a.city ? a.prov : a.prov + a.city) + a.dist + ' ' + a.detail; }
+  addrVals() {
+    const st = this.state, set = (o) => this.setState(o);
+    const addrs = st.addrs || [];
+    const cur = addrs.find((a) => a.id === st.addrId);
+    const D = st.adr; // { mode: 'pick'|'form', from: 'checkout'|'account', pickId, f: {...}, editId, tried }
+    const view = (a) => ({ name: a.name, phone: this.maskPhone(a.phone), tag: a.tag, def: !!a.def, full: this.addrFull(a) });
+    const R = this.regions();
+    const blank = () => { const p = '上海市', c = Object.keys(R[p])[0]; return { name: '', phone: '', prov: p, city: c, dist: R[p][c][0], detail: '', tag: '公司', def: !addrs.length }; };
+    const openForm = (a, from, back) => this.setState({ adr: { mode: 'form', from: from, back: !!back, pickId: D ? D.pickId : st.addrId, editId: a ? a.id : '', tried: false, f: a ? Object.assign({}, a) : blank() } });
+    const f = D && D.f ? D.f : blank();
+    const setF = (patch) => set({ adr: Object.assign({}, D, { f: Object.assign({}, f, patch) }) });
+    const errs = { name: !String(f.name).trim(), phone: !/^1\d{10}$/.test(String(f.phone).replace(/\s/g, '')), detail: String(f.detail).trim().length < 5 };
+    const tried = !!(D && D.tried);
+    const cities = Object.keys(R[f.prov] || {});
+    const dists = (R[f.prov] || {})[f.city] || [];
+    const save = () => {
+      if (errs.name || errs.phone || errs.detail) { set({ adr: Object.assign({}, D, { tried: true }) }); return; }
+      const rec = Object.assign({}, f, { phone: String(f.phone).replace(/\s/g, ''), name: String(f.name).trim(), detail: String(f.detail).trim() });
+      let list;
+      if (D.editId) list = addrs.map((a) => (a.id === D.editId ? Object.assign({}, a, rec, { id: a.id }) : a));
+      else { rec.id = 'a' + Date.now(); list = addrs.concat([rec]); }
+      const id = D.editId || rec.id;
+      if (rec.def) list = list.map((a) => Object.assign({}, a, { def: a.id === id }));
+      const o = { addrs: list };
+      if (D.from === 'checkout') { o.addrId = id; o.adr = null; } else o.adr = null;
+      if (D.from === 'checkout' && D.back) { o.adr = { mode: 'pick', from: 'checkout', pickId: id }; delete o.addrId; }
+      this.setState(o);
+      this.flash(D.editId ? '地址已更新' : (D.from === 'checkout' && !D.back ? '已新增并选用该地址' : '地址已新增'), false);
+    };
+    const del = () => {
+      const list = addrs.filter((a) => a.id !== D.editId);
+      if (list.length && !list.some((a) => a.def)) list[0] = Object.assign({}, list[0], { def: true });
+      const o = { addrs: list, adr: D.back ? { mode: 'pick', from: D.from, pickId: list.length ? list[0].id : '' } : null };
+      if (st.addrId === D.editId) o.addrId = list.length ? (list.find((a) => a.def) || list[0]).id : '';
+      this.setState(o); this.flash('地址已删除', false);
+    };
+    const pickId = D && D.pickId ? D.pickId : st.addrId;
+    return {
+      coShowAddr: st.ship !== 'list', coHasAddr: !!cur, coNoAddr: !cur, coAddr: cur ? view(cur) : { name: '', phone: '', tag: '', def: false, full: '' },
+      coAddrShort: cur ? (cur.city + cur.dist + ' · ' + cur.name) : '请新增收货地址',
+      adrOpenPick: () => set({ adr: { mode: 'pick', from: 'checkout', pickId: st.addrId } }),
+      adrOpenNew: () => openForm(null, D ? D.from : 'checkout', !!(D && D.mode === 'pick')),
+      adrOn: !!D, adrIsPick: !!D && D.mode === 'pick', adrIsForm: !!D && D.mode === 'form',
+      adrTitle: !D ? '' : D.mode === 'pick' ? '选择收货地址' : (D.editId ? '编辑收货地址' : '新增收货地址'),
+      adrCanBack: !!D && D.mode === 'form' && !!D.back, adrBack: () => set({ adr: { mode: 'pick', from: D.from, pickId: D.pickId } }),
+      adrClose: () => set({ adr: null }), adrFormCancel: () => set({ adr: D && D.back ? { mode: 'pick', from: D.from, pickId: D.pickId } : null }),
+      adrList: addrs.map((a) => Object.assign(view(a), { cls: pickId === a.id ? 'on' : '', on: String(pickId === a.id),
+        pick: () => set({ adr: Object.assign({}, D, { pickId: a.id }) }),
+        edit: (e) => { if (e && e.stopPropagation) e.stopPropagation(); openForm(a, 'checkout', true); } })),
+      adrConfirm: () => { this.setState({ addrId: pickId, adr: null }); this.flash('已切换收货地址', false); },
+      adrF: {
+        name: f.name, phone: f.phone, prov: f.prov, city: f.city, dist: f.dist, detail: f.detail,
+        nameErr: tried && errs.name, phoneErr: tried && errs.phone, detailErr: tried && errs.detail,
+        nameCls: tried && errs.name ? 'err' : '', phoneCls: tried && errs.phone ? 'err' : '', detailCls: tried && errs.detail ? 'err' : '',
+        onName: (e) => setF({ name: e.target.value }), onPhone: (e) => setF({ phone: String(e.target.value).replace(/\D/g, '').slice(0, 11) }), onDetail: (e) => setF({ detail: e.target.value }),
+        provs: Object.keys(R).map((v) => ({ v: v })), cities: cities.map((v) => ({ v: v })), dists: dists.map((v) => ({ v: v })),
+        onProv: (e) => { const p = e.target.value; const c = Object.keys(R[p])[0]; setF({ prov: p, city: c, dist: R[p][c][0] }); },
+        onCity: (e) => { const c = e.target.value; setF({ city: c, dist: R[f.prov][c][0] }); },
+        onDist: (e) => setF({ dist: e.target.value }),
+        tags: ['公司', '分支机构', '仓库', '门店'].map((t) => ({ t: t, cls: f.tag === t ? 'on' : '', pick: () => setF({ tag: t }) })),
+        defCls: f.def ? 'on' : '', defOn: String(!!f.def), toggleDef: () => setF({ def: !f.def }),
+        canDel: !!(D && D.editId), del: del, save: save,
+        saveLabel: D && D.from === 'checkout' && !D.editId && !D.back ? '保存并使用' : '保存'
+      },
+      acAddrs: addrs.map((a) => ({ name: a.name + ' · ' + this.maskPhone(a.phone), addr: this.addrFull(a), def: !!a.def, tag: a.tag, edit: () => openForm(a, 'account', false) })),
+      acAddr: () => openForm(null, 'account', false)
+    };
   }
   // ---------------- 插画（内联 SVG） ----------------
   art() {
@@ -2396,6 +2549,11 @@ class Component extends DCLogic {
         adv: [['实用', '员工天天用得上'], ['可刻字', '保温杯支持定制'], ['一件代发', '按名单发到家']], topic: '暖冬专题', hall: '家居品牌馆', ids: ['h5', 'h6', 'h9', 'h13', 'h14', 'g5'], vs: [] },
       { id: 'r9', banners: [{ t: "塞翁福 · 滋补莲子", img: 'b-saiwengfu', zone: 't1' }, { t: "京东生鲜 · 全球优采", img: 'b-jingmi', zone: 't3' }], name: '健康滋补', window: '敬老 · 关怀', src: '京东、平台精选', slogan: '敬老慰问、员工关怀的滋补好物',
         adv: [['老字号', '品牌滋补礼盒'], ['礼盒装', '送长辈更体面'], ['可配卡', '滋补提货卡可选']], topic: '重阳敬老专题', hall: '滋补品牌馆', ids: ['h7', 'h8', 'g4'], vs: ['v6'] }];
+  }
+  // 「去逛发发福利」：进入最新发发福利落地页（一页融合），对话框默认收起，直接定位到 GUI 区
+  goGui() {
+    this.setState({ screen: 'ai', v3Mini: true, v3More: false, toast: '' });
+    this.v3ToGui();
   }
   // 收缩态下切换栏目 / 频道：对话框保持收缩，页面回到 GUI 区顶部
   v3ToGui() {
@@ -2821,7 +2979,8 @@ class Component extends DCLogic {
     const ro = st.roster || { st: 'none' };
     const rosN = ro.n || 0; const need = rosN * st.rosPer;
     const mism = st.ship === 'list' && ro.st === 'ok' ? selItems.filter((p) => st.cart[p.id] !== need) : [];
-    const blockText = st.ship === 'list' && ro.st !== 'ok' ? '选择了名单代发：请先上传名单并通过校验' : (mism.length ? '商品数量与名单不一致：请先「按名单调整数量」' : '');
+    const curAddr = (st.addrs || []).find((a) => a.id === st.addrId);
+    const blockText = st.ship === 'one' && !curAddr ? '请先新增或选择收货地址' : st.ship === 'list' && ro.st !== 'ok' ? '选择了名单代发：请先上传名单并通过校验' : (mism.length ? '商品数量与名单不一致：请先「按名单调整数量」' : '');
     const stepIdx = ro.st === 'none' ? 1 : (ro.st === 'checking' || ro.st === 'err' ? 2 : (mism.length ? 3 : 4));
     const upload = () => { this.setState({ roster: { st: 'checking', file: '员工名单.xlsx' } }); clearTimeout(this._r); this._r = setTimeout(() => this.setState({ roster: { st: 'err', file: '员工名单.xlsx', total: 120, okN: 118 } }), 900); };
     // ---- 提交订单：1 个主单，按供应商拆子单 ----
@@ -2830,7 +2989,7 @@ class Component extends DCLogic {
       if (blockText) { this.flash(blockText, false); return; }
       const d = new Date(); const no = 'FM261017' + String(1000 + st.orders.length * 7 + d.getMinutes()).slice(-4);
       const order = { no: no, time: '10-17 ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'), ship: st.ship,
-        roster: st.ship === 'list' ? { n: rosN, per: st.rosPer, file: ro.file } : null,
+        roster: st.ship === 'list' ? { n: rosN, per: st.rosPer, file: ro.file } : null, addr: st.ship === 'one' && curAddr ? Object.assign({}, curAddr) : null,
         subs: selSrcs.map((s, i) => { const its = selItems.filter((p) => p.source === s).map((p) => ({ id: p.id, name: p.name, qty: st.cart[p.id], unit: P(p), img: this.imgOf(p), physical: p.physical !== false }));
           return { no: no + '-' + (i + 1), source: s, items: its, amount: its.reduce((a, it) => a + it.unit * it.qty, 0), virtual: its.some((it) => !it.physical), status: 'unpaid', pay: '', log: false, invoiced: false }; }) };
       const cart = Object.assign({}, st.cart); selItems.forEach((p) => { delete cart[p.id]; });
@@ -3187,7 +3346,7 @@ class Component extends DCLogic {
           afterNodes: a ? [['提交售后申请 · ' + a.reason, a.t0, true], ['供应商审核' + (a.st === 'rejected' ? '：已驳回' : (a.st === 'review' ? '中' : '：已同意')), a.t1 || '', a.st !== 'review'], ['寄回商品', a.t2 || '', !!a.way && a.type !== '仅退款'], ['供应商签收', a.t3 || '', ['refunding', 'closed', 'exchanging'].indexOf(a.st) >= 0 && a.type !== '仅退款'], [a.type === '换货' ? '补发新品' : '退款到账', a.t4 || '', a.st === 'closed']].filter((x) => !(a.type === '仅退款' && (x[0] === '寄回商品' || x[0] === '供应商签收'))).filter((x) => !(a.st === 'rejected' && !x[2])).reverse().filter((x) => x[2]).map((x, i) => ({ d: x[0], t: x[1], cls: i === 0 ? 'cur' : '' })) : [],
           hasReturnLog: !!(a && a.way), retNo: a && a.way ? (a.way === '上门取件' ? '顺丰速运 SF15' + s.no.replace(/\D/g, '').slice(-8) : a.co + ' ' + a.wb) : '', retWay: a ? a.way || '' : '', retNodes: a ? retNodes(s) : [],
           buyerKv: [['下单人', o.buyer || '三院'], ['角色', (o.buyer || '三院') === '三院' ? '管理员' : '采购员'], ['所属企业', per ? '个人账户' : '[企业名称]'], ['下单时间', o.time], ['主单号', o.no], ['下单渠道', '发发福利 · ' + (o.roster ? 'AI 方案' : 'GUI 落地页')]].map((x) => ({ k: x[0], v: x[1] })),
-          recvKv: (o.roster ? [['收货方式', '名单代发'], ['收件人', o.roster.n + ' 位 · 每人 ' + o.roster.per + ' 份'], ['名单文件', o.roster.file || '—']] : [['收货方式', '整批发到一处'], ['收货人', '行政部 [联系人] · 138 **** 6612'], ['地址', '[公司地址]']]).map((x) => ({ k: x[0], v: x[1] })),
+          recvKv: (o.roster ? [['收货方式', '名单代发'], ['收件人', o.roster.n + ' 位 · 每人 ' + o.roster.per + ' 份'], ['名单文件', o.roster.file || '—']] : [['收货方式', '整批发到一处'], ['收货人', (o.addr || this.seedAddrs()[0]).name + ' · ' + this.maskPhone((o.addr || this.seedAddrs()[0]).phone)], ['地址', this.addrFull(o.addr || this.seedAddrs()[0])]]).map((x) => ({ k: x[0], v: x[1] })),
           siblings: o.subs.filter((x) => x.no !== s.no).map((x) => { const m = stOf(x); return { no: x.no, source: x.source, amount: n2(x.amount), status: m[0], color: m[1], open: () => this.setState({ odNo: x.no, pkOpen: {} }) }; }),
           noSib: o.subs.length === 1 };
       }
@@ -3964,7 +4123,7 @@ class Component extends DCLogic {
       quick: quick, nextBatch: () => this.setState({ batch: b + 1, scene: this.scenes()[(this.scenes().findIndex((s) => s.id === st.scene) + 1) % this.scenes().length].id, sub: '' }),
       services: [['模糊想法变清晰任务', '听懂客户需求', '从需求或聊天记录中，自动提炼预算、场景、人群、数量及定制要求。', '#e7f4f3', '#36c7aa'], ['从海量商品中快速优选', '推荐合适商品组合', '结合企业商品库、预算和历史经验，快速给出多档商品组合，支持对比与调整。', '#edf4ff', '#4772ad'], ['专业方案随时可以发送', '一键生成对客方案', '自动整理商品图片、卖点、报价与交付信息，生成 PPT、H5 或 PDF。', '#f0f8e6', '#8ecf43']].map((a) => ({ eyebrow: a[0], title: a[1], desc: a[2], bg: a[3], fg: a[4] })),
       fTabs: fTabs, tabScene: st.tab === 'scene', tabHot: st.tab === 'hot', tabGift: st.tab === 'gift', tabCard: st.tab === 'card', tabSquare: st.tab === 'square', tabCartOn: st.tab === 'cart',
-      tabCart: () => this.setTab('cart'), tabSceneGo: () => this.setTab('scene'),
+      tabCart: () => this.setTab('cart'), tabSceneGo: () => this.goGui(),
       // 场景
       scenes: this.scenes().map((s) => ({ name: s.name, ico: s.ico, window: s.window, badge: s.badge, badgeBg: s.badgeBg, badgeColor: s.badgeColor, bg: s.bg, fg: s.fg, cls: s.id === st.scene ? 'on' : '', pick: () => this.setState({ scene: s.id, sub: '', tpl: null, slots: {}, slotErr: false }) })),
       sceneHeroBg: sc.heroBg, sceneInk: sc.ink, sceneBadge: sc.badge, sceneSlogan: sc.slogan, sceneDesc: sc.desc, sceneShort: sc.short,
@@ -4021,7 +4180,7 @@ class Component extends DCLogic {
       stop: () => { clearInterval(this._s); clearTimeout(this._k); this.setState({ sn: 9999, phase: 'idle', stepN: 4 }); },
       copied: () => this.flash('已复制方案摘要', false), thanks: () => this.flash('感谢反馈', false),
       regen: () => { this.setState({ planSet: st.planSet === 1 ? 0 : 1 }); this.runTools(); },
-      backFafa: () => this.setState({ screen: 'ai' }),
+      backFafa: () => this.goGui(),
       ...(() => { const r = plans.reduce((a, p) => a.concat(p.rows), []).find((x) => x.key === st.pd); if (!r || st.ws !== 'plan') return { pdOn: false, pdClose: () => this.setState({ pd: '' }), pd: { kv: [], tags: [] } };
         const d = r.detail; const p = d.p; const isV = p.cat === 'voucher'; const P2 = this.priceOf(p);
         return { pdOn: true, pdClose: () => this.setState({ pd: '' }), pd: { planName: d.plan, img: this.imgOf(p), imgCls: isV ? 'face' : '', name: p.name, price: this.money2(P2), strike: p.market > P2 ? this.money2(p.market) : '',
@@ -4070,7 +4229,7 @@ class Component extends DCLogic {
       openUpgrade: () => this.setState({ showUpgrade: true }), closeUpgrade: () => this.setState({ showUpgrade: false }),
       doUpgrade: () => { this.setState({ account: 'enterprise', showUpgrade: false }); this.flash('企业认证已通过 · 已按会员价重算', false); },
       toast: st.toast, toastCart: st.toastCart, toastPlain: !st.toastCart, hasToast: !!st.toast
-    }, TV, AV, OV, V2);
+    }, TV, AV, OV, V2, this.addrVals());
   }
 }
 </script>
