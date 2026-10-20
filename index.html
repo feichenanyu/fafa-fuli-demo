@@ -669,6 +669,34 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 .adr-sw i::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:999px;background:#fff;transition:left .2s}
 .adr-sw.on i{background:var(--brand)}
 .adr-sw.on i::after{left:18px}
+.plw{position:relative;display:inline-flex;flex:none}
+.plbtn.on{border-color:var(--brand)!important;color:var(--brand-700);background:var(--brand-soft)!important}
+.plmask{position:fixed;inset:0;z-index:900;background:transparent}
+.plpop{position:fixed;z-index:901;width:300px;overflow-y:auto;isolation:isolate;background:#fff;border-radius:16px;box-shadow:0 0 0 1px var(--border-subtle),0 16px 40px #15413826;padding:8px;display:flex;flex-direction:column;gap:2px;animation:fadeIn .16s ease-out both;text-align:left}
+.plpop-h{font-size:12px;color:var(--text-3);padding:8px 10px 4px;display:flex;align-items:center;justify-content:space-between}
+.pli{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:10px;border:0;background:transparent;width:100%;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink)}
+.pli:hover{background:var(--surface-subtle)}
+.pli-ic{width:30px;height:30px;border-radius:9px;background:var(--surface-muted);color:var(--text-3);display:flex;align-items:center;justify-content:center;flex:none}
+.pli-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pli-tx b{font-size:14px;font-weight:500;color:var(--text-2)}
+.pli-tx span{font-size:12px;color:var(--text-3);line-height:17px}
+.pli-soon{flex:none;font-size:11px;color:#b45309;background:var(--warning-soft,#fff6e8);border-radius:999px;padding:1px 8px;margin-top:6px;white-space:nowrap}
+.plpop-f{border-top:1px solid var(--border-subtle);margin-top:4px;padding:10px 10px 4px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-3);line-height:17px}
+.plpop-f button{flex:none;height:28px;border:1px solid var(--brand-300);background:#fff;color:var(--brand-700);border-radius:999px;padding:0 12px;font-size:12px;cursor:pointer;font-family:inherit}
+.plpop-f button.done{border-color:var(--border);color:var(--text-3);cursor:default}
+.qcmask{position:fixed;inset:0;z-index:880;background:#0f141814}
+.qcpop{position:fixed;z-index:881;background:#fff;border-radius:18px;box-shadow:0 0 0 1px var(--border-subtle),0 18px 48px #15413830;padding:14px 16px 12px;display:flex;flex-direction:column;gap:10px;animation:fadeIn .16s ease-out both}
+.qcpop textarea{width:100%;min-height:72px;border:0;outline:0;resize:none;font-family:inherit;font-size:15px;line-height:22px;color:var(--ink);background:transparent;padding:2px 0}
+.qc-h{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-3)}
+.qc-ctx{display:inline-flex;align-items:center;height:24px;border-radius:999px;padding:0 10px;background:var(--brand-soft);color:var(--brand-700);font-size:12px;font-weight:500}
+.qc-g{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.qc-f{display:flex;align-items:center;gap:8px;border-top:1px solid var(--border-subtle);padding-top:10px}
+.qc-full{border:0;background:transparent;color:var(--text-2);font-size:12px;cursor:pointer;font-family:inherit;padding:0}
+.qc-full:hover{color:var(--brand-700)}
+.qc-send{width:36px;height:36px;border-radius:999px;border:0;background:#c8d3d0;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.qc-send.ready{background:var(--brand)}
+.qc-x{width:28px;height:28px;border:0;background:transparent;border-radius:8px;cursor:pointer;color:var(--text-3);display:flex;align-items:center;justify-content:center;margin-left:auto}
+.qc-x:hover{background:var(--surface-subtle)}
 </style>
 </helmet>
 
@@ -795,7 +823,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <div class="composer fu" style="max-width: 908px; margin-top: 18px; animation-delay: 140ms">
 <div style="padding: 24px 28px 64px; min-height: 96px"><textarea class="cin" rows="2" aria-label="描述采购需求" placeholder="如：某科技公司 1200 名员工，中秋福利预算 300 元/人，希望兼顾国潮感与实用性..." value="{{draft}}" onChange="{{onDraft}}" onKeyDown="{{onKey}}"></textarea></div>
 <div style="position: absolute; left: 28px; right: 28px; bottom: 18px; display: flex; align-items: center">
-<button class="ib" style="width: 42px; height: 42px; border: 1px solid var(--border); border-radius: 999px; background: #fff" aria-label="添加附件"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<span class="plw"><button class="ib plbtn {{plusClsA}}" style="width: 42px; height: 42px; border: 1px solid var(--border); border-radius: 999px; background: #fff" aria-label="更多能力" aria-haspopup="menu" aria-expanded="{{plusOpenA}}" title="更多能力 · 专家技能即将上线" onClick="{{plusA}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></span>
 <div style="flex: 1"></div>
 <button class="send {{sendCls}}" style="width: 42px; height: 42px" aria-label="发送" onClick="{{send}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
 </div>
@@ -1356,7 +1384,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <span style="font-size: 15px; font-weight: 600; white-space: nowrap">发发福利</span><span class="hide-sm" style="font-size: 11px; font-weight: 600; color: #fff; background: #0d9488; border-radius: 999px; padding: 2px 8px; white-space: nowrap">Beta 0.3 · 一页融合</span>
 <div style="flex: 1; display: flex; justify-content: center; min-width: 0">
 <sc-if value="{{v3Mini}}" hint-placeholder-val="{{ false }}">
-<button class="v3search fi" onClick="{{v3Expand}}" aria-label="展开 AI 对话框"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span class="v3s-ctx">{{v3MiniCtx}}</span><span class="v3s-ph">{{v3MiniPh}}</span><span class="v3s-go">展开</span></button>
+<button class="v3search fi" onClick="{{qcOpen}}" aria-label="在当前位置输入需求" aria-haspopup="dialog" aria-expanded="{{qcOnS}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span class="v3s-ctx">{{v3MiniCtx}}</span><span class="v3s-ph">{{v3MiniPh}}</span><span class="v3s-go">展开</span></button>
 </sc-if>
 </div>
 <button class="ib" style="width: 32px; height: 32px; position: relative" aria-label="购物车" onClick="{{goCartPage}}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg><sc-if value="{{hasCart}}" hint-placeholder-val="{{ false }}"><span class="badge">{{cartCount}}</span></sc-if></button>
@@ -1437,7 +1465,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 </div>
 </sc-if>
 <div style="position: absolute; left: 16px; right: 16px; bottom: 14px; display: flex; align-items: center; gap: 8px">
-<button class="ib" style="width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 999px; background: #fff" aria-label="添加附件"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<span class="plw"><button class="ib plbtn {{plusClsB}}" style="width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 999px; background: #fff" aria-label="更多能力" aria-haspopup="menu" aria-expanded="{{plusOpenB}}" title="更多能力 · 专家技能即将上线" onClick="{{plusB}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></span>
 <span class="mode v2-ctx {{v2CtxCls}}" style="cursor: default; padding-right: 10px" title="场景来自所选场景、货盘或分组标签；也会从你的输入里识别"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8" width="17" height="4" rx="1"></rect><path d="M5 12v8h14v-8M12 8v12M12 8c-1.6-3.6-5.5-3.8-5.5-1.6C6.5 8 10 8 12 8zm0 0c1.6-3.6 5.5-3.8 5.5-1.6C17.5 8 14 8 12 8z"></path></svg>{{v2Ctx}}</span>
 <div style="flex: 1"></div>
 <sc-if value="{{hasDraftClear}}" hint-placeholder-val="{{ false }}"><button class="tq" aria-label="清空输入" onClick="{{clearDraft}}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>清空</button></sc-if>
@@ -1676,7 +1704,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <div class="composer" style="max-width: 760px; margin: 0 auto">
 <div style="padding: 14px 20px 50px"><textarea class="cin" rows="1" aria-label="继续对话" placeholder="{{chatPlaceholder}}" value="{{draft}}" onChange="{{onDraft}}" onKeyDown="{{onKey}}"></textarea></div>
 <div style="position: absolute; left: 14px; right: 14px; bottom: 12px; display: flex; align-items: center; gap: 8px">
-<button class="ib" style="width: 30px; height: 30px; border: 1px solid var(--border); border-radius: 999px" aria-label="添加附件"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<span class="plw"><button class="ib plbtn {{plusClsC}}" style="width: 30px; height: 30px; border: 1px solid var(--border); border-radius: 999px" aria-label="更多能力" aria-haspopup="menu" aria-expanded="{{plusOpenC}}" title="更多能力 · 专家技能即将上线" onClick="{{plusC}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></span>
 <span class="mode" style="cursor: default; padding-right: 10px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8" width="17" height="4" rx="1"></rect><path d="M5 12v8h14v-8M12 8v12"></path></svg>发发福利</span>
 <div style="flex: 1"></div>
 <sc-if value="{{busy}}" hint-placeholder-val="{{ false }}">
@@ -2364,6 +2392,21 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 </sc-if>
 
 <!-- Toast -->
+<!-- 收起态快速输入：在当前位置展开对话框，不跳回页面顶部 -->
+<sc-if value="{{qcOn}}" hint-placeholder-val="{{ false }}"><div class="qcmask" onClick="{{qcClose}}"></div><div class="qcpop" role="dialog" aria-label="问问发发" style="left: {{qcX}}px; top: {{qcY}}px; width: {{qcW}}px" onClick="{{stop}}">
+<div class="qc-h"><span class="qc-ctx">{{qcCtx}}</span><span>在当前页直接提问，发送后进入任务对话</span><button class="qc-x" aria-label="收起" onClick="{{qcClose}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<textarea rows="3" autofocus aria-label="问问发发" placeholder="{{v2Ph}}" value="{{draft}}" onChange="{{onDraft}}" onKeyDown="{{qcKey}}"></textarea>
+<sc-if value="{{v3HasGuide}}" hint-placeholder-val="{{ true }}"><div class="qc-g"><span class="v3g-l">{{v3GuideLabel}}</span><sc-for list="{{qcGuides}}" as="gq" hint-placeholder-count="3"><button class="v2ap" onClick="{{gq.pick}}">{{gq.t}}</button></sc-for></div></sc-if>
+<div class="qc-f"><button class="qc-full" onClick="{{qcFull}}">展开完整对话框（模板填空、上传等）↑</button><div style="flex: 1"></div><span style="font-size: 12px; color: var(--text-3)">Enter 发送 · Esc 收起</span><button class="qc-send {{qcSendCls}}" aria-label="发送" onClick="{{qcSend}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button></div>
+</div></sc-if>
+<!-- 「+」更多能力弹层：放在根层级，避免被局部层叠/定位上下文裁切 -->
+<sc-if value="{{plusOn}}" hint-placeholder-val="{{ false }}"><div class="plmask" onClick="{{plusClose}}"></div><div class="plpop" role="menu" aria-label="更多能力" style="left: {{plusX}}px; top: {{plusT}}; bottom: {{plusBt}}; max-height: {{plusMH}}px" onClick="{{stop}}">
+<div class="plpop-h"><span>专家技能</span><span>首期暂未开放</span></div>
+<sc-for list="{{plusSkills}}" as="it" hint-placeholder-count="4"><button class="pli" role="menuitem" aria-disabled="true" onClick="{{it.pick}}"><span class="pli-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{it.icon}}"></path></svg></span><span class="pli-tx"><b>{{it.name}}</b><span>{{it.desc}}</span></span><span class="pli-soon">即将上线</span></button></sc-for>
+<div class="plpop-h"><span>附件</span></div>
+<button class="pli" role="menuitem" aria-disabled="true" onClick="{{plusFile}}"><span class="pli-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.5l-8.5 8.5a5 5 0 0 1-7-7L14 5.5a3.3 3.3 0 0 1 4.7 4.7L10.2 18.7a1.7 1.7 0 0 1-2.4-2.4L15.5 8.6"></path></svg></span><span class="pli-tx"><b>上传文件</b><span>需求清单、员工名单（Excel / PDF），AI 自动识别</span></span><span class="pli-soon">即将上线</span></button>
+<div class="plpop-f"><span style="flex: 1">现在可以直接用文字描述需求，发发会为你配方案</span><button class="{{plusSubCls}}" onClick="{{plusSub}}">{{plusSubLabel}}</button></div>
+</div></sc-if>
 <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
 <div role="status" style="position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 30; background: var(--toast); color: #fff; border-radius: 999px; padding: 8px 8px 8px 18px; display: flex; gap: 12px; align-items: center; box-shadow: var(--shadow-floating); animation: toastIn .3s var(--ease) both; font-size: 14px; max-width: calc(100vw - 32px)">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#36c7aa" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
@@ -2401,6 +2444,39 @@ class Component extends DCLogic {
       doneInfo: null, orders: this.seedOrders(), paying: false, payErr: '', tradeFrom: 'home' };
   }
 
+
+  // ---------------- 「+」更多能力：专家技能首期未开放，给出即将上线提示 ----------------
+  plusVals() {
+    const st = this.state, P = st.plusPop;
+    const open = (k) => (e) => {
+      if (P && P.k === k) { this.setState({ plusPop: null }); return; }
+      let x = 24, top = null, bot = 120, mh = 560;
+      try {
+        const r = e.currentTarget.getBoundingClientRect(); const W = window.innerWidth || 1440, Hh = window.innerHeight || 900;
+        x = Math.max(12, Math.min(r.left, W - 312));
+        const above = r.top - 20, below = Hh - r.bottom - 20;
+        if (above >= 420 || above >= below) { bot = Hh - r.top + 8; mh = Math.max(240, Math.min(560, above)); }
+        else { top = r.bottom + 8; mh = Math.max(240, Math.min(560, below)); }
+      } catch (err) {}
+      this.setState({ plusPop: { k: k, x: Math.round(x), t: top == null ? null : Math.round(top), b: top == null ? Math.round(bot) : null, mh: Math.round(mh) } });
+    };
+    const soon = (name) => () => { this.setState({ plusPop: null }); this.flash('「' + name + '」将在后续版本上线，现在可以直接用文字描述需求', false); };
+    const SK = [
+      ['选品专家', '按场景、预算和人群自动组货，给出多套方案', 'M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z'],
+      ['采购寻源专家', '跨货源比价，找同款与平替', 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4'],
+      ['礼包定制专家', 'Logo 定制、包装与贺卡，打样排期', 'M20 12v8H4v-8M2 7h20v5H2zM12 20V7'],
+      ['集采议价专家', '大批量阶梯价与账期方案', 'M4 19V9M10 19V5M16 19v-8M22 19H2']
+    ];
+    const r = {
+      plusOn: !!P, plusX: P ? P.x : 0, plusT: P && P.t != null ? P.t + 'px' : 'auto', plusBt: P && P.b != null ? P.b + 'px' : 'auto', plusMH: P ? P.mh : 560, plusClose: () => this.setState({ plusPop: null }),
+      plusSkills: SK.map((x) => ({ name: x[0], desc: x[1], icon: x[2], pick: soon(x[0]) })),
+      plusFile: soon('上传文件'),
+      plusSubCls: st.plusSub ? 'done' : '', plusSubLabel: st.plusSub ? '已订阅' : '上线通知我',
+      plusSub: () => { if (st.plusSub) return; this.setState({ plusSub: true, plusPop: null }); this.flash('已订阅，专家技能上线后会通过站内消息通知你', false); }
+    };
+    ['A', 'B', 'C'].forEach((k) => { const on = !!P && P.k === k; r['plusOn' + k] = on; r['plusOpen' + k] = String(on); r['plusCls' + k] = on ? 'on' : ''; r['plus' + k] = open(k); });
+    return r;
+  }
   // ---------------- 收货地址 ----------------
   seedAddrs() {
     return [
@@ -3574,6 +3650,9 @@ class Component extends DCLogic {
       v2Clear: () => this.setState({ v2l3: '', v3tpl: '', v2slots: {}, draft: '' }), v2Free: () => this.setState({ v2l3: '', v3tpl: '', draft: parts.map((x, i) => i % 2 === 1 ? ((sl[x] || '').trim() || '（' + x + '）') : x).join('') }),
       v2TplKey: (e) => { if (e && e.key === 'Enter' && !e.shiftKey) { if (e.preventDefault) e.preventDefault(); sendTpl(); } },
       v2Send: () => { if (tpl) { sendTpl(); return; } const t = (st.draft || '').trim(); if (!t) { this.flash('先选栏目，或直接输入需求', false); return; } go(t, ''); },
+      qcSend: () => { const t = (st.draft || '').trim(); if (!t) { this.flash('先输入需求，或点一条引导问句', false); return; } this.setState({ qc: null, v3tpl: null, v3tplKey: '' }); go(t, ''); },
+      qcKey: (e) => { if (!e) return; if (e.key === 'Escape') { this.setState({ qc: null }); return; } if (e.key === 'Enter' && !e.shiftKey) { if (e.preventDefault) e.preventDefault(); const t = (st.draft || '').trim(); if (!t) return; this.setState({ qc: null, v3tpl: null, v3tplKey: '' }); go(t, ''); } },
+      qcSendCls: (st.draft || '').trim() ? 'ready' : '',
       v2Key: (e) => { if (e && e.key === 'Enter' && !e.shiftKey) { if (e.preventDefault) e.preventDefault(); const t = (st.draft || '').trim(); if (tpl) sendTpl(); else if (t) go(t, ''); } },
       v2SendCls: (st.draft || '').trim() || (tpl && !empty) ? 'ready' : '',
       v2Ph: G.ph,
@@ -3594,6 +3673,11 @@ class Component extends DCLogic {
       v3HasGuide: G.qs.length > 0, v3GuideLabel: G.label, v3Guides: G.qs.map((q) => ({ t: q.t, isTpl: q.isTpl, cls: gOn && st.v3tpl === q.tpl ? 'on' : '', title: q.isTpl ? '点击后可修改括号里的数字再发送' : '点击后填入输入框，可修改再发送',
         pick: () => { if (q.isTpl) this.setState({ v3tpl: q.tpl, v3tplKey: G.key, v3tplPath: (G.chName || (this.scenes().find((x) => x.id === st.scene) || {}).name || '专家咨询'), v2slots: Object.assign({}, q.defs), v2focus: '', v2err: false, v2l3: '', draft: '' }); else this.setState({ v3tpl: '', v2slots: {}, draft: q.t }); } })),
       v3Expand: () => { this._v3lock = Date.now(); this.setState({ v3Mini: false }); try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {} },
+      qcOpen: (e) => { if (st.qc) { this.setState({ qc: null }); return; } let x = 120, y = 72, w = 640; try { const r = e.currentTarget.getBoundingClientRect(); const W = window.innerWidth || 1440; w = Math.min(Math.max(r.width, 560), W - 32); x = Math.max(16, Math.min(r.left + r.width / 2 - w / 2, W - w - 16)); y = r.bottom + 8; } catch (err) {} this.setState({ qc: { x: Math.round(x), y: Math.round(y), w: Math.round(w) } }); },
+      qcOn: !!st.qc && !!st.v3Mini, qcOnS: String(!!st.qc && !!st.v3Mini), qcX: st.qc ? st.qc.x : 0, qcY: st.qc ? st.qc.y : 0, qcW: st.qc ? st.qc.w : 640,
+      qcClose: () => this.setState({ qc: null }), qcCtx: '当前：' + (col === 'scene' ? (this.scenes().find((x) => x.id === st.scene) || {}).name : ({ hot: '福利爆品', gift: '福利礼包', card: '福利卡券', ask: '专家咨询' }[col] || '商品资源')),
+      qcFull: () => { this._v3lock = Date.now(); this.setState({ v3Mini: false, qc: null }); try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {} },
+      qcGuides: G.qs.map((q) => ({ t: q.t, pick: () => this.setState({ draft: q.t, v3tpl: null, v3tplKey: '' }) })),
       v3IsScene: col === 'scene', v3ShowL2: col !== 'scene', v3GuiScene: col === 'scene', v3GuiRes: isRes, v3GuiAsk: col === 'ask',
       ...(() => { const scs = this.scenes(); const pinIds = ['s2', 's4', 's5']; const cur = st.scene; const curSc = scs.find((x) => x.id === cur) || scs[0];
         const pickSc = (id) => { this.landScene(id); this.setState({ v2col: 'scene', v2l2: id, v2l3: '', v3More: false }); if (st.v3Mini) this.v3ToGui(); };
@@ -4229,7 +4313,7 @@ class Component extends DCLogic {
       openUpgrade: () => this.setState({ showUpgrade: true }), closeUpgrade: () => this.setState({ showUpgrade: false }),
       doUpgrade: () => { this.setState({ account: 'enterprise', showUpgrade: false }); this.flash('企业认证已通过 · 已按会员价重算', false); },
       toast: st.toast, toastCart: st.toastCart, toastPlain: !st.toastCart, hasToast: !!st.toast
-    }, TV, AV, OV, V2, this.addrVals());
+    }, TV, AV, OV, V2, this.addrVals(), this.plusVals());
   }
 }
 </script>
