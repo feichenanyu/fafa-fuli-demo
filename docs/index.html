@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>发发福利 文档中心</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article p,article li{color:var(--ink)}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+article blockquote p{margin:4px 0}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;padding:0;white-space:pre-wrap;word-break:break-word}
+hr{border:0;border-top:1px solid var(--border);margin:28px 0}
+.meta{color:var(--text-3);font-size:14px;margin-bottom:24px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+
+.hub{max-width:960px;margin:0 auto;padding:40px 16px 80px}
+.hub h1{font-size:28px;margin:0 0 6px}.hub .sub{color:var(--text-3);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;text-decoration:none;color:var(--ink)}
+.card:hover{border-color:var(--brand)}
+.tag{align-self:flex-start;font-size:12px;font-weight:600;color:var(--brand-700);background:var(--brand-soft);border-radius:999px;padding:2px 10px}
+.card b{font-size:17px;line-height:1.4}.card span{color:var(--text-2);font-size:14px;line-height:1.6}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 32px}
+.sec{font-size:14px;font-weight:600;color:var(--text-3);margin:0 0 12px}
+.md{font-size:13px;color:var(--text-3)}</style></head>
+<body><main class="hub">
+<h1>发发福利 · 文档中心</h1><p class="sub">产品需求与 AI Prompt 设计文档，配套可交互 Demo。最近同步：2026-10-20</p>
+<p class="sec">Demo</p>
+<div class="row"><a class="btn pri" href="../">买家端 Demo · Beta 0.3</a><a class="btn pri" href="../admin/">运营管理后台 Demo v1.1</a></div>
+<p class="sec">文档</p>
+<div class="grid"><a class="card" href="prd-frontend.html"><span class="tag">前台 PRD</span><b>发发福利 PRD v2.0（一页融合版）</b><span>发发福利买家端（Beta 0.3 一页融合）：固定栏目、场景频道、AI 对话与 GUI 的产品需求。</span><span class="md">13 个章节 · Markdown 原文：prd-frontend.md</span></a><a class="card" href="prd-admin.html"><span class="tag">后台 PRD</span><b>采发发 运营管理后台 PRD v1.1（首期接入：发发福利）</b><span>采发发运营管理后台（首期接入发发福利）：场景、频道、专题、权益包、企业认证、订单与财务等模块需求。</span><span class="md">16 个章节 · Markdown 原文：prd-admin.md</span></a><a class="card" href="prompt.html"><span class="tag">Prompt 设计</span><b>发发福利 AI Prompt 设计 v2.1</b><span>发发福利 AI 的角色设定、意图识别、方案生成与安全边界等 Prompt 设计。</span><span class="md">11 个章节 · Markdown 原文：prompt.md</span></a></div>
+</main></body></html>
