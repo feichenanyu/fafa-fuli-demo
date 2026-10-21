@@ -2843,7 +2843,8 @@ class Component extends DCLogic {
       ['type', '商品类型', ['爆品', '礼包', '卡券'].map((x) => [x, x]), (p) => this.skuType(p)],
       ['band', '价位', [['lo', '¥' + Math.round(A * 0.6) + ' 以下'], ['mid', '¥' + Math.round(A * 0.6) + '–' + Math.round(A * 0.85)], ['hi', '¥' + Math.round(A * 0.85) + '–' + A]], band],
       ['g', '品类', Array.from(new Set(its.map(gOf))).map((x) => [x, x]), gOf],
-      ['src', '来源', Array.from(new Set(its.map((p) => p.source))).map((x) => [x, x]), (p) => p.source]
+      ['src', '来源', Array.from(new Set(its.map((p) => p.source))).map((x) => [x, x]), (p) => p.source],
+      ['wh', '发货仓', Array.from(new Set(its.map((p) => (p.at ? p.at.wh : '电商仓')))).map((x) => [x, x]), (p) => (p.at ? p.at.wh : '电商仓')]
     ];
     const on = (k) => Object.keys(F[k] || {}).filter((x) => F[k][x]);
     const pass = (p, skip) => DIM.every((d) => { if (d[0] === skip) return true; const v = on(d[0]); return !v.length || v.indexOf(d[3](p)) >= 0; });
@@ -2872,7 +2873,7 @@ class Component extends DCLogic {
       toggleAll: () => { const m = Object.assign({}, pick); rows.forEach((p) => { m[p.id] = !allOn; }); setPick(m); },
       clearPick: () => setPick({}), noRows: rows.length === 0,
       rows: rows.map((p) => { const o = !!pick[p.id]; const t = this.skuType(p); const isRec = rec && p.id === rec.id;
-        return { key: 'sel|' + p.id, name: p.name, img: this.imgOf(p), type: t, tCls: t === '礼包' ? 'tg-gift' : t === '卡券' ? 'tg-card' : 'tg-hot', meta: p.source + (p.sold ? ' · 已售 ' + p.sold : ''), price: this.money(P(p)),
+        return { key: 'sel|' + p.id, name: p.name, img: this.imgOf(p), type: t, tCls: t === '礼包' ? 'tg-gift' : t === '卡券' ? 'tg-card' : 'tg-hot', meta: p.source + (p.at ? ' · ' + p.at.wh + (p.at.st === '紧张' ? ' · 库存紧张' : '') : '') + (p.sold ? ' · 已售 ' + p.sold : ''), price: this.money(P(p)),
           profit: per ? '' : '毛利 ' + Math.round(mg(p) * 100) + '%', hasProfit: !per, rec: !!isRec, recWhy: isRec ? this.selRecWhy(p) : '', cls: o ? 'on' : '', ckCls: o ? 'on' : '', aria: o ? 'true' : 'false',
           toggle: () => { const m = Object.assign({}, pick); m[p.id] = !o; setPick(m); }, view: () => this.setState({ pd: 'sel|' + p.id }),
           detail: { p: p, on: o, alt: false, plan: '选品结果', toggle: () => { const m = Object.assign({}, pick); m[p.id] = !o; setPick(m); } } }; }),
@@ -2912,8 +2913,10 @@ class Component extends DCLogic {
     const id = p.id; const card = p.cat === 'voucher'; const h = (k) => this.fnH(id, k);
     const food = ['粮油米面', '休闲零食', '乳品饮料', '生鲜冻品', '健康滋补', '速食方便'].indexOf(p.g) >= 0 || (p.cat === 'gift' && /食|果|糕|茶|粮|海味|滋补|年货|零食|坚果|粽|谷|山珍/.test(p.name));
     const fragile = ['小家电', '杯壶餐具'].indexOf(p.g) >= 0;
-    return { stock: card ? 99999 : Math.round(h(1) < 0.25 ? 30 + h(2) * 90 : 150 + h(2) * 1800), ship: card ? 1 : /定制|尊享/.test(p.name) ? 240 : (/京东|天猫/.test(p.source) ? [24, 48, 48, 72][Math.floor(h(3) * 4)] : [48, 72, 168, 168][Math.floor(h(3) * 4)]),
-      shelf: food ? [45, 90, 180, 365][Math.floor(h(4) * 4)] : 0, food: food, fragile: fragile, warranty: fragile ? h(5) > 0.35 : true, margin: (p.market - p.member) / p.market };
+    // 商品库只有库存状态（有货 / 库存紧张 / 无货）；发货仓只分电商仓（京东、猫超自营仓）与商家仓（猫超部分商品也是商家仓）；效期只有部分食品有
+    const wh = card ? '卡密即发' : p.source === '京东' ? '电商仓' : p.source === '天猫超市' ? (h(3) < 0.3 ? '商家仓' : '电商仓') : '商家仓';
+    return { st: card ? '有货' : h(1) < 0.06 ? '无货' : h(1) < 0.3 ? '紧张' : '有货', wh: wh, ship: wh === '电商仓' ? '次日–48 小时' : wh === '商家仓' ? '3–7 天' : '即时',
+      shelf: food && h(4) > 0.35 ? [60, 120, 240, 365][Math.min(3, Math.floor((h(4) - 0.35) / 0.65 * 4))] : 0, food: food, fragile: fragile, warranty: fragile ? h(5) > 0.35 : true, margin: (p.market - p.member) / p.market };
   }
   fnGrpOk(p, g) {
     const M = { 员工: ['粮油米面', '休闲零食', '乳品饮料', '家庭清洁', '纸品湿巾', '小家电', '家居保暖', '礼包', '速食方便', '杯壶餐具', '卡券', '生鲜冻品'], 客户: ['礼包', '健康滋补', '生鲜冻品', '杯壶餐具', '小家电', '卡券'], 离退休: ['健康滋补', '粮油米面', '家居保暖', '乳品饮料', '礼包'], 工会: ['休闲零食', '卡券', '礼包', '小家电', '杯壶餐具', '乳品饮料'] };
@@ -2931,8 +2934,8 @@ class Component extends DCLogic {
   fnPass(p, c, skip) {
     const P = this.priceOf(p); const a = p.at; const n = c.n || 0;
     const T = { grp: () => !c.grp || this.fnGrpOk(p, c.grp), budget: () => { if (!c.budget) return true; const A = this.fnAvail(c); return P <= A && P >= Math.max(20, A * 0.3); },
-      ship: () => !c.ship || a.ship <= c.ship, stock: () => !c.stock || !n || a.stock >= n * (c.stock === 'full' ? 1.1 : 0.5), sales: () => !c.sales || (p.sold || 0) >= c.sales,
-      margin: () => !c.margin || a.margin * 100 >= c.margin, shelf: () => !c.shelf || !a.food || a.shelf >= c.shelf, after: () => !c.after || a.warranty,
+      ship: () => !c.ship || a.wh !== '商家仓', stock: () => a.st !== '无货' && (!c.stock || a.st === '有货'), sales: () => !c.sales || (p.sold || 0) >= c.sales,
+      margin: () => !c.margin || a.margin * 100 >= c.margin, shelf: () => !c.shelf || !a.food || (c.shelf === 'strict' ? a.shelf >= 180 : (!a.shelf || a.shelf >= 90)), after: () => !c.after || a.warranty,
       form: () => !c.form || (c.form === 'card' ? p.cat === 'voucher' : p.cat !== 'voucher'), pref: () => !c.pref || this.fnPrefOk(p, c.pref), ex: () => !c.ex || !c.ex.length || c.ex.indexOf(p.g) < 0 };
     return Object.keys(T).every((k) => k === skip || T[k]());
   }
@@ -2942,11 +2945,11 @@ class Component extends DCLogic {
     return [
       { k: 'grp', name: '目标群体', q: '这批采购主要发给谁？', opts: [['员工', '员工福利'], ['客户', '客户送礼'], ['离退休', '离退休慰问'], ['工会', '工会活动']] },
       { k: 'nb', name: '人数与预算', q: '发给多少人？每人预算大概多少？' },
-      { k: 'ship', name: '履约时效', q: '希望多久内到货？', opts: [[48, '48 小时内'], [168, '7 天内'], [0, '不限（含定制、预售）']], rec: 168 },
-      { k: 'stock', name: '库存', q: '库存要现货够全部人数吗？', opts: [['full', '现货够全部人数'], ['half', '可分批，现货够一半'], [0, '不限']], rec: 'full' },
+      { k: 'ship', name: '发货仓', q: '对发货速度有要求吗？', opts: [['ec', '要快：只选电商仓（京东、猫超自营仓，次日–48 小时）'], [0, '商家仓也可以（一般 3–7 天）']], rec: 'ec' },
+      { k: 'stock', name: '库存', q: '「库存紧张」的商品要不要？', opts: [['ample', '只要库存充足的'], [0, '紧张的也可以（下单前再确认）']], rec: 'ample' },
       { k: 'sales', name: '销量', q: '要不要只选卖得好的？', opts: [[1000, '只要爆款（月销 1000+）'], [300, '月销 300 以上'], [0, '不限']], rec: 300 },
       { k: 'margin', name: '利润率', q: '每个商品至少要多少利润率？', opts: [[25, '≥ 25%'], [20, '≥ 20%'], [15, '≥ 15%'], [0, '不限']], rec: 20, when: !this.isPer() && st.basis === 'client' },
-      { k: 'shelf', name: '商品效期', q: '食品类保质期有要求吗？', opts: [[180, '剩余 ≥ 6 个月'], [90, '剩余 ≥ 3 个月'], [0, '不限']], rec: 90, when: base.some((p) => p.at.food) },
+      { k: 'shelf', name: '商品效期', q: '食品类对保质期有要求吗？（部分商品未标注效期）', opts: [['strict', '只要标注了效期且剩余 ≥ 6 个月'], ['mid', '剩余 ≥ 3 个月，未标注的保留'], [0, '不限']], rec: 'mid', when: base.some((p) => p.at.food && p.at.shelf) },
       { k: 'after', name: '售后支持', q: '家电、易碎品的售后有要求吗？', opts: [['w', '需质保 / 破损包赔'], [0, '不限']], rec: 'w', when: base.some((p) => p.at.fragile) },
       { k: 'form', name: '发放形式', q: '发实物还是卡券？', opts: [['phys', '只要实物'], ['card', '只要卡券（员工自选）'], [0, '都可以']], rec: 'phys' },
       { k: 'pref', name: '商品偏好', q: '商品风格更偏哪种？', opts: [['实用', '偏实用'], ['体面', '偏体面'], ['健康', '健康养生'], [0, '不限']] }
@@ -2961,6 +2964,8 @@ class Component extends DCLogic {
   fnLabel(k, v, c) {
     if (k === 'n') return v + ' 人'; if (k === 'budget') return (this.isPer() || this.state.basis !== 'client' ? '人均 ≤ ¥' : '客户预算 ¥') + v;
     if (k === 'ex') return '不含' + v.join('、');
+    const SH = { ship: { ec: '只选电商仓' }, stock: { ample: '只要库存充足' }, shelf: { strict: '效期 ≥ 6 个月', mid: '效期 ≥ 3 个月（未标注保留）' } };
+    if (SH[k] && SH[k][v]) return (k === 'shelf' ? '' : this.fnDim(k).name + '：') + SH[k][v];
     const d = this.fnDim(k); const o = d && d.opts ? d.opts.find((x) => x[0] === v) : null; return (d ? d.name + '：' : '') + (o ? o[1] : v);
   }
   fnSum(c) { return ['grp', 'n', 'budget', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref', 'ex'].filter((k) => c[k] && (k !== 'ex' || c[k].length)).map((k) => this.fnLabel(k, c[k], c)); }
@@ -2970,14 +2975,14 @@ class Component extends DCLogic {
     const bm = t.match(/(人均|每人|预算|面值)\D{0,4}(\d{2,5})/); if (bm) { c.budget = +bm[2]; got.push('人均 ' + c.budget); }
     const G = [[/客户|送礼|合作伙伴|走亲访友/, '客户'], [/离退休|老同志|敬老|老干部|重阳/, '离退休'], [/工会|团建/, '工会'], [/员工|职工|年货|生日|餐补|加班/, '员工']];
     for (let i = 0; i < G.length; i++) if (G[i][0].test(t)) { c.grp = G[i][1]; got.push(this.fnLabel('grp', c.grp)); break; }
-    const sh = t.match(/(\d+)\s*(小时|h)/i); if (sh) { c.ship = +sh[1] <= 48 ? 48 : 168; got.push(this.fnLabel('ship', c.ship)); } else if (/一周|7\s*天|七天/.test(t)) { c.ship = 168; got.push(this.fnLabel('ship', 168)); }
+    if (/(\d+)\s*(小时|h)|尽快|要快|加急|电商仓|自营仓|次日|明天到/i.test(t)) { c.ship = 'ec'; got.push(this.fnLabel('ship', 'ec')); }
     const mg = t.match(/利润率?\D{0,3}(\d{1,2})\s*%\s*(以上|起)/); if (mg) { const m = +mg[1]; c.margin = m >= 25 ? 25 : m >= 20 ? 20 : 15; got.push('利润率 ≥ ' + c.margin + '%'); }
     const nm = t.match(/(不要|不含|除了|别要|不用)([^，,。；;]+)/);
     if (nm) { const EXM = { 生鲜: '生鲜冻品', 零食: '休闲零食', 家电: '小家电', 饮料: '乳品饮料', 牛奶: '乳品饮料', 滋补: '健康滋补', 清洁: '家庭清洁', 纸: '纸品湿巾', 礼包: '礼包', 卡券: '卡券', 酒: '酒水' }; const ex = []; Object.keys(EXM).forEach((k) => { if (nm[2].indexOf(k) >= 0) ex.push(EXM[k]); }); if (ex.length) { c.ex = Array.from(new Set((c.ex || []).concat(ex))); got.push('不含' + nm[2].replace(/和|及/g, '、')); } }
-    if (/现货/.test(t)) { c.stock = 'full'; got.push(this.fnLabel('stock', 'full')); }
+    if (/现货|库存充足|有货|(不要|不含|排除)[^，,。]*紧张/.test(t)) { c.stock = 'ample'; got.push(this.fnLabel('stock', 'ample')); }
     if (/爆款|热销/.test(t)) { c.sales = 1000; got.push(this.fnLabel('sales', 1000)); }
     if (/卡券|提货券|自选/.test(t) && !(nm && /卡券/.test(nm[2]))) { c.form = 'card'; got.push(this.fnLabel('form', 'card')); } else if (/实物/.test(t)) { c.form = 'phys'; got.push(this.fnLabel('form', 'phys')); }
-    const sl = t.match(/保质期\D{0,4}(\d+)\s*个?月/); if (sl) { c.shelf = +sl[1] >= 6 ? 180 : 90; got.push(this.fnLabel('shelf', c.shelf)); }
+    const sl = t.match(/(保质期|效期)\D{0,4}(\d+)\s*个?月/); if (sl) { c.shelf = +sl[2] >= 6 ? 'strict' : 'mid'; got.push(this.fnLabel('shelf', c.shelf)); }
     if (/质保|破损包赔/.test(t)) { c.after = 'w'; got.push(this.fnLabel('after', 'w')); }
     const pf = t.match(/实用|体面|有面子|健康|养生/); if (pf) { c.pref = /实用/.test(pf[0]) ? '实用' : /体面|面子/.test(pf[0]) ? '体面' : '健康'; got.push(this.fnLabel('pref', c.pref)); }
     return { c: c, got: got };
@@ -3014,7 +3019,7 @@ class Component extends DCLogic {
     this.setState(up);
   }
   fnStart(t, fromAi) {
-    const p = this.fnParse(t, {}); const fn0 = { c: p.c, got: p.got, log: [{ who: 'u', t: t }], hist: [this.fnBase().length], round: 0, asked: [], cur: '', done: false };
+    const p = this.fnParse(t, {}); const fn0 = { c: p.c, got: p.got, log: [{ who: 'u', t: t }], hist: [this.fnCount({})], round: 0, asked: [], cur: '', done: false };
     this.fnCommit(this.fnAdvance(fn0, ''), fromAi);
   }
   fnAnswer(k, v, label) {
@@ -3067,7 +3072,7 @@ class Component extends DCLogic {
     const blankDone = { tag: '', ans: '', edit: () => 0, canEdit: false };
     const base = (o) => Object.assign({ isUser: false, isAi: true, text: '', typing: false, hasSteps: false, hasParams: false, params: [], options: [], showOpts: false, showActs: false, hasCard: false, card: blankCard, hasDone: false, done: blankDone, hasText: true }, o);
     const dots = (r) => [1, 2, 3, 4, 5, 6].map((i) => ({ cls: i < r ? 'on' : i === r ? 'cur' : '' }));
-    const other = { otherPh: '48 小时内到、不要生鲜', other: st.fnOther || '', onOther: (e) => this.setState({ fnOther: e && e.target ? e.target.value : '' }),
+    const other = { otherPh: '要快、不要生鲜、不要库存紧张的', other: st.fnOther || '', onOther: (e) => this.setState({ fnOther: e && e.target ? e.target.value : '' }),
       otherKey: (e) => { if (e && e.key === 'Enter') { e.preventDefault && e.preventDefault(); const v = (e.target && e.target.value) || st.fnOther; if (v && v.trim()) { this.setState({ fnOther: '' }); this.fnText(v.trim()); } } },
       otherGo: () => { const v = (st.fnOther || '').trim(); if (!v) { this.flash('先输入要求，或点上面的选项', false); return; } this.setState({ fnOther: '' }); this.fnText(v); } };
     const out = []; const L = fn.log;
@@ -4587,7 +4592,7 @@ class Component extends DCLogic {
       this.startTask(fillText(), { qa: curA.id === 'ask', prefer: curA.prefer });
       this.setState({ act: '', app: -1 });
     };
-    const chatInput = st.step === 1 && st.fn ? (st.fn.cur === 'nb' ? '直接说「120 人，人均 300」' : '点选项，或直接说更明确的要求，如「48 小时内到、不要生鲜」') : st.step === 1 ? '直接输入人数，例如 120' : st.step === 2 ? '直接输入人均预算，例如 300' : '继续追问，或说「不要生鲜」「继续缩小范围」';
+    const chatInput = st.step === 1 && st.fn ? (st.fn.cur === 'nb' ? '直接说「120 人，人均 300」' : '点选项，或直接说更明确的要求，如「要快、不要生鲜」') : st.step === 1 ? '直接输入人数，例如 120' : st.step === 2 ? '直接输入人均预算，例如 300' : '继续追问，或说「不要生鲜」「继续缩小范围」';
     const send = () => {
       const t = (st.draft || '').trim();
       if (st.screen === 'home') { soon('采发发「选品做方案」')(); return; }
