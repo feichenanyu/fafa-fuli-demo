@@ -388,6 +388,50 @@ button{font-family:inherit;color:inherit}
 .pl-list{display:flex;flex-direction:column;border:1px solid var(--border-subtle);border-radius:12px;overflow:hidden}
 .pl-bar{display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:12px;color:var(--text-2);background:var(--surface-subtle);border-bottom:1px solid var(--border-subtle)}
 .pl-alt{font-size:12px;color:var(--text-3);padding:8px 10px 4px;background:var(--surface-subtle);border-top:1px dashed var(--border)}
+.opt-lbl{flex-basis:100%;font-size:12px;color:var(--text-3);margin-top:2px}.opt-lbl:empty{height:0;margin:0}.opt.on{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-700)}.opt.ghost{border-style:dashed;color:var(--text-2)}.opt-rec{font-style:normal;font-size:11px;margin-left:6px;padding:0 5px;border-radius:4px;background:var(--warning-soft);color:var(--warning)}
+.sbx{position:relative;width:100%;max-width:620px}.sbx-in{height:40px;border:1px solid var(--border);background:#fff;border-radius:999px;display:flex;align-items:center;gap:8px;padding:0 4px 0 14px;color:var(--text-3);position:relative;z-index:62}.sbx-in:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.sbx-in input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:14px;font-family:inherit;color:var(--ink)}.sbx-x{border:0;background:none;color:var(--text-3);font-size:16px;cursor:pointer;width:24px}.sbx-go{height:32px;border:0;border-radius:999px;background:var(--brand);color:#fff;padding:0 16px;font-size:13px;font-family:inherit;cursor:pointer}
+.sbx-mask{position:fixed;inset:0;z-index:60}.sbx-dd{position:absolute;left:0;right:0;top:46px;z-index:61;background:#fff;border:1px solid var(--border-subtle);border-radius:14px;box-shadow:var(--shadow-floating);padding:10px;display:flex;flex-direction:column;gap:4px;max-height:70vh;overflow:auto}
+.sbx-h{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3);padding:4px 6px}.sbx-tags{display:flex;gap:6px;flex-wrap:wrap;padding:0 6px 6px}.sbx-tag{height:28px;border:0;background:var(--surface-subtle);border-radius:999px;padding:0 12px;font-size:13px;cursor:pointer;font-family:inherit;color:var(--text-2)}
+.sbx-hot{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;padding:0 6px}.sbx-hi{display:flex;align-items:center;gap:8px;border:0;background:none;padding:6px 4px;font-size:13px;cursor:pointer;font-family:inherit;color:var(--ink);border-radius:8px;text-align:left}.sbx-hi:hover{background:var(--surface-subtle)}.sbx-hi em{font-style:normal;width:18px;font-size:12px;color:var(--text-3);font-weight:600}.sbx-hi em.top{color:#d95e53}
+.sbx-row{display:flex;align-items:center;gap:10px;border:0;background:none;padding:6px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;color:var(--ink);text-align:left;width:100%}.sbx-row:hover{background:var(--surface-subtle)}.sbx-all{color:var(--brand-700)}.sbx-th{width:32px;height:32px;flex:none;border-radius:8px;background:var(--surface-subtle);overflow:hidden;display:flex;align-items:center;justify-content:center}.sbx-th img{width:100%;height:100%;object-fit:contain}.sbx-n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sbx-none{font-size:12px;color:var(--text-3);padding:6px}.sbx-ask{display:flex;align-items:center;gap:10px;border:1px dashed var(--brand-300);background:var(--brand-soft);border-radius:10px;padding:8px 10px;margin-top:4px;cursor:pointer;font-family:inherit;color:var(--brand-700)}.sbx-ask b{font-size:13px;font-weight:600}.sbx-ask small{font-size:12px;color:var(--text-3)}
+.sbx-askm{width:28px;height:28px;flex:none;border-radius:999px;background:#fff;border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center}
+.srv{width:100%;max-width:1180px;padding:20px 24px 120px;display:flex;flex-direction:column;gap:12px;margin:0 auto}.srv-top{display:flex;align-items:center;gap:12px;font-size:15px}.srv-strip{display:flex;align-items:center;gap:12px;border:1px solid var(--border-subtle);background:#fff;border-radius:12px;padding:10px 14px;cursor:pointer;font-family:inherit;color:var(--ink)}.srv-strip b{font-size:14px;font-weight:600}.srv-strip small{font-size:12px;color:var(--text-3)}
+.srv-strip:hover{border-color:var(--brand-300)}.srv-strip.hot{background:linear-gradient(90deg,#e8f7f4,#fff);border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}.srv-go{font-size:18px;color:var(--brand-700)}.srv-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.srv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.srv-card{background:#fff;border:1px solid var(--border-subtle);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px}.srv-img{height:150px;border-radius:10px;background:var(--surface-subtle);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}.srv-img img{width:72%;height:80%;object-fit:contain}
+.srv-sc{position:absolute;left:8px;top:8px;font-size:11px;background:#fff0ed;color:#9b2f26;border-radius:4px;padding:1px 6px}.srv-name{font-size:13px;line-height:19px;height:38px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.srv-meta{font-size:12px;color:var(--text-3)}.srv-pr{display:flex;align-items:baseline;gap:6px}.srv-pr b{font-size:16px;color:var(--price)}.srv-pr s{font-size:12px;color:var(--text-3)}
+.srv-act{display:flex;gap:6px}.srv-act .btn{flex:1;height:32px;font-size:13px;padding:0}.srv-none{display:flex;flex-direction:column;align-items:center;gap:6px;padding:40px;font-size:13px;color:var(--text-3)}.srv-none b{font-size:15px;color:var(--ink)}
+.dock{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:55;width:min(720px,calc(100% - 32px));display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.97);border:1px solid var(--brand-300);border-radius:999px;box-shadow:var(--shadow-floating);padding:6px 6px 6px 8px;margin-left:130px}
+.dock-tag{flex:none;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;height:32px;border:0;border-radius:999px;background:var(--brand-soft);color:var(--brand-700);font-size:12px;font-weight:500;padding:0 12px;cursor:pointer;font-family:inherit}
+.dock-ph{flex:1;min-width:0;display:flex;align-items:center;gap:8px;border:0;background:none;cursor:text;font-family:inherit;font-size:14px;color:var(--text-3);text-align:left;padding:0}.dock-pht{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dock-ib{width:32px;height:32px;flex:none;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:18px;color:var(--text-2);cursor:pointer}.dock-send{width:36px;height:36px;flex:none;border-radius:999px;border:0;background:var(--brand);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.dock-mask{position:fixed;inset:0;z-index:56;background:rgba(15,23,22,.12)}.dock-panel{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);margin-left:130px;z-index:57;width:min(720px,calc(100% - 32px));height:min(56vh,560px);background:#fff;border-radius:20px;box-shadow:var(--shadow-floating);display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border-subtle)}
+.dock-h{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--border-subtle)}.dock-h b{font-size:15px}.dock-body{flex:1;overflow:auto;padding:14px 18px;display:flex;flex-direction:column;gap:10px}.dock-ai{font-size:14px;line-height:22px;color:var(--ink)}.dock-me{align-self:flex-end;max-width:80%;background:var(--surface-subtle);border-radius:14px;padding:8px 12px;font-size:14px}
+.dock-list{border:1px solid var(--border-subtle);border-radius:12px;padding:4px}.dock-more{align-self:flex-start;border:0;background:none;color:var(--brand-700);font-size:13px;cursor:pointer;font-family:inherit;padding:0}.dock-prod{display:flex;align-items:center;gap:10px;border:1px solid var(--border-subtle);border-radius:12px;padding:6px 10px;font-size:13px}
+.dock-f{border-top:1px solid var(--border-subtle);padding:10px 14px;display:flex;flex-direction:column;gap:6px}.dock-f textarea{border:0;outline:0;resize:none;font-size:14px;font-family:inherit;line-height:22px}
+@media (max-width:900px){.dock,.dock-panel{margin-left:0}}
+.fnp-n{font-size:22px;font-weight:600;color:var(--brand-700)}.fnp-hist{display:flex;gap:8px;align-items:baseline;font-size:12px;color:var(--text-3);background:var(--brand-soft);border-radius:8px;padding:6px 10px}.fnp-hist b{font-size:13px;color:var(--brand-700)}.fnp-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.sel-tagx.ed{background:var(--brand-soft);color:var(--brand-700)}.fnp-pl{font-size:12px;color:var(--text-3)}.opt.zero{opacity:.45}
+.mtx:empty{display:none}.qa-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:14px 16px 12px;display:flex;flex-direction:column;gap:10px;max-width:640px;box-shadow:0 1px 2px rgba(15,23,22,.04)}
+.qa-h{display:flex;align-items:center;gap:10px}.qa-tag{font-size:12px;color:var(--brand-700);background:var(--brand-soft);border-radius:999px;padding:2px 10px;font-weight:500;white-space:nowrap}.qa-dots{display:flex;gap:3px}.qa-dots i{width:14px;height:4px;border-radius:2px;background:var(--border)}.qa-dots i.on{background:var(--brand-300)}.qa-dots i.cur{background:var(--brand)}.qa-cnt{font-size:12px;color:var(--text-3)}
+.qa-q{font-size:16px;font-weight:600;line-height:24px}.qa-list{display:flex;flex-direction:column;gap:6px}.qa-list:empty{display:none}
+.qa-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--border-subtle);background:#fff;border-radius:12px;padding:10px 12px;cursor:pointer;font-family:inherit;color:var(--ink);transition:border-color .15s,background .15s}.qa-row:hover{border-color:var(--brand-300);background:#f7fcfb}.qa-row:hover .qa-go{opacity:1;transform:translateX(0)}
+.qa-rd{width:16px;height:16px;border-radius:999px;border:1.5px solid var(--border);flex:none}.qa-row:hover .qa-rd{border-color:var(--brand)}.qa-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.qa-l{font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px}.qa-d{font-size:12px;color:var(--text-3)}.qa-go{color:var(--brand-700);font-size:18px;opacity:0;transform:translateX(-4px);transition:all .15s}.qa-row.zero{opacity:.45}
+.qa-gl{font-size:12px;color:var(--text-3);margin-bottom:-4px}.qa-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.qa-sg{height:40px;border:1px solid var(--border-subtle);border-radius:10px;background:#fff;font-size:13px;cursor:pointer;font-family:inherit;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:4px}.qa-sg:hover{border-color:var(--brand-300)}.qa-sg.on{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-700);font-weight:500}
+.qa-other{display:flex;align-items:center;gap:6px;border:1px dashed var(--border);border-radius:12px;padding:4px 4px 4px 12px}.qa-other:focus-within{border-style:solid;border-color:var(--brand)}.qa-other input{flex:1;min-width:0;border:0;outline:0;font-size:13px;font-family:inherit;background:transparent;height:30px}.qa-other button{width:30px;height:30px;border:0;border-radius:8px;background:var(--surface-subtle);cursor:pointer;color:var(--text-2)}
+.qa-hint{font-size:12px;color:var(--text-3)}.dock-body{flex-direction:column-reverse !important}.dock-in{display:flex;flex-direction:column;gap:10px}
+.qa-f{display:flex;align-items:center;gap:8px}.qa-link{border:0;background:none;color:var(--text-3);font-size:13px;cursor:pointer;font-family:inherit;padding:0}.qa-link:hover{color:var(--ink)}.qa-stop{height:32px;border:1px solid var(--brand);color:var(--brand-700);background:#fff;border-radius:999px;padding:0 14px;font-size:13px;cursor:pointer;font-family:inherit}.qa-stop:hover{background:var(--brand-soft)}
+.qa-done{display:flex;align-items:center;gap:8px;border:1px solid var(--border-subtle);background:var(--surface-subtle);border-radius:12px;padding:8px 12px;font-size:13px;max-width:640px}.qa-done b{font-weight:500}.qa-ck{width:18px;height:18px;border-radius:999px;background:var(--brand);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}.qa-edit{border:0;background:none;color:var(--brand-700);font-size:12px;cursor:pointer;font-family:inherit}
+.sel-card{padding:14px;display:flex;flex-direction:column;gap:10px}.sel-h{display:flex;gap:10px;align-items:flex-start}.sel-h b{display:block;font-size:15px;font-weight:600}.sel-h small{display:block;font-size:12px;color:var(--text-3);line-height:18px;margin-top:2px}
+.sel-warn{font-size:12px;line-height:18px;color:#b4433a;background:#fdf0ee;border-radius:8px;padding:7px 10px}.sel-note{font-size:12px;line-height:18px;color:var(--brand-700);background:var(--brand-soft);border-radius:8px;padding:7px 10px}
+.sel-fs{display:flex;flex-direction:column;gap:6px;border:1px solid var(--border-subtle);border-radius:10px;padding:8px 10px;background:#fff}.sel-f{display:flex;gap:8px;align-items:flex-start}.sel-fl{flex:none;width:52px;font-size:12px;color:var(--text-3);line-height:26px}.sel-fc{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.sel-chip{height:26px;border:1px solid var(--border);background:#fff;border-radius:999px;padding:0 10px;font-size:12px;color:var(--text-2);cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:4px}.sel-chip em{font-style:normal;font-size:11px;color:var(--text-3)}.sel-chip.on{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-700)}.sel-chip.on em{color:var(--brand-700)}.sel-chip.zero{opacity:.45}
+.sel-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.sel-tagx{display:inline-flex;align-items:center;gap:4px;font-size:12px;background:var(--surface-subtle);border-radius:6px;padding:2px 4px 2px 8px}.sel-tagx button{border:0;background:none;cursor:pointer;color:var(--text-3);font-size:13px}.sel-clr{border:0;background:none;color:var(--brand-700);font-size:12px;cursor:pointer;font-family:inherit;padding:0}
+.sel-bar{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-2);flex-wrap:wrap}.sel-sort{border:0;background:none;font-size:12px;color:var(--text-3);cursor:pointer;font-family:inherit;padding:2px 4px;border-radius:6px}.sel-sort.on{color:var(--brand-700);background:var(--brand-soft)}
+.sel-list{border:1px solid var(--border-subtle);border-radius:10px;background:#fff;max-height:520px;overflow:auto}.sel-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--border-subtle)}.sel-row:last-child{border-bottom:0}.sel-row.on{background:#f3fbf9}
+.sel-tg{font-size:11px;border-radius:4px;padding:0 5px;margin-right:6px;line-height:16px;display:inline-block}.tg-hot{background:#fff1e6;color:#c2410c}.tg-gift{background:#fdecec;color:#b4433a}.tg-card{background:#eef2ff;color:#4338ca}
+.sel-rec{display:block;font-size:11.5px;line-height:17px;color:var(--warning);margin-top:3px}.sel-rec .tagw{margin-right:6px}.sel-pr{display:flex;flex-direction:column;align-items:flex-end;flex:none}.sel-pr b{font-size:13px}.sel-pr small{font-size:11px;color:var(--text-3)}
+.sel-foot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--border-subtle);padding-top:10px}
 .pl-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--border-subtle);transition:background .15s}
 .pl-row:last-child{border-bottom:0}
 .pl-row:hover{background:var(--surface-subtle)}
@@ -1383,9 +1427,12 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <header class="v3hd {{v3HdCls}}">
 <span style="font-size: 15px; font-weight: 600; white-space: nowrap">发发福利</span><span class="hide-sm" style="font-size: 11px; font-weight: 600; color: #fff; background: #0d9488; border-radius: 999px; padding: 2px 8px; white-space: nowrap">Beta 0.3 · 一页融合</span>
 <div style="flex: 1; display: flex; justify-content: center; min-width: 0">
-<sc-if value="{{v3Mini}}" hint-placeholder-val="{{ false }}">
-<button class="v3search fi" onClick="{{qcOpen}}" aria-label="在当前位置输入需求" aria-haspopup="dialog" aria-expanded="{{qcOnS}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span class="v3s-ctx">{{v3MiniCtx}}</span><span class="v3s-ph">{{v3MiniPh}}</span><span class="v3s-go">展开</span></button>
-</sc-if>
+<div class="sbx" role="search"><div class="sbx-in"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input aria-label="搜索商品" placeholder="搜索商品、品类、品牌" value="{{srch.q}}" onChange="{{srch.onQ}}" onFocus="{{srch.focus}}" onKeyDown="{{srch.key}}"><sc-if value="{{srch.hasQ}}" hint-placeholder-val="{{ false }}"><button class="sbx-x" aria-label="清空搜索词" onClick="{{srch.clearQ}}">×</button></sc-if><button class="sbx-go" onClick="{{srch.go}}">搜索</button></div>
+<sc-if value="{{srch.dd.on}}" hint-placeholder-val="{{ false }}"><div class="sbx-mask" onClick="{{srch.ddClose}}"></div><div class="sbx-dd fi" role="listbox" aria-label="搜索建议">
+<sc-if value="{{srch.dd.empty}}" hint-placeholder-val="{{ true }}"><sc-if value="{{srch.dd.hasHist}}" hint-placeholder-val="{{ true }}"><div class="sbx-h"><span>最近搜索</span><button class="sel-clr" onClick="{{srch.dd.clearHist}}">清除</button></div><div class="sbx-tags"><sc-for list="{{srch.dd.hist}}" as="h" hint-placeholder-count="2"><button class="sbx-tag" onClick="{{h.pick}}">{{h.t}}</button></sc-for></div></sc-if><div class="sbx-h"><span>热门搜索</span></div><div class="sbx-hot"><sc-for list="{{srch.dd.hot}}" as="h" hint-placeholder-count="6"><button class="sbx-hi" onClick="{{h.pick}}"><em class="{{h.cls}}">{{h.n}}</em>{{h.t}}</button></sc-for></div></sc-if>
+<sc-if value="{{srch.dd.notEmpty}}" hint-placeholder-val="{{ false }}"><button class="sbx-row sbx-all" onClick="{{srch.dd.allPick}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span>{{srch.dd.all}}</span></button><sc-for list="{{srch.dd.sugg}}" as="g" hint-placeholder-count="3"><button class="sbx-row" onClick="{{g.pick}}"><span class="sbx-th"><img src="{{g.img}}" alt=""></span><span class="sbx-n">{{g.name}}</span><span class="sel-tg tg-hot">{{g.type}}</span><b class="mono">{{g.price}}</b></button></sc-for><sc-if value="{{srch.dd.noSugg}}" hint-placeholder-val="{{ false }}"><div class="sbx-none">没有匹配的商品联想，回车按关键词搜索</div></sc-if><button class="sbx-ask" onClick="{{srch.dd.askPick}}"><span class="sbx-askm"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="18" height="15" style="object-fit: contain"></span><span style="display: flex; flex-direction: column; gap: 1px; text-align: left; min-width: 0"><b>{{srch.dd.ask}}</b><small>{{srch.dd.askSub}}</small></span></button></sc-if>
+</div></sc-if>
+</div>
 </div>
 <button class="ib" style="width: 32px; height: 32px; position: relative" aria-label="购物车" onClick="{{goCartPage}}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg><sc-if value="{{hasCart}}" hint-placeholder-val="{{ false }}"><span class="badge">{{cartCount}}</span></sc-if></button>
 <sc-if value="{{v3Mini}}" hint-placeholder-val="{{ false }}">
@@ -1407,6 +1454,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 </nav>
 </sc-if>
 </header>
+<sc-if value="{{srch.off}}" hint-placeholder-val="{{ true }}">
 <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 20px 24px 56px">
 <!-- 广告位：沿用 Beta 0.2 顶部弧形轮播的展现形式，卡片为运营广告 -->
 <div class="arc fi" aria-label="广告位">
@@ -1629,8 +1677,18 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 </sc-if>
 </div>
 </div>
+</sc-if>
+<!-- 搜索结果视图：顶部搜索回车后在当前页切换；默认全站在售，可收窄到当前场景货盘 -->
+<sc-if value="{{srch.on}}" hint-placeholder-val="{{ false }}">
+<div class="srv fi"><div class="srv-top"><button class="chip" style="height: 30px; padding: 0 12px; color: var(--brand-700)" onClick="{{srch.exit}}">{{srch.back}}</button><b>{{srch.count}}</b></div><button class="srv-strip {{srch.stripCls}}" onClick="{{srch.strip}}"><span class="sbx-askm"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="18" height="15" style="object-fit: contain"></span><span style="display: flex; flex-direction: column; gap: 2px; text-align: left; flex: 1; min-width: 0"><b>{{srch.stripT}}</b><small>{{srch.stripSub}}</small></span><span class="srv-go">→</span></button><div class="sel-fs" style="padding: 10px 12px"><div class="sel-f"><span class="sel-fl">范围</span><div class="sel-fc" role="radiogroup" aria-label="搜索范围"><sc-for list="{{srch.scopes}}" as="c" hint-placeholder-count="2"><button class="sel-chip {{c.cls}}" role="radio" aria-checked="{{c.aria}}" onClick="{{c.pick}}">{{c.t}}<em>{{c.n}}</em></button></sc-for></div></div><sc-for list="{{srch.filters}}" as="f" hint-placeholder-count="4"><div class="sel-f"><span class="sel-fl">{{f.label}}</span><div class="sel-fc"><sc-for list="{{f.chips}}" as="c" hint-placeholder-count="3"><button class="sel-chip {{c.cls}}" role="checkbox" aria-checked="{{c.aria}}" onClick="{{c.pick}}">{{c.t}}<em>{{c.n}}</em></button></sc-for></div></div></sc-for></div><div class="srv-bar"><sc-if value="{{srch.hasChips}}" hint-placeholder-val="{{ false }}"><div class="sel-chips"><sc-for list="{{srch.chips}}" as="c" hint-placeholder-count="1"><span class="sel-tagx">{{c.t}}<button aria-label="移除条件" onClick="{{c.x}}">×</button></span></sc-for><button class="sel-clr" onClick="{{srch.clearF}}">清空筛选</button></div></sc-if><div style="flex: 1"></div><sc-for list="{{srch.sorts}}" as="s" hint-placeholder-count="4"><button class="sel-sort {{s.cls}}" onClick="{{s.pick}}">{{s.t}}</button></sc-for></div><div class="srv-grid"><sc-for list="{{srch.cards}}" as="p" hint-placeholder-count="8"><article class="srv-card"><div class="srv-img"><img src="{{p.img}}" alt=""><sc-if value="{{p.hasSc}}" hint-placeholder-val="{{ false }}"><span class="srv-sc">{{p.scTag}}</span></sc-if></div><div class="srv-name"><span class="sel-tg {{p.tCls}}">{{p.type}}</span>{{p.name}}</div><div class="srv-meta">{{p.meta}}</div><div class="srv-pr"><b class="mono">{{p.price}}</b><sc-if value="{{p.hasMk}}" hint-placeholder-val="{{ false }}"><s class="mono">{{p.mk}}</s></sc-if></div><div class="srv-act"><button class="btn btn-o" onClick="{{p.ask}}">问发发</button><button class="btn btn-p" onClick="{{p.add}}">加购</button></div></article></sc-for></div><sc-if value="{{srch.none}}" hint-placeholder-val="{{ false }}"><div class="srv-none"><b>{{srch.noneT}}</b><span>换个关键词，或点上方横条让发发帮你找相近商品</span><button class="sel-clr" onClick="{{srch.clearF}}">清空筛选</button></div></sc-if></div>
+</sc-if>
+
 </div>
 </sc-if>
+<!-- 底部发发对话框：滚过首屏或在搜索结果页出现；点开向上展开为半屏浮层；开始选品后自动进入任务工作台 -->
+<sc-if value="{{dk.mini}}" hint-placeholder-val="{{ false }}"><div class="dock fi" role="region" aria-label="问发发"><sc-if value="{{dk.hasTag}}" hint-placeholder-val="{{ false }}"><button class="dock-tag" onClick="{{dk.back}}" title="回到工作台">↩ {{dk.tag}}</button></sc-if><button class="dock-ph" onClick="{{dk.openP}}"><span class="sbx-askm"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="18" height="15" style="object-fit: contain"></span><span class="dock-pht">{{dk.ph}}</span></button><sc-if value="{{dk.hasNew}}" hint-placeholder-val="{{ false }}"><button class="dock-ib" aria-label="新任务" title="新任务" onClick="{{dk.newTask}}">+</button></sc-if><button class="dock-send" aria-label="展开对话框" onClick="{{dk.openP}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button></div></sc-if>
+<sc-if value="{{dk.open}}" hint-placeholder-val="{{ false }}"><div class="dock-mask" onClick="{{dk.close}}"></div><div class="dock-panel fi" role="dialog" aria-label="问发发"><div class="dock-h"><span class="sbx-askm"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="18" height="15" style="object-fit: contain"></span><b>发发</b><span class="qc-ctx">{{dk.ctx}}</span><div style="flex: 1"></div><button class="qc-full" onClick="{{dk.full}}">↗ {{dk.fullT}}</button><button class="qc-x" aria-label="收起" onClick="{{dk.close}}">–</button></div><div class="dock-body"><div class="dock-in"><sc-if value="{{dk.hasProd}}" hint-placeholder-val="{{ false }}"><div class="dock-prod"><span class="sbx-th"><img src="{{dk.prodImg}}" alt=""></span><span class="sbx-n">{{dk.prodName}}</span><b class="mono">{{dk.prodPrice}}</b><button class="sel-clr" onClick="{{dk.prodX}}">移除</button></div></sc-if><sc-if value="{{dk.intro}}" hint-placeholder-val="{{ true }}"><div class="dock-ai">{{dk.introT}}</div><div class="qc-g"><sc-for list="{{dk.guides}}" as="g" hint-placeholder-count="3"><button class="v2ap" onClick="{{g.pick}}">{{g.t}}</button></sc-for></div></sc-if><sc-if value="{{dk.hasKw}}" hint-placeholder-val="{{ false }}"><div class="dock-me">{{dk.kw.q}}</div><div class="dock-ai">{{dk.kw.text}}</div><div class="dock-list"><sc-for list="{{dk.kw.rows}}" as="r" hint-placeholder-count="4"><div class="sbx-row"><span class="sbx-th"><img src="{{r.img}}" alt=""></span><span class="sbx-n">{{r.name}}</span><span class="sel-tg tg-hot">{{r.type}}</span><b class="mono">{{r.price}}</b><button class="chip" style="height: 26px; padding: 0 10px" onClick="{{r.add}}">加购</button></div></sc-for></div><sc-if value="{{dk.kw.hasMore}}" hint-placeholder-val="{{ false }}"><button class="dock-more" onClick="{{dk.kw.more}}">{{dk.kw.moreT}}</button></sc-if></sc-if><sc-if value="{{dk.hasFn}}" hint-placeholder-val="{{ false }}"><sc-for list="{{dk.fnMsgs}}" as="m" hint-placeholder-count="2"><sc-if value="{{m.isUser}}" hint-placeholder-val="{{ false }}"><div class="dock-me">{{m.text}}</div></sc-if><sc-if value="{{m.isAi}}" hint-placeholder-val="{{ true }}"><sc-if value="{{m.hasText}}" hint-placeholder-val="{{ true }}"><div class="dock-ai" style="white-space: pre-wrap">{{m.text}}</div></sc-if><sc-if value="{{m.hasDone}}" hint-placeholder-val="{{ false }}"><div class="qa-done"><span class="qa-ck">✓</span><span class="qa-tag">{{m.done.tag}}</span><b>{{m.done.ans}}</b><div style="flex: 1"></div><button class="qa-edit" onClick="{{m.done.edit}}">修改</button></div></sc-if><sc-if value="{{m.hasCard}}" hint-placeholder-val="{{ false }}"><div class="qa-card fi" role="group" aria-label="{{m.card.q}}"><div class="qa-h"><span class="qa-tag">{{m.card.tag}}</span><div class="qa-dots" aria-hidden="true"><sc-for list="{{m.card.dots}}" as="dt" hint-placeholder-count="6"><i class="{{dt.cls}}"></i></sc-for></div><div style="flex: 1"></div><span class="qa-cnt">{{m.card.cnt}}</span></div><div class="qa-q">{{m.card.q}}</div><sc-if value="{{m.card.isNb}}" hint-placeholder-val="{{ false }}"><sc-for list="{{m.card.groups}}" as="g" hint-placeholder-count="2"><div class="qa-gl">{{g.label}}</div><div class="qa-seg"><sc-for list="{{g.rows}}" as="o" hint-placeholder-count="3"><button class="qa-sg {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-for></div></sc-for></sc-if><div class="qa-list"><sc-for list="{{m.card.rows}}" as="o" hint-placeholder-count="3"><button class="qa-row {{o.cls}}" onClick="{{o.pick}}"><span class="qa-rd" aria-hidden="true"></span><span class="qa-tx"><span class="qa-l">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></span><sc-if value="{{o.hasDesc}}" hint-placeholder-val="{{ true }}"><span class="qa-d">{{o.desc}}</span></sc-if></span><span class="qa-go" aria-hidden="true">›</span></button></sc-for></div><div class="qa-hint">没有合适的？在输入框直接说，例如「{{m.card.otherPh}}」，多个条件一次生效</div><div class="qa-f"><sc-if value="{{m.card.hasSkip}}" hint-placeholder-val="{{ true }}"><button class="qa-link" onClick="{{m.card.skip}}">{{m.card.skipT}}</button></sc-if><div style="flex: 1"></div><sc-if value="{{m.card.hasStop}}" hint-placeholder-val="{{ false }}"><button class="qa-stop" onClick="{{m.card.stop}}">{{m.card.stopT}}</button></sc-if></div></div></sc-if><sc-if value="{{m.showOpts}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{m.options}}" as="o" hint-placeholder-count="4"><sc-if value="{{o.isLbl}}" hint-placeholder-val="{{ false }}"><span class="opt-lbl">{{o.label}}</span></sc-if><sc-if value="{{o.isBtn}}" hint-placeholder-val="{{ true }}"><button class="opt {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-if></sc-for></div></sc-if></sc-if></sc-for><div style="font-size: 12px; color: var(--text-3)">答完人数和预算后进入任务工作台，右侧实时显示候选范围</div></sc-if>
+<sc-if value="{{dk.hasAsk}}" hint-placeholder-val="{{ false }}"><div class="dock-me">{{dk.askUser}}</div><div class="dock-ai">{{dk.askText}}</div><div class="opts" style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{dk.opts}}" as="o" hint-placeholder-count="4"><sc-if value="{{o.isLbl}}" hint-placeholder-val="{{ false }}"><span class="opt-lbl">{{o.label}}</span></sc-if><sc-if value="{{o.isBtn}}" hint-placeholder-val="{{ true }}"><button class="opt {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-if></sc-for></div><div style="font-size: 12px; color: var(--text-3)">答完会自动进入任务工作台，右侧出选品结果</div></sc-if></div></div><div class="dock-f"><textarea rows="2" aria-label="问发发" placeholder="{{dk.ph}}" value="{{draft}}" onChange="{{onDraft}}" onKeyDown="{{dk.key}}"></textarea><div style="display: flex; align-items: center; gap: 8px"><sc-if value="{{dk.hasNew}}" hint-placeholder-val="{{ false }}"><button class="dock-ib" aria-label="新任务" title="新任务" onClick="{{dk.newTask}}">+</button></sc-if><div style="flex: 1"></div><button class="qc-send {{dk.sendCls}}" aria-label="发送" onClick="{{dk.send}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button></div></div></div></sc-if>
 
 <!-- ============ B. 任务页（Agent 对话） ============ -->
 <sc-if value="{{isChat}}" hint-placeholder-val="{{ false }}">
@@ -1672,7 +1730,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 </sc-if>
 </div>
 </sc-if>
-<div style="font-size: 15px; line-height: 26px; white-space: pre-wrap">{{m.text}}<sc-if value="{{m.typing}}" hint-placeholder-val="{{ false }}"><span class="caret"></span></sc-if></div>
+<div class="mtx" style="font-size: 15px; line-height: 26px; white-space: pre-wrap">{{m.text}}<sc-if value="{{m.typing}}" hint-placeholder-val="{{ false }}"><span class="caret"></span></sc-if></div>
 <sc-if value="{{m.hasParams}}" hint-placeholder-val="{{ false }}">
 <div class="fi" style="display: flex; gap: 8px; flex-wrap: wrap">
 <sc-for list="{{m.params}}" as="pa" hint-placeholder-count="4">
@@ -1680,10 +1738,11 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 </sc-for>
 </div>
 </sc-if>
+<sc-if value="{{m.hasDone}}" hint-placeholder-val="{{ false }}"><div class="qa-done"><span class="qa-ck">✓</span><span class="qa-tag">{{m.done.tag}}</span><b>{{m.done.ans}}</b><div style="flex: 1"></div><button class="qa-edit" onClick="{{m.done.edit}}">修改</button></div></sc-if><sc-if value="{{m.hasCard}}" hint-placeholder-val="{{ false }}"><div class="qa-card fi" role="group" aria-label="{{m.card.q}}"><div class="qa-h"><span class="qa-tag">{{m.card.tag}}</span><div class="qa-dots" aria-hidden="true"><sc-for list="{{m.card.dots}}" as="dt" hint-placeholder-count="6"><i class="{{dt.cls}}"></i></sc-for></div><div style="flex: 1"></div><span class="qa-cnt">{{m.card.cnt}}</span></div><div class="qa-q">{{m.card.q}}</div><sc-if value="{{m.card.isNb}}" hint-placeholder-val="{{ false }}"><sc-for list="{{m.card.groups}}" as="g" hint-placeholder-count="2"><div class="qa-gl">{{g.label}}</div><div class="qa-seg"><sc-for list="{{g.rows}}" as="o" hint-placeholder-count="3"><button class="qa-sg {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-for></div></sc-for></sc-if><div class="qa-list"><sc-for list="{{m.card.rows}}" as="o" hint-placeholder-count="3"><button class="qa-row {{o.cls}}" onClick="{{o.pick}}"><span class="qa-rd" aria-hidden="true"></span><span class="qa-tx"><span class="qa-l">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></span><sc-if value="{{o.hasDesc}}" hint-placeholder-val="{{ true }}"><span class="qa-d">{{o.desc}}</span></sc-if></span><span class="qa-go" aria-hidden="true">›</span></button></sc-for></div><div class="qa-hint">没有合适的？在输入框直接说，例如「{{m.card.otherPh}}」，多个条件一次生效</div><div class="qa-f"><sc-if value="{{m.card.hasSkip}}" hint-placeholder-val="{{ true }}"><button class="qa-link" onClick="{{m.card.skip}}">{{m.card.skipT}}</button></sc-if><div style="flex: 1"></div><sc-if value="{{m.card.hasStop}}" hint-placeholder-val="{{ false }}"><button class="qa-stop" onClick="{{m.card.stop}}">{{m.card.stopT}}</button></sc-if></div></div></sc-if>
 <sc-if value="{{m.showOpts}}" hint-placeholder-val="{{ false }}">
 <div class="fi" style="display: flex; gap: 8px; flex-wrap: wrap">
 <sc-for list="{{m.options}}" as="o" hint-placeholder-count="3">
-<button class="opt" onClick="{{o.pick}}">{{o.label}}</button>
+<sc-if value="{{o.isLbl}}" hint-placeholder-val="{{ false }}"><span class="opt-lbl">{{o.label}}</span></sc-if><sc-if value="{{o.isBtn}}" hint-placeholder-val="{{ true }}"><button class="opt {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-if>
 </sc-for>
 </div>
 </sc-if>
@@ -1725,7 +1784,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <aside class="hide-sm ws-aside" style="width: {{wsW}}px; flex: none; border-left: 1px solid var(--border-subtle); display: flex; flex-direction: column; position: sticky; top: 0; height: calc(100vh - 20px)">
 <div class="ws-drag {{wsDragCls}}" role="separator" aria-orientation="vertical" aria-label="拖动调整任务栏宽度，双击恢复默认" aria-valuenow="{{wsW}}" aria-valuemin="320" aria-valuemax="760" tabindex="0" title="拖动调整宽度 · 双击恢复默认" onMouseDown="{{wsDragStart}}" onDoubleClick="{{wsReset}}" onKeyDown="{{wsKey}}"><i></i></div>
 <div style="height: 56px; flex: none; display: flex; align-items: center; gap: 4px; padding: 0 16px; border-bottom: 1px solid var(--border-subtle)">
-<button class="tab {{wsPlanCls}}" style="height: 32px" onClick="{{wsPlan}}">选品方案<sc-if value="{{hasPlans}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 12px; opacity: .8">{{planCount}}</span></sc-if></button>
+<button class="tab {{wsPlanCls}}" style="height: 32px" onClick="{{wsPlan}}">{{wsPlanName}}<sc-if value="{{hasPlans}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 12px; opacity: .8">{{planCount}}</span></sc-if></button>
 <button class="tab {{wsCartCls}}" style="height: 32px" onClick="{{wsCart}}">购物车<sc-if value="{{hasCart}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 12px; opacity: .8">{{cartCount}}</span></sc-if></button>
 <div style="flex: 1"></div>
 <span class="mono hide-sm" style="font-size: 11px; color: var(--text-3)">{{wsW}}px</span>
@@ -1737,8 +1796,8 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <sc-if value="{{noPlans}}" hint-placeholder-val="{{ true }}">
 <div style="margin-top: 40px; text-align: center; color: var(--text-2); font-size: 13px; line-height: 22px; display: flex; flex-direction: column; align-items: center; gap: 12px">
 <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--brand-200)" stroke-width="1.1" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="3"></rect><path d="M7.5 9h9M7.5 12.5h9M7.5 16h5"></path></svg>
-<span>回答人数和预算后<br>选品方案会出现在这里</span>
-<span style="font-size: 12px; color: var(--text-3)">可整套加购、立即购买，或逐项调整</span>
+<span>回答几轮问题后<br>选品结果会出现在这里</span>
+<span style="font-size: 12px; color: var(--text-3)">结果 = 全部满足条件的 SKU，可筛选、多选后加购</span>
 </div>
 </sc-if>
 <sc-if value="{{planLoading}}" hint-placeholder-val="{{ false }}">
@@ -1746,35 +1805,8 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 10px"><div style="display: flex; gap: 10px"><div class="sk" style="width: 56px; height: 56px; border-radius: 10px"></div><div style="flex: 1; display: flex; flex-direction: column; gap: 8px"><div class="sk" style="height: 14px; width: 50%"></div><div class="sk" style="height: 12px; width: 85%"></div></div></div><div class="sk" style="height: 34px; border-radius: 999px"></div></div>
 </sc-for>
 </sc-if>
-<sc-for list="{{plans}}" as="pl" hint-placeholder-count="0">
-<div class="card sl" style="padding: 16px; display: flex; flex-direction: column; gap: 12px; animation-delay: {{pl.delay}}; box-shadow: {{pl.shadow}}">
-<div style="display: flex; align-items: center; gap: 8px"><span style="font-size: 15px; font-weight: 600; flex: 1; min-width: 0">{{pl.name}}</span><sc-if value="{{pl.best}}" hint-placeholder-val="{{ false }}"><span class="tagw">发发推荐</span></sc-if><button class="tq" aria-expanded="{{pl.ariaOpen}}" onClick="{{pl.toggleOpen}}">{{pl.openLabel}}</button></div>
-<sc-if value="{{pl.closed}}" hint-placeholder-val="{{ false }}">
-<button class="pl-fold" onClick="{{pl.toggleOpen}}">
-<span style="display: flex; gap: 6px"><sc-for list="{{pl.thumbs}}" as="th" hint-placeholder-count="2"><span class="pl-th"><img src="{{th.img}}" alt=""></span></sc-for></span>
-<span style="font-size: 13px; color: var(--text-2); line-height: 20px; text-align: left">{{pl.items}}</span>
-</button>
-</sc-if>
-<sc-if value="{{pl.open}}" hint-placeholder-val="{{ true }}">
-<div class="pl-list fi">
-<div class="pl-bar"><button class="pl-ck {{pl.allCls}}" role="checkbox" aria-checked="{{pl.allAria}}" aria-label="全选" onClick="{{pl.toggleAll}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button><span>全选</span><div style="flex: 1"></div><span style="color: var(--text-3)">点商品看详情</span></div>
-<sc-for list="{{pl.rows}}" as="r" hint-placeholder-count="3">
-<sc-if value="{{r.altHead}}" hint-placeholder-val="{{ false }}"><div class="pl-alt">也可以加选 · 同场景、预算内</div></sc-if>
-<div class="pl-row {{r.cls}}">
-<button class="pl-ck {{r.ckCls}}" role="checkbox" aria-checked="{{r.aria}}" aria-label="选择 {{r.name}}" onClick="{{r.toggle}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button>
-<button class="pl-hit" onClick="{{r.view}}"><span class="pl-th"><img src="{{r.img}}" alt=""></span><span class="pl-info"><span class="pl-n">{{r.name}}</span><span class="pl-m">{{r.meta}}</span></span></button>
-<span class="pl-pr mono">{{r.price}}</span>
-</div>
-</sc-for>
-</div>
-</sc-if>
-<div style="display: flex; gap: 14px; font-size: 12px; color: var(--text-3); flex-wrap: wrap"><span>已选 <b class="mono" style="color: var(--ink); font-size: 14px">{{pl.selCount}}</b> 件</span><span>人均 <b class="mono" style="color: var(--ink); font-size: 14px">{{pl.per}}</b></span><span>合计 <b class="mono" style="color: var(--ink); font-size: 14px">{{pl.total}}</b></span><span>{{pl.split}}</span></div>
-<sc-if value="{{pl.hasProfit}}" hint-placeholder-val="{{ true }}"><div class="pf-box {{pl.profCls}}"><div class="pf-h"><span class="pf-tag">{{pl.profTag}}</span><span class="pf-note">{{pl.profNote}}</span></div><div class="pf-g"><span>采购成本<b class="mono">{{pl.profCost}}</b></span><span>建议对客价<b class="mono">{{pl.profClient}}</b></span><span>每人利润<b class="mono">{{pl.profPer}}</b></span><span>毛利率<b class="mono pf-r">{{pl.profRate}}</b></span></div><div class="pf-t">预计总利润 <b class="mono">{{pl.profTotal}}</b> · 人均以已选商品计</div></div></sc-if>
-<sc-if value="{{pl.noProfit}}" hint-placeholder-val="{{ false }}"><div class="pf-box"><div class="pf-h"><span class="pf-tag">{{pl.noProfitText}}</span><span class="pf-note">按预算直接选品</span></div></div></sc-if>
-<div style="font-size: 12px; color: var(--brand-700); background: var(--brand-soft); border-radius: 8px; padding: 7px 10px; line-height: 18px">{{pl.reason}}</div>
-<div style="display: flex; gap: 8px"><button class="btn btn-o {{pl.btnCls}}" style="flex: 1" onClick="{{pl.add}}">加购已选 · {{headcount}} 份</button><button class="btn btn-p {{pl.btnCls}}" style="flex: 1" onClick="{{pl.buy}}">立即购买</button></div>
-</div>
-</sc-for>
+<sc-if value="{{fnAsking}}" hint-placeholder-val="{{ false }}"><div class="card sl sel-card fnp"><div class="sel-h"><div style="flex: 1; min-width: 0"><b>{{fnp.title}}</b><small>{{fnp.note}}</small></div><span class="fnp-n mono">{{fnp.cnt}}</span></div><div class="fnp-hist"><span>候选</span><b class="mono">{{fnp.hist}}</b></div><sc-if value="{{fnp.hasChips}}" hint-placeholder-val="{{ true }}"><div class="fnp-chips"><sc-for list="{{fnp.chips}}" as="c" hint-placeholder-count="3"><span class="sel-tagx {{c.cls}}">{{c.t}}<sc-if value="{{c.ed}}" hint-placeholder-val="{{ false }}"><button aria-label="修改条件" title="重新确认" onClick="{{c.edit}}">✎</button></sc-if><sc-if value="{{c.rm}}" hint-placeholder-val="{{ true }}"><button aria-label="去掉条件" onClick="{{c.x}}">×</button></sc-if></span></sc-for></div></sc-if><sc-if value="{{fnp.hasPrev}}" hint-placeholder-val="{{ true }}"><div class="fnp-pl">当前排在前面</div><div class="sel-list" style="max-height: none"><sc-for list="{{fnp.prev}}" as="p" hint-placeholder-count="5"><div class="sel-row"><span class="pl-th"><img src="{{p.img}}" alt=""></span><span class="pl-info"><span class="pl-n">{{p.name}}</span><span class="pl-m"><span class="sel-tg tg-hot">{{p.type}}</span></span></span><span class="sel-pr"><b class="mono">{{p.price}}</b></span></div></sc-for></div></sc-if><sc-if value="{{fnp.canStop}}" hint-placeholder-val="{{ true }}"><button class="btn btn-p" onClick="{{fnp.stop}}">{{fnp.stopT}}</button></sc-if></div></sc-if>
+<sc-if value="{{sel.has}}" hint-placeholder-val="{{ false }}"><div class="card sl sel-card"><div class="sel-h"><div style="flex: 1; min-width: 0"><b>{{sel.head}}</b><small>{{sel.sub}}</small></div><button class="chip" style="height: 28px; padding: 0 10px" onClick="{{sel.export}}">导出清单</button></div><sc-if value="{{sel.hasConds}}" hint-placeholder-val="{{ false }}"><div class="fnp-chips"><span style="font-size: 12px; color: var(--text-3)">需求条件</span><sc-for list="{{sel.conds}}" as="c" hint-placeholder-count="3"><span class="sel-tagx" style="padding-right: 8px">{{c.t}}</span></sc-for><button class="sel-clr" onClick="{{sel.more}}">继续缩小范围</button></div></sc-if><div class="sel-fs"><sc-for list="{{sel.filters}}" as="f" hint-placeholder-count="4"><div class="sel-f"><span class="sel-fl">{{f.label}}</span><div class="sel-fc"><sc-for list="{{f.chips}}" as="c" hint-placeholder-count="3"><button class="sel-chip {{c.cls}}" role="checkbox" aria-checked="{{c.aria}}" onClick="{{c.pick}}">{{c.t}}<em>{{c.n}}</em></button></sc-for></div></div></sc-for></div><sc-if value="{{sel.hasChips}}" hint-placeholder-val="{{ false }}"><div class="sel-chips"><sc-for list="{{sel.chips}}" as="c" hint-placeholder-count="1"><span class="sel-tagx">{{c.t}}<button aria-label="移除条件" onClick="{{c.x}}">×</button></span></sc-for><button class="sel-clr" onClick="{{sel.clearF}}">清空筛选</button></div></sc-if><div class="sel-bar"><button class="pl-ck {{sel.allCls}}" role="checkbox" aria-checked="{{sel.allAria}}" aria-label="全选当前结果" onClick="{{sel.toggleAll}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button><span>全选当前 <b class="mono">{{sel.shown}}</b> 个</span><div style="flex: 1"></div><sc-for list="{{sel.sorts}}" as="s" hint-placeholder-count="4"><button class="sel-sort {{s.cls}}" onClick="{{s.pick}}">{{s.t}}</button></sc-for></div><div class="sel-list"><sc-for list="{{sel.rows}}" as="r" hint-placeholder-count="5"><div class="sel-row {{r.cls}}"><button class="pl-ck {{r.ckCls}}" role="checkbox" aria-checked="{{r.aria}}" aria-label="选择 {{r.name}}" onClick="{{r.toggle}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button><button class="pl-hit" onClick="{{r.view}}"><span class="pl-th"><img src="{{r.img}}" alt=""></span><span class="pl-info"><span class="pl-n">{{r.name}}</span><span class="pl-m"><span class="sel-tg {{r.tCls}}">{{r.type}}</span>{{r.meta}}</span><sc-if value="{{r.rec}}" hint-placeholder-val="{{ false }}"><span class="sel-rec"><span class="tagw">发发推荐</span>{{r.recWhy}}</span></sc-if></span></button><span class="sel-pr"><b class="mono">{{r.price}}</b><sc-if value="{{r.hasProfit}}" hint-placeholder-val="{{ false }}"><small>{{r.profit}}</small></sc-if></span></div></sc-for><sc-if value="{{sel.noRows}}" hint-placeholder-val="{{ false }}"><div style="padding: 24px; text-align: center; font-size: 13px; color: var(--text-3)">没有符合筛选的商品 · <button class="sel-clr" onClick="{{sel.clearF}}">清空筛选</button></div></sc-if></div><div class="sel-foot"><div style="display: flex; gap: 14px; font-size: 12px; color: var(--text-3); flex-wrap: wrap; align-items: center"><span>已选 <b class="mono" style="color: var(--ink); font-size: 14px">{{sel.selN}}</b> 个 SKU</span><span>每人合计 <b class="mono" style="color: var(--ink)">{{sel.per}}</b></span><span>× {{sel.n}} 人 <b class="mono" style="color: var(--ink)">{{sel.totalAmt}}</b></span><div style="flex: 1"></div><button class="sel-clr" onClick="{{sel.clearPick}}">清空已选</button></div><sc-if value="{{sel.over}}" hint-placeholder-val="{{ false }}"><div class="sel-warn">{{sel.overText}}</div></sc-if><sc-if value="{{sel.multi}}" hint-placeholder-val="{{ false }}"><div class="sel-note">{{sel.multiText}}</div></sc-if><sc-if value="{{sel.hasProfit}}" hint-placeholder-val="{{ false }}"><div class="sel-note">{{sel.profText}}</div></sc-if><div style="display: flex; gap: 8px"><button class="btn btn-o {{sel.btnCls}}" style="flex: 1" onClick="{{sel.add}}">加购已选 · 各 {{sel.n}} 份</button><button class="btn btn-p {{sel.btnCls}}" style="flex: 1" onClick="{{sel.buy}}">立即购买</button></div></div></div></sc-if>
 </sc-if>
 <sc-if value="{{wsIsCart}}" hint-placeholder-val="{{ false }}">
 <sc-if value="{{cartEmpty}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 40px; text-align: center; color: var(--text-2); font-size: 13px">购物车是空的 · 从方案卡一键加购</div></sc-if>
@@ -2432,8 +2464,8 @@ class Component extends DCLogic {
     return { carIdx: 0, carPaused: false, sceneChosen: false, pendingScene: null, aiBig: true, biz: 'hot', chip: '', zone: '', banIdx: 0, allSc: false, screen: 'ai', cap: 'plan', srcSel: { own: true }, act: '', app: -1, prefer: '', tab: 'scene', scene: 's2', sub: '', assetOpen: false,
       pallet: 't1', group: '', giftTier: 'all', giftScene: '', channel: '', minDraft: '', maxDraft: '', min: null, max: null, q: '', page: 1, sel: {}, listLoading: false,
       cardType: '电子卡', cardScene: '', cq: '', tpl: null, slots: {}, focusSlot: '', slotErr: false, vd: null, vdDenom: 0, vdQty: 1,
-      cart: {}, draft: '', step: 0, qHead: true, qBudget: true, topic: '员工福利', ask: '', headcount: 120, budget: 300,
-      phase: 'idle', stepN: 0, stepsOpen: true, sn: 9999, planSet: 0, ws: 'plan', batch: 0, planSel: {}, planOpen: {}, pd: '', margin: 15, basis: 'client', mOpen: false,
+      cart: {}, srch: '', srchQ: '', srchDd: false, srchF: {}, srchSort: '', srchScope: 'all', srchHist: ['坚果', '年货礼包'], dock: 'mini', dockKw: '', dockAsk: false, dockNew: false, dockProd: '', fnOther: '', fn: null, fnT: 80, draft: '', step: 0, qHead: true, qBudget: true, topic: '员工福利', ask: '', headcount: 120, budget: 300,
+      phase: 'idle', stepN: 0, stepsOpen: true, sn: 9999, planSet: 0, ws: 'plan', batch: 0, planSel: {}, planOpen: {}, selF: {}, selSort: 'rec', selPick: null, selRound: 0, ansH: false, ansB: false, assumed: false, pd: '', margin: 15, basis: 'client', mOpen: false,
       cartSel: {}, wsW: 400, wsHide: false, wsDrag: false, v2col: 'scene', v2l2: 's2', v2l3: '', v2slots: {}, v2focus: '', v2err: false, af: null, rt: null, odNo: '', pkOpen: {}, fNo: '', fKw: '', fTime: 'all', fBuyerKw: '', fFrom: '', fTo: '', fShip: 'all', billTab: 'un', billSel: {}, invDlg: null, showBal: false, userMenu: false, acFrom: 'home', roster: null, rosPer: 1, payNo: '', payMode: 'all', oTab: 'all', acTab: 'sub', flowTab: 'all', rc: null, inq: null,
       fin: { prepay: 80000, activity: 20000, frozen: 0, flows: [
         { t: '10-15 16:43', acct: '预付款', type: '订单支付', amt: -28982, ref: 'FM2610150031', bal: 80000 },
@@ -2742,12 +2774,12 @@ class Component extends DCLogic {
       { id: 'h12', cat: 'hot', k: 'nuts', g: '休闲零食', name: '百草味 奶油味夏威夷果 分享装 1.2kg', source: '平台精选', member: 69, market: 99, sold: 920, sc: ['s6'], subs: ['团建观影', '轻福利'] },
       { id: 'h13', cat: 'hot', k: 'snack', g: '家庭清洁', name: '蓝月亮 深层洁净洗衣液 3kg', source: '天猫超市', member: 49, market: 69, sold: 3560, sc: ['s4', 's5'], subs: ['日常慰问', '员工关怀'] },
       { id: 'h14', cat: 'hot', k: 'snack', g: '纸品湿巾', name: '舒洁 湿厕纸 80 抽 × 6 包', source: '天猫超市', member: 39, market: 59, sold: 2280, sc: ['s5'], subs: ['日常慰问'] },
-      { id: 'g1', cat: 'gift', k: 'gift', g: '礼包', name: '福满年货礼包（8 件组合）', source: '平台精选', member: 298, market: 398, sold: 1560, sc: ['s2'], subs: ['员工年货', '春节送礼'] },
-      { id: 'g2', cat: 'gift', k: 'gift2', g: '礼包', name: '山珍干货礼盒（6 件组合）', source: '入驻商家', member: 268, market: 358, sold: 720, sc: ['s2', 's1'], subs: ['走亲访友', '敬老慰问'] },
-      { id: 'g3', cat: 'gift', k: 'tea', g: '礼包', name: '茶点团圆礼盒（5 件组合）', source: '入驻商家', member: 228, market: 299, sold: 860, sc: ['s2', 's3'], subs: ['春节送礼', '走亲访友', '年会伴手礼'] },
+      { id: 'g1', cat: 'gift', k: 'gift', g: '礼包', name: '福满年货礼包 · 整箱 1 件（内含 8 款）', source: '平台精选', member: 298, market: 398, sold: 1560, sc: ['s2'], subs: ['员工年货', '春节送礼'] },
+      { id: 'g2', cat: 'gift', k: 'gift2', g: '礼包', name: '山珍干货礼盒 · 整盒 1 件（内含 6 款）', source: '入驻商家', member: 268, market: 358, sold: 720, sc: ['s2', 's1'], subs: ['走亲访友', '敬老慰问'] },
+      { id: 'g3', cat: 'gift', k: 'tea', g: '礼包', name: '茶点团圆礼盒 · 整盒 1 件（内含 5 款）', source: '入驻商家', member: 228, market: 299, sold: 860, sc: ['s2', 's3'], subs: ['春节送礼', '走亲访友', '年会伴手礼'] },
       { id: 'g4', cat: 'gift', k: 'giftG', g: '礼包', name: '敬老滋补礼盒（阿胶 · 燕窝 · 人参）', source: '平台精选', member: 368, market: 488, sold: 540, sc: ['s1'], subs: ['敬老慰问'] },
       { id: 'g5', cat: 'gift', k: 'giftW', g: '礼包', name: '暖冬家居礼盒（毛毯 · 暖手宝 · 保温杯）', source: '平台精选', member: 168, market: 238, sold: 980, sc: ['s1'], subs: ['秋冬保暖', '员工关怀'] },
-      { id: 'g6', cat: 'gift', k: 'giftS', g: '礼包', name: '迎新零食礼盒（12 件组合）', source: '入驻商家', member: 98, market: 138, sold: 1340, sc: ['s3', 's4', 's5', 's6'], subs: ['年会伴手礼', '开门红', '日常慰问', '节日加餐', '团建观影'] },
+      { id: 'g6', cat: 'gift', k: 'giftS', g: '礼包', name: '迎新零食礼盒 · 整盒 1 件（内含 12 款）', source: '入驻商家', member: 98, market: 138, sold: 1340, sc: ['s3', 's4', 's5', 's6'], subs: ['年会伴手礼', '开门红', '日常慰问', '节日加餐', '团建观影'] },
       { id: 'g7', cat: 'gift', k: 'giftB', g: '礼包', name: '生日关怀礼盒（伴手礼 + 贺卡）', source: '平台精选', member: 128, market: 168, sold: 2100, sc: ['s4'], subs: ['员工生日'] },
       { id: 'g8', cat: 'gift', k: 'sea', g: '礼包', name: '臻选海味礼盒（鲍鱼 · 海参 · 花胶）', source: '入驻商家', member: 588, market: 798, sold: 310, sc: ['s2'], subs: ['春节送礼'] }
     ];
@@ -2764,12 +2796,458 @@ class Component extends DCLogic {
       { id: 'v8', name: '电影票兑换券', type: '电子卡', denoms: [40, 60], def: 60, moq: 10, sold: 1720, sc: ['s6'], chip: '观影', c1: '#3f2d7a', c2: '#a58cf0', ship: '卡密即发 · 全国 300+ 城市影院', desc: '在线选座兑换，2D/3D 通用，节假日不加价。' }
     ];
   }
+
+  // 演示用扩充货盘：每个都是独立 SKU（爆品 / 礼包 / 卡券都按 SKU 维度，礼包是供应商整箱发货的一个 SKU，不由平台或 AI 拼装）
+  extraSkus() {
+    if (this._xs) return this._xs;
+    const T = [
+      ['hot', '粮油米面', '金龙鱼 东北大米 10kg', 79, 'rice', '京东', ['s2', 's4', 's5']], ['hot', '粮油米面', '鲁花 5S 压榨一级花生油 5L', 129, 'oil', '天猫超市', ['s2', 's4']], ['hot', '粮油米面', '十月稻田 五常大米 5kg', 99, 'rice', '天猫超市', ['s2', 's1']],
+      ['hot', '粮油米面', '福临门 菜籽油 5L', 69, 'oil', '京东', ['s2', 's5']], ['hot', '粮油米面', '金沙河 挂面礼盒 3kg', 45, 'rice', '平台精选', ['s2', 's5']],
+      ['hot', '休闲零食', '百草味 坚果礼盒 1.5kg', 138, 'nuts', '天猫超市', ['s2', 's3', 's4']], ['hot', '休闲零食', '洽洽 每日坚果 30 袋', 109, 'nuts', '京东', ['s2', 's4', 's5', 's6']], ['hot', '休闲零食', '良品铺子 肉脯礼盒 1kg', 158, 'snack', '平台精选', ['s2', 's3']],
+      ['hot', '休闲零食', '旺旺 大礼包 2.2kg', 89, 'snack', '京东', ['s2', 's3', 's6']], ['hot', '休闲零食', '徐福记 新年糖果 1.5kg', 75, 'snack', '天猫超市', ['s2', 's3']], ['hot', '休闲零食', '稻香村 糕点礼盒 1.6kg', 128, 'snack', '平台精选', ['s2', 's1']],
+      ['hot', '生鲜冻品', '智利车厘子 2.5kg JJ 级', 268, 'gift', '京东', ['s2']], ['hot', '生鲜冻品', '阳澄湖 冷冻大闸蟹 8 只', 238, 'sea', '入驻商家', ['s2']], ['hot', '生鲜冻品', '宁夏滩羊 羊肉卷 2kg', 189, 'gift', '入驻商家', ['s2', 's1']],
+      ['hot', '生鲜冻品', '恒都 原切牛排 1.5kg', 168, 'gift', '京东', ['s2', 's4']], ['hot', '乳品饮料', '伊利 金典有机奶 12 盒', 69, 'milk', '京东', ['s2', 's4', 's5']], ['hot', '乳品饮料', '蒙牛 特仑苏 16 盒', 75, 'milk', '天猫超市', ['s2', 's1', 's4']],
+      ['hot', '乳品饮料', '农夫山泉 NFC 果汁 12 瓶', 79, 'milk', '天猫超市', ['s3', 's5', 's6']], ['hot', '健康滋补', '东阿 阿胶糕 500g', 198, 'goji', '平台精选', ['s1', 's2']], ['hot', '健康滋补', '同仁堂 西洋参片 100g', 228, 'goji', '入驻商家', ['s1']],
+      ['hot', '健康滋补', '燕之屋 即食燕窝 6 瓶', 268, 'goji', '平台精选', ['s1', 's2']], ['hot', '健康滋补', '红枣枸杞桂圆 养生组合 1.2kg', 89, 'goji', '天猫超市', ['s1', 's2']], ['hot', '家居保暖', '水星家纺 蚕丝被 200×230', 299, 'quilt', '京东', ['s1', 's3']],
+      ['hot', '家居保暖', '南极人 加厚法兰绒毯', 89, 'quilt', '天猫超市', ['s1', 's3']], ['hot', '家居保暖', '小米 智能电热毯 双人', 199, 'warmer', '京东', ['s1']], ['hot', '小家电', '美的 电炖锅 3L', 169, 'warmer', '京东', ['s1', 's2', 's3']],
+      ['hot', '小家电', '九阳 豆浆机 免滤', 259, 'warmer', '京东', ['s2', 's3']], ['hot', '小家电', '小熊 多功能早餐机', 129, 'warmer', '天猫超市', ['s3', 's4']], ['hot', '小家电', '飞利浦 电动牙刷', 239, 'cup', '京东', ['s3', 's4']],
+      ['hot', '杯壶餐具', '膳魔师 保温杯 480ml', 159, 'cup', '京东', ['s1', 's3', 's4']], ['hot', '杯壶餐具', '双立人 刀具 5 件套', 289, 'cup', '入驻商家', ['s2', 's3']], ['hot', '杯壶餐具', '康宁 玻璃餐具 12 件套', 139, 'cup', '平台精选', ['s2', 's4']],
+      ['hot', '家庭清洁', '立白 洗衣液 6kg 家庭装', 59, 'snack', '天猫超市', ['s4', 's5']], ['hot', '纸品湿巾', '维达 抽纸 24 包整箱', 59, 'snack', '京东', ['s4', 's5']],
+      ['gift', '礼包', '稻香村 新春糕点礼包', 158, 'gift', '平台精选', ['s2', 's3']], ['gift', '礼包', '五芳斋 粽香礼包', 128, 'gift', '入驻商家', ['s2']], ['gift', '礼包', '中粮 年货粮油礼包', 198, 'gift', '平台精选', ['s2', 's4']],
+      ['gift', '礼包', '三只松鼠 坚果年货礼包', 168, 'gift', '天猫超市', ['s2', 's4', 's5']], ['gift', '礼包', '良品铺子 团圆零食礼包', 148, 'gift', '平台精选', ['s2', 's3', 's6']], ['gift', '礼包', '百草味 生日零食礼包', 118, 'gift', '天猫超市', ['s4']],
+      ['gift', '礼包', '天福茗茶 茶叶礼包', 238, 'tea', '入驻商家', ['s1', 's2', 's3']], ['gift', '礼包', '洽洽 新年坚果礼包', 99, 'gift', '京东', ['s2', 's3']], ['gift', '礼包', '晨光 开学文具礼包', 79, 'giftS', '平台精选', ['s3', 's4']],
+      ['gift', '礼包', '康师傅 加班能量礼包', 69, 'giftS', '天猫超市', ['s5']], ['gift', '礼包', '贝因美 母婴关怀礼包', 199, 'giftB', '入驻商家', ['s4']], ['gift', '礼包', '杂粮养生礼包 · 东北 8 谷', 128, 'gift2', '入驻商家', ['s1', 's2']]
+    ];
+    const out = [];
+    T.forEach((t, i) => {
+      [[1, ''], [1.35, ' · 加量装'], [1.6, ' · 礼盒装'], [0.8, ' · 体验装'], [1.2, ' · 企业定制装'], [1.45, ' · 家庭装'], [1.9, ' · 双件装'], [2.2, ' · 尊享装'], [0.65, ' · 分享装'], [1.1, ' · 经典装']].forEach((v, j) => {
+        const member = Math.round(t[3] * v[0]); const id = 'x' + i + '-' + j;
+        out.push({ id: id, cat: t[0], k: t[4], g: t[1], name: t[2] + v[1], source: t[5], member: member, market: Math.round(member * (1.12 + ((i * 37 + j * 53) % 40) / 100)), sold: 300 + ((i * 97 + j * 211) % 3600), sc: t[6], subs: [], brand: t[2].split(' ')[0] });
+      });
+    });
+    this._xs = out; return out;
+  }
+  selRec() { const st = this.state; const its = this.selItems().items; const want = st.prefer === 'card' ? '卡券' : '礼包'; const A = this.availB(); const P = (p) => this.priceOf(p);
+    const c = its.filter((p) => this.skuType(p) === want); const pick = (c.length ? c : its).slice().sort((a, b) => Math.abs(A * 0.92 - P(a)) - Math.abs(A * 0.92 - P(b)))[0]; return pick || null; }
+  selRecWhy(p) { const st = this.state; const t = this.skuType(p); const per = this.isPer();
+    return (t === '礼包' ? '人均 ¥' + st.budget + ' 内礼包感最强，整箱一个包裹直发' : t === '卡券' ? '员工自选兑换，' + st.headcount + ' 人发放最省心' : '实用高复购，' + st.headcount + ' 人都用得上') + (per ? '' : '，毛利达标'); }
+  selVals(ready) {
+    const st = this.state; const n = st.headcount; const A = this.availB(); const BF = st.budget; const per = this.isPer(); const P = (p) => this.priceOf(p);
+    const empty = { has: false, rows: [], filters: [], sorts: [], total: 0, shown: 0 };
+    if (!ready) return empty;
+    const S = this.selItems(); const its = S.items; const rec = this.selRec();
+    const F = st.selF || {};
+    const band = (p) => { const x = P(p); return x < A * 0.6 ? 'lo' : x < A * 0.85 ? 'mid' : 'hi'; };
+    const gOf = (p) => (p.cat === 'voucher' ? '卡券' : p.g);
+    const DIM = [
+      ['type', '商品类型', ['爆品', '礼包', '卡券'].map((x) => [x, x]), (p) => this.skuType(p)],
+      ['band', '价位', [['lo', '¥' + Math.round(A * 0.6) + ' 以下'], ['mid', '¥' + Math.round(A * 0.6) + '–' + Math.round(A * 0.85)], ['hi', '¥' + Math.round(A * 0.85) + '–' + A]], band],
+      ['g', '品类', Array.from(new Set(its.map(gOf))).map((x) => [x, x]), gOf],
+      ['src', '来源', Array.from(new Set(its.map((p) => p.source))).map((x) => [x, x]), (p) => p.source]
+    ];
+    const on = (k) => Object.keys(F[k] || {}).filter((x) => F[k][x]);
+    const pass = (p, skip) => DIM.every((d) => { if (d[0] === skip) return true; const v = on(d[0]); return !v.length || v.indexOf(d[3](p)) >= 0; });
+    const setF = (k, v) => { const m = Object.assign({}, F); m[k] = Object.assign({}, m[k] || {}); m[k][v] = !m[k][v]; this.setState({ selF: m }); };
+    const filters = DIM.map((d) => ({ label: d[1], chips: d[2].map((c) => { const cnt = its.filter((p) => pass(p, d[0]) && d[3](p) === c[0]).length; const sel = !!(F[d[0]] || {})[c[0]];
+      return { t: c[1], n: cnt, cls: (sel ? 'on' : '') + (cnt ? '' : ' zero'), aria: sel ? 'true' : 'false', pick: () => setF(d[0], c[0]) }; }) }));
+    const chips = []; DIM.forEach((d) => on(d[0]).forEach((v) => { const c = d[2].find((x) => x[0] === v); chips.push({ t: d[1] + '：' + (c ? c[1] : v), x: () => setF(d[0], v) }); }));
+    const sorts = [['rec', '推荐'], ['pa', '价格↑'], ['pd', '价格↓'], ['sold', '销量']].concat(per ? [] : [['mg', '毛利']]);
+    const sk = st.selSort || 'rec';
+    let rows = its.filter((p) => pass(p, null));
+    const mg = (p) => (p.market - p.member) / p.market;
+    rows = rows.slice().sort((a, b) => sk === 'pa' ? P(a) - P(b) : sk === 'pd' ? P(b) - P(a) : sk === 'sold' ? (b.sold || 0) - (a.sold || 0) : sk === 'mg' ? mg(b) - mg(a) : (b === rec) - (a === rec) || S.scoreOf(b) - S.scoreOf(a));
+    const pick = st.selPick || (rec ? { [rec.id]: true } : {});
+    const selIds = its.filter((p) => pick[p.id]).map((p) => p.id);
+    const setPick = (m) => this.setState({ selPick: m });
+    const allOn = rows.length > 0 && rows.every((p) => pick[p.id]); const someOn = rows.some((p) => pick[p.id]);
+    const selItems = selIds.map((id) => its.find((p) => p.id === id));
+    const perSel = selItems.reduce((a, p) => a + P(p), 0);
+    const over = selItems.length > 1 && perSel > BF;
+    const face = Math.min(BF * Math.max(1, selItems.length), Math.ceil(perSel / (1 - st.margin / 100))); const prof = Math.max(0, face - perSel);
+    return { has: true, total: its.length, poolN: S.pool, shown: rows.length, few: false, fewText: '',
+      head: '选出 ' + its.length + ' 个商品' + (st.fn ? ' · 全部满足 ' + this.fnSum(st.fn.c).length + ' 个条件' : ' · 每人' + (per ? '预算' : '可用采购') + ' ≤ ¥' + A), conds: st.fn ? this.fnSum(st.fn.c).map((t) => ({ t: t })) : [], hasConds: !!st.fn, more: () => this.fnMore(), sub: '爆品 / 礼包 / 卡券都按 SKU 维度：每个商品单独成行，礼包是供应商整箱发货的一个 SKU，平台不拼装',
+      filters: filters, chips: chips, hasChips: chips.length > 0, clearF: () => this.setState({ selF: {} }),
+      sorts: sorts.map((s) => ({ t: s[1], cls: sk === s[0] ? 'on' : '', pick: () => this.setState({ selSort: s[0] }) })),
+      allCls: allOn ? 'on' : (someOn ? 'part' : ''), allAria: allOn ? 'true' : (someOn ? 'mixed' : 'false'),
+      toggleAll: () => { const m = Object.assign({}, pick); rows.forEach((p) => { m[p.id] = !allOn; }); setPick(m); },
+      clearPick: () => setPick({}), noRows: rows.length === 0,
+      rows: rows.map((p) => { const o = !!pick[p.id]; const t = this.skuType(p); const isRec = rec && p.id === rec.id;
+        return { key: 'sel|' + p.id, name: p.name, img: this.imgOf(p), type: t, tCls: t === '礼包' ? 'tg-gift' : t === '卡券' ? 'tg-card' : 'tg-hot', meta: p.source + (p.sold ? ' · 已售 ' + p.sold : ''), price: this.money(P(p)),
+          profit: per ? '' : '毛利 ' + Math.round(mg(p) * 100) + '%', hasProfit: !per, rec: !!isRec, recWhy: isRec ? this.selRecWhy(p) : '', cls: o ? 'on' : '', ckCls: o ? 'on' : '', aria: o ? 'true' : 'false',
+          toggle: () => { const m = Object.assign({}, pick); m[p.id] = !o; setPick(m); }, view: () => this.setState({ pd: 'sel|' + p.id }),
+          detail: { p: p, on: o, alt: false, plan: '选品结果', toggle: () => { const m = Object.assign({}, pick); m[p.id] = !o; setPick(m); } } }; }),
+      selN: selIds.length, none: selIds.length === 0, btnCls: selIds.length ? '' : 'dis', per: this.money(perSel), totalAmt: this.money(perSel * n), n: n,
+      over: over, overText: '已选 ' + selIds.length + ' 个 SKU，若每人各发一份合计 ¥' + Math.round(perSel) + '，超出人均 ¥' + BF + '；员工自选建议只留 1 个卡券或礼包',
+      multi: selItems.length > 1 && !over, multiText: '已选 ' + selIds.length + ' 个 SKU，默认每个 × ' + n + ' 份加购，可在购物车改数量',
+      hasProfit: !per && st.basis === 'client' && selIds.length > 0, profText: '对客 ¥' + face + ' · 每人利润 ¥' + prof + ' · 总利润 ' + this.money(prof * n),
+      add: () => { if (!selIds.length) { this.flash('先勾选要加购的商品', false); return; } selIds.forEach((id) => this.addItem(id, n)); this.flash('已加购 ' + selIds.length + ' 个 SKU × ' + n + ' 份', true); this.setState({ ws: 'cart', pd: '' }); },
+      buy: () => { if (!selIds.length) { this.flash('先勾选要购买的商品', false); return; } this.buyOnly(selIds, selIds.map(() => n)); },
+      export: () => this.flash('已导出选品清单（' + rows.length + ' 个商品，含价格与毛利），可发给客户挑选', false) };
+  }
+  skuType(p) { return p.cat === 'voucher' ? '卡券' : p.cat === 'gift' ? '礼包' : '爆品'; }
+  // 选品清单：约 50 个 SKU（45–55），同品牌 ≤ 5、单一品类 ≤ 40%，单品价不超过每人可用预算
+  selItems() {
+    const st = this.state;
+    if (st.fn && st.fn.c) { const key = 'fn|' + JSON.stringify(st.fn.c) + '|' + st.scene + '|' + this.isPer() + st.basis + st.margin; if (this._selK === key) return this._selV;
+      const A = this.fnAvail(st.fn.c); const P = (p) => this.priceOf(p); const its = this.fnBase().filter((p) => this.fnPass(p, st.fn.c)); const maxS = Math.max.apply(null, its.map((p) => p.sold || 1).concat([1]));
+      const score = (p) => (1 - Math.abs(A * 0.9 - P(p)) / A) * 0.4 + ((p.sold || 500) / maxS) * 0.3 + p.at.margin * 0.6;
+      this._selK = key; this._selV = { items: its.slice().sort((a, b) => score(b) - score(a)), pool: its.length, scoreOf: score }; return this._selV; } const sid = st.scene; const A = this.availB(); const P = (p) => this.priceOf(p);
+    const key = sid + '|' + A + '|' + st.selRound + '|' + (this.isPer() ? 'p' : 'e'); if (this._selK === key) return this._selV;
+    const goods = this.catalog().concat(this.extraSkus()).filter((p) => p.sc.indexOf(sid) >= 0);
+    const vs = []; this.vouchers().filter((v) => v.sc.indexOf(sid) >= 0 || v.chip === '通用').forEach((v) => { (v.fixed ? [v.denoms[0]] : v.denoms).forEach((d) => vs.push(this.item(v.id + '@' + d))); });
+    const lo = Math.max(20, A * 0.3);
+    const pool = goods.map((p) => Object.assign({ physical: true }, p)).concat(vs).filter((p) => P(p) <= A && P(p) >= lo);
+    const h = (s) => { let x = 0; for (let i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) % 997; return x / 997; };
+    const maxSold = Math.max.apply(null, pool.map((p) => p.sold || 500).concat([1]));
+    const score = (p) => (1 - Math.abs(A * 0.9 - P(p)) / A) * 0.4 + ((p.sold || 500) / maxSold) * 0.3 + ((p.market - p.member) / p.market) * 0.3 + (st.selRound ? h(p.id + st.selRound) * 0.35 : 0);
+    const ranked = pool.slice().sort((a, b) => score(b) - score(a));
+    const out = [], byBrand = {}, byG = {}; const target = 9999, gCap = 9999;
+    ranked.forEach((p) => { if (out.length >= target) return; const b = p.brand || (p.cat === 'voucher' ? p.name.split(' ')[0] : p.name.split(' ')[0]); const g = p.cat === 'voucher' ? '卡券' : p.g;
+      if ((byBrand[b] || 0) >= 5 || (byG[g] || 0) >= gCap) return; byBrand[b] = (byBrand[b] || 0) + 1; byG[g] = (byG[g] || 0) + 1; out.push(p); });
+    this._selK = key; this._selV = { items: out, pool: pool.length, scoreOf: score }; return this._selV;
+  }
+  // ---------------- 多轮反问收窄（v2.1）：意图识别后 2–6 轮，按维度缩小候选池，结果 = 全部满足条件的 SKU ----------------
+  fnH(s, k) { let x = 7 + k; for (let i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i) * (k + 1)) % 1009; return x / 1009; }
+  fnAttrs(p) {
+    const id = p.id; const card = p.cat === 'voucher'; const h = (k) => this.fnH(id, k);
+    const food = ['粮油米面', '休闲零食', '乳品饮料', '生鲜冻品', '健康滋补', '速食方便'].indexOf(p.g) >= 0 || (p.cat === 'gift' && /食|果|糕|茶|粮|海味|滋补|年货|零食|坚果|粽|谷|山珍/.test(p.name));
+    const fragile = ['小家电', '杯壶餐具'].indexOf(p.g) >= 0;
+    return { stock: card ? 99999 : Math.round(h(1) < 0.25 ? 30 + h(2) * 90 : 150 + h(2) * 1800), ship: card ? 1 : /定制|尊享/.test(p.name) ? 240 : (/京东|天猫/.test(p.source) ? [24, 48, 48, 72][Math.floor(h(3) * 4)] : [48, 72, 168, 168][Math.floor(h(3) * 4)]),
+      shelf: food ? [45, 90, 180, 365][Math.floor(h(4) * 4)] : 0, food: food, fragile: fragile, warranty: fragile ? h(5) > 0.35 : true, margin: (p.market - p.member) / p.market };
+  }
+  fnGrpOk(p, g) {
+    const M = { 员工: ['粮油米面', '休闲零食', '乳品饮料', '家庭清洁', '纸品湿巾', '小家电', '家居保暖', '礼包', '速食方便', '杯壶餐具', '卡券', '生鲜冻品'], 客户: ['礼包', '健康滋补', '生鲜冻品', '杯壶餐具', '小家电', '卡券'], 离退休: ['健康滋补', '粮油米面', '家居保暖', '乳品饮料', '礼包'], 工会: ['休闲零食', '卡券', '礼包', '小家电', '杯壶餐具', '乳品饮料'] };
+    return (M[g] || []).indexOf(p.g) >= 0 && (g !== '客户' || this.priceOf(p) >= 80);
+  }
+  fnPrefOk(p, v) { const M = { 实用: ['粮油米面', '家庭清洁', '纸品湿巾', '乳品饮料', '小家电', '杯壶餐具', '家居保暖', '速食方便', '卡券'], 体面: ['礼包', '健康滋补', '生鲜冻品', '杯壶餐具'], 健康: ['健康滋补', '乳品饮料', '粮油米面', '生鲜冻品'] }; return (M[v] || []).indexOf(p.g) >= 0; }
+  fnAvail(c) { const st = this.state; const B = c.budget || st.budget; if (this.isPer() || st.basis !== 'client') return B; return Math.floor(B * (1 - st.margin / 100)); }
+  fnBase() {
+    const sid = this.state.scene; if (this._fbK === sid) return this._fbV;
+    const goods = this.catalog().concat(this.extraSkus()).filter((p) => p.sc.indexOf(sid) >= 0).map((p) => Object.assign({ physical: true }, p));
+    const vs = []; this.vouchers().filter((v) => v.sc.indexOf(sid) >= 0 || v.chip === '通用').forEach((v) => (v.fixed ? [v.denoms[0]] : v.denoms).forEach((d) => vs.push(Object.assign(this.item(v.id + '@' + d), { g: '卡券', sold: v.sold, sc: v.sc }))));
+    const all = goods.concat(vs); all.forEach((p) => { p.at = this.fnAttrs(p); });
+    this._fbK = sid; this._fbV = all; return all;
+  }
+  fnPass(p, c, skip) {
+    const P = this.priceOf(p); const a = p.at; const n = c.n || 0;
+    const T = { grp: () => !c.grp || this.fnGrpOk(p, c.grp), budget: () => { if (!c.budget) return true; const A = this.fnAvail(c); return P <= A && P >= Math.max(20, A * 0.3); },
+      ship: () => !c.ship || a.ship <= c.ship, stock: () => !c.stock || !n || a.stock >= n * (c.stock === 'full' ? 1.1 : 0.5), sales: () => !c.sales || (p.sold || 0) >= c.sales,
+      margin: () => !c.margin || a.margin * 100 >= c.margin, shelf: () => !c.shelf || !a.food || a.shelf >= c.shelf, after: () => !c.after || a.warranty,
+      form: () => !c.form || (c.form === 'card' ? p.cat === 'voucher' : p.cat !== 'voucher'), pref: () => !c.pref || this.fnPrefOk(p, c.pref), ex: () => !c.ex || !c.ex.length || c.ex.indexOf(p.g) < 0 };
+    return Object.keys(T).every((k) => k === skip || T[k]());
+  }
+  fnCount(c) { return this.fnBase().filter((p) => this.fnPass(p, c)).length; }
+  fnDims() {
+    const st = this.state; const base = this.fnBase();
+    return [
+      { k: 'grp', name: '目标群体', q: '这批采购主要发给谁？', opts: [['员工', '员工福利'], ['客户', '客户送礼'], ['离退休', '离退休慰问'], ['工会', '工会活动']] },
+      { k: 'nb', name: '人数与预算', q: '发给多少人？每人预算大概多少？' },
+      { k: 'ship', name: '履约时效', q: '希望多久内到货？', opts: [[48, '48 小时内'], [168, '7 天内'], [0, '不限（含定制、预售）']], rec: 168 },
+      { k: 'stock', name: '库存', q: '库存要现货够全部人数吗？', opts: [['full', '现货够全部人数'], ['half', '可分批，现货够一半'], [0, '不限']], rec: 'full' },
+      { k: 'sales', name: '销量', q: '要不要只选卖得好的？', opts: [[1000, '只要爆款（月销 1000+）'], [300, '月销 300 以上'], [0, '不限']], rec: 300 },
+      { k: 'margin', name: '利润率', q: '每个商品至少要多少利润率？', opts: [[25, '≥ 25%'], [20, '≥ 20%'], [15, '≥ 15%'], [0, '不限']], rec: 20, when: !this.isPer() && st.basis === 'client' },
+      { k: 'shelf', name: '商品效期', q: '食品类保质期有要求吗？', opts: [[180, '剩余 ≥ 6 个月'], [90, '剩余 ≥ 3 个月'], [0, '不限']], rec: 90, when: base.some((p) => p.at.food) },
+      { k: 'after', name: '售后支持', q: '家电、易碎品的售后有要求吗？', opts: [['w', '需质保 / 破损包赔'], [0, '不限']], rec: 'w', when: base.some((p) => p.at.fragile) },
+      { k: 'form', name: '发放形式', q: '发实物还是卡券？', opts: [['phys', '只要实物'], ['card', '只要卡券（员工自选）'], [0, '都可以']], rec: 'phys' },
+      { k: 'pref', name: '商品偏好', q: '商品风格更偏哪种？', opts: [['实用', '偏实用'], ['体面', '偏体面'], ['健康', '健康养生'], [0, '不限']] }
+    ];
+  }
+  fnDim(k) { return this.fnDims().find((d) => d.k === k); }
+  fnRec(d, c) {
+    let rv = d.k === 'pref' ? ({ 员工: '实用', 客户: '体面', 离退休: '健康', 工会: '实用' }[c.grp] || '实用') : d.k === 'grp' ? '员工' : d.rec;
+    const i0 = d.opts.findIndex((o) => o[0] === rv); const order = d.opts.slice(Math.max(0, i0)).concat(d.opts.slice(0, Math.max(0, i0)).reverse());
+    const hit = order.find((o) => !o[0] || this.fnCount(Object.assign({}, c, { [d.k]: o[0] })) >= 10); return hit ? hit[0] : rv;
+  }
+  fnLabel(k, v, c) {
+    if (k === 'n') return v + ' 人'; if (k === 'budget') return (this.isPer() || this.state.basis !== 'client' ? '人均 ≤ ¥' : '客户预算 ¥') + v;
+    if (k === 'ex') return '不含' + v.join('、');
+    const d = this.fnDim(k); const o = d && d.opts ? d.opts.find((x) => x[0] === v) : null; return (d ? d.name + '：' : '') + (o ? o[1] : v);
+  }
+  fnSum(c) { return ['grp', 'n', 'budget', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref', 'ex'].filter((k) => c[k] && (k !== 'ex' || c[k].length)).map((k) => this.fnLabel(k, c[k], c)); }
+  fnParse(t, c0) {
+    const c = Object.assign({}, c0); const got = [];
+    const hm = t.match(/(\d+)\s*(人|名|位)/); if (hm) { c.n = +hm[1]; got.push(c.n + ' 人'); }
+    const bm = t.match(/(人均|每人|预算|面值)\D{0,4}(\d{2,5})/); if (bm) { c.budget = +bm[2]; got.push('人均 ' + c.budget); }
+    const G = [[/客户|送礼|合作伙伴|走亲访友/, '客户'], [/离退休|老同志|敬老|老干部|重阳/, '离退休'], [/工会|团建/, '工会'], [/员工|职工|年货|生日|餐补|加班/, '员工']];
+    for (let i = 0; i < G.length; i++) if (G[i][0].test(t)) { c.grp = G[i][1]; got.push(this.fnLabel('grp', c.grp)); break; }
+    const sh = t.match(/(\d+)\s*(小时|h)/i); if (sh) { c.ship = +sh[1] <= 48 ? 48 : 168; got.push(this.fnLabel('ship', c.ship)); } else if (/一周|7\s*天|七天/.test(t)) { c.ship = 168; got.push(this.fnLabel('ship', 168)); }
+    const mg = t.match(/利润率?\D{0,3}(\d{1,2})\s*%\s*(以上|起)/); if (mg) { const m = +mg[1]; c.margin = m >= 25 ? 25 : m >= 20 ? 20 : 15; got.push('利润率 ≥ ' + c.margin + '%'); }
+    const nm = t.match(/(不要|不含|除了|别要|不用)([^，,。；;]+)/);
+    if (nm) { const EXM = { 生鲜: '生鲜冻品', 零食: '休闲零食', 家电: '小家电', 饮料: '乳品饮料', 牛奶: '乳品饮料', 滋补: '健康滋补', 清洁: '家庭清洁', 纸: '纸品湿巾', 礼包: '礼包', 卡券: '卡券', 酒: '酒水' }; const ex = []; Object.keys(EXM).forEach((k) => { if (nm[2].indexOf(k) >= 0) ex.push(EXM[k]); }); if (ex.length) { c.ex = Array.from(new Set((c.ex || []).concat(ex))); got.push('不含' + nm[2].replace(/和|及/g, '、')); } }
+    if (/现货/.test(t)) { c.stock = 'full'; got.push(this.fnLabel('stock', 'full')); }
+    if (/爆款|热销/.test(t)) { c.sales = 1000; got.push(this.fnLabel('sales', 1000)); }
+    if (/卡券|提货券|自选/.test(t) && !(nm && /卡券/.test(nm[2]))) { c.form = 'card'; got.push(this.fnLabel('form', 'card')); } else if (/实物/.test(t)) { c.form = 'phys'; got.push(this.fnLabel('form', 'phys')); }
+    const sl = t.match(/保质期\D{0,4}(\d+)\s*个?月/); if (sl) { c.shelf = +sl[1] >= 6 ? 180 : 90; got.push(this.fnLabel('shelf', c.shelf)); }
+    if (/质保|破损包赔/.test(t)) { c.after = 'w'; got.push(this.fnLabel('after', 'w')); }
+    const pf = t.match(/实用|体面|有面子|健康|养生/); if (pf) { c.pref = /实用/.test(pf[0]) ? '实用' : /体面|面子/.test(pf[0]) ? '体面' : '健康'; got.push(this.fnLabel('pref', c.pref)); }
+    return { c: c, got: got };
+  }
+  fnPick(fn, cnt) {
+    let best = null, bs = 0;
+    this.fnDims().filter((d) => d.opts && d.k !== 'grp' && d.when !== false && fn.asked.indexOf(d.k) < 0 && fn.c[d.k] === undefined).forEach((d) => {
+      const rv = this.fnRec(d, fn.c); if (!rv) return; const n = this.fnCount(Object.assign({}, fn.c, { [d.k]: rv })); const W = { ship: 1, stock: 1, shelf: 1, after: 1, form: 0.9, margin: 0.8, sales: 0.7, pref: 0.3 }; const red = (cnt - n) * (W[d.k] || 1); if (n >= 10 && red > bs) { bs = red; best = d.k; } });
+    return best;
+  }
+  fnAdvance(fn, pre) {
+    const T = this.state.fnT || 80; const c = fn.c; const cnt = this.fnCount(c); const log = fn.log.slice();
+    const hist = fn.hist[fn.hist.length - 1] === cnt ? fn.hist.slice() : fn.hist.concat([cnt]); const nb = !!(c.n && c.budget);
+    if (nb && cnt < 10) {
+      const keys = Object.keys(c).filter((k) => c[k] && k !== 'n' && (k !== 'ex' || c[k].length));
+      const bl = keys.map((k) => { const c2 = Object.assign({}, c); delete c2[k]; return [k, this.fnCount(c2)]; }).filter((x) => x[1] > cnt).sort((a, b) => b[1] - a[1]).slice(0, 2);
+      log.push({ who: 'a', t: (pre ? pre + '\n' : '') + '候选只剩 ' + cnt + ' 个' + (bl.length ? '，主要卡在「' + bl.map((x) => this.fnLabel(x[0], c[x[0]], c)).join('」「') + '」' : '') + '。要放宽哪一条？', dim: 'relax', relax: bl });
+      return Object.assign({}, fn, { log: log, hist: hist, cur: 'relax', done: false });
+    }
+    let next = null;
+    if (!c.grp && fn.asked.indexOf('grp') < 0) next = 'grp'; else if (!nb) next = 'nb'; else if (cnt > T && fn.round < 6) next = this.fnPick(fn, cnt);
+    if (!next) { if (pre) log.push({ who: 'a', t: pre }); return Object.assign({}, fn, { log: log, hist: hist, cur: '', done: true }); }
+    const d = this.fnDim(next); const r = fn.round + 1;
+    const lead = fn.round === 0 ? '收到，按「' + this.scene().name + '」场景来选。' + (fn.got && fn.got.length ? '已识别：' + fn.got.join('、') + '。' : '') + '\n' : '';
+    log.push({ who: 'a', t: (pre ? pre + '\n' : '') + lead + '第 ' + r + '/6 轮 · ' + d.q + (nb ? '（当前候选 ' + cnt + ' 个）' : ''), dim: next, pre: ((pre ? pre + '\n' : '') + lead).trim(), q: d.q, r: r });
+    return Object.assign({}, fn, { log: log, hist: hist, cur: next, round: r, asked: fn.asked.concat(fn.asked.indexOf(next) < 0 ? [next] : []), done: false });
+  }
+  fnCommit(nf, fromAi) {
+    const st = this.state; const up = { fn: nf, headcount: nf.c.n || st.headcount, budget: nf.c.budget || st.budget, draft: '', ws: 'plan' };
+    const nb = !!(nf.c.n && nf.c.budget);
+    if (nf.done) { Object.assign(up, { step: 3, selF: {}, selPick: null, dockAsk: false, dock: 'mini', dockProd: '', screen: 'chat', assumed: false }); this.setState(up); this.runTools(); return; }
+    up.step = 1; up.phase = 'idle';
+    if (!nb && (fromAi || st.screen === 'ai')) Object.assign(up, { screen: 'ai', dockAsk: true, dock: 'open' }); else Object.assign(up, { screen: 'chat', dockAsk: false, dock: 'mini' });
+    this.setState(up);
+  }
+  fnStart(t, fromAi) {
+    const p = this.fnParse(t, {}); const fn0 = { c: p.c, got: p.got, log: [{ who: 'u', t: t }], hist: [this.fnBase().length], round: 0, asked: [], cur: '', done: false };
+    this.fnCommit(this.fnAdvance(fn0, ''), fromAi);
+  }
+  fnAnswer(k, v, label) {
+    const fn = this.state.fn; if (!fn) return; const c = Object.assign({}, fn.c); const before = this.fnCount(c);
+    if (k === 'n' || k === 'budget') {
+      c[k] = v; const nbL = Object.assign({}, fn.nbL || {}, { [k]: label });
+      if (!(c.n && c.budget)) { this.fnCommit(Object.assign({}, fn, { c: c, nbL: nbL })); return; }
+      const log = fn.log.concat([{ who: 'u', t: [nbL.n || c.n + ' 人', nbL.budget || '人均 ' + c.budget].join('，') }]);
+      const after = this.fnCount(c); this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: log }), '好的，' + c.n + ' 人、' + this.fnLabel('budget', c.budget) + '，候选 ' + fn.hist[0] + ' → ' + after + ' 个。')); return;
+    }
+    if (v) c[k] = v; else delete c[k];
+    const after = this.fnCount(c); const d = this.fnDim(k);
+    this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: fn.log.concat([{ who: 'u', t: label }]), asked: fn.asked.concat(fn.asked.indexOf(k) < 0 ? [k] : []) }), v ? '已按「' + this.fnLabel(k, v, c) + '」，候选 ' + before + ' → ' + after + ' 个。' : '「' + (d ? d.name : k) + '」不限，候选仍为 ' + after + ' 个。'));
+  }
+  fnAny() { const fn = this.state.fn; if (!fn) return; const c = Object.assign({ grp: '员工' }, fn.c); c.n = c.n || 120; c.budget = c.budget || 300;
+    this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: fn.log.concat([{ who: 'u', t: '随便，你看着定' }]), asked: fn.asked.concat(['grp', 'nb']) }), '已按' + this.fnSum({ grp: c.grp, n: c.n, budget: c.budget }).join('、') + '假设，可随时改；候选 ' + this.fnCount(c) + ' 个。')); }
+  fnSkip() { const fn = this.state.fn; if (!fn || !fn.cur) return; if (fn.cur === 'grp' || fn.cur === 'nb') { this.fnAny(); return; } this.fnAnswer(fn.cur, 0, '跳过'); }
+  fnStop() { const fn = this.state.fn; if (!fn) return; const cnt = this.fnCount(fn.c); this.fnCommit(Object.assign({}, fn, { log: fn.log.concat([{ who: 'u', t: '就这些，出结果' }, { who: 'a', t: '好的，就按当前条件出结果，共 ' + cnt + ' 个 SKU。' }]), cur: '', done: true })); }
+  fnRelax(k) { const fn = this.state.fn; const c = Object.assign({}, fn.c); const before = this.fnCount(c); const lb = this.fnLabel(k, c[k], c); delete c[k]; const after = this.fnCount(c);
+    this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: fn.log.concat([{ who: 'u', t: '放宽「' + lb + '」' }]) }), '已放宽「' + lb + '」，候选 ' + before + ' → ' + after + ' 个。')); }
+  fnRemove(k) { const fn = this.state.fn; if (!fn) return; const c = Object.assign({}, fn.c); const lb = this.fnLabel(k, c[k], c); const before = this.fnCount(c); delete c[k]; const after = this.fnCount(c);
+    const nf = Object.assign({}, fn, { c: c, hist: fn.hist.concat([after]), log: fn.log.concat([{ who: 'a', t: '已去掉「' + lb + '」，候选 ' + before + ' → ' + after + ' 个。' }]) });
+    if (fn.done) { this.setState({ fn: nf, selPick: null }); return; } this.setState({ fn: nf }); }
+  fnReask(k) { const fn = this.state.fn; if (!fn) return; const d = this.fnDim(k); const c = Object.assign({}, fn.c); if (k === 'nb') { delete c.n; delete c.budget; } else delete c[k];
+    this.setState({ fn: Object.assign({}, fn, { c: c, done: false, cur: k, nbL: k === 'nb' ? {} : fn.nbL, log: fn.log.concat([{ who: 'a', t: '重新确认 · ' + d.q, dim: k, pre: '好的，重新确认这一项，候选回到 ' + this.fnCount(c) + ' 个。', q: d.q, r: fn.round }]) }), step: 1, phase: 'idle', selPick: null }); }
+  fnMore() { const fn = this.state.fn; if (!fn) return; const cnt = this.fnCount(fn.c); const next = fn.round < 6 ? this.fnPick(Object.assign({}, fn, { round: 0 }), cnt) : null;
+    if (!next) { this.flash(fn.round >= 6 ? '已问满 6 轮，可在右侧筛选里继续缩小' : '没有能再明显缩小范围的维度了，可在右侧筛选', false); return; }
+    const d = this.fnDim(next); const r = fn.round + 1;
+    this.setState({ step: 1, phase: 'idle', selPick: null, fn: Object.assign({}, fn, { done: false, cur: next, round: r, asked: fn.asked.concat([next]), log: fn.log.concat([{ who: 'u', t: '继续缩小范围' }, { who: 'a', t: '第 ' + r + '/6 轮 · ' + d.q + '（当前 ' + cnt + ' 个）', dim: next, pre: '好的，再缩小一轮。', q: d.q, r: r }]) }) }); }
+  fnText(t) {
+    const fn = this.state.fn; if (!fn) return false;
+    if (/就这些|出结果|够了|可以了/.test(t)) { if (fn.c.n && fn.c.budget) this.fnStop(); else this.flash('先告诉我人数和预算', false); return true; }
+    if (/^(跳过|不限|随便|你定|你看着)/.test(t)) { this.fnSkip(); return true; }
+    let p = this.fnParse(t, fn.c);
+    if (!p.got.length && fn.cur === 'nb') { const num = t.match(/(\d{2,5})/); if (num) { const v = +num[1]; if (!fn.c.n) p = { c: Object.assign({}, fn.c, { n: v }), got: [v + ' 人'] }; else p = { c: Object.assign({}, fn.c, { budget: v }), got: ['人均 ' + v] }; } }
+    if (!p.got.length) { this.flash('没识别到条件，可以点选项，或说「48 小时内到、不要生鲜」', false); return true; }
+    const before = this.fnCount(fn.c); const after = this.fnCount(p.c);
+    const covered = ['grp', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref'].filter((k) => p.c[k] !== undefined);
+    if (p.c.n && p.c.budget) covered.push('nb');
+    const nf = Object.assign({}, fn, { c: p.c, log: fn.log.concat([{ who: 'u', t: t }]), asked: Array.from(new Set(fn.asked.concat(covered))) });
+    if (!(p.c.n && p.c.budget) && !(fn.c.n && fn.c.budget) && fn.cur === 'nb') { this.fnCommit(Object.assign(nf, { log: nf.log.concat([{ who: 'a', t: '已记下：' + p.got.join('、') + '。还差' + (p.c.n ? '每人预算' : '人数') + '。', dim: 'nb' }]) })); return true; }
+    this.fnCommit(this.fnAdvance(nf, '已按：' + p.got.join('、') + '，候选 ' + before + ' → ' + after + ' 个。'));
+    return true;
+  }
+  fnMsgs() {
+    const st = this.state; const fn = st.fn; if (!fn) return [];
+    const nb = !!(fn.c.n && fn.c.budget); const cnt = this.fnCount(fn.c);
+    const lastA = (() => { for (let i = fn.log.length - 1; i >= 0; i--) if (fn.log[i].who === 'a') return i; return -1; })();
+    const blankCard = { tag: '', q: '', cnt: '', dots: [], isNb: false, rows: [], groups: [], hasStop: false, stopT: '', stop: () => 0, hasSkip: false, skipT: '', skip: () => 0, otherPh: '', other: '', onOther: () => 0, otherKey: () => 0, otherGo: () => 0 };
+    const blankDone = { tag: '', ans: '', edit: () => 0, canEdit: false };
+    const base = (o) => Object.assign({ isUser: false, isAi: true, text: '', typing: false, hasSteps: false, hasParams: false, params: [], options: [], showOpts: false, showActs: false, hasCard: false, card: blankCard, hasDone: false, done: blankDone, hasText: true }, o);
+    const dots = (r) => [1, 2, 3, 4, 5, 6].map((i) => ({ cls: i < r ? 'on' : i === r ? 'cur' : '' }));
+    const other = { otherPh: '48 小时内到、不要生鲜', other: st.fnOther || '', onOther: (e) => this.setState({ fnOther: e && e.target ? e.target.value : '' }),
+      otherKey: (e) => { if (e && e.key === 'Enter') { e.preventDefault && e.preventDefault(); const v = (e.target && e.target.value) || st.fnOther; if (v && v.trim()) { this.setState({ fnOther: '' }); this.fnText(v.trim()); } } },
+      otherGo: () => { const v = (st.fnOther || '').trim(); if (!v) { this.flash('先输入要求，或点上面的选项', false); return; } this.setState({ fnOther: '' }); this.fnText(v); } };
+    const out = []; const L = fn.log;
+    for (let i = 0; i < L.length; i++) {
+      const m = L[i];
+      if (m.who === 'u') { out.push(base({ isUser: true, isAi: false, text: m.t })); continue; }
+      const live = i === lastA && !fn.done && m.dim && (m.dim === fn.cur || m.dim === 'relax');
+      if (m.dim && m.dim !== 'relax' && m.q && !live) {
+        const ans = L[i + 1] && L[i + 1].who === 'u' ? L[i + 1].t : '（已跳过）'; if (L[i + 1] && L[i + 1].who === 'u') i++;
+        const d = this.fnDim(m.dim);
+        out.push(base({ text: m.pre || '', hasText: !!m.pre, hasDone: true, done: { tag: '第 ' + m.r + ' 轮 · ' + (d ? d.name : ''), ans: ans, canEdit: !fn.done || true, edit: () => this.fnReask(m.dim) } }));
+        continue;
+      }
+      if (!live) { out.push(base({ text: m.t })); continue; }
+      const R = (label, desc, pick, extra) => Object.assign({ label: label, desc: desc, hasDesc: !!desc, rec: false, cls: '', pick: pick }, extra || {});
+      if (m.dim === 'relax') {
+        const rows = (m.relax || []).map((x) => R('放宽「' + this.fnLabel(x[0], fn.c[x[0]], fn.c) + '」', '约 ' + x[1] + ' 个', () => this.fnRelax(x[0])));
+        if (rows[0]) rows[0].rec = true;
+        out.push(base({ text: m.t, hasCard: true, card: Object.assign({}, blankCard, other, { tag: '候选过少 · 需要放宽', q: '放宽哪一条？', cnt: '当前 ' + cnt + ' 个', rows: rows, hasStop: cnt > 0, stopT: '就用这 ' + cnt + ' 个出结果', stop: () => this.fnStop() }) }));
+        continue;
+      }
+      const d = this.fnDim(m.dim);
+      const card = Object.assign({}, blankCard, other, { tag: '第 ' + m.r + '/6 轮 · ' + d.name, q: m.q || d.q, cnt: nb ? '当前候选 ' + cnt + ' 个' : '候选 ' + cnt + ' 个', dots: dots(m.r),
+        hasSkip: true, skipT: m.dim === 'grp' || m.dim === 'nb' ? '随便，你看着定' : '跳过这一项', skip: () => this.fnSkip(), hasStop: nb && m.dim !== 'nb', stopT: '就这些，出结果（' + cnt + ' 个）', stop: () => this.fnStop() });
+      if (m.dim === 'nb') {
+        card.isNb = true;
+        card.groups = [{ label: '人数', rows: [[50, '50 人以内'], [120, '50–200 人'], [300, '200 人以上']].map((x) => R(x[1], '', () => this.fnAnswer('n', x[0], x[1]), { cls: fn.c.n === x[0] ? 'on' : '' })) },
+          { label: '每人预算', rows: [[200, '人均 200 以内', false], [300, '人均 300 左右', true], [500, '人均 500 以上', false]].map((x) => R(x[1], '', () => this.fnAnswer('budget', x[0], x[1]), { rec: x[2], cls: fn.c.budget === x[0] ? 'on' : '' })) }];
+        card.otherPh = '120 人，人均 300';
+      } else {
+        const rv = d.k === 'grp' ? '员工' : this.fnRec(d, fn.c);
+        const DESC = { 员工: '实用为主，粮油、日用、小家电', 客户: '体面为主，礼包、滋补、生鲜', 离退休: '健康滋补、保暖、粮油', 工会: '活动氛围，零食、卡券、小家电' };
+        card.rows = d.opts.map((o) => { const n = this.fnCount(Object.assign({}, fn.c, { [d.k]: o[0] })); const diff = cnt - n;
+          return R(o[1], d.k === 'grp' ? DESC[o[0]] : '约 ' + n + ' 个' + (o[0] && diff > 0 ? ' · 少 ' + diff + ' 个' : ''), () => this.fnAnswer(d.k, o[0], o[1]), { rec: o[0] === rv && !!o[0], cls: n === 0 && o[0] ? 'zero' : '' }); });
+        card.rows.sort((x, y) => y.rec - x.rec);
+      }
+      out.push(base({ text: m.pre || '', hasText: !!m.pre, hasCard: true, card: card }));
+    }
+    return out;
+  }
+  fnProfile() {
+    const st = this.state; const fn = st.fn; const off = { on: false, title: '', hist: '', note: '', chips: [], prev: [], canStop: false, stopT: '', stop: () => 0, hasPrev: false };
+    if (!fn) return off; const nb = !!(fn.c.n && fn.c.budget); const cnt = this.fnCount(fn.c); const T = st.fnT || 80;
+    const keys = ['grp', 'n', 'budget', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref', 'ex'].filter((k) => fn.c[k] && (k !== 'ex' || fn.c[k].length));
+    const chips = keys.map((k) => { const ed = k === 'grp' || k === 'n' || k === 'budget'; return { t: this.fnLabel(k, fn.c[k], fn.c), ed: ed, rm: !ed, cls: ed ? 'ed' : '', edit: () => this.fnReask(k === 'grp' ? 'grp' : 'nb'), x: () => this.fnRemove(k) }; });
+    const pv = this.fnBase().filter((p) => this.fnPass(p, fn.c)).sort((a, b) => (b.sold || 0) - (a.sold || 0)).slice(0, 5);
+    return { on: true, title: '需求画像 · 第 ' + Math.max(1, fn.round) + '/6 轮', hist: fn.hist.join(' → ') + (fn.hist[fn.hist.length - 1] === cnt ? '' : ' → ' + cnt), cnt: String(cnt),
+      note: cnt <= T ? '已进入可挑选区间（目标 ≤ ' + T + ' 个），可以出结果' : '目标 ≤ ' + T + ' 个；继续回答左侧问题，或直接出结果', chips: chips, hasChips: chips.length > 0,
+      prev: pv.map((p) => ({ key: 'pv|' + p.id, name: p.name, img: this.imgOf(p), price: this.money(this.priceOf(p)), type: this.skuType(p) })), hasPrev: nb && pv.length > 0,
+      canStop: nb, stopT: '就这些，出结果（' + cnt + ' 个）', stop: () => this.fnStop() };
+  }
+  // ---------------- 顶部搜索 + 底部发发对话框 ----------------
+  srchPool() {
+    if (this._sp) return this._sp;
+    const vs = this.vouchers().map((v) => Object.assign(this.item(v.id + '@' + (v.fixed ? v.denoms[0] : v.def)), { g: '卡券', sc: v.sc, sold: v.sold, subs: [v.chip, v.type] }));
+    this._sp = this.catalog().concat(this.extraSkus()).map((p) => Object.assign({ physical: true }, p)).concat(vs); return this._sp;
+  }
+  isDemand(q) { return /(\d+)\s*(人|名|位)/.test(q || '') || /(人均|每人|预算)\D{0,4}\d{2,5}/.test(q || ''); }
+  isKw(t) { return !this.isDemand(t) && t.length <= 10 && !/[配发送购吗？?]|福利|方案|推荐|帮|怎么|多少|预算|人均|适合/.test(t); }
+  srchMatch(q) {
+    q = (q || '').trim(); if (!q) return [];
+    const SYN = { 坚果: ['坚果', '腰果', '夏威夷果', '核桃'], 零食: ['零食', '糖果', '糕点', '肉脯'], 大米: ['大米', '贡米', '稻'], 油: ['油'], 礼包: ['礼包', '礼盒'], 礼盒: ['礼包', '礼盒'], 年货礼包: ['年货礼包', '年货粮油礼包', '新春糕点礼包', '新年坚果礼包'], 卡券: ['券', '卡'], 购物卡: ['E 卡', '礼品卡', '提货'], 牛奶: ['奶'], 茶: ['茶'], 保温杯: ['保温杯'], 家电: ['小家电'], 京东卡: ['京东 E 卡'], '京东 E 卡': ['京东 E 卡'] };
+    let k = SYN[q] ? [q] : q.replace(/\d+\s*(人|名|位|元|块)?/g, ' ').replace(/人均|每人|预算|左右|以内|采购|员工|帮我|一批|福利|配|发|给|的|，|,|。/g, ' ').trim().split(/\s+/).filter(Boolean);
+    if (!k.length) k = [q];
+    const terms = k.map((w) => SYN[w] || [w]); const sid = this.state.scene; const scName = this.scene().name;
+    return this.srchPool().filter((p) => { const hay = [p.name, p.g, p.source, (p.subs || []).join(' '), (p.sc || []).indexOf(sid) >= 0 ? scName : ''].join(' '); return terms.some((ts) => ts.some((w) => hay.indexOf(w) >= 0)); });
+  }
+  runSearch(q) {
+    q = (q || '').trim(); if (!q) { this.flash('输入商品、品类或品牌名', false); return; }
+    const h = [q].concat((this.state.srchHist || []).filter((x) => x !== q)).slice(0, 6);
+    this._v3lock = Date.now() + 700;
+    this.setState({ srch: q, srchQ: q, srchDd: false, srchF: {}, srchSort: '', srchScope: 'all', srchHist: h, dockKw: '', dock: 'mini', v3More: false });
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+  }
+  hasTask() { const st = this.state; return st.step >= 3 && st.step < 10 && !!st.ask; }
+  followUp(t) {
+    const st = this.state; this.setState({ screen: 'chat', draft: '', dock: 'mini', dockKw: '', dockProd: '' });
+    if (/自选|卡券/.test(t)) { this.setState({ selF: { type: { '卡券': true } }, prefer: 'card' }); this.flash('已筛选为卡券（员工自选）', false); return; }
+    if (/礼包|礼盒/.test(t) && /只/.test(t)) { this.setState({ selF: { type: { '礼包': true } } }); this.flash('已筛选为礼包', false); return; }
+    if (/继续|缩小/.test(t)) { this.fnMore(); return; }
+    if (st.fn && this.fnParse(t, st.fn.c).got.length) { this.setState({ step: 1 }); this.fnText(t); return; }
+    this.startTask(t);
+  }
+  dockSend(text, o) {
+    const st = this.state; const t = (text || '').trim(); o = o || {};
+    if (!t) { this.flash('先说说需求，或点一条引导问句', false); return; }
+    if (st.fn && st.step === 1 && !o.fresh) { this.setState({ draft: '' }); this.fnText(t); return; }
+    if (st.dockAsk && st.step === 1 && !o.fresh) {
+      this.setState({ draft: '' });
+      if (/随便|你定|看着/.test(t)) { this.answerAny(); return; }
+      const hm = t.match(/(\d+)\s*(人|名|位)/), bm = t.match(/(人均|每人|预算)\D{0,4}(\d{2,5})/) || (!hm ? t.match(/()(\d{2,5})/) : null);
+      const H = st.qHead && !st.ansH && hm ? parseInt(hm[1], 10) : 0, B = st.qBudget && !st.ansB && bm ? parseInt(bm[2], 10) : 0;
+      if (H && B) { this.setState({ headcount: H, budget: B, ansH: true, ansB: true }); this.goSel(); return; }
+      if (H) { this.answerHead(H); return; } if (B) { this.answerBudget(B); return; }
+      this.flash('例如「120 人，人均 300」', false); return;
+    }
+    if (this.hasTask() && !st.dockNew && !o.fresh) { this.followUp(t); return; }
+    if (this.isKw(t)) { this.setState({ dockKw: t, draft: '', dock: 'open', dockAsk: false, dockNew: false }); return; }
+    this.setState({ dockNew: false, dockKw: '', draft: '' });
+    this.startTask(t, { fromAi: true });
+  }
+  srchVals() {
+    const st = this.state; const per = this.isPer(); const P = (p) => this.priceOf(p); const sc = this.scene(); const sid = st.scene;
+    const qq = (st.srchQ || '').trim(); const sugg = qq ? this.srchMatch(qq).slice(0, 5) : [];
+    const hist = st.srchHist || [];
+    const dd = { on: !!st.srchDd, empty: !qq, notEmpty: !!qq, hasHist: hist.length > 0, hist: hist.map((h) => ({ t: h, pick: () => this.runSearch(h) })), clearHist: () => this.setState({ srchHist: [] }),
+      hot: ['坚果', '年货礼包', '京东 E 卡', '保温杯', '大米', '蛋糕券'].map((h, i) => ({ t: h, n: String(i + 1), cls: i < 3 ? 'top' : '', pick: () => this.runSearch(h) })),
+      hasSugg: sugg.length > 0, sugg: sugg.map((p) => ({ name: p.name, img: this.imgOf(p), price: this.money(P(p)), type: this.skuType(p), pick: () => this.runSearch(p.name) })),
+      noSugg: !!qq && sugg.length === 0, all: '搜索「' + qq + '」', allPick: () => this.runSearch(qq),
+      demand: this.isDemand(qq), ask: '问发发：' + qq, askSub: this.isDemand(qq) ? '看起来是采购需求，交给发发按人数和预算配' : '让发发按你的需求挑选、配方案', askPick: () => { this.setState({ srchDd: false, srchQ: '' }); this.dockSend(qq, { fresh: true }); } };
+    const base = { q: st.srchQ || '', hasQ: !!qq, dd: dd,
+      onQ: (e) => this.setState({ srchQ: e && e.target ? e.target.value : '', srchDd: true }), focus: () => this.setState({ srchDd: true, dock: 'mini' }), ddClose: () => this.setState({ srchDd: false }),
+      key: (e) => { if (!e) return; if (e.key === 'Escape') { this.setState({ srchDd: false }); return; } if (e.key === 'Enter') { e.preventDefault && e.preventDefault(); this.runSearch(e.target && e.target.value !== undefined ? e.target.value : st.srchQ); } },
+      go: () => this.runSearch(st.srchQ), clearQ: () => this.setState({ srchQ: '', srchDd: true }) };
+    const q = st.srch;
+    if (!q) return Object.assign(base, { on: false, off: true, cards: [], filters: [], scopes: [], sorts: [], chips: [] });
+    const all = this.srchMatch(q); const scope = st.srchScope || 'all'; const F = st.srchF || {};
+    const inSc = (p) => (p.sc || []).indexOf(sid) >= 0; const pool = all.filter((p) => scope === 'all' || inSc(p));
+    const band = (p) => P(p) < 100 ? 'lo' : P(p) < 300 ? 'mid' : 'hi';
+    const uq = (a) => Array.from(new Set(a));
+    const DIM = [['type', '类型', ['爆品', '礼包', '卡券'].map((x) => [x, x]), (p) => this.skuType(p)], ['band', '价位', [['lo', '¥100 以下'], ['mid', '¥100–300'], ['hi', '¥300 以上']], band],
+      ['g', '品类', uq(all.map((p) => p.g)).map((x) => [x, x]), (p) => p.g], ['src', '来源', uq(all.map((p) => p.source)).map((x) => [x, x]), (p) => p.source]];
+    const on = (k) => Object.keys(F[k] || {}).filter((x) => F[k][x]);
+    const pass = (p, skip) => DIM.every((d) => { if (d[0] === skip) return true; const v = on(d[0]); return !v.length || v.indexOf(d[3](p)) >= 0; });
+    const setF = (k, v) => { const m = Object.assign({}, F); m[k] = Object.assign({}, m[k] || {}); m[k][v] = !m[k][v]; this.setState({ srchF: m }); };
+    const filters = DIM.map((d) => ({ label: d[1], chips: d[2].map((c) => { const n = pool.filter((p) => pass(p, d[0]) && d[3](p) === c[0]).length; const s = !!(F[d[0]] || {})[c[0]];
+      return { t: c[1], n: String(n), cls: (s ? 'on' : '') + (n ? '' : ' zero'), aria: s ? 'true' : 'false', pick: () => setF(d[0], c[0]) }; }) }));
+    const chips = []; DIM.forEach((d) => on(d[0]).forEach((v) => { const c = d[2].find((x) => x[0] === v); chips.push({ t: d[1] + '：' + (c ? c[1] : v), x: () => setF(d[0], v) }); }));
+    const sk = st.srchSort || '';
+    let rows = pool.filter((p) => pass(p, null));
+    rows = rows.slice().sort((a, b) => sk === 'pa' ? P(a) - P(b) : sk === 'pd' ? P(b) - P(a) : sk === 'sold' ? (b.sold || 0) - (a.sold || 0) : (inSc(b) - inSc(a)) || ((b.sold || 0) - (a.sold || 0)));
+    const hm = q.match(/(\d+)\s*(人|名|位)/), bm = q.match(/(人均|每人|预算)\D{0,4}(\d{2,5})/); const dem = !!(hm || bm);
+    const need = (hm ? hm[1] + ' 人' : '') + (hm && bm ? ' · ' : '') + (bm ? '人均 ' + bm[2] : '');
+    return Object.assign(base, { on: true, off: false, q2: q, back: '‹ 返回「' + sc.name + '」', exit: () => this.setState({ srch: '', srchQ: '' }),
+      count: '「' + q + '」找到 ' + rows.length + ' 个商品' + (scope === 'sc' ? '（仅「' + sc.name + '」货盘）' : ''),
+      stripCls: dem ? 'hot' : '', stripT: dem ? '看起来是采购需求，让发发按「' + need + '」配' : '让发发按「' + q + '」帮你配', stripSub: dem ? '按人数和预算选出约 50 个 SKU，可筛选、多选后加购' : '告诉发发人数和预算，按场景选品并算好利润',
+      strip: () => { if (dem) this.dockSend(q, { fresh: true }); else this.setState({ dock: 'open', dockKw: '', dockAsk: false, dockNew: true, dockProd: '', draft: '帮我配一批「' + q + '」福利，' }); },
+      scopes: [['all', '全部在售', all.length], ['sc', '「' + sc.name + '」货盘', all.filter(inSc).length]].map((s) => ({ t: s[1], n: String(s[2]), cls: scope === s[0] ? 'on' : '', aria: scope === s[0] ? 'true' : 'false', pick: () => this.setState({ srchScope: s[0] }) })),
+      filters: filters, chips: chips, hasChips: chips.length > 0, clearF: () => this.setState({ srchF: {} }),
+      sorts: [['', '综合'], ['sold', '销量'], ['pa', '价格↑'], ['pd', '价格↓']].map((s) => ({ t: s[1], cls: sk === s[0] ? 'on' : '', pick: () => this.setState({ srchSort: s[0] }) })),
+      none: rows.length === 0, noneAll: all.length === 0, noneT: all.length === 0 ? '没找到「' + q + '」相关商品' : '当前筛选下没有商品',
+      cards: rows.map((p) => { const t = this.skuType(p); const s = inSc(p); const nm = p.name.length > 14 ? p.name.slice(0, 14) + '…' : p.name;
+        return { key: 'sr|' + p.id, name: p.name, img: this.imgOf(p), type: t, tCls: t === '礼包' ? 'tg-gift' : t === '卡券' ? 'tg-card' : 'tg-hot', hasSc: s, scTag: sc.short || sc.name, price: this.money(P(p)), hasMk: !per && p.market > p.member, mk: this.money(p.market), meta: p.source + (p.sold ? ' · 已售 ' + p.sold : ''),
+          add: () => { this.addItem(p.id, 1); this.flash('已加入购物车 · ' + nm, true); }, ask: () => this.setState({ dock: 'open', dockProd: p.id, dockKw: '', dockAsk: false, dockNew: true, draft: '「' + nm + '」适合发给员工吗？同价位还有哪些？' }) }; }) });
+  }
+  dockVals(G) {
+    const st = this.state; const on = st.screen === 'ai' && (!!st.v3Mini || !!st.srch || st.dock === 'open'); const open = on && st.dock === 'open';
+    const task = this.hasTask(); const follow = task && !st.dockNew; const P = (p) => this.priceOf(p); const sc = this.scene();
+    let selN = 0; if (task) { const pk = st.selPick; selN = pk ? Object.keys(pk).filter((k) => pk[k]).length : 1; }
+    const prod = st.dockProd ? this.item(st.dockProd) : null;
+    const ph = follow ? '追问当前任务，例如「只看礼包」「换一批」' : (st.fn && st.step === 1 ? (st.fn.cur === 'grp' ? '直接说，例如「给客户送礼」' : st.fn.cur === 'nb' ? '直接说「120 人，人均 300」' : '点选项，或说更明确的要求') : st.dockAsk && st.step === 1 ? '直接回答，例如「120 人，人均 300」' : '问发发：' + ((G && G.mini) || '说说给谁发、多少人、人均多少'));
+    const kwAll = st.dockKw ? this.srchMatch(st.dockKw) : [];
+    const kw = { q: st.dockKw, text: kwAll.length ? '找到 ' + kwAll.length + ' 个「' + st.dockKw + '」相关商品，先看前 4 个。要按人数和预算配，直接告诉我。' : '没找到「' + st.dockKw + '」相关商品，换个说法试试，或告诉我要给谁发、多少人。',
+      rows: kwAll.slice(0, 4).map((p) => ({ key: 'dk|' + p.id, name: p.name, img: this.imgOf(p), price: this.money(P(p)), type: this.skuType(p), add: () => { this.addItem(p.id, 1); this.flash('已加入购物车', true); } })),
+      hasMore: kwAll.length > 0, moreT: '在页面查看全部 ' + kwAll.length + ' 个 →', more: () => this.runSearch(st.dockKw) };
+    const asking = !!(st.dockAsk && st.step === 1 && !st.fn);
+    const opts = [];
+    if (asking) {
+      if (st.qHead) { opts.push({ label: '人数', isLbl: true, isBtn: false, cls: '', rec: false, pick: () => 0 }); [[50, '50 人以内'], [120, '50–200 人'], [300, '200 人以上']].forEach((x) => opts.push({ label: x[1], isLbl: false, isBtn: true, cls: st.ansH && st.headcount === x[0] ? 'on' : '', rec: false, pick: () => this.answerHead(x[0]) })); }
+      if (st.qBudget) { opts.push({ label: '每人预算', isLbl: true, isBtn: false, cls: '', rec: false, pick: () => 0 }); [[200, '人均 200 以内', false], [300, '人均 300 左右', true], [500, '人均 500 以上', false]].forEach((x) => opts.push({ label: x[1], isLbl: false, isBtn: true, cls: st.ansB && st.budget === x[0] ? 'on' : '', rec: x[2], pick: () => this.answerBudget(x[0]) })); }
+      opts.push({ label: '随便，你看着定', isLbl: false, isBtn: true, cls: 'ghost', rec: false, pick: () => this.answerAny() });
+    }
+    const nm = prod ? (prod.name.length > 14 ? prod.name.slice(0, 14) + '…' : prod.name) : '';
+    return { on: on, open: open, mini: on && !open, hasTag: follow, tag: follow ? st.topic + ' · ' + st.headcount + ' 人 · 已选 ' + selN : '', back: () => this.setState({ screen: 'chat', dock: 'mini' }),
+      hasNew: follow, newTask: () => this.setState({ dockNew: true, dock: 'open', dockKw: '', dockAsk: false, dockProd: '', draft: '' }), ph: ph,
+      openP: () => this.setState({ dock: 'open', srchDd: false }), close: () => this.setState({ dock: 'mini' }),
+      fullT: follow ? '回到工作台' : '展开大对话框', full: () => { if (follow) { this.setState({ screen: 'chat', dock: 'mini' }); return; } this._v3lock = Date.now(); this.setState({ v3Mini: false, srch: '', dock: 'mini' }); try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {} },
+      ctx: prod ? '商品：' + nm : (follow ? '追问：' + st.topic : (st.dockNew && task ? '新任务 · ' + sc.name : '场景：' + sc.name)), hasProd: !!prod, prodImg: prod ? this.imgOf(prod) : '', prodName: prod ? prod.name : '', prodPrice: prod ? this.money(P(prod)) : '', prodX: () => this.setState({ dockProd: '' }),
+      hasKw: !!st.dockKw, kw: kw, hasFn: !!(st.fn && st.step === 1 && st.dockAsk), fnMsgs: st.fn && st.step === 1 ? this.fnMsgs() : [], hasAsk: asking, askUser: st.ask, askText: asking ? this.aiText(1) : '', opts: opts,
+      intro: !st.dockKw && !asking && !(st.fn && st.step === 1 && st.dockAsk), introT: follow ? '在当前任务里继续：可以说「只看礼包」「换一批」「员工自选」，或点左下角「+」开始新任务。' : '说说给谁发、多少人、人均多少；缺的信息我会一次问清。只想找某个商品，用顶部搜索更快。',
+      guides: follow ? ['只看礼包', '换一批', '改成员工自选'].map((t) => ({ t: t, pick: () => this.setState({ draft: t }) })) : ((G && G.qs) || []).slice(0, 3).map((q) => ({ t: q.t, pick: () => this.setState({ draft: q.t }) })),
+      sendCls: (st.draft || '').trim() ? 'ready' : '', send: () => this.dockSend(st.draft),
+      key: (e) => { if (!e) return; if (e.key === 'Escape') { this.setState({ dock: 'mini' }); return; } if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault && e.preventDefault(); this.dockSend(e.target && e.target.value !== undefined ? e.target.value : st.draft); } } };
+  }
   item(id) {
     if (id.indexOf('@') > 0) {
       const parts = id.split('@'); const v = this.vouchers().find((x) => x.id === parts[0]); const d = parseInt(parts[1], 10);
       return { id: id, cat: 'voucher', face: this.face(v, d), name: v.name + (v.fixed ? '' : ' ¥' + d), source: v.type === '实体卡' ? '卡券 · 实体' : '卡券 · 电子', member: v.fixed ? v.fixed.member : Math.round(d * 0.95), market: v.fixed ? v.fixed.market : d, physical: v.type === '实体卡' };
     }
-    const p = this.catalog().find((x) => x.id === id);
+    const p = this.catalog().find((x) => x.id === id) || this.extraSkus().find((x) => x.id === id);
     return Object.assign({ physical: true }, p);
   }
   imgOf(it) { return it.face || this.pimg(it); }
@@ -2791,10 +3269,15 @@ class Component extends DCLogic {
   // ---------------- 对话 ----------------
   aiText(i) {
     const st = this.state; const sc = this.scene();
-    if (i === 1) return '收到。按「' + sc.name + '」场景来配' + st.topic + '，要实用又有心意。为了配出能直接下单的方案，先确认一下：这次发给多少人？';
+    if (i === 1) { const nh = !st.ansH && st.qHead, nb = !st.ansB && st.qBudget; return '收到，按「' + sc.name + '」场景来选' + st.topic + '。' + (st.qHead && st.qBudget ? '先确认两件事：发给多少人？每人预算大概多少？点选即可，也可以直接告诉我。' : st.qHead ? '这次发给多少人？' : '每人预算大概多少？'); }
     if (i === 2) return '好的，' + st.headcount + ' 人。每人预算大概多少？';
     if (i === 10) { return '按「' + sc.name + ' · ' + st.topic + '」、人均 ¥' + st.budget + ' 来看，建议这样分配：\n① 约 60% 放实用主礼（粮油、滋补或保暖类，员工和家人都用得上）；\n② 约 30% 放有节日氛围的小件或礼盒，提升仪式感；\n③ 约 10% 留给贺卡定制和名单代发。\n开票方面，礼包按子商品分别开票；用活动账户支付时按同票折扣开票。\n以上来自《发发福利知识库 · 福利采购指南》，政策细节以客服确认为准。'; }
-    if (i === 3) { const b = this.plansData()[0]; const L = this.loopSteps(); const pr = this.isPer() ? '' : (st.basis === 'client' ? '每套都按客户预算 ¥' + st.budget + '、预留 ' + st.margin + '% 利润来配（可用采购 ¥' + this.availB() + '）' + (L.rounds > 1 ? '，自检时替换了 1 个毛利不达标的礼包' : '') + '。\n' : '按' + this.basisLabel() + '来配，不预留利润。\n'); return '方案配好了，放在右侧「选品方案」。\n' + pr + '我更推荐「' + b.name + '」：' + b.reason + '。\n可以整套加购，也可以点「立即购买」直接进入结算页。'; }
+    if (i === 3) { const S = this.selItems(); const its = S.items; const cnt = (t) => its.filter((p) => this.skuType(p) === t).length; const rec = this.selRec(); const A = this.availB();
+      const fc = st.fn ? this.fnSum(st.fn.c) : []; const rounds = st.fn ? st.fn.round : 0;
+      const head = '选品结果放在右侧：' + (st.fn ? '经过 ' + rounds + ' 轮确认，候选 ' + st.fn.hist[0] + ' → ' + its.length + ' 个，' : '') + '全部满足条件的 ' + its.length + ' 个 SKU 都列出来了（礼包 ' + cnt('礼包') + ' · 爆品 ' + cnt('爆品') + ' · 卡券 ' + cnt('卡券') + '），每个都是单独 SKU。\n' + (fc.length ? '条件：' + fc.join('、') + '。\n' : '');
+      const prof = this.isPer() ? '' : (st.basis === 'client' ? '按客户预算 ¥' + st.budget + '、预留 ' + st.margin + '% 利润筛价。\n' : '按' + this.basisLabel() + '筛价，不预留利润。\n');
+      return head + prof + (rec ? '推荐「' + rec.name.replace(/ · .*/, '') + '」：' + this.selRecWhy(rec) + '。\n' : '') + '可以继续按类型、价位、品类和来源筛选，勾选多个后一起加购；还想再缩小，点「继续缩小范围」。'; }
+    if (i === 99) { const b = this.plansData()[0]; const L = this.loopSteps(); const pr = this.isPer() ? '' : (st.basis === 'client' ? '每套都按客户预算 ¥' + st.budget + '、预留 ' + st.margin + '% 利润来配（可用采购 ¥' + this.availB() + '）' + (L.rounds > 1 ? '，自检时替换了 1 个毛利不达标的礼包' : '') + '。\n' : '按' + this.basisLabel() + '来配，不预留利润。\n'); return '方案配好了，放在右侧「选品方案」。\n' + pr + '我更推荐「' + b.name + '」：' + b.reason + '。\n可以整套加购，也可以点「立即购买」直接进入结算页。'; }
     return '';
   }
   streamTo(len) {
@@ -2808,7 +3291,7 @@ class Component extends DCLogic {
   }
   startTask(text, opt) {
     clearInterval(this._s); clearTimeout(this._k);
-    const o = opt || {};
+    const o = Object.assign({ fromAi: this.state.screen === 'ai' }, opt || {});
     const t = (text || '').trim() || this.scene().subs[0];
     const hm = t.match(/(\d+)\s*(人|名|位)/), bm = t.match(/(人均|每人|预算|面值)\D{0,4}(\d{2,5})/);
     const tm = t.match(/提货卡|蛋糕券|会员年卡|礼盒|礼包|爆品|员工年货|春节送礼|送礼|走亲访友|年夜饭|开门红|年会伴手礼|重阳|敬老|慰问|保暖|暖心|生日|自选|年货/);
@@ -2817,13 +3300,18 @@ class Component extends DCLogic {
     this.setState({ basis: basis, margin: mm ? parseInt(mm[1], 10) : (this.state.margin || 15), mOpen: false });
     this.setState({ screen: 'chat', topic: topic, ask: t, draft: '', tpl: null, slots: {}, slotErr: false, prefer: o.prefer || (/提货卡|提货券|蛋糕券|会员|自选/.test(t) ? 'card' : ''), planSet: 0, ws: 'plan', stepN: 0, stepsOpen: true });
     if (o.qa) { this.setState({ step: 10, qHead: false, qBudget: false, budget: bm ? parseInt(bm[2], 10) : this.state.budget }); setTimeout(() => this.streamTo(this.aiText(10).length), 60); return; }
+    this.setState({ selF: {}, selPick: null, selRound: 0, assumed: false, ansH: false, ansB: false });
+    if (!o.legacy) { this.fnStart(t, o.fromAi); return; }
     if (hm && bm) { this.setState({ headcount: parseInt(hm[1], 10), budget: parseInt(bm[2], 10), step: 3, qHead: false, qBudget: false }); this.runTools(); return; }
-    if (hm) { this.setState({ headcount: parseInt(hm[1], 10), step: 2, qHead: false, qBudget: true }); setTimeout(() => this.streamTo(this.aiText(2).length), 60); return; }
+    if (bm) { this.setState({ budget: parseInt(bm[2], 10), step: 1, qHead: true, qBudget: false }); setTimeout(() => this.streamTo(this.aiText(1).length), 60); return; }
+    if (hm) { this.setState({ headcount: parseInt(hm[1], 10), step: 1, qHead: false, qBudget: true }); setTimeout(() => this.streamTo(this.aiText(1).length), 60); return; }
     this.setState({ step: 1, qHead: true, qBudget: true });
     setTimeout(() => this.streamTo(this.aiText(1).length), 60);
   }
-  answerHead(n) { this.setState({ headcount: n, step: 2 }); setTimeout(() => this.streamTo(this.aiText(2).length), 60); }
-  answerBudget(b) { this.setState({ budget: b, step: 3 }); this.runTools(); }
+  answerHead(n) { const st = this.state; this.setState({ headcount: n, ansH: true }); if (!st.qBudget || st.ansB) this.goSel(); }
+  answerBudget(b) { const st = this.state; this.setState({ budget: b, ansB: true }); if (!st.qHead || st.ansH) this.goSel(); }
+  answerAny() { const st = this.state; this.setState({ headcount: st.ansH ? st.headcount : 120, budget: st.ansB ? st.budget : 300, ansH: true, ansB: true, assumed: true }); this.goSel(); }
+  goSel() { const toChat = this.state.screen === 'ai'; this.setState({ step: 3, selF: {}, selPick: null, dockAsk: false, dock: 'mini', dockProd: '' }); if (toChat) this.setState({ screen: 'chat' }); this.runTools(); }
   runTools() {
     clearTimeout(this._k);
     this.setState({ phase: 'tools', stepN: 0, stepsOpen: true, sn: 0 });
@@ -2844,13 +3332,13 @@ class Component extends DCLogic {
     const g1 = all.filter((p) => p.cat === 'gift' && P(p) <= B).sort((a, b) => P(b) - P(a))[0];
     const fail = !this.isPer() && st.basis === 'client' && g1 && P(g1) > A;
     const head = st.topic + ' · ' + st.headcount + ' 人 · ' + (this.isPer() ? '人均 ¥' + B : (st.basis === 'client' ? '客户预算 ¥' + B + '，预留 ' + st.margin + '% → 可用采购 ¥' + A : '预算 ¥' + B + '（' + this.basisLabel() + '）'));
-    const d = [{ l: '理解需求', m: head }, { l: '检索「' + sc.name + '」场景货盘', m: '命中 ' + hit + ' 款' }, { l: '组方案 · 第 1 轮', m: '3 套' }];
+    const d = [{ l: '理解需求', m: head }, { l: '检索「' + sc.name + '」场景货盘', m: '命中 ' + (st.fn ? this.fnBase().length : hit) + ' 个 SKU' }, { l: '按条件收窄', m: (st.fn ? st.fn.hist.join(' → ') : '') + ' · 结果 ' + this.selItems().items.length + ' 个 SKU' }];
     if (fail) {
       const mg = Math.round((B - P(g1)) / B * 100);
       d.push({ l: '自检 · 第 1 轮', m: '「' + g1.name.replace(/（.*/, '').slice(0, 10) + '」采购成本 ¥' + P(g1) + '，毛利 ' + mg + '% < ' + st.margin + '%，未通过', bad: true });
-      d.push({ l: '修正 · 第 2 轮', m: '替换该礼包，按可用采购 ¥' + A + ' 重新组方案' });
-      d.push({ l: '自检 · 第 2 轮', m: '预算 · 利润 · 库存 · 红线 全部通过' });
-    } else d.push({ l: '自检 · 第 1 轮', m: '预算 · 利润 · 库存 · 红线 全部通过' });
+      d.push({ l: '修正 · 第 2 轮', m: '剔除毛利不达标的 SKU，按可用采购 ¥' + A + ' 重新选品' });
+      d.push({ l: '自检 · 第 2 轮', m: '预算 · 利润 · 库存 · 合规全部通过' });
+    } else d.push({ l: '自检 · 第 1 轮', m: '预算 · 利润 · 库存 · 合规全部通过' });
     d.push({ l: '校验库存与发货时效', m: '均可 48 小时发货' });
     d.rounds = fail ? 2 : 1;
     return d;
@@ -3667,7 +4155,7 @@ class Component extends DCLogic {
       v3AdCards: [-2, -1, 0, 1, 2].map((k) => { const n5 = ads.length; const i = (ai0 + k + n5) % n5; const x = ads[i]; const ab = Math.abs(k); const cur = k === 0;
         return { name: adShort[i][0], sub: adShort[i][1], tag: cur ? '广告 · ' + x.tag : x.tag, tagBg: cur ? '#0d9488' : '#fff', tagColor: cur ? '#fff' : '#666', dot: cur ? '#fff' : x.fg, bg: x.bg, img: this.asset(x.img), cls: cur ? 'cur' : '',
           tf: 'rotate(' + (k * 11) + 'deg) scale(' + (cur ? 1.06 : 1) + ')', z: 10 - ab, op: 1 - ab * 0.16, pick: () => { if (cur) x.go(); else this.setState({ adIdx: i }); } }; }),
-      v3HasL3: L3.length > 0 && col !== 'scene', v3Mini: !!st.v3Mini, v3HdCls: st.v3Mini ? 'mini' : '',
+      srch: this.srchVals(), dk: this.dockVals(G), v3HasL3: L3.length > 0 && col !== 'scene', v3Mini: !!st.v3Mini, v3HdCls: st.v3Mini ? 'mini' : '',
       v3MiniCtx: col === 'scene' ? (this.scenes().find((x) => x.id === st.scene) || {}).name : ({ hot: '福利爆品', gift: '福利礼包', card: '福利卡券', ask: '专家咨询' }[col] || ''),
       v3MiniPh: (st.draft || '').trim() || G.mini,
       v3HasGuide: G.qs.length > 0, v3GuideLabel: G.label, v3Guides: G.qs.map((q) => ({ t: q.t, isTpl: q.isTpl, cls: gOn && st.v3tpl === q.tpl ? 'on' : '', title: q.isTpl ? '点击后可修改括号里的数字再发送' : '点击后填入输入框，可修改再发送',
@@ -3966,6 +4454,7 @@ class Component extends DCLogic {
     const aiMsg = (i, opts, extra) => {
       const full = this.aiText(i); const isLast = i === lastAi;
       const done = !(isLast && (streaming || st.phase === 'tools'));
+      opts = opts.map((o) => Object.assign({ isLbl: false, isBtn: !o.isLbl, cls: '', rec: false }, o));
       return Object.assign({ isAi: true, isUser: false, text: isLast && streaming ? full.slice(0, st.sn) : full, typing: isLast && streaming, hasSteps: false, hasParams: false, params: [],
         options: opts, showOpts: done && isLast && opts.length > 0, showActs: done && isLast && i === 3 }, extra || {});
     };
@@ -3973,16 +4462,20 @@ class Component extends DCLogic {
       msgs.push({ isUser: true, isAi: false, text: st.ask });
       msgs.push(aiMsg(10, [{ label: '按这个预算配方案', pick: () => this.startTask('为' + st.topic + '给 ' + st.headcount + ' 位员工采购，人均预算' + st.budget + '元', { prefer: 'gift' }) }, { label: '联系福利专家', pick: () => this.flash('已为你转接福利专家（演示）', false) }]));
     }
-    if (st.step >= 1 && st.step < 10) {
-      if (st.qHead) msgs.push(aiMsg(1, [50, 120, 300].map((x) => ({ label: x + ' 人', pick: () => this.answerHead(x) }))));
+    if (st.fn && st.step >= 1 && st.step < 10) this.fnMsgs().forEach((m) => msgs.push(m));
+    if (!st.fn && st.step >= 1 && st.step < 10) {
+      const o1 = [];
+      if (st.qHead) { o1.push({ label: '人数', isLbl: true }); [[50, '50 人以内'], [120, '50–200 人'], [300, '200 人以上']].forEach((x) => o1.push({ label: x[1], isBtn: true, cls: st.ansH && st.headcount === x[0] ? 'on' : '', rec: false, pick: () => this.answerHead(x[0]) })); }
+      if (st.qBudget) { o1.push({ label: '每人预算', isLbl: true }); [[200, '人均 200 以内', false], [300, '人均 300 左右', true], [500, '人均 500 以上', false]].forEach((x) => o1.push({ label: x[1], isBtn: true, cls: st.ansB && st.budget === x[0] ? 'on' : '', rec: x[2], pick: () => this.answerBudget(x[0]) })); }
+      o1.push({ label: '', isLbl: true }); o1.push({ label: '随便，你看着定', isBtn: true, cls: 'ghost', rec: false, pick: () => this.answerAny() });
+      msgs.push(aiMsg(1, o1));
     }
-    if (st.step >= 2 && st.step < 10 && st.qHead) msgs.push({ isUser: true, isAi: false, text: st.headcount + ' 人' });
-    if (st.step >= 2 && st.step < 10 && st.qBudget) msgs.push(aiMsg(2, [{ l: '人均 200 以内', b: 200 }, { l: '人均 300 左右', b: 300 }, { l: '人均 500 以上', b: 500 }].map((o) => ({ label: o.l, pick: () => this.answerBudget(o.b) }))));
+    // v2.1：人数与预算在同一轮反问
     if (st.step >= 3 && st.step < 10) {
-      if (st.qBudget) msgs.push({ isUser: true, isAi: false, text: '人均 ' + st.budget + ' 左右' });
-      const reM = (o) => { this.setState(Object.assign({ mOpen: false, planSel: {}, planOpen: {} }, o)); this.runTools(); };
+      if (!st.fn && (st.qHead || st.qBudget)) msgs.push({ isUser: true, isAi: false, text: st.assumed ? '随便，你看着定' : [st.qHead ? st.headcount + ' 人' : '', st.qBudget ? '人均 ' + st.budget + ' 左右' : ''].filter(Boolean).join('，') });
+      const reM = (o) => { this.setState(Object.assign({ mOpen: false, planSel: {}, planOpen: {}, selPick: null }, o)); this.runTools(); };
       const m3opts = st.mOpen ? [10, 15, 20].map((x) => ({ label: '利润留 ' + x + '%', pick: () => reM({ basis: 'client', margin: x }) })).concat([{ label: '不留利润（自用）', pick: () => reM({ basis: 'self' }) }])
-        : [{ label: '换一批', pick: () => this.setState({ planSet: st.planSet === 1 ? 0 : 1 }) }, { label: '改成员工自选', pick: () => this.setState({ planSet: 2 }) }].concat(this.isPer() ? [] : [{ label: '调整利润', pick: () => this.setState({ mOpen: true }) }]).concat([{ label: '去购物车结算', pick: () => this.setState({ ws: 'cart' }) }]);
+        : [{ label: '继续缩小范围', pick: () => this.fnMore() }, { label: '只看礼包', pick: () => this.setState({ selF: { type: { '礼包': true } }, ws: 'plan' }) }, { label: '员工自选（卡券）', pick: () => this.setState({ selF: { type: { '卡券': true } }, ws: 'plan', prefer: 'card' }) }].concat(this.isPer() ? [] : [{ label: '调整利润', pick: () => this.setState({ mOpen: true }) }]).concat([{ label: '去购物车结算', pick: () => this.setState({ ws: 'cart' }) }]);
       const m3 = aiMsg(3, m3opts,
         { hasSteps: true, hasParams: st.phase !== 'tools', params: [{ k: '场景', v: sc.name }, { k: '用途', v: st.topic }, { k: '人数', v: st.headcount + ' 人' }, { k: this.isPer() || st.basis !== 'client' ? '人均' : '客户预算', v: '≤ ¥' + st.budget }].concat(this.isPer() ? [] : [{ k: '口径', v: this.basisLabel() }].concat(st.basis === 'client' ? [{ k: '可用采购', v: '≤ ¥' + this.availB() }] : [])) });
       if (st.phase === 'tools') m3.text = '';
@@ -3996,7 +4489,7 @@ class Component extends DCLogic {
       return { label: d[0], meta: done ? d[1] : (cur ? '进行中…' : ''), color: done && d[2] ? '#c2410c' : (done || cur ? '#0f1418' : '#929d99'), dot: done ? (d[2] ? '#fd6600' : '#0d9488') : (cur ? '#36c7aa' : '#dfe7e5') };
     }).filter((s, i) => !toolsRunning || i <= st.stepN);
     const plansReady = st.step >= 3 && st.step < 10 && !toolsRunning;
-    const plans = plansReady ? this.plansData() : [];
+    const plans = []; const sel = this.selVals(plansReady);
 
     // ----- 首页 -----
     const b = st.batch;
@@ -4094,17 +4587,21 @@ class Component extends DCLogic {
       this.startTask(fillText(), { qa: curA.id === 'ask', prefer: curA.prefer });
       this.setState({ act: '', app: -1 });
     };
-    const chatInput = st.step === 1 ? '直接输入人数，例如 120' : st.step === 2 ? '直接输入人均预算，例如 300' : '继续追问，或说「换成员工自选」';
+    const chatInput = st.step === 1 && st.fn ? (st.fn.cur === 'nb' ? '直接说「120 人，人均 300」' : '点选项，或直接说更明确的要求，如「48 小时内到、不要生鲜」') : st.step === 1 ? '直接输入人数，例如 120' : st.step === 2 ? '直接输入人均预算，例如 300' : '继续追问，或说「不要生鲜」「继续缩小范围」';
     const send = () => {
       const t = (st.draft || '').trim();
       if (st.screen === 'home') { soon('采发发「选品做方案」')(); return; }
       if ((st.screen === 'ai' || st.screen === 'fafa') && curG) { sendTpl(); return; }
       if (st.screen !== 'chat') { this.startTask(t); return; }
       if (st.phase !== 'idle') return;
-      if (st.step === 1) { const x = parseInt(t, 10); if (!x) { this.flash('请输入人数，例如 120', false); return; } this.setState({ draft: '' }); this.answerHead(x); return; }
-      if (st.step === 2) { const v = parseInt(t.replace(/\D/g, ''), 10); if (!v) { this.flash('请输入人均预算，例如 300', false); return; } this.setState({ draft: '' }); this.answerBudget(v); return; }
-      if (/自选/.test(t)) { this.setState({ draft: '', planSet: 2 }); this.flash('已切换为员工自选方案', false); return; }
-      if (/换/.test(t)) { this.setState({ draft: '', planSet: st.planSet === 1 ? 0 : 1 }); this.flash('已换一批方案', false); return; }
+      if (st.step === 1 && st.fn) { this.setState({ draft: '' }); this.fnText(t); return; }
+      if (st.step >= 3 && st.step < 10 && st.fn && (/继续|缩小/.test(t) || this.fnParse(t, st.fn.c).got.length)) { this.setState({ draft: '' }); if (/继续|缩小/.test(t)) this.fnMore(); else this.fnText(t); return; }
+      if (st.step === 1) { if (/随便|你定|看着/.test(t)) { this.setState({ draft: '' }); this.answerAny(); return; } const hm2 = t.match(/(\d+)\s*(人|名|位)/), bm2 = t.match(/(人均|每人|预算)?\D{0,4}(\d{2,5})\s*(元|块)?/); this.setState({ draft: '' });
+        if (st.qHead && !st.ansH && (hm2 || (!st.qBudget && bm2))) this.answerHead(parseInt((hm2 || bm2)[hm2 ? 1 : 2], 10));
+        else if (st.qBudget && !st.ansB && bm2) this.answerBudget(parseInt(bm2[2], 10)); else this.flash('例如「120 人，人均 300」', false); return; }
+      if (/自选|卡券/.test(t)) { this.setState({ draft: '', selF: { type: { '卡券': true } }, prefer: 'card' }); this.flash('已筛选为卡券（员工自选）', false); return; }
+      if (/礼包|礼盒/.test(t) && /只/.test(t)) { this.setState({ draft: '', selF: { type: { '礼包': true } } }); this.flash('已筛选为礼包', false); return; }
+      if (/换/.test(t)) { this.setState({ draft: '', selRound: st.selRound + 1, selPick: null }); this.flash('已换一批', false); return; }
       this.startTask(t);
     };
     const submit = () => {
@@ -4255,27 +4752,27 @@ class Component extends DCLogic {
       askAi: () => this.startTask(''),
       // chat
       isChat: st.screen === 'chat', messages: msgs,
-      statusText: st.phase !== 'idle' ? '进行中' : (plansReady ? '方案已生成' : '待补充信息'),
+      statusText: st.phase !== 'idle' ? '进行中' : (plansReady ? '选品已生成' : '待补充信息'),
       statusBg: st.phase !== 'idle' || plansReady ? '#eaf8f5' : '#fff4e8', statusColor: st.phase !== 'idle' || plansReady ? '#066b5f' : '#fd6600',
       steps: steps, stepsRunning: toolsRunning, stepsDone: !toolsRunning, stepsOpen: st.stepsOpen || toolsRunning,
       stepsTitle: toolsRunning ? '正在执行 · ' + stepDefs[Math.min(st.stepN, stepDefs.length - 1)][0] : '已完成 ' + stepDefs.length + ' 个步骤 · 自检循环 ' + lsd.rounds + ' 轮', stepsChev: st.stepsOpen || toolsRunning ? 'rotate(180deg)' : 'none',
       toggleSteps: () => this.setState({ stepsOpen: !st.stepsOpen }),
       busy: st.phase !== 'idle', idle: st.phase === 'idle',
       stop: () => { clearInterval(this._s); clearTimeout(this._k); this.setState({ sn: 9999, phase: 'idle', stepN: 4 }); },
-      copied: () => this.flash('已复制方案摘要', false), thanks: () => this.flash('感谢反馈', false),
-      regen: () => { this.setState({ planSet: st.planSet === 1 ? 0 : 1 }); this.runTools(); },
+      copied: () => this.flash('已复制选品摘要', false), thanks: () => this.flash('感谢反馈', false),
+      regen: () => { this.setState({ selRound: st.selRound + 1, selPick: null }); this.runTools(); },
       backFafa: () => this.goGui(),
-      ...(() => { const r = plans.reduce((a, p) => a.concat(p.rows), []).find((x) => x.key === st.pd); if (!r || st.ws !== 'plan') return { pdOn: false, pdClose: () => this.setState({ pd: '' }), pd: { kv: [], tags: [] } };
+      ...(() => { const r = (sel.rows || []).find((x) => x.key === st.pd); if (!r || st.ws !== 'plan') return { pdOn: false, pdClose: () => this.setState({ pd: '' }), pd: { kv: [], tags: [] } };
         const d = r.detail; const p = d.p; const isV = p.cat === 'voucher'; const P2 = this.priceOf(p);
         return { pdOn: true, pdClose: () => this.setState({ pd: '' }), pd: { planName: d.plan, img: this.imgOf(p), imgCls: isV ? 'face' : '', name: p.name, price: this.money2(P2), strike: p.market > P2 ? this.money2(p.market) : '',
           margin: !isV && !per ? '毛利率 ' + ((p.market - p.member) / p.market * 100).toFixed(1) + '%' : '',
           kv: (isV ? [['类型', p.physical ? '实体卡' : '电子卡'], ['来源', p.source], ['数量', st.headcount + ' 张（每人 1 张）']] : [['规格', this.specOf(p)], ['来源', p.source], ['已售', String(p.sold)], ['发货', p.source === '入驻商家' ? '商家发货 · 48 小时内' : '一键代发 · 支持名单直发']]).map((x) => ({ k: x[0], v: x[1] })),
           tags: (p.subs || []).slice(0, 4).map((t) => ({ t: t })),
-          why: d.alt ? '发发备选：同场景、预算内，勾选后一起加购' : '方案内商品：' + d.plan + '。取消勾选即从本次加购中移除',
+          why: '选品结果中的 SKU：' + (d.p.cat === 'voucher' ? '卡券' : d.p.cat === 'gift' ? '礼包（供应商整箱发货，一个 SKU）' : '爆品') + '。勾选后与其他已选商品一起加购',
           selLabel: d.on ? '移出本次加购' : '加入本次加购', selBtnCls: d.on ? 'btn-o' : 'btn-o', toggle: d.toggle,
           addOne: () => { this.addItem(p.id, st.headcount); this.flash('已加购 ' + p.name + ' × ' + st.headcount, true); } } }; })(),
-      plans: plans, hasPlans: plans.length > 0, planCount: plans.length, noPlans: !plansReady && !toolsRunning, planLoading: toolsRunning, headcount: st.headcount,
-      wsIsPlan: st.ws === 'plan', wsIsCart: st.ws === 'cart', wsPlanCls: st.ws === 'plan' ? 'on' : '', wsCartCls: st.ws === 'cart' ? 'on' : '',
+      fnp: this.fnProfile(), fnAsking: !!(st.fn && st.step === 1 && st.screen === 'chat'), sel: sel, plans: plans, hasPlans: sel.has, planCount: sel.total || 0, noPlans: !plansReady && !toolsRunning && !(st.fn && st.step === 1), planLoading: toolsRunning, headcount: st.headcount,
+      wsPlanName: st.fn && st.step === 1 ? '需求画像' : '选品结果', wsIsPlan: st.ws === 'plan', wsIsCart: st.ws === 'cart', wsPlanCls: st.ws === 'plan' ? 'on' : '', wsCartCls: st.ws === 'cart' ? 'on' : '',
       wsW: Math.round(st.wsW || 400), wsHidden: !!st.wsHide, wsShown: !st.wsHide, wsDragCls: st.wsDrag ? 'on' : '',
       wsIsWide: (st.wsW || 400) >= 600, wsNotWide: (st.wsW || 400) < 600, wsWideLabel: (st.wsW || 400) >= 600 ? '恢复默认宽度' : '加宽任务栏',
       wsToggleWide: () => this.setState({ wsW: (st.wsW || 400) >= 600 ? 400 : 640 }), wsReset: () => this.setState({ wsW: 400 }),

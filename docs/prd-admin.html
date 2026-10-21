@@ -44,7 +44,7 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-一-文档说明">一、文档说明</a><a href="#h-二-后台信息架构与权限">二、后台信息架构与权限</a><a href="#h-三-用户管理">三、用户管理</a><a href="#h-四-权益管理">四、权益管理</a><a href="#h-五-账户与财务管理">五、账户与财务管理</a><a href="#h-六-场景管理">六、场景管理</a><a href="#h-七-资源管理">七、资源管理</a><a href="#h-八-订单管理">八、订单管理</a><a href="#h-九-售后管理">九、售后管理</a><a href="#h-十-全链路流程与数据联动">十、全链路流程与数据联动</a><a href="#h-十一-角色业务操作流程-培训用">十一、角色业务操作流程（培训用）</a><a href="#h-十二-AI-应用">十二、AI 应用</a><a href="#h-十三-定时任务中心">十三、定时任务中心</a><a href="#h-十四-埋点规则与埋点管理">十四、埋点规则与埋点管理</a><a href="#h-十五-非功能需求与迭代计划">十五、非功能需求与迭代计划</a><a href="#h-十六-待确认事项">十六、待确认事项</a></nav>
 <article><h1 id="h-采发发-运营管理后台-PRD-v1-1-首期接入-发发福利">采发发 运营管理后台 PRD v1.1（首期接入：发发福利）</h1>
 <p>Oct 20, 2026 · @sanyuan</p>
-<p><strong>v1.1 修订（2026-10-20）</strong>：按 Admin Demo v66 对齐。商品侧改为「商品库 → 商品池 → 专题」三层选品，场景与频道统一用页面装修，删去货源管理、品牌授权和品牌馆。</p>
+<p><strong>v1.1 修订（2026-10-20）</strong>：按 Admin Demo v66 对齐。商品侧改为「商品库 → 商品池 → 专题」三层选品，场景与频道统一用页面装修，删去货源管理、品牌授权和品牌馆。「10-21 补充」场景新增 AI 反问配置（目标规模、最多反问轮数、可反问维度），对应前台多轮反问收窄；礼包均为供应商整箱供应的 SKU。</p>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -54,7 +54,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>章节</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>新建场景</td>
 <td>名称、简称、标语、主视觉、窗口期、角标、细分用途、排序、状态等 10 项</td>
 <td>只填场景名称 + 有效期；到期自动下线；排序在列表上移 / 下移</td>
@@ -114,8 +115,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>按子单分包裹的物流轨迹、名单代发包裹统计、卡密发放记录</td>
 <td>8.4</td>
 </tr>
-</tbody></table>
-</div><h2 id="h-一-文档说明">一、文档说明</h2>
+</tbody>
+</table></div>
+<h2 id="h-一-文档说明">一、文档说明</h2>
 <h3 id="h-1-1-背景与定位">1.1 背景与定位</h3>
 <p>发发福利前台（Beta 0.3）的栏目、频道、页面装修、专题、商品池、引导词和商品范围都由平台运营人工配置；企业认证、权益、资金、订单和售后也需要平台侧处理。</p>
 <p>本后台定位为<strong>采发发全平台共用的运营管理后台</strong>：客户、商品、交易、账户与财务、数据与智能、系统设置作为<strong>平台底座</strong>只做一份；各业务线（发发福利、发发集采、分采通…）以<strong>业务应用</strong>形式接入，各占一个一级菜单。首期接入发发福利。</p>
@@ -134,7 +136,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>培训流程</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>超级管理员</td>
 <td>后台账号、角色与权限、业务线、系统参数</td>
 <td>—</td>
@@ -169,8 +172,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>埋点字典与上报质量、埋点监控任务、数据看板、AI 应用效果评估</td>
 <td>十四</td>
 </tr>
-</tbody></table>
-</div><h3 id="h-1-4-与前台文档的关系">1.4 与前台文档的关系</h3>
+</tbody>
+</table></div>
+<h3 id="h-1-4-与前台文档的关系">1.4 与前台文档的关系</h3>
 <ul>
 <li>前台以《发发福利 PRD v2.0》和 Beta 0.3 Demo 为准；AI 行为以《AI Prompt 设计 v2.0》为准；前台埋点以本文第十四节为准。</li>
 <li>前台不得出现后台无法配置的运营内容；前台新增可交互元素必须同步补埋点。</li>
@@ -191,7 +195,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>企业客户、认证、子账号</td>
 <td>全平台唯一</td>
 <td>认证一次，各业务线通用</td>
@@ -226,8 +231,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>底座统一管理</td>
 <td>均带「业务线」字段，可按业务线筛选与统计</td>
 </tr>
-</tbody></table>
-</div><h3 id="h-1-7-术语">1.7 术语</h3>
+</tbody>
+</table></div>
+<h3 id="h-1-7-术语">1.7 术语</h3>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -235,7 +241,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>业务线</td>
 <td>接入后台的业务应用，如发发福利、发发集采、分采通</td>
 </tr>
@@ -271,9 +278,10 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>埋点事件</td>
 <td>一次用户行为的上报记录，如 fafa_res_card_click</td>
 </tr>
-</tbody></table>
-</div><h2 id="h-二-后台信息架构与权限">二、后台信息架构与权限</h2>
-<h3 id="h-2-1-栏目规划-平台底座-+-业务应用插槽">2.1 栏目规划：平台底座 + 业务应用插槽</h3>
+</tbody>
+</table></div>
+<h2 id="h-二-后台信息架构与权限">二、后台信息架构与权限</h2>
+<h3 id="h-2-1-栏目规划-平台底座-业务应用插槽">2.1 栏目规划：平台底座 + 业务应用插槽</h3>
 <p>按「对象归谁管」划分一级菜单：跨业务线共用的对象放底座，只属于某条业务线的运营内容放业务应用。接入新业务线只新增一个业务应用菜单，不改底座。</p>
 <div class="tbl"><table>
 <thead>
@@ -284,7 +292,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>主要角色</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>工作台</td>
 <td>我的待办、核心数据、监控告警与 AI 异常摘要</td>
 <td>10.2 / 10.3</td>
@@ -338,8 +347,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>二</td>
 <td>超级管理员</td>
 </tr>
-</tbody></table>
-</div><p>与 v1.0 的差异：商品中心取消「货源管理」，新增「商品池」；「专题与品牌馆」改为「专题管理」；场景和频道的运营位统一为「<strong>页面装修</strong>」，由内容运营维护；频道的「<strong>商品归置</strong>」仍由商品运营维护，两个角色不改同一页。</p>
+</tbody>
+</table></div>
+<p>与 v1.0 的差异：商品中心取消「货源管理」，新增「商品池」；「专题与品牌馆」改为「专题管理」；场景和频道的运营位统一为「<strong>页面装修</strong>」，由内容运营维护；频道的「<strong>商品归置</strong>」仍由商品运营维护，两个角色不改同一页。</p>
 <h3 id="h-2-2-权限模型-四层授权">2.2 权限模型：四层授权</h3>
 <p>角色不写死在代码里，由超管在「角色与权限」中组合以下四层：</p>
 <div class="tbl"><table>
@@ -350,7 +360,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>例子</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>功能权限</td>
 <td>菜单与按钮（权限点）</td>
 <td>能看订单列表，但没有 trade.order.export（导出）</td>
@@ -370,8 +381,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>敏感字段可见 / 脱敏 / 不可见</td>
 <td>接口价、成本、利润率只给商品运营和财务；手机号、信用代码默认脱敏</td>
 </tr>
-</tbody></table>
-</div><p>规则：一个账号可绑多个角色，功能与范围取并集；新账号默认无权限；系统预置 7 个角色模板（1.3 中的角色），超管可复制后修改，新增角色无需发版。</p>
+</tbody>
+</table></div>
+<p>规则：一个账号可绑多个角色，功能与范围取并集；新账号默认无权限；系统预置 7 个角色模板（1.3 中的角色），超管可复制后修改，新增角色无需发版。</p>
 <p><strong>预置角色模板</strong>（「改」= 新增 / 编辑 / 上下线；「审」= 审核或复核；「看」= 只读；空 = 不可见）</p>
 <div class="tbl"><table>
 <thead>
@@ -386,7 +398,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>产品 / 数据</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>客户中心</td>
 <td>改</td>
 <td>改、审</td>
@@ -466,8 +479,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
-</div><h3 id="h-2-3-安全底线">2.3 安全底线</h3>
+</tbody>
+</table></div>
+<h3 id="h-2-3-安全底线">2.3 安全底线</h3>
 <ul>
 <li><strong>资金操作双人复核</strong>：人工调账、冻结 / 解冻、退款、活动发放、认领流水均为一人发起、另一人复核，发起人不得自审。</li>
 <li><strong>高危权限单独授予</strong>：资金、导出、角色管理、敏感字段明文标记为高危，授予时须超管发起 + 另一超管确认。</li>
@@ -496,7 +510,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>规则</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>营业执照</td>
 <td>OCR 识别企业名称、统一社会信用代码、法人、有效期，运营核对原图</td>
 </tr>
@@ -516,8 +531,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>时效</td>
 <td>工作日 2 小时内处理；超时在工作台标红</td>
 </tr>
-</tbody></table>
-</div><p>审核状态：待审核 → 已通过 / 已驳回（可重新提交）；营业执照到期前 30 天提醒用户更新，过期后暂停下单但不影响已有订单售后。</p>
+</tbody>
+</table></div>
+<p>审核状态：待审核 → 已通过 / 已驳回（可重新提交）；营业执照到期前 30 天提醒用户更新，过期后暂停下单但不影响已有订单售后。</p>
 <h3 id="h-3-4-子账号">3.4 子账号</h3>
 <ul>
 <li>企业主账号可在前台邀请子账号；后台可查看、停用子账号，但不替企业新增。</li>
@@ -541,7 +557,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>等级名称</td>
 <td>如：个人用户 / 企业会员 / 专业采购商 / 大客户</td>
 </tr>
@@ -557,8 +574,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>状态</td>
 <td>启用 / 停用；停用前须把已有用户迁到其他等级</td>
 </tr>
-</tbody></table>
-</div><p>个人用户为系统预置等级，不可删除，其权益固定为：可浏览、不可下单、不展示成本与利润。</p>
+</tbody>
+</table></div>
+<p>个人用户为系统预置等级，不可删除，其权益固定为：可浏览、不可下单、不展示成本与利润。</p>
 <h3 id="h-4-2-权益包">4.2 权益包</h3>
 <div class="tbl"><table>
 <thead>
@@ -568,7 +586,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>前台生效</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>价格可见</td>
 <td>显示会员价 / 零售价；是否显示市场价、利润率</td>
 <td>商品卡、方案卡、频道页筛选</td>
@@ -603,8 +622,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>规则由 AI 开发团队制定，权益包中只引用其规则（如等级对应的赠送额度），见 5.2</td>
 <td>AI 对话框</td>
 </tr>
-</tbody></table>
-</div><p>权益包可按等级默认发放，也可按用户 / 标签单独发放，带生效与失效日期；同一用户有多个权益包时取并集，数值类取更优值。</p>
+</tbody>
+</table></div>
+<p>权益包可按等级默认发放，也可按用户 / 标签单独发放，带生效与失效日期；同一用户有多个权益包时取并集，数值类取更优值。</p>
 <h3 id="h-4-3-价格与利润策略">4.3 价格与利润策略</h3>
 <ul>
 <li><strong>默认利润率</strong>：全局默认 15%，可按等级覆盖；用户可在前台 0%–40% 范围内自调，后台可改范围上下限。</li>
@@ -624,7 +644,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>商品预付款账户</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>用途</td>
 <td>AI 功能消耗的 token（对话、方案生成、场景推荐等）</td>
 <td>平台出资的活动补贴，用于支付订单</td>
@@ -660,8 +681,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>不开票</td>
 <td>充值不开票，按订单实付开票</td>
 </tr>
-</tbody></table>
-</div><p>结算时默认扣款顺序：活动账户 → 商品预付款账户 → 在线支付补差；用户可在结算页取消勾选。</p>
+</tbody>
+</table></div>
+<p>结算时默认扣款顺序：活动账户 → 商品预付款账户 → 在线支付补差；用户可在结算页取消勾选。</p>
 <h3 id="h-5-2-积分账户-保留入口">5.2 积分账户（保留入口）</h3>
 <p>积分规则由 AI 开发团队指定，运营管理后台本期只保留入口：</p>
 <ul>
@@ -708,7 +730,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>开票申请</td>
 <td>来自前台：用户对已完成的子订单申请；字段：发票类型（普票 / 专票）、抬头、税号、开户行与账号（专票）、收票邮箱 / 地址、开票金额</td>
 </tr>
@@ -736,8 +759,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>列表与导出</td>
 <td>按企业、订单号、状态、申请时间、发票类型筛选；批量下载发票文件；导出开票台账</td>
 </tr>
-</tbody></table>
-</div><p>发票状态：待开票 → 开票中 → 已开票；分支：已驳回、待红冲 → 已红冲。超过 5 个工作日未开的申请在工作台标红。</p>
+</tbody>
+</table></div>
+<p>发票状态：待开票 → 开票中 → 已开票；分支：已驳回、待红冲 → 已红冲。超过 5 个工作日未开的申请在工作台标红。</p>
 <h2 id="h-六-场景管理">六、场景管理</h2>
 <p>场景管理决定前台「精选福利场景」下每个二级场景的页面、引导词、AI 怎么答和卖哪些商品。内容运营在场景详情里按页签维护：引导词｜页面装修｜商品来源｜商品明细。</p>
 <h3 id="h-6-1-场景基本信息">6.1 场景基本信息</h3>
@@ -750,7 +774,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>前台生效</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>场景名称</td>
 <td>必填，如「新春年货节」；对话框上下文默认用此名称</td>
 <td>场景频道栏、对话框上下文</td>
@@ -760,8 +785,14 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>开始日期 + 结束日期；常驻场景打开「长期有效」，不填结束日期</td>
 <td>到期次日 0 点自动下线</td>
 </tr>
-</tbody></table>
-</div><ul>
+<tr>
+<td>AI 反问与选品（选填）</td>
+<td>在「编辑基本信息」配置：目标规模（默认 80，10–500）、最多反问轮数（2–6，默认 6）、可反问维度（库存 / 销量 / 利润率 / 履约时效 / 商品效期 / 售后支持 / 发放形式 / 商品偏好，默认全选）；目标群体、人数与预算为必问，不在此配置</td>
+<td>前台 AI 多轮反问：候选 ≤ 目标规模或问满轮数即出结果；只从勾选的维度里自动挑选（Prompt 7.6）；结果不截断</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
 <li>标语与主视觉：取页面装修 Banner 第 1 帧的标题与图片，不再单独填写。</li>
 <li>排序：在场景列表中「上移 / 下移」，即时同步前台顺序。</li>
 <li>上线 / 下线：在场景详情操作；上线前须引导词已发布、在售商品 ≥ 3 款。</li>
@@ -774,11 +805,11 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <ul>
 <li>品类偏好：优先召回的品类及权重。</li>
 <li>禁忌与要求：不推品类（如餐补不含烟酒）、包装要求、时效提示。</li>
-<li>默认商品类型：礼包为主 / 卡券为主 / 爆品组合。</li>
+<li>默认商品类型：礼包为主 / 卡券为主 / 爆品为主（均为 SKU，只影响排序）。</li>
 <li>场景识别词：用户输入含这些词时自动识别为本场景（如「年货 / 春节 / 新春」）。</li>
 <li>AI 候选池：取 6.5 计算出的场景在售商品，不再单独按场景标圈品。</li>
 </ul>
-<p>配置保存后可在后台「试一下」：输入一句需求，查看 AI 的召回和方案预览，确认后再发布。</p>
+<p>配置保存后可在后台「试一下」：输入一句需求，查看 AI 的反问轮次、候选数变化与选品结果预览，确认后再发布。</p>
 <h3 id="h-6-3-引导词">6.3 引导词</h3>
 <p>按「二级栏目」配置（每个场景、每个资源频道、专家咨询各一组）：</p>
 <div class="tbl"><table>
@@ -788,7 +819,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>输入框提示语</td>
 <td>如「说说年货怎么发，例如「120 位员工发年货，人均 300」」</td>
 </tr>
@@ -808,8 +840,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>空的候选值</td>
 <td>每种空（人数 / 预算 / 份数 / 面值…）的常用值，全局维护</td>
 </tr>
-</tbody></table>
-</div><p>校验：问句 ≤ 20 字；个人账号可见的问句不得含利润、会员价字样；发布时提示语与全部问句不得为空。状态：草稿 / 有未发布修改 / 已发布。</p>
+</tbody>
+</table></div>
+<p>校验：问句 ≤ 20 字；个人账号可见的问句不得含利润、会员价字样；发布时提示语与全部问句不得为空。状态：草稿 / 有未发布修改 / 已发布。</p>
 <h3 id="h-6-4-页面装修-场景页与资源频道页共用">6.4 页面装修（场景页与资源频道页共用）</h3>
 <p>装修画布按 PC 前台 1440 宽版式绘制，与前台 Beta03 的二级场景页、资源频道页一一对应；手机端装修后续迭代。场景在「场景详情 › 页面装修」，频道在「频道详情 › 页面装修」，用同一套装修器。</p>
 <div class="tbl"><table>
@@ -821,7 +854,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>可加组件</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>丰富型</td>
 <td>节庆大促</td>
 <td>Banner 轮播（最多 5 帧）+ 场景专区 ×6（3 列 × 2 行）</td>
@@ -833,8 +867,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>Banner + 专题方块 ×4（2 × 2）</td>
 <td>核心品牌</td>
 </tr>
-</tbody></table>
-</div><div class="tbl"><table>
+</tbody>
+</table></div>
+<div class="tbl"><table>
 <thead>
 <tr>
 <th>板块</th>
@@ -843,7 +878,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>前台表现</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Banner 轮播</td>
 <td>1–5 帧</td>
 <td>1053×600</td>
@@ -873,8 +909,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>—</td>
 <td>场景页：爆款 / 礼包 / 卡券栏目 + 商品列表；频道页：带筛选的频道商品；只展示，不可装修</td>
 </tr>
-</tbody></table>
-</div><ul>
+</tbody>
+</table></div>
+<ul>
 <li>链接目标：每个坑位都可选专题、品牌商品列表、自定义图片 + 链接（站内路径或白名单 https 域名）。</li>
 <li>搜索选择：选专题可按名称搜、按状态（上线中 / 待上线 / 草稿）筛，已结束的不出现；选品牌可按名称、首字母、英文名搜，可只看「有在售商品」；单次最多显示 50 条。</li>
 <li>模板与组件：切换模板需二次确认，已配置的坑位保留，切回可恢复；组件可添加、移除、上下移；核心品牌坑位数调小时，超出部分配置保留但不展示。</li>
@@ -911,7 +948,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>字段</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>基本</td>
 <td>商品 ID、SKU ID、名称、品牌（归一后）、类目（一级 / 二级）、规格、主图与详情图、69 码</td>
 </tr>
@@ -931,8 +969,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>卡券专属</td>
 <td>面值档位、电子 / 实体、卡面图、有效期、兑换范围</td>
 </tr>
-</tbody></table>
-</div><p><strong>商品状态</strong>：待审核 → 已上架 ⇄ 已下架；系统自动标记「异常」：货源下架、长期无货、价格倒挂（会员价 ≤ 接口价）、缺主图。异常商品自动从前台和 AI 候选池移除，并在工作台提醒。</p>
+</tbody>
+</table></div>
+<p><strong>商品状态</strong>：待审核 → 已上架 ⇄ 已下架；系统自动标记「异常」：货源下架、长期无货、价格倒挂（会员价 ≤ 接口价）、缺主图。异常商品自动从前台和 AI 候选池移除，并在工作台提醒。</p>
 <p><strong>批量操作</strong>：筛选后批量上下架、打 / 清运营标签、AI 打标建议、导出。筛选维度与前台「频道商品」一致（名称、品牌、是否有货、类目、库存地区、ID / SKU ID、价格利润区间、时间范围），另加货源、状态、运营标签、商品类型（爆品 / 礼包 / 卡券，带各自数量，方便运营了解前台展示）。</p>
 <p><strong>商品数据标准化</strong>：品牌归一（已完成）、类目模板（食品保质期、3C 型号，待建设）、补全 69 码；类目重复项（如「电脑、办公」与「电脑办公」）在后台做映射合并。</p>
 <h3 id="h-7-2-商品池">7.2 商品池</h3>
@@ -944,7 +983,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>基本信息</td>
 <td>名称、说明、负责人、启用 / 停用；可复制为新池</td>
 </tr>
@@ -960,8 +1000,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>被引用</td>
 <td>列出引用它的场景、频道、专题；停用前提示影响范围</td>
 </tr>
-</tbody></table>
-</div><p>商品池列表显示池内款数及爆品 / 礼包 / 卡券各自数量。新品命中规则自动进池，商品下架或利润率不达标自动出池。</p>
+</tbody>
+</table></div>
+<p>商品池列表显示池内款数及爆品 / 礼包 / 卡券各自数量。新品命中规则自动进池，商品下架或利润率不达标自动出池。</p>
 <h3 id="h-7-3-专题管理">7.3 专题管理</h3>
 <p>专题是一组有主题的商品 + 一个落地页（/topic/{id}），可被场景、频道绑定为商品来源，也可作为页面装修坑位的跳转目标。不再区分「专题页 / 品牌馆」：按品牌圈品就在规则里选品牌；只展示某品牌商品时，装修坑位直接选「品牌商品列表」。</p>
 <div class="tbl"><table>
@@ -971,7 +1012,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>基本信息</td>
 <td>专题名称、封面 / Banner 图（1053×600）、开始 / 结束日期（留空为长期）、状态（草稿 / 待上线 / 上线中 / 已结束）</td>
 </tr>
@@ -987,15 +1029,16 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>被引用</td>
 <td>场景、频道、场景装修、频道装修中引用它的位置</td>
 </tr>
-</tbody></table>
-</div><p><strong>排他规则</strong>：用于在规则结果中排除部分商品。例：「居家焕新季」绑定「居家日用池」，再加一条排他规则「品牌 = 蓝月亮」，蓝月亮商品就从专题中剔除。</p>
+</tbody>
+</table></div>
+<p><strong>排他规则</strong>：用于在规则结果中排除部分商品。例：「居家焕新季」绑定「居家日用池」，再加一条排他规则「品牌 = 蓝月亮」，蓝月亮商品就从专题中剔除。</p>
 <ul>
 <li>排他规则的货源可选「全部货源」，只按类目 / 品牌 / 商品类型匹配，不看利润率。</li>
 <li>优先级：手动加入 &gt; 手动排除 &gt; 排他规则 &gt; 普通规则 / 商品池；手动加入的商品不受排他影响。</li>
 <li>被剔除的商品在明细中标注「排他：命中排他规则 N（条件）」；专题列表显示排他规则条数，可按「有排他规则」筛选。</li>
 <li>被引用的专题不可删除；上线中的专题须先下线。</li>
 </ul>
-<h3 id="h-7-4-频道运营-发发福利·商品资源栏目">7.4 频道运营（发发福利·商品资源栏目）</h3>
+<h3 id="h-7-4-频道运营-发发福利-商品资源栏目">7.4 频道运营（发发福利·商品资源栏目）</h3>
 <p>一个资源频道由两个角色分工维护，频道详情分三个页签，各自保存、各自发布，互不覆盖。频道基本信息（内容运营新建）：频道名称、角标（如「自营」）、一句话卖点、排序、常显（前 5 个）/ 收入「更多频道」、可见范围（等级 / 权益包）。</p>
 <div class="tbl"><table>
 <thead>
@@ -1005,7 +1048,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>配置内容</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>商品归置</td>
 <td>商品运营</td>
 <td>三步：设置规则（绑定商品池 / 专题 + 货源规则，可多货源；筛选条件：货源、类目、品牌、商品类型、利润率）→ 预览与调整（手动加入、排除、批量导入）→ 发布生效；发布后提示下一步「页面装修」</td>
@@ -1020,8 +1064,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>内容运营</td>
 <td>见 6.3，1–6 条问句</td>
 </tr>
-</tbody></table>
-</div><p>发布校验：频道归置数为 0 时不得上线；装修引用的专题已下线时提示替换。下线频道不影响已下单订单。</p>
+</tbody>
+</table></div>
+<p>发布校验：频道归置数为 0 时不得上线；装修引用的专题已下线时提示替换。下线频道不影响已下单订单。</p>
 <h3 id="h-7-5-品牌与标签">7.5 品牌与标签</h3>
 <ul>
 <li><strong>品牌管理</strong>：只维护品牌档案——品牌名、英文名、首字母、Logo、启用 / 停用；不做授权管理。品牌详情显示在库商品和规则里选了该品牌的相关专题；仍有商品的品牌不可删除，只能停用。</li>
@@ -1055,7 +1100,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>后台可操作</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>待支付</td>
 <td>提交订单，需在线支付补差</td>
 <td>关闭；超时 30 分钟自动关闭并释放账户冻结</td>
@@ -1085,8 +1131,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>未支付超时、主动取消、全额退款</td>
 <td>—</td>
 </tr>
-</tbody></table>
-</div><p>子订单叠加「售后中」标记，不打断主状态。签收后超过售后期（默认 15 天，可按货源配置）不再受理售后。</p>
+</tbody>
+</table></div>
+<p>子订单叠加「售后中」标记，不打断主状态。签收后超过售后期（默认 15 天，可按货源配置）不再受理售后。</p>
 <h3 id="h-8-3-订单列表与详情">8.3 订单列表与详情</h3>
 <ul>
 <li><strong>筛选</strong>：订单号 / 子单号、企业、下单人、货源、状态、来源入口、支付方式、下单时间、金额区间、是否售后中、开票状态。</li>
@@ -1104,7 +1151,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>可操作</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>待发货</td>
 <td>待供应商填写运单；备货节点；超 48 小时标红</td>
 <td>催发货</td>
@@ -1124,8 +1172,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>卡密发放记录：已发放 / 已兑换 / 未兑换，发放渠道（短信 + 站内信）</td>
 <td>补发卡密</td>
 </tr>
-</tbody></table>
-</div><p>一个订单有多个子单时按「子单 N · 货源」切换。物流异常（地址异常、超时未揽收）进入工作台待办。</p>
+</tbody>
+</table></div>
+<p>一个订单有多个子单时按「子单 N · 货源」切换。物流异常（地址异常、超时未揽收）进入工作台待办。</p>
 <h3 id="h-8-5-开票">8.5 开票</h3>
 <p>按子订单开票，礼包按子商品明细开具。开票申请、人工上传、财务系统自动回传与红冲见 5.7 发票管理；订单详情展示发票状态与下载。</p>
 <h3 id="h-8-6-集采咨询单">8.6 集采咨询单</h3>
@@ -1137,7 +1186,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>待跟进</td>
 <td>新提交；工作日 4 小时内须跟进</td>
 </tr>
@@ -1157,8 +1207,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>已关闭</td>
 <td>用户放弃 / 报价过期，须填关闭原因</td>
 </tr>
-</tbody></table>
-</div><p>字段：商品（可多个）、预估数量、期望交期、定制需求、联系人、跟进人、沟通记录。</p>
+</tbody>
+</table></div>
+<p>字段：商品（可多个）、预估数量、期望交期、定制需求、联系人、跟进人、沟通记录。</p>
 <h2 id="h-九-售后管理">九、售后管理</h2>
 <h3 id="h-9-1-售后类型">9.1 售后类型</h3>
 <div class="tbl"><table>
@@ -1169,7 +1220,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>仅退款</td>
 <td>未发货、少件、商品问题且无需退货</td>
 <td>退款金额 ≤ 该商品实付</td>
@@ -1189,8 +1241,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>未激活卡密退卡、卡密异常补发</td>
 <td>已兑换卡密不可退</td>
 </tr>
-</tbody></table>
-</div><p>名单代发订单可按收件人维度申请售后。</p>
+</tbody>
+</table></div>
+<p>名单代发订单可按收件人维度申请售后。</p>
 <h3 id="h-9-2-处理流程">9.2 处理流程</h3>
 <ol>
 <li>用户在前台对子订单发起售后，选择类型、商品与数量，填原因、上传凭证。</li>
@@ -1222,7 +1275,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>联动结果</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>企业认证通过</td>
 <td>开通等级默认权益包 + 三个账户；前台立即显示会员价、利润与下单入口</td>
 </tr>
@@ -1270,8 +1324,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>专题下线</td>
 <td>引用它的装修坑位前台隐藏，工作台提醒内容运营替换</td>
 </tr>
-</tbody></table>
-</div><h3 id="h-10-2-工作台待办">10.2 工作台待办</h3>
+</tbody>
+</table></div>
+<h3 id="h-10-2-工作台待办">10.2 工作台待办</h3>
 <p>待审核企业认证、待认账 / 待认领流水、待复核（调账 / 发放 / 退款）、待开票、待介入售后、待跟进集采咨询、异常商品、即将到期的场景 / 专题、装修引用已下线专题、物流异常包裹、定时任务告警（附 AI 异常摘要）。待办按当前账号的角色、业务线与数据范围过滤；超时项标红。</p>
 <h3 id="h-10-3-核心数据">10.3 核心数据</h3>
 <p>GMV 与订单数（按来源入口：AI 方案 / 频道 / 专题 / 品牌商品列表 / 场景页）、新增企业与认证通过率、预付款充值额、活动账户发放与核销率、售后率、集采咨询转单率。</p>
@@ -1308,7 +1363,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>人工确认方式</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>商品打标建议</td>
 <td>商品运营</td>
 <td>商品库批量操作、频道商品归置</td>
@@ -1343,8 +1399,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>售后申请、双方凭证图片、物流轨迹、商品售后规则、该客户与供应商历史 → 建议结论（支持用户 / 支持供应商 / 部分退款及金额）、依据、风险提示、回复话术</td>
 <td>客服参考后自行裁定；退款仍走 9.2 的复核；建议与最终裁定不一致时要求填原因</td>
 </tr>
-</tbody></table>
-</div><h3 id="h-12-3-后续应用-P1-P2">12.3 后续应用（P1 / P2）</h3>
+</tbody>
+</table></div>
+<h3 id="h-12-3-后续应用-P1-P2">12.3 后续应用（P1 / P2）</h3>
 <p>价格 / 库存异常巡检摘要（与定时任务结合）、场景层配置建议、集采咨询单回复与报价草拟、客户流失预警、认账模糊匹配、对账差异归因。</p>
 <h3 id="h-12-4-AI-应用管理">12.4 AI 应用管理</h3>
 <ul>
@@ -1362,7 +1419,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>规则</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>谁能创建</td>
 <td>商品运营建商品监控；订单 / 客服建订单监控；产品 / 数据建埋点监控；受业务线范围限制；超管可看全部任务</td>
 </tr>
@@ -1386,8 +1444,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>管理</td>
 <td>启用 / 暂停 / 复制 / 删除；运行记录（开始时间、耗时、命中条数、通知结果）；连续失败 3 次通知创建人并自动暂停</td>
 </tr>
-</tbody></table>
-</div><h3 id="h-13-2-首期模板">13.2 首期模板</h3>
+</tbody>
+</table></div>
+<h3 id="h-13-2-首期模板">13.2 首期模板</h3>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -1397,7 +1456,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>默认频率</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>商品监控</td>
 <td>价格倒挂（会员价 ≤ 接口价）</td>
 <td>任意 1 件</td>
@@ -1469,8 +1529,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>任意 1 个</td>
 <td>每天</td>
 </tr>
-</tbody></table>
-</div><p>自定义 SQL 条件放在 P2，仅对超管开放。</p>
+</tbody>
+</table></div>
+<p>自定义 SQL 条件放在 P2，仅对超管开放。</p>
 <h2 id="h-十四-埋点规则与埋点管理">十四、埋点规则与埋点管理</h2>
 <p>埋点<strong>自建</strong>，覆盖前台 AI 对话、前台发发福利 GUI 界面与运营后台。目的：分析用户行为，归因每笔成交来自哪个入口（AI 方案 / 引导词 / 频道 / 专题 / 品牌商品列表 / 装修坑位），并支撑自然语言查数与埋点监控。</p>
 <h3 id="h-14-1-采集方案">14.1 采集方案</h3>
@@ -1495,7 +1556,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>event_time / event_id</td>
 <td>事件时间、唯一 ID</td>
 </tr>
@@ -1527,8 +1589,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>app_version / platform</td>
 <td>版本、PC / H5</td>
 </tr>
-</tbody></table>
-</div><h3 id="h-14-4-前台·AI-对话事件">14.4 前台·AI 对话事件</h3>
+</tbody>
+</table></div>
+<h3 id="h-14-4-前台-AI-对话事件">14.4 前台·AI 对话事件</h3>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -1537,7 +1600,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>关键属性</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>fafa_ai_guide_click</td>
 <td>点击引导问句</td>
 <td>guide_id、是否填空句</td>
@@ -1582,8 +1646,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>点赞 / 点踩 / 中断</td>
 <td>原因</td>
 </tr>
-</tbody></table>
-</div><h3 id="h-14-5-前台·GUI-事件">14.5 前台·GUI 事件</h3>
+</tbody>
+</table></div>
+<h3 id="h-14-5-前台-GUI-事件">14.5 前台·GUI 事件</h3>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -1592,7 +1657,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>关键属性</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>顶部广告位</td>
 <td>fafa_home_ad_expose / click</td>
 <td>ad_id、位置、跳转类型</td>
@@ -1647,8 +1713,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>fafa_recharge_submit、fafa_invoice_apply_submit、fafa_aftersale_submit</td>
 <td>方式、金额、类型</td>
 </tr>
-</tbody></table>
-</div><h3 id="h-14-6-运营后台事件">14.6 运营后台事件</h3>
+</tbody>
+</table></div>
+<h3 id="h-14-6-运营后台事件">14.6 运营后台事件</h3>
 <p>配置发布（admin_config_publish，含对象类型与版本）、AI 建议采纳（admin_ai_suggest_adopt / modify / reject）、导出（admin_export_submit）、资金操作发起与复核、定时任务创建与告警处理、自然语言查数提问（只记问题类型，不记结果数据）。</p>
 <h3 id="h-14-7-归因规则">14.7 归因规则</h3>
 <ul>
@@ -1664,7 +1731,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>事件字典</td>
 <td>登记事件名、含义、触发时机、属性及是否必填、负责人、所属业务线；状态：草稿 → 待开发 → 已上线 → 已废弃；按版本留存变更</td>
 </tr>
@@ -1680,8 +1748,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>监控</td>
 <td>与定时任务中心的埋点监控模板联动（13.2）</td>
 </tr>
-</tbody></table>
-</div><p>研发流程：需求评审时产品在字典登记事件 → 开发按字典实现 → 测试用实时调试验收 → 上线后状态改为已上线；未登记的事件不入正式数仓。</p>
+</tbody>
+</table></div>
+<p>研发流程：需求评审时产品在字典登记事件 → 开发按字典实现 → 测试用实时调试验收 → 上线后状态改为已上线；未登记的事件不入正式数仓。</p>
 <h3 id="h-14-9-隐私与合规">14.9 隐私与合规</h3>
 <p>不采集手机号、证件号、银行账号等敏感信息；输入框内容只记字数与来源，不记原文（AI 对话内容由对话日志单独管理）；明细数据保留 13 个月，汇总数据长期保留；隐私政策中说明行为数据的采集与用途。</p>
 <h2 id="h-十五-非功能需求与迭代计划">十五、非功能需求与迭代计划</h2>
@@ -1693,7 +1762,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>要求</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>安全</td>
 <td>后台账号强制二次验证；敏感字段（手机号、信用代码、银行账号）列表脱敏，查看明文留痕</td>
 </tr>
@@ -1721,8 +1791,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>合规</td>
 <td>出版物须校验《出版物经营许可证》；个人账号任何接口不得返回成本与会员价</td>
 </tr>
-</tbody></table>
-</div><h3 id="h-15-2-迭代计划">15.2 迭代计划</h3>
+</tbody>
+</table></div>
+<h3 id="h-15-2-迭代计划">15.2 迭代计划</h3>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -1730,7 +1801,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>范围</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>P0（首期上线必须）</td>
 <td>平台底座框架（业务线字段、四层权限、预置角色模板、安全底线）；企业认证、会员等级与默认权益包；商品预付款账户（充值认账、流水）、积分账户入口、发票管理（人工上传）；商品库、商品池、频道商品归置、场景（有效期与场景层）、引导词、场景 / 频道页面装修（PC）、专题管理（含排他规则）、批量导入、订单物流；订单、售后；埋点 SDK、事件字典与前台核心事件（14.4 / 14.5）、归因；AI：商品打标建议、引导词与文案生成、发票 OCR 回填；定时任务中心（商品 / 订单监控模板）；操作日志</td>
 </tr>
@@ -1742,8 +1814,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>P2</td>
 <td>发票对接财务系统自动回传、积分账户明细与规则（随 AI 开发团队）、自定义 SQL 定时任务（仅超管）、登录 IP 与时段限制、规则标签自动归类、定向投放、等级自动升降、12.3 后续 AI 应用、发发集采 / 分采通业务应用接入</td>
 </tr>
-</tbody></table>
-</div><h2 id="h-十六-待确认事项">十六、待确认事项</h2>
+</tbody>
+</table></div>
+<h2 id="h-十六-待确认事项">十六、待确认事项</h2>
 <p><strong>已确认（2026-10-19）</strong>：通知渠道为钉钉群机器人；首期数据范围做到「业务线 + 本部门」，客户归属 P1；自定义 SQL 定时任务 P2 且仅超管；后台 AI 计入平台内部成本并按应用设上限；埋点明细保留 13 个月。</p>
 <p>v1.1 新增待确认（2026-10-20）：</p>
 <ul>
@@ -1762,7 +1835,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <th>影响模块</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>积分账户的消耗规则、赠送 / 购买方式、明细字段与接口</td>
 <td>由 AI 开发团队制定，后台只保留入口</td>
@@ -1828,6 +1902,7 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <td>使用近 90 天；不可；延长 30 天</td>
 <td>场景、售后、账户</td>
 </tr>
-</tbody></table>
-</div><hr><p class="meta">同步自 Claude 文档 · 2026-10-20</p></article></div>
+</tbody>
+</table></div>
+<hr><p class="meta">同步自 Claude 文档 · 2026-10-21</p></article></div>
 </body></html>

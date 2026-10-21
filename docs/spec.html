@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>发发福利首期产品 Spec v2.1</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article p,article li{color:var(--ink)}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+article blockquote p{margin:4px 0}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;padding:0;white-space:pre-wrap;word-break:break-word}
+hr{border:0;border-top:1px solid var(--border);margin:28px 0}
+.meta{color:var(--text-3);font-size:14px;margin-bottom:24px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="./">采发发 · 文档</a><span class="crumb">产品 Spec · 发发福利首期产品 Spec v2.1</span>
+<a class="btn" href="./">全部文档</a><a class="btn pri" href="../">打开 Demo</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-一-概述">一、概述</a><a href="#h-二-用户故事清单">二、用户故事清单</a><a href="#h-三-进入与找货-US-01-04-07-08-22-23-25-33">三、进入与找货（US-01–04、07、08、22、23、25、33）</a><a href="#h-四-AI-推荐-利润-场景推荐与专家咨询-US-05-06-26-28">四、AI 推荐、利润、场景推荐与专家咨询（US-05、06、26–28）</a><a href="#h-五-加购-下单支付与履约-US-09-17-24-29-31">五、加购、下单支付与履约（US-09–17、24、29–31）</a><a href="#h-六-售后-结算开票与账户-US-18-20-32">六、售后、结算开票与账户（US-18–20、32）</a><a href="#h-七-支撑能力与上线指标">七、支撑能力与上线指标</a></nav>
+<article><h1 id="h-发发福利首期产品-Spec-v2-1">发发福利首期产品 Spec v2.1</h1>
+<p>Oct 20, 2026 · @sanyuan</p>
+<p><strong>v2.1 修订（2026-10-20）</strong>：对齐《运营管理后台 PRD v1.1》与《AI Prompt 设计 v2.1》。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>v2.0</th>
+<th>v2.1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>场景页 / 频道页</td>
+<td>固定 Banner + 六专区；场景商品按场景标</td>
+<td>按后台页面装修模板渲染（丰富型 / 精简型 + 核心品牌）；场景商品来自商品池 / 专题 / 规则；场景到期自动下线</td>
+</tr>
+<tr>
+<td>引导问句</td>
+<td>未定义</td>
+<td>对话框下方展示运营配置的 1–6 条问句</td>
+</tr>
+<tr>
+<td>AI 对话</td>
+<td>只追问缺失参数</td>
+<td>新增意图识别与 2–6 轮反问收窄、选择推荐、选品结果不设上限、政企采购合规约束</td>
+</tr>
+<tr>
+<td>专家咨询</td>
+<td>答不准转专家</td>
+<td>知识库自动问答；定制需求引导 400 热线或提交需求表单</td>
+</tr>
+<tr>
+<td>商品</td>
+<td>运营打爆品 / 场景 / 频道标</td>
+<td>商品只从供应商同步，商品类型由供应商指定，运营只打运营标签</td>
+</tr>
+<tr>
+<td>订单 / 账户</td>
+<td>—</td>
+<td>下单后不支持修改地址；预付款按专属识别码自动入账，不支持退回</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-一-概述">一、概述</h2>
+<p>首期交付「从进入到结算开票」的最小闭环：32 个用户故事（US-21 本期取消），2026-11-20 上线。本版以 Demo「Beta 0.3 · 一页融合」为准，配套《发发福利 PRD v2.0（一页融合版）》、《运营管理后台 PRD v1.1》与《发发福利 AI Prompt 设计 v2.1》；口径不一致时以 PRD 为准。</p>
+<ul>
+<li><strong>产品形态</strong>：发发福利是采发发侧栏一级应用，只有一个主页面——广告位、固定栏目（福利场景 / 商品资源 / 专家咨询）、运营频道、AI 对话框、底部联动 GUI；页头常驻商品搜索框；下滑过首屏后 AI 对话框收为底部小对话框，点击展开。</li>
+<li><strong>合规红线</strong>：只有企业账户能下单；个人账户只看市场价，不见会员价、采购成本和利润。</li>
+<li><strong>服务商口径</strong>：用户说的预算默认是客户预算，选品先扣目标利润。</li>
+<li><strong>本期不做</strong>：C 端商城与移动端；企业对账单；个人下单；多级审批；卡券制卡；储值卡；礼包部分 / 批量售后；合并开票；对外开放接口；铺货到商城；预付款退回（用户与后台均不支持）；下单后修改收货地址。</li>
+</ul>
+<p><strong>主流程（每步对应第二节故事）</strong></p>
+<ol>
+<li>进入：侧栏进入一页，默认福利场景 · 当季首推场景。</li>
+<li>找货：选栏目与频道浏览底部 GUI，或用顶部搜索框直接搜商品，或在对话框说需求，或点场景推荐。</li>
+<li>AI 方案：先识别意图，采购需求用 2–6 轮反问按群体、预算、库存、销量、利润率、履约、效期、售后等维度缩小范围，再输出全部满足条件的 SKU 与利润，标出 1 个推荐 SKU；爆品 / 礼包 / 卡券都是 SKU 维度（礼包由供应商整箱供应），AI 不拼套装。</li>
+<li>加购：勾选加购或立即购买。</li>
+<li>下单支付：确认订单 → 生成主单并拆子单 → 合并或分子单支付。</li>
+<li>履约：按来源发货、名单代发、卡券分发。</li>
+<li>售后：供应商审核，寄回，原路退款。</li>
+<li>结算开票：已完成子单多选申请开票。</li>
+</ol>
+<h2 id="h-二-用户故事清单">二、用户故事清单</h2>
+<p>原编号不重排；v2.0 改写的故事标「改」，新增的故事续编 US-25 起；P1 表示工期紧张时可先上简化版。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>旅程</th>
+<th>用户故事</th>
+<th>优先级</th>
+<th>变化</th>
+<th>PRD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US-01</td>
+<td>进入</td>
+<td>从采发发侧栏直接进入发发福利一页</td>
+<td>P0</td>
+<td>改</td>
+<td>6.1</td>
+</tr>
+<tr>
+<td>US-02</td>
+<td>进入</td>
+<td>手机号注册个人版先浏览，并知道下单需升级</td>
+<td>P0</td>
+<td>—</td>
+<td>6.1</td>
+</tr>
+<tr>
+<td>US-03</td>
+<td>找货</td>
+<td>打开就看到当前档期的场景频道（新春年货节）</td>
+<td>P0</td>
+<td>改</td>
+<td>6.4</td>
+</tr>
+<tr>
+<td>US-04</td>
+<td>找货</td>
+<td>在福利场景 / 商品资源 / 专家咨询三个栏目和运营频道间切换，底部内容联动</td>
+<td>P0</td>
+<td>改（取代三层引导）</td>
+<td>6.3–6.6</td>
+</tr>
+<tr>
+<td>US-05</td>
+<td>找货</td>
+<td>向专家咨询提问、提定制需求或看经营概况，答不准时转专家</td>
+<td>P0</td>
+<td>改</td>
+<td>7.4</td>
+</tr>
+<tr>
+<td>US-06</td>
+<td>找货</td>
+<td>说出人数和预算，让 AI 推荐方案</td>
+<td>P0</td>
+<td>—</td>
+<td>7.1–7.3</td>
+</tr>
+<tr>
+<td>US-07</td>
+<td>找货</td>
+<td>在场景运营页浏览专区、爆品 / 礼包 / 卡券并筛选</td>
+<td>P0</td>
+<td>改</td>
+<td>6.6</td>
+</tr>
+<tr>
+<td>US-08</td>
+<td>找货</td>
+<td>在资源频道（京东自营、天猫超市、零食专场等）浏览商品</td>
+<td>P0</td>
+<td>改（取代资源广场）</td>
+<td>6.4–6.6</td>
+</tr>
+<tr>
+<td>US-09</td>
+<td>加购</td>
+<td>在选品结果（多选）和商品卡上加购</td>
+<td>P0</td>
+<td>—</td>
+<td>7.3</td>
+</tr>
+<tr>
+<td>US-10</td>
+<td>加购</td>
+<td>在购物车按来源分组、改数量、删除并跨供应商合并结算</td>
+<td>P0</td>
+<td>改</td>
+<td>8.1</td>
+</tr>
+<tr>
+<td>US-11</td>
+<td>下单支付</td>
+<td>在线支付</td>
+<td>P0</td>
+<td>—</td>
+<td>8.2</td>
+</tr>
+<tr>
+<td>US-12</td>
+<td>下单支付</td>
+<td>预付款下单</td>
+<td>P0</td>
+<td>—</td>
+<td>8.2</td>
+</tr>
+<tr>
+<td>US-13</td>
+<td>下单支付</td>
+<td>个人用户下单前升级企业账户</td>
+<td>P0</td>
+<td>—</td>
+<td>5.2</td>
+</tr>
+<tr>
+<td>US-14</td>
+<td>下单支付</td>
+<td>提交前看到拆单预览，提交后生成主单与子单</td>
+<td>P0</td>
+<td>改</td>
+<td>8.2</td>
+</tr>
+<tr>
+<td>US-15</td>
+<td>履约</td>
+<td>按来源自动拆单发货</td>
+<td>P0</td>
+<td>—</td>
+<td>5.1</td>
+</tr>
+<tr>
+<td>US-16</td>
+<td>履约</td>
+<td>电子提货券分发与兑换</td>
+<td>P0</td>
+<td>—</td>
+<td>8.8</td>
+</tr>
+<tr>
+<td>US-17</td>
+<td>履约</td>
+<td>查看所有包裹的物流节点</td>
+<td>P0</td>
+<td>改（主动推送仍 P1）</td>
+<td>8.3</td>
+</tr>
+<tr>
+<td>US-18</td>
+<td>售后</td>
+<td>按子单申请售后，审核通过后选择寄回方式</td>
+<td>P0</td>
+<td>改</td>
+<td>8.4</td>
+</tr>
+<tr>
+<td>US-19</td>
+<td>售后</td>
+<td>退款原路退回</td>
+<td>P0</td>
+<td>—</td>
+<td>8.4</td>
+</tr>
+<tr>
+<td>US-20</td>
+<td>结算</td>
+<td>已完成子单多选申请开票</td>
+<td>P0</td>
+<td>改</td>
+<td>8.5</td>
+</tr>
+<tr>
+<td>US-21</td>
+<td>结算</td>
+<td>下载企业对账单</td>
+<td>—</td>
+<td>本期取消</td>
+<td>—</td>
+</tr>
+<tr>
+<td>US-22</td>
+<td>进入</td>
+<td>顶部搜索框直接搜商品；下滑后对话框收为底部小对话框，点击展开</td>
+<td>P0</td>
+<td>改（取代双模式）</td>
+<td>6.7</td>
+</tr>
+<tr>
+<td>US-23</td>
+<td>找货</td>
+<td>看到与账户类型对应的价格和身份</td>
+<td>P0</td>
+<td>—</td>
+<td>6.1</td>
+</tr>
+<tr>
+<td>US-24</td>
+<td>下单支付</td>
+<td>活动账户支付实物订单</td>
+<td>P0</td>
+<td>—</td>
+<td>8.2</td>
+</tr>
+<tr>
+<td>US-25</td>
+<td>进入</td>
+<td>在顶部广告位看到运营推广并跳转</td>
+<td>P1</td>
+<td>新</td>
+<td>6.2</td>
+</tr>
+<tr>
+<td>US-26</td>
+<td>找货</td>
+<td>按客户预算选品并看到采购成本、建议对客价与利润</td>
+<td>P0</td>
+<td>新</td>
+<td>3.4、7.3</td>
+</tr>
+<tr>
+<td>US-27</td>
+<td>找货</td>
+<td>看到 AI 的执行步骤与自检修正</td>
+<td>P0</td>
+<td>新</td>
+<td>7.2</td>
+</tr>
+<tr>
+<td>US-28</td>
+<td>找货</td>
+<td>看到按场景与企业记录生成的推荐和提问建议</td>
+<td>P1</td>
+<td>新</td>
+<td>7.5</td>
+</tr>
+<tr>
+<td>US-29</td>
+<td>下单支付</td>
+<td>上传名单代发并跟踪每位收件人的发货</td>
+<td>P0</td>
+<td>新</td>
+<td>5.3、8.2</td>
+</tr>
+<tr>
+<td>US-30</td>
+<td>下单支付</td>
+<td>主单未付时按子单分别支付</td>
+<td>P0</td>
+<td>新</td>
+<td>8.2</td>
+</tr>
+<tr>
+<td>US-31</td>
+<td>履约</td>
+<td>筛选订单并查看子单详情</td>
+<td>P0</td>
+<td>新</td>
+<td>8.3</td>
+</tr>
+<tr>
+<td>US-32</td>
+<td>账户</td>
+<td>在账号与设置管理财务账户并充值预付款</td>
+<td>P0</td>
+<td>新</td>
+<td>8.6–8.7</td>
+</tr>
+<tr>
+<td>US-33</td>
+<td>找货</td>
+<td>对商品发起集采询价</td>
+<td>P1</td>
+<td>新</td>
+<td>6.6、10.3</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-三-进入与找货-US-01-04-07-08-22-23-25-33">三、进入与找货（US-01–04、07、08、22、23、25、33）</h2>
+<p>用户从侧栏进入一页，通过栏目和频道找货；对话框与底部 GUI 始终在同一页面。</p>
+<h3 id="h-功能要点">功能要点</h3>
+<ul>
+<li><strong>一页结构</strong>（US-01）：吸顶页头（含商品搜索框）→ 广告位 → 标题 → 固定栏目 → 运营频道 → AI 对话框 → 底部联动 GUI。</li>
+<li><strong>固定栏目</strong>（US-04）：福利场景 / 商品资源 / 专家咨询，纯文字分段开关；不对运营开放配置。</li>
+<li><strong>场景频道</strong>（US-03、07）：常驻新春年货节 / 生日补贴 / 餐补随心兑，其余在「更多场景」下拉；选中后底部按后台页面装修渲染：丰富型为 Banner 轮播 + 6 个场景专区，精简型为 Banner + 4 个专题方块，可选核心品牌；下方为业务栏目与商品网格。场景商品来自后台「商品来源」（商品池 / 专题 / 规则 / 手动矫正），场景过有效期自动下线。</li>
+<li><strong>资源频道</strong>（US-08）：常驻电商精选（京东自营）/ 天猫超市 / 天猫优品 / 零食专场 / 粮油专场，其余在「更多频道」；底部按频道页面装修展示 Banner、专题方块与核心品牌，再展示频道商品，可按全部 / 爆品 / 礼包 / 卡券（商品类型，由供应商指定）筛选。</li>
+<li><strong>对话框</strong>：自由输入 + 场景上下文标签；输入框提示语与下方 1–6 条引导问句由后台按场景 / 频道配置，点击问句直接发送，填空句的可改值以「［］」标出；「+」专家技能显示即将上线。</li>
+<li><strong>广告位</strong>（US-25）：弧形卡片轮播，4.5 秒切换；点中间卡跳转栏目 + 频道、商品或专题。</li>
+<li><strong>搜索框</strong>（US-22）：页头常驻商品搜索框（占位「搜索商品、品类、品牌」），聚焦只出下拉、不开 AI：空词时为最近搜索 + 热门搜索；输入时为「搜索『xxx』」+ 至多 5 个商品联想，末行「问发发：xxx」。下滑 &gt; 520px 后页头第二行常驻栏目与频道，AI 对话框收为底部居中的小对话框。</li>
+<li><strong>搜索结果（US-22）</strong>：回车后在当前页切为结果视图——「‹ 返回{场景}」+ 结果数；顶部横条「让发发按『xxx』帮你配 →」；筛选为范围（全部在售 / 当前场景货盘，默认全部）+ 类型 / 价位 / 品类 / 来源四组多选（选项带数量），排序综合 / 销量 / 价格；商品卡可直接加购或「问发发」，当前场景货盘内的商品带场景小标。结果为空时提示换词或交给发发。</li>
+<li><strong>底部小对话框（US-06、22）</strong>：滚过首屏或在搜索结果页时出现。点击后向上展开为半屏浮层（约 720px），前 2 轮反问（目标群体、人数与预算）在浮层内完成；答完后自动进入任务工作台，左侧继续反问、右侧为需求画像，停止反问后右侧变为选品结果。浮层右上角可「展开大对话框」回到顶部。</li>
+<li><strong>入口互转</strong>：不自动互转。搜索词带人数或预算时照常出结果，横条高亮为「看起来是采购需求，让发发按『120 人 · 人均 300』配」；在对话框只输关键词时，AI 给一句结论 + 前 4 个商品 +「在页面查看全部 N 个 →」。</li>
+<li><strong>任务延续</strong>：有进行中的任务时，底部小对话框左侧显示「↩ 员工年货 · 120 人 · 已选 N」，点击回工作台；直接输入为对当前任务追问；「+」开新任务。商品卡「问发发」把该商品带入浮层。</li>
+<li><strong>价格与身份</strong>（US-23）：个人账户看市场价与「升级企业版查看会员价」，企业账户看会员价与划线市场价。</li>
+<li><strong>集采询价</strong>（US-33）：商品卡悬停「集采询价」，弹窗填数量区间与交期，提交到后台。</li>
+</ul>
+<h3 id="h-验收标准">验收标准</h3>
+<ul>
+<li>[ ] 点侧栏 1 秒内进入一页，2 秒内首屏完整；2026-11-20 至春节档内默认选中「福利场景 · 新春年货节」</li>
+<li>[ ] 切换栏目或频道后 1 秒内底部 GUI 刷新，对话框上下文标签同步变化，已输入文字保留</li>
+<li>[ ] 「更多场景 / 更多频道」下拉在对话框之上完整可见；选中下拉内频道后按钮显示频道名并高亮</li>
+<li>[ ] 场景页的专区与网格只含该场景「商品来源」算出的在售商品；空坑位不展示；过有效期的场景不再出现在场景频道栏；资源频道类型筛选数量与网格一致，无商品的类型不显示</li>
+<li>[ ] 后台修改广告、频道名称 / 顺序 / 常驻、引导词、页面装修并发布后，前台 1 分钟内生效</li>
+<li>[ ] 搜索框聚焦不打开 AI；回车 1 秒内出结果视图，「返回」回到原场景页；下滑出现底部小对话框、滚动中不闪烁；在浮层答完人数和预算后自动进入工作台；收缩时广告暂停轮播</li>
+<li>[ ] 个人账户任何页面、任何接口都不返回会员价；各页面显示身份提示</li>
+<li>[ ] 集采询价提交后后台可见，状态为「待报价」</li>
+</ul>
+<h2 id="h-四-AI-推荐-利润-场景推荐与专家咨询-US-05-06-26-28">四、AI 推荐、利润、场景推荐与专家咨询（US-05、06、26–28）</h2>
+<p>AI 只理解需求和写结论，商品由规则服务召回、组方案和自检；企业账户方案默认按客户预算留出利润。</p>
+<h3 id="h-功能要点">功能要点</h3>
+<ul>
+<li><strong>AI 方案</strong>（US-06）：先识别意图（采购 / 找商品 / 咨询 / 不确定）；采购需求进入 2–6 轮反问收窄——第 1 轮目标群体、第 2 轮人数与预算（必问，已说过的跳过），第 3 轮起按「最能缩小候选池」自动挑维度（库存 / 销量 / 利润率 / 履约 / 效期 / 售后 / 发放形式 / 偏好），每轮 3–4 个选项带「约 N 个」并标推荐，另有「跳过」「就这些，出结果」；追问以卡片呈现（参考 Claude / Gemini 提问卡）：头部为轮次与维度 + 6 段进度条 + 候选数，选项整行可点、点即提交，推荐项置顶，已答轮次折叠为「✓ 第 k 轮 · 答案 · 修改」；一句话多条件一次生效算 1 轮；候选 &lt; 10 时指出卡住的条件并给放宽选项。第 2 轮后进入工作台，右侧「需求画像」实时显示候选数变化（如 340 → 201 → 127）、条件标签（可改 / 可删）与排在前面的商品。候选 ≤ 目标规模（默认 80，后台按场景配）、问满 6 轮或用户要求时停止；右侧输出全部满足条件的 SKU（不截断）：按商品类型（爆品 / 礼包 / 卡券）、价位、品类、来源四组多选筛选（组内「或」、组间「且」，选项带数量），可按推荐 / 价格 / 销量 / 毛利排序；结果支持多选与「全选当前结果」，推荐 SKU 默认勾选；底栏显示已选 SKU 数、每人合计与总额，多选合计超出每人预算时提示；「加购已选」按每个 SKU × 人数加入购物车，也可立即购买或导出清单；快捷调整「继续缩小范围 / 只看礼包 / 员工自选（卡券）/ 调整利润 / 去购物车」。</li>
+<li><strong>利润差价</strong>（US-26）：可用采购预算 = 客户预算 × (1 − 目标毛利率)；选品结果按已选 SKU 显示采购成本、建议对客价、每人利润、毛利率与总利润；「自己员工」为自用口径不留利润；卡券利润 = 面值 − 会员价。</li>
+<li><strong>自检循环</strong>（US-27）：理解 → 召回 → 组方案 → 自检 → 修正，最多 3 轮 / 8 秒；步骤条展示每轮结果，未通过项橙色。</li>
+<li><strong>反问与选择推荐</strong>：采购需求用 2–6 轮反问逐步收窄，每轮只问 1 个维度；意图不明或涉及合规判断时另问；给用户多个选项（方案、价位、发放形式）时，标出 1 个「推荐」并写一句理由。</li>
+<li><strong>选品清单</strong>：用户要「选一批商品 / 出选品单」时不组方案，先多轮收窄，再输出全部满足条件的商品（不设上限，靠收窄控制规模），可筛选、可导出、可加购。</li>
+<li><strong>合规约束</strong>：客户为政府、事业单位、国企或使用工会经费时，不推荐烟酒、奢侈品和购物卡 / 现金类卡券；不协助拆单规避审批、品名不符的发票或虚报价格；政策类问题只给依据并提示以当地规定为准。</li>
+<li><strong>场景推荐</strong>（US-28）：独立模型调用，在规则候选内挑 4 个商品、写推荐语与 3 条提问建议；超时降级为规则结果。</li>
+<li><strong>专家咨询</strong>（US-05）：福利咨询走知识库（答案 ≤ 4 句 + 来源）；知识库以外或定制需求引导拨打 400 热线或提交需求表单，表单推送后台「咨询需求单」与钉钉群，不报价；经营概况分析仅企业管理员与财务可用。</li>
+</ul>
+<h3 id="h-验收标准">验收标准</h3>
+<ul>
+<li>[ ] 只给人数时 AI 只追问预算；第 2 轮仍缺预算按标准档出方案并说明假设</li>
+<li>[ ] 客户预算人均 300、目标 15% 时：选品结果中每个 SKU 单价 ≤ 255，建议对客价 ≤ 300</li>
+<li>[ ] 点「调整利润 › 留 20%」后重新出方案，人数、客户预算保留；「不留利润」后显示自用口径</li>
+<li>[ ] 第 1 轮入选商品毛利低于目标时被自检拦下并替换，结论中说明；3 轮仍不足时告知最高可留利润，不强凑</li>
+<li>[ ] 个人账户方案只显示市场价，不出现采购成本、利润、毛利率与「调整利润」</li>
+<li>[ ] 「换一批」返回与上一批不同的方案；商品资源栏目只用当前频道内商品</li>
+<li>[ ] 场景推荐商品 100% 来自候选，文字不含价格；1.5 秒未返回时展示规则结果</li>
+<li>[ ] 知识库外问题不编造，展示 400 热线与需求表单入口；表单提交后后台「咨询需求单」可见、钉钉群收到通知</li>
+<li>[ ] 个人账户申请经营概况分析时不调用数据，引导升级</li>
+<li>[ ] 只说「帮我配一下」时第 1 轮问目标群体、第 2 轮问人数与预算；每轮答完候选数实时变化且与右侧需求画像一致；候选 ≤ 目标规模、满 6 轮或点「就这些，出结果」时停止；前 2 轮不提供出结果；一句话多条件只算 1 轮；结果数不被截断</li>
+<li>[ ] 每次给出 2 个及以上选项时，恰好 1 个标「推荐」，理由 ≤ 20 字且引用用户说过的条件</li>
+<li>[ ] 「帮我选一批年货商品」返回 45–55 个商品；候选不足 45 个时返回全部并说明实际数量与可放宽的条件</li>
+<li>[ ] 用户说明客户为机关 / 国企或用工会经费时，方案与清单中不出现烟酒、奢侈品、购物卡；要求拆单规避审批或开品名不符的发票时拒绝并说明</li>
+</ul>
+<h2 id="h-五-加购-下单支付与履约-US-09-17-24-29-31">五、加购、下单支付与履约（US-09–17、24、29–31）</h2>
+<p>一笔订单可含多个供应商的商品，提交后生成主单并按来源拆子单；只有企业账户能进入结算。</p>
+<h3 id="h-功能要点">功能要点</h3>
+<ul>
+<li><strong>加购</strong>（US-09）：方案内勾选加购，每件数量 = 人数；单品默认 1；校验起订量、限购、库存。</li>
+<li><strong>购物车</strong>（US-10）：按来源分组（不拆单）；全选 / 按供应商全选 / 单选；数量 ± 与手动输入 1–99999；单品与批量删除；只汇总已选。</li>
+<li><strong>确认订单</strong>（US-14、29）：单地址或名单代发（模板 → 上传 → 逐行校验 → 核对数量）；拆单预览；提交生成主单与子单（主单号-1 / -2…）；提交后不支持修改收货地址，需取消重下，确认页醒目提示。</li>
+<li><strong>收银台</strong>（US-11、12、24、30）：合并支付或按子单分别支付；在线支付 / 预付款 / 活动账户；活动账户仅实物子单；不允许单笔混合支付；30 分钟未付关闭；超阈值先审批。</li>
+<li><strong>升级</strong>（US-13）：个人账户点任何下单入口弹升级引导，上传营业执照，3 个工作日内审核，通过后一键回到结算。</li>
+<li><strong>履约</strong>（US-15–17）：只按来源拆单；礼包整包进入其供应商子单；电子卡从卡池分配卡密；所有已发货子单可查物流节点（倒序、最新高亮）。</li>
+<li><strong>订单</strong>（US-31）：主单卡片内逐行展示子单；状态 Tab 按子单计数；筛选订单号、下单信息、下单时间（快捷 + 自定义）、下单人（手输模糊）、收货方式；子单详情含订单 / 下单人 / 发货 / 售后明细。</li>
+</ul>
+<h3 id="h-验收标准">验收标准</h3>
+<ul>
+<li>[ ] 整方案加购后购物车每个商品数量 = 人数 × 单人份数；「立即下单」不影响购物车其他商品</li>
+<li>[ ] 购物车分组数 = 拆单预览子单数 = 实际子单数；金额一致</li>
+<li>[ ] 数量输入非数字被过滤，小于 1 按 1 处理；无库存商品不可勾选</li>
+<li>[ ] 名单有错误行或数量与名单不一致时不能提交；修正后可提交；下单后可下载发货明细</li>
+<li>[ ] 主单未付时可只付其中一个子单；剩余子单可在订单列表继续支付或取消</li>
+<li>[ ] 同一订单重复点支付只扣一次；超阈值未审批前不扣款，驳回后关闭并释放库存</li>
+<li>[ ] 含电子卡的子单不能选活动账户；不能同时扣活动账户与预付款</li>
+<li>[ ] 个人用户点任何下单入口一定出现升级引导且不生成订单</li>
+<li>[ ] 含 3 个来源的订单支付后生成 3 个子单；子单发货后 5 分钟内可见运单号与节点</li>
+<li>[ ] 筛选与状态 Tab 叠加生效，Tab 计数随筛选变化；自定义日期后快捷项失效</li>
+</ul>
+<h2 id="h-六-售后-结算开票与账户-US-18-20-32">六、售后、结算开票与账户（US-18–20、32）</h2>
+<p>售后由供应商审核、平台可介入；首期不做对账单，只对已完成子单结算开票；财务入口统一在「账号与设置」。</p>
+<h3 id="h-功能要点">功能要点</h3>
+<ul>
+<li><strong>售后</strong>（US-18）：类型（退货退款 / 仅退款 / 换货）、原因、凭证 1–6 张必填；供应商 48 小时内审核；退货类同意后选上门取件（地址、联系人、预约时段）或自行寄回（物流公司 + 运单号，支持面单识别回填）→ 退货中 → 签收 → 退款或补发。</li>
+<li><strong>退款</strong>（US-19）：在线支付回原通道并回退分账；预付款、活动账户回各自余额并写流水；已开票提示红冲。</li>
+<li><strong>结算开票</strong>（US-20）：已完成子单进入未结算；多选后申请开票（抬头、税号、专票 / 普票），各供应商按子单开具；状态已结算 · 开票中 → 已开票；礼包按子商品行；活动账户金额同票折扣。</li>
+<li><strong>账户</strong>（US-32）：QA 式「账号与设置」；账户弹窗含当前权益、采购车（件数）、预付款（余额默认隐藏）；财务账户含预付款、活动账户、在线支付状态与资金流水；业务偏好可设默认预算口径与默认利润率。</li>
+<li><strong>预付款充值</strong>（US-32）：汇款智能认账（选银行、查看专属账号与企业专属汇款识别码、复制账号信息，到账按识别码自动入账，后台不做人工匹配）或微信 / 支付宝在线充值（金额 → 渠道 → 二维码）；预付款不支持退回（用户与后台均无入口）。</li>
+</ul>
+<h3 id="h-验收标准">验收标准</h3>
+<ul>
+<li>[ ] 售后未填类型、原因或无凭证时不能提交；凭证最多 6 张</li>
+<li>[ ] 仅退款同意后直接退款；退货类同意后出现寄回方式选择</li>
+<li>[ ] 上传面单可识别并回填物流公司与运单号；识别失败提示手动填写；面单出现在售后明细</li>
+<li>[ ] 售后只影响对应子单；预付款订单退款后流水实时可见；礼包只能整包售后</li>
+<li>[ ] 供应商超 48 小时未审的售后进入平台介入队列</li>
+<li>[ ] 未完成子单不能申请开票；多选汇总的子单数、供应商数与合计正确；申请后状态变为「已结算 · 开票中」</li>
+<li>[ ] 活动账户订单发票折让金额 = 活动账户支付金额；礼包发票与供应商开票明细一致</li>
+<li>[ ] 弹窗预付款余额默认隐藏，点眼睛显示，与财务账户页同步</li>
+<li>[ ] 汇款后系统自动入账并写流水；在线充值超单笔限额时提示改用汇款；财务账户无预付款退款入口</li>
+</ul>
+<h2 id="h-七-支撑能力与上线指标">七、支撑能力与上线指标</h2>
+<p>以下能力不直接面向采购者，但须与前台同时上线；细节见 PRD 第九、十、十一章。</p>
+<h3 id="h-支撑能力">支撑能力</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>能力</th>
+<th>首期要求</th>
+<th>支撑故事</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商品库与打标</td>
+<td>商品只从供应商商品库同步，后台不录入；商品类型（爆品 / 礼包 / 卡券）由供应商指定、审核时可纠正；运营只打运营标签；商品池；类目模板与 69 码；卡券库存与卡池</td>
+<td>US-03–08、16</td>
+</tr>
+<tr>
+<td>频道运营</td>
+<td>广告位；场景（名称 + 有效期、引导词 1–6 条、商品来源）；资源频道商品归置；场景 / 频道页面装修（PC 模板）；专题（排他规则）；场景推荐配置</td>
+<td>US-03、US-04、US-07、US-08、US-25、US-28</td>
+</tr>
+<tr>
+<td>供应商端</td>
+<td>礼包组包；子单发货、售后审核与退货地址、开票</td>
+<td>US-15、US-18、US-20</td>
+</tr>
+<tr>
+<td>交易与财务后台</td>
+<td>订单 / 子单 / 物流、售后介入、集采询价、结算与开票监管、专属识别码自动入账与线下充值复核、订单物流查看（不支持改地址、不支持预付款退回）</td>
+<td>US-14–20、US-32、US-33</td>
+</tr>
+<tr>
+<td>福利知识库</td>
+<td>6 类知识 + 指标口径 + 政企采购合规条目（工会经费、公务礼品、预付卡）；审核发布；未命中问题与咨询需求单进后台；100 题评测（整体 ≥ 90%，规则类 100%）</td>
+<td>US-05</td>
+</tr>
+<tr>
+<td>CUI 底座</td>
+<td>选品、组方案（含自检循环与利润）、加购、查单、售后、开票、知识库等接口 GUI 与对话共用；草稿与确认；事件与审计；不对外开放</td>
+<td>US-06、US-26–28</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="h-上线指标">上线指标</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>春节档 GMV</td>
+<td>11-20 至春节档结束，已支付 − 退款</td>
+</tr>
+<tr>
+<td>下单漏斗</td>
+<td>进入一页 → 选栏目 / 频道或发送需求 → 看方案或商品 → 加购 → 提交 → 支付</td>
+</tr>
+<tr>
+<td>AI 推荐采纳率</td>
+<td>方案被加购 ÷ 方案展示</td>
+</tr>
+<tr>
+<td>广告位 / 场景推荐点击率</td>
+<td>点击 ÷ 曝光</td>
+</tr>
+<tr>
+<td>频道转化</td>
+<td>频道内加购 ÷ 频道进入</td>
+</tr>
+<tr>
+<td>个人升级率</td>
+<td>认证通过 ÷ 触发升级引导</td>
+</tr>
+<tr>
+<td>卡券兑换率 / 子单售后率 / 专家命中率</td>
+<td>同 v1.0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="h-待确认">待确认</h3>
+<p>售后与开票主体、平台默认毛利率、在线充值限额、场景识别方式、首期频道清单等，统一见 PRD v2.0 第十三章。</p>
+<hr><p class="meta">同步自 Claude 文档 · 2026-10-21</p></article></div>
+</body></html>
