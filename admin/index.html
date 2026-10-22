@@ -1037,7 +1037,7 @@ const NAV = [
     { id: 'fin', name: '账户与财务', subs: [{ id: 'points', name: '积分账户（AI 额度）' }, { id: 'activity', name: '活动账户' }, { id: 'prepay', name: '商品预付款' }, { id: 'inv', name: '发票管理' }, { id: 'flow', name: '流水与对账', alias: ['recon'] }, { id: 'recon', name: '对账单', hidden: true }] }
   ] },
   { label: '业务应用', mods: [
-    { id: 'fafa', name: '发发福利', subs: [{ id: 'scene', name: '场景管理' }, { id: 'chan', name: '频道运营' }, { id: 'topic', name: '专题管理' }, { id: 'benefit', name: '权益包' }, { id: 'kb', name: '专家咨询知识库', alias: ['kbmiss'] }, { id: 'kbmiss', name: '未命中问题', hidden: true }] },
+    { id: 'fafa', name: '发发福利', subs: [{ id: 'scene', name: '场景管理' }, { id: 'chan', name: '频道运营' }, { id: 'topic', name: '专题管理' }, { id: 'benefit', name: '权益包' }, { id: 'kb', name: '专家咨询知识库', alias: ['kbmiss', 'kbpolicy', 'kbrule'] }, { id: 'kbpolicy', name: '合规与采购政策', hidden: true }, { id: 'kbrule', name: '合规规则', hidden: true }, { id: 'kbmiss', name: '未命中问题', hidden: true }] },
     { id: 'jicai', name: '发发集采', dis: true, subs: [] },
     { id: 'fct', name: '分采通', dis: true, subs: [] }
   ] },
@@ -1067,7 +1067,7 @@ const PH_LOGO = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQE
 const PILL = {
   '已发布': 'p-ok', '启用': 'p-ok', '已启用': 'p-ok', '正常': 'p-ok', '上线中': 'p-ok', '进行中': 'p-ok', '已上线': 'p-ok', '已授权': 'p-ok', '已入账': 'p-ok', '已确认': 'p-ok', '已完成': 'p-ok', '同步正常': 'p-ok', '灰度中': 'p-brand',
   '停用': 'p-mute', '已停用': 'p-mute', '已下线': 'p-mute', '已结束': 'p-mute', '草稿': 'p-mute', '已取消': 'p-mute', '已退回': 'p-mute', '已撤回': 'p-mute', '禁用': 'p-mute', '待上线': 'p-brand',
-  '待匹配': 'p-warn', '待复核': 'p-brand', '待核对': 'p-warn', '待补充': 'p-warn', '待支付': 'p-warn', '待发货': 'p-brand', '待收货': 'p-brand', '售后中': 'p-warn', '同步失败': 'p-err',
+  '生效中': 'p-ok', '已废止': 'p-mute', '待匹配': 'p-warn', '待复核': 'p-brand', '待核对': 'p-warn', '待补充': 'p-warn', '待支付': 'p-warn', '待发货': 'p-brand', '待收货': 'p-brand', '售后中': 'p-warn', '同步失败': 'p-err',
   '冻结': 'p-err', '已过期': 'p-err', '疑似异常': 'p-err', '有差异': 'p-err'
 };
 const pc = (t) => PILL[t] || 'p-mute';
@@ -1284,6 +1284,26 @@ function crudSeed() {
       { id: 'kb6', q: '名单代发最多支持多少人？', cat: '下单与支付', a: '单次上传名单不超过 5000 行，字段为姓名、手机号、省市区、详细地址和每人份数；系统会逐行校验并标出问题行，可在线修正后再支付。', sims: '可以直接发到员工家里吗\n名单模板在哪下载', scope: '企业账号', fallback: '无', status: '已发布', src: '人工', hits: 121, useful: 95, upd: '10-16 15:20' },
       { id: 'kb7', q: '电子卡券可以退吗？', cat: '售后政策', a: '电子卡券发出后不支持退款；未发放的卡密可在订单详情申请作废，作废后原路退回。', sims: '卡密能退吗\n提货券不要了怎么办', scope: '全部账号', fallback: '拨打 400', status: '已发布', src: '人工', hits: 64, useful: 71, upd: '09-30 10:00' },
       { id: 'kb8', q: '大批量采购能否议价或月结？', cat: '商品与定制', a: '单笔超过 5 万元或年度集采可申请阶梯价与月结账期，请提交需求表单，注明品类、数量与预算，客户经理会在 1 个工作日内给出方案。', sims: '量大有优惠吗\n能不能月结', scope: '企业账号', fallback: '提交需求表单', status: '草稿', src: 'AI 生成草稿', hits: 0, useful: 0, upd: '今天 09:10' }
+    ],
+    policies: [
+      { id: 'pl1', name: '关于规范中央企业采购管理工作的指导意见', no: '国资发改革规〔2024〕53号', lv: '国家', reg: '全国', issuer: '国务院国资委、国家发展改革委', type: '采购管理', who: '央国企', eff: '2024-07-18', review: '2027-07-18', status: '生效中', sum: '规范央企采购方式（招标 / 询比 / 竞价 / 谈判 / 直购）与限额以上集中采购；推行采购全流程电子化留痕；同等条件下优先采购帮扶地区产品；严禁拆分规避采购。', rules: 'R08 R09 R10', url: 'https://www.gov.cn/zhengce/zhengceku/202408/content_6966835.htm', owner: '合规运营 · 周 **', upd: '10-20 10:30', hits: 412 },
+      { id: 'pl2', name: '基层工会经费收支管理办法', no: '总工办发〔2017〕32号', lv: '国家', reg: '全国', issuer: '中华全国总工会', type: '工会经费', who: '工会经费（全部客户类型）', eff: '2017-12-01', review: '2026-12-01', status: '生效中', sum: '节日慰问限法定节日及少数民族节日，慰问品为符合传统节日习惯的用品和职工群众必需的生活用品；生日慰问可发放蛋糕等实物或蛋糕券；不得发放购物卡、代金券等，不得购买酒水香烟。', rules: 'R01 R02 R03 R04', url: '', owner: '合规运营 · 周 **', upd: '10-20 10:32', hits: 655 },
+      { id: 'pl3', name: '浙江省基层工会经费收支管理实施细则', no: '（文号待法务补录）', lv: '地方', reg: '浙江', issuer: '浙江省总工会', type: '工会经费', who: '浙江 · 工会经费', eff: '2018-01-01', review: '2026-11-30', status: '生效中', sum: '节日慰问每人每年合计不超过 1500 元；生日慰问每人每次不超过 300 元（蛋糕或蛋糕券）。', rules: 'R05 R06', url: '', owner: '华东运营 · 陈 **', upd: '10-19 16:05', hits: 238 },
+      { id: 'pl4', name: '安徽省基层工会经费收支管理相关规定', no: '（文号待法务补录）', lv: '地方', reg: '安徽', issuer: '安徽省总工会', type: '工会经费', who: '安徽 · 工会经费', eff: '2018-01-01', review: '2026-10-31', status: '待复核', sum: '节日慰问每人每年合计不超过 2000 元。演示数据，额度需法务按最新文件复核后再启用。', rules: 'R07', url: '', owner: '华东运营 · 陈 **', upd: '10-12 09:20', hits: 41 },
+      { id: 'pl5', name: '中央八项规定精神及实施细则相关要求', no: '—', lv: '国家', reg: '全国', issuer: '中共中央', type: '廉洁纪律', who: '机关 / 事业单位 / 央国企', eff: '2012-12-04', review: '2026-12-31', status: '生效中', sum: '公款不得购买发放高档礼品、购物卡、烟酒等；不得以福利名义变相发放现金类凭证。具体口径以客户单位纪检要求为准。', rules: 'R01 R02', url: '', owner: '法务 · 吴 **', upd: '10-18 11:00', hits: 520 },
+      { id: 'pl6', name: '某央企集团 2026 年度福利采购管理办法（客户内规示例）', no: '集团内部文件', lv: '客户内规', reg: '全国', issuer: '客户上传', type: '采购管理', who: '指定客户', eff: '2026-01-01', review: '2026-12-31', status: '草稿', sum: '公开采购限额 ¥30,000（低于平台默认 ¥50,000）；节日慰问只允许食品与日用品。客户内规优先于平台默认规则，仅对该客户生效。', rules: 'R08', url: '', owner: '客户经理 · 李 **', upd: '今天 09:40', hits: 0 }
+    ],
+    cmprules: [
+      { id: 'R01', lv: '国家', who: '工会经费；机关 / 事业单位 / 央国企', act: '剔除', what: '酒水、香烟', pol: 'pl2 pl5', on: true, hits: 1032 },
+      { id: 'R02', lv: '国家', who: '工会经费；机关 / 事业单位 / 央国企', act: '剔除', what: '购物卡、储值卡等类现金卡券（指定用途的提货券、蛋糕券可用）', pol: 'pl2 pl5', on: true, hits: 988 },
+      { id: 'R03', lv: '国家', who: '工会经费 · 生日慰问', act: '只允许', what: '生日蛋糕等实物或蛋糕券', pol: 'pl2', on: true, hits: 126 },
+      { id: 'R04', lv: '国家', who: '工会经费 · 节日慰问', act: '提示', what: '慰问品符合传统节日习惯或为生活必需品', pol: 'pl2', on: true, hits: 529 },
+      { id: 'R05', lv: '浙江', who: '工会经费 · 节日慰问', act: '限额', what: '每人每年 ≤ ¥1500（需问已发金额）', pol: 'pl3', on: true, hits: 214 },
+      { id: 'R06', lv: '浙江', who: '工会经费 · 生日慰问', act: '限额', what: '每人每次 ≤ ¥300', pol: 'pl3', on: true, hits: 24 },
+      { id: 'R07', lv: '安徽', who: '工会经费 · 节日慰问', act: '限额', what: '每人每年 ≤ ¥2000', pol: 'pl4', on: true, hits: 41 },
+      { id: 'R08', lv: '国家', who: '央国企', act: '提示', what: '单笔超公开采购限额（默认 ¥50,000，客户内规可覆盖）需询比 / 竞价并附三家比价单', pol: 'pl1 pl6', on: true, hits: 187 },
+      { id: 'R09', lv: '国家', who: '央国企', act: '偏好', what: '同等条件下优先帮扶地区产品', pol: 'pl1', on: true, hits: 302 },
+      { id: 'R10', lv: '国家', who: '全部', act: '红线', what: '发票按实际商品开具；不协助拆单规避审批', pol: 'pl1', on: true, hits: 0 }
     ],
     kbmiss: [
       { id: 'mq1', q: '年货可以分批次发货吗？', n: 14, last: '今天 10:12', ai: '未命中，已引导提交需求表单', status: '待处理' },
@@ -1694,7 +1714,7 @@ function buildDefs(self, st, role) {
   const BAN = /利润|供货价|接口价|成本价|毛利/;
   const KBCAT = ['平台规则', '下单与支付', '发票与结算', '售后政策', '商品与定制', '账户与权益'];
   D.kb = {
-    page: 'kb', title: '专家咨询知识库', noun: '知识', store: 'kbs', edit: ['admin', 'content', 'cs'], newLabel: '新增知识', group: [['kb', '知识条目'], ['kbmiss', '未命中问题']],
+    page: 'kb', title: '专家咨询知识库', noun: '知识', store: 'kbs', edit: ['admin', 'content', 'cs'], newLabel: '新增知识', group: [['kb', '知识条目'], ['kbpolicy', '合规与采购政策'], ['kbrule', '合规规则'], ['kbmiss', '未命中问题']],
     desc: '前台「专家咨询」由 AI 基于已发布的知识自动问答；答不了或涉及定制时，引导拨打 400 官方客服或提交需求表单',
     extra: [{ t: '批量导入（Excel）', run: () => self.flash('下载模板 → 按「标准问题 / 分类 / 答案 / 相似问法」填写 → 上传后进入草稿，逐条发布') }],
     kpis: () => [['已发布知识', st.kbs.filter((k) => k.status === '已发布').length, '草稿 ' + st.kbs.filter((k) => k.status === '草稿').length], ['近 7 天问答', '1,286', '示例数据'], ['自动解答率', '82%', '无需转人工或留单'], ['未命中问题', st.kbmiss.filter((m) => m.status === '待处理').length, '待补充为知识']],
@@ -1718,13 +1738,56 @@ function buildDefs(self, st, role) {
     savedMsg: (rec, isNew) => (rec.fromMiss ? '已补充为知识，对应未命中问题已关闭' : isNew ? '已新增知识「' + rec.q.slice(0, 12) + '」' : '已保存')
   };
   D.kbmiss = {
-    page: 'kbmiss', title: '专家咨询知识库', noun: '问题', store: 'kbmiss', edit: ['admin', 'content', 'cs'], group: [['kb', '知识条目'], ['kbmiss', '未命中问题']],
+    page: 'kbmiss', title: '专家咨询知识库', noun: '问题', store: 'kbmiss', edit: ['admin', 'content', 'cs'], group: [['kb', '知识条目'], ['kbpolicy', '合规与采购政策'], ['kbrule', '合规规则'], ['kbmiss', '未命中问题']],
     desc: '用户在专家咨询里问了、但知识库没答上来的问题，按提问次数排序；补充为知识后同类问题即可自动解答',
     tabs: { opts: [['待处理', '待处理'], ['已补充', '已补充'], ['已忽略', '已忽略'], ['', '全部']], get: (r) => r.status },
     filters: [{ k: 'q', type: 'text', ph: '问题关键词', match: (r, v) => r.q.includes(v) }],
     sort: (rows) => rows.slice().sort((a, b) => b.n - a.n),
     cols: [{ t: '用户问题', cell: (r) => N(r.q, r.ai) }, { t: '提问次数', cls: 'r', cell: (r) => M(String(r.n)) }, { t: '最近提问', cell: (r) => T(r.last) }, { t: '状态', cell: (r) => ({ type: 'pill', v: r.status, pCls: pc(r.status === '已补充' ? '已完成' : r.status === '已忽略' ? '已停用' : '待匹配') }) }],
     acts: (r) => (r.status === '待处理' ? [{ t: '补充为知识', run: () => self.openForm('kb', null, { q: r.q, sims: r.q, src: '从未命中问题沉淀', fromMiss: r.id }) }, { t: 'AI 起草', run: () => self.openForm('kb', null, { q: r.q, sims: r.q, src: 'AI 生成草稿', fromMiss: r.id, a: r.q.includes('分批') ? '支持分批发货：下单时在备注写明批次与时间，或提交需求表单由专属顾问排期；名单代发可按名单分批发出。' : '（AI 草稿，请核实后修改）' + r.q.replace(/[？?]$/, '') + '：请拨打 400 官方客服或提交需求表单，专属顾问会在 2 小时内联系你。', fallback: '提交需求表单' }) }, { t: '忽略', run: () => self.crudPatch('kbmiss', r.id, { status: '已忽略' }, '忽略未命中问题', r.q) }] : r.status === '已忽略' ? [{ t: '恢复', run: () => self.crudPatch('kbmiss', r.id, { status: '待处理' }, '恢复未命中问题', r.q) }] : [{ t: '查看知识', run: () => { const k = st.kbs.find((x) => x.id === r.kb); if (k) self.go('kb', { cdet: { ent: 'kb', id: k.id } }); else self.flash('对应知识已删除'); } }])
+  };
+  // ---------- 知识库 · 合规与采购政策（政策原文归档 → 拆成规则 → 选品工作流执行） ----------
+  const PLV = ['国家', '地方', '行业', '客户内规'], PTYPE = ['采购管理', '工会经费', '廉洁纪律', '发票税务', '其他'];
+  const rulesOf = (p) => st.cmprules.filter((r) => r.pol.split(' ').includes(p.id));
+  D.kbpolicy = {
+    page: 'kbpolicy', title: '专家咨询知识库', noun: '政策', store: 'policies', edit: ['admin', 'content', 'cs'], newLabel: '归档政策', group: [['kb', '知识条目'], ['kbpolicy', '合规与采购政策'], ['kbrule', '合规规则'], ['kbmiss', '未命中问题']],
+    desc: '归档采购政策、工会经费规定、地方细则和客户内规；每份政策拆成「合规规则」后由规则引擎在 AI 选品时确定性执行，AI 只解释并引用依据。到复核日未复核的政策自动转「待复核」，相关规则仅提示不拦截',
+    extra: [{ t: '上传政策原文（PDF / Word）', run: () => self.flash('上传后 AI 提取文号、适用对象、限额与禁止品类，生成「草稿」政策与待确认规则，需法务确认后生效') }],
+    kpis: () => [['生效政策', st.policies.filter((p) => p.status === '生效中').length, '国家 ' + st.policies.filter((p) => p.lv === '国家').length + ' · 地方 ' + st.policies.filter((p) => p.lv === '地方').length], ['待复核', st.policies.filter((p) => p.status === '待复核').length, '到复核日或有新文件'], ['合规规则', st.cmprules.filter((r) => r.on).length + ' 条', '在选品工作流中执行'], ['近 30 天命中', st.cmprules.reduce((a, r) => a + r.hits, 0).toLocaleString(), '按规则累计']],
+    tabs: { opts: [['', '全部'], ['生效中', '生效中'], ['待复核', '待复核'], ['草稿', '草稿'], ['已废止', '已废止']], get: (r) => r.status },
+    filters: [{ k: 'q', type: 'text', ph: '政策名称 / 文号 / 摘要', match: (r, v) => (r.name + r.no + r.sum).includes(v) }, { k: 'lv', type: 'select', label: '层级', opts: PLV.map((x) => [x, x]), match: (r, v) => r.lv === v }, { k: 'reg', type: 'select', label: '地区', opts: ['全国', '浙江', '安徽'].map((x) => [x, x]), match: (r, v) => r.reg === v }, { k: 'type', type: 'select', label: '类型', opts: PTYPE.map((x) => [x, x]), match: (r, v) => r.type === v }],
+    cols: [{ t: '政策', cell: (r) => N(r.name, r.no) }, { t: '层级 · 地区', cell: (r) => T(r.lv + ' · ' + r.reg) }, { t: '适用对象', cell: (r) => T(r.who) }, { t: '关联规则', cell: (r) => T(r.rules || '—') }, { t: '生效 / 复核', cell: (r) => T(r.eff + ' / ' + r.review) }, { t: '状态', cell: (r) => Pl(r.status) }],
+    acts: (r) => [{ t: '查看', k: 'view' }, { t: '编辑', k: 'edit' }].concat(r.status === '生效中' ? [{ t: '标记复核', run: () => { self.crudPatch('policies', r.id, { status: '生效中', review: '2027-' + r.review.slice(5), upd: '今天 ' + nowStr().slice(6) }, '复核政策', r.name); self.flash('已复核，下次复核日顺延一年'); } }, { t: '废止', run: () => { self.crudPatch('policies', r.id, { status: '已废止' }, '废止政策', r.name); self.flash('已废止；仅由该政策支撑的规则将停用'); } }] : r.status === '已废止' ? [] : [{ t: '确认生效', run: () => { self.crudPatch('policies', r.id, { status: '生效中', upd: '今天 ' + nowStr().slice(6) }, '政策生效', r.name); self.flash('已生效，关联规则即时进入选品工作流'); } }]).concat([{ t: '删除', k: 'del', danger: true }]),
+    delBlock: (r) => (r.status === '生效中' ? '生效中的政策请先废止再删除，避免选品时规则失去依据。' : null),
+    detail: (r) => ({ title: r.name, sub: r.no + ' · ' + r.issuer + ' · 更新于 ' + r.upd, pill: r.status,
+      kv: [['层级 · 地区', r.lv + ' · ' + r.reg], ['政策类型', r.type], ['适用对象', r.who], ['生效日期', r.eff], ['复核日期', r.review + '（到期未复核自动转「待复核」，相关规则只提示不拦截）'], ['要点摘要', r.sum], ['原文链接', r.url || '未上传原文'], ['负责人', r.owner]],
+      ai: { tag: 'AI 引用预览', title: '选品时 AI 这样引用本政策', lines: ['依据' + (r.no && r.no.indexOf('〔') >= 0 ? '《' + r.name + '》（' + r.no + '）' : '《' + r.name + '》') + '：' + r.sum.slice(0, 46) + '…'], warn: r.status !== '生效中' ? '当前状态为「' + r.status + '」，选品时不作为拦截依据' : '' },
+      tables: [{ title: '拆出的合规规则', sub: '规则引擎在 AI 选品工作流中执行', cols: ['规则', '适用', '动作', '内容', '近 30 天命中'], rows: rulesOf(r).map((x) => [x.id, x.who, x.act, x.what, String(x.hits)]), empty: '尚未拆规则' }] }),
+    blank: () => ({ name: '', no: '', lv: '地方', reg: '全国', issuer: '', type: '工会经费', who: '', eff: '', review: '', status: '草稿', sum: '', rules: '', url: '', owner: '合规运营 · 周 **', upd: '', hits: 0 }),
+    form: () => [{ k: 'name', t: '政策名称', type: 'text', req: true }, { k: 'no', t: '文号', type: 'text', w: 'half' }, { k: 'issuer', t: '发文机关', type: 'text', w: 'half' },
+      { k: 'lv', t: '层级', type: 'radio', opts: PLV, w: 'half' }, { k: 'reg', t: '适用地区', type: 'text', w: 'half', ph: '全国 / 浙江 / 安徽 …' }, { k: 'type', t: '政策类型', type: 'select', opts: PTYPE.map((x) => [x, x]), w: 'half' }, { k: 'who', t: '适用对象', type: 'text', w: 'half', ph: '如：央国企；工会经费' },
+      { k: 'eff', t: '生效日期', type: 'text', w: 'half', ph: 'YYYY-MM-DD' }, { k: 'review', t: '复核日期', type: 'text', w: 'half', ph: 'YYYY-MM-DD', hint: '建议每年复核一次' },
+      { k: 'sum', t: '要点摘要', type: 'area', req: true, hint: '写清限额、禁止品类、流程要求；AI 只按规则执行，摘要用于解释与引用' }, { k: 'rules', t: '关联规则', type: 'text', ph: '如 R05 R06，在「合规规则」页维护' }, { k: 'url', t: '原文链接', type: 'text' }, { k: 'status', t: '保存为', type: 'radio', opts: ['草稿', '生效中'] }],
+    save: (v) => Object.assign(v, { upd: '今天 ' + nowStr().slice(6) }),
+    savedMsg: (rec, isNew) => (isNew ? '已归档政策「' + rec.name.slice(0, 14) + '」' : '已保存')
+  };
+  D.kbrule = {
+    page: 'kbrule', title: '专家咨询知识库', noun: '规则', store: 'cmprules', edit: ['admin', 'content'], newLabel: '新增规则', group: [['kb', '知识条目'], ['kbpolicy', '合规与采购政策'], ['kbrule', '合规规则'], ['kbmiss', '未命中问题']],
+    desc: '从政策拆出的可执行规则：剔除 / 只允许 / 限额 / 提示 / 偏好 / 红线。AI 选品时先过规则再计数，「合规已排除」的商品不进入候选；规则改动即时生效并留痕',
+    extra: [{ t: '规则试算', run: () => self.flash('试算：央国企 · 工会经费 · 浙江 · 春节 → 命中 R01 R02 R04 R05 R08 R09 R10；剔除酒水 30、储值卡 6；需问今年已发节日慰问金额') }],
+    kpis: () => [['启用规则', st.cmprules.filter((r) => r.on).length, '共 ' + st.cmprules.length + ' 条'], ['剔除 / 只允许', st.cmprules.filter((r) => ['剔除', '只允许'].includes(r.act)).length, '硬过滤，先于计数'], ['限额', st.cmprules.filter((r) => r.act === '限额').length, '工作流内额度校验'], ['近 30 天命中', st.cmprules.reduce((a, r) => a + r.hits, 0).toLocaleString(), '']],
+    tabs: { opts: [['', '全部'], ['剔除', '剔除'], ['只允许', '只允许'], ['限额', '限额'], ['提示', '提示'], ['偏好', '偏好'], ['红线', '红线']], get: (r) => r.act },
+    filters: [{ k: 'q', type: 'text', ph: '规则编号 / 内容', match: (r, v) => (r.id + r.what + r.who).includes(v) }, { k: 'lv', type: 'select', label: '层级', opts: ['国家', '浙江', '安徽'].map((x) => [x, x]), match: (r, v) => r.lv === v }],
+    cols: [{ t: '规则', cell: (r) => N(r.id + ' · ' + r.act, r.what) }, { t: '层级', cell: (r) => T(r.lv) }, { t: '适用', cell: (r) => T(r.who) }, { t: '依据政策', cell: (r) => T(r.pol.split(' ').map((id) => { const p = st.policies.find((x) => x.id === id); return p ? p.name.slice(0, 10) + '…' : id; }).join('；')) }, { t: '近 30 天命中', cls: 'r', cell: (r) => M(String(r.hits)) }, { t: '状态', cell: (r) => Pl(r.on ? '启用' : '停用') }],
+    acts: (r) => [{ t: '查看', k: 'view' }, { t: '编辑', k: 'edit' }, r.on ? { t: '停用', run: () => self.crudPatch('cmprules', r.id, { on: false }, '停用规则', r.id) } : { t: '启用', run: () => self.crudPatch('cmprules', r.id, { on: true }, '启用规则', r.id) }],
+    detail: (r) => ({ title: r.id + ' · ' + r.act, sub: r.lv + ' · ' + r.who, pill: r.on ? '启用' : '停用',
+      kv: [['规则内容', r.what], ['适用', r.who], ['执行方式', { '剔除': '硬过滤：命中商品不进入候选，结果页标「合规已排除 N 个」', '只允许': '硬过滤：只保留允许品类', '限额': '工作流追问已发金额，预算超出时让用户调整预算或改资金来源', '提示': '在需求画像和结果页提示，不拦截', '偏好': '同等条件下排序加权，并在商品上标注', '红线': 'AI 拒绝执行并说明原因（如拆单规避审批）' }[r.act]], ['依据政策', r.pol.split(' ').map((id) => { const p = st.policies.find((x) => x.id === id); return p ? '《' + p.name + '》' + (p.status !== '生效中' ? '（' + p.status + '）' : '') : id; }).join('；')]],
+      ai: { tag: 'AI 话术预览', title: '命中后 AI 这样说', lines: [r.act === '剔除' ? '已按合规规则排除' + r.what.split('（')[0] + '，依据见需求画像。' : r.act === '限额' ? '按地方工会细则，' + r.what + '。今年已经发过多少？' : '提示：' + r.what], warn: '' },
+      tables: [] }),
+    blank: () => ({ id: 'R' + String(st.cmprules.length + 1).padStart(2, '0'), lv: '国家', who: '', act: '提示', what: '', pol: '', on: false, hits: 0 }),
+    form: () => [{ k: 'act', t: '动作', type: 'radio', opts: ['剔除', '只允许', '限额', '提示', '偏好', '红线'] }, { k: 'lv', t: '层级', type: 'text', w: 'half' }, { k: 'who', t: '适用条件', type: 'text', w: 'half', ph: '客户类型 / 资金来源 / 地区 / 场景' }, { k: 'what', t: '规则内容', type: 'area', req: true }, { k: 'pol', t: '依据政策 ID', type: 'text', ph: '如 pl2 pl5，必须至少关联一份生效政策' }],
+    validate: (v) => (!String(v.pol || '').trim() ? { pol: '规则必须关联依据政策' } : {}),
+    savedMsg: (rec, isNew) => (isNew ? '已新增规则 ' + rec.id + '（默认停用，确认后启用）' : '已保存，即时生效')
   };
   // ---------- 咨询需求单 ----------
   const LTYPE = ['礼盒定制', 'Logo 定制', '大批量集采', '专属方案', '其他'];
@@ -2004,14 +2067,14 @@ class Component extends DCLogic {
   subOf(page) { for (const g of NAV) for (const m of g.mods) for (const s of m.subs) if (s.id === page) return s; return null; }
   canPage(page, role) {
     const m = this.modOf(page); if (!m) return false;
-    const EXTRA = { lead: ['cs'], kb: ['cs'], kbmiss: ['cs'] };
+    const EXTRA = { lead: ['cs'], kb: ['cs'], kbmiss: ['cs'], kbpolicy: ['cs'], kbrule: ['cs'] };
     if (!ACCESS[role].includes(m.id) && !(EXTRA[page] || []).includes(role)) return false;
     if (PAGE_ROLES[page] && !PAGE_ROLES[page].includes(role)) return false;
     return true;
   }
   go(page, extra) {
     const o = Object.assign({ page: page, certId: '', afId: '', chId: '', cdet: null, scDet: '', scRd: null }, extra || {});
-    const tabs = (this.state.pgTabs || ['home']).slice(); const tp = page === 'recon' ? 'flow' : page === 'kbmiss' ? 'kb' : page === 'tagtype' ? 'tag' : page;
+    const tabs = (this.state.pgTabs || ['home']).slice(); const tp = page === 'recon' ? 'flow' : ['kbmiss', 'kbpolicy', 'kbrule'].includes(page) ? 'kb' : page === 'tagtype' ? 'tag' : page;
     if (!tabs.includes(tp)) { tabs.push(tp); if (tabs.length > 8) tabs.splice(1, 1); }
     o.pgTabs = tabs;
     this.setState(o); this.top();
@@ -2967,7 +3030,7 @@ class Component extends DCLogic {
       isHome: st.page === 'home', greet: greet, todos: todos, chart: chart, hasTodos: todos.length > 0, todoN: todos.reduce((a, t) => a + (Number(t.n) || 0), 0),
       sbCls: st.sbMini ? 'mini' : '', sbToggle: () => set({ sbMini: !st.sbMini }), sbToggleLabel: st.sbMini ? '展开菜单' : '收起菜单',
       tbRefresh: () => this.flash('已刷新当前页数据'), tbFull: () => { try { const d = document.documentElement; if (!document.fullscreenElement && d.requestFullscreen) d.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); } catch (e) {} },
-      pgTabs: (st.pgTabs || ['home']).map((p) => { const sb = this.subOf(p); const on = p === st.page || (p === 'flow' && st.page === 'recon') || (p === 'kb' && st.page === 'kbmiss') || (p === 'tag' && st.page === 'tagtype'); return { name: p === 'home' ? '工作台' : sb ? sb.name : p, cls: on ? 'on' : '', go: () => { if (!on) this.go(p); }, closable: p !== 'home', close: (e) => { if (e && e.stopPropagation) e.stopPropagation(); const tabs = (st.pgTabs || ['home']).filter((x) => x !== p); if (on) { this.go(tabs[tabs.length - 1] || 'home'); this.setState({ pgTabs: tabs }); } else set({ pgTabs: tabs }); } }; }),
+      pgTabs: (st.pgTabs || ['home']).map((p) => { const sb = this.subOf(p); const on = p === st.page || (p === 'flow' && st.page === 'recon') || (p === 'kb' && ['kbmiss', 'kbpolicy', 'kbrule'].includes(st.page)) || (p === 'tag' && st.page === 'tagtype'); return { name: p === 'home' ? '工作台' : sb ? sb.name : p, cls: on ? 'on' : '', go: () => { if (!on) this.go(p); }, closable: p !== 'home', close: (e) => { if (e && e.stopPropagation) e.stopPropagation(); const tabs = (st.pgTabs || ['home']).filter((x) => x !== p); if (on) { this.go(tabs[tabs.length - 1] || 'home'); this.setState({ pgTabs: tabs }); } else set({ pgTabs: tabs }); } }; }),
       tabsCloseOthers: () => set({ pgTabs: ['home'].concat(st.page !== 'home' ? [st.page === 'recon' ? 'flow' : st.page] : []) }), alerts: alerts.map((a) => ({ title: a.title, task: a.task, time: a.time, summary: a.summary, action: a.action, go: a.go })), noAlerts: !alerts.length, kpis: kpis,
       // 认证
       isCertList: pageOk && st.page === 'cert' && !st.certId, isCertDetail: pageOk && st.page === 'cert' && !!st.certId,

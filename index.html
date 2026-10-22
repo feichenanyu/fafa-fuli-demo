@@ -422,6 +422,7 @@ button{font-family:inherit;color:inherit}
 .qa-hint{font-size:12px;color:var(--text-3)}.dock-body{flex-direction:column-reverse !important}.dock-in{display:flex;flex-direction:column;gap:10px}
 .qa-f{display:flex;align-items:center;gap:8px}.qa-link{border:0;background:none;color:var(--text-3);font-size:13px;cursor:pointer;font-family:inherit;padding:0}.qa-link:hover{color:var(--ink)}.qa-stop{height:32px;border:1px solid var(--brand);color:var(--brand-700);background:#fff;border-radius:999px;padding:0 14px;font-size:13px;cursor:pointer;font-family:inherit}.qa-stop:hover{background:var(--brand-soft)}
 .qa-done{display:flex;align-items:center;gap:8px;border:1px solid var(--border-subtle);background:var(--surface-subtle);border-radius:12px;padding:8px 12px;font-size:13px;max-width:640px}.qa-done b{font-weight:500}.qa-ck{width:18px;height:18px;border-radius:999px;background:var(--brand);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}.qa-edit{border:0;background:none;color:var(--brand-700);font-size:12px;cursor:pointer;font-family:inherit}
+.cmp-note{display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:18px;background:#eef6ff;color:#1d4f91;border-radius:8px;padding:7px 10px}.cmp-note b{font-weight:500}.cmp-note small{color:#4b6b94;font-size:11.5px}.sel-tagx.cmp{background:#eef6ff;color:#1d4f91}
 .sel-card{padding:14px;display:flex;flex-direction:column;gap:10px}.sel-h{display:flex;gap:10px;align-items:flex-start}.sel-h b{display:block;font-size:15px;font-weight:600}.sel-h small{display:block;font-size:12px;color:var(--text-3);line-height:18px;margin-top:2px}
 .sel-warn{font-size:12px;line-height:18px;color:#b4433a;background:#fdf0ee;border-radius:8px;padding:7px 10px}.sel-note{font-size:12px;line-height:18px;color:var(--brand-700);background:var(--brand-soft);border-radius:8px;padding:7px 10px}
 .sel-fs{display:flex;flex-direction:column;gap:6px;border:1px solid var(--border-subtle);border-radius:10px;padding:8px 10px;background:#fff}.sel-f{display:flex;gap:8px;align-items:flex-start}.sel-fl{flex:none;width:52px;font-size:12px;color:var(--text-3);line-height:26px}.sel-fc{display:flex;gap:6px;flex-wrap:wrap;flex:1}
@@ -1615,7 +1616,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 </sc-if>
 <!-- 底部发发对话框：滚过首屏或在搜索结果页出现；点开向上展开为半屏浮层；开始选品后自动进入任务工作台 -->
 <sc-if value="{{dk.mini}}" hint-placeholder-val="{{ false }}"><div class="dock fi" role="region" aria-label="问发发"><sc-if value="{{dk.hasTag}}" hint-placeholder-val="{{ false }}"><button class="dock-tag" onClick="{{dk.back}}" title="回到工作台">↩ {{dk.tag}}</button></sc-if><button class="dock-ph" onClick="{{dk.openP}}"><span class="sbx-askm"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="18" height="15" style="object-fit: contain"></span><span class="dock-pht">{{dk.ph}}</span></button><sc-if value="{{dk.hasNew}}" hint-placeholder-val="{{ false }}"><button class="dock-ib" aria-label="新任务" title="新任务" onClick="{{dk.newTask}}">+</button></sc-if><button class="dock-send" aria-label="展开对话框" onClick="{{dk.openP}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button></div></sc-if>
-<sc-if value="{{dk.open}}" hint-placeholder-val="{{ false }}"><div class="dock-mask" onClick="{{dk.close}}"></div><div class="dock-panel fi" role="dialog" aria-label="问发发"><div class="dock-h"><span class="sbx-askm"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="18" height="15" style="object-fit: contain"></span><b>发发</b><span class="qc-ctx">{{dk.ctx}}</span><div style="flex: 1"></div><button class="qc-full" onClick="{{dk.full}}">↗ {{dk.fullT}}</button><button class="qc-x" aria-label="收起" onClick="{{dk.close}}">–</button></div><div class="dock-body"><div class="dock-in"><sc-if value="{{dk.hasProd}}" hint-placeholder-val="{{ false }}"><div class="dock-prod"><span class="sbx-th"><img src="{{dk.prodImg}}" alt=""></span><span class="sbx-n">{{dk.prodName}}</span><b class="mono">{{dk.prodPrice}}</b><button class="sel-clr" onClick="{{dk.prodX}}">移除</button></div></sc-if><sc-if value="{{dk.intro}}" hint-placeholder-val="{{ true }}"><div class="dock-ai">{{dk.introT}}</div><div class="qc-g"><sc-for list="{{dk.guides}}" as="g" hint-placeholder-count="3"><button class="v2ap" onClick="{{g.pick}}">{{g.t}}</button></sc-for></div></sc-if><sc-if value="{{dk.hasKw}}" hint-placeholder-val="{{ false }}"><div class="dock-me">{{dk.kw.q}}</div><div class="dock-ai">{{dk.kw.text}}</div><div class="dock-list"><sc-for list="{{dk.kw.rows}}" as="r" hint-placeholder-count="4"><div class="sbx-row"><span class="sbx-th"><img src="{{r.img}}" alt=""></span><span class="sbx-n">{{r.name}}</span><span class="sel-tg tg-hot">{{r.type}}</span><b class="mono">{{r.price}}</b><button class="chip" style="height: 26px; padding: 0 10px" onClick="{{r.add}}">加购</button></div></sc-for></div><sc-if value="{{dk.kw.hasMore}}" hint-placeholder-val="{{ false }}"><button class="dock-more" onClick="{{dk.kw.more}}">{{dk.kw.moreT}}</button></sc-if></sc-if><sc-if value="{{dk.hasFn}}" hint-placeholder-val="{{ false }}"><sc-for list="{{dk.fnMsgs}}" as="m" hint-placeholder-count="2"><sc-if value="{{m.isUser}}" hint-placeholder-val="{{ false }}"><div class="dock-me">{{m.text}}</div></sc-if><sc-if value="{{m.isAi}}" hint-placeholder-val="{{ true }}"><sc-if value="{{m.hasText}}" hint-placeholder-val="{{ true }}"><div class="dock-ai" style="white-space: pre-wrap">{{m.text}}</div></sc-if><sc-if value="{{m.hasDone}}" hint-placeholder-val="{{ false }}"><div class="qa-done"><span class="qa-ck">✓</span><span class="qa-tag">{{m.done.tag}}</span><b>{{m.done.ans}}</b><div style="flex: 1"></div><button class="qa-edit" onClick="{{m.done.edit}}">修改</button></div></sc-if><sc-if value="{{m.hasCard}}" hint-placeholder-val="{{ false }}"><div class="qa-card fi" role="group" aria-label="{{m.card.q}}"><div class="qa-h"><span class="qa-tag">{{m.card.tag}}</span><div class="qa-meter" role="progressbar" aria-label="{{m.card.progT}}" title="{{m.card.progT}}"><i style="width: {{m.card.prog}}"></i></div><div style="flex: 1"></div><span class="qa-cnt">{{m.card.cnt}}</span></div><div class="qa-q">{{m.card.q}}</div><sc-if value="{{m.card.isNb}}" hint-placeholder-val="{{ false }}"><sc-for list="{{m.card.groups}}" as="g" hint-placeholder-count="2"><div class="qa-gl">{{g.label}}</div><div class="qa-seg"><sc-for list="{{g.rows}}" as="o" hint-placeholder-count="3"><button class="qa-sg {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-for></div></sc-for></sc-if><div class="qa-list"><sc-for list="{{m.card.rows}}" as="o" hint-placeholder-count="3"><button class="qa-row {{o.cls}}" onClick="{{o.pick}}"><span class="qa-rd" aria-hidden="true"></span><span class="qa-tx"><span class="qa-l">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></span><sc-if value="{{o.hasDesc}}" hint-placeholder-val="{{ true }}"><span class="qa-d">{{o.desc}}</span></sc-if></span><span class="qa-go" aria-hidden="true">›</span></button></sc-for></div><div class="qa-hint">没有合适的？在输入框直接说，例如「{{m.card.otherPh}}」，多个条件一次生效</div><div class="qa-f"><sc-if value="{{m.card.hasSkip}}" hint-placeholder-val="{{ true }}"><button class="qa-link" onClick="{{m.card.skip}}">{{m.card.skipT}}</button></sc-if><div style="flex: 1"></div><sc-if value="{{m.card.hasStop}}" hint-placeholder-val="{{ false }}"><button class="qa-stop" onClick="{{m.card.stop}}">{{m.card.stopT}}</button></sc-if></div></div></sc-if><sc-if value="{{m.showOpts}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{m.options}}" as="o" hint-placeholder-count="4"><sc-if value="{{o.isLbl}}" hint-placeholder-val="{{ false }}"><span class="opt-lbl">{{o.label}}</span></sc-if><sc-if value="{{o.isBtn}}" hint-placeholder-val="{{ true }}"><button class="opt {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-if></sc-for></div></sc-if></sc-if></sc-for><div style="font-size: 12px; color: var(--text-3)">答完人数和预算后进入任务工作台，右侧实时显示候选范围</div></sc-if>
+<sc-if value="{{dk.open}}" hint-placeholder-val="{{ false }}"><div class="dock-mask" onClick="{{dk.close}}"></div><div class="dock-panel fi" role="dialog" aria-label="问发发"><div class="dock-h"><span class="sbx-askm"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="18" height="15" style="object-fit: contain"></span><b>发发</b><span class="qc-ctx">{{dk.ctx}}</span><div style="flex: 1"></div><button class="qc-full" onClick="{{dk.full}}">↗ {{dk.fullT}}</button><button class="qc-x" aria-label="收起" onClick="{{dk.close}}">–</button></div><div class="dock-body"><div class="dock-in"><sc-if value="{{dk.hasProd}}" hint-placeholder-val="{{ false }}"><div class="dock-prod"><span class="sbx-th"><img src="{{dk.prodImg}}" alt=""></span><span class="sbx-n">{{dk.prodName}}</span><b class="mono">{{dk.prodPrice}}</b><button class="sel-clr" onClick="{{dk.prodX}}">移除</button></div></sc-if><sc-if value="{{dk.intro}}" hint-placeholder-val="{{ true }}"><div class="dock-ai">{{dk.introT}}</div><div class="qc-g"><sc-for list="{{dk.guides}}" as="g" hint-placeholder-count="3"><button class="v2ap" onClick="{{g.pick}}">{{g.t}}</button></sc-for></div></sc-if><sc-if value="{{dk.hasKw}}" hint-placeholder-val="{{ false }}"><div class="dock-me">{{dk.kw.q}}</div><div class="dock-ai">{{dk.kw.text}}</div><div class="dock-list"><sc-for list="{{dk.kw.rows}}" as="r" hint-placeholder-count="4"><div class="sbx-row"><span class="sbx-th"><img src="{{r.img}}" alt=""></span><span class="sbx-n">{{r.name}}</span><span class="sel-tg tg-hot">{{r.type}}</span><b class="mono">{{r.price}}</b><button class="chip" style="height: 26px; padding: 0 10px" onClick="{{r.add}}">加购</button></div></sc-for></div><sc-if value="{{dk.kw.hasMore}}" hint-placeholder-val="{{ false }}"><button class="dock-more" onClick="{{dk.kw.more}}">{{dk.kw.moreT}}</button></sc-if></sc-if><sc-if value="{{dk.hasFn}}" hint-placeholder-val="{{ false }}"><sc-for list="{{dk.fnMsgs}}" as="m" hint-placeholder-count="2"><sc-if value="{{m.isUser}}" hint-placeholder-val="{{ false }}"><div class="dock-me">{{m.text}}</div></sc-if><sc-if value="{{m.isAi}}" hint-placeholder-val="{{ true }}"><sc-if value="{{m.hasText}}" hint-placeholder-val="{{ true }}"><div class="dock-ai" style="white-space: pre-wrap">{{m.text}}</div></sc-if><sc-if value="{{m.hasDone}}" hint-placeholder-val="{{ false }}"><div class="qa-done"><span class="qa-ck">✓</span><span class="qa-tag">{{m.done.tag}}</span><b>{{m.done.ans}}</b><div style="flex: 1"></div><button class="qa-edit" onClick="{{m.done.edit}}">修改</button></div></sc-if><sc-if value="{{m.hasCard}}" hint-placeholder-val="{{ false }}"><div class="qa-card fi" role="group" aria-label="{{m.card.q}}"><div class="qa-h"><span class="qa-tag">{{m.card.tag}}</span><div class="qa-meter" role="progressbar" aria-label="{{m.card.progT}}" title="{{m.card.progT}}"><i style="width: {{m.card.prog}}"></i></div><div style="flex: 1"></div><span class="qa-cnt">{{m.card.cnt}}</span></div><div class="qa-q">{{m.card.q}}</div><sc-if value="{{m.card.isNb}}" hint-placeholder-val="{{ false }}"><sc-for list="{{m.card.groups}}" as="g" hint-placeholder-count="2"><div class="qa-gl">{{g.label}}</div><div class="qa-seg"><sc-for list="{{g.rows}}" as="o" hint-placeholder-count="3"><button class="qa-sg {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-for></div></sc-for></sc-if><div class="qa-list"><sc-for list="{{m.card.rows}}" as="o" hint-placeholder-count="3"><button class="qa-row {{o.cls}}" onClick="{{o.pick}}"><span class="qa-rd" aria-hidden="true"></span><span class="qa-tx"><span class="qa-l">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></span><sc-if value="{{o.hasDesc}}" hint-placeholder-val="{{ true }}"><span class="qa-d">{{o.desc}}</span></sc-if></span><span class="qa-go" aria-hidden="true">›</span></button></sc-for></div><div class="qa-hint">没有合适的？在输入框直接说，例如「{{m.card.otherPh}}」，多个条件一次生效</div><div class="qa-f"><sc-if value="{{m.card.hasSkip}}" hint-placeholder-val="{{ true }}"><button class="qa-link" onClick="{{m.card.skip}}">{{m.card.skipT}}</button></sc-if><div style="flex: 1"></div><sc-if value="{{m.card.hasStop}}" hint-placeholder-val="{{ false }}"><button class="qa-stop" onClick="{{m.card.stop}}">{{m.card.stopT}}</button></sc-if></div></div></sc-if><sc-if value="{{m.showOpts}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{m.options}}" as="o" hint-placeholder-count="4"><sc-if value="{{o.isLbl}}" hint-placeholder-val="{{ false }}"><span class="opt-lbl">{{o.label}}</span></sc-if><sc-if value="{{o.isBtn}}" hint-placeholder-val="{{ true }}"><button class="opt {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-if></sc-for></div></sc-if></sc-if></sc-for><div style="font-size: 12px; color: var(--text-3)">答完人数和预算后进入任务工作台，右侧显示需求画像</div></sc-if>
 <sc-if value="{{dk.hasAsk}}" hint-placeholder-val="{{ false }}"><div class="dock-me">{{dk.askUser}}</div><div class="dock-ai">{{dk.askText}}</div><div class="opts" style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{dk.opts}}" as="o" hint-placeholder-count="4"><sc-if value="{{o.isLbl}}" hint-placeholder-val="{{ false }}"><span class="opt-lbl">{{o.label}}</span></sc-if><sc-if value="{{o.isBtn}}" hint-placeholder-val="{{ true }}"><button class="opt {{o.cls}}" onClick="{{o.pick}}">{{o.label}}<sc-if value="{{o.rec}}" hint-placeholder-val="{{ false }}"><em class="opt-rec">推荐</em></sc-if></button></sc-if></sc-for></div><div style="font-size: 12px; color: var(--text-3)">答完会自动进入任务工作台，右侧出选品结果</div></sc-if></div></div><div class="dock-f"><textarea rows="2" aria-label="问发发" placeholder="{{dk.ph}}" value="{{draft}}" onChange="{{onDraft}}" onKeyDown="{{dk.key}}"></textarea><div style="display: flex; align-items: center; gap: 8px"><sc-if value="{{dk.hasNew}}" hint-placeholder-val="{{ false }}"><button class="dock-ib" aria-label="新任务" title="新任务" onClick="{{dk.newTask}}">+</button></sc-if><div style="flex: 1"></div><button class="qc-send {{dk.sendCls}}" aria-label="发送" onClick="{{dk.send}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button></div></div></div></sc-if>
 
 <!-- ============ B. 任务页（Agent 对话） ============ -->
@@ -1733,8 +1734,9 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 10px"><div style="display: flex; gap: 10px"><div class="sk" style="width: 56px; height: 56px; border-radius: 10px"></div><div style="flex: 1; display: flex; flex-direction: column; gap: 8px"><div class="sk" style="height: 14px; width: 50%"></div><div class="sk" style="height: 12px; width: 85%"></div></div></div><div class="sk" style="height: 34px; border-radius: 999px"></div></div>
 </sc-for>
 </sc-if>
-<sc-if value="{{fnAsking}}" hint-placeholder-val="{{ false }}"><div class="card sl sel-card fnp"><div class="sel-h"><div style="flex: 1; min-width: 0"><b>{{fnp.title}}</b><small>{{fnp.note}}</small></div><span class="fnp-n mono">{{fnp.cnt}}</span></div><div class="fnp-hist"><span>候选</span><b class="mono">{{fnp.hist}}</b></div><sc-if value="{{fnp.hasChips}}" hint-placeholder-val="{{ true }}"><div class="fnp-chips"><sc-for list="{{fnp.chips}}" as="c" hint-placeholder-count="3"><span class="sel-tagx {{c.cls}}">{{c.t}}<sc-if value="{{c.ed}}" hint-placeholder-val="{{ false }}"><button aria-label="修改条件" title="重新确认" onClick="{{c.edit}}">✎</button></sc-if><sc-if value="{{c.rm}}" hint-placeholder-val="{{ true }}"><button aria-label="去掉条件" onClick="{{c.x}}">×</button></sc-if></span></sc-for></div></sc-if><sc-if value="{{fnp.hasPrev}}" hint-placeholder-val="{{ true }}"><div class="fnp-pl">当前排在前面</div><div class="sel-list" style="max-height: none"><sc-for list="{{fnp.prev}}" as="p" hint-placeholder-count="5"><div class="sel-row"><span class="pl-th"><img src="{{p.img}}" alt=""></span><span class="pl-info"><span class="pl-n">{{p.name}}</span><span class="pl-m"><span class="sel-tg tg-hot">{{p.type}}</span></span></span><span class="sel-pr"><b class="mono">{{p.price}}</b></span></div></sc-for></div></sc-if><sc-if value="{{fnp.canStop}}" hint-placeholder-val="{{ true }}"><button class="btn btn-p" onClick="{{fnp.stop}}">{{fnp.stopT}}</button></sc-if></div></sc-if>
-<sc-if value="{{sel.has}}" hint-placeholder-val="{{ false }}"><div class="card sl sel-card"><div class="sel-h"><div style="flex: 1; min-width: 0"><b>{{sel.head}}</b><small>{{sel.sub}}</small></div><button class="chip" style="height: 28px; padding: 0 10px" onClick="{{sel.export}}">导出清单</button></div><sc-if value="{{sel.hasConds}}" hint-placeholder-val="{{ false }}"><div class="fnp-chips"><span style="font-size: 12px; color: var(--text-3)">需求条件</span><sc-for list="{{sel.conds}}" as="c" hint-placeholder-count="3"><span class="sel-tagx" style="padding-right: 8px">{{c.t}}</span></sc-for><button class="sel-clr" onClick="{{sel.more}}">继续缩小范围</button></div></sc-if><div class="sel-fs"><sc-for list="{{sel.filters}}" as="f" hint-placeholder-count="4"><div class="sel-f"><span class="sel-fl">{{f.label}}</span><div class="sel-fc"><sc-for list="{{f.chips}}" as="c" hint-placeholder-count="3"><button class="sel-chip {{c.cls}}" role="checkbox" aria-checked="{{c.aria}}" onClick="{{c.pick}}">{{c.t}}<em>{{c.n}}</em></button></sc-for></div></div></sc-for></div><sc-if value="{{sel.hasChips}}" hint-placeholder-val="{{ false }}"><div class="sel-chips"><sc-for list="{{sel.chips}}" as="c" hint-placeholder-count="1"><span class="sel-tagx">{{c.t}}<button aria-label="移除条件" onClick="{{c.x}}">×</button></span></sc-for><button class="sel-clr" onClick="{{sel.clearF}}">清空筛选</button></div></sc-if><div class="sel-bar"><button class="pl-ck {{sel.allCls}}" role="checkbox" aria-checked="{{sel.allAria}}" aria-label="全选当前结果" onClick="{{sel.toggleAll}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button><span>全选当前 <b class="mono">{{sel.shown}}</b> 个</span><div style="flex: 1"></div><sc-for list="{{sel.sorts}}" as="s" hint-placeholder-count="4"><button class="sel-sort {{s.cls}}" onClick="{{s.pick}}">{{s.t}}</button></sc-for></div><div class="sel-list"><sc-for list="{{sel.rows}}" as="r" hint-placeholder-count="5"><div class="sel-row {{r.cls}}"><button class="pl-ck {{r.ckCls}}" role="checkbox" aria-checked="{{r.aria}}" aria-label="选择 {{r.name}}" onClick="{{r.toggle}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button><button class="pl-hit" onClick="{{r.view}}"><span class="pl-th"><img src="{{r.img}}" alt=""></span><span class="pl-info"><span class="pl-n">{{r.name}}</span><span class="pl-m"><span class="sel-tg {{r.tCls}}">{{r.type}}</span>{{r.meta}}</span><sc-if value="{{r.rec}}" hint-placeholder-val="{{ false }}"><span class="sel-rec"><span class="tagw">发发推荐</span>{{r.recWhy}}</span></sc-if></span></button><span class="sel-pr"><b class="mono">{{r.price}}</b><sc-if value="{{r.hasProfit}}" hint-placeholder-val="{{ false }}"><small>{{r.profit}}</small></sc-if></span></div></sc-for><sc-if value="{{sel.noRows}}" hint-placeholder-val="{{ false }}"><div style="padding: 24px; text-align: center; font-size: 13px; color: var(--text-3)">没有符合筛选的商品 · <button class="sel-clr" onClick="{{sel.clearF}}">清空筛选</button></div></sc-if></div><div class="sel-foot"><div style="display: flex; gap: 14px; font-size: 12px; color: var(--text-3); flex-wrap: wrap; align-items: center"><span>已选 <b class="mono" style="color: var(--ink); font-size: 14px">{{sel.selN}}</b> 个 SKU</span><span>每人合计 <b class="mono" style="color: var(--ink)">{{sel.per}}</b></span><span>× {{sel.n}} 人 <b class="mono" style="color: var(--ink)">{{sel.totalAmt}}</b></span><div style="flex: 1"></div><button class="sel-clr" onClick="{{sel.clearPick}}">清空已选</button></div><sc-if value="{{sel.over}}" hint-placeholder-val="{{ false }}"><div class="sel-warn">{{sel.overText}}</div></sc-if><sc-if value="{{sel.multi}}" hint-placeholder-val="{{ false }}"><div class="sel-note">{{sel.multiText}}</div></sc-if><sc-if value="{{sel.hasProfit}}" hint-placeholder-val="{{ false }}"><div class="sel-note">{{sel.profText}}</div></sc-if><div style="display: flex; gap: 8px"><button class="btn btn-o {{sel.btnCls}}" style="flex: 1" onClick="{{sel.add}}">加购已选 · 各 {{sel.n}} 份</button><button class="btn btn-p {{sel.btnCls}}" style="flex: 1" onClick="{{sel.buy}}">立即购买</button></div></div></div></sc-if>
+<sc-if value="{{fnAsking}}" hint-placeholder-val="{{ false }}"><div class="card sl sel-card fnp"><div class="sel-h"><div style="flex: 1; min-width: 0"><b>{{fnp.title}}</b><small>{{fnp.note}}</small></div><span class="fnp-n mono">{{fnp.cnt}}</span></div><div class="fnp-hist"><span>当前范围</span><b class="mono">{{fnp.hist}}</b></div><sc-if value="{{fnp.hasCmp}}" hint-placeholder-val="{{ false }}"><div class="cmp-note"><b>✓ {{fnp.cmpT}}</b><small>{{fnp.cmpBasis}}</small></div></sc-if><sc-if value="{{fnp.hasChips}}" hint-placeholder-val="{{ true }}"><div class="fnp-chips"><sc-for list="{{fnp.chips}}" as="c" hint-placeholder-count="3"><span class="sel-tagx {{c.cls}}">{{c.t}}<sc-if value="{{c.ed}}" hint-placeholder-val="{{ false }}"><button aria-label="修改条件" title="重新确认" onClick="{{c.edit}}">✎</button></sc-if><sc-if value="{{c.rm}}" hint-placeholder-val="{{ true }}"><button aria-label="去掉条件" onClick="{{c.x}}">×</button></sc-if></span></sc-for></div></sc-if><sc-if value="{{fnp.hasPrev}}" hint-placeholder-val="{{ true }}"><div class="fnp-pl">当前排在前面</div><div class="sel-list" style="max-height: none"><sc-for list="{{fnp.prev}}" as="p" hint-placeholder-count="5"><div class="sel-row"><span class="pl-th"><img src="{{p.img}}" alt=""></span><span class="pl-info"><span class="pl-n">{{p.name}}</span><span class="pl-m"><span class="sel-tg tg-hot">{{p.type}}</span></span></span><span class="sel-pr"><b class="mono">{{p.price}}</b></span></div></sc-for></div></sc-if><sc-if value="{{fnp.canStop}}" hint-placeholder-val="{{ true }}"><button class="btn btn-p" onClick="{{fnp.stop}}">{{fnp.stopT}}</button></sc-if></div></sc-if>
+<sc-if value="{{sel.has}}" hint-placeholder-val="{{ false }}"><div class="card sl sel-card"><div class="sel-h"><div style="flex: 1; min-width: 0"><b>{{sel.head}}</b><small>{{sel.sub}}</small></div><button class="chip" style="height: 28px; padding: 0 10px" onClick="{{sel.export}}">导出清单</button></div><sc-if value="{{sel.hasCmp}}" hint-placeholder-val="{{ false }}"><div class="cmp-note"><b>✓ {{sel.cmpT}}</b><small>{{sel.cmpBasis}}</small><div style="display: flex; gap: 12px; margin-top: 4px"><button class="sel-clr" onClick="{{sel.cmpRules}}">查看命中规则</button><sc-if value="{{sel.isPub}}" hint-placeholder-val="{{ false }}"><button class="sel-clr" onClick="{{sel.trace}}">导出采购留痕包</button></sc-if></div></div></sc-if><sc-if value="{{sel.overLimit}}" hint-placeholder-val="{{ false }}"><div class="sel-warn">{{sel.limitT}} <button class="sel-clr" onClick="{{sel.compare}}">导出比价单</button></div></sc-if>
+<sc-if value="{{sel.hasConds}}" hint-placeholder-val="{{ false }}"><div class="fnp-chips"><span style="font-size: 12px; color: var(--text-3)">需求条件</span><sc-for list="{{sel.conds}}" as="c" hint-placeholder-count="3"><span class="sel-tagx" style="padding-right: 8px">{{c.t}}</span></sc-for><button class="sel-clr" onClick="{{sel.more}}">继续缩小范围</button></div></sc-if><div class="sel-fs"><sc-for list="{{sel.filters}}" as="f" hint-placeholder-count="4"><div class="sel-f"><span class="sel-fl">{{f.label}}</span><div class="sel-fc"><sc-for list="{{f.chips}}" as="c" hint-placeholder-count="3"><button class="sel-chip {{c.cls}}" role="checkbox" aria-checked="{{c.aria}}" onClick="{{c.pick}}">{{c.t}}<em>{{c.n}}</em></button></sc-for></div></div></sc-for></div><sc-if value="{{sel.hasChips}}" hint-placeholder-val="{{ false }}"><div class="sel-chips"><sc-for list="{{sel.chips}}" as="c" hint-placeholder-count="1"><span class="sel-tagx">{{c.t}}<button aria-label="移除条件" onClick="{{c.x}}">×</button></span></sc-for><button class="sel-clr" onClick="{{sel.clearF}}">清空筛选</button></div></sc-if><div class="sel-bar"><button class="pl-ck {{sel.allCls}}" role="checkbox" aria-checked="{{sel.allAria}}" aria-label="全选当前结果" onClick="{{sel.toggleAll}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button><span>全选当前 <b class="mono">{{sel.shown}}</b> 个</span><div style="flex: 1"></div><sc-for list="{{sel.sorts}}" as="s" hint-placeholder-count="4"><button class="sel-sort {{s.cls}}" onClick="{{s.pick}}">{{s.t}}</button></sc-for></div><div class="sel-list"><sc-for list="{{sel.rows}}" as="r" hint-placeholder-count="5"><div class="sel-row {{r.cls}}"><button class="pl-ck {{r.ckCls}}" role="checkbox" aria-checked="{{r.aria}}" aria-label="选择 {{r.name}}" onClick="{{r.toggle}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button><button class="pl-hit" onClick="{{r.view}}"><span class="pl-th"><img src="{{r.img}}" alt=""></span><span class="pl-info"><span class="pl-n">{{r.name}}</span><span class="pl-m"><span class="sel-tg {{r.tCls}}">{{r.type}}</span>{{r.meta}}</span><sc-if value="{{r.rec}}" hint-placeholder-val="{{ false }}"><span class="sel-rec"><span class="tagw">发发推荐</span>{{r.recWhy}}</span></sc-if></span></button><span class="sel-pr"><b class="mono">{{r.price}}</b><sc-if value="{{r.hasProfit}}" hint-placeholder-val="{{ false }}"><small>{{r.profit}}</small></sc-if></span></div></sc-for><sc-if value="{{sel.noRows}}" hint-placeholder-val="{{ false }}"><div style="padding: 24px; text-align: center; font-size: 13px; color: var(--text-3)">没有符合筛选的商品 · <button class="sel-clr" onClick="{{sel.clearF}}">清空筛选</button></div></sc-if></div><div class="sel-foot"><div style="display: flex; gap: 14px; font-size: 12px; color: var(--text-3); flex-wrap: wrap; align-items: center"><span>已选 <b class="mono" style="color: var(--ink); font-size: 14px">{{sel.selN}}</b> 个 SKU</span><span>每人合计 <b class="mono" style="color: var(--ink)">{{sel.per}}</b></span><span>× {{sel.n}} 人 <b class="mono" style="color: var(--ink)">{{sel.totalAmt}}</b></span><div style="flex: 1"></div><button class="sel-clr" onClick="{{sel.clearPick}}">清空已选</button></div><sc-if value="{{sel.over}}" hint-placeholder-val="{{ false }}"><div class="sel-warn">{{sel.overText}}</div></sc-if><sc-if value="{{sel.multi}}" hint-placeholder-val="{{ false }}"><div class="sel-note">{{sel.multiText}}</div></sc-if><sc-if value="{{sel.hasProfit}}" hint-placeholder-val="{{ false }}"><div class="sel-note">{{sel.profText}}</div></sc-if><div style="display: flex; gap: 8px"><button class="btn btn-o {{sel.btnCls}}" style="flex: 1" onClick="{{sel.add}}">加购已选 · 各 {{sel.n}} 份</button><button class="btn btn-p {{sel.btnCls}}" style="flex: 1" onClick="{{sel.buy}}">立即购买</button></div></div></div></sc-if>
 </sc-if>
 <sc-if value="{{wsIsCart}}" hint-placeholder-val="{{ false }}">
 <sc-if value="{{cartEmpty}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 40px; text-align: center; color: var(--text-2); font-size: 13px">购物车是空的 · 从方案卡一键加购</div></sc-if>
@@ -2729,6 +2731,7 @@ class Component extends DCLogic {
   extraSkus() {
     if (this._xs) return this._xs;
     const T = [
+      ['hot', '酒水', '洋河 海之蓝 52度 礼盒', 268, 'gift', '京东', ['s1', 's2', 's3']], ['hot', '酒水', '张裕 解百纳 红酒礼盒 2 支', 198, 'gift', '天猫超市', ['s2', 's3', 's6']], ['hot', '酒水', '五粮液 浓香 52度 500ml', 239, 'gift', '入驻商家', ['s1', 's2']],
       ['hot', '粮油米面', '金龙鱼 东北大米 10kg', 79, 'rice', '京东', ['s2', 's4', 's5']], ['hot', '粮油米面', '鲁花 5S 压榨一级花生油 5L', 129, 'oil', '天猫超市', ['s2', 's4']], ['hot', '粮油米面', '十月稻田 五常大米 5kg', 99, 'rice', '天猫超市', ['s2', 's1']],
       ['hot', '粮油米面', '福临门 菜籽油 5L', 69, 'oil', '京东', ['s2', 's5']], ['hot', '粮油米面', '金沙河 挂面礼盒 3kg', 45, 'rice', '平台精选', ['s2', 's5']],
       ['hot', '休闲零食', '百草味 坚果礼盒 1.5kg', 138, 'nuts', '天猫超市', ['s2', 's3', 's4']], ['hot', '休闲零食', '洽洽 每日坚果 30 袋', 109, 'nuts', '京东', ['s2', 's4', 's5', 's6']], ['hot', '休闲零食', '良品铺子 肉脯礼盒 1kg', 158, 'snack', '平台精选', ['s2', 's3']],
@@ -2793,7 +2796,8 @@ class Component extends DCLogic {
     const perSel = selItems.reduce((a, p) => a + P(p), 0);
     const over = selItems.length > 1 && perSel > BF;
     const face = Math.min(BF * Math.max(1, selItems.length), Math.ceil(perSel / (1 - st.margin / 100))); const prof = Math.max(0, face - perSel);
-    return { has: true, total: its.length, poolN: S.pool, shown: rows.length, few: false, fewText: '',
+    return { has: true, total: its.length, poolN: S.pool, shown: rows.length, few: false, fewText: '', hasCmp: !!(st.fn && st.fn.c.cty), cmpT: st.fn && st.fn.c.cty ? '合规：' + this.cmpTag(st.fn.c) + ' · ' + this.cmpStat(st.fn.c).txt : '', cmpBasis: st.fn && st.fn.c.cty ? '依据：' + this.cmpInfo(st.fn.c).basis.join('；') : '', cmpRules: () => this.flash('已命中规则 ' + this.cmpInfo(st.fn.c).rules.join('、') + '，详见运营后台「专家咨询知识库 › 合规与采购政策」', false),
+      isPub: !!(st.fn && this.cmpInfo(st.fn.c).pub), trace: () => this.flash('已导出采购留痕包：需求原文、每轮条件、候选数变化 ' + (st.fn ? st.fn.hist.join(' → ') : '') + '、合规规则版本与选择理由（演示）', false),
       head: '选出 ' + its.length + ' 个商品' + (st.fn ? ' · 全部满足 ' + this.fnSum(st.fn.c).length + ' 个条件' : ' · 每人' + (per ? '预算' : '可用采购') + ' ≤ ¥' + A), conds: st.fn ? this.fnSum(st.fn.c).map((t) => ({ t: t })) : [], hasConds: !!st.fn, more: () => this.fnMore(), sub: '爆品 / 礼包 / 卡券都按 SKU 维度：每个商品单独成行，礼包是供应商整箱发货的一个 SKU，平台不拼装',
       filters: filters, chips: chips, hasChips: chips.length > 0, clearF: () => this.setState({ selF: {} }),
       sorts: sorts.map((s) => ({ t: s[1], cls: sk === s[0] ? 'on' : '', pick: () => this.setState({ selSort: s[0] }) })),
@@ -2801,10 +2805,11 @@ class Component extends DCLogic {
       toggleAll: () => { const m = Object.assign({}, pick); rows.forEach((p) => { m[p.id] = !allOn; }); setPick(m); },
       clearPick: () => setPick({}), noRows: rows.length === 0,
       rows: rows.map((p) => { const o = !!pick[p.id]; const t = this.skuType(p); const isRec = rec && p.id === rec.id;
-        return { key: 'sel|' + p.id, name: p.name, img: this.imgOf(p), type: t, tCls: t === '礼包' ? 'tg-gift' : t === '卡券' ? 'tg-card' : 'tg-hot', meta: p.source + (p.at ? ' · ' + p.at.wh + (p.at.st === '紧张' ? ' · 库存紧张' : '') : '') + (p.sold ? ' · 已售 ' + p.sold : ''), price: this.money(P(p)),
+        return { key: 'sel|' + p.id, name: p.name, img: this.imgOf(p), type: t, tCls: t === '礼包' ? 'tg-gift' : t === '卡券' ? 'tg-card' : 'tg-hot', meta: p.source + (p.at ? ' · ' + p.at.wh + (p.at.st === '紧张' ? ' · 库存紧张' : '') + (p.at.aid && st.fn && st.fn.c.cty === 'soe' ? ' · 帮扶产品' : '') : '') + (p.sold ? ' · 已售 ' + p.sold : ''), price: this.money(P(p)),
           profit: per ? '' : '毛利 ' + Math.round(mg(p) * 100) + '%', hasProfit: !per, rec: !!isRec, recWhy: isRec ? this.selRecWhy(p) : '', cls: o ? 'on' : '', ckCls: o ? 'on' : '', aria: o ? 'true' : 'false',
           toggle: () => { const m = Object.assign({}, pick); m[p.id] = !o; setPick(m); }, view: () => this.setState({ pd: 'sel|' + p.id }),
           detail: { p: p, on: o, alt: false, plan: '选品结果', toggle: () => { const m = Object.assign({}, pick); m[p.id] = !o; setPick(m); } } }; }),
+      overLimit: !!(st.fn && ['soe', 'lsoe'].indexOf(st.fn.c.cty) >= 0 && perSel * n > 50000), limitT: '本单约 ' + this.money(perSel * n) + '，超过客户公开采购限额 ¥50,000（53 号文：限额以上需询比 / 竞价）。可导出三家比价单（京东 / 天猫 / 平台会员价）附在审批材料里。', compare: () => this.flash('已导出三家比价单：每个 SKU 的京东、天猫与平台会员价对照（演示）', false),
       selN: selIds.length, none: selIds.length === 0, btnCls: selIds.length ? '' : 'dis', per: this.money(perSel), totalAmt: this.money(perSel * n), n: n,
       over: over, overText: '已选 ' + selIds.length + ' 个 SKU，若每人各发一份合计 ¥' + Math.round(perSel) + '，超出人均 ¥' + BF + '；员工自选建议只留 1 个卡券或礼包',
       multi: selItems.length > 1 && !over, multiText: '已选 ' + selIds.length + ' 个 SKU，默认每个 × ' + n + ' 份加购，可在购物车改数量',
@@ -2844,13 +2849,13 @@ class Component extends DCLogic {
     // 商品库只有库存状态（有货 / 库存紧张 / 无货）；发货仓只分电商仓（京东、猫超自营仓）与商家仓（猫超部分商品也是商家仓）；效期只有部分食品有
     const wh = card ? '卡密即发' : p.source === '京东' ? '电商仓' : p.source === '天猫超市' ? (h(3) < 0.3 ? '商家仓' : '电商仓') : '商家仓';
     return { st: card ? '有货' : h(1) < 0.06 ? '无货' : h(1) < 0.3 ? '紧张' : '有货', wh: wh, ship: wh === '电商仓' ? '次日–48 小时' : wh === '商家仓' ? '3–7 天' : '即时',
-      shelf: food && h(4) > 0.35 ? [60, 120, 240, 365][Math.min(3, Math.floor((h(4) - 0.35) / 0.65 * 4))] : 0, food: food, fragile: fragile, warranty: fragile ? h(5) > 0.35 : true, margin: (p.market - p.member) / p.market };
+      shelf: food && h(4) > 0.35 ? [60, 120, 240, 365][Math.min(3, Math.floor((h(4) - 0.35) / 0.65 * 4))] : 0, food: food, fragile: fragile, aid: ['粮油米面', '生鲜冻品', '健康滋补', '休闲零食'].indexOf(p.g) >= 0 && h(6) < 0.25, warranty: fragile ? h(5) > 0.35 : true, margin: (p.market - p.member) / p.market };
   }
   fnGrpOk(p, g) {
-    const M = { 员工: ['粮油米面', '休闲零食', '乳品饮料', '家庭清洁', '纸品湿巾', '小家电', '家居保暖', '礼包', '速食方便', '杯壶餐具', '卡券', '生鲜冻品'], 客户: ['礼包', '健康滋补', '生鲜冻品', '杯壶餐具', '小家电', '卡券'], 离退休: ['健康滋补', '粮油米面', '家居保暖', '乳品饮料', '礼包'], 工会: ['休闲零食', '卡券', '礼包', '小家电', '杯壶餐具', '乳品饮料'] };
+    const M = { 员工: ['酒水', '粮油米面', '休闲零食', '乳品饮料', '家庭清洁', '纸品湿巾', '小家电', '家居保暖', '礼包', '速食方便', '杯壶餐具', '卡券', '生鲜冻品'], 客户: ['酒水', '礼包', '健康滋补', '生鲜冻品', '杯壶餐具', '小家电', '卡券'], 离退休: ['健康滋补', '粮油米面', '家居保暖', '乳品饮料', '礼包'], 工会: ['休闲零食', '卡券', '礼包', '小家电', '杯壶餐具', '乳品饮料'] };
     return (M[g] || []).indexOf(p.g) >= 0 && (g !== '客户' || this.priceOf(p) >= 80);
   }
-  fnPrefOk(p, v) { const M = { 实用: ['粮油米面', '家庭清洁', '纸品湿巾', '乳品饮料', '小家电', '杯壶餐具', '家居保暖', '速食方便', '卡券'], 体面: ['礼包', '健康滋补', '生鲜冻品', '杯壶餐具'], 健康: ['健康滋补', '乳品饮料', '粮油米面', '生鲜冻品'] }; return (M[v] || []).indexOf(p.g) >= 0; }
+  fnPrefOk(p, v) { if (v === 'aid') return !!(p.at && p.at.aid); const M = { 实用: ['粮油米面', '家庭清洁', '纸品湿巾', '乳品饮料', '小家电', '杯壶餐具', '家居保暖', '速食方便', '卡券'], 体面: ['礼包', '健康滋补', '生鲜冻品', '杯壶餐具'], 健康: ['健康滋补', '乳品饮料', '粮油米面', '生鲜冻品'] }; return (M[v] || []).indexOf(p.g) >= 0; }
   fnAvail(c) { const st = this.state; const B = c.budget || st.budget; if (this.isPer() || st.basis !== 'client') return B; return Math.floor(B * (1 - st.margin / 100)); }
   fnBase() {
     const sid = this.state.scene; if (this._fbK === sid) return this._fbV;
@@ -2859,12 +2864,47 @@ class Component extends DCLogic {
     const all = goods.concat(vs); all.forEach((p) => { p.at = this.fnAttrs(p); });
     this._fbK = sid; this._fbV = all; return all;
   }
+  // ---------------- 合规规则（演示：规则引擎确定性执行，AI 只解释与引用依据） ----------------
+  cmpRules() {
+    return [
+      { id: 'R01', lv: '国家', who: '工会经费；机关 / 事业单位 / 央国企（公款）', act: '剔除', what: '酒水、香烟', src: '《基层工会经费收支管理办法》（全总）；中央八项规定精神相关要求' },
+      { id: 'R02', lv: '国家', who: '工会经费；机关 / 事业单位 / 央国企（公款）', act: '剔除', what: '购物卡、储值卡等类现金卡券（指定用途的提货券、蛋糕券可用）', src: '中央八项规定精神相关要求；各地工会经费细则' },
+      { id: 'R03', lv: '国家', who: '工会经费 · 生日慰问', act: '只允许', what: '生日蛋糕等实物或指定蛋糕店蛋糕券', src: '《基层工会经费收支管理办法》（全总）' },
+      { id: 'R04', lv: '国家', who: '工会经费 · 节日慰问', act: '提示', what: '慰问品应符合传统节日习惯或为生活必需品；节日限法定节日及少数民族节日', src: '《基层工会经费收支管理办法》（全总）' },
+      { id: 'R05', lv: '浙江', who: '工会经费 · 节日慰问', act: '限额', what: '每人每年不超过 1500 元', src: '《浙江省总工会关于加强和规范基层工会经费收支管理的实施细则》' },
+      { id: 'R06', lv: '浙江', who: '工会经费 · 生日慰问', act: '限额', what: '生日蛋糕每人每次不超过 300 元', src: '同上' },
+      { id: 'R07', lv: '安徽', who: '工会经费 · 节日慰问', act: '限额', what: '每人每年不超过 2000 元', src: '安徽省基层工会经费收支管理相关规定' },
+      { id: 'R08', lv: '国家', who: '央国企', act: '提示', what: '单笔超过客户公开采购限额（默认 ¥50,000）需走询比 / 竞价，提供三家比价单', src: '《关于规范中央企业采购管理工作的指导意见》（国资发改革规〔2024〕53号）' },
+      { id: 'R09', lv: '国家', who: '央国企', act: '偏好', what: '同等条件下优先帮扶地区产品', src: '同上' },
+      { id: 'R10', lv: '国家', who: '全部', act: '红线', what: '发票按实际商品开具；不协助拆单规避审批', src: '发票管理相关规定；53 号文' }
+    ];
+  }
+  cmpInfo(c) {
+    const pub = ['gov', 'inst', 'soe', 'lsoe', 'unk'].indexOf(c.cty) >= 0, union = c.fund === 'union', bday = this.state.scene === 's4';
+    const sv = (p) => p.cat === 'voucher' && /E 卡|礼品卡/.test(p.name);
+    const excl = (p) => { if ((pub || union) && p.g === '酒水') return '酒水'; if ((pub || union) && sv(p)) return '储值 / 购物卡'; if (union && bday && !/蛋糕|生日/.test(p.name)) return '生日慰问仅限蛋糕'; return null; };
+    const rules = []; if (pub || union) rules.push('R01', 'R02'); if (union && bday) rules.push('R03'); if (union && !bday) rules.push('R04');
+    if (union && c.reg === '浙江') rules.push(bday ? 'R06' : 'R05'); if (union && c.reg === '安徽' && !bday) rules.push('R07'); if (c.cty === 'soe' || c.cty === 'lsoe') rules.push('R08', 'R09'); rules.push('R10');
+    const all = this.cmpRules(); const basis = Array.from(new Set([].concat.apply([], rules.map((id) => all.find((r) => r.id === id).src.split('；'))))).filter((x) => x !== '同上');
+    return { on: !!c.cty, pub: pub, union: union, excl: excl, rules: rules, basis: basis };
+  }
+  cmpCapSrc(c) { return c.reg === '浙江' ? '《浙江省总工会关于加强和规范基层工会经费收支管理的实施细则》' : c.reg === '安徽' ? '安徽省基层工会经费收支管理相关规定' : '当地工会经费细则'; }
+  cmpCap(c) { if (c.fund !== 'union') return 0; const s = this.state.scene; if (s === 's4') return c.reg === '浙江' ? 300 : 0; if (['s1', 's2', 's3'].indexOf(s) < 0) return 0; return c.reg === '浙江' ? 1500 : c.reg === '安徽' ? 2000 : 0; }
+  fnScope(n) { const T = this.state.fnT || 80; return n <= T ? '已聚焦' : n <= T * 3 ? '适中' : '较宽'; }
+  fnD(a, b) { return b < a ? '，范围' + (b <= (this.state.fnT || 80) ? '已足够聚焦' : (a - b) / Math.max(1, a) >= 0.3 ? '明显收窄' : '略有收窄') + '。' : '。'; }
+  fnEff(cur, n) { if (!n) return '没有匹配的商品'; const r = (cur - n) / Math.max(1, cur); return r >= 0.4 ? '范围明显收窄' : r >= 0.1 ? '范围略收窄' : '几乎不影响范围'; }
+  cmpStat(c) {
+    if (!c.cty) return { n: 0, by: {}, txt: '' }; const ci = this.cmpInfo(c); const by = {}; let n = 0;
+    this.fnBase().forEach((p) => { if (!this.fnPass(p, c, 'cmp')) return; const r = ci.excl(p); if (r) { n++; by[r] = (by[r] || 0) + 1; } });
+    return { n: n, by: by, txt: n ? '合规已排除：' + Object.keys(by).join('、') : '当前客户类型与资金来源没有额外的品类限制' };
+  }
+  cmpTag(c) { const L = { cty: { gov: '党政机关', inst: '事业单位', soe: '央企', lsoe: '地方国企', pe: '民营企业', fe: '外资企业', ngo: '社会组织', unk: '其他（按公款口径）' }, fund: { union: '工会经费', welfare: '职工福利费', gift: '客户礼品 / 业务招待', self: '员工自付', unk: '其他 / 不确定' } }; return [L.cty[c.cty], L.fund[c.fund], c.reg === 'other' ? '其他地区' : c.reg].filter(Boolean).join(' · '); }
   fnPass(p, c, skip) {
     const P = this.priceOf(p); const a = p.at; const n = c.n || 0;
     const T = { grp: () => !c.grp || this.fnGrpOk(p, c.grp), budget: () => { if (!c.budget) return true; const A = this.fnAvail(c); return P <= A && P >= Math.max(20, A * 0.3); },
       ship: () => !c.ship || a.wh !== '商家仓', stock: () => a.st !== '无货' && (!c.stock || a.st === '有货'), sales: () => !c.sales || (p.sold || 0) >= c.sales,
       margin: () => !c.margin || a.margin * 100 >= c.margin, shelf: () => !c.shelf || !a.food || (c.shelf === 'strict' ? a.shelf >= 180 : (!a.shelf || a.shelf >= 90)), after: () => !c.after || a.warranty,
-      form: () => !c.form || (c.form === 'card' ? p.cat === 'voucher' : p.cat !== 'voucher'), pref: () => !c.pref || this.fnPrefOk(p, c.pref), ex: () => !c.ex || !c.ex.length || c.ex.indexOf(p.g) < 0 };
+      cmp: () => !c.cty || !this.cmpInfo(c).excl(p), form: () => !c.form || (c.form === 'card' ? p.cat === 'voucher' : p.cat !== 'voucher'), pref: () => !c.pref || this.fnPrefOk(p, c.pref), ex: () => !c.ex || !c.ex.length || c.ex.indexOf(p.g) < 0 };
     return Object.keys(T).every((k) => k === skip || T[k]());
   }
   fnCount(c) { return this.fnBase().filter((p) => this.fnPass(p, c)).length; }
@@ -2872,6 +2912,8 @@ class Component extends DCLogic {
     const st = this.state; const base = this.fnBase();
     return [
       { k: 'grp', name: '目标群体', q: '这批采购主要发给谁？', opts: [['员工', '员工福利'], ['客户', '客户送礼'], ['离退休', '离退休慰问'], ['工会', '工会活动']] },
+      { k: 'cmp', name: '合规信息', q: '为了匹配合规品类，确认一下客户类型、这笔福利从哪项预算出、客户所在地。列表里没有的选「其他 / 不确定」，按最严的公款口径处理；也可以直接输入单位性质，我来归类：' },
+      { k: 'cap', name: '年度额度', q: '今年其他节日已经发过多少？' },
       { k: 'nb', name: '人数与预算', q: '发给多少人？每人预算大概多少？' },
       { k: 'ship', name: '发货仓', q: '对发货速度有要求吗？', opts: [['ec', '要快：只选电商仓（京东、猫超自营仓，次日–48 小时）'], [0, '商家仓也可以（一般 3–7 天）']], rec: 'ec' },
       { k: 'stock', name: '库存', q: '「库存紧张」的商品要不要？', opts: [['ample', '只要库存充足的'], [0, '紧张的也可以（下单前再确认）']], rec: 'ample' },
@@ -2880,7 +2922,7 @@ class Component extends DCLogic {
       { k: 'shelf', name: '商品效期', q: '食品类对保质期有要求吗？（部分商品未标注效期）', opts: [['strict', '只要标注了效期且剩余 ≥ 6 个月'], ['mid', '剩余 ≥ 3 个月，未标注的保留'], [0, '不限']], rec: 'mid', when: base.some((p) => p.at.food && p.at.shelf) },
       { k: 'after', name: '售后支持', q: '家电、易碎品的售后有要求吗？', opts: [['w', '需质保 / 破损包赔'], [0, '不限']], rec: 'w', when: base.some((p) => p.at.fragile) },
       { k: 'form', name: '发放形式', q: '发实物还是卡券？', opts: [['phys', '只要实物'], ['card', '只要卡券（员工自选）'], [0, '都可以']], rec: 'phys' },
-      { k: 'pref', name: '商品偏好', q: '商品风格更偏哪种？', opts: [['实用', '偏实用'], ['体面', '偏体面'], ['健康', '健康养生'], [0, '不限']] }
+      { k: 'pref', name: '商品偏好', q: '商品风格更偏哪种？', opts: [['实用', '偏实用'], ['体面', '偏体面'], ['健康', '健康养生']].concat(st.fn && st.fn.c && ['soe', 'lsoe'].indexOf(st.fn.c.cty) >= 0 ? [['aid', '优先帮扶地区产品']] : []).concat([[0, '不限']]) }
     ];
   }
   fnDim(k) { return this.fnDims().find((d) => d.k === k); }
@@ -2892,11 +2934,12 @@ class Component extends DCLogic {
   fnLabel(k, v, c) {
     if (k === 'n') return v + ' 人'; if (k === 'budget') return (this.isPer() || this.state.basis !== 'client' ? '人均 ≤ ¥' : '客户预算 ¥') + v;
     if (k === 'ex') return '不含' + v.join('、');
+    if (k === 'cmp') return '合规：' + this.cmpTag(c || {});
     const SH = { ship: { ec: '只选电商仓' }, stock: { ample: '只要库存充足' }, shelf: { strict: '效期 ≥ 6 个月', mid: '效期 ≥ 3 个月（未标注保留）' } };
     if (SH[k] && SH[k][v]) return (k === 'shelf' ? '' : this.fnDim(k).name + '：') + SH[k][v];
     const d = this.fnDim(k); const o = d && d.opts ? d.opts.find((x) => x[0] === v) : null; return (d ? d.name + '：' : '') + (o ? o[1] : v);
   }
-  fnSum(c) { return ['grp', 'n', 'budget', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref', 'ex'].filter((k) => c[k] && (k !== 'ex' || c[k].length)).map((k) => this.fnLabel(k, c[k], c)); }
+  fnSum(c) { return (c.cty ? [this.fnLabel('cmp', 1, c)] : []).concat(['grp', 'n', 'budget', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref', 'ex'].filter((k) => c[k] && (k !== 'ex' || c[k].length)).map((k) => this.fnLabel(k, c[k], c))); }
   fnParse(t, c0) {
     const c = Object.assign({}, c0); const got = [];
     const hm = t.match(/(\d+)\s*(人|名|位)/); if (hm) { c.n = +hm[1]; got.push(c.n + ' 人'); }
@@ -2904,6 +2947,10 @@ class Component extends DCLogic {
     const G = [[/客户|送礼|合作伙伴|走亲访友/, '客户'], [/离退休|老同志|敬老|老干部|重阳/, '离退休'], [/工会|团建/, '工会'], [/员工|职工|年货|生日|餐补|加班/, '员工']];
     for (let i = 0; i < G.length; i++) if (G[i][0].test(t)) { c.grp = G[i][1]; got.push(this.fnLabel('grp', c.grp)); break; }
     if (/(\d+)\s*(小时|h)|尽快|要快|加急|电商仓|自营仓|次日|明天到/i.test(t)) { c.ship = 'ec'; got.push(this.fnLabel('ship', 'ec')); }
+    if (/机关|政府|局里|委办|党委|人大|政协/.test(t)) c.cty = 'gov'; else if (/事业单位|学校|医院|研究院|高校/.test(t)) c.cty = 'inst'; else if (/央企|中央企业/.test(t)) c.cty = 'soe'; else if (/国企|国有|城投|地方国资/.test(t)) c.cty = 'lsoe'; else if (/外企|外资|合资/.test(t)) c.cty = 'fe'; else if (/协会|商会|基金会|社会组织|社团/.test(t)) c.cty = 'ngo'; else if (/民企|私企|我们公司/.test(t)) c.cty = 'pe';
+    if (/工会/.test(t)) c.fund = 'union'; else if (/福利费/.test(t)) c.fund = 'welfare'; else if (/招待|客户礼品|送客户/.test(t)) c.fund = 'gift'; else if (/自费|自付|员工出钱/.test(t)) c.fund = 'self';
+    if (/浙江|杭州|宁波|温州/.test(t)) c.reg = '浙江'; else if (/安徽|合肥/.test(t)) c.reg = '安徽'; else if (/北京|上海|广东|广州|深圳|江苏|南京|山东|四川|成都|湖北|武汉|河南|福建|湖南|天津|重庆|河北|陕西|辽宁|江西|广西|云南|山西|贵州|吉林|黑龙江|内蒙古|新疆|甘肃|海南|宁夏|青海|西藏/.test(t)) c.reg = 'other';
+    if (c.cty && c.fund && c.reg && !(c0.cty && c0.fund && c0.reg)) got.push('合规：' + this.cmpTag(c));
     const mg = t.match(/利润率?\D{0,3}(\d{1,2})\s*%\s*(以上|起)/); if (mg) { const m = +mg[1]; c.margin = m >= 25 ? 25 : m >= 20 ? 20 : 15; got.push('利润率 ≥ ' + c.margin + '%'); }
     const nm = t.match(/(不要|不含|除了|别要|不用)([^，,。；;]+)/);
     if (nm) { const EXM = { 生鲜: '生鲜冻品', 零食: '休闲零食', 家电: '小家电', 饮料: '乳品饮料', 牛奶: '乳品饮料', 滋补: '健康滋补', 清洁: '家庭清洁', 纸: '纸品湿巾', 礼包: '礼包', 卡券: '卡券', 酒: '酒水' }; const ex = []; Object.keys(EXM).forEach((k) => { if (nm[2].indexOf(k) >= 0) ex.push(EXM[k]); }); if (ex.length) { c.ex = Array.from(new Set((c.ex || []).concat(ex))); got.push('不含' + nm[2].replace(/和|及/g, '、')); } }
@@ -2924,20 +2971,28 @@ class Component extends DCLogic {
   fnAdvance(fn, pre) {
     const T = this.state.fnT || 80; const c = fn.c; const cnt = this.fnCount(c); const log = fn.log.slice();
     const hist = fn.hist[fn.hist.length - 1] === cnt ? fn.hist.slice() : fn.hist.concat([cnt]); const nb = !!(c.n && c.budget);
+    const cap = nb ? this.cmpCap(c) : 0;
+    if (nb && cap && c.capOk === undefined && fn.cur !== 'capx') {
+      if (this.state.scene === 's4' || fn.asked.indexOf('cap') >= 0) { const used = c.capUsed || 0; const remain = cap - used;
+        if (c.budget <= remain) { c.capOk = true; pre = [pre, '额度校验通过：按' + this.cmpCapSrc(c) + '，' + (this.state.scene === 's4' ? '生日蛋糕每人每次 ≤ ¥' + cap : '节日慰问每人每年 ≤ ¥' + cap + '，今年剩余 ¥' + remain) + '，人均 ¥' + c.budget + ' 在额度内。'].filter(Boolean).join('\n'); }
+        else { log.push({ who: 'a', t: (pre ? pre + '\n' : '') + '人均 ¥' + c.budget + ' 超出额度：' + (this.state.scene === 's4' ? '生日蛋糕每人每次 ≤ ¥' + cap : '节日慰问每人每年 ≤ ¥' + cap + '，今年剩余 ¥' + Math.max(0, remain)) + '（依据' + this.cmpCapSrc(c) + '）。怎么处理？', dim: 'capx', remain: Math.max(0, remain) }); return Object.assign({}, fn, { c: c, log: log, hist: hist, cur: 'capx', done: false }); } }
+    }
     if (nb && cnt < 10) {
-      const keys = Object.keys(c).filter((k) => c[k] && k !== 'n' && (k !== 'ex' || c[k].length));
+      const keys = Object.keys(c).filter((k) => c[k] && ['n', 'cty', 'fund', 'reg', 'capOk', 'capUsed'].indexOf(k) < 0 && !(k === 'budget' && c.capOk) && (k !== 'ex' || c[k].length));
       const bl = keys.map((k) => { const c2 = Object.assign({}, c); delete c2[k]; return [k, this.fnCount(c2)]; }).filter((x) => x[1] > cnt).sort((a, b) => b[1] - a[1]).slice(0, 2);
-      log.push({ who: 'a', t: (pre ? pre + '\n' : '') + '候选只剩 ' + cnt + ' 个' + (bl.length ? '，主要卡在「' + bl.map((x) => this.fnLabel(x[0], c[x[0]], c)).join('」「') + '」' : '') + '。要放宽哪一条？', dim: 'relax', relax: bl });
+      if (!bl.length) { log.push({ who: 'a', t: [pre, '符合条件的商品很少。' + (c.cty ? '这是合规规则限定后的结果（' + this.cmpStat(c).txt + '），没有可放宽的条件，直接按这些出结果。' : '没有可放宽的条件，直接按这些出结果。')].filter(Boolean).join('\n') }); return Object.assign({}, fn, { c: c, log: log, hist: hist, cur: '', done: true }); }
+      log.push({ who: 'a', t: (pre ? pre + '\n' : '') + '符合条件的商品很少' + (bl.length ? '，主要卡在「' + bl.map((x) => this.fnLabel(x[0], c[x[0]], c)).join('」「') + '」' : '') + '。' + (bl.length ? '要放宽哪一条？' : (c.cty ? '这是合规规则限定后的结果（' + this.cmpStat(c).txt + '），可以直接用这些出结果。' : '')), dim: 'relax', relax: bl });
       return Object.assign({}, fn, { log: log, hist: hist, cur: 'relax', done: false });
     }
     let next = null;
-    if (!c.grp && fn.asked.indexOf('grp') < 0) next = 'grp'; else if (!nb) next = 'nb'; else if (cnt > T && fn.round < 6) next = this.fnPick(fn, cnt);
-    if (!next) { const why = !nb ? '' : cnt <= T ? '候选已缩到 ' + cnt + ' 个，进入可挑选范围（≤ ' + T + ' 个），不用再问了，直接出结果。' : fn.round >= 6 ? '已经问了 ' + fn.round + ' 轮，先按当前 ' + cnt + ' 个出结果，可在右侧继续筛选。' : '剩下的条件已经很难再缩小范围，按当前 ' + cnt + ' 个出结果，可在右侧继续筛选。';
-      const t2 = [pre, why].filter(Boolean).join('\n'); if (t2) log.push({ who: 'a', t: t2 }); return Object.assign({}, fn, { log: log, hist: hist, cur: '', done: true }); }
-    const d = this.fnDim(next); const r = fn.round + 1;
-    const lead = fn.round === 0 ? '收到，按「' + this.scene().name + '」场景来选。我会问几个问题帮你缩小范围，候选缩到 ' + T + ' 个以内就直接出结果。' + (fn.got && fn.got.length ? '已识别：' + fn.got.join('、') + '。' : '') + '\n' : '';
-    log.push({ who: 'a', t: (pre ? pre + '\n' : '') + lead + '第 ' + r + ' 问 · ' + d.q + (nb ? '（当前候选 ' + cnt + ' 个）' : ''), dim: next, pre: ((pre ? pre + '\n' : '') + lead).trim(), q: d.q, r: r });
-    return Object.assign({}, fn, { log: log, hist: hist, cur: next, round: r, asked: fn.asked.concat(fn.asked.indexOf(next) < 0 ? [next] : []), done: false });
+    if (!c.grp && fn.asked.indexOf('grp') < 0) next = 'grp'; else if (!(c.cty && c.fund && c.reg) && fn.asked.indexOf('cmp') < 0) next = 'cmp'; else if (!nb) next = 'nb'; else if (cap && c.capOk === undefined && this.state.scene !== 's4') next = 'cap'; else if (cnt > T && fn.round < 6) next = this.fnPick(fn, cnt);
+    if (!next) { const why = !nb ? '' : cnt <= T ? '条件已经足够明确，不用再问了，直接出结果。' : fn.round >= 6 ? '关键条件都确认过了，先按当前条件出结果，可在右侧继续筛选。' : '剩下的条件已经很难再缩小范围，先按当前条件出结果，可在右侧继续筛选。';
+      const t2 = [pre, why].filter(Boolean).join('\n'); if (t2) log.push({ who: 'a', t: t2 }); return Object.assign({}, fn, { c: c, log: log, hist: hist, cur: '', done: true }); }
+    const d = this.fnDim(next); const free = next === 'cmp' || next === 'cap'; const r = free ? fn.round : fn.round + 1;
+    const lead = fn.round === 0 && !fn.log.some((m) => m.dim) ? '收到，按「' + this.scene().name + '」场景来选。我先问几个关键问题帮你缩小范围，条件够明确就直接出结果。' + (fn.got && fn.got.length ? '已识别：' + fn.got.join('、') + '。' : '') + '\n' : '';
+    const qq = next === 'cap' ? '按' + this.cmpCapSrc(c) + '，工会经费发节日慰问每人每年不超过 ¥' + cap + '。今年其他节日已经发过多少？' : d.q;
+    log.push({ who: 'a', t: (pre ? pre + '\n' : '') + lead + (free ? '合规确认 · ' : '') + qq, dim: next, pre: ((pre ? pre + '\n' : '') + lead).trim(), q: qq, r: r, free: free });
+    return Object.assign({}, fn, { c: c, log: log, hist: hist, cur: next, round: r, asked: fn.asked.concat(fn.asked.indexOf(next) < 0 ? [next] : []), done: false });
   }
   fnCommit(nf, fromAi) {
     const st = this.state; const up = { fn: nf, headcount: nf.c.n || st.headcount, budget: nf.c.budget || st.budget, draft: '', ws: 'plan' };
@@ -2953,31 +3008,44 @@ class Component extends DCLogic {
   }
   fnAnswer(k, v, label) {
     const fn = this.state.fn; if (!fn) return; const c = Object.assign({}, fn.c); const before = this.fnCount(c);
+    if (k === 'cty' || k === 'fund' || k === 'reg') {
+      c[k] = v; const cL = Object.assign({}, fn.cL || {}, { [k]: label });
+      if (!(c.cty && c.fund && c.reg)) { this.fnCommit(Object.assign({}, fn, { c: c, cL: cL })); return; }
+      const st2 = this.cmpStat(c); const after = this.fnCount(c); const before0 = fn.hist[fn.hist.length - 1];
+      this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, cL: cL, asked: fn.asked.concat(['cmp']), log: fn.log.concat([{ who: 'u', t: [cL.cty, cL.fund, cL.reg].join('，') }]) }), '已按「' + this.cmpTag(c) + '」套用合规规则：' + st2.txt + this.fnD(before0, after))); return;
+    }
+    if (k === 'cap') { c.capUsed = v; this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, asked: fn.asked.concat(['cap']), log: fn.log.concat([{ who: 'u', t: label }]) }), '')); return; }
+    if (k === 'capx') {
+      if (v === 'adj') { c.budget = fn.log[fn.log.length - 1].remain; c.capOk = true; this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, cur: '', log: fn.log.concat([{ who: 'u', t: label }]) }), '已把人均调整为 ¥' + c.budget + this.fnD(before, this.fnCount(c)))); return; }
+      c.fund = 'welfare'; delete c.capOk; delete c.capUsed; this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, cur: '', log: fn.log.concat([{ who: 'u', t: label }]) }), '已改为福利费列支，工会经费的额度与品类限制不再适用' + this.fnD(before, this.fnCount(c)))); return;
+    }
     if (k === 'n' || k === 'budget') {
       c[k] = v; const nbL = Object.assign({}, fn.nbL || {}, { [k]: label });
       if (!(c.n && c.budget)) { this.fnCommit(Object.assign({}, fn, { c: c, nbL: nbL })); return; }
       const log = fn.log.concat([{ who: 'u', t: [nbL.n || c.n + ' 人', nbL.budget || '人均 ' + c.budget].join('，') }]);
-      const after = this.fnCount(c); this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: log }), '好的，' + c.n + ' 人、' + this.fnLabel('budget', c.budget) + '，候选 ' + fn.hist[0] + ' → ' + after + ' 个。')); return;
+      const after = this.fnCount(c); this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: log }), '好的，' + c.n + ' 人、' + this.fnLabel('budget', c.budget) + this.fnD(fn.hist[0], after))); return;
     }
     if (v) c[k] = v; else delete c[k];
     const after = this.fnCount(c); const d = this.fnDim(k);
-    this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: fn.log.concat([{ who: 'u', t: label }]), asked: fn.asked.concat(fn.asked.indexOf(k) < 0 ? [k] : []) }), v ? '已按「' + this.fnLabel(k, v, c) + '」，候选 ' + before + ' → ' + after + ' 个。' : '「' + (d ? d.name : k) + '」不限，候选仍为 ' + after + ' 个。'));
+    this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: fn.log.concat([{ who: 'u', t: label }]), asked: fn.asked.concat(fn.asked.indexOf(k) < 0 ? [k] : []) }), v ? '已按「' + this.fnLabel(k, v, c) + '」' + this.fnD(before, after) : '「' + (d ? d.name : k) + '」不限，范围不变。'));
   }
-  fnAny() { const fn = this.state.fn; if (!fn) return; const c = Object.assign({ grp: '员工' }, fn.c); c.n = c.n || 120; c.budget = c.budget || 300;
-    this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: fn.log.concat([{ who: 'u', t: '随便，你看着定' }]), asked: fn.asked.concat(['grp', 'nb']) }), '已按' + this.fnSum({ grp: c.grp, n: c.n, budget: c.budget }).join('、') + '假设，可随时改；候选 ' + this.fnCount(c) + ' 个。')); }
-  fnSkip() { const fn = this.state.fn; if (!fn || !fn.cur) return; if (fn.cur === 'grp' || fn.cur === 'nb') { this.fnAny(); return; } this.fnAnswer(fn.cur, 0, '跳过'); }
+  fnAny() { const fn = this.state.fn; if (!fn) return; const c = Object.assign({ grp: '员工' }, fn.c); c.n = c.n || 120; c.budget = c.budget || 300; if (!c.cty) { c.cty = 'unk'; c.fund = 'unk'; c.reg = 'other'; }
+    this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: fn.log.concat([{ who: 'u', t: '随便，你看着定' }]), asked: fn.asked.concat(['grp', 'nb', 'cmp']) }), '已按' + this.fnSum({ grp: c.grp, n: c.n, budget: c.budget }).join('、') + '、合规从严（其他 · 不确定）假设，可随时改。')); }
+  fnSkip() { const fn = this.state.fn; if (!fn || !fn.cur) return; if (fn.cur === 'cmp') { const c = Object.assign({}, fn.c, { cty: 'unk', fund: 'unk', reg: 'other' }); this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, asked: fn.asked.concat(['cmp']), log: fn.log.concat([{ who: 'u', t: '跳过合规确认' }]) }), '已按「其他 · 不确定」从严处理（按公款口径排除酒水、储值卡）；如果客户是民营 / 外资企业且用职工福利费，可在右侧修改放宽。')); return; }
+    if (fn.cur === 'cap') { this.fnAnswer('cap', 0, '不清楚'); return; }
+    if (fn.cur === 'grp' || fn.cur === 'nb') { this.fnAny(); return; } this.fnAnswer(fn.cur, 0, '跳过'); }
   fnStop() { const fn = this.state.fn; if (!fn) return; const cnt = this.fnCount(fn.c); this.fnCommit(Object.assign({}, fn, { log: fn.log.concat([{ who: 'u', t: '就这些，出结果' }, { who: 'a', t: '好的，就按当前条件出结果，共 ' + cnt + ' 个 SKU。' }]), cur: '', done: true })); }
   fnRelax(k) { const fn = this.state.fn; const c = Object.assign({}, fn.c); const before = this.fnCount(c); const lb = this.fnLabel(k, c[k], c); delete c[k]; const after = this.fnCount(c);
-    this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: fn.log.concat([{ who: 'u', t: '放宽「' + lb + '」' }]) }), '已放宽「' + lb + '」，候选 ' + before + ' → ' + after + ' 个。')); }
+    this.fnCommit(this.fnAdvance(Object.assign({}, fn, { c: c, log: fn.log.concat([{ who: 'u', t: '放宽「' + lb + '」' }]) }), '已放宽「' + lb + '」' + this.fnD(before, after))); }
   fnRemove(k) { const fn = this.state.fn; if (!fn) return; const c = Object.assign({}, fn.c); const lb = this.fnLabel(k, c[k], c); const before = this.fnCount(c); delete c[k]; const after = this.fnCount(c);
-    const nf = Object.assign({}, fn, { c: c, hist: fn.hist.concat([after]), log: fn.log.concat([{ who: 'a', t: '已去掉「' + lb + '」，候选 ' + before + ' → ' + after + ' 个。' }]) });
+    const nf = Object.assign({}, fn, { c: c, hist: fn.hist.concat([after]), log: fn.log.concat([{ who: 'a', t: '已去掉「' + lb + '」' + this.fnD(before, after) }]) });
     if (fn.done) { this.setState({ fn: nf, selPick: null }); return; } this.setState({ fn: nf }); }
-  fnReask(k) { const fn = this.state.fn; if (!fn) return; const d = this.fnDim(k); const c = Object.assign({}, fn.c); if (k === 'nb') { delete c.n; delete c.budget; } else delete c[k];
-    this.setState({ fn: Object.assign({}, fn, { c: c, done: false, cur: k, nbL: k === 'nb' ? {} : fn.nbL, log: fn.log.concat([{ who: 'a', t: '重新确认 · ' + d.q, dim: k, pre: '好的，重新确认这一项，候选回到 ' + this.fnCount(c) + ' 个。', q: d.q, r: fn.round }]) }), step: 1, phase: 'idle', selPick: null }); }
+  fnReask(k) { const fn = this.state.fn; if (!fn) return; const d = this.fnDim(k); const c = Object.assign({}, fn.c); if (k === 'nb') { delete c.n; delete c.budget; delete c.capOk; } else if (k === 'cmp') { delete c.cty; delete c.fund; delete c.reg; delete c.capOk; delete c.capUsed; } else delete c[k];
+    this.setState({ fn: Object.assign({}, fn, { c: c, done: false, cur: k, nbL: k === 'nb' ? {} : fn.nbL, cL: k === 'cmp' ? {} : fn.cL, log: fn.log.concat([{ who: 'a', t: '重新确认 · ' + d.q, dim: k, pre: '好的，重新确认这一项。', q: d.q, r: fn.round }]) }), step: 1, phase: 'idle', selPick: null }); }
   fnMore() { const fn = this.state.fn; if (!fn) return; const cnt = this.fnCount(fn.c); const next = fn.round < 6 ? this.fnPick(Object.assign({}, fn, { round: 0 }), cnt) : null;
     if (!next) { this.flash(fn.round >= 6 ? '已问满 6 轮，可在右侧筛选里继续缩小' : '没有能再明显缩小范围的维度了，可在右侧筛选', false); return; }
     const d = this.fnDim(next); const r = fn.round + 1;
-    this.setState({ step: 1, phase: 'idle', selPick: null, fn: Object.assign({}, fn, { done: false, cur: next, round: r, asked: fn.asked.concat([next]), log: fn.log.concat([{ who: 'u', t: '继续缩小范围' }, { who: 'a', t: '第 ' + r + ' 问 · ' + d.q + '（当前 ' + cnt + ' 个）', dim: next, pre: '好的，再缩小一轮。', q: d.q, r: r }]) }) }); }
+    this.setState({ step: 1, phase: 'idle', selPick: null, fn: Object.assign({}, fn, { done: false, cur: next, round: r, asked: fn.asked.concat([next]), log: fn.log.concat([{ who: 'u', t: '继续缩小范围' }, { who: 'a', t: d.q, dim: next, pre: '好的，再缩小一轮。', q: d.q, r: r }]) }) }); }
   fnText(t) {
     const fn = this.state.fn; if (!fn) return false;
     if (/就这些|出结果|够了|可以了/.test(t)) { if (fn.c.n && fn.c.budget) this.fnStop(); else this.flash('先告诉我人数和预算', false); return true; }
@@ -2986,11 +3054,11 @@ class Component extends DCLogic {
     if (!p.got.length && fn.cur === 'nb') { const num = t.match(/(\d{2,5})/); if (num) { const v = +num[1]; if (!fn.c.n) p = { c: Object.assign({}, fn.c, { n: v }), got: [v + ' 人'] }; else p = { c: Object.assign({}, fn.c, { budget: v }), got: ['人均 ' + v] }; } }
     if (!p.got.length) { this.flash('没识别到条件，可以点选项，或说「48 小时内到、不要生鲜」', false); return true; }
     const before = this.fnCount(fn.c); const after = this.fnCount(p.c);
-    const covered = ['grp', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref'].filter((k) => p.c[k] !== undefined);
+    const covered = (p.c.cty && p.c.fund && p.c.reg ? ['cmp'] : []).concat(['grp', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref'].filter((k) => p.c[k] !== undefined));
     if (p.c.n && p.c.budget) covered.push('nb');
     const nf = Object.assign({}, fn, { c: p.c, log: fn.log.concat([{ who: 'u', t: t }]), asked: Array.from(new Set(fn.asked.concat(covered))) });
     if (!(p.c.n && p.c.budget) && !(fn.c.n && fn.c.budget) && fn.cur === 'nb') { this.fnCommit(Object.assign(nf, { log: nf.log.concat([{ who: 'a', t: '已记下：' + p.got.join('、') + '。还差' + (p.c.n ? '每人预算' : '人数') + '。', dim: 'nb' }]) })); return true; }
-    this.fnCommit(this.fnAdvance(nf, '已按：' + p.got.join('、') + '，候选 ' + before + ' → ' + after + ' 个。'));
+    this.fnCommit(this.fnAdvance(nf, '已按：' + p.got.join('、') + this.fnD(before, after)));
     return true;
   }
   fnMsgs() {
@@ -3013,21 +3081,34 @@ class Component extends DCLogic {
       if (m.dim && m.dim !== 'relax' && m.q && !live) {
         const ans = L[i + 1] && L[i + 1].who === 'u' ? L[i + 1].t : '（已跳过）'; if (L[i + 1] && L[i + 1].who === 'u') i++;
         const d = this.fnDim(m.dim);
-        out.push(base({ text: m.pre || '', hasText: !!m.pre, hasDone: true, done: { tag: '第 ' + m.r + ' 问 · ' + (d ? d.name : ''), ans: ans, canEdit: !fn.done || true, edit: () => this.fnReask(m.dim) } }));
+        out.push(base({ text: m.pre || '', hasText: !!m.pre, hasDone: true, done: { tag: m.free ? '合规确认 · ' + (d ? d.name : '') : (d ? d.name : ''), ans: ans, canEdit: !fn.done || true, edit: () => this.fnReask(m.dim) } }));
         continue;
       }
       if (!live) { out.push(base({ text: m.t })); continue; }
       const R = (label, desc, pick, extra) => Object.assign({ label: label, desc: desc, hasDesc: !!desc, rec: false, cls: '', pick: pick }, extra || {});
       if (m.dim === 'relax') {
-        const rows = (m.relax || []).map((x) => R('放宽「' + this.fnLabel(x[0], fn.c[x[0]], fn.c) + '」', '约 ' + x[1] + ' 个', () => this.fnRelax(x[0])));
+        const rows = (m.relax || []).map((x) => R('放宽「' + this.fnLabel(x[0], fn.c[x[0]], fn.c) + '」', '放宽后可选商品更多', () => this.fnRelax(x[0])));
         if (rows[0]) rows[0].rec = true;
-        out.push(base({ text: m.t, hasCard: true, card: Object.assign({}, blankCard, other, { tag: '候选过少 · 需要放宽', q: '放宽哪一条？', cnt: '当前 ' + cnt + ' 个', rows: rows, hasStop: cnt > 0, stopT: '就用这 ' + cnt + ' 个出结果', stop: () => this.fnStop() }) }));
+        out.push(base({ text: m.t, hasCard: true, card: Object.assign({}, blankCard, other, { tag: '可选商品很少 · 需要放宽', q: '放宽哪一条？', cnt: '', rows: rows, hasStop: cnt > 0, stopT: '就用当前结果', stop: () => this.fnStop() }) }));
+        continue;
+      }
+      if (m.dim === 'capx') {
+        const rows = (m.remain >= 20 ? [R('按剩余额度调整为人均 ¥' + m.remain, '仍用工会经费，品类限制不变', () => this.fnAnswer('capx', 'adj', '调整为人均 ¥' + m.remain), { rec: true })] : []).concat([R('改由福利费列支', '不再受工会经费额度与品类限制，需客户确认', () => this.fnAnswer('capx', 'fund', '改由福利费列支'), { rec: m.remain < 20 })]);
+        out.push(base({ text: m.t, hasCard: true, card: Object.assign({}, blankCard, other, { tag: '合规确认 · 额度', q: '超出额度，怎么处理？', cnt: '依据已在上方说明', rows: rows }) }));
         continue;
       }
       const d = this.fnDim(m.dim);
-      const card = Object.assign({}, blankCard, other, { tag: '第 ' + m.r + ' 问 · ' + d.name, q: m.q || d.q, cnt: nb ? '候选 ' + cnt + ' 个 · 缩到 ' + T + ' 个以内即出结果' : '候选 ' + cnt + ' 个', dots: dots(m.r), prog: prog + '%', progT: nb ? '收窄进度' : '先了解需求',
-        hasSkip: true, skipT: m.dim === 'grp' || m.dim === 'nb' ? '随便，你看着定' : '跳过这一项', skip: () => this.fnSkip(), hasStop: nb && m.dim !== 'nb', stopT: '就这些，出结果（' + cnt + ' 个）', stop: () => this.fnStop() });
-      if (m.dim === 'nb') {
+      const card = Object.assign({}, blankCard, other, { tag: d.name, q: m.q || d.q, cnt: nb ? '当前范围：' + this.fnScope(cnt) : '先了解需求', dots: dots(m.r), prog: prog + '%', progT: nb ? '收窄进度' : '先了解需求',
+        hasSkip: true, skipT: m.dim === 'grp' || m.dim === 'nb' ? '随便，你看着定' : '跳过这一项', skip: () => this.fnSkip(), hasStop: nb && m.dim !== 'nb', stopT: '就这些，出结果', stop: () => this.fnStop() });
+      if (m.free) { card.tag = '合规确认 · ' + d.name; card.hasStop = false; card.progT = '合规确认不计入问题数'; }
+      if (m.dim === 'cmp') {
+        card.isNb = true; card.skipT = '跳过（从严，按公款口径处理）'; card.otherPh = '如：市属城投公司，用工会经费，浙江';
+        const G = (label, k, opts) => ({ label: label, rows: opts.map((x) => R(x[1], '', () => this.fnAnswer(k, x[0], x[1]), { cls: fn.c[k] === x[0] ? 'on' : '' })) });
+        card.groups = [G('客户类型', 'cty', [['gov', '党政机关'], ['inst', '事业单位'], ['soe', '央企'], ['lsoe', '地方国企'], ['pe', '民营企业'], ['fe', '外资企业'], ['ngo', '社会组织'], ['unk', '其他 / 不确定']]), G('这笔福利从哪项预算出', 'fund', [['union', '工会经费'], ['welfare', '职工福利费'], ['gift', '客户礼品 / 业务招待'], ['self', '员工自付'], ['unk', '不确定']]), G('客户所在地', 'reg', [['浙江', '浙江'], ['安徽', '安徽'], ['other', '其他地区']])];
+      } else if (m.dim === 'cap') {
+        card.skipT = '不清楚，先按没发过算';
+        card.rows = [[0, '还没发过'], [500, '约 500 元'], [1000, '约 1000 元']].map((x) => R(x[1], '剩余 ¥' + Math.max(0, this.cmpCap(fn.c) - x[0]) + (fn.c.budget > this.cmpCap(fn.c) - x[0] ? ' · 人均 ¥' + fn.c.budget + ' 会超额' : ' · 人均 ¥' + fn.c.budget + ' 在额度内'), () => this.fnAnswer('cap', x[0], x[1])));
+      } else if (m.dim === 'nb') {
         card.isNb = true;
         card.groups = [{ label: '人数', rows: [[50, '50 人以内'], [120, '50–200 人'], [300, '200 人以上']].map((x) => R(x[1], '', () => this.fnAnswer('n', x[0], x[1]), { cls: fn.c.n === x[0] ? 'on' : '' })) },
           { label: '每人预算', rows: [[200, '人均 200 以内', false], [300, '人均 300 左右', true], [500, '人均 500 以上', false]].map((x) => R(x[1], '', () => this.fnAnswer('budget', x[0], x[1]), { rec: x[2], cls: fn.c.budget === x[0] ? 'on' : '' })) }];
@@ -3036,7 +3117,7 @@ class Component extends DCLogic {
         const rv = d.k === 'grp' ? '员工' : this.fnRec(d, fn.c);
         const DESC = { 员工: '实用为主，粮油、日用、小家电', 客户: '体面为主，礼包、滋补、生鲜', 离退休: '健康滋补、保暖、粮油', 工会: '活动氛围，零食、卡券、小家电' };
         card.rows = d.opts.map((o) => { const n = this.fnCount(Object.assign({}, fn.c, { [d.k]: o[0] })); const diff = cnt - n;
-          return R(o[1], d.k === 'grp' ? DESC[o[0]] : '约 ' + n + ' 个' + (o[0] && diff > 0 ? ' · 少 ' + diff + ' 个' : ''), () => this.fnAnswer(d.k, o[0], o[1]), { rec: o[0] === rv && !!o[0], cls: n === 0 && o[0] ? 'zero' : '' }); });
+          return R(o[1], d.k === 'grp' ? DESC[o[0]] : (o[0] ? this.fnEff(cnt, n) : '不加限制'), () => this.fnAnswer(d.k, o[0], o[1]), { rec: o[0] === rv && !!o[0], cls: n === 0 && o[0] ? 'zero' : '' }); });
         card.rows.sort((x, y) => y.rec - x.rec);
       }
       out.push(base({ text: m.pre || '', hasText: !!m.pre, hasCard: true, card: card }));
@@ -3044,15 +3125,16 @@ class Component extends DCLogic {
     return out;
   }
   fnProfile() {
-    const st = this.state; const fn = st.fn; const off = { on: false, title: '', hist: '', note: '', chips: [], prev: [], canStop: false, stopT: '', stop: () => 0, hasPrev: false };
+    const st = this.state; const fn = st.fn; const off = { on: false, hasCmp: false, cmpT: '', cmpBasis: '', title: '', hist: '', note: '', chips: [], prev: [], canStop: false, stopT: '', stop: () => 0, hasPrev: false };
     if (!fn) return off; const nb = !!(fn.c.n && fn.c.budget); const cnt = this.fnCount(fn.c); const T = st.fnT || 80;
     const keys = ['grp', 'n', 'budget', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref', 'ex'].filter((k) => fn.c[k] && (k !== 'ex' || fn.c[k].length));
-    const chips = keys.map((k) => { const ed = k === 'grp' || k === 'n' || k === 'budget'; return { t: this.fnLabel(k, fn.c[k], fn.c), ed: ed, rm: !ed, cls: ed ? 'ed' : '', edit: () => this.fnReask(k === 'grp' ? 'grp' : 'nb'), x: () => this.fnRemove(k) }; });
+    const chips = (fn.c.cty ? [{ t: this.fnLabel('cmp', 1, fn.c), ed: true, rm: false, cls: 'ed cmp', edit: () => this.fnReask('cmp'), x: () => 0 }] : []).concat(keys.map((k) => { const ed = k === 'grp' || k === 'n' || k === 'budget'; return { t: this.fnLabel(k, fn.c[k], fn.c), ed: ed, rm: !ed, cls: ed ? 'ed' : '', edit: () => this.fnReask(k === 'grp' ? 'grp' : 'nb'), x: () => this.fnRemove(k) }; }));
+    const cs = this.cmpStat(fn.c);
     const pv = this.fnBase().filter((p) => this.fnPass(p, fn.c)).sort((a, b) => (b.sold || 0) - (a.sold || 0)).slice(0, 5);
-    return { on: true, title: '需求画像 · 已问 ' + Math.max(1, fn.round) + ' 个问题', hist: fn.hist.join(' → ') + (fn.hist[fn.hist.length - 1] === cnt ? '' : ' → ' + cnt), cnt: String(cnt),
-      note: cnt <= T ? '已进入可挑选区间（目标 ≤ ' + T + ' 个），可以出结果' : '目标 ≤ ' + T + ' 个；继续回答左侧问题，或直接出结果', chips: chips, hasChips: chips.length > 0,
+    return { on: true, title: '需求画像', hist: nb ? this.fnScope(cnt) : '待确认人数与预算', cnt: '',
+      hasCmp: !!fn.c.cty, cmpT: cs.txt, cmpBasis: fn.c.cty ? '依据：' + this.cmpInfo(fn.c).basis.join('；') : '', note: cnt <= T ? '条件已足够明确，可以出结果' : '继续回答左侧问题，或直接出结果', chips: chips, hasChips: chips.length > 0,
       prev: pv.map((p) => ({ key: 'pv|' + p.id, name: p.name, img: this.imgOf(p), price: this.money(this.priceOf(p)), type: this.skuType(p) })), hasPrev: nb && pv.length > 0,
-      canStop: nb, stopT: '就这些，出结果（' + cnt + ' 个）', stop: () => this.fnStop() };
+      canStop: nb, stopT: '就这些，出结果', stop: () => this.fnStop() };
   }
   // ---------------- 顶部搜索 + 底部发发对话框 ----------------
   srchPool() {
@@ -3209,7 +3291,7 @@ class Component extends DCLogic {
     if (i === 10) { return '按「' + sc.name + ' · ' + st.topic + '」、人均 ¥' + st.budget + ' 来看，建议这样分配：\n① 约 60% 放实用主礼（粮油、滋补或保暖类，员工和家人都用得上）；\n② 约 30% 放有节日氛围的小件或礼盒，提升仪式感；\n③ 约 10% 留给贺卡定制和名单代发。\n开票方面，礼包按子商品分别开票；用活动账户支付时按同票折扣开票。\n以上来自《发发福利知识库 · 福利采购指南》，政策细节以客服确认为准。'; }
     if (i === 3) { const S = this.selItems(); const its = S.items; const cnt = (t) => its.filter((p) => this.skuType(p) === t).length; const rec = this.selRec(); const A = this.availB();
       const fc = st.fn ? this.fnSum(st.fn.c) : []; const rounds = st.fn ? st.fn.round : 0;
-      const head = '选品结果放在右侧：' + (st.fn ? '经过 ' + rounds + ' 轮确认，候选 ' + st.fn.hist[0] + ' → ' + its.length + ' 个，' : '') + '全部满足条件的 ' + its.length + ' 个 SKU 都列出来了（礼包 ' + cnt('礼包') + ' · 爆品 ' + cnt('爆品') + ' · 卡券 ' + cnt('卡券') + '），每个都是单独 SKU。\n' + (fc.length ? '条件：' + fc.join('、') + '。\n' : '');
+      const head = '选品结果放在右侧：' + (st.fn ? '按你确认的条件，' : '') + '全部满足条件的 ' + its.length + ' 个 SKU 都列出来了（礼包 ' + cnt('礼包') + ' · 爆品 ' + cnt('爆品') + ' · 卡券 ' + cnt('卡券') + '），每个都是单独 SKU。\n' + (fc.length ? '条件：' + fc.join('、') + '。\n' : '');
       const prof = this.isPer() ? '' : (st.basis === 'client' ? '按客户预算 ¥' + st.budget + '、预留 ' + st.margin + '% 利润筛价。\n' : '按' + this.basisLabel() + '筛价，不预留利润。\n');
       return head + prof + (rec ? '推荐「' + rec.name.replace(/ · .*/, '') + '」：' + this.selRecWhy(rec) + '。\n' : '') + '可以继续按类型、价位、品类和来源筛选，勾选多个后一起加购；还想再缩小，点「继续缩小范围」。'; }
     if (i === 99) { const b = this.plansData()[0]; const L = this.loopSteps(); const pr = this.isPer() ? '' : (st.basis === 'client' ? '每套都按客户预算 ¥' + st.budget + '、预留 ' + st.margin + '% 利润来配（可用采购 ¥' + this.availB() + '）' + (L.rounds > 1 ? '，自检时替换了 1 个毛利不达标的礼包' : '') + '。\n' : '按' + this.basisLabel() + '来配，不预留利润。\n'); return '方案配好了，放在右侧「选品方案」。\n' + pr + '我更推荐「' + b.name + '」：' + b.reason + '。\n可以整套加购，也可以点「立即购买」直接进入结算页。'; }
@@ -3267,7 +3349,7 @@ class Component extends DCLogic {
     const g1 = all.filter((p) => p.cat === 'gift' && P(p) <= B).sort((a, b) => P(b) - P(a))[0];
     const fail = !this.isPer() && st.basis === 'client' && g1 && P(g1) > A;
     const head = st.topic + ' · ' + st.headcount + ' 人 · ' + (this.isPer() ? '人均 ¥' + B : (st.basis === 'client' ? '客户预算 ¥' + B + '，预留 ' + st.margin + '% → 可用采购 ¥' + A : '预算 ¥' + B + '（' + this.basisLabel() + '）'));
-    const d = [{ l: '理解需求', m: head }, { l: '检索「' + sc.name + '」场景货盘', m: '命中 ' + (st.fn ? this.fnBase().length : hit) + ' 个 SKU' }, { l: '按条件收窄', m: (st.fn ? st.fn.hist.join(' → ') : '') + ' · 结果 ' + this.selItems().items.length + ' 个 SKU' }];
+    const d = [{ l: '理解需求', m: head }, { l: '检索「' + sc.name + '」场景货盘', m: '命中 ' + (st.fn ? this.fnBase().length : hit) + ' 个 SKU' }, { l: '按条件收窄', m: (st.fn ? this.fnSum(st.fn.c).join('、') : '') + ' · 结果 ' + this.selItems().items.length + ' 个 SKU' }];
     if (fail) {
       const mg = Math.round((B - P(g1)) / B * 100);
       d.push({ l: '自检 · 第 1 轮', m: '「' + g1.name.replace(/（.*/, '').slice(0, 10) + '」采购成本 ¥' + P(g1) + '，毛利 ' + mg + '% < ' + st.margin + '%，未通过', bad: true });
