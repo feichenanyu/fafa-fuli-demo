@@ -3145,10 +3145,10 @@ class Component extends DCLogic {
     const keys = ['grp', 'n', 'budget', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref', 'ex'].filter((k) => fn.c[k] && (k !== 'ex' || fn.c[k].length));
     const chips = (fn.c.cty ? [{ t: this.fnLabel('cmp', 1, fn.c), ed: true, rm: false, cls: 'ed cmp', edit: () => this.fnReask('cmp'), x: () => 0 }] : []).concat(keys.map((k) => { const ed = k === 'grp' || k === 'n' || k === 'budget'; return { t: this.fnLabel(k, fn.c[k], fn.c), ed: ed, rm: !ed, cls: ed ? 'ed' : '', edit: () => this.fnReask(k === 'grp' ? 'grp' : 'nb'), x: () => this.fnRemove(k) }; }));
     const cs = this.cmpStat(fn.c);
-    const pv = this.fitRank(this.fnBase().filter((p) => this.fnPass(p, fn.c)), fn.c.grp, (p) => (p.sold || 0) / 5000 + this.fitScore(p, fn.c.grp)).slice(0, 5);
+    const pv = []; // 提问阶段不展示商品：结果只在出结果后出现
     return { on: true, title: '需求画像', hist: nb ? this.fnScope(cnt) : '待确认人数与预算', cnt: '',
       hasCmp: !!fn.c.cty, cmpT: cs.txt, cmpBasis: fn.c.cty ? '依据：' + this.cmpInfo(fn.c).basis.join('；') : '', note: (this.fitOf(fn.c.grp) ? '按「' + fn.c.grp + ' · ' + this.fitOf(fn.c.grp).purpose + '」品类适配排序 · ' : '') + (cnt <= T ? '条件已足够明确，可以出结果' : '继续回答左侧问题，或直接出结果'), chips: chips, hasChips: chips.length > 0,
-      prev: pv.map((p) => ({ key: 'pv|' + p.id, name: p.name, img: this.imgOf(p), price: this.money(this.priceOf(p)), type: this.skuType(p) })), hasPrev: nb && pv.length > 0,
+      prev: pv.map((p) => ({ key: 'pv|' + p.id, name: p.name, img: this.imgOf(p), price: this.money(this.priceOf(p)), type: this.skuType(p) })), hasPrev: false,
       canStop: nb, stopT: '就这些，出结果', stop: () => this.fnStop() };
   }
   // ---------------- 顶部搜索 + 底部发发对话框 ----------------
