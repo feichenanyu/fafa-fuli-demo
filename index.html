@@ -2758,10 +2758,25 @@ class Component extends DCLogic {
     });
     this._xs = out; return out;
   }
+  // ---------------- 用途与品类适配（后台「场景配置 › 群体品类适配」维护，category_fit 工具返回） ----------------
+  fitCat(p) { return p.cat === 'voucher' ? '卡券' : p.k === 'tea' ? '茶叶' : p.g === '礼包' ? '综合礼包' : p.g; }
+  fitTable() { return {
+    员工: { purpose: '自用福利', prefer: ['粮油米面', '休闲零食', '乳品饮料', '生鲜冻品', '综合礼包', '卡券'], avoid: ['茶叶', '酒水', '健康滋补'], why: '员工年货以实用为主，全家都用得上' },
+    客户: { purpose: '对外送礼', prefer: ['茶叶', '综合礼包', '健康滋补', '休闲零食'], avoid: ['粮油米面', '杯壶餐具', '卡券'], why: '送客户重体面与包装' },
+    离退休: { purpose: '慰问', prefer: ['健康滋补', '粮油米面', '乳品饮料', '小家电'], avoid: ['酒水', '卡券'], why: '老同志慰问以健康、实用为主' },
+    工会: { purpose: '自用福利', prefer: ['休闲零食', '卡券', '小家电', '综合礼包'], avoid: ['茶叶', '酒水'], why: '工会活动重参与感，员工自选更灵活' } }; }
+  fitOf(grp) { return grp ? this.fitTable()[grp] || null : null; }
+  fitScore(p, grp) { const f = this.fitOf(grp); if (!f) return 0; const c = this.fitCat(p); return f.prefer.indexOf(c) >= 0 ? 0.5 : f.avoid.indexOf(c) >= 0 ? -0.6 : 0; }
+  fitAvoid(p, grp) { const f = this.fitOf(grp); return !!f && f.avoid.indexOf(this.fitCat(p)) >= 0; }
+  fitRank(list, grp, scoreFn) { const sorted = list.slice().sort((a, b) => scoreFn(b) - scoreFn(a)); if (!this.fitOf(grp)) return sorted;
+    const ok = sorted.filter((p) => !this.fitAvoid(p, grp)), av = sorted.filter((p) => this.fitAvoid(p, grp)); return ok.slice(0, 10).concat(av.concat(ok.slice(10)).sort((a, b) => scoreFn(b) - scoreFn(a))); }
+  fitNote(grp) { const f = this.fitOf(grp); return f ? '已按「' + grp + ' · ' + f.purpose + '」品类适配排序：优先' + f.prefer.slice(0, 4).join('、') + '；' + f.avoid.join('、') + '不进前 10、不作为推荐（' + f.why + '）' : ''; }
   selRec() { const st = this.state; const its = this.selItems().items; const want = st.prefer === 'card' ? '卡券' : '礼包'; const A = this.availB(); const P = (p) => this.priceOf(p);
-    const c = its.filter((p) => this.skuType(p) === want); const pick = (c.length ? c : its).slice().sort((a, b) => Math.abs(A * 0.92 - P(a)) - Math.abs(A * 0.92 - P(b)))[0]; return pick || null; }
+    const g = st.fn && st.fn.c ? st.fn.c.grp : ''; const okI = its.filter((p) => !this.fitAvoid(p, g)); const base = okI.length ? okI : its; const c = base.filter((p) => this.skuType(p) === want);
+    const pick = (c.length ? c : base).slice().sort((a, b) => (Math.abs(A * 0.92 - P(a)) / A - this.fitScore(a, g) * 0.3) - (Math.abs(A * 0.92 - P(b)) / A - this.fitScore(b, g) * 0.3))[0]; return pick || null; }
   selRecWhy(p) { const st = this.state; const t = this.skuType(p); const per = this.isPer();
-    return (t === '礼包' ? '人均 ¥' + st.budget + ' 内礼包感最强，整箱一个包裹直发' : t === '卡券' ? '员工自选兑换，' + st.headcount + ' 人发放最省心' : '实用高复购，' + st.headcount + ' 人都用得上') + (per ? '' : '，毛利达标'); }
+    const fw = st.fn && st.fn.c ? this.fitOf(st.fn.c.grp) : null;
+    return (fw ? fw.why + '，' : '') + (t === '礼包' ? '人均 ¥' + st.budget + ' 内礼包感最强，整箱一个包裹直发' : t === '卡券' ? '员工自选兑换，' + st.headcount + ' 人发放最省心' : '实用高复购，' + st.headcount + ' 人都用得上') + (per ? '' : '，毛利达标'); }
   selVals(ready) {
     const st = this.state; const n = st.headcount; const A = this.availB(); const BF = st.budget; const per = this.isPer(); const P = (p) => this.priceOf(p);
     const empty = { has: false, rows: [], filters: [], sorts: [], total: 0, shown: 0 };
@@ -2824,8 +2839,8 @@ class Component extends DCLogic {
     const st = this.state;
     if (st.fn && st.fn.c) { const key = 'fn|' + JSON.stringify(st.fn.c) + '|' + st.scene + '|' + this.isPer() + st.basis + st.margin; if (this._selK === key) return this._selV;
       const A = this.fnAvail(st.fn.c); const P = (p) => this.priceOf(p); const its = this.fnBase().filter((p) => this.fnPass(p, st.fn.c)); const maxS = Math.max.apply(null, its.map((p) => p.sold || 1).concat([1]));
-      const score = (p) => (1 - Math.abs(A * 0.9 - P(p)) / A) * 0.4 + ((p.sold || 500) / maxS) * 0.3 + p.at.margin * 0.6;
-      this._selK = key; this._selV = { items: its.slice().sort((a, b) => score(b) - score(a)), pool: its.length, scoreOf: score }; return this._selV; } const sid = st.scene; const A = this.availB(); const P = (p) => this.priceOf(p);
+      const g = st.fn.c.grp; const score = (p) => (1 - Math.abs(A * 0.9 - P(p)) / A) * 0.4 + ((p.sold || 500) / maxS) * 0.3 + p.at.margin * 0.3 + this.fitScore(p, g);
+      this._selK = key; this._selV = { items: this.fitRank(its, g, score), pool: its.length, scoreOf: score }; return this._selV; } const sid = st.scene; const A = this.availB(); const P = (p) => this.priceOf(p);
     const key = sid + '|' + A + '|' + st.selRound + '|' + (this.isPer() ? 'p' : 'e'); if (this._selK === key) return this._selV;
     const goods = this.catalog().concat(this.extraSkus()).filter((p) => p.sc.indexOf(sid) >= 0);
     const vs = []; this.vouchers().filter((v) => v.sc.indexOf(sid) >= 0 || v.chip === '通用').forEach((v) => { (v.fixed ? [v.denoms[0]] : v.denoms).forEach((d) => vs.push(this.item(v.id + '@' + d))); });
@@ -3130,9 +3145,9 @@ class Component extends DCLogic {
     const keys = ['grp', 'n', 'budget', 'ship', 'stock', 'sales', 'margin', 'shelf', 'after', 'form', 'pref', 'ex'].filter((k) => fn.c[k] && (k !== 'ex' || fn.c[k].length));
     const chips = (fn.c.cty ? [{ t: this.fnLabel('cmp', 1, fn.c), ed: true, rm: false, cls: 'ed cmp', edit: () => this.fnReask('cmp'), x: () => 0 }] : []).concat(keys.map((k) => { const ed = k === 'grp' || k === 'n' || k === 'budget'; return { t: this.fnLabel(k, fn.c[k], fn.c), ed: ed, rm: !ed, cls: ed ? 'ed' : '', edit: () => this.fnReask(k === 'grp' ? 'grp' : 'nb'), x: () => this.fnRemove(k) }; }));
     const cs = this.cmpStat(fn.c);
-    const pv = this.fnBase().filter((p) => this.fnPass(p, fn.c)).sort((a, b) => (b.sold || 0) - (a.sold || 0)).slice(0, 5);
+    const pv = this.fitRank(this.fnBase().filter((p) => this.fnPass(p, fn.c)), fn.c.grp, (p) => (p.sold || 0) / 5000 + this.fitScore(p, fn.c.grp)).slice(0, 5);
     return { on: true, title: '需求画像', hist: nb ? this.fnScope(cnt) : '待确认人数与预算', cnt: '',
-      hasCmp: !!fn.c.cty, cmpT: cs.txt, cmpBasis: fn.c.cty ? '依据：' + this.cmpInfo(fn.c).basis.join('；') : '', note: cnt <= T ? '条件已足够明确，可以出结果' : '继续回答左侧问题，或直接出结果', chips: chips, hasChips: chips.length > 0,
+      hasCmp: !!fn.c.cty, cmpT: cs.txt, cmpBasis: fn.c.cty ? '依据：' + this.cmpInfo(fn.c).basis.join('；') : '', note: (this.fitOf(fn.c.grp) ? '按「' + fn.c.grp + ' · ' + this.fitOf(fn.c.grp).purpose + '」品类适配排序 · ' : '') + (cnt <= T ? '条件已足够明确，可以出结果' : '继续回答左侧问题，或直接出结果'), chips: chips, hasChips: chips.length > 0,
       prev: pv.map((p) => ({ key: 'pv|' + p.id, name: p.name, img: this.imgOf(p), price: this.money(this.priceOf(p)), type: this.skuType(p) })), hasPrev: nb && pv.length > 0,
       canStop: nb, stopT: '就这些，出结果', stop: () => this.fnStop() };
   }
@@ -3291,7 +3306,7 @@ class Component extends DCLogic {
     if (i === 10) { return '按「' + sc.name + ' · ' + st.topic + '」、人均 ¥' + st.budget + ' 来看，建议这样分配：\n① 约 60% 放实用主礼（粮油、滋补或保暖类，员工和家人都用得上）；\n② 约 30% 放有节日氛围的小件或礼盒，提升仪式感；\n③ 约 10% 留给贺卡定制和名单代发。\n开票方面，礼包按子商品分别开票；用活动账户支付时按同票折扣开票。\n以上来自《发发福利知识库 · 福利采购指南》，政策细节以客服确认为准。'; }
     if (i === 3) { const S = this.selItems(); const its = S.items; const cnt = (t) => its.filter((p) => this.skuType(p) === t).length; const rec = this.selRec(); const A = this.availB();
       const fc = st.fn ? this.fnSum(st.fn.c) : []; const rounds = st.fn ? st.fn.round : 0;
-      const head = '选品结果放在右侧：' + (st.fn ? '按你确认的条件，' : '') + '全部满足条件的 ' + its.length + ' 个 SKU 都列出来了（礼包 ' + cnt('礼包') + ' · 爆品 ' + cnt('爆品') + ' · 卡券 ' + cnt('卡券') + '），每个都是单独 SKU。\n' + (fc.length ? '条件：' + fc.join('、') + '。\n' : '');
+      const head = '选品结果放在右侧：' + (st.fn ? '按你确认的条件，' : '') + '全部满足条件的 ' + its.length + ' 个 SKU 都列出来了（礼包 ' + cnt('礼包') + ' · 爆品 ' + cnt('爆品') + ' · 卡券 ' + cnt('卡券') + '），每个都是单独 SKU。\n' + (fc.length ? '条件：' + fc.join('、') + '。\n' : '') + (st.fn && this.fitOf(st.fn.c.grp) ? this.fitNote(st.fn.c.grp) + '。\n' : '');
       const prof = this.isPer() ? '' : (st.basis === 'client' ? '按客户预算 ¥' + st.budget + '、预留 ' + st.margin + '% 利润筛价。\n' : '按' + this.basisLabel() + '筛价，不预留利润。\n');
       return head + prof + (rec ? '推荐「' + rec.name.replace(/ · .*/, '') + '」：' + this.selRecWhy(rec) + '。\n' : '') + '可以继续按类型、价位、品类和来源筛选，勾选多个后一起加购；还想再缩小，点「继续缩小范围」。'; }
     if (i === 99) { const b = this.plansData()[0]; const L = this.loopSteps(); const pr = this.isPer() ? '' : (st.basis === 'client' ? '每套都按客户预算 ¥' + st.budget + '、预留 ' + st.margin + '% 利润来配（可用采购 ¥' + this.availB() + '）' + (L.rounds > 1 ? '，自检时替换了 1 个毛利不达标的礼包' : '') + '。\n' : '按' + this.basisLabel() + '来配，不预留利润。\n'); return '方案配好了，放在右侧「选品方案」。\n' + pr + '我更推荐「' + b.name + '」：' + b.reason + '。\n可以整套加购，也可以点「立即购买」直接进入结算页。'; }
