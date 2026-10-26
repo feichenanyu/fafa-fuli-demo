@@ -3285,11 +3285,11 @@ class Component extends DCLogic {
       sendCls: (st.draft || '').trim() ? 'ready' : '', send: () => this.dockSend(st.draft),
       key: (e) => { if (!e) return; if (e.key === 'Escape') { this.setState({ dock: 'mini' }); return; } if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault && e.preventDefault(); this.dockSend(e.target && e.target.value !== undefined ? e.target.value : st.draft); } } };
   }
-  // ---------------- 定价：会员价 = 接口价 × 场景 / 频道绑定的定价模板（后台「商品中心 › 定价模板」） ----------------
+  // ---------------- 定价：会员价 = 接口价 ×（1 + 加价率）；加价率来自场景绑定商品池在「发发福利」业务系统下的定价规则（后台「商品池 › 定价规则」，按类目 / 品牌 / 货源 / 利润率条件命中），多池取最低价；未入池按平台默认 ----------------
   priceTpls() { return {
-    pt1: { name: '平台默认会员价', rate: 12, tier: { 卡券: 3 }, floor: 3, round: 1 },
-    pt2: { name: '节日福利标准价', rate: 10, tier: { 礼包: 12, 卡券: 3 }, floor: 3, round: 1 },
-    pt3: { name: '常驻福利让利价', rate: 6, tier: { 卡券: 2 }, floor: 2, round: 0.1 } }; }
+    pt1: { name: '未入池 · 平台默认', rate: 12, tier: { 卡券: 3 }, floor: 3, round: 1 },
+    pt2: { name: '年货精选池 · 发发福利', rate: 10, tier: { 礼包: 12, 卡券: 3 }, floor: 3, round: 1 },
+    pt3: { name: '常驻福利池 · 发发福利', rate: 6, tier: { 卡券: 2 }, floor: 2, round: 0.1 } }; }
   tplOfCtx(ctx) { return ctx === 'all' ? 'pt1' : ['s4', 's5', 's6'].indexOf(ctx) >= 0 ? 'pt3' : 'pt2'; }
   ctxName(ctx) { if (ctx === 'all') return '全站'; const sc = this.scenes().find((x) => x.id === ctx); return sc ? sc.short || sc.name : ctx; }
   priceCtx() { const st = this.state; return st.srch && (st.srchScope || 'all') === 'all' ? 'all' : st.scene; }
