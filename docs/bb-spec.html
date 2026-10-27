@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>帮帮采 首期产品 Spec v0.1</title><style>
+<title>**采 首期产品 Spec v0.2</title><style>
 :root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625}}
 *{box-sizing:border-box}
@@ -39,19 +39,19 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 @media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
 </style></head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="./">采发发 · 文档</a><span class="crumb">帮帮采 · Spec · 帮帮采 首期产品 Spec v0.1</span>
+<header class="top"><div class="top-in"><a class="brand" href="./">采发发 · 文档</a><span class="crumb">**采 · Spec · **采 首期产品 Spec v0.2</span>
 <a class="btn" href="./">全部文档</a><a class="btn pri" href="../bangbang/">打开 Demo</a></div></header>
 <div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-一-背景与目标">一、背景与目标</a><a href="#h-二-首期范围">二、首期范围</a><a href="#h-三-关键产品决策">三、关键产品决策</a><a href="#h-四-用户故事">四、用户故事</a><a href="#h-五-验收标准">五、验收标准</a><a href="#h-六-成功指标">六、成功指标</a><a href="#h-七-依赖-风险与待确认">七、依赖、风险与待确认</a></nav>
-<article><h1 id="h-帮帮采-首期产品-Spec-v0-1">帮帮采 首期产品 Spec v0.1</h1>
+<article><h1 id="h-采-首期产品-Spec-v0-2">**采 首期产品 Spec v0.2</h1>
 <p>Oct 27, 2026 · @sanyuan</p>
 <h2 id="h-一-背景与目标">一、背景与目标</h2>
-<p>帮帮采是采发发面向<strong>企业终端采购人员</strong>的 AI 采购产品：用户说一句需求，AI 助手「小帮」追问 1–2 个关键问题，从帮帮采商品库里配出 2–3 套方案，用户确认后用预付款下单。它从发发福利 v1.1 精简而来，去掉了服务商侧的利润、合规画像、权益包细分和活动账户。</p>
+<p>**采是采发发面向<strong>企业终端采购人员</strong>的 AI 采购产品：用户说一句需求，AI 助手「小帮」追问 1–2 个关键问题，从**采商品库里配出 2–3 套方案，用户确认后用预付款下单。它从发发福利 v1.1 精简而来，去掉了服务商侧的利润、合规画像、权益包细分和活动账户。</p>
 <ul>
 <li><strong>服务对象</strong>：10–200 人企业里兼职做采购的行政、办公室、工会人员，一人要管福利、行政、办公三类采购；不懂供应链，需要「省心、能报给领导」。</li>
-<li><strong>和发发福利的关系</strong>：两者共用平台底座（客户、订单、账户、供应链接入）和同一个运营管理后台；帮帮采有<strong>独立的商品库、定价规则和场景运营</strong>，在后台作为一个新应用「帮帮采」管理。</li>
+<li><strong>和发发福利的关系</strong>：两者共用平台底座（客户、订单、账户、供应链接入）和同一个运营管理后台；**采有<strong>独立的商品库、定价规则和场景运营</strong>，在后台作为一个新应用「**采」管理。</li>
 <li><strong>首期目标</strong>：让终端采购人员从说需求到拿到可下单的方案 ≤ 3 分钟、≤ 3 轮对话；商品上下架和会员价由规则自动完成，运营只做例外处理。</li>
 </ul>
-<p>配套文档：《帮帮采 PRD》《帮帮采 AI 选品 Prompt》；对话话术沿用<a href="https://claude.ai/artifact/V5AnFRDvoUWqfML7kGUHv7">《帮你采 · 小帮对话话术规范》</a>；Demo 见画布「帮帮采 Demo v0.2」与「运营管理后台 Demo v1.2」。</p>
+<p>配套文档：《**采 PRD》《**采 AI 选品 Prompt》；对话话术沿用<a href="https://claude.ai/artifact/V5AnFRDvoUWqfML7kGUHv7">《帮你采 · 小帮对话话术规范》</a>；Demo 见画布「**采 Demo v0.2」与「运营管理后台 Demo v1.2」。</p>
 <h2 id="h-二-首期范围">二、首期范围</h2>
 <p>首期做「一套商品库 + 三大应用对话 + 预付款下单」的最小闭环，其余留到后续。</p>
 <div class="tbl"><table>
@@ -100,8 +100,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 </tr>
 <tr>
 <td>运营后台</td>
-<td>在同一后台新增应用「帮帮采」：商品库（商品 / 自动上下架规则 / 定价规则）、场景运营（子场景 / 三大应用）、热门运营场景、应用设置；顶栏业务线可切到帮帮采</td>
-<td>独立的帮帮采后台、独立账号体系</td>
+<td>在同一后台新增应用「**采」：商品库（商品 / 自动上下架规则 / 定价规则）、场景运营（子场景 / 三大应用）、热门运营场景、应用设置；顶栏业务线可切到**采</td>
+<td>独立的**采后台、独立账号体系</td>
 </tr>
 </tbody>
 </table></div>
@@ -117,7 +117,7 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <tbody>
 <tr>
 <td>D1</td>
-<td>帮帮采使用<strong>独立商品库</strong>，不复用发发福利的商品池</td>
+<td>**采使用<strong>独立商品库</strong>，不复用发发福利的商品池</td>
 <td>终端企业的品类（行政 / 办公）和价格策略与服务商渠道不同，独立才能单独控制上品范围与加价</td>
 </tr>
 <tr>
@@ -133,7 +133,7 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <tr>
 <td>D4</td>
 <td>会员价 = 接口价 ×（1 + 加价率），加价率来自商品库定价规则（自上而下命中第一条，都不命中用默认）</td>
-<td>与发发福利商品池定价口径一致；帮帮采只有一套业务系统，所以只有一套规则</td>
+<td>与发发福利商品池定价口径一致；**采只有一套业务系统，所以只有一套规则</td>
 </tr>
 <tr>
 <td>D5</td>
@@ -162,13 +162,13 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 </tr>
 <tr>
 <td>D10</td>
-<td>帮帮采运营在同一运营管理后台，作为「业务应用」下新增应用</td>
+<td>**采运营在同一运营管理后台，作为「业务应用」下新增应用</td>
 <td>客户、订单、财务、权限复用平台底座，只新增应用层</td>
 </tr>
 </tbody>
 </table></div>
 <h2 id="h-四-用户故事">四、用户故事</h2>
-<p>共 22 条，P0 是首期上线必须具备的闭环。BB = 帮帮采，章节指《帮帮采 PRD》。</p>
+<p>共 22 条，P0 是首期上线必须具备的闭环。BB = **采，章节指《**采 PRD》。</p>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -343,13 +343,13 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <li>[ ] 输入「给 20 个人准备春节福利，人均 200 元」：只追问 1 个问题（到货时间），回答后出 3 套方案并标首推。</li>
 <li>[ ] 用户说过的人数 / 预算 / 到货 / 品牌不会被再问；追问最多 2 轮、每轮 ≤ 2 问。</li>
 <li>[ ] 点「不确定，你先推荐」或说「随便」：不再追问，按默认值出方案，并在回复中说明用了常用值。</li>
-<li>[ ] 方案内商品全部是帮帮采商品库已上架、有货、能在要求时间内送达的商品；库存不够的在处理过程里写明「只剩 N 件、已换同类」。</li>
+<li>[ ] 方案内商品全部是**采商品库已上架、有货、能在要求时间内送达的商品；库存不够的在处理过程里写明「只剩 N 件、已换同类」。</li>
 <li>[ ] 方案回复按「结论 → 理由 → 下一步」，含总价 / 人均、与预算差额、送达日期；对话里不带任何操作按钮，导出、汇报、下单都在右侧。</li>
 <li>[ ] 超出平台范围（如机票）不硬推荐；需求模糊（如「买点东西」）给子场景选项。</li>
 </ul>
 <p><strong>右侧产出物</strong></p>
 <ul>
-<li>[ ] 改数量 / 换一款 / 移除后，总价、预算条、送达日期立即更新；对话中出现一条留痕，连续修改只保留最新一条；超预算时提示可在右侧点「更省钱」重配。</li>
+<li>[ ] 改数量 / 换一款 / 移除后，总价、预算条、送达日期立即更新；对话中出现一条留痕，连续修改只保留最新一条；切换 A / B / C 方案只更新右侧，不在对话中留痕；超预算时提示可在右侧点「更省钱」重配。</li>
 <li>[ ] 选品清单筛选只显示当前子场景类目内的商品；无货商品不能加入方案。</li>
 <li>[ ] 生成汇报：在右侧「汇报」选格式；分享页必须点「确认无误，生成分享链接」后才生成链接；扣 10 积分。</li>
 </ul>
@@ -361,7 +361,7 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 </ul>
 <p><strong>运营后台</strong></p>
 <ul>
-<li>[ ] 后台左侧「业务应用」下出现「帮帮采」，含商品库 / 场景运营 / 热门运营场景 / 应用设置；顶栏业务线可切到帮帮采。</li>
+<li>[ ] 后台左侧「业务应用」下出现「**采」，含商品库 / 场景运营 / 热门运营场景 / 应用设置；顶栏业务线可切到**采。</li>
 <li>[ ] 停用一条上品规则后，只靠它上架的商品变为「已下架」并写明原因。</li>
 <li>[ ] 新增 / 调整定价规则顺序后，商品库的会员价和「定价命中」列立即变化；会员价不低于底价，底价高于市场价的商品自动下架。</li>
 <li>[ ] 子场景保存校验：至少 1 个类目；必填维度必须在追问维度里；快捷语 ≤ 4 条。有上线热门场景引用的子场景不能删除。</li>
@@ -424,9 +424,9 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 </ul>
 <p><strong>待确认</strong></p>
 <ul>
-<li>[ ] 商品池定价的业务系统里已有「企业终端采购」；帮帮采改为独立商品库后，该选项是否去掉？（建议：去掉，避免两套价）</li>
-<li>[ ] AI 积分是否与发发福利共用同一额度，还是帮帮采单独发放？消耗标准（出方案 5 / 汇报 10）由 AI 团队确认。</li>
-<li>[ ] 帮帮采企业是否需要企业认证才能下单（沿用发发福利认证）？个人账号是否可用？</li>
+<li>[ ] 商品池定价的业务系统里已有「企业终端采购」；**采改为独立商品库后，该选项是否去掉？（建议：去掉，避免两套价）</li>
+<li>[ ] AI 积分是否与发发福利共用同一额度，还是**采单独发放？消耗标准（出方案 5 / 汇报 10）由 AI 团队确认。</li>
+<li>[ ] **采企业是否需要企业认证才能下单（沿用发发福利认证）？个人账号是否可用？</li>
 <li>[ ] 各子场景默认值（福利人均 200、行政人数 30 等）与加价率均为演示数字，待商务确认。</li>
 <li>[ ] 接入钉钉 / OA 后，「生成汇报」是否改为「提交审批」。</li>
 </ul>

@@ -469,7 +469,7 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 <button class="tbi" aria-label="{{sbToggleLabel}}" title="{{sbToggleLabel}}" onClick="{{sbToggle}}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h16"></path></svg></button><button class="tbi" aria-label="刷新" title="刷新" onClick="{{tbRefresh}}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg></button>
 <div class="crumb"><span>{{crumbA}}</span><span aria-hidden="true">/</span><b>{{crumbB}}</b></div>
 <div class="ask"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="color: var(--text-3)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input aria-label="智能查数" placeholder="问数据：上周各频道 GMV 和转单率" value="{{topQ}}" onChange="{{onTopQ}}" onKeyDown="{{topKey}}"><button onClick="{{topGo}}">问一下</button></div>
-<label class="tb-f">业务线<select class="sel" aria-label="业务线" value="{{biz}}" onChange="{{onBiz}}"><option value="fafa">业务线：发发福利</option><option value="bbc">业务线：帮帮采</option><option value="jicai">发发集采（预留）</option><option value="fct">分采通（预留）</option></select></label>
+<label class="tb-f">业务线<select class="sel" aria-label="业务线" value="{{biz}}" onChange="{{onBiz}}"><option value="fafa">业务线：发发福利</option><option value="bbc">业务线：**采</option><option value="jicai">发发集采（预留）</option><option value="fct">分采通（预留）</option></select></label>
 <label class="tb-f">演示角色<select class="sel" aria-label="演示角色" value="{{role}}" onChange="{{onRole}}"><option value="admin">演示角色：超级管理员</option><option value="cust">客户运营</option><option value="goods">商品运营</option><option value="content">内容运营</option><option value="fin">财务</option><option value="cs">订单 / 客服</option><option value="data">产品 / 数据</option></select></label>
 <button class="tbi" aria-label="全屏" title="全屏" onClick="{{tbFull}}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg></button><button class="bell" aria-label="通知" onClick="{{goHome}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg><sc-if value="{{hasBell}}" hint-placeholder-val="{{ true }}"><i>{{bellN}}</i></sc-if></button>
 <span class="av" title="{{roleName}}">{{roleShort}}</span>
@@ -1075,7 +1075,7 @@ const NAV = [
   ] },
   { label: '业务应用', mods: [
     { id: 'fafa', name: '发发福利', subs: [{ id: 'scene', name: '场景管理' }, { id: 'chan', name: '频道运营' }, { id: 'topic', name: '专题管理' }, { id: 'benefit', name: '权益包' }, { id: 'kb', name: '专家咨询知识库', alias: ['kbmiss', 'kbpolicy', 'kbrule'] }, { id: 'kbpolicy', name: '合规与采购政策', hidden: true }, { id: 'kbrule', name: '合规规则', hidden: true }, { id: 'kbmiss', name: '未命中问题', hidden: true }] },
-    { id: 'bbc', name: '帮帮采', subs: [{ id: 'bgoods', name: '商品库', alias: ['bsrc', 'bprice'] }, { id: 'bsrc', name: '自动上下架规则', hidden: true }, { id: 'bprice', name: '定价规则', hidden: true }, { id: 'bscene', name: '场景运营', alias: ['bapp'] }, { id: 'bapp', name: '三大应用', hidden: true }, { id: 'bhot', name: '热门运营场景' }, { id: 'bset', name: '应用设置' }] },
+    { id: 'bbc', name: '**采', subs: [{ id: 'bgoods', name: '商品库', alias: ['bsrc', 'bprice'] }, { id: 'bsrc', name: '自动上下架规则', hidden: true }, { id: 'bprice', name: '定价规则', hidden: true }, { id: 'bscene', name: '场景运营', alias: ['bapp'] }, { id: 'bapp', name: '三大应用', hidden: true }, { id: 'bhot', name: '热门运营场景' }, { id: 'bset', name: '应用设置' }] },
     { id: 'jicai', name: '发发集采', dis: true, subs: [] },
     { id: 'fct', name: '分采通', dis: true, subs: [] }
   ] },
@@ -1339,7 +1339,7 @@ function crudSeed() {
       { id: 'pr5', pool: 'p1', sys: '发发集采', ord: 1, cats: ['粮油'], brands: [], srcs: [], mmin: '', mmax: '', rate: 4, note: '' },
       { id: 'pr6', pool: 'p2', sys: '发发福利', ord: 1, cats: ['小家电'], brands: [], srcs: ['京东自营'], mmin: '', mmax: '', rate: 9, note: '' }
     ],
-    // ---------- 帮帮采（独立商品库 / 定价 / 场景运营）----------
+    // ---------- **采（独立商品库 / 定价 / 场景运营）----------
     bgoods: ([
   ['g01', '金龙鱼 东北大米 5kg', '粮油米面', '金龙鱼', '京东自营', 52, 79, -1, 3820, 1], ['g02', '鲁花 5S 压榨花生油 5L', '粮油米面', '鲁花', '京东自营', 128, 169, -1, 2950, 1],
   ['g03', '三只松鼠 坚果礼盒 1.5kg', '休闲零食', '三只松鼠', '天猫超市', 86, 139, -1, 4210, 1], ['g04', '良品铺子 零食大礼包 1.2kg', '休闲零食', '良品铺子', '天猫超市', 72, 118, -1, 3560, 1],
@@ -1403,11 +1403,11 @@ function crudSeed() {
       { id: 'h5', name: '中秋送什么不踩雷', app: '福利采购', scene: 'fl_mid', desc: '中秋礼盒热销排行', badge: '', mode: '榜单', rank: '近 30 天企业采购量', limit: 50, start: '2026-08-20', end: '2026-09-30', sort: 5, status: '已下线', clicks: 3120 }
     ],
     bsets: [
-      { id: 'bs1', grp: '账户', k: '开通账户', v: '预付款账户、AI 积分', note: '活动账户本期不开通；账户在平台底座统一，帮帮采与发发福利共用同一企业的预付款与积分' },
+      { id: 'bs1', grp: '账户', k: '开通账户', v: '预付款账户、AI 积分', note: '活动账户本期不开通；账户在平台底座统一，**采与发发福利共用同一企业的预付款与积分' },
       { id: 'bs2', grp: '账户', k: '支付方式', v: '预付款优先，不足时在线支付补差', note: '不支持赊销 / 账期' },
       { id: 'bs3', grp: 'AI 积分', k: '积分消耗', v: '出方案 5 / 生成汇报 10', note: '追问、改数量、换商品不扣积分；积分不能抵扣货款' },
       { id: 'bs4', grp: 'AI 对话', k: '追问上限', v: '最多 2 轮，每轮最多 2 个问题', note: '问不到的用场景默认值先出方案，并在回复中说明' },
-      { id: 'bs5', grp: 'AI 对话', k: '方案数量', v: '2–3 套，标出首推', note: '方案商品全部来自帮帮采商品库已上架商品' },
+      { id: 'bs5', grp: 'AI 对话', k: '方案数量', v: '2–3 套，标出首推', note: '方案商品全部来自**采商品库已上架商品' },
       { id: 'bs6', grp: '交易', k: '报价有效期', v: '7 天', note: '到期前 1 天站内提醒' },
       { id: 'bs7', grp: '交易', k: '下单确认', v: '必须用户点确认卡', note: '小帮不自动下单、不自动付款' },
       { id: 'bs8', grp: '交易', k: '名单代发运费', v: '¥6 / 人', note: '仅福利采购可选' }
@@ -1939,15 +1939,15 @@ function buildDefs(self, st, role) {
     save: (v) => { delete v.sysTxt; if (!v.ord) v.ord = Math.max(0, ...st.prules.filter((r) => r.pool === v.pool && r.sys === v.sys).map((r) => r.ord)) + 1; return v; },
     savedMsg: () => '定价规则已保存，引用本池的场景 / 频道 1 分钟内按新价格展示'
   };
-  // ================= 帮帮采 =================
+  // ================= **采 =================
   const BCATS = ['粮油米面', '休闲零食', '茶叶冲饮', '家居日用', '小家电', '礼品卡', '茶水饮料', '纸品', '清洁用品', '劳保用品', '会议物料', '办公文具', '打印耗材', '数码配件', '办公设备'];
   const BSRCS = ['京东自营', '天猫超市', '1688', '得力直供', '供应商直供'];
   const BDIMS = ['人数', '人数 / 数量', '人均预算', '总预算', '到货时间', '采购周期', '品牌偏好', '收货方式'];
   const bAuto = (g) => self.bbAuto(g); const bPrice = (g) => self.bbPrice(g);
   const bGroup = [['bgoods', '商品'], ['bsrc', '自动上下架规则'], ['bprice', '定价规则']];
   D.bgoods = {
-    page: 'bgoods', title: '帮帮采 · 商品库', noun: '商品', store: 'bgoods', edit: ['admin', 'goods'], group: bGroup,
-    desc: '帮帮采独立商品库，不区分商品类型。商品由「自动上下架规则」从各供应链自动上品、自动下架；会员价按「定价规则」自动计算，运营只做例外处理（手动下架 / 恢复自动）',
+    page: 'bgoods', title: '**采 · 商品库', noun: '商品', store: 'bgoods', edit: ['admin', 'goods'], group: bGroup,
+    desc: '**采独立商品库，不区分商品类型。商品由「自动上下架规则」从各供应链自动上品、自动下架；会员价按「定价规则」自动计算，运营只做例外处理（手动下架 / 恢复自动）',
     extra: [{ t: '立即同步供应链', run: () => self.flash('同步完成：新上架 3 款、自动下架 1 款、会员价重算 12 款（演示）') }],
     kpis: () => { const a = st.bgoods.map(bAuto); return [['在库商品', st.bgoods.length, '来自 ' + BSRCS.length + ' 个供应链'], ['已上架', a.filter((x) => x.on).length, '前台与小帮可选'], ['自动下架', a.filter((x) => !x.on && !x.manual).length, '不满足规则 / 无货 / 供应链下架'], ['手动下架', a.filter((x) => x.manual).length, '运营例外处理']]; },
     tabs: { opts: [['', '全部'], ['已上架', '已上架'], ['已下架', '已下架']], get: (r) => (bAuto(r).on ? '已上架' : '已下架') },
@@ -1955,13 +1955,13 @@ function buildDefs(self, st, role) {
     cols: [{ t: '商品', cell: (r) => N(r.name, r.id + ' · 同步 ' + r.synced) }, { t: '类目 · 品牌', cell: (r) => T(r.cat + ' · ' + r.brand) }, { t: '货源', cell: (r) => T(r.src) },
       { t: '接口价', cls: 'r', cell: (r) => M(self.canCost() ? fmtM(r.cost) : '***') }, { t: '会员价', cls: 'r', cell: (r) => M(fmtM(bPrice(r).v)) }, { t: '定价命中', cell: (r) => T(bPrice(r).rule) },
       { t: '上品规则', cell: (r) => { const a = bAuto(r); return { type: 'tags', tags: a.rule ? [a.rule] : [], empty: '未命中' }; } }, { t: '状态', cell: (r) => { const a = bAuto(r); return N(a.on ? '已上架' : '已下架', a.why); } }],
-    acts: (r) => [{ t: '查看', k: 'view' }, r.lock ? { t: '恢复自动', run: () => self.crudPatch('bgoods', r.id, { lock: false }, '恢复自动上下架', r.name) } : { t: '手动下架', danger: true, run: () => self.confirm('手动下架「' + r.name + '」？', '下架后不再出现在帮帮采前台和小帮的方案里，自动规则不再把它上架，直到「恢复自动」。', '下架', true, (reason) => self.crudPatch('bgoods', r.id, { lock: true, lockNote: reason || '运营下架' }, '手动下架', r.name, true), true) }],
+    acts: (r) => [{ t: '查看', k: 'view' }, r.lock ? { t: '恢复自动', run: () => self.crudPatch('bgoods', r.id, { lock: false }, '恢复自动上下架', r.name) } : { t: '手动下架', danger: true, run: () => self.confirm('手动下架「' + r.name + '」？', '下架后不再出现在**采前台和小帮的方案里，自动规则不再把它上架，直到「恢复自动」。', '下架', true, (reason) => self.crudPatch('bgoods', r.id, { lock: true, lockNote: reason || '运营下架' }, '手动下架', r.name, true), true) }],
     detail: (r) => { const a = bAuto(r), p = bPrice(r); return { title: r.name, sub: r.cat + ' · ' + r.brand + ' · ' + r.src, pill: a.on ? '已上架' : '已下架',
       kv: [['接口价', self.canCost() ? fmtM(r.cost) : '***'], ['市场价', fmtM(r.market)], ['市场价利润率', self.canCost() ? Math.round((r.market - r.cost) / r.market * 1000) / 10 + '%' : '***'], ['会员价', fmtM(p.v)], ['定价命中', p.rule], ['毛利率', self.canCost() ? p.mg + '%' : '***'], ['上品规则', a.rule || '未命中任何启用规则'], ['状态说明', a.why], ['库存', r.stock === 0 ? '无货' : r.stock > 0 ? '仅剩 ' + r.stock : '充足'], ['近 30 天企业采购量', String(r.sold)]],
       tables: [{ title: '被引用的子场景', cols: ['应用', '子场景', '状态'], rows: st.bscenes.filter((s) => s.cats.includes(r.cat)).map((s) => [s.app, s.name, s.status]), empty: '暂无' }] }; }
   };
   D.bsrc = {
-    page: 'bsrc', title: '帮帮采 · 商品库', noun: '上下架规则', store: 'bsrc', edit: ['admin', 'goods'], newLabel: '新增规则', group: bGroup,
+    page: 'bsrc', title: '**采 · 商品库', noun: '上下架规则', store: 'bsrc', edit: ['admin', 'goods'], newLabel: '新增规则', group: bGroup,
     desc: '按货源 + 类目 + 条件从供应链自动上品；不满足下架条件的商品自动下架。规则之间是「或」：商品命中任一启用规则即上架。每天 06:00 全量跑一次，价格 / 库存变化实时触发',
     tabs: { opts: [['', '全部'], ['启用', '启用'], ['停用', '停用']], get: (r) => r.status },
     cols: [{ t: '规则', cell: (r) => N(r.name, (r.cats.length ? r.cats.length + ' 个类目' : '全部类目') + (r.mmin ? ' · 利润率 ≥ ' + r.mmin + '%' : '') + (r.pmax ? ' · 接口价 ≤ ¥' + r.pmax : '') + (r.salesMin ? ' · 月销 ≥ ' + r.salesMin : '')) }, { t: '货源', cell: (r) => ({ type: 'tags', tags: r.srcs, empty: '—' }) },
@@ -1978,7 +1978,7 @@ function buildDefs(self, st, role) {
     savedMsg: () => '规则已保存，下次同步（或点「立即同步供应链」）按新规则上下架'
   };
   D.bprice = {
-    page: 'bprice', title: '帮帮采 · 商品库', noun: '定价规则', store: 'bprules', edit: ['admin', 'goods'], newLabel: '新增条件规则', group: bGroup,
+    page: 'bprice', title: '**采 · 商品库', noun: '定价规则', store: 'bprules', edit: ['admin', 'goods'], newLabel: '新增条件规则', group: bGroup,
     desc: '会员价 = 接口价 ×（1 + 加价率）。条件规则自上而下匹配，命中第一条即停，都不命中用默认加价率；商品自动上架后即按此自动设置会员价，接口价变动时实时重算',
     note: (() => { const c = st.bpcfgs[0]; return '默认加价率 +' + c.rate + '% · 最低毛利 ' + c.floor + '%（底价 = 接口价 ×（1 + 最低毛利），低于底价自动下架）· 顶价 ' + c.ceil + ' · 取整 ' + c.round; })(),
     extra: [{ t: '修改默认加价 / 底价 / 顶价', run: () => self.openForm('bpcfg', 'bc1') }],
@@ -1991,14 +1991,14 @@ function buildDefs(self, st, role) {
       { k: 'mmin', t: '市场价利润率 ≥（%）', type: 'num', w: 'half', ph: '留空不限' }, { k: 'mmax', t: '市场价利润率 <（%）', type: 'num', w: 'half', ph: '留空不限' }, { k: 'rate', t: '加价率（%）', type: 'num', req: true, w: 'half' }, { k: 'note', t: '备注', type: 'text', w: 'half' }],
     validate: (v) => (v.mmin !== '' && v.mmax !== '' && +v.mmin >= +v.mmax ? { mmax: '上限要大于下限' } : (+v.rate < 0 ? { rate: '加价率不能为负' } : {})),
     save: (v) => { if (!v.ord) v.ord = Math.max(0, ...st.bprules.map((r) => r.ord)) + 1; return v; },
-    savedMsg: () => '定价规则已保存，帮帮采前台 1 分钟内按新会员价展示'
+    savedMsg: () => '定价规则已保存，**采前台 1 分钟内按新会员价展示'
   };
   D.bpcfg = { page: '', title: '默认定价', noun: '默认定价', store: 'bpcfgs', edit: ['admin', 'goods'],
     form: () => [{ k: 'rate', t: '默认加价率（%）', type: 'num', req: true, w: 'half' }, { k: 'floor', t: '最低毛利（%）', type: 'num', req: true, w: 'half', hint: '底价 = 接口价 ×（1 + 最低毛利）' }, { k: 'ceil', t: '顶价', type: 'radio', opts: ['≤ 市场价', '≤ 平均到手价', '不限'] }, { k: 'round', t: '取整', type: 'radio', opts: ['不取整', '到角', '到元', '尾数 9'] }],
     save: (v) => Object.assign(v, { rate: Number(v.rate), floor: Number(v.floor) }), savedMsg: () => '默认定价已保存，全部商品会员价已重算' };
   const bsGroup = [['bscene', '子场景'], ['bapp', '三大应用']];
   D.bscene = {
-    page: 'bscene', title: '帮帮采 · 场景运营', noun: '子场景', store: 'bscenes', edit: ['admin', 'content'], newLabel: '新增子场景', group: bsGroup,
+    page: 'bscene', title: '**采 · 场景运营', noun: '子场景', store: 'bscenes', edit: ['admin', 'content'], newLabel: '新增子场景', group: bsGroup,
     desc: '前台 AI 对话框按「福利采购 / 行政采购 / 办公采购」分三大应用，应用下的子场景在这里运营：类目范围决定小帮能从哪些商品里选，追问维度决定小帮问什么，快捷语显示在输入框下方',
     tabs: { opts: [['', '全部'], ['福利采购', '福利采购'], ['行政采购', '行政采购'], ['办公采购', '办公采购']], get: (r) => r.app },
     filters: [{ k: 'q', type: 'text', ph: '子场景名称', match: (r, v) => r.name.includes(v) }, { k: 'st', type: 'select', label: '状态', opts: [['上线中', '上线中'], ['已下线', '已下线']], match: (r, v) => r.status === v }],
@@ -2016,7 +2016,7 @@ function buildDefs(self, st, role) {
     save: (v) => Object.assign(v, { sort: Number(v.sort || 9) })
   };
   D.bapp = {
-    page: 'bapp', title: '帮帮采 · 场景运营', noun: '应用', store: 'bapps', edit: ['admin', 'content'], group: bsGroup,
+    page: 'bapp', title: '**采 · 场景运营', noun: '应用', store: 'bapps', edit: ['admin', 'content'], group: bsGroup,
     desc: '三大应用固定为福利采购、行政采购、办公采购，只能改欢迎语、输入框示例和排序，不能新增或删除',
     cols: [{ t: '应用', cell: (r) => N(r.name, '子场景 ' + st.bscenes.filter((s) => s.app === r.name && s.status === '上线中').length + ' 个上线') }, { t: '欢迎语', cell: (r) => T(r.hello.slice(0, 34) + '…') }, { t: '输入框示例', cell: (r) => T(r.ph) }, { t: '默认追问维度', cell: (r) => ({ type: 'tags', tags: r.dims, empty: '—' }) }, { t: '启用', cell: (r) => swCell(r, 'bapps', '启用', '停用', '启用状态') }],
     acts: () => [{ t: '编辑', k: 'edit' }],
@@ -2024,7 +2024,7 @@ function buildDefs(self, st, role) {
     validate: (v) => (String(v.hello || '').length > 80 ? { hello: '欢迎语不超过 80 字' } : {})
   };
   D.bhot = {
-    page: 'bhot', title: '帮帮采 · 热门运营场景', noun: '热门场景', store: 'bhots', edit: ['admin', 'content'], newLabel: '新增热门场景',
+    page: 'bhot', title: '**采 · 热门运营场景', noun: '热门场景', store: 'bhots', edit: ['admin', 'content'], newLabel: '新增热门场景',
     desc: '首页「热门运营场景」卡片：标题写成采购人员心里的问题（如「同行都在送什么？今年年货热销榜」），不要直接写「爆品 TOP100」。前台以竖排胶囊按钮展示在输入框下方；类型分榜单（按规则自动排行）和清单模板（按人数自动算用量），点击后进入对应子场景的任务，右侧直接展示榜单 / 清单',
     tabs: { opts: [['', '全部'], ['上线中', '上线中'], ['已下线', '已下线']], get: (r) => r.status },
     sort: (rows) => rows.slice().sort((a, b) => a.sort - b.sort),
@@ -2039,8 +2039,8 @@ function buildDefs(self, st, role) {
     save: (v) => Object.assign(v, { app: (st.bscenes.find((s) => s.id === v.scene) || { app: v.app }).app, limit: Number(v.limit || 20), sort: Number(v.sort || 9) })
   };
   D.bset = {
-    page: 'bset', title: '帮帮采 · 应用设置', noun: '设置项', store: 'bsets', edit: ['admin'],
-    desc: '帮帮采本期只开通预付款账户和 AI 积分，不开通活动账户；对话与交易的边界参数在这里统一配置，前台和 AI 选品 Prompt 都读这里的值',
+    page: 'bset', title: '**采 · 应用设置', noun: '设置项', store: 'bsets', edit: ['admin'],
+    desc: '**采本期只开通预付款账户和 AI 积分，不开通活动账户；对话与交易的边界参数在这里统一配置，前台和 AI 选品 Prompt 都读这里的值',
     tabs: { opts: [['', '全部'], ['账户', '账户'], ['AI 积分', 'AI 积分'], ['AI 对话', 'AI 对话'], ['交易', '交易']], get: (r) => r.grp },
     cols: [{ t: '分组', cell: (r) => T(r.grp) }, { t: '设置项', cell: (r) => N(r.k, r.note) }, { t: '当前值', cell: (r) => T(r.v) }],
     acts: () => [{ t: '编辑', k: 'edit' }],
@@ -2503,7 +2503,7 @@ class Component extends DCLogic {
     return r;
   }
   // ================= 集合详情页：二级场景 / 商品池 / 专题 =================
-  // ---------- 帮帮采：自动上下架与定价 ----------
+  // ---------- **采：自动上下架与定价 ----------
   bbMargin(g) { return Math.round((g.market - g.cost) / g.market * 1000) / 10; }
   bbAuto(g) { const st = this.state; if (g.lock) return { on: false, manual: true, why: '手动下架：' + (g.lockNote || '运营下架'), rule: '', ruleId: '' };
     if (g.supOff) return { on: false, why: '供应链已下架', rule: '', ruleId: '' }; if (g.stock === 0) return { on: false, why: '连续无货 3 天，自动下架', rule: '', ruleId: '' };
@@ -2517,7 +2517,7 @@ class Component extends DCLogic {
     const rd = c.round === '到角' ? 0.1 : c.round === '不取整' ? 0.01 : 1; v = Math.round(v / rd) * rd; if (c.round === '尾数 9') v = Math.floor(v / 10) * 10 + 9;
     const fl = g.cost * (1 + c.floor / 100); if (v < fl) { if (fl > g.market && c.ceil === '≤ 市场价') stt = '触底'; v = Math.ceil(fl / rd) * rd; }
     v = Math.round(v * 100) / 100; return { v: v, rate: rate, rule: h ? '规则 ' + h.ord + ' · +' + h.rate + '%' : '默认 +' + c.rate + '%', mg: Math.round((v - g.cost) / v * 1000) / 10, st: stt }; }
-  bbMove(r, d) { const st = this.state; const rs = st.bprules.slice().sort((a, b) => a.ord - b.ord); const i = rs.findIndex((x) => x.id === r.id), j = i + d; if (j < 0 || j >= rs.length) { this.flash(d < 0 ? '已经在最前' : '已经在最后'); return; } const o = rs[j]; this.setState({ bprules: st.bprules.map((x) => (x.id === r.id ? Object.assign({}, x, { ord: o.ord }) : x.id === o.id ? Object.assign({}, x, { ord: r.ord }) : x)) }); this.pushLog('帮帮采', '调整定价规则顺序', '规则 ' + r.ord); }
+  bbMove(r, d) { const st = this.state; const rs = st.bprules.slice().sort((a, b) => a.ord - b.ord); const i = rs.findIndex((x) => x.id === r.id), j = i + d; if (j < 0 || j >= rs.length) { this.flash(d < 0 ? '已经在最前' : '已经在最后'); return; } const o = rs[j]; this.setState({ bprules: st.bprules.map((x) => (x.id === r.id ? Object.assign({}, x, { ord: o.ord }) : x.id === o.id ? Object.assign({}, x, { ord: r.ord }) : x)) }); this.pushLog('**采', '调整定价规则顺序', '规则 ' + r.ord); }
   // ---------- 商品池定价 ----------
   prMk(g) { return g.market || Math.round(g.member * 1.3); }
   prMargin(g) { const mk = this.prMk(g); return Math.round((mk - g.cost) / mk * 1000) / 10; }
@@ -3334,7 +3334,7 @@ class Component extends DCLogic {
     return {
       logo: BRAND_LOGO, nav: nav, crumbA: crumbA, crumbB: crumbB,
       topQ: st.topQ, onTopQ: val('topQ'), topKey: (e) => { if (e && e.key === 'Enter') { if (e.preventDefault) e.preventDefault(); runAsk(st.topQ.trim()); set({ topQ: '' }); } }, topGo: () => { runAsk(st.topQ.trim()); set({ topQ: '' }); },
-      biz: (this.modOf(st.page) || {}).id === 'bbc' ? 'bbc' : st.biz, onBiz: (e) => { const v = e.target.value; if (v === 'bbc') { set({ biz: 'bbc' }); this.go('bgoods'); this.flash('已切换到帮帮采：商品库、场景运营与设置独立，账户与订单共用平台底座'); return; } if (v !== 'fafa') this.flash('该业务线为预留，首期接入发发福利、帮帮采'); set({ biz: 'fafa' }); },
+      biz: (this.modOf(st.page) || {}).id === 'bbc' ? 'bbc' : st.biz, onBiz: (e) => { const v = e.target.value; if (v === 'bbc') { set({ biz: 'bbc' }); this.go('bgoods'); this.flash('已切换到**采：商品库、场景运营与设置独立，账户与订单共用平台底座'); return; } if (v !== 'fafa') this.flash('该业务线为预留，首期接入发发福利、**采'); set({ biz: 'fafa' }); },
       role: role, roleName: ROLES[role], roleShort: ROLES[role].slice(0, 1),
       onRole: (e) => {
         const r = e.target.value; const ok = this.canPage(st.page, r);

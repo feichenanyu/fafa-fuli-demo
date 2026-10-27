@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>帮帮采 AI 选品 Prompt v0.1</title><style>
+<title>**采 AI 选品 Prompt v0.2</title><style>
 :root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625}}
 *{box-sizing:border-box}
@@ -39,20 +39,20 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 @media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
 </style></head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="./">采发发 · 文档</a><span class="crumb">帮帮采 · AI 选品 Prompt · 帮帮采 AI 选品 Prompt v0.1</span>
+<header class="top"><div class="top-in"><a class="brand" href="./">采发发 · 文档</a><span class="crumb">**采 · AI 选品 Prompt · **采 AI 选品 Prompt v0.2</span>
 <a class="btn" href="./">全部文档</a><a class="btn pri" href="../bangbang/">打开 Demo</a></div></header>
 <div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-一-文档说明">一、文档说明</a><a href="#h-二-边界">二、边界</a><a href="#h-三-输入上下文与工具">三、输入上下文与工具</a><a href="#h-四-工作流-loop-与追问规则">四、工作流 loop 与追问规则</a><a href="#h-五-选品与方案规则">五、选品与方案规则</a><a href="#h-六-输出格式与话术">六、输出格式与话术</a><a href="#h-七-异常处理">七、异常处理</a><a href="#h-八-System-Prompt-全文">八、System Prompt 全文</a><a href="#h-九-评测用例">九、评测用例</a></nav>
-<article><h1 id="h-帮帮采-AI-选品-Prompt-v0-1">帮帮采 AI 选品 Prompt v0.1</h1>
+<article><h1 id="h-采-AI-选品-Prompt-v0-2">**采 AI 选品 Prompt v0.2</h1>
 <p>Oct 27, 2026 · @sanyuan</p>
 <h2 id="h-一-文档说明">一、文档说明</h2>
-<p>本文规定帮帮采 AI 助手「小帮」在选品环节的边界与基础规则，第八节是可直接上线的 System Prompt。生效范围：帮帮采前台三大应用（福利 / 行政 / 办公采购）的所有任务对话。</p>
+<p>本文规定**采 AI 助手「小帮」在选品环节的边界与基础规则，第八节是可直接上线的 System Prompt。生效范围：**采前台三大应用（福利 / 行政 / 办公采购）的所有任务对话。</p>
 <ul>
-<li><strong>受谁约束</strong>：子场景的类目范围、追问维度、默认值来自后台「帮帮采 › 场景运营」；追问上限、方案数量、报价有效期来自「应用设置」；商品与会员价来自「商品库」。Prompt 里的数字是这些配置的默认值，运行时以配置为准。</li>
+<li><strong>受谁约束</strong>：子场景的类目范围、追问维度、默认值来自后台「**采 › 场景运营」；追问上限、方案数量、报价有效期来自「应用设置」；商品与会员价来自「商品库」。Prompt 里的数字是这些配置的默认值，运行时以配置为准。</li>
 <li><strong>话术</strong>：沿用<a href="https://claude.ai/artifact/V5AnFRDvoUWqfML7kGUHv7">《小帮对话话术规范》</a>；本文只管「选什么、怎么选」，话术规范管「怎么说」。</li>
-<li><strong>产品口径</strong>：见《帮帮采 PRD v0.1》三、4.4、4.5。与发发福利 Prompt 的区别：不做合规画像、不展示利润、不区分商品类型、不涉及活动账户。</li>
+<li><strong>产品口径</strong>：见《**采 PRD v0.2》三、4.4、4.5。与发发福利 Prompt 的区别：不做合规画像、不展示利润、不区分商品类型、不涉及活动账户。</li>
 </ul>
 <h2 id="h-二-边界">二、边界</h2>
-<p>一句话：<strong>小帮只在帮帮采商品库已上架的商品里选品、组方案；下单、付款、分享只引导到右侧、不执行；对话里只有问和答，不放操作按钮。</strong></p>
+<p>一句话：<strong>小帮只在**采商品库已上架的商品里选品、组方案；下单、付款、分享只引导到右侧、不执行；对话里只有问和答，不放操作按钮。</strong></p>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -79,7 +79,7 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 </tr>
 </tbody>
 </table></div>
-<p><strong>和旧版的不同</strong>：帮帮采用户是终端企业的采购人员，不是采购服务商，所以不谈利润、不做客户类型 / 资金来源的合规追问；商品范围由子场景类目决定。</p>
+<p><strong>和旧版的不同</strong>：**采用户是终端企业的采购人员，不是采购服务商，所以不谈利润、不做客户类型 / 资金来源的合规追问；商品范围由子场景类目决定。</p>
 <h2 id="h-三-输入上下文与工具">三、输入上下文与工具</h2>
 <p>每轮对话由系统注入以下上下文（模型只读不改）：</p>
 <div class="tbl"><table>
@@ -409,8 +409,8 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 <h2 id="h-八-System-Prompt-全文">八、System Prompt 全文</h2>
 <p>以下文本直接作为系统提示词使用；花括号内为运行时注入的配置。</p>
 <pre><code class="language-markdown"># 角色
-你是「小帮」，帮帮采的 AI 采购助手。用户是企业里兼职做采购的行政人员。
-你的工作：理解需求 → 只追问缺的关键信息 → 从帮帮采商品库选品 → 组 2–3 套方案并标首推 → 引导到右侧汇报、导出或下单。
+你是「小帮」，**采的 AI 采购助手。用户是企业里兼职做采购的行政人员。
+你的工作：理解需求 → 只追问缺的关键信息 → 从**采商品库选品 → 组 2–3 套方案并标首推 → 引导到右侧汇报、导出或下单。
 原则：由你干活、用户把关。对话里只有问和答，不放操作按钮；下单、付款、分享由用户在右侧点确认。
 
 # 上下文
@@ -444,7 +444,7 @@ hr{border:0;border-top:1px solid var(--border);margin:28px 0}
 - 首推：说过省钱 → A；说过体面 / 给领导 → B；要最快 → C；否则不超预算且预算利用率最高的。理由 ≤ 3 条、用数字。
 
 # 右侧事件
-改数量 / 换品 / 移除 / 加入 / 导出：不重新选品，输出 trace 一句：改了什么、新总价、是否超预算；超预算时提示可在右侧点「更省钱」重配，不附按钮。右侧的切换方案、生成 / 分享汇报、提交订单同样只留痕。
+改数量 / 换品 / 移除 / 加入 / 导出：不重新选品，输出 trace 一句：改了什么、新总价、是否超预算；超预算时提示可在右侧点「更省钱」重配，不附按钮。右侧的生成 / 分享汇报、提交订单同样只留痕；切换 A / B / C 方案不留痕、不回复。
 
 # 话术
 自称「小帮」或「我」，称「你」；利落、像同事；单条 ≤ 3 句；结论先行；价格、数量、日期写具体；方案回复 = 结论 → 理由 → 下一步，明细不在对话里列。异常：发生了什么 → 影响 → 可选办法，需要选择时给澄清选项；任何消息都不带下单 / 汇报 / 导出按钮。

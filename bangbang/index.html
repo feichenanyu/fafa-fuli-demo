@@ -743,7 +743,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 .qc-send.ready{background:var(--brand)}
 .qc-x{width:28px;height:28px;border:0;background:transparent;border-radius:8px;cursor:pointer;color:var(--text-3);display:flex;align-items:center;justify-content:center;margin-left:auto}
 .qc-x:hover{background:var(--surface-subtle)}
-/* ===== 帮帮采专属（bb-）：在发发福利 Agent 设计令牌之上 ===== */
+/* ===== **采专属（bb-）：在发发福利 Agent 设计令牌之上 ===== */
 .otab span{font-size:inherit;color:inherit}
 .otab .mono{font-size:12px;color:var(--warning)}
 .otab.on .mono{color:#ffd7b8}
@@ -838,10 +838,10 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 </helmet>
 
 <div class="shell">
-<aside class="side" aria-label="帮帮采主导航">
+<aside class="side" aria-label="**采主导航">
 <sc-if value="{{notAccount}}" hint-placeholder-val="{{ true }}">
 <div style="height: 88px; display: flex; align-items: center; gap: 8px; padding: 0 16px 0 18px; flex: none">
-<button class="bb-logo" onClick="{{newTask}}" aria-label="帮帮采，回到新建任务"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="38" height="30" style="object-fit: contain"><div style="line-height: 1; text-align: left"><div style="font-size: 20px; font-weight: 700; color: var(--brand); letter-spacing: 1px">帮帮采</div><div style="font-size: 12px; color: var(--brand-700); margin-top: 5px">企业采购工作台</div></div></button>
+<button class="bb-logo" onClick="{{newTask}}" aria-label="**采，回到新建任务"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="38" height="30" style="object-fit: contain"><div style="line-height: 1; text-align: left"><div style="font-size: 20px; font-weight: 700; color: var(--brand); letter-spacing: 1px">**采</div><div style="font-size: 12px; color: var(--brand-700); margin-top: 5px">企业采购工作台</div></div></button>
 <div style="flex: 1"></div>
 <button class="ib hide-sm" aria-label="搜索任务"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4-4"></path></svg></button>
 </div>
@@ -904,7 +904,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <!-- ================= 新建任务（首页） ================= -->
 <sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
 <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 72px 24px 56px">
-<div class="fu" style="display: flex; align-items: center; gap: 12px"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="40" height="32" style="object-fit: contain"><span style="font-size: 28px; font-weight: 800; color: var(--brand); letter-spacing: 2px">帮帮采 · 企业采购助手</span></div>
+<div class="fu" style="display: flex; align-items: center; gap: 12px"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="40" height="32" style="object-fit: contain"><span style="font-size: 28px; font-weight: 800; color: var(--brand); letter-spacing: 2px">**采 · 企业采购助手</span></div>
 <p class="fu" style="margin: 10px 0 0; font-size: 15px; font-weight: 300; color: var(--text-2); max-width: 640px; text-align: center; line-height: 24px">{{hello}}</p>
 <div role="tablist" aria-label="三大应用" class="fu" style="margin-top: 22px; display: flex; gap: 4px; padding: 5px; background: var(--surface-muted); border-radius: 999px">
 <sc-for list="{{apps}}" as="a" hint-placeholder-count="3"><button class="stab {{a.cls}}" role="tab" aria-selected="{{a.sel}}" style="padding: 0 26px" onClick="{{a.pick}}">{{a.t}}</button></sc-for>
@@ -991,7 +991,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <button class="send ready" aria-label="发送" onClick="{{chatGo}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
 </div>
 </div>
-<div style="text-align: center; font-size: 12px; color: var(--text-3); margin-top: 8px">小帮只推荐帮帮采商品库内已上架商品；下单、汇报、导出都在右侧操作</div>
+<div style="text-align: center; font-size: 12px; color: var(--text-3); margin-top: 8px">小帮只推荐**采商品库内已上架商品；下单、汇报、导出都在右侧操作</div>
 </div>
 </section>
 
@@ -1141,7 +1141,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <div class="acw-cmp" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))">
 <div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">预付款账户</b><span class="tagb">可充值</span></div><div class="mono" style="font-size: 30px; font-weight: 600; margin: 14px 0 6px">{{prepay}}</div><div class="acw-m" style="margin: 0 0 14px">冻结中 ¥0 · 可用于全部商品，可开票</div><div style="display: flex; gap: 8px"><button class="btn btn-p sm" onClick="{{recharge}}">对公转账充值</button></div><div style="font-size: 12px; color: var(--text-3); margin-top: 8px">按企业专属汇款识别码转账，到账自动入账；不支持主动退款，订单取消、售后退款原路退回预付款</div></div>
 <div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">汇款识别码</b><span class="tagb">专属</span></div><div class="mono" style="font-size: 22px; font-weight: 600; margin: 18px 0 10px">BBC-8273-6610</div><div class="acw-m" style="margin: 0">收款户名：杭州飞象科技有限公司 · 招商银行杭州分行 5719 **** 0001；转账备注填写识别码</div></div>
-<div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">在线支付</b><span class="tagb">仅补差</span></div><div style="font-size: 20px; font-weight: 600; margin: 18px 0 10px">支付宝 · 微信支付</div><div class="acw-m" style="margin: 0">预付款不足时用于补差价；帮帮采不开通活动账户</div></div>
+<div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">在线支付</b><span class="tagb">仅补差</span></div><div style="font-size: 20px; font-weight: 600; margin: 18px 0 10px">支付宝 · 微信支付</div><div class="acw-m" style="margin: 0">预付款不足时用于补差价；**采不开通活动账户</div></div>
 </div>
 <div class="acw-sec"><b>资金流水</b><span>充值、支付、退款</span></div>
 <div class="acw-tbl"><div class="bb-tb" role="table" style="--c: 120px 80px 110px 110px minmax(0,1fr) 110px;"><div class="bb-tr" role="row"><div class="bb-hd" role="columnheader">时间</div><div class="bb-hd" role="columnheader">账户</div><div class="bb-hd" role="columnheader">类型</div><div class="bb-hd" role="columnheader" style="text-align: right">金额</div><div class="bb-hd" role="columnheader">关联订单</div><div class="bb-hd" role="columnheader" style="text-align: right">余额</div></div><sc-for list="{{flows}}" as="f" hint-placeholder-count="4"><div class="bb-tr" role="row"><div role="cell" class="mono">{{f.t}}</div><div role="cell">{{f.acct}}</div><div role="cell">{{f.type}}</div><div role="cell" class="mono" style="text-align: right; color: {{f.color}}">{{f.amt}}</div><div role="cell" class="mono" style="color: var(--text-2)">{{f.ref}}</div><div role="cell" class="mono" style="text-align: right">{{f.bal}}</div></div></sc-for></div></div>
@@ -1176,7 +1176,7 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
-// ================= 帮帮采 · 会员前台 Demo =================
+// ================= **采 · 会员前台 Demo =================
 const TODAY = '2026-10-27';
 const BRAND_LOGO = "data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%2239%22%20height%3D%2232%22%20viewBox%3D%220%200%2039%2032%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M20.5%2016.9C20.5%2016.9%2022.9%2016.8%2025.4%2017.3L26.7%2017L24%2016.7C24%2016.7%2021%2016.9%2020.5%2016.9V16.9Z%22%20fill%3D%22url%28%23paint0_linear_3105_1501%29%22/%3E%3Cpath%20d%3D%22M22.2%205.5C22.2%202.2%2020.4%200.6%2019.7%200.1C19.5%200%2019.3%200%2019.1%200.1C18.5%200.6%2016.6%202.4%2016.6%205.5C16.6%207.5%2017.4%209%2018.2%2010C18.2%2010%2019.1%2011.6%2018.7%2012.2L19.4%2014L18.9%2012.8C19.4%2011.2%2019.2%2010.3%2019.2%2010H19.2C19.2%2010%2019.2%2010%2019.2%2010C19.1%209.5%2018.6%208.9%2018.1%208.6C18%208.6%2018%208.6%2018%208.6C17.9%208.6%2017.8%208.6%2017.8%208.5C17.8%208.3%2017.8%208.3%2018%208.3C18.1%208.3%2018.1%208.3%2018.1%208.5C18.1%208.5%2018.1%208.5%2018.1%208.5C18.2%208.6%2018.9%209%2019.2%209.6C19.2%209.6%2019.2%209.2%2019%208.7C18.8%208.7%2018.7%208.5%2018.7%208.3C18.7%208.3%2018.7%208.2%2018.8%208.1C18.7%207.9%2018.5%207.7%2018.4%207.5C17.7%206.6%2017.5%206.4%2017.4%206C17.3%206%2017.2%205.9%2017.2%205.7C17.2%205.6%2017.3%205.5%2017.4%205.5C17.5%205.5%2017.7%205.6%2017.7%205.7C17.7%205.8%2017.6%205.9%2017.5%206C17.6%206.2%2017.9%206.6%2018.3%207C18.3%207%2018.2%206.3%2018.4%205.7C18.2%205.6%2018.2%205.5%2018.2%205.4C18.2%205.3%2018.2%205.2%2018.3%205.1C18.2%205%2018.2%204.9%2018.1%204.8C18.1%204.8%2018%204.9%2017.9%204.9C17.8%204.9%2017.7%204.8%2017.7%204.6C17.7%204.5%2017.8%204.4%2017.9%204.4C18.1%204.4%2018.2%204.5%2018.2%204.6C18.2%204.7%2018.2%204.7%2018.2%204.7C18.2%204.8%2018.3%204.9%2018.4%205.1C18.4%205%2018.5%205%2018.5%205C18.5%205%2018.5%205%2018.5%205C18.6%204.4%2018.7%203.6%2018.2%203.1C18.2%203.1%2018.2%203.1%2018.1%203.1C18%203.1%2017.9%203%2017.9%202.9C17.9%202.8%2018%202.7%2018.1%202.7C18.2%202.7%2018.3%202.8%2018.3%202.9C18.3%202.9%2018.3%203%2018.3%203C18.5%203.2%2018.9%203.8%2018.7%205.1C18.8%205.2%2018.9%205.3%2018.9%205.4C18.9%205.6%2018.7%205.7%2018.6%205.7C18.3%207.1%2018.7%207.4%2019%208C19%207.9%2019.1%207.9%2019.1%207.9C19.2%207.9%2019.2%207.9%2019.3%208C19.3%207.8%2019.4%207.7%2019.4%207.6C19.5%207.5%2019.4%207.1%2019.3%206.9C19.2%206.8%2019.2%206.5%2019.2%206.4C19.1%206.4%2019%206.3%2019%206.3C19%206.2%2019.1%206.1%2019.2%206.1C19.3%206.1%2019.3%206.2%2019.3%206.3C19.3%206.3%2019.3%206.4%2019.2%206.4C19.2%206.6%2019.3%206.8%2019.4%206.9C19.5%207.1%2019.6%207.4%2019.6%207.4C19.6%207.4%2019.8%207%2019.9%206.4C19.8%206.4%2019.8%206.3%2019.8%206.1C19.8%206%2019.9%205.9%2020%205.8C20%205.4%2019.9%204.9%2019.7%204.4C19.1%203%2018.9%202.3%2019.2%201.5C19%201.4%2019%201.3%2019%201.2C19%201.1%2019.1%201%2019.2%201C19.4%200.9%2019.6%201.1%2019.6%201.2C19.6%201.4%2019.5%201.5%2019.3%201.5C19.3%201.5%2019.3%201.5%2019.3%201.5C19.2%201.8%2019%202.6%2019.8%204C19.8%203.3%2020.1%202.9%2020.2%202.8C20.2%202.7%2020.1%202.7%2020.1%202.6C20.1%202.5%2020.3%202.4%2020.4%202.4C20.5%202.4%2020.6%202.5%2020.6%202.6C20.6%202.8%2020.5%202.9%2020.4%202.9C20.4%202.9%2020.3%202.9%2020.3%202.9C20%203.3%2019.9%204.3%2019.9%204.3C20.1%204.8%2020.2%205.3%2020.2%205.8C20.3%205.8%2020.3%205.9%2020.4%205.9C21%205.5%2021.1%204.9%2021.1%204.8C21.1%204.8%2021%204.7%2021%204.6C21%204.5%2021.1%204.4%2021.2%204.4C21.3%204.4%2021.4%204.5%2021.4%204.6C21.4%204.7%2021.3%204.8%2021.2%204.8L21.2%204.8C21.1%205.6%2020.7%206%2020.5%206.2C20.4%206.3%2020.3%206.5%2020.1%206.5C20%207%2019.9%207.3%2019.8%207.4C19.8%207.5%2019.6%207.7%2019.5%208.1C19.5%208.2%2019.5%208.2%2019.5%208.3C19.5%208.5%2019.5%208.6%2019.3%208.7C19.3%209%2019.4%209.2%2019.5%209.5C19.5%209.5%2019.6%208.7%2020.6%207.6C20.6%207.5%2020.6%207.5%2020.6%207.4C20.6%207.3%2020.7%207.2%2020.8%207.2C20.9%207.2%2021%207.3%2021%207.4C21%207.6%2020.9%207.7%2020.8%207.7C20.8%207.7%2020.7%207.6%2020.7%207.6C20.2%208.4%2019.7%208.9%2019.6%2010H19.6C19.4%2011.3%2019.8%2012.8%2019.8%2012.8L19.4%2013.8C19.6%2013.3%2020.1%2012.2%2020.1%2012.2C19.7%2011.6%2020.3%2010.6%2020.6%2010.2C20.6%2010.2%2020.7%2010.1%2020.7%2010C21.4%209.1%2022.2%207.5%2022.2%205.5L22.2%205.5H22.2Z%22%20fill%3D%22%2310B981%22/%3E%3Cpath%20d%3D%22M1.4%2030.2C3.5%2032.1%207.3%2031.9%209.6%2031.1C13.1%2030%2016.6%2026.4%2018.8%2022.1C18.8%2022%2018.9%2021.8%2019%2021.6C19.3%2020.8%2019.8%2019.2%2020.2%2017.7C21.9%2017.7%2033.1%2017.9%2037.7%2010.6C39.4%208%2038.8%205.8%2037.3%204.4C35.2%202.5%2031.4%202.7%2029.1%203.4C25.6%204.6%2022.2%208%2020.1%2012.2C20.1%2012.2%2020.1%2012.2%2020.1%2012.2C20%2012.3%2020%2012.4%2019.9%2012.5C19.8%2012.7%2019.6%2013.3%2019.5%2013.7C19.1%2014.6%2018.8%2015.7%2018.4%2016.9C16.8%2016.8%205.7%2016.8%200.9%2024C-0.5%2026.2%20-0.2%2028.7%201.4%2030.2V30.2ZM21.5%2013.7C23.9%208.1%2028.8%204.2%2033.2%203.8C34.7%203.6%2037.3%203.6%2038.1%206C38.9%208.6%2035.6%2011.5%2034.1%2012.6C30.3%2015.2%2025.6%2016.9%2020.4%2016.9C20.6%2015.6%2021%2014.7%2021.5%2013.7H21.5ZM4.4%2022.2C8.2%2019.5%2013%2017.7%2018.3%2017.7C18%2018.9%2017.7%2019.8%2017.2%2020.9C14.8%2026.4%209.8%2030.3%205.5%2030.8C3.9%2030.9%201.2%2030.8%200.4%2028.4C-0.3%2026.3%202.9%2023.2%204.4%2022.2Z%22%20fill%3D%22%230A7B71%22/%3E%3Cpath%20d%3D%22M37.8%2024C33%2016.8%2021.9%2016.8%2020.3%2016.9C20%2015.7%2019.6%2014.6%2019.3%2013.7C19.1%2013.3%2018.9%2012.7%2018.8%2012.5C18.8%2012.4%2018.7%2012.3%2018.7%2012.2C18.7%2012.2%2018.7%2012.2%2018.7%2012.2C16.5%208%2013.1%204.6%209.7%203.4C7.4%202.7%203.5%202.5%201.5%204.4C-0.1%205.8%20-0.6%208%201%2010.6C5.6%2017.9%2016.8%2017.7%2018.5%2017.7C18.9%2019.2%2019.5%2020.8%2019.8%2021.6C19.9%2021.8%2019.9%2022%2020%2022.1C22.1%2026.4%2025.6%2030%2029.1%2031.1C31.4%2031.9%2035.3%2032.1%2037.3%2030.2C38.9%2028.7%2039.3%2026.2%2037.8%2024ZM18.3%2016.9C13.1%2016.9%208.4%2015.2%204.6%2012.6C3.1%2011.5%20-0.2%208.6%200.7%206C1.5%203.6%204%203.6%205.5%203.8C9.9%204.2%2014.8%208.1%2017.3%2013.7C17.7%2014.7%2018.1%2015.6%2018.3%2016.9H18.3ZM38.3%2028.4C37.5%2030.8%2034.8%2030.9%2033.3%2030.8C28.9%2030.3%2024%2026.4%2021.5%2020.9C21.1%2019.8%2020.7%2018.9%2020.5%2017.7C25.7%2017.7%2030.5%2019.5%2034.3%2022.2C35.8%2023.2%2039%2026.3%2038.3%2028.4Z%22%20fill%3D%22%230D9488%22/%3E%3Cpath%20d%3D%22M19.4%2015L19.5%2015.6C19.6%2016.3%2020%2016.9%2020.5%2017.3C20%2017.7%2019.6%2018.3%2019.5%2019L19.4%2019.5C19.4%2019.6%2019.4%2019.6%2019.4%2019.5L19.3%2019C19.2%2018.3%2018.8%2017.7%2018.3%2017.3C18.8%2016.9%2019.2%2016.3%2019.3%2015.6L19.4%2015C19.4%2015%2019.4%2015%2019.4%2015Z%22%20fill%3D%22%23F97316%22/%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22paint0_linear_3105_1501%22%20x1%3D%2223.5%22%20y1%3D%2217.2%22%20x2%3D%2223.6%22%20y2%3D%2216.7%22%20gradientUnits%3D%22userSpaceOnUse%22%3E%3Cstop%20stop-color%3D%22%23057265%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230D9488%22%20stop-opacity%3D%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E";
 const IC = {
@@ -1214,7 +1214,7 @@ const CAT = {
   清洁用品: ['spray', '#e9f7f3', '#0f766e'], 劳保用品: ['shield', '#fef6e4', '#a16207'], 会议物料: ['meet', '#eef1fb', '#4338ca'], 办公文具: ['pen', '#f2f7ee', '#4d7c0f'],
   打印耗材: ['print', '#f1f5f9', '#334155'], 数码配件: ['kb', '#eef5fb', '#1d4ed8'], 办公设备: ['dev', '#f3f0fa', '#5b21b6']
 };
-// 商品库（帮帮采独立商品库，由后台上品规则从供应链自动上架；无「商品类型」）
+// 商品库（**采独立商品库，由后台上品规则从供应链自动上架；无「商品类型」）
 // [id, 名称, 类目, 品牌, 货源, 接口价, 市场价, 库存(数字=剩余件数, 0=无货, -1=充足), 近30天企业采购量, 用量(几人每月 1 件；1=一人一件；999=每单 1 件)]
 const RAW = [
   ['g01', '金龙鱼 东北大米 5kg', '粮油米面', '金龙鱼', '京东自营', 52, 79, -1, 3820, 1], ['g02', '鲁花 5S 压榨花生油 5L', '粮油米面', '鲁花', '京东自营', 128, 169, -1, 2950, 1],
@@ -1236,7 +1236,7 @@ const RAW = [
   ['g33', '得力 碎纸机 5 级保密', '办公设备', '得力', '得力直供', 299, 429, -1, 380, 999], ['g34', '惠普 M232dw 激光打印机', '办公设备', '惠普', '京东自营', 899, 1199, -1, 450, 999]
 ];
 const SHIP = { 京东自营: 2, 天猫超市: 3, '1688': 5, 得力直供: 3, 供应商直供: 3 };
-// 定价规则（与后台「帮帮采 › 商品库 › 定价规则」一致）：会员价 = 接口价 ×（1 + 加价率），自上而下命中第一条
+// 定价规则（与后台「**采 › 商品库 › 定价规则」一致）：会员价 = 接口价 ×（1 + 加价率），自上而下命中第一条
 const PRICE = { rate: 8, floor: 3, round: 0.1, rules: [
   { srcs: ['1688'], rate: 15 }, { cats: ['礼品卡'], rate: 2 }, { cats: ['办公设备'], rate: 5 }, { cats: ['休闲零食'], mmin: 35, rate: 12 }] };
 const margin = (g) => (g.market - g.cost) / g.market * 100;
@@ -1250,7 +1250,7 @@ const APPS = [
   { k: 'xz', name: '行政采购', kind: 'list', hello: '你好，我是小帮。行政上的日常采购交给我：茶水饮料、清洁用品、劳保用品、会议物料都能帮你配齐。说说要买什么、给多少人用，我来出方案。', ph: '比如：给 30 人的办公室配一个月的茶水和纸巾' },
   { k: 'bg', name: '办公采购', kind: 'list', hello: '你好，我是小帮。新员工入职、办公用品补货、打印耗材，说一句我就帮你配好。告诉我需要什么、多少人，我按预算帮你挑。', ph: '比如：新来 5 个同事，帮我配齐入职办公用品' }
 ];
-// 子场景（运营后台「帮帮采 › 场景运营」维护：所属应用、类目范围、快捷语、追问维度）
+// 子场景（运营后台「**采 › 场景运营」维护：所属应用、类目范围、快捷语、追问维度）
 const SUBS = [
   { id: 'fl_spring', app: 'fl', name: '春节 / 年货福利', tag: '节日', cats: ['粮油米面', '休闲零食', '茶叶冲饮', '家居日用', '小家电'], kw: /春节|年货|过年|元旦/, prompts: ['给 20 个人准备春节福利，人均 200 元', '年货福利要一份能给老板看的方案，人均 300 元'] },
   { id: 'fl_bday', app: 'fl', name: '生日福利', cats: ['礼品卡', '家居日用', '小家电', '休闲零食'], kw: /生日/, prompts: ['这个月有 3 位同事过生日，人均 200 元'] },
@@ -1266,7 +1266,7 @@ const SUBS = [
   { id: 'bg_print', app: 'bg', name: '打印耗材', cats: ['打印耗材'], kw: /墨盒|A4|复印纸|打印纸|耗材/, prompts: ['打印机的墨盒和 A4 纸快用完了，20 人用'] },
   { id: 'bg_device', app: 'bg', name: '办公设备', cats: ['办公设备'], kw: /投影|打印机|碎纸机|设备/, prompts: ['帮我选一台适合 10 人会议室的投影仪'] }
 ];
-// 热门运营场景（后台「帮帮采 › 热门运营场景」维护）
+// 热门运营场景（后台「**采 › 热门运营场景」维护）
 const HOT = [
   { id: 'h1', name: '同行都在送什么？今年年货热销榜', sub: 'fl_spring', desc: '近 30 天企业采购量排行 · 每日更新', badge: '热' },
   { id: 'h2', name: '30 人茶水间，一个月备多少货才够', sub: 'xz_tea', desc: '按人数自动算一个月用量', badge: '' },
@@ -1567,7 +1567,7 @@ class Component extends DCLogic {
   acctVals(unBill) {
     const st = this.state; const pg = st.acPage; const all = this.allSubs();
     const G = [['账户与权益', [['info', '账号信息', '号'], ['cert', '企业认证', '证', '已认证'], ['pts', 'AI 积分', '积']]], ['财务与账单', [['fin', '预付款管理', '预'], ['inv', '结算与账单', '结', unBill.length ? unBill.length + ' 待开票' : '']]], ['组织与协作', [['org', '组织管理', '组'], ['ent', '企业信息', '企']]]];
-    const TT = { info: ['账号信息', '个人资料与登录安全'], cert: ['企业认证', '认证通过后享受企业会员价、预付款与按名单代发'], pts: ['AI 积分', '小帮出方案、生成汇报会消耗积分'], fin: ['预付款管理', '帮帮采只开通预付款账户；在线支付仅用于补差'], inv: ['结算与账单', '已完成的子单在这里申请开票'], org: ['组织管理', '成员、角色与审批规则'], ent: ['企业信息', '工商信息、收货地址与开票信息'] };
+    const TT = { info: ['账号信息', '个人资料与登录安全'], cert: ['企业认证', '认证通过后享受企业会员价、预付款与按名单代发'], pts: ['AI 积分', '小帮出方案、生成汇报会消耗积分'], fin: ['预付款管理', '**采只开通预付款账户；在线支付仅用于补差'], inv: ['结算与账单', '已完成的子单在这里申请开票'], org: ['组织管理', '成员、角色与审批规则'], ent: ['企业信息', '工商信息、收货地址与开票信息'] };
     const done = all.filter((s) => s.status === '已完成');
     const isUn = st.billTab === 'un'; const rows = done.filter((s) => (isUn ? !s.inv : !!s.inv));
     const selRows = unBill.filter((s) => st.billSel[s.no]); const selAmt = selRows.reduce((a, s) => a + s.amount, 0);
@@ -1656,7 +1656,7 @@ class Component extends DCLogic {
       steps: this.stepVals(t), msgs: msgs,
       rtabs: tabs.map((x) => ({ t: x[1], cls: st.rtab === x[0] ? 'on' : '', badge: x[0] === 'plan' ? String(t.plans.length) : '', hasBadge: x[0] === 'plan' && !!t.plans.length, go: () => this.setState({ rtab: x[0], alt: '' }) })),
       isPlan: st.rtab === 'plan', isPool: st.rtab === 'pool', isRep: st.rtab === 'rep', isOrd: st.rtab === 'order',
-      plans: t.plans.map((x, i) => ({ k: x.k, name: x.name, v: fm(this.total(t, x)), rec: !!x.rec, cls: i === t.pi ? 'on' : '', pick: () => { if (t.pi === i) return; t.pi = i; t.confirming = false; if (t.phase === 'confirm') t.phase = 'plan'; this.log(t, '已切换到 ' + x.k + ' 方案（' + x.name + '），合计 ' + fm(this.total(t, x)) + '。'); this.upd(t); } })), noPlan: !p, pl: pl,
+      plans: t.plans.map((x, i) => ({ k: x.k, name: x.name, v: fm(this.total(t, x)), rec: !!x.rec, cls: i === t.pi ? 'on' : '', pick: () => { if (t.pi === i) return; t.pi = i; t.confirming = false; if (t.phase === 'confirm') t.phase = 'plan'; this.upd(t); } })), noPlan: !p, pl: pl,
       modes: [['cheap', '更省钱'], ['brand', '品质更好'], ['fast', '最快到货']].map((x) => ({ t: x[1], go: () => { if (t.phase === 'done') { this.flash('已下单的任务不能重配，可新建任务'); return; } this.log(t, '已按右侧「' + x[1] + '」让小帮重新配方案。'); this.remode(t, x[0]); this.upd(t); } })),
       poolTitle: t.hot === 'h1' ? '今年年货热销榜 · 按近 30 天企业采购量' : sb.name + ' · 可选商品', pool: pool, noPool: !pool.length,
       fCats: [{ t: '全部', cls: !st.fCat ? 'on' : '', pick: () => this.setState({ fCat: '' }) }].concat(sb.cats.map((c) => ({ t: c, cls: st.fCat === c ? 'on' : '', pick: () => this.setState({ fCat: c }) }))),
