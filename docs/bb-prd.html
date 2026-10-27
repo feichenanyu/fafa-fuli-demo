@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>帮帮采 PRD v0.1（会员前台 + 运营后台）</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article p,article li{color:var(--ink)}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+article blockquote p{margin:4px 0}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;padding:0;white-space:pre-wrap;word-break:break-word}
+hr{border:0;border-top:1px solid var(--border);margin:28px 0}
+.meta{color:var(--text-3);font-size:14px;margin-bottom:24px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="./">采发发 · 文档</a><span class="crumb">帮帮采 · PRD · 帮帮采 PRD v0.1（会员前台 + 运营后台）</span>
+<a class="btn" href="./">全部文档</a><a class="btn pri" href="../bangbang/">打开 Demo</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-一-文档说明">一、文档说明</a><a href="#h-二-产品结构">二、产品结构</a><a href="#h-三-会员前台">三、会员前台</a><a href="#h-四-运营后台-帮帮采应用">四、运营后台：帮帮采应用</a><a href="#h-五-数据与埋点">五、数据与埋点</a><a href="#h-六-非功能需求与待确认">六、非功能需求与待确认</a></nav>
+<article><h1 id="h-帮帮采-PRD-v0-1-会员前台-运营后台">帮帮采 PRD v0.1（会员前台 + 运营后台）</h1>
+<p>Oct 27, 2026 · @sanyuan</p>
+<h2 id="h-一-文档说明">一、文档说明</h2>
+<p>本 PRD 定义帮帮采首期的会员前台和运营后台「帮帮采」应用，面向研发、测试与运营。范围与优先级以《帮帮采 首期产品 Spec v0.1》为准，小帮的选品边界以《帮帮采 AI 选品 Prompt》为准，话术沿用<a href="https://claude.ai/artifact/V5AnFRDvoUWqfML7kGUHv7">《小帮对话话术规范》</a>。Demo 见画布「帮帮采 Demo v0.1」「运营管理后台 Demo v1.2」。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>名词</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>帮帮采</td>
+<td>面向企业终端采购人员的 AI 采购产品；本文简称 BB</td>
+</tr>
+<tr>
+<td>小帮</td>
+<td>帮帮采的 AI 采购助手</td>
+</tr>
+<tr>
+<td>三大应用</td>
+<td>福利采购、行政采购、办公采购；固定不可增删</td>
+</tr>
+<tr>
+<td>子场景</td>
+<td>应用下的运营单元（如春节 / 年货福利、茶水间补货、新员工入职），决定类目范围、追问维度、快捷语</td>
+</tr>
+<tr>
+<td>热门运营场景</td>
+<td>首页卡片：榜单（如年货爆品 TOP100）或清单模板</td>
+</tr>
+<tr>
+<td>任务</td>
+<td>一次采购对话：从说需求到下单；在左侧「最近任务」可回看</td>
+</tr>
+<tr>
+<td>接口价</td>
+<td>供应链给平台的价格，定价基准；仅商品运营 / 财务 / 管理员可见</td>
+</tr>
+<tr>
+<td>会员价</td>
+<td>用户看到并支付的价格 = 接口价 ×（1 + 加价率）</td>
+</tr>
+<tr>
+<td>市场价利润率</td>
+<td>（市场价 − 接口价）÷ 市场价；上品和定价的条件</td>
+</tr>
+<tr>
+<td>预付款账户</td>
+<td>企业对公转账充值的货款账户，不支持退回；平台底座统一</td>
+</tr>
+<tr>
+<td>AI 积分</td>
+<td>企业使用小帮的额度；不抵货款</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-二-产品结构">二、产品结构</h2>
+<p>帮帮采新增的只有会员前台和后台的「帮帮采」应用；客户、订单、账户、供应链接入都复用平台底座。</p>
+<p>&#91;embedded content: 帮帮采产品结构 · 5 层]</p>
+<p>商品从供应链同步进商品库，按规则自动上架并定价；小帮只从已上架商品里选品，用户确认后订单与扣款走平台底座。</p>
+<h2 id="h-三-会员前台">三、会员前台</h2>
+<h3 id="h-3-1-整体布局">3.1 整体布局</h3>
+<p>全站最左侧固定菜单栏（宽 232），右侧是当前视图：首页、任务页、订单、企业账户。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>区域</th>
+<th>内容</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logo</td>
+<td>帮帮采 · 企业采购 AI 助手</td>
+<td>点击回首页</td>
+</tr>
+<tr>
+<td>新建采购</td>
+<td>主按钮</td>
+<td>回首页、清空输入与子场景选择</td>
+</tr>
+<tr>
+<td>导航</td>
+<td>首页 / 福利采购 / 行政采购 / 办公采购 / 订单 / 企业账户</td>
+<td>点应用 = 回首页并切到该应用</td>
+</tr>
+<tr>
+<td>最近任务</td>
+<td>最近 6 条，标题 + 应用 + 时间；圆点：进行中（品牌色）/ 待确认下单（橙）/ 已完成（灰）</td>
+<td>点击恢复任务页，右侧定位到最近产出（订单 &gt; 汇报 &gt; 方案）</td>
+</tr>
+<tr>
+<td>账户卡</td>
+<td>企业名、预付款余额、AI 积分</td>
+<td>实时同步；不显示活动账户</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="h-3-2-首页">3.2 首页</h3>
+<p>首页只做一件事：让用户 5 秒内知道「说一句就能开始」。自上而下：</p>
+<ol>
+<li><strong>标题 + 欢迎语</strong>：欢迎语随当前应用切换，来自后台「三大应用」。</li>
+<li><strong>三大应用切换</strong>：福利采购 / 行政采购 / 办公采购，默认福利采购。</li>
+<li><strong>子场景标签</strong>：展示当前应用下上线中的子场景，按后台排序；带角标的显示角标（如「节日」）。点选 = 选中（再点取消），输入框示例与快捷语切到该子场景。</li>
+<li><strong>输入框</strong>：placeholder = 子场景第一条快捷语，未选子场景时用应用的输入框示例；Enter 发送，Shift+Enter 换行；空内容发送时提示「先说说要买什么」。</li>
+<li><strong>快捷语</strong>：最多 4 条，点击直接作为需求发送。</li>
+<li><strong>未完成任务提醒</strong>：存在未下单且非本次创建的任务时显示：「你上次的『{任务名}』还没下单，报价明天到期，要继续吗？」[继续上次] [新建采购]。只提一条。</li>
+<li><strong>热门运营场景</strong>：4 张卡片（名称、副标题、所属应用、角标热 / 新），点击创建任务并进入任务页，右侧直接定位「榜单 / 选品」。</li>
+</ol>
+<p><strong>发送后的分流</strong>：命中超范围词（机票、酒店、手机等）→ 小帮说明能帮的范围并给三大应用选项；没有数字也识别不出子场景 → 小帮给子场景选项；其余按关键词识别子场景（优先当前应用），进入任务。</p>
+<h3 id="h-3-3-任务页-三栏">3.3 任务页：三栏</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>栏</th>
+<th>宽度</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>左</td>
+<td>232</td>
+<td>全站菜单（同 3.1），当前任务高亮</td>
+</tr>
+<tr>
+<td>中</td>
+<td>520</td>
+<td>AI 工作流：任务头（标题、应用 · 子场景、本任务已用积分）+ 5 步进度条 + 对话流 + 底部输入框</td>
+</tr>
+<tr>
+<td>右</td>
+<td>自适应</td>
+<td>任务产出物与操作区：方案 / 选品清单（热门场景为「榜单 / 选品」）/ 汇报 / 下单四个页签</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>进度条 5 步</strong>：理解需求 → 补全信息（显示问了几轮）→ 选品出方案（显示几套）→ 确认下单 → 完成。当前步高亮，已完成步浅色。</p>
+<h3 id="h-3-4-AI-工作流-loop">3.4 AI 工作流（loop）</h3>
+<p>小帮每一轮都先观察已知与缺失，再判断是追问还是出方案；用户在任何时候调整，都回到判断这一步。</p>
+<p>&#91;embedded content: 小帮 loop · 2 个循环，1 个用户确认点]</p>
+<p>上循环补信息（最多 2 轮），下循环调方案（不限次数）；只有确认卡被用户点下才会生成订单。</p>
+<p><strong>追问规则</strong></p>
+<ul>
+<li>追问维度来自子场景配置；先从用户原话提取（人数、人均 / 总预算、到货天数、周期、品牌、具体商品名词如「投影仪」「墨盒」），已说过的不问。</li>
+<li>每轮 ≤ 2 问，必填优先；必填都有后，最多再问 1 轮非必填（只问 1 个）；总追问 ≤ 2 轮。</li>
+<li>问题卡：每个问题一组选项，全部选完自动提交；底部「不确定，你先推荐 →」用场景默认值补齐并出方案。品牌问题的选项 = 「没有」+ 子场景内采购量前 3 的品牌。</li>
+<li>追问前先复述已理解的信息（「好的，春节 / 年货福利，20 人、人均 ¥200。」）。</li>
+<li>用户说「随便 / 你看着办 / 不确定」→ 不再追问，用默认值并在方案回复里说明。</li>
+</ul>
+<p><strong>处理过程（对用户可见）</strong>：每条小帮消息上方用 2–4 行展示：✓ 已知 / ○ 还缺 / ! 跳过的商品及原因（如「膳魔师保温杯只剩 12 件，不够 20 份，已换成同类」）。不展示候选数量、不用技术词。</p>
+<p><strong>消息类型</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>何时出现</th>
+<th>形态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>追问</td>
+<td>信息不足</td>
+<td>文字 + 问题卡；只有最新一条可操作</td>
+</tr>
+<tr>
+<td>方案</td>
+<td>信息补齐 / 调整后</td>
+<td>处理过程 + 结论（首推、人均或合计、差额、送达日）+ [生成汇报方案] [调整方案] [直接下单]</td>
+</tr>
+<tr>
+<td>调整</td>
+<td>点「调整方案」</td>
+<td>[更省钱一点] [品质再好一点] [只要最快到货]</td>
+</tr>
+<tr>
+<td>留痕</td>
+<td>右侧改数量 / 换品 / 移除 / 加入 / 导出</td>
+<td>灰底小字；连续修改合并为最新一条；超预算附 [换便宜一点]</td>
+</tr>
+<tr>
+<td>确认卡</td>
+<td>点任何「下单」</td>
+<td>方案、商品金额、运费、收货、发票、支付 6 行 + 按钮</td>
+</tr>
+<tr>
+<td>完成</td>
+<td>下单成功</td>
+<td>订单号、扣款构成、送达日</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>底部输入框</strong>：随时可说「改成 25 人」「换便宜点」「做成汇报」「就要这个」；解析到数字 / 偏好就重出方案，提到汇报走生成汇报，提到下单出确认卡；追问中输入视为回答。</p>
+<h3 id="h-3-5-右侧-任务产出物与操作区">3.5 右侧：任务产出物与操作区</h3>
+<p><strong>方案</strong>：顶部 A / B / C 方案切换（名称 + 总价，首推带角标）。汇总卡：总价、人均 × 人数（福利）或商品种数（行政 / 办公）、方案说明、预算条（超预算变橙）、剩余 / 超出金额、预计送达日。商品行：缩略图、名称、品牌 · 货源 · N 天达、会员价（划线市场价）、数量步进器、小计、[换一款]（展开同类目 3 款）[移除]。底栏：合计 + [导出清单] [生成汇报方案] [下单]。</p>
+<p><strong>选品清单 / 榜单</strong>：当前子场景类目内的已上架商品；筛选：类目、货源（京东自营 / 天猫超市 / 1688 / 得力直供）、2 天内到；排序：按采购量 / 价格从低到高。卡片显示排名（前 3 红色）、近 30 天企业采购量、库存提示（仅剩 N 橙 / 无货红）、[加入 X 方案]；未出方案时按钮为「先出方案」不可点。</p>
+<p><strong>汇报</strong>：标题、格式（PPT 6 页 / 分享页）、分享状态；指标卡：方案总价 / 预算 / 对比预算；需求复述；明细表；推荐理由 3 条。分享链接 7 天有效，只读、不能下单。</p>
+<p><strong>导出清单</strong>：导出当前方案为 Excel（商品、品牌、货源、会员价、数量、小计、合计、报价有效期），对话留痕；不扣积分。</p>
+<h3 id="h-3-6-下单与支付">3.6 下单与支付</h3>
+<p>「下单」页签：收货方式（统一送到公司 / 按名单发到员工 +¥6/人，后者仅福利采购）、发票（增值税专用 / 普通）、商品金额、运费、支付方式（预付款账户 + 余额）、应付、[提交下单确认]。</p>
+<ul>
+<li><strong>运费</strong>：全部京东自营 / 天猫超市或商品金额 ≥ ¥299 包邮，否则 ¥12；名单代发按 ¥6/人。</li>
+<li><strong>确认卡</strong>：任何入口的下单都先在对话中出确认卡；按钮 [确认下单 · ¥X] [再看看]。</li>
+<li><strong>预付款不足</strong>：确认卡显示「预付款 ¥A + 在线支付补差 ¥B」，按钮 [在线支付补差并下单] [先去充值预付款] [再看看]。无活动账户、无账期。</li>
+<li><strong>下单成功</strong>：生成订单号 BByyMMdd…，扣预付款，对话给出完成消息，右侧显示订单卡；发票签收后开出。</li>
+<li><strong>报价有效期</strong> 7 天，到期前 1 天站内提醒；下单时按当时会员价重算，变价在确认卡提示。</li>
+</ul>
+<h3 id="h-3-7-订单与企业账户">3.7 订单与企业账户</h3>
+<ul>
+<li><strong>订单</strong>：列表（标题、订单号、时间、商品种数、支付方式、实付、状态）；详情、物流、售后、开票复用平台底座订单能力。</li>
+<li><strong>企业账户</strong>：只有两张卡——预付款账户（余额、说明、[对公转账充值]，按企业专属汇款识别码到账自动入账）和 AI 积分（余额、消耗规则、按任务的消耗明细、[查看权益与额度]）。不显示活动账户。</li>
+</ul>
+<h2 id="h-四-运营后台-帮帮采应用">四、运营后台：帮帮采应用</h2>
+<h3 id="h-4-1-菜单与权限">4.1 菜单与权限</h3>
+<p>帮帮采与发发福利在同一运营管理后台，作为「业务应用」下的新应用：客户、订单、财务、系统设置复用平台底座。顶栏「业务线」新增「帮帮采」，切换后打开帮帮采商品库；进入帮帮采任一页面时业务线自动显示为帮帮采。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>菜单</th>
+<th>页签</th>
+<th>可编辑角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商品库</td>
+<td>商品 / 自动上下架规则 / 定价规则</td>
+<td>超管、商品运营</td>
+</tr>
+<tr>
+<td>场景运营</td>
+<td>子场景 / 三大应用</td>
+<td>超管、内容运营</td>
+</tr>
+<tr>
+<td>热门运营场景</td>
+<td>—</td>
+<td>超管、内容运营</td>
+</tr>
+<tr>
+<td>应用设置</td>
+<td>—</td>
+<td>超管（仅超管可见）</td>
+</tr>
+</tbody>
+</table></div>
+<p>菜单可见：超管、商品运营、内容运营；不可编辑的角色只读。接口价、利润率、毛利率仅商品运营 / 财务 / 超管可见，其余角色显示 ***。所有新增、修改、上下线、手动下架记操作日志。</p>
+<h3 id="h-4-2-商品库-商品">4.2 商品库 › 商品</h3>
+<p>帮帮采独立商品库，<strong>不区分商品类型</strong>。商品由供应链同步进来，是否上架、卖多少钱都由规则自动决定。</p>
+<ul>
+<li><strong>指标卡</strong>：在库商品、已上架、自动下架、手动下架。</li>
+<li><strong>页签 / 筛选</strong>：全部 / 已上架 / 已下架；商品名 / 品牌、货源、类目。</li>
+<li><strong>列</strong>：商品（编号 · 同步时间）、类目 · 品牌、货源、接口价、会员价（自动）、定价命中（「规则 3 · +5%」或「默认 +8%」）、上品规则、状态（已上架 / 已下架 + 原因）。</li>
+<li><strong>状态原因</strong>（按优先级判定）：手动下架 → 供应链已下架 → 连续无货 3 天 → 未命中上品规则（写明差在哪，如「未达『天猫超市 · 福利食品与家居』条件：利润率 6.7% &lt; 15%」）→ 会员价低于底价 → 自动上架。</li>
+<li><strong>操作</strong>：查看（接口价、市场价、利润率、会员价、命中规则、库存、采购量、被引用的子场景）；[手动下架]（填原因，之后规则不再把它上架）/ [恢复自动]；页头 [立即同步供应链]。</li>
+<li>商品不能在这里新增或改价。</li>
+</ul>
+<h3 id="h-4-3-商品库-自动上下架规则">4.3 商品库 › 自动上下架规则</h3>
+<p>规则决定从哪些供应链、哪些商品自动上架。规则之间是「或」：命中任一启用规则即上架。每天 06:00 全量跑一次，价格 / 库存变化实时触发。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>规则名称</td>
+<td>必填</td>
+</tr>
+<tr>
+<td>供应链货源</td>
+<td>多选：京东自营 / 天猫超市 / 1688 / 得力直供 / 供应商直供；至少选 1 个</td>
+</tr>
+<tr>
+<td>类目</td>
+<td>多选，不选 = 全部</td>
+</tr>
+<tr>
+<td>排除品牌</td>
+<td>这些品牌不自动上架</td>
+</tr>
+<tr>
+<td>市场价利润率 ≥</td>
+<td>%</td>
+</tr>
+<tr>
+<td>接口价 ≤</td>
+<td>元，留空不限</td>
+</tr>
+<tr>
+<td>近 30 天销量 ≥</td>
+<td>供应链侧销量，过滤冷门品</td>
+</tr>
+<tr>
+<td>库存要求</td>
+<td>有货才上架 / 不限</td>
+</tr>
+<tr>
+<td>自动下架条件</td>
+<td>多选：供应链下架 / 连续无货 3 天 / 价格倒挂 / 利润率低于下限</td>
+</tr>
+<tr>
+<td>状态</td>
+<td>启用 / 停用；列表可直接开关</td>
+</tr>
+</tbody>
+</table></div>
+<p>列表显示每条规则「命中上架」商品数。删除 / 停用提示：只靠这条规则上架的商品会在下次同步时自动下架。</p>
+<h3 id="h-4-4-商品库-定价规则">4.4 商品库 › 定价规则</h3>
+<p>会员价 = 接口价 ×（1 + 加价率）。商品自动上架后即按此设会员价，接口价变动时实时重算，1 分钟内前台生效。</p>
+<ul>
+<li><strong>默认定价</strong>（页头 [修改默认加价 / 底价 / 顶价]）：默认加价率（演示 +8%）、最低毛利（演示 3%，底价 = 接口价 ×（1 + 最低毛利））、顶价（≤ 市场价 / ≤ 平均到手价 / 不限）、取整（不取整 / 到角 / 到元 / 尾数 9）。</li>
+<li><strong>条件规则</strong>：类目、品牌、货源（均多选，不选 = 不限）、市场价利润率 ≥ / &lt;（可只填一端）、加价率、备注；下限须小于上限，加价率不能为负。</li>
+<li><strong>命中</strong>：自上而下匹配，命中第一条即停；都不命中用默认。列表显示顺序、条件、加价率、命中商品数（不重复计），支持上移 / 下移。</li>
+<li><strong>顺序</strong>：先取加价 → 顶价封顶 → 取整 → 低于底价则取底价；若底价高于市场价（顶价为「≤ 市场价」时），该商品自动下架并进工作台待办。</li>
+<li><strong>演示规则</strong>：① 货源 1688 → +15%；② 类目礼品卡 → +2%；③ 类目办公设备 → +5%；④ 休闲零食且利润率 ≥ 35% → +12%；其余 +8%。</li>
+</ul>
+<h3 id="h-4-5-场景运营">4.5 场景运营</h3>
+<p><strong>三大应用</strong>（固定三条，只能编辑）：欢迎语（≤ 80 字，问候 + 能做什么 + 引导说需求）、输入框示例、默认追问维度、排序、启用。</p>
+<p><strong>子场景</strong>（按应用分页签）：</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>所属应用</td>
+<td>福利采购 / 行政采购 / 办公采购</td>
+</tr>
+<tr>
+<td>子场景名称 / 角标</td>
+<td>如「春节 / 年货福利」「节日」</td>
+</tr>
+<tr>
+<td>上线日期 / 到期自动下线</td>
+<td>留空 = 常驻</td>
+</tr>
+<tr>
+<td>类目范围</td>
+<td>必填；小帮只从这些类目的已上架商品里选品</td>
+</tr>
+<tr>
+<td>追问维度</td>
+<td>人数 / 人数或数量 / 人均预算 / 总预算 / 到货时间 / 采购周期 / 品牌偏好 / 收货方式</td>
+</tr>
+<tr>
+<td>必填维度</td>
+<td>必须是追问维度的子集；缺了必须问，其余缺失用默认值并告知</td>
+</tr>
+<tr>
+<td>快捷语</td>
+<td>每行一条，≤ 4 条；具体到人数、预算、品类，与在架商品一致</td>
+</tr>
+<tr>
+<td>排序 / 状态</td>
+<td>上线中 / 已下线</td>
+</tr>
+</tbody>
+</table></div>
+<p>列表显示类目范围、追问维度（必填带 *）、在架商品数、近 30 天发起任务数、状态。有上线中热门场景引用的子场景不能删除。首期预置 14 个：福利 6（春节 / 年货、生日、餐补、团建礼品、员工购物卡、中秋已下线）、行政 4（茶水间补货、清洁用品、劳保用品、会议物料）、办公 4（新员工入职、办公用品补货、打印耗材、办公设备）。</p>
+<h3 id="h-4-6-热门运营场景">4.6 热门运营场景</h3>
+<p>首页热门卡片。字段：名称、角标（无 / 热 / 新）、副标题、关联子场景（决定所属应用和商品范围）、类型（榜单 / 清单模板）、排行规则（近 30 天企业采购量 / 会员价从低到高 / 新上架优先）、TOP N、投放期、排序。列表显示近 30 天点击；支持上线 / 下线；首页最多展示 4 个上线中的，按排序。</p>
+<h3 id="h-4-7-应用设置">4.7 应用设置</h3>
+<p>仅超管可见可改，前台与 AI 选品 Prompt 都读取这里的值：</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>设置项</th>
+<th>首期值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>账户</td>
+<td>开通账户</td>
+<td>预付款账户、AI 积分；活动账户不开通</td>
+</tr>
+<tr>
+<td>账户</td>
+<td>支付方式</td>
+<td>预付款优先，不足时在线支付补差</td>
+</tr>
+<tr>
+<td>AI 积分</td>
+<td>积分消耗</td>
+<td>出方案 5 / 生成汇报 10；追问、改数量、换品不扣</td>
+</tr>
+<tr>
+<td>AI 对话</td>
+<td>追问上限</td>
+<td>最多 2 轮，每轮 ≤ 2 问</td>
+</tr>
+<tr>
+<td>AI 对话</td>
+<td>方案数量</td>
+<td>2–3 套，标首推</td>
+</tr>
+<tr>
+<td>交易</td>
+<td>报价有效期</td>
+<td>7 天</td>
+</tr>
+<tr>
+<td>交易</td>
+<td>下单确认</td>
+<td>必须用户点确认卡</td>
+</tr>
+<tr>
+<td>交易</td>
+<td>名单代发运费</td>
+<td>¥6 / 人，仅福利采购</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-五-数据与埋点">五、数据与埋点</h2>
+<p>埋点沿用平台自建埋点规范，公共属性增加 app = bbc、bb_app（fl / xz / bg）、bb_scene、task_id。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>事件</th>
+<th>触发</th>
+<th>关键属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bb_home_view</td>
+<td>首页曝光</td>
+<td>bb_app、has_open_task</td>
+</tr>
+<tr>
+<td>bb_scene_click</td>
+<td>点子场景 / 快捷语 / 热门场景</td>
+<td>type（scene / prompt / hot）、id</td>
+</tr>
+<tr>
+<td>bb_task_start</td>
+<td>发送首条需求</td>
+<td>bb_scene、解析出的维度、is_out_scope、is_vague</td>
+</tr>
+<tr>
+<td>bb_ask_show / bb_ask_answer</td>
+<td>追问卡展示 / 作答</td>
+<td>round、dims、answer（含 skip）</td>
+</tr>
+<tr>
+<td>bb_plan_show</td>
+<td>出方案</td>
+<td>plan_count、rec、total、budget、assumed、mode（cheap / brand / fast）</td>
+</tr>
+<tr>
+<td>bb_plan_edit</td>
+<td>右侧改数量 / 换品 / 移除 / 加入</td>
+<td>action、goods_id、over_budget</td>
+</tr>
+<tr>
+<td>bb_pool_filter</td>
+<td>选品清单筛选 / 排序</td>
+<td>cat、src、fast、sort</td>
+</tr>
+<tr>
+<td>bb_export / bb_report / bb_share</td>
+<td>导出 / 生成汇报 / 确认分享</td>
+<td>fmt、plan</td>
+</tr>
+<tr>
+<td>bb_confirm_show / bb_order_submit</td>
+<td>确认卡展示 / 提交</td>
+<td>pay、prepay_used、topup、ship、inv</td>
+</tr>
+<tr>
+<td>bb_admin_rule_change</td>
+<td>后台改上品 / 定价规则、子场景、热门场景</td>
+<td>entity、action、before / after</td>
+</tr>
+</tbody>
+</table></div>
+<p>看板指标口径见《Spec》六、成功指标。</p>
+<h2 id="h-六-非功能需求与待确认">六、非功能需求与待确认</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>响应</td>
+<td>追问卡 ≤ 2 秒出现；出方案 ≤ 8 秒，超时显示「刚才出了点问题……」并可重试，进度不丢失</td>
+</tr>
+<tr>
+<td>价格一致</td>
+<td>前台、方案、确认卡、订单使用同一会员价计算服务；拿不到实时价时不显示价格、不用缓存价</td>
+</tr>
+<tr>
+<td>商品同步</td>
+<td>每天 06:00 全量，价格 / 库存变更实时；规则变更后 5 分钟内全库重算</td>
+</tr>
+<tr>
+<td>任务保存</td>
+<td>任务进度、方案、修改实时保存，换设备可继续</td>
+</tr>
+<tr>
+<td>权限</td>
+<td>接口价、利润率对前台与无权限角色不可见；应用设置仅超管</td>
+</tr>
+<tr>
+<td>审计</td>
+<td>下单、付款、分享均有用户确认记录；后台规则变更记操作日志</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>待确认</strong></p>
+<ul>
+<li>[ ] 发发福利商品池的「生效业务系统」里的「企业终端采购」是否去掉（帮帮采已用独立商品库）。</li>
+<li>[ ] AI 积分与发发福利共用或单独发放；消耗标准待 AI 团队确认。</li>
+<li>[ ] 没有市场价的商品利润率怎么算（演示用会员价 × 1.3 估算）。</li>
+<li>[ ] 是否要求企业认证后才能下单；个人账号能否使用。</li>
+<li>[ ] 各子场景默认值、加价率、运费规则为演示数字，待商务确认。</li>
+</ul>
+<hr><p class="meta">同步自 Claude 文档 · 2026-10-27</p></article></div>
+</body></html>

@@ -1,16 +1,20 @@
-# 发发福利 · Demo 与文档
+# 发发福利 · 帮帮采 · Demo 与文档
 
 在线访问（无需登录）：
 
 | 内容 | 链接 |
 | --- | --- |
 | 买家端 Demo · Beta 0.3（一页融合） | https://feichenanyu.github.io/fafa-fuli-demo/ |
-| 运营管理后台 Demo v1.1（首期接入发发福利） | https://feichenanyu.github.io/fafa-fuli-demo/admin/ |
+| 运营管理后台 Demo v1.2（发发福利 + 帮帮采） | https://feichenanyu.github.io/fafa-fuli-demo/admin/ |
+| 帮帮采 Demo v0.1（企业终端采购） | https://feichenanyu.github.io/fafa-fuli-demo/bangbang/ |
 | 文档中心 | https://feichenanyu.github.io/fafa-fuli-demo/docs/ |
 | 前台 PRD v2.1（一页融合版） | https://feichenanyu.github.io/fafa-fuli-demo/docs/prd-frontend.html |
 | 产品 Spec v2.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/spec.html |
 | 运营管理后台 PRD v1.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/prd-admin.html |
 | AI Prompt 设计 v2.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/prompt.html |
+| 帮帮采 Spec v0.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/bb-spec.html |
+| 帮帮采 PRD v0.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/bb-prd.html |
+| 帮帮采 AI 选品 Prompt v0.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/bb-prompt.html |
 
 Markdown 原文在 [`docs/`](docs/) 目录。
 
@@ -27,7 +31,13 @@ Markdown 原文在 [`docs/`](docs/) 目录。
 
 演示数据已内置：左侧「最近任务」有 4 个不同状态的老任务（追问中、待挑选、方案已生成、已下单），也可在首页新建任务；左下角铃铛为站内提醒。商品、价格、企业信息均为示例数据，Logo 待定。
 
-## 最近更新（2026-10-21）
+## 最近更新（2026-10-27）
+
+- 新增帮帮采（企业终端采购）：独立商品库（自动上下架 + 定价规则，不区分商品类型）、三大应用（福利 / 行政 / 办公采购）+ 后台运营的子场景与热门场景、左菜单 + 中间 AI 工作流 + 右侧产出物三栏、仅预付款与 AI 积分
+- 运营后台新增「帮帮采」应用；顶栏业务线可切换
+- 文档：帮帮采 Spec / PRD / AI 选品 Prompt v0.1
+
+## 2026-10-21
 
 - 买家端：页头常驻商品搜索框与搜索结果视图；下滑后 AI 对话框收为底部小对话框
 - AI：先识别意图，采购需求 2–6 轮反问收窄（追问卡片 + 右侧需求画像），输出全部满足条件的 SKU，支持多选筛选与多选加购
