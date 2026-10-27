@@ -1396,11 +1396,11 @@ function crudSeed() {
       { id: 'bg_device', app: '办公采购', name: '办公设备', tag: '', start: '', end: '', cats: ['办公设备'], dims: ['人数 / 数量', '总预算', '品牌偏好'], req: ['人数 / 数量'], prompts: '帮我选一台适合 10 人会议室的投影仪', sort: 4, status: '上线中', uses: 150 }
     ],
     bhots: [
-      { id: 'h1', name: '年货爆品 TOP100', app: '福利采购', scene: 'fl_spring', desc: '近 30 天企业采购量排行 · 每日更新', badge: '热', mode: '榜单', rank: '近 30 天企业采购量', limit: 100, start: '2026-10-20', end: '2027-02-10', sort: 1, status: '上线中', clicks: 2310 },
-      { id: 'h2', name: '茶水间月度补货清单', app: '行政采购', scene: 'xz_tea', desc: '按人数自动算一个月用量', badge: '', mode: '清单模板', rank: '近 30 天企业采购量', limit: 20, start: '', end: '', sort: 2, status: '上线中', clicks: 860 },
-      { id: 'h3', name: '新员工入职套装', app: '办公采购', scene: 'bg_new', desc: '文具 + 键鼠，一人一套', badge: '新', mode: '清单模板', rank: '近 30 天企业采购量', limit: 20, start: '', end: '', sort: 3, status: '上线中', clicks: 540 },
-      { id: 'h4', name: '开年会议物料', app: '行政采购', scene: 'xz_meet', desc: '纸杯、桌签、茶水一次配齐', badge: '', mode: '清单模板', rank: '近 30 天企业采购量', limit: 20, start: '2026-12-01', end: '2027-02-28', sort: 4, status: '上线中', clicks: 120 },
-      { id: 'h5', name: '中秋送礼榜', app: '福利采购', scene: 'fl_mid', desc: '中秋礼盒热销排行', badge: '', mode: '榜单', rank: '近 30 天企业采购量', limit: 50, start: '2026-08-20', end: '2026-09-30', sort: 5, status: '已下线', clicks: 3120 }
+      { id: 'h1', name: '同行都在送什么？今年年货热销榜', app: '福利采购', scene: 'fl_spring', desc: '近 30 天企业采购量排行 · 每日更新', badge: '热', mode: '榜单', rank: '近 30 天企业采购量', limit: 100, start: '2026-10-20', end: '2027-02-10', sort: 1, status: '上线中', clicks: 2310 },
+      { id: 'h2', name: '30 人茶水间，一个月备多少货才够', app: '行政采购', scene: 'xz_tea', desc: '按人数自动算一个月用量', badge: '', mode: '清单模板', rank: '近 30 天企业采购量', limit: 20, start: '', end: '', sort: 2, status: '上线中', clicks: 860 },
+      { id: 'h3', name: '新同事下周到岗，工位一次配齐', app: '办公采购', scene: 'bg_new', desc: '文具 + 键鼠，一人一套', badge: '新', mode: '清单模板', rank: '近 30 天企业采购量', limit: 20, start: '', end: '', sort: 3, status: '上线中', clicks: 540 },
+      { id: 'h4', name: '年会前一周，会务物料别漏项', app: '行政采购', scene: 'xz_meet', desc: '纸杯、桌签、茶水一次配齐', badge: '', mode: '清单模板', rank: '近 30 天企业采购量', limit: 20, start: '2026-12-01', end: '2027-02-28', sort: 4, status: '上线中', clicks: 120 },
+      { id: 'h5', name: '中秋送什么不踩雷', app: '福利采购', scene: 'fl_mid', desc: '中秋礼盒热销排行', badge: '', mode: '榜单', rank: '近 30 天企业采购量', limit: 50, start: '2026-08-20', end: '2026-09-30', sort: 5, status: '已下线', clicks: 3120 }
     ],
     bsets: [
       { id: 'bs1', grp: '账户', k: '开通账户', v: '预付款账户、AI 积分', note: '活动账户本期不开通；账户在平台底座统一，帮帮采与发发福利共用同一企业的预付款与积分' },
@@ -2025,14 +2025,14 @@ function buildDefs(self, st, role) {
   };
   D.bhot = {
     page: 'bhot', title: '帮帮采 · 热门运营场景', noun: '热门场景', store: 'bhots', edit: ['admin', 'content'], newLabel: '新增热门场景',
-    desc: '首页「热门运营场景」卡片：榜单（如年货爆品 TOP100，按规则自动排行）或清单模板（按人数自动算用量）。点击后进入对应子场景的任务，右侧直接展示榜单 / 清单',
+    desc: '首页「热门运营场景」卡片：标题写成采购人员心里的问题（如「同行都在送什么？今年年货热销榜」），不要直接写「爆品 TOP100」。前台以竖排胶囊按钮展示在输入框下方；类型分榜单（按规则自动排行）和清单模板（按人数自动算用量），点击后进入对应子场景的任务，右侧直接展示榜单 / 清单',
     tabs: { opts: [['', '全部'], ['上线中', '上线中'], ['已下线', '已下线']], get: (r) => r.status },
     sort: (rows) => rows.slice().sort((a, b) => a.sort - b.sort),
     cols: [{ t: '热门场景', cell: (r) => N(r.name + (r.badge ? ' · ' + r.badge : ''), r.desc) }, { t: '类型', cell: (r) => T(r.mode + (r.mode === '榜单' ? ' · TOP ' + r.limit : '')) }, { t: '关联子场景', cell: (r) => T(r.app + ' › ' + ((st.bscenes.find((s) => s.id === r.scene) || {}).name || '—')) },
       { t: '排行规则', cell: (r) => T(r.rank) }, { t: '投放期', cell: (r) => T(r.end ? r.start.slice(5) + ' 至 ' + r.end.slice(5) : '常驻') }, { t: '近 30 天点击', cls: 'r', cell: (r) => M(String(r.clicks)) }, { t: '状态', cell: (r) => Pl(r.status) }],
     acts: (r) => [{ t: '编辑', k: 'edit' }, r.status === '上线中' ? { t: '下线', run: () => self.crudPatch('bhots', r.id, { status: '已下线' }, '下线热门场景', r.name) } : { t: '上线', run: () => self.crudPatch('bhots', r.id, { status: '上线中' }, '上线热门场景', r.name) }, { t: '删除', k: 'del', danger: true }],
     blank: () => ({ name: '', app: '福利采购', scene: 'fl_spring', desc: '', badge: '', mode: '榜单', rank: '近 30 天企业采购量', limit: 100, start: '', end: '', sort: 9, status: '已下线', clicks: 0 }),
-    form: (v) => [{ k: 'name', t: '名称', type: 'text', req: true, w: 'half', ph: '如：年货爆品 TOP100' }, { k: 'badge', t: '角标', type: 'radio', opts: [['', '无'], ['热', '热'], ['新', '新']], w: 'half' }, { k: 'desc', t: '副标题', type: 'text', req: true },
+    form: (v) => [{ k: 'name', t: '名称', type: 'text', req: true, w: 'half', ph: '如：同行都在送什么？今年年货热销榜', hint: '写成一句用户会问的话，20 字内；不写「TOP100」「爆品」等运营术语' }, { k: 'badge', t: '角标', type: 'radio', opts: [['', '无'], ['热', '热'], ['新', '新']], w: 'half' }, { k: 'desc', t: '说明（鼠标悬停显示）', type: 'text', req: true },
       { k: 'scene', t: '关联子场景', type: 'select', req: true, opts: st.bscenes.map((s) => [s.id, s.app + ' › ' + s.name]) }, { k: 'mode', t: '类型', type: 'radio', opts: ['榜单', '清单模板'] },
       { k: 'rank', t: '排行规则', type: 'select', opts: ['近 30 天企业采购量', '会员价从低到高', '新上架优先'].map((x) => [x, x]), w: 'half' }, { k: 'limit', t: '展示数量（TOP N）', type: 'num', w: 'half' },
       { k: 'start', t: '开始日期', type: 'date', w: 'half', hint: '留空 = 常驻' }, { k: 'end', t: '结束日期', type: 'date', w: 'half' }, { k: 'sort', t: '排序', type: 'num', w: 'half' }],

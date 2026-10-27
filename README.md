@@ -6,7 +6,7 @@
 | --- | --- |
 | 买家端 Demo · Beta 0.3（一页融合） | https://feichenanyu.github.io/fafa-fuli-demo/ |
 | 运营管理后台 Demo v1.2（发发福利 + 帮帮采） | https://feichenanyu.github.io/fafa-fuli-demo/admin/ |
-| 帮帮采 Demo v0.1（企业终端采购） | https://feichenanyu.github.io/fafa-fuli-demo/bangbang/ |
+| 帮帮采 Demo v0.2（企业终端采购 · 发发福利 Agent UI） | https://feichenanyu.github.io/fafa-fuli-demo/bangbang/ |
 | 文档中心 | https://feichenanyu.github.io/fafa-fuli-demo/docs/ |
 | 前台 PRD v2.1（一页融合版） | https://feichenanyu.github.io/fafa-fuli-demo/docs/prd-frontend.html |
 | 产品 Spec v2.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/spec.html |
@@ -36,6 +36,7 @@ Markdown 原文在 [`docs/`](docs/) 目录。
 - 新增帮帮采（企业终端采购）：独立商品库（自动上下架 + 定价规则，不区分商品类型）、三大应用（福利 / 行政 / 办公采购）+ 后台运营的子场景与热门场景、左菜单 + 中间 AI 工作流 + 右侧产出物三栏、仅预付款与 AI 积分
 - 运营后台新增「帮帮采」应用；顶栏业务线可切换
 - 文档：帮帮采 Spec / PRD / AI 选品 Prompt v0.1
+- 帮帮采 v0.2：前台按发发福利 Agent UI 复原；中间工作流只有问答与澄清选项，下单 / 汇报 / 导出 / 重配全部在右侧执行；热门场景改为输入框下方竖排胶囊（标题写成用户的问题）；保留订单管理（按货源拆子单）、账号信息、企业认证、组织管理、企业信息、预付款管理、结算与账单
 
 ## 2026-10-21
 
