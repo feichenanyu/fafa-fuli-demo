@@ -834,9 +834,100 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 .card .bb-tb .bb-tr{padding:8px 10px}
 .bb-tr>sc-if,.bb-tr>sc-for{display:contents}
 .side{z-index:30}
+/* 登录 */
+.lg{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);background:var(--canvas);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,sans-serif;color:var(--ink)}
+.lg-l{padding:56px 64px;display:flex;flex-direction:column;justify-content:center;gap:22px;background:radial-gradient(120% 90% at 0% 0%,var(--brand-soft) 0%,#f3faf8 45%,var(--canvas) 100%)}
+.lg-h{margin:24px 0 0;font-size:38px;line-height:1.3;font-weight:700;letter-spacing:1px}
+.lg-p{margin:0;font-size:16px;line-height:28px;color:var(--text-2);max-width:460px}
+.lg-pts{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;max-width:460px}
+.lg-pts>li{display:flex;flex-direction:column;gap:2px;padding-left:16px;border-left:2px solid var(--brand-200)}
+.lg-pts b{font-size:15px}
+.lg-pts span{font-size:13px;color:var(--text-2);line-height:20px}
+.lg-r{display:flex;align-items:center;justify-content:center;padding:40px 24px}
+.lg-card{width:100%;max-width:400px;background:var(--surface);border-radius:20px;padding:36px 32px 28px;box-shadow:var(--shadow-floating);display:flex;flex-direction:column;gap:16px}
+.lg-card>h2{margin:0;font-size:22px;font-weight:700}
+.lg-sub{margin:-8px 0 4px;font-size:13px;color:var(--text-3)}
+.lg-f{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--text-2)}
+.lg-in{display:flex;align-items:center;height:46px;border:1px solid var(--border);border-radius:12px;padding:0 6px 0 14px;gap:10px;background:#fff;transition:border-color .15s,box-shadow .15s}
+.lg-in:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-100)}
+.lg-in>em{font-style:normal;color:var(--text-2);font-size:14px;padding-right:10px;border-right:1px solid var(--border-subtle)}
+.lg-in>input{flex:1;min-width:0;border:0;outline:0;font-size:15px;font-family:inherit;color:var(--ink);background:transparent}
+.lg-code{height:34px;border:0;border-radius:8px;background:var(--brand-soft);color:var(--brand-700);font-size:13px;padding:0 12px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.lg-code.sent{background:var(--surface-muted);color:var(--text-3)}
+.lg-agree{display:flex;align-items:center;gap:8px;border:0;background:transparent;padding:0;cursor:pointer;font-size:12px;color:var(--text-2);font-family:inherit;text-align:left}
+.pl-ck.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.lg-go{height:46px;font-size:16px;width:100%}
+.lg-demo{display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px dashed var(--border);font-size:12px;color:var(--text-3)}
+.lg-demo>button{border:1px solid var(--border-subtle);background:var(--surface-subtle);border-radius:8px;padding:7px 10px;text-align:left;font-size:13px;color:var(--text-2);cursor:pointer;font-family:inherit}
+.lg-demo>button:hover{border-color:var(--brand-300);color:var(--brand-700)}
+@media (max-width:900px){.lg{grid-template-columns:1fr}.lg-l{padding:32px 20px 8px}.lg-h{font-size:28px}}
+/* 充值弹窗 */
+.bb-mask{position:fixed;inset:0;background:#0f141859;z-index:50}
+.bb-modal{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,sans-serif;color:var(--ink);font-size:14px;animation:fadeIn .2s ease-out;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:51;width:min(620px,calc(100vw - 32px));max-height:calc(100vh - 40px);overflow:auto;background:#fff;border-radius:16px;padding:22px 24px 20px;box-shadow:var(--shadow-dialog);display:flex;flex-direction:column;gap:12px}
+.rc-h{display:flex;align-items:center;gap:8px;padding-left:10px;border-left:4px solid var(--brand)}
+.rc-h>b{font-size:18px}
+.rc-h>span{font-size:12px;color:var(--text-3)}
+.rc-h>span>b{color:var(--ink);font-size:13px}
+.rc-l{font-size:14px;color:var(--text-2);margin-top:4px}
+.rc-opts{display:flex;gap:12px;flex-wrap:wrap}
+.rc-o{position:relative;min-width:180px;height:48px;padding:0 20px;border:1px solid transparent;border-radius:6px;background:var(--surface-muted);font-size:15px;color:var(--ink);cursor:pointer;font-family:inherit;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.rc-o.on{background:#fdf6ec;border-color:#e3c48f}
+.rc-o>i{position:absolute;right:0;top:0;width:34px;height:34px;background:linear-gradient(45deg,transparent 50%,var(--brand) 50%);color:#fff;font-style:normal;font-size:11px;display:flex;justify-content:flex-end;padding:2px 3px 0 0}
+.rc-o.off{color:var(--text-3)}
+.rc-o.off>small{font-size:11px;color:var(--text-3);border:1px solid var(--border);border-radius:4px;padding:0 4px;line-height:16px}
+.rc-tip{margin:6px 0 0;font-size:14px;color:var(--text-2)}
+.rc-tip>em{font-style:normal;color:#e0533d;font-weight:600}
+.rc-box{border:1px solid var(--border);background:var(--surface-subtle);border-radius:8px;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.rc-row{display:grid;grid-template-columns:104px 1fr;align-items:center;gap:14px;font-size:14px}
+.rc-row>span{text-align:right;color:var(--text-2)}
+.rc-row>b{font-weight:500;display:flex;align-items:center;gap:8px}
+.rc-bk{width:22px;height:22px;border-radius:4px;color:#fff;font-style:normal;font-size:12px;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
+.rc-acct{color:#e0533d;font-size:18px !important;font-weight:700 !important;letter-spacing:.5px}
+.rc-notes{margin:0;padding:0;list-style:none;font-size:12px;color:var(--text-3);line-height:20px}
+.rc-notes>li::before{content:"· "}
+.rc-ft{display:flex;justify-content:flex-end;gap:10px;margin-top:4px}
+/* 企业认证 */
+.ct-intro{display:flex;flex-direction:column;gap:6px;background:var(--brand-soft) !important}
+.ct-intro>b{font-size:16px}
+.ct-intro>span{font-size:13px;color:var(--text-2);line-height:22px}
+.ct-up{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;height:170px;border:1.5px dashed var(--brand-300);border-radius:14px;background:var(--surface-subtle);cursor:pointer;font-family:inherit;color:var(--ink);max-width:520px;width:100%}
+.ct-up>b{font-size:15px}
+.ct-up>span{font-size:12px;color:var(--text-3)}
+.ct-up:hover{background:var(--brand-soft)}
+.ct-file{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;max-width:520px}
+.ct-file b{display:block;font-size:14px}
+.ct-file div>span{font-size:12px;color:var(--brand-700)}
+.ct-thumb{width:48px;height:60px;border-radius:6px;background:linear-gradient(160deg,#fbe9d6,#f3d1b0);border:1px solid #e3b98d;color:#a2541d;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ct-wait{width:44px;height:44px;border-radius:999px;background:var(--warning-soft);color:var(--warning);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.ct-gate{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:64px 24px;background:var(--surface-subtle);border-radius:16px}
+.ct-gate>b{font-size:17px}
+.ct-gate>span{font-size:13px;color:var(--text-2);max-width:420px;line-height:22px}
+.bb-toast{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
 </style>
 </helmet>
 
+<sc-if value="{{isLogin}}" hint-placeholder-val="{{ false }}">
+<div class="lg">
+<section class="lg-l">
+<div style="display: flex; align-items: center; gap: 10px"><img src="{{brandLogo}}" alt="" aria-hidden="true" width="40" height="32" style="object-fit: contain"><div style="line-height: 1"><div style="font-size: 22px; font-weight: 700; color: var(--brand); letter-spacing: 1px">**采</div><div style="font-size: 12px; color: var(--brand-700); margin-top: 6px">企业采购工作台</div></div></div>
+<h1 class="lg-h">说一句需求，<br>小帮帮你把采购办完</h1>
+<p class="lg-p">福利、行政、办公采购，一句话出 2–3 套方案，做成汇报给领导确认，再一键下单。</p>
+<ul class="lg-pts"><li><b>手机号即可开始</b><span>验证码登录，未注册自动创建账号</span></li><li><b>先用后认证</b><span>出方案、做汇报不需要认证；下单前上传营业执照完成企业认证</span></li><li><b>对公汇款认账</b><span>专属汇款账号，到账自动认账；下单也可用微信 / 支付宝</span></li></ul>
+</section>
+<section class="lg-r">
+<div class="lg-card fu">
+<h2>手机号登录 / 注册</h2>
+<p class="lg-sub">未注册的手机号验证后自动创建账号</p>
+<label class="lg-f"><span>手机号</span><div class="lg-in"><em>+86</em><input type="tel" inputmode="numeric" maxlength="11" placeholder="请输入手机号" aria-label="手机号" value="{{phone}}" onChange="{{onPhone}}"></div></label>
+<label class="lg-f"><span>验证码</span><div class="lg-in"><input type="text" inputmode="numeric" maxlength="6" placeholder="短信验证码" aria-label="短信验证码" value="{{code}}" onChange="{{onCode}}" onKeyDown="{{loginKey}}"><button class="lg-code {{codeCls}}" onClick="{{sendCode}}">{{codeT}}</button></div></label>
+<button class="lg-agree" role="checkbox" aria-checked="{{agreeAria}}" onClick="{{toggleAgree}}"><span class="pl-ck {{agreeCls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span><span>我已阅读并同意《用户协议》《隐私政策》</span></button>
+<button class="btn btn-p lg-go" onClick="{{doLogin}}">登录</button>
+<div class="lg-demo"><span>演示账号</span><button onClick="{{demoOld}}">已认证企业 · 138 0000 2210</button><button onClick="{{demoNew}}">新用户（未认证）· 139 1234 5678</button></div>
+</div>
+</section>
+</div>
+</sc-if>
+<sc-if value="{{notLogin}}" hint-placeholder-val="{{ true }}">
 <div class="shell">
 <aside class="side" aria-label="**采主导航">
 <sc-if value="{{notAccount}}" hint-placeholder-val="{{ true }}">
@@ -861,12 +952,12 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <div class="umenu-mask" onClick="{{closeUserMenu}}"></div>
 <div class="umenu fu" role="menu" aria-label="账户菜单">
 <button class="um-id" role="menuitem" onClick="{{umInfo}}">
-<span class="bb-av" style="width: 44px; height: 44px; font-size: 17px">李</span>
-<span style="flex: 1; min-width: 0; text-align: left"><b style="display: block; font-size: 16px; font-weight: 600">李敏</b><span style="display: block; font-size: 12px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px">杭州云栖科技有限公司 · 管理员</span></span>
+<span class="bb-av" style="width: 44px; height: 44px; font-size: 17px">{{uAv}}</span>
+<span style="flex: 1; min-width: 0; text-align: left"><b style="display: block; font-size: 16px; font-weight: 600">{{uName}}</b><span style="display: block; font-size: 12px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px">{{uMenuSub}}</span></span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
 </button>
 <div class="um-card">
-<div class="um-col"><span class="um-k">预付款余额</span><button class="um-v mono um-bal" onClick="{{umFin}}" title="预付款管理">{{prepay}}</button><button class="um-btn p" onClick="{{umFin}}">充值</button></div>
+<div class="um-col"><span class="um-k">预付款余额</span><button class="um-v mono um-bal" onClick="{{umFin}}" title="预付款管理">{{prepay}}</button><button class="um-btn p" onClick="{{umTopup}}">充值</button></div>
 <div class="um-col"><span class="um-k">AI 积分</span><span class="um-v mono">{{points}}</span><button class="um-btn" onClick="{{umPts}}">明细</button></div>
 </div>
 <button class="umenu-i" role="menuitem" onClick="{{umOrders}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 10h17M9 14h6"></path></svg><span style="flex: 1">订单管理</span></button>
@@ -876,8 +967,8 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 </div>
 </sc-if>
 <button class="ucard" onClick="{{toggleUserMenu}}" aria-label="账户菜单" aria-expanded="{{userMenuAria}}">
-<span class="bb-av">李</span>
-<div style="min-width: 0; flex: 1"><div style="font-size: 13px; font-weight: 600; line-height: 20px">李敏</div><div style="font-size: 12px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">杭州云栖科技 · 企业会员</div></div>
+<span class="bb-av">{{uAv}}</span>
+<div style="min-width: 0; flex: 1"><div style="font-size: 13px; font-weight: 600; line-height: 20px">{{uName}}</div><div style="font-size: 12px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{uSub}}</div></div>
 <span style="position: relative; display: inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-2)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"></path><path d="M10 20.5a2 2 0 0 0 4 0"></path></svg><span style="position: absolute; top: 0; right: 0; width: 6px; height: 6px; border-radius: 999px; background: var(--danger)"></span></span>
 </button>
 </div>
@@ -941,7 +1032,6 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <div style="flex: 1"></div>
 <span style="font-size: 12px; color: var(--text-3); white-space: nowrap">{{tSub}}</span>
 </header>
-<div class="bb-steps"><sc-for list="{{steps}}" as="s" hint-placeholder-count="5"><div class="bb-st {{s.cls}}"><i></i><span>{{s.t}}</span><small>{{s.sub}}</small></div></sc-for></div>
 <div class="bb-flow">
 <div style="padding: 24px 24px 16px; width: 100%; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px" aria-live="polite">
 <sc-for list="{{msgs}}" as="m" hint-placeholder-count="3">
@@ -1059,16 +1149,17 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <div class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 14px">
 <b style="font-size: 15px">下单 · {{pl.k}} 方案</b>
 <div class="bb-row"><span>收货方式</span><div class="bb-chips"><button class="otab {{ck.shipOne}}" onClick="{{ck.setOne}}">统一送到公司</button><sc-if value="{{ck.isFl}}" hint-placeholder-val="{{ true }}"><button class="otab {{ck.shipList}}" onClick="{{ck.setList}}">按名单发到员工 {{ck.listFee}}</button></sc-if></div></div>
-<div class="bb-row"><span>收货地址</span><b style="font-weight: 400">杭州市西湖区云栖小镇 8 号楼 3 层 · 李敏 138****2210</b></div>
+<div class="bb-row"><span>收货地址</span><b style="font-weight: 400">{{ck.addr}}</b></div>
 <div class="bb-row"><span>发票</span><div class="bb-chips"><button class="otab {{ck.invVat}}" onClick="{{ck.setVat}}">增值税专用发票</button><button class="otab {{ck.invGen}}" onClick="{{ck.setGen}}">普通发票</button></div></div>
 <div class="bb-row"><span>商品金额</span><b class="mono">{{ck.tot}}</b></div>
 <div class="bb-row"><span>运费</span><b class="mono">{{ck.fr}}</b></div>
-<div class="bb-row"><span>支付方式</span><b>预付款账户 <span class="mono" style="font-weight: 400; color: var(--text-3)">余额 {{ck.bal}}</span></b></div>
+<div class="bb-row"><span>支付方式</span><div class="bb-chips"><button class="otab {{ck.payPre}}" onClick="{{ck.setPre}}">预付款账户 <span class="mono">{{ck.bal}}</span></button><button class="otab {{ck.payWx}}" onClick="{{ck.setWx}}">微信支付</button><button class="otab {{ck.payAli}}" onClick="{{ck.setAli}}">支付宝</button></div></div>
+<sc-if value="{{ck.needCert}}" hint-placeholder-val="{{ false }}"><div class="bb-warn" style="display: flex; align-items: center; gap: 10px"><span style="flex: 1">当前账号未完成企业认证。可以先看方案、做汇报；提交订单前需上传营业执照完成认证。</span><button class="btn btn-p sm" onClick="{{ck.goCert}}">去认证</button></div></sc-if>
 <sc-if value="{{ck.short}}" hint-placeholder-val="{{ false }}"><div class="bb-warn">{{ck.shortT}}</div></sc-if>
-<sc-if value="{{ck.notConfirming}}" hint-placeholder-val="{{ true }}"><div style="display: flex; align-items: center; gap: 10px; justify-content: flex-end"><span style="font-size: 13px; color: var(--text-2)">应付</span><b class="mono" style="font-size: 20px">{{ck.pay}}</b><button class="btn btn-p" onClick="{{ck.go}}">提交订单</button></div></sc-if>
+<sc-if value="{{ck.notConfirming}}" hint-placeholder-val="{{ true }}"><div style="display: flex; align-items: center; gap: 10px; justify-content: flex-end"><span style="font-size: 13px; color: var(--text-2)">应付</span><b class="mono" style="font-size: 20px">{{ck.pay}}</b><sc-if value="{{ck.certOk}}" hint-placeholder-val="{{ true }}"><button class="btn btn-p" onClick="{{ck.go}}">提交订单</button></sc-if><sc-if value="{{ck.needCert}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p" onClick="{{ck.go}}">认证后下单</button></sc-if></div></sc-if>
 <sc-if value="{{ck.confirming}}" hint-placeholder-val="{{ false }}">
 <div class="bb-cf fi"><b>请确认订单</b><sc-for list="{{ck.rows}}" as="r" hint-placeholder-count="5"><div class="bb-cfr"><span>{{r.k}}</span><b>{{r.v}}</b></div></sc-for>
-<div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap"><sc-if value="{{ck.short}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p sm" onClick="{{ck.topup}}">在线支付补差并下单</button><button class="btn btn-o sm" onClick="{{ck.recharge}}">先去充值预付款</button></sc-if><sc-if value="{{ck.enough}}" hint-placeholder-val="{{ true }}"><button class="btn btn-p sm" onClick="{{ck.confirm}}">确认下单 · {{ck.pay}}</button></sc-if><button class="btn btn-o sm" onClick="{{ck.back}}">返回修改</button></div>
+<div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap"><sc-if value="{{ck.short}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p sm" onClick="{{ck.topup}}">微信 / 支付宝补差并下单</button><button class="btn btn-o sm" onClick="{{ck.recharge}}">先对公转账充值</button></sc-if><sc-if value="{{ck.enough}}" hint-placeholder-val="{{ true }}"><button class="btn btn-p sm" onClick="{{ck.confirm}}">{{ck.confirmT}}</button></sc-if><button class="btn btn-o sm" onClick="{{ck.back}}">返回修改</button></div>
 </div>
 </sc-if>
 </div>
@@ -1110,16 +1201,41 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 <header class="acw-h"><div><h1>{{acTitle}}</h1><p>{{acSub}}</p></div><button class="ib" style="width: 36px; height: 36px" aria-label="关闭" onClick="{{acBack}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></header>
 
 <sc-if value="{{acIsInfo}}" hint-placeholder-val="{{ true }}">
-<div class="acw-panel" style="display: flex; align-items: center; gap: 16px"><span class="bb-av" style="width: 60px; height: 60px; font-size: 22px">李</span><div style="flex: 1"><div style="font-size: 18px; font-weight: 600">李敏</div><div class="acw-m" style="margin: 4px 0 0">行政主管 · 杭州云栖科技有限公司</div></div><span class="tagb">企业已认证</span></div>
+<div class="acw-panel" style="display: flex; align-items: center; gap: 16px"><span class="bb-av" style="width: 60px; height: 60px; font-size: 22px">{{uAv}}</span><div style="flex: 1"><div style="font-size: 18px; font-weight: 600">{{uName}}</div><div class="acw-m" style="margin: 4px 0 0">{{uTitle}}</div></div><span class="{{certTagCls}}">{{certTagT}}</span></div>
 <div class="acw-rows"><sc-for list="{{acInfo}}" as="kv" hint-placeholder-count="5"><div><span>{{kv.k}}</span><b>{{kv.v}}</b></div></sc-for></div>
 <div style="display: flex; gap: 8px"><button class="btn btn-o sm" onClick="{{acSoon}}">修改资料</button><button class="btn btn-o sm" onClick="{{acSoon}}">修改密码</button></div>
 </sc-if>
 
 <sc-if value="{{acIsCert}}" hint-placeholder-val="{{ false }}">
-<div class="acw-panel" style="display: flex; align-items: center; gap: 14px"><span class="bb-certok">✓</span><div style="flex: 1"><div style="font-size: 17px; font-weight: 600">企业认证已通过</div><div class="acw-m" style="margin: 4px 0 0">2026-09-02 通过 · 可使用企业会员价、预付款与按名单代发</div></div><button class="btn btn-o sm" onClick="{{certChange}}">变更认证信息</button></div>
+<sc-if value="{{certForm}}" hint-placeholder-val="{{ false }}">
+<div class="acw-panel ct-intro"><b>下单前需完成企业认证</b><span>上传营业执照，系统自动识别企业信息；审核通过后即可下单、对公转账充值预付款、按名单代发，并成为企业管理员。</span></div>
+<div class="acw-sec"><b>1. 上传营业执照</b><span>支持 JPG / PNG / PDF，≤ 5MB；需清晰完整，四角可见</span></div>
+<sc-if value="{{certNoLic}}" hint-placeholder-val="{{ true }}"><button class="ct-up" onClick="{{certUpload}}"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"></path></svg><b>点击上传营业执照</b><span>演示：点击即模拟上传并自动识别</span></button></sc-if>
+<sc-if value="{{certLic}}" hint-placeholder-val="{{ false }}">
+<div class="ct-file"><span class="ct-thumb" aria-hidden="true">执照</span><div style="flex: 1"><b>营业执照.jpg</b><span>已自动识别 · 请核对下列信息</span></div><button class="btn btn-o sm" onClick="{{certUpload}}">重新上传</button></div>
+<div class="acw-rows"><sc-for list="{{certOcr}}" as="kv" hint-placeholder-count="4"><div><span>{{kv.k}}</span><b>{{kv.v}}</b></div></sc-for></div>
+</sc-if>
+<div class="acw-sec"><b>2. 申请人信息</b></div>
+<div class="bb-row"><span>我的身份</span><div class="bb-chips"><button class="otab {{certLegal}}" onClick="{{setLegal}}">法定代表人</button><button class="otab {{certAgent}}" onClick="{{setAgent}}">经办人</button></div></div>
+<sc-if value="{{certIsAgent}}" hint-placeholder-val="{{ false }}"><div class="acw-m" style="margin: 0">经办人需额外上传加盖公章的授权委托书（演示略）</div></sc-if>
+<div class="bb-row"><span>联系手机</span><b class="mono" style="font-weight: 500">{{certPhone}}</b><span style="width: auto; font-size: 12px">即当前登录手机号，审核结果短信通知</span></div>
+<button class="lg-agree" role="checkbox" aria-checked="{{certAgreeAria}}" onClick="{{certToggleAgree}}"><span class="pl-ck {{certAgreeCls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span><span>我确认以上信息真实有效，并同意《企业认证授权协议》</span></button>
+<div><button class="btn btn-p {{certSubmitCls}}" onClick="{{certSubmit}}">提交认证</button></div>
+</sc-if>
+<sc-if value="{{certPending}}" hint-placeholder-val="{{ false }}">
+<div class="acw-panel" style="display: flex; align-items: center; gap: 14px"><span class="ct-wait" aria-hidden="true">···</span><div style="flex: 1"><div style="font-size: 17px; font-weight: 600">认证审核中</div><div class="acw-m" style="margin: 4px 0 0">已提交「{{certEntName}}」的认证资料，预计 1 个工作日内完成，结果短信通知 {{certPhone}}</div></div><button class="btn btn-p sm" onClick="{{certPass}}">演示：审核通过</button></div>
+<sc-if value="{{certFromTask}}" hint-placeholder-val="{{ false }}"><div class="acw-m" style="margin: 0">审核通过后会自动回到刚才的任务，继续下单。</div></sc-if>
+</sc-if>
+<sc-if value="{{certOk}}" hint-placeholder-val="{{ true }}">
+<div class="acw-panel" style="display: flex; align-items: center; gap: 14px"><span class="bb-certok">✓</span><div style="flex: 1"><div style="font-size: 17px; font-weight: 600">企业认证已通过</div><div class="acw-m" style="margin: 4px 0 0">{{certAtT}}</div></div><button class="btn btn-o sm" onClick="{{certChange}}">变更认证信息</button></div>
 <div class="acw-rows"><sc-for list="{{certInfo}}" as="kv" hint-placeholder-count="6"><div><span>{{kv.k}}</span><b>{{kv.v}}</b></div></sc-for></div>
 <div class="acw-sec"><b>认证记录</b></div>
 <div class="acw-tbl"><div class="bb-tb" role="table" style="--c: 150px 1fr 110px 110px;"><div class="bb-tr" role="row"><div class="bb-hd" role="columnheader">时间</div><div class="bb-hd" role="columnheader">事项</div><div class="bb-hd" role="columnheader">结果</div><div class="bb-hd" role="columnheader">处理人</div></div><sc-for list="{{certLog}}" as="r" hint-placeholder-count="2"><div class="bb-tr" role="row"><div role="cell" class="mono">{{r.t}}</div><div role="cell">{{r.w}}</div><div role="cell"><span style="color: {{r.color}}">● {{r.r}}</span></div><div role="cell">{{r.by}}</div></div></sc-for></div></div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{acGate}}" hint-placeholder-val="{{ false }}">
+<div class="ct-gate"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--brand-300)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h9l6 6v11zM14 4v6h6M8 14h8M8 17.5h5"></path></svg><b>完成企业认证后可用</b><span>{{acGateT}}需要企业身份。上传营业执照即可认证，通常 1 个工作日内完成。</span><button class="btn btn-p" onClick="{{acGoCert}}">去企业认证</button></div>
 </sc-if>
 
 <sc-if value="{{acIsEnt}}" hint-placeholder-val="{{ false }}">
@@ -1139,12 +1255,12 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 
 <sc-if value="{{acIsFin}}" hint-placeholder-val="{{ false }}">
 <div class="acw-cmp" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))">
-<div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">预付款账户</b><span class="tagb">可充值</span></div><div class="mono" style="font-size: 30px; font-weight: 600; margin: 14px 0 6px">{{prepay}}</div><div class="acw-m" style="margin: 0 0 14px">冻结中 ¥0 · 可用于全部商品，可开票</div><div style="display: flex; gap: 8px"><button class="btn btn-p sm" onClick="{{recharge}}">对公转账充值</button></div><div style="font-size: 12px; color: var(--text-3); margin-top: 8px">按企业专属汇款识别码转账，到账自动入账；不支持主动退款，订单取消、售后退款原路退回预付款</div></div>
-<div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">汇款识别码</b><span class="tagb">专属</span></div><div class="mono" style="font-size: 22px; font-weight: 600; margin: 18px 0 10px">BBC-8273-6610</div><div class="acw-m" style="margin: 0">收款户名：杭州飞象科技有限公司 · 招商银行杭州分行 5719 **** 0001；转账备注填写识别码</div></div>
-<div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">在线支付</b><span class="tagb">仅补差</span></div><div style="font-size: 20px; font-weight: 600; margin: 18px 0 10px">支付宝 · 微信支付</div><div class="acw-m" style="margin: 0">预付款不足时用于补差价；**采不开通活动账户</div></div>
+<div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">预付款账户</b><span class="tagb">可充值</span></div><div class="mono" style="font-size: 30px; font-weight: 600; margin: 14px 0 6px">{{prepay}}</div><div class="acw-m" style="margin: 0 0 14px">冻结中 ¥0 · 可用于全部商品，可开票</div><div style="display: flex; gap: 8px"><button class="btn btn-p sm" onClick="{{recharge}}">充值</button></div><div style="font-size: 12px; color: var(--text-3); margin-top: 8px">不支持主动退款；订单取消、售后退款原路退回预付款</div></div>
+<div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">专属汇款账号</b><span class="tagb">汇款智能认账</span></div><div class="mono" style="font-size: 20px; font-weight: 600; margin: 18px 0 10px">{{finAcct}}</div><div class="acw-m" style="margin: 0 0 10px">杭州飞象企服网络技术有限公司 · 招行杭州高新支行；贵司独享，汇入自动认账，无需备注</div><button class="btn btn-o sm" onClick="{{finCopy}}">复制账号信息</button></div>
+<div class="acw-card"><div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 15px">微信 / 支付宝</b><span class="tagw">仅下单支付</span></div><div style="font-size: 20px; font-weight: 600; margin: 18px 0 10px">下单时直接付款</div><div class="acw-m" style="margin: 0">暂不支持在线充值预付款；下单时可选微信 / 支付宝全额付款，或预付款不足时补差</div></div>
 </div>
 <div class="acw-sec"><b>资金流水</b><span>充值、支付、退款</span></div>
-<div class="acw-tbl"><div class="bb-tb" role="table" style="--c: 120px 80px 110px 110px minmax(0,1fr) 110px;"><div class="bb-tr" role="row"><div class="bb-hd" role="columnheader">时间</div><div class="bb-hd" role="columnheader">账户</div><div class="bb-hd" role="columnheader">类型</div><div class="bb-hd" role="columnheader" style="text-align: right">金额</div><div class="bb-hd" role="columnheader">关联订单</div><div class="bb-hd" role="columnheader" style="text-align: right">余额</div></div><sc-for list="{{flows}}" as="f" hint-placeholder-count="4"><div class="bb-tr" role="row"><div role="cell" class="mono">{{f.t}}</div><div role="cell">{{f.acct}}</div><div role="cell">{{f.type}}</div><div role="cell" class="mono" style="text-align: right; color: {{f.color}}">{{f.amt}}</div><div role="cell" class="mono" style="color: var(--text-2)">{{f.ref}}</div><div role="cell" class="mono" style="text-align: right">{{f.bal}}</div></div></sc-for></div></div>
+<div class="acw-tbl"><div class="bb-tb" role="table" style="--c: 120px 80px 110px 110px minmax(0,1fr) 110px;"><div class="bb-tr" role="row"><div class="bb-hd" role="columnheader">时间</div><div class="bb-hd" role="columnheader">账户</div><div class="bb-hd" role="columnheader">类型</div><div class="bb-hd" role="columnheader" style="text-align: right">金额</div><div class="bb-hd" role="columnheader">关联订单</div><div class="bb-hd" role="columnheader" style="text-align: right">余额</div></div><sc-if value="{{noFlows}}" hint-placeholder-val="{{ false }}"><div style="padding: 32px; text-align: center; color: var(--text-2)">还没有资金流水</div></sc-if><sc-for list="{{flows}}" as="f" hint-placeholder-count="4"><div class="bb-tr" role="row"><div role="cell" class="mono">{{f.t}}</div><div role="cell">{{f.acct}}</div><div role="cell">{{f.type}}</div><div role="cell" class="mono" style="text-align: right; color: {{f.color}}">{{f.amt}}</div><div role="cell" class="mono" style="color: var(--text-2)">{{f.ref}}</div><div role="cell" class="mono" style="text-align: right">{{f.bal}}</div></div></sc-for></div></div>
 </sc-if>
 
 <sc-if value="{{acIsInv}}" hint-placeholder-val="{{ false }}">
@@ -1171,8 +1287,28 @@ textarea.adr-in{height:72px;padding:10px 12px;resize:none;line-height:20px}
 
 </div>
 </div>
-<sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}"><div class="bb-toast">{{toast}}</div></sc-if>
 </div>
+</sc-if>
+<sc-if value="{{rcOpen}}" hint-placeholder-val="{{ false }}">
+<div class="bb-mask fi" onClick="{{rcClose}}"></div>
+<div class="bb-modal" role="dialog" aria-modal="true" aria-label="预付款账户充值">
+<div class="rc-h"><b>预付款账户充值</b><div style="flex: 1"></div><span>当前余额 <b class="mono">{{prepay}}</b></span></div>
+<div class="rc-l">支付方式</div>
+<div class="rc-opts"><button class="rc-o on">汇款智能认账支付<i aria-hidden="true">荐</i></button><button class="rc-o off" onClick="{{rcOnline}}">微信 / 支付宝在线充值<small>暂不支持</small></button></div>
+<div class="rc-l">汇款银行</div>
+<div class="rc-opts"><button class="rc-o {{rcCmbc}}" onClick="{{pickCmbc}}">民生银行</button><button class="rc-o {{rcCmb}}" onClick="{{pickCmb}}">招商银行</button></div>
+<p class="rc-tip">请您通过 <em>网上银行</em> 或 <em>银行柜台</em> 完成转账，汇款账号如下：</p>
+<div class="rc-box">
+<div class="rc-row"><span>开户名称</span><b>杭州飞象企服网络技术有限公司</b></div>
+<div class="rc-row"><span>开户银行</span><b><i class="rc-bk" style="background: {{rcColor}}">{{rcBadge}}</i>{{rcBranch}}</b></div>
+<div class="rc-row"><span>专属汇款账号</span><b class="rc-acct mono">{{rcAcct}} [示例]</b></div>
+<div class="rc-row"><span></span><div><button class="btn btn-o sm" onClick="{{rcCopy}}">复制账号信息</button></div></div>
+</div>
+<ul class="rc-notes"><li>专属账号为贵司独享，汇入后系统自动识别并入账到预付款，无需填写备注</li><li>同行通常 10 分钟内到账，跨行以银行处理时间为准；金额不限</li><li>请使用企业对公账户汇款，个人账户汇款将原路退回</li></ul>
+<div class="rc-ft"><button class="btn btn-o" onClick="{{rcClose}}">关闭</button><button class="btn btn-p" onClick="{{rcDone}}">我已完成转账</button></div>
+</div>
+</sc-if>
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}"><div class="bb-toast">{{toast}}</div></sc-if>
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
@@ -1295,7 +1431,12 @@ const BLANK_CK = { shipOne: '', setOne: () => 0, isFl: false, shipList: '', setL
 const subOf = (id) => SUBS.find((s) => s.id === id);
 const appOf = (k) => APPS.find((a) => a.k === k);
 
-const BLANK_CK2 = Object.assign({}, BLANK_CK, { notConfirming: true, confirming: false, rows: [], topup: () => 0, recharge: () => 0, enough: true, confirm: () => 0, back: () => 0 });
+const BLANK_CK2 = Object.assign({}, BLANK_CK, { addr: '', payPre: '', setPre: () => 0, payWx: '', setWx: () => 0, payAli: '', setAli: () => 0, needCert: false, goCert: () => 0, certOk: true, confirmT: '', isPre: true, notConfirming: true, confirming: false, rows: [], topup: () => 0, recharge: () => 0, enough: true, confirm: () => 0, back: () => 0 });
+const ENT_DEMO = { name: '杭州云栖科技有限公司', code: '91330106MA2****7X1', legal: '周*', addr: '杭州市西湖区云栖小镇 8 号楼', industry: '软件和信息技术服务', size: '100–200 人', certAt: '2026-09-02', way: '对公账户打款验证', email: 'finance@yunqi-tech.cn' };
+const ENT_OCR = { name: '杭州星河网络科技有限公司', code: '91330110MA7****3K2', legal: '陈*', addr: '杭州市余杭区文一西路 998 号 5 幢', industry: '信息技术服务', size: '20–50 人', certAt: TODAY, way: '营业执照 + 手机号核验', email: '—' };
+const BANKS = { cmb: { n: '招商银行', branch: '招行杭州高新支行', badge: '招', color: '#c8102e', acct: '5719 0000 8800 2068 0001' }, cmbc: { n: '民生银行', branch: '民生银行杭州分行营业部', badge: '民', color: '#00703c', acct: '6226 0900 1868 3305 0001' } };
+const DEMO_PHONE = '13800002210';
+const mask = (p) => p.slice(0, 3) + '****' + p.slice(7);
 const SRC_ORDER = ['京东自营', '天猫超市', '得力直供', '1688', '供应商直供'];
 const ST_COLOR = { 待发货: 'var(--warning)', 待收货: '#3159a6', 已完成: 'var(--brand)' };
 // 演示订单：一个主单按货源拆成子单
@@ -1304,9 +1445,20 @@ const sumSubs = (subs) => Math.round(subs.reduce((a, s) => a + s.amount, 0) * 10
 
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = this.fresh(); }
-  fresh() {
-    const st = { view: 'home', app: 'fl', sub: '', draft: '', tasks: [], cur: '', prepay: 0, points: 3200, orders: [], flows: [], toast: '', busy: false, rtab: 'plan', fCat: '', fSrc: '', fFast: false, fSort: 'sold', chat: '', alt: '', userMenu: false, acPage: 'info', acFrom: 'home', oTab: 'all', billTab: 'un', billSel: {}, members: null };
-    this.state = st;
+  base() { return { view: 'home', app: 'fl', sub: '', draft: '', tasks: [], cur: '', prepay: 0, points: 0, orders: [], flows: [], toast: '', busy: false, rtab: 'plan', fCat: '', fSrc: '', fFast: false, fSort: 'sold', chat: '', alt: '', userMenu: false, acPage: 'info', acFrom: 'home', oTab: 'all', billTab: 'un', billSel: {}, rcOpen: false, rcBank: 'cmb', me: { name: '', phone: '', av: '' }, ent: null, certified: false, cert: { step: 'none', lic: false, role: 'legal', agree: false }, certFrom: '' }; }
+  fresh() { return Object.assign(this.base(), { view: 'login', phone: '', code: '', codeSent: false, agree: false }); }
+  login() {
+    const st = this.state; const p = (st.phone || '').replace(/\D/g, '');
+    if (p.length !== 11) { this.flash('请输入 11 位手机号'); return; }
+    if (!st.codeSent || (st.code || '').length < 4) { this.flash('请先获取并输入短信验证码'); return; }
+    if (!st.agree) { this.flash('请先阅读并同意用户协议与隐私政策'); return; }
+    if (p === DEMO_PHONE) { const sd = this.seed(); this.setState(Object.assign(sd, { view: 'home' })); this.flash('欢迎回来，李敏'); return; }
+    const b = this.base(); b.me = { name: mask(p), phone: p, av: p.slice(-2) }; b.points = 500;
+    this.setState(Object.assign(b, { view: 'home' })); this.flash('注册成功，已赠送 500 AI 积分；下单前需完成企业认证');
+  }
+  seed() {
+    const st = Object.assign(this.base(), { points: 3200, me: { name: '李敏', phone: DEMO_PHONE, av: '李' }, ent: ENT_DEMO, certified: true, cert: { step: 'done', lic: true, role: 'legal', agree: true } });
+    const prev = this.state; this.state = st;
     const t = this.mkTask('xz', 'xz_tea', '给 30 人的办公室配一个月的茶水和纸巾', true);
     t.title = '国庆后茶水间补货'; t.ago = '3 天前';
     this.autoAnswer(t, { tb: 1000 });
@@ -1326,6 +1478,7 @@ class Component extends DCLogic {
     const add = (time, type, amt, ref) => { bal = Math.round((bal + amt) * 10) / 10; fl.unshift({ t: time, acct: '预付款', type: type, amt: amt, ref: ref, bal: bal }); };
     add('10-08 09:12', '对公转账充值', 10000, '—'); add('10-15 10:21', '订单支付', -o1.total, o1.no); add('10-21 16:05', '订单支付', -o2.total, o2.no);
     st.flows = fl; st.prepay = bal;
+    this.state = prev;
     return st;
   }
   // ---------------- 任务引擎（同步，可测）----------------
@@ -1462,24 +1615,30 @@ class Component extends DCLogic {
   remode(t, md) { if (md === 'brand') t.slots.pref = 'brand'; this.later(() => { this.plan(t, md); this.upd(t); }); }
   // ---------------- 右侧产出物上的操作（中间只留痕）----------------
   repGen(t, f) { if (!t.plans.length) return; this.later(() => { t.rep = { fmt: f, plan: t.pi, shared: false }; t.used += 10; this.state.points -= 10; this.log(t, '已在右侧生成' + (f === 'ppt' ? ' PPT 汇报' : '汇报分享页') + '（' + t.plans[t.pi].k + ' 方案，消耗 10 积分）。' + (f === 'page' ? '分享前请先核对内容。' : '')); this.setState({ rtab: 'rep' }); this.upd(t); }); }
-  toConfirm(t) { if (!t.plans.length) return; t.confirming = true; t.phase = 'confirm'; this.setState({ rtab: 'order' }); this.upd(t); }
+  toCert(t) { this.setState({ view: 'account', acPage: 'cert', acFrom: 'task', certFrom: t ? t.id : '', userMenu: false }); this.flash('下单前需完成企业认证：上传营业执照即可'); }
+  addrList() { const st = this.state; if (!st.certified) return []; if (st.ent === ENT_DEMO) return [{ name: '李敏 138****2210', tag: '公司', def: true, addr: '浙江省杭州市西湖区云栖小镇 8 号楼 3 层 前台' }, { name: '陈晓 139****5520', tag: '仓库', def: false, addr: '浙江省杭州市余杭区仓前街道 18 号 2 号仓' }]; return [{ name: st.me.name, tag: '公司', def: true, addr: '浙江省' + st.ent.addr }]; }
+  certPass() { const st = this.state; const back = st.certFrom && st.tasks.find((x) => x.id === st.certFrom);
+    this.setState({ certified: true, ent: ENT_OCR, cert: Object.assign({}, st.cert, { step: 'done' }) });
+    if (back) { this.setState({ view: 'task', cur: back.id, rtab: 'order', certFrom: '' }); this.flash('企业认证已通过，可以继续下单了'); } else this.flash('企业认证已通过，现在可以下单、充值预付款了'); }
+  toConfirm(t) { if (!t.plans.length) return; if (!this.state.certified) { this.toCert(t); return; } t.confirming = true; t.phase = 'confirm'; this.setState({ rtab: 'order' }); this.upd(t); }
   freight(t) { const p = t.plans[t.pi]; if (!p) return 0; if (t.ship === 'list') return (t.slots.n || 1) * 6; const sub = this.total(t, p); return p.items.every((x) => /京东|天猫/.test(GD(x.id).src)) || sub >= 299 ? 0 : 12; }
   placeOrder(t, topup) {
     const p = t.plans[t.pi]; const tot = this.total(t, p); const fr = this.freight(t); const pay = Math.round((tot + fr) * 10) / 10; const st = this.state;
-    const fromPre = Math.min(st.prepay, pay); const no = 'BB261027' + String(st.orders.length + 1).padStart(4, '0');
+    const by = t.payBy || 'pre'; const online = by === 'wx' ? '微信支付' : by === 'ali' ? '支付宝' : '微信 / 支付宝';
+    const fromPre = by === 'pre' ? Math.min(st.prepay, pay) : 0; const no = 'BB261027' + String(st.orders.length + 1).padStart(4, '0');
     const days = Math.max.apply(null, p.items.map((x) => GD(x.id).ship));
     const bySrc = {}; p.items.forEach((x) => { const g = GD(x.id); (bySrc[g.src] = bySrc[g.src] || []).push([g.id, x.qty]); });
     const srcs = Object.keys(bySrc).sort((a, b) => SRC_ORDER.indexOf(a) - SRC_ORDER.indexOf(b));
     const subs = mkSubs(no, srcs.map((s) => ({ src: s, items: bySrc[s], status: '待发货' })));
     if (fr) subs[0].amount = Math.round((subs[0].amount + fr) * 10) / 10;
-    subs.forEach((s) => { s.pay = topup ? '预付款 + 在线补差' : '预付款'; });
-    t.order = { no: no, title: t.title, total: pay, pay: topup ? '预付款 ' + fm(fromPre) + ' + 在线支付 ' + fm(pay - fromPre) : '预付款', time: '10-27 ' + (this.noAnim ? '14:30' : new Date().toTimeString().slice(0, 5)), buyer: '李敏', ship: t.ship === 'list' ? '按名单发到员工' : '统一送到公司', from: '任务「' + t.title + '」', status: '待发货', subs: subs, due: dueTxt(days) };
+    subs.forEach((s) => { s.pay = by !== 'pre' ? online : topup ? '预付款 + 在线补差' : '预付款'; });
+    t.order = { no: no, title: t.title, total: pay, pay: by !== 'pre' ? online + ' ' + fm(pay) : topup ? '预付款 ' + fm(fromPre) + ' + ' + online + ' ' + fm(pay - fromPre) : '预付款', time: '10-27 ' + (this.noAnim ? '14:30' : new Date().toTimeString().slice(0, 5)), buyer: st.me.name, ship: t.ship === 'list' ? '按名单发到员工' : '统一送到公司', from: '任务「' + t.title + '」', status: '待发货', subs: subs, due: dueTxt(days) };
     t.confirming = false; this.closeLive(t);
-    t.msgs.push({ who: 'a', kind: 'done', t: '订单 ' + no + ' 已提交：' + (topup ? '预付款扣 ' + fm(fromPre) + '，在线支付 ' + fm(pay - fromPre) : '预付款扣 ' + fm(pay)) + '，按货源拆成 ' + subs.length + ' 个子单发货，预计 ' + dueTxt(days) + '前送达。子单完成后可在「结算与账单」申请开票。' });
+    t.msgs.push({ who: 'a', kind: 'done', t: '订单 ' + no + ' 已提交：' + (by !== 'pre' ? online + '已付 ' + fm(pay) : topup ? '预付款扣 ' + fm(fromPre) + '，' + online + '补差 ' + fm(pay - fromPre) : '预付款扣 ' + fm(pay)) + '，按货源拆成 ' + subs.length + ' 个子单发货，预计 ' + dueTxt(days) + '前送达。子单完成后可在「结算与账单」申请开票。' });
     t.phase = 'done';
     const bal = Math.round((st.prepay - fromPre) * 10) / 10;
-    const flows = [{ t: t.order.time, acct: '预付款', type: '订单支付', amt: -fromPre, ref: no, bal: bal }].concat(st.flows);
-    if (topup) flows.unshift({ t: t.order.time, acct: '在线支付', type: '补差支付', amt: -(Math.round((pay - fromPre) * 10) / 10), ref: no, bal: bal });
+    const flows = (fromPre ? [{ t: t.order.time, acct: '预付款', type: '订单支付', amt: -fromPre, ref: no, bal: bal }] : []).concat(st.flows);
+    if (pay - fromPre > 0.05) flows.unshift({ t: t.order.time, acct: online, type: by === 'pre' ? '补差支付' : '订单支付', amt: -(Math.round((pay - fromPre) * 10) / 10), ref: no, bal: bal });
     this.setState({ prepay: bal, flows: flows, orders: [t.order].concat(st.orders), rtab: 'order' }); this.upd(t); this.flash('订单已提交');
   }
   // 右侧改动 → 对话留痕（一条可合并的日志）
@@ -1532,8 +1691,27 @@ class Component extends DCLogic {
       prepay: fm(st.prepay), points: st.points.toLocaleString('zh-CN'),
       userMenu: st.userMenu, userMenuAria: st.userMenu ? 'true' : 'false',
       toggleUserMenu: () => this.setState({ userMenu: !st.userMenu }), closeUserMenu: () => this.setState({ userMenu: false }),
-      umInfo: () => this.goAcct('info'), umFin: () => this.goAcct('fin'), umPts: () => this.goAcct('pts'), umSettings: () => this.goAcct('info'),
-      umOrders: () => this.setState({ view: 'orders', userMenu: false }), umLogout: () => { this.setState({ userMenu: false }); this.flash('演示环境不支持退出登录'); },
+      umInfo: () => this.goAcct('info'), umFin: () => this.goAcct('fin'), umTopup: () => (st.certified ? this.setState({ rcOpen: true, rcBank: 'cmb', userMenu: false }) : this.goAcct('cert')), umPts: () => this.goAcct('pts'), umSettings: () => this.goAcct('info'),
+      umOrders: () => this.setState({ view: 'orders', userMenu: false }), umLogout: () => { this.setState(this.fresh()); this.flash('已退出登录'); },
+      // 登录
+      isLogin: st.view === 'login', notLogin: st.view !== 'login',
+      phone: st.phone || '', code: st.code || '', onPhone: (e) => this.setState({ phone: e.target.value }), onCode: (e) => this.setState({ code: e.target.value }),
+      codeT: st.codeSent ? '已发送 · 60s' : '获取验证码', codeCls: st.codeSent ? 'sent' : '',
+      sendCode: () => { const p = (st.phone || '').replace(/\D/g, ''); if (p.length !== 11) { this.flash('请输入 11 位手机号'); return; } this.setState({ codeSent: true }); this.flash('验证码已发送（演示：任意 4–6 位数字）'); },
+      agreeCls: st.agree ? 'on' : '', agreeAria: st.agree ? 'true' : 'false', toggleAgree: () => this.setState({ agree: !st.agree }),
+      doLogin: () => this.login(), loginKey: (e) => { if (e.key === 'Enter') { this.state.code = e.target.value; this.login(); } },
+      demoOld: () => this.setState({ phone: DEMO_PHONE, code: '2210', codeSent: true, agree: true }), demoNew: () => this.setState({ phone: '13912345678', code: '5678', codeSent: true, agree: true }),
+      // 用户
+      uName: st.me.name || '—', uAv: st.me.av || '我', uPhone: st.me.phone ? mask(st.me.phone) : '',
+      uSub: st.certified ? st.ent.name.replace('有限公司', '') + ' · 企业会员' : st.cert.step === 'pending' ? '企业认证审核中' : '未认证企业 · 去认证',
+      uMenuSub: st.certified ? st.ent.name + ' · 管理员' : '个人账号 · 未完成企业认证',
+      // 充值弹窗（汇款智能认账）
+      rcOpen: !!st.rcOpen, rcClose: () => this.setState({ rcOpen: false }),
+      rcCmb: st.rcBank === 'cmb' ? 'on' : '', rcCmbc: st.rcBank === 'cmbc' ? 'on' : '', pickCmb: () => this.setState({ rcBank: 'cmb' }), pickCmbc: () => this.setState({ rcBank: 'cmbc' }),
+      rcBranch: BANKS[st.rcBank].branch, rcBadge: BANKS[st.rcBank].badge, rcColor: BANKS[st.rcBank].color, rcAcct: BANKS[st.rcBank].acct,
+      rcOnline: () => this.flash('暂不支持微信 / 支付宝在线充值；下单时可直接用微信 / 支付宝付款'),
+      rcCopy: () => this.flash('已复制：杭州飞象企服网络技术有限公司 · ' + BANKS[st.rcBank].branch + ' · ' + BANKS[st.rcBank].acct),
+      rcDone: () => { const bal = Math.round((st.prepay + 5000) * 10) / 10; this.setState({ rcOpen: false, prepay: bal, flows: [{ t: '10-27 ' + (this.noAnim ? '14:00' : new Date().toTimeString().slice(0, 5)), acct: '预付款', type: '对公转账充值', amt: 5000, ref: BANKS[st.rcBank].n + '专属账号', bal: bal }].concat(st.flows) }); this.flash('已收到转账，系统自动认账：预付款 +¥5,000（演示）'); },
       isHome: st.view === 'home', isTask: st.view === 'task', isOrders: st.view === 'orders',
       // 首页
       apps: APPS.map((a) => ({ t: a.name, cls: a.k === st.app ? 'on' : '', sel: a.k === st.app ? 'true' : 'false', pick: () => this.setState({ app: a.k, sub: '' }) })),
@@ -1566,8 +1744,9 @@ class Component extends DCLogic {
   }
   acctVals(unBill) {
     const st = this.state; const pg = st.acPage; const all = this.allSubs();
-    const G = [['账户与权益', [['info', '账号信息', '号'], ['cert', '企业认证', '证', '已认证'], ['pts', 'AI 积分', '积']]], ['财务与账单', [['fin', '预付款管理', '预'], ['inv', '结算与账单', '结', unBill.length ? unBill.length + ' 待开票' : '']]], ['组织与协作', [['org', '组织管理', '组'], ['ent', '企业信息', '企']]]];
-    const TT = { info: ['账号信息', '个人资料与登录安全'], cert: ['企业认证', '认证通过后享受企业会员价、预付款与按名单代发'], pts: ['AI 积分', '小帮出方案、生成汇报会消耗积分'], fin: ['预付款管理', '**采只开通预付款账户；在线支付仅用于补差'], inv: ['结算与账单', '已完成的子单在这里申请开票'], org: ['组织管理', '成员、角色与审批规则'], ent: ['企业信息', '工商信息、收货地址与开票信息'] };
+    const ent = st.ent || ENT_OCR; const ok = !!st.certified; const cs = st.cert;
+    const G = [['账户与权益', [['info', '账号信息', '号'], ['cert', '企业认证', '证', ok ? '已认证' : cs.step === 'pending' ? '审核中' : '未认证'], ['pts', 'AI 积分', '积']]], ['财务与账单', [['fin', '预付款管理', '预'], ['inv', '结算与账单', '结', unBill.length ? unBill.length + ' 待开票' : '']]], ['组织与协作', [['org', '组织管理', '组'], ['ent', '企业信息', '企']]]];
+    const TT = { info: ['账号信息', '个人资料与登录安全'], cert: ['企业认证', '认证通过后享受企业会员价、预付款与按名单代发'], pts: ['AI 积分', '小帮出方案、生成汇报会消耗积分'], fin: ['预付款管理', '预付款通过对公汇款充值，汇入专属账号自动认账；下单时也可用微信 / 支付宝直接付款'], inv: ['结算与账单', '已完成的子单在这里申请开票'], org: ['组织管理', '成员、角色与审批规则'], ent: ['企业信息', '工商信息、收货地址与开票信息'] };
     const done = all.filter((s) => s.status === '已完成');
     const isUn = st.billTab === 'un'; const rows = done.filter((s) => (isUn ? !s.inv : !!s.inv));
     const selRows = unBill.filter((s) => st.billSel[s.no]); const selAmt = selRows.reduce((a, s) => a + s.amount, 0);
@@ -1577,18 +1756,31 @@ class Component extends DCLogic {
       acGroups: G.map((g) => ({ label: g[0], items: g[1].map((it) => ({ label: it[1], ico: it[2], tag: it[3] || '', hasTag: !!it[3], cls: pg === it[0] ? 'on' : '', pick: () => this.setState({ acPage: it[0], billSel: {} }) })) })),
       acBack: () => this.setState({ view: st.acFrom === 'account' ? 'home' : st.acFrom || 'home' }), acSoon: () => this.flash('演示环境暂不支持修改'),
       acTitle: (TT[pg] || TT.info)[0], acSub: (TT[pg] || TT.info)[1],
-      acIsInfo: pg === 'info', acIsCert: pg === 'cert', acIsEnt: pg === 'ent', acIsOrg: pg === 'org', acIsFin: pg === 'fin', acIsInv: pg === 'inv', acIsPts: pg === 'pts',
-      acInfo: [['姓名', '李敏'], ['手机号', '138****2210'], ['邮箱', 'limin@yunqi-tech.cn'], ['所属企业', '杭州云栖科技有限公司'], ['角色', '管理员 · 可下单、可审批、可管理资金']].map((x) => ({ k: x[0], v: x[1] })),
-      certInfo: [['企业名称', '杭州云栖科技有限公司'], ['统一社会信用代码', '91330106MA2****7X1'], ['法定代表人', '周*'], ['认证方式', '对公账户打款验证'], ['认证时间', '2026-09-02'], ['有效期', '长期（工商信息变更需重新认证）']].map((x) => ({ k: x[0], v: x[1] })),
-      certLog: [['2026-09-02 15:20', '对公打款验证', '通过', '系统'], ['2026-09-01 10:08', '提交营业执照', '审核通过', '运营 · 王一']].map((x) => ({ t: x[0], w: x[1], r: x[2], by: x[3], color: 'var(--brand)' })),
+      acIsInfo: pg === 'info', acIsCert: pg === 'cert', acIsPts: pg === 'pts',
+      acIsEnt: pg === 'ent' && ok, acIsOrg: pg === 'org' && ok, acIsFin: pg === 'fin' && ok, acIsInv: pg === 'inv' && ok,
+      acGate: !ok && ['ent', 'org', 'fin', 'inv'].includes(pg), acGateT: { ent: '企业信息、收货地址和开票信息', org: '成员邀请、角色权限和审批规则', fin: '预付款充值与资金流水', inv: '订单结算与申请开票' }[pg] || '',
+      acGoCert: () => this.setState({ acPage: 'cert' }),
+      certTagT: ok ? '企业已认证' : cs.step === 'pending' ? '认证审核中' : '未认证企业', certTagCls: ok ? 'tagb' : 'tagw', uTitle: ok ? (st.ent === ENT_DEMO ? '行政主管 · ' : '管理员 · ') + ent.name : '个人账号 · 手机号 ' + mask(st.me.phone || '00000000000'),
+      acInfo: (ok ? [['姓名', st.me.name], ['手机号', mask(st.me.phone)], ['所属企业', ent.name], ['角色', '管理员 · 可下单、可审批、可管理资金']] : [['登录手机号', mask(st.me.phone || '00000000000')], ['账号类型', '个人账号（手机号注册）'], ['所属企业', '未认证 · 认证后自动成为企业管理员'], ['可用功能', '与小帮对话出方案、生成汇报、导出清单；下单需企业认证']]).map((x) => ({ k: x[0], v: x[1] })),
+      certOk: ok, certForm: !ok && cs.step !== 'pending', certPending: !ok && cs.step === 'pending',
+      certLic: !!cs.lic, certNoLic: !cs.lic, certUpload: () => { this.setState({ cert: Object.assign({}, cs, { lic: true }) }); this.flash('营业执照已上传，信息已自动识别，请核对'); },
+      certOcr: [['企业名称', ENT_OCR.name], ['统一社会信用代码', ENT_OCR.code], ['法定代表人', ENT_OCR.legal], ['注册地址', ENT_OCR.addr]].map((x) => ({ k: x[0], v: x[1] })),
+      certLegal: cs.role === 'legal' ? 'on' : '', certAgent: cs.role === 'agent' ? 'on' : '', certIsAgent: cs.role === 'agent', setLegal: () => this.setState({ cert: Object.assign({}, cs, { role: 'legal' }) }), setAgent: () => this.setState({ cert: Object.assign({}, cs, { role: 'agent' }) }),
+      certAgreeCls: cs.agree ? 'on' : '', certAgreeAria: cs.agree ? 'true' : 'false', certToggleAgree: () => this.setState({ cert: Object.assign({}, cs, { agree: !cs.agree }) }),
+      certPhone: mask(st.me.phone || '00000000000'), certSubmitCls: cs.lic && cs.agree ? '' : 'dis',
+      certSubmit: () => { if (!cs.lic) { this.flash('请先上传营业执照'); return; } if (!cs.agree) { this.flash('请先勾选认证授权协议'); return; } this.setState({ cert: Object.assign({}, cs, { step: 'pending' }) }); this.flash('已提交认证，预计 1 个工作日内完成审核'); },
+      certPass: () => this.certPass(), certEntName: ENT_OCR.name, certFromTask: !!st.certFrom,
+      certInfo: [['企业名称', ent.name], ['统一社会信用代码', ent.code], ['法定代表人', ent.legal], ['认证方式', ent.way], ['认证时间', ent.certAt], ['有效期', '长期（工商信息变更需重新认证）']].map((x) => ({ k: x[0], v: x[1] })),
+      certAtT: ent.certAt + ' 通过 · 可下单、充值预付款、按名单代发',
+      certLog: (st.ent === ENT_DEMO ? [['2026-09-02 15:20', '对公打款验证', '通过', '系统'], ['2026-09-01 10:08', '提交营业执照', '审核通过', '运营 · 王一']] : [[TODAY + ' 10:30', '提交营业执照', '审核通过', '运营 · 王一']]).map((x) => ({ t: x[0], w: x[1], r: x[2], by: x[3], color: 'var(--brand)' })),
       certChange: () => this.flash('变更认证需上传新营业执照，提交后 1 个工作日内审核（演示）'),
-      entInfo: [['企业名称', '杭州云栖科技有限公司'], ['所属行业', '软件和信息技术服务'], ['员工规模', '100–200 人'], ['注册地址', '杭州市西湖区云栖小镇 8 号楼'], ['企业管理员', '李敏']].map((x) => ({ k: x[0], v: x[1] })),
-      addrs: [{ name: '李敏 138****2210', tag: '公司', def: true, addr: '浙江省杭州市西湖区云栖小镇 8 号楼 3 层 前台' }, { name: '陈晓 139****5520', tag: '仓库', def: false, addr: '浙江省杭州市余杭区仓前街道 18 号 2 号仓' }],
-      invInfo: [['发票抬头', '杭州云栖科技有限公司'], ['税号', '91330106MA2****7X1'], ['默认发票类型', '增值税专用发票'], ['收票邮箱', 'finance@yunqi-tech.cn']].map((x) => ({ k: x[0], v: x[1] })),
-      members: [['李敏', '行政部', '管理员', '下单 · 审批 · 资金 · 成员', '已激活'], ['陈晓', '行政部', '采购员', '发起任务 · 下单（单笔 ≤ ¥5,000）', '已激活'], ['王磊', '财务部', '财务', '查看订单 · 结算开票 · 充值', '已激活'], ['赵雨', '人力资源部', '采购员', '发起任务 · 下单（单笔 ≤ ¥3,000）', '待接受邀请']].map((x) => ({ name: x[0], dept: x[1], role: x[2], perm: x[3], status: x[4], color: x[4] === '已激活' ? 'var(--brand)' : 'var(--warning)' })),
+      entInfo: [['企业名称', ent.name], ['所属行业', ent.industry], ['员工规模', ent.size], ['注册地址', ent.addr], ['企业管理员', st.me.name]].map((x) => ({ k: x[0], v: x[1] })),
+      addrs: this.addrList(),
+      invInfo: [['发票抬头', ent.name], ['税号', ent.code], ['默认发票类型', '增值税专用发票'], ['收票邮箱', ent.email]].map((x) => ({ k: x[0], v: x[1] })),
+      members: st.ent !== ENT_DEMO ? [{ name: st.me.name, dept: '—', role: '管理员', perm: '下单 · 审批 · 资金 · 成员', status: '已激活', color: 'var(--brand)' }] : [['李敏', '行政部', '管理员', '下单 · 审批 · 资金 · 成员', '已激活'], ['陈晓', '行政部', '采购员', '发起任务 · 下单（单笔 ≤ ¥5,000）', '已激活'], ['王磊', '财务部', '财务', '查看订单 · 结算开票 · 充值', '已激活'], ['赵雨', '人力资源部', '采购员', '发起任务 · 下单（单笔 ≤ ¥3,000）', '待接受邀请']].map((x) => ({ name: x[0], dept: x[1], role: x[2], perm: x[3], status: x[4], color: x[4] === '已激活' ? 'var(--brand)' : 'var(--warning)' })),
       orgInvite: () => this.flash('邀请链接已复制，7 天内有效（演示）'),
       secInfo: [['下单审批', '单笔超过 ¥5,000 需管理员审批'], ['汇报分享', '分享链接 7 天有效，仅可查看'], ['资金权限', '仅管理员、财务可充值'], ['登录安全', '新设备登录需短信验证']].map((x) => ({ k: x[0], v: x[1] })),
-      recharge: () => { const bal = Math.round((st.prepay + 5000) * 10) / 10; this.setState({ prepay: bal, flows: [{ t: '10-27 ' + (this.noAnim ? '14:00' : new Date().toTimeString().slice(0, 5)), acct: '预付款', type: '对公转账充值', amt: 5000, ref: '—', bal: bal }].concat(st.flows) }); this.flash('演示：对公转账 ¥5,000 已到账，自动入账预付款'); },
+      recharge: () => this.setState({ rcOpen: true, rcBank: 'cmb', userMenu: false }), noFlows: !st.flows.length, finAcct: BANKS.cmb.acct, finCopy: () => this.flash('已复制专属汇款账号：' + BANKS.cmb.acct),
       flows: st.flows.map((f) => ({ t: f.t, acct: f.acct, type: f.type, amt: (f.amt > 0 ? '+' : '') + fm(f.amt).replace('¥-', '-¥'), color: f.amt > 0 ? 'var(--brand)' : 'var(--ink)', ref: f.ref, bal: f.acct === '预付款' ? fm(f.bal) : '—' })),
       billUnCls: isUn ? 'on' : '', billDoneCls: isUn ? '' : 'on', billGoUn: () => this.setState({ billTab: 'un' }), billGoDone: () => this.setState({ billTab: 'done', billSel: {} }),
       billUnAmt: fm(unBill.reduce((a, s) => a + s.amount, 0)), billUnN: String(unBill.length), billDoneAmt: fm(doneRows.reduce((a, s) => a + s.amount, 0)), billDoneN: String(doneRows.length), billApplyingN: String(doneRows.filter((s) => s.inv === 'applying').length),
@@ -1639,13 +1831,16 @@ class Component extends DCLogic {
     const inPlan = p ? p.items.map((x) => x.id) : [];
     const pool = fl.map((g, i) => ({ rank: String(i + 1), top: i < 3 ? 'top' : '', name: g.name, meta: g.cat + ' · ' + g.brand + ' · ' + g.src, price: fm(g.price), mk: fm(g.market), sold: '近 30 天 ' + g.sold.toLocaleString('zh-CN') + ' 件', stock: g.stock === 0 ? '无货' : g.stock > 0 ? '仅剩 ' + g.stock : g.ship + ' 天达', stCls: g.stock === 0 ? 'no' : g.stock > 0 ? 'low' : '', th: this.thumb(g), addT: inPlan.includes(g.id) ? '已在方案' : p ? '加入 ' + p.k + ' 方案' : '先出方案',
       add: () => { if (!p) { this.flash('先在左侧回答小帮的问题，出方案后再加'); return; } if (inPlan.includes(g.id) || g.stock === 0) return; this.edit(t, () => { p.items.push({ id: g.id, qty: this.qtyOf(t, g) }); }, '已把' + g.name + '加入方案'); } }));
-    const fr = p ? this.freight(t) : 0; const pay = Math.round((tot + fr) * 10) / 10; const short = st.prepay < pay;
-    const ck = p ? { tot: fm(tot), fr: fr ? fm(fr) : '包邮', pay: fm(pay), bal: fm(st.prepay), short: short, enough: !short, shortT: '预付款不足，差 ' + fm(pay - st.prepay) + '，可在线支付补差或先充值',
+    const fr = p ? this.freight(t) : 0; const pay = Math.round((tot + fr) * 10) / 10; const by = t.payBy || 'pre'; const short = by === 'pre' && st.prepay < pay; const PAYN = { pre: '预付款账户', wx: '微信支付', ali: '支付宝' };
+    const ck = p ? { tot: fm(tot), fr: fr ? fm(fr) : '包邮', pay: fm(pay), bal: fm(st.prepay), short: short, enough: !short, shortT: '预付款不足，差 ' + fm(pay - st.prepay) + '，可用微信 / 支付宝补差，或先对公转账充值',
+      payPre: by === 'pre' ? 'on' : '', payWx: by === 'wx' ? 'on' : '', payAli: by === 'ali' ? 'on' : '', setPre: () => { t.payBy = 'pre'; this.upd(t); }, setWx: () => { t.payBy = 'wx'; this.upd(t); }, setAli: () => { t.payBy = 'ali'; this.upd(t); },
+      isPre: by === 'pre', needCert: !st.certified, certOk: !!st.certified, goCert: () => this.toCert(t), addr: st.certified ? (this.addrList()[0] || {}).addr + ' · ' + (this.addrList()[0] || {}).name : '完成企业认证后设置收货地址',
+      confirmT: by === 'pre' ? '确认下单 · ' + fm(pay) : '确认并用' + PAYN[by] + '支付 · ' + fm(pay),
       shipOne: t.ship === 'one' ? 'on' : '', shipList: t.ship === 'list' ? 'on' : '', isFl: t.app === 'fl', setOne: () => { t.ship = 'one'; this.upd(t); }, setList: () => { t.ship = 'list'; this.upd(t); }, listFee: '+¥6/人',
       invVat: t.inv === 'vat' ? 'on' : '', invGen: t.inv === 'gen' ? 'on' : '', setVat: () => { t.inv = 'vat'; this.upd(t); }, setGen: () => { t.inv = 'gen'; this.upd(t); },
-      go: () => this.toConfirm(t), confirming: !!t.confirming, notConfirming: !t.confirming,
-      rows: [['方案', p.k + ' · ' + p.name + '（' + p.items.length + ' 种商品）'], ['商品金额', fm(tot)], ['运费', fr ? fm(fr) : '包邮'], ['收货', t.ship === 'list' ? '按名单发到员工（' + (t.slots.n || 1) + ' 人）' : '统一送到公司'], ['发票', t.inv === 'vat' ? '增值税专用发票' : '普通发票'], ['支付', short ? '预付款 ' + fm(st.prepay) + ' + 在线支付 ' + fm(pay - st.prepay) : '预付款 ' + fm(pay)]].map((r) => ({ k: r[0], v: r[1] })),
-      confirm: () => this.placeOrder(t, false), topup: () => this.placeOrder(t, true), recharge: () => this.goAcct('fin'),
+      go: () => (st.certified ? this.toConfirm(t) : this.toCert(t)), confirming: !!t.confirming, notConfirming: !t.confirming,
+      rows: [['方案', p.k + ' · ' + p.name + '（' + p.items.length + ' 种商品）'], ['商品金额', fm(tot)], ['运费', fr ? fm(fr) : '包邮'], ['收货', t.ship === 'list' ? '按名单发到员工（' + (t.slots.n || 1) + ' 人）' : '统一送到公司'], ['发票', t.inv === 'vat' ? '增值税专用发票' : '普通发票'], ['支付', by !== 'pre' ? PAYN[by] + ' ' + fm(pay) : short ? '预付款 ' + fm(st.prepay) + ' + 微信 / 支付宝补差 ' + fm(pay - st.prepay) : '预付款 ' + fm(pay)]].map((r) => ({ k: r[0], v: r[1] })),
+      confirm: () => this.placeOrder(t, false), topup: () => this.placeOrder(t, true), recharge: () => this.setState({ rcOpen: true, rcBank: 'cmb' }),
       back: () => { t.confirming = false; t.phase = 'plan'; this.upd(t); } } : BLANK_CK2;
     const rep = t.rep && t.plans[t.rep.plan] ? (() => { const rp = t.plans[t.rep.plan]; const rt = this.total(t, rp); return { title: sb.name + '采购方案 · ' + rp.k + ' 方案', fmt: t.rep.fmt === 'ppt' ? 'PPT · 6 页' : '分享页', need: this.slotTxt(t), total: fm(rt), lim: lim ? fm(lim) : '未设', save: lim ? (rt <= lim ? '节省 ' + fm(lim - rt) : '超出 ' + fm(rt - lim)) : '—',
       rows: rp.items.map((x) => { const g = GD(x.id); return { n: g.name, q: x.qty + (t.app === 'fl' ? ' 份' : ' 件'), v: fm(g.price * x.qty) }; }), why: ['预算内' + (lim ? '，' + (rt <= lim ? '比预算低 ' + fm(lim - rt) : '超出 ' + fm(rt - lim)) : ''), '全部有货，' + dueTxt(days) + '前送达', '对比：其余 ' + (t.plans.length - 1) + ' 套方案见附页'],

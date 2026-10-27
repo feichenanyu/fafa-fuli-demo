@@ -6,7 +6,7 @@
 | --- | --- |
 | 买家端 Demo · Beta 0.3（一页融合） | https://feichenanyu.github.io/fafa-fuli-demo/ |
 | 运营管理后台 Demo v1.2（发发福利 + **采） | https://feichenanyu.github.io/fafa-fuli-demo/admin/ |
-| **采 Demo v0.2（企业终端采购 · 发发福利 Agent UI） | https://feichenanyu.github.io/fafa-fuli-demo/bangbang/ |
+| **采 Demo v0.3（企业终端采购 · 发发福利 Agent UI） | https://feichenanyu.github.io/fafa-fuli-demo/bangbang/ |
 | 文档中心 | https://feichenanyu.github.io/fafa-fuli-demo/docs/ |
 | 前台 PRD v2.1（一页融合版） | https://feichenanyu.github.io/fafa-fuli-demo/docs/prd-frontend.html |
 | 产品 Spec v2.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/spec.html |
