@@ -29,12 +29,13 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 .shell{display:flex;height:100vh;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink);font-size:14px;background:var(--canvas)}
 /* 左侧菜单 */
 .side{width:232px;flex:none;background:#fbfcfc;border-right:1px solid var(--border-subtle);display:flex;flex-direction:column;padding:18px 14px 14px}
-.logo{display:flex;align-items:center;gap:10px;padding:2px 8px 18px}
+.logo{display:flex;align-items:center;gap:10px;padding:2px 8px 18px;border:0;background:transparent;text-align:left;width:100%}
 .logo-m{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#0d9488,#36c7aa);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;letter-spacing:-.5px}
 .logo b{font-size:17px;letter-spacing:.5px}
 .logo small{display:block;font-size:11px;color:var(--text-3);font-weight:400;margin-top:1px}
 .newbtn{display:flex;align-items:center;justify-content:center;gap:6px;height:40px;border-radius:12px;border:0;background:var(--brand);color:#fff;font-size:14px;font-weight:600;margin-bottom:14px;box-shadow:0 8px 18px #0d94882e}
 .newbtn:hover{background:var(--brand-600)}
+.newbtn.on{box-shadow:0 0 0 3px #0d948833,0 8px 18px #0d94882e}
 .nv{display:flex;align-items:center;gap:10px;height:38px;padding:0 10px;border-radius:10px;border:0;background:transparent;width:100%;text-align:left;font-size:14px;color:var(--text-2)}
 .nv:hover{background:var(--hover)}
 .nv.on{background:var(--brand-soft);color:var(--brand-700);font-weight:600}
@@ -246,8 +247,8 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 </helmet>
 <div class="shell">
   <aside class="side">
-    <div class="logo"><div class="logo-m">帮</div><div><b>帮帮采</b><small>企业采购 AI 助手</small></div></div>
-    <button class="newbtn" onClick="{{newTask}}"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="{{ic.plus}}"></path></svg>新建采购</button>
+    <button class="logo" onClick="{{newTask}}" aria-label="帮帮采，回到新建采购"><div class="logo-m">帮</div><div><b>帮帮采</b><small>企业采购 AI 助手</small></div></button>
+    <button class="newbtn {{newCls}}" onClick="{{newTask}}"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="{{ic.plus}}"></path></svg>新建采购</button>
     <sc-for list="{{nav}}" as="n" hint-placeholder-count="6"><button class="nv {{n.cls}}" onClick="{{n.go}}"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{n.icon}}"></path></svg>{{n.t}}</button></sc-for>
     <div class="sec">最近任务</div>
     <sc-for list="{{tasks}}" as="k" hint-placeholder-count="2"><button class="tk {{k.cls}}" onClick="{{k.go}}"><i class="d {{k.dot}}"></i><div><b>{{k.t}}</b><small>{{k.sub}}</small></div></button></sc-for>
@@ -679,12 +680,11 @@ class Component extends DCLogic {
     const sel = subOf(st.sub);
     const prompts = (sel ? sel.prompts : subs.reduce((a, s) => a.concat(s.prompts.slice(0, 1)), [])).slice(0, 4);
     const open = st.tasks.find((x) => x.phase !== 'done' && x.ago !== '刚刚');
-    const nav = [['home', '首页', IC.home]].concat(APPS.map((a) => [a.k, a.name, IC[a.k]])).concat([['orders', '订单', IC.order], ['acct', '企业账户', IC.acct]]);
+    const nav = [['orders', '订单', IC.order], ['acct', '企业账户', IC.acct]];
     const V = {
       ic: IC, today: TODAY,
-      nav: nav.map((n) => ({ t: n[1], icon: n[2], cls: (n[0] === 'home' && st.view === 'home' && !st.appNav) || (n[0] === st.view) || (APPS.some((a) => a.k === n[0]) && st.view === 'home' && st.appNav && st.app === n[0]) ? 'on' : '',
-        go: () => { if (APPS.some((a) => a.k === n[0])) this.setState({ view: 'home', app: n[0], sub: '', appNav: true }); else this.setState({ view: n[0], appNav: false }); } })),
-      newTask: () => this.setState({ view: 'home', sub: '', draft: '', appNav: false }),
+      nav: nav.map((n) => ({ t: n[1], icon: n[2], cls: n[0] === st.view ? 'on' : '', go: () => this.setState({ view: n[0] }) })), newCls: st.view === 'home' ? 'on' : '',
+      newTask: () => this.setState({ view: 'home', sub: '', draft: '' }),
       tasks: st.tasks.filter((x) => x.id !== '__new').slice(0, 6).map((x) => ({ t: x.title, sub: (appOf(x.app) || {}).name + ' · ' + x.ago, dot: x.phase === 'done' ? 'done' : x.phase === 'confirm' ? 'wait' : 'run', cls: x.id === st.cur && st.view === 'task' ? 'on' : '', go: () => this.setState({ view: 'task', cur: x.id, rtab: x.order ? 'order' : x.rep ? 'rep' : 'plan', alt: '' }) })),
       noTasks: !st.tasks.length,
       prepay: fm(st.prepay), points: st.points.toLocaleString('zh-CN'),
