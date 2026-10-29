@@ -853,9 +853,9 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 </div>
 </sc-if>
 <sc-if value="{{sc.isShow}}" hint-placeholder-val="{{ false }}">
-<div class="card"><h3>前台展示<span>场景运营页的业务栏目副标题、卖点筛选项与卖点标签都在这里维护；引用本池的场景 / 频道直接读取，保存后 1 分钟内同步</span></h3>
-<div class="tw" style="border: 0"><table class="tbl"><thead><tr><th>业务栏目</th><th>栏目副标题</th></tr></thead><tbody><sc-for list="{{sc.colSubs}}" as="c" hint-placeholder-count="3"><tr><td>{{c.col}}</td><td><input class="v3in" value="{{c.v}}" onChange="{{c.on}}" disabled="{{sc.ro}}" aria-label="{{c.col}} 副标题"></td></tr></sc-for></tbody></table></div>
-<div class="tw" style="border: 0; margin-top: 12px"><table class="tbl"><thead><tr><th>#</th><th>业务栏目</th><th>筛选项名称</th><th>卖点标签</th><th>匹配条件</th><th>显示</th><th class="r"></th></tr></thead><tbody><sc-for list="{{sc.shows}}" as="x" hint-placeholder-count="5"><tr><td class="mono">{{x.n}}</td><td>{{x.col}}</td><td><input class="v3in" value="{{x.label}}" onChange="{{x.onLabel}}" disabled="{{sc.ro}}" aria-label="筛选项名称" placeholder="如：休闲零食"></td><td><input class="v3in" value="{{x.tag}}" onChange="{{x.onTag}}" disabled="{{sc.ro}}" aria-label="卖点标签" placeholder="≤ 6 字，如：618 同价"></td><td><input class="v3in" value="{{x.cond}}" onChange="{{x.onCond}}" disabled="{{sc.ro}}" aria-label="匹配条件" placeholder="如：类目 = 休闲食品"></td><td><button class="swl" role="switch" aria-checked="{{x.onS}}" onClick="{{x.toggle}}" disabled="{{sc.ro}}"><span class="sw {{x.onCls}}"></span></button></td><td class="r"><button class="lk" onClick="{{x.del}}" disabled="{{sc.ro}}">删除</button></td></tr></sc-for></tbody></table><sc-if value="{{sc.noShows}}" hint-placeholder-val="{{ false }}"><div class="empty">还没有配置前台筛选项，前台将只显示「全部」</div></sc-if></div>
+<div class="card"><h3>前台展示<span>场景页「场景商品」区的副标题、品类筛选项与卖点标签都在这里维护（不再按爆品 / 礼包 / 卡券分栏）；引用本池的场景 / 频道直接读取，保存后 1 分钟内同步</span></h3>
+<div class="tw" style="border: 0"><table class="tbl"><thead><tr><th>展示区</th><th>副标题</th></tr></thead><tbody><sc-for list="{{sc.colSubs}}" as="c" hint-placeholder-count="3"><tr><td>{{c.col}}</td><td><input class="v3in" value="{{c.v}}" onChange="{{c.on}}" disabled="{{sc.ro}}" aria-label="{{c.col}} 副标题"></td></tr></sc-for></tbody></table></div>
+<div class="tw" style="border: 0; margin-top: 12px"><table class="tbl"><thead><tr><th>#</th><th>展示区</th><th>筛选项名称</th><th>卖点标签</th><th>匹配条件</th><th>显示</th><th class="r"></th></tr></thead><tbody><sc-for list="{{sc.shows}}" as="x" hint-placeholder-count="5"><tr><td class="mono">{{x.n}}</td><td>{{x.col}}</td><td><input class="v3in" value="{{x.label}}" onChange="{{x.onLabel}}" disabled="{{sc.ro}}" aria-label="筛选项名称" placeholder="如：休闲零食"></td><td><input class="v3in" value="{{x.tag}}" onChange="{{x.onTag}}" disabled="{{sc.ro}}" aria-label="卖点标签" placeholder="≤ 6 字，如：618 同价"></td><td><input class="v3in" value="{{x.cond}}" onChange="{{x.onCond}}" disabled="{{sc.ro}}" aria-label="匹配条件" placeholder="如：类目 = 休闲食品"></td><td><button class="swl" role="switch" aria-checked="{{x.onS}}" onClick="{{x.toggle}}" disabled="{{sc.ro}}"><span class="sw {{x.onCls}}"></span></button></td><td class="r"><button class="lk" onClick="{{x.del}}" disabled="{{sc.ro}}">删除</button></td></tr></sc-for></tbody></table><sc-if value="{{sc.noShows}}" hint-placeholder-val="{{ false }}"><div class="empty">还没有配置前台筛选项，前台将只显示「全部」</div></sc-if></div>
 <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px"><sc-for list="{{sc.showAdd}}" as="a" hint-placeholder-count="3"><button class="btn btn-o" onClick="{{a.pick}}" disabled="{{sc.ro}}">{{a.t}}</button></sc-for></div>
 <p style="margin: 12px 0 0; font-size: 12px; color: var(--text-3)">规则：卖点标签须为可核实的事实（价格对比、发货方式、价保周期等），不使用「最低价」「第一」等绝对化用语；匹配条件只能引用本池商品字段；场景绑定多个商品池时，按「商品来源」中排在第一的池展示。</p>
 </div>
@@ -1146,7 +1146,9 @@ function poolToSingle(p) {
   // 旧口径「结算价 / 会员价 小于 X%」折算为「利润率 ≥ 100 − X%」
   if (f.adv && p.flt && p.flt.advOp !== '大于等于') { f.advOp = p.flt.advOp === '小于' ? '大于等于' : '小于'; f.advPct = String(100 - Number(p.flt.advPct)); }
   if (!f.adv && rm.length) { f.adv = true; f.advOp = '大于等于'; f.advPct = String(Math.min.apply(null, rm)); }
-  return Object.assign({}, p, { flt: f, rules: [], prule: true });
+  const shows = (p.shows || []).map((x) => ['场景商品'].concat(x.slice(1)));
+  const cs = p.colSubs || {}; const colSubs = { 场景商品: cs['场景商品'] || '全部货源 · 按品类浏览' };
+  return Object.assign({}, p, { flt: f, rules: [], prule: true, shows: shows, colSubs: colSubs });
 }
 function crudSeed() {
   return {
@@ -2781,7 +2783,7 @@ class Component extends DCLogic {
             sum: dirty ? '预览（未保存）' : '当前生效',
             drops: drops.map((x) => ({ name: x.g.name, why: x.why.replace('未通过：', ''), src: x.g.src + ' · ' + this.gShip(x.g), member: '¥' + x.g.member, cost: this.canCost() ? '¥' + x.g.cost : '***' })), noDrops: !drops.length } }; })(),
         ...(() => { if (KIND !== 'pool') return { shows: [], noShows: true, colSubs: [], showAdd: [] }; const sh = s.shows || []; const cs = s.colSubs || {}; const put = (v, msg) => { patchS(Object.assign({ shows: v }, {})); if (msg) this.pushLog('商品池', msg, s.name); };
-          const COLS = ['爆款限定', '精选礼包', '福利卡券'];
+          const COLS = ['场景商品'];
           return { shows: sh.map((x, i) => ({ col: x[0], label: x[1], tag: x[2], cond: x[3], onCls: x[4] ? 'on' : '', onS: x[4] ? 'true' : 'false', n: i + 1,
             onLabel: (e) => { const v = sh.map((y) => y.slice()); v[i][1] = e.target.value; put(v); }, onTag: (e) => { const v = sh.map((y) => y.slice()); v[i][2] = e.target.value; put(v); }, onCond: (e) => { const v = sh.map((y) => y.slice()); v[i][3] = e.target.value; put(v); },
             toggle: () => { if (!canEdit) return; const v = sh.map((y) => y.slice()); v[i][4] = !v[i][4]; put(v, (v[i][4] ? '显示' : '隐藏') + '筛选项「' + x[1] + '」'); },

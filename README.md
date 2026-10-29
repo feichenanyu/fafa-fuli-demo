@@ -5,8 +5,8 @@
 | 内容 | 链接 |
 | --- | --- |
 | 买家端 Demo · Beta 0.3（一页融合） | https://feichenanyu.github.io/fafa-fuli-demo/ |
-| 采发发 Agent Demo v0.1（福利 / 行政 / 办公三大应用 · 服务商 / 企业账号） | https://feichenanyu.github.io/fafa-fuli-demo/agent/ |
-| 运营管理后台 Demo v1.4（采发发 Agent · 商品池统一商品规则） | https://feichenanyu.github.io/fafa-fuli-demo/admin/ |
+| 采发发 Agent Demo v0.2（福利 / 行政 / 办公三大应用 · 服务商 / 企业账号 · 商品不分类型） | https://feichenanyu.github.io/fafa-fuli-demo/agent/ |
+| 运营管理后台 Demo v1.5（采发发 Agent · 商品池统一商品规则 · 不分商品类型） | https://feichenanyu.github.io/fafa-fuli-demo/admin/ |
 | **采 Demo v0.3（企业终端采购 · 发发福利 Agent UI） | https://feichenanyu.github.io/fafa-fuli-demo/bangbang/ |
 | 文档中心 | https://feichenanyu.github.io/fafa-fuli-demo/docs/ |
 | 前台 PRD v2.1（一页融合版） | https://feichenanyu.github.io/fafa-fuli-demo/docs/prd-frontend.html |
@@ -39,6 +39,7 @@ Markdown 原文在 [`docs/`](docs/) 目录。
 - 运营后台 v1.3：发发福利与**采合并为「采发发 Agent」模块（三大应用与子场景、热门运营场景、福利场景专区、应用设置），**采独立商品库下线，统一用商品池
 - 运营后台 v1.4：商品池的「商品规则」与「筛选规则」合并为一个运营项「商品规则」——一池一套、全部货源过同一套规则，通过即自动上架、不通过即自动下架（带原因与日志）；字段：品类、利润率（=（会员价 − 成本价）÷ 会员价，平台内部可见，会员端只展示市场价利润率）、剔除关键词、剔除竞对品牌、会员价区间、剔除不可售、发货方式
 - 商品类型不再区分爆品 / 礼包 / 卡券：后台商品库、商品池、频道 / 场景 / 专题规则里的商品类型字段与筛选全部去掉，改按品类圈品
+- 前台同步取消商品类型：福利采购场景页「爆款限定 / 精选礼包 / 福利卡券」合并为「场景商品」按品类浏览；选品结果、搜索去掉类型筛选，标签改为品类；后台商品池「前台展示」只保留一个展示区
 - **采 Demo v0.3 与历史文档保持封板，未改动
 
 ## 最近更新（2026-10-27）
