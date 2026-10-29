@@ -1823,7 +1823,6 @@ function buildDefs(self, st, role) {
   D.pool = {
     page: 'pool', title: '商品池', noun: '商品池', store: 'pools', edit: ['admin', 'goods', 'content'], newLabel: '新建商品池',
     desc: '一个商品池一套商品规则：全部货源的商品都过同一套规则，通过即自动上架入池，不通过或商品下架即自动下架出池；可被子场景、资源频道、专题绑定复用',
-    kpis: () => [['启用中的商品池', st.pools.filter((p) => p.status === '启用').length, '停用 ' + st.pools.filter((p) => p.status !== '启用').length], ['池内商品（去重）', Array.from(new Set(st.pools.reduce((a, p) => a.concat(self.poolIn(p.id)), []))).length, '商品库在售 ' + st.goods.filter((g) => g.status === 'on').length], ['被引用次数', st.pools.reduce((a, p) => a + self.refsOf('pool', p.id).length, 0), '场景 / 频道 / 专题'], ['今日自动进出', '3', '规则重算每小时一次']],
     tabs: { opts: [['', '全部'], ['启用', '启用'], ['停用', '停用']], get: (r) => r.status },
     filters: [{ k: 'q', type: 'text', ph: '商品池名称 / 说明', match: (r, v) => (r.name + r.desc).includes(v) }, { k: 'owner', type: 'select', label: '负责人', opts: [['王磊', '王磊'], ['王悦', '王悦']], match: (r, v) => r.owner === v }],
     cols: [{ t: '商品池', cell: (r) => N(r.name, r.desc) }, { t: '商品规则', cell: (r) => ({ type: 'tags', tags: self.pruleTags(r.flt).slice(0, 3), empty: '不限' }) },
