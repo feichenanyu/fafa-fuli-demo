@@ -3425,7 +3425,7 @@ class Component extends DCLogic {
   }
   client() { return this.clients().find((c) => c.id === this.state.client) || null; }
   oSkus() {
-    // 已经过商品池「行政办公池」筛选规则：剔除关键词「临期」、结算价 / 京东价 < 95%（例：晨光中性笔临期包装 未出现在前台）
+    // 已经过商品池「行政办公池」筛选规则：剔除关键词「临期」、结算价 / 会员价 < 95%（例：晨光中性笔临期包装 未出现在前台）
     const T = [
       ['o1', 'paper', '办公文具', '得力 A4 复印纸 70g 5 包', '厂家发货 · 5 包 / 箱', 109, 139, 4800, ['xz_meet', 'bg_supply', 'bg_print', 'bg_new']],
       ['o2', 'ink', '打印耗材', '惠普 803 墨盒 黑色', '京东自营 · 原装', 129, 159, 1250, ['bg_print']],
@@ -4642,7 +4642,7 @@ class Component extends DCLogic {
     Object.assign(O, {
       agSubs: a.subs.map((x) => ({ name: x.name, cls: x.id === sub.id ? 'on' : '', pick: () => this.setState({ bSub: x.id, draft: '' }) })),
       agGuiTitle: '「' + sub.name + '」· ' + a.name, agGuiSub: '池内 ' + items.length + ' 款 · 按销量排序', agPool: a.pool,
-      agRule: '已按池内筛选规则剔除：含「临期」关键词、结算价 / 京东价 ≥ 95% 的商品',
+      agRule: '已按池内筛选规则剔除：含「临期」关键词、结算价 / 会员价 ≥ 95% 的商品',
       agGrid: items.map((p) => ({ name: p.name, spec: p.spec, img: this.pimg(p), price: this.money2(P(p)), strike: this.money2(p.market),
         extra: per ? '认证后享会员价' : ent ? '企业会员价' : '毛利 ' + ((p.market - P(p)) / p.market * 100).toFixed(0) + '%', tags: [{ t: p.g }, { t: a.name }],
         add: () => { this.addItem(p.id, 1); this.flash('已加入采购车 · ' + p.name, true); }, buy: () => this.buyOnly([p.id], [1]) })),
