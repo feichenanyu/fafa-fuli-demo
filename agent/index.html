@@ -2908,7 +2908,7 @@ class Component extends DCLogic {
       clearPick: () => setPick({}), noRows: rows.length === 0,
       rows: rows.map((p) => { const o = !!pick[p.id]; const t = this.skuType(p); const isRec = rec && p.id === rec.id;
         return { key: 'sel|' + p.id, name: p.name, img: this.imgOf(p), type: t, tCls: t === '礼包' ? 'tg-gift' : t === '卡券' ? 'tg-card' : 'tg-hot', meta: p.source + (p.at ? ' · ' + p.at.wh + (p.at.st === '紧张' ? ' · 库存紧张' : '') + (p.at.aid && st.fn && st.fn.c.cty === 'soe' ? ' · 帮扶产品' : '') : '') + (p.sold ? ' · 已售 ' + p.sold : ''), price: this.money(P(p)),
-          profit: per ? '' : '毛利 ' + Math.round(mg(p) * 100) + '%', hasProfit: !per, rec: !!isRec, recWhy: isRec ? this.selRecWhy(p) : '', cls: o ? 'on' : '', ckCls: o ? 'on' : '', aria: o ? 'true' : 'false',
+          profit: per ? '' : '市场价利润率 ' + Math.round(mg(p) * 100) + '%', hasProfit: !per, rec: !!isRec, recWhy: isRec ? this.selRecWhy(p) : '', cls: o ? 'on' : '', ckCls: o ? 'on' : '', aria: o ? 'true' : 'false',
           toggle: () => { const m = Object.assign({}, pick); m[p.id] = !o; setPick(m); }, view: () => this.setState({ pd: 'sel|' + p.id }),
           detail: { p: p, on: o, alt: false, plan: '选品结果', toggle: () => { const m = Object.assign({}, pick); m[p.id] = !o; setPick(m); } } }; }),
       overLimit: !!(st.fn && ['soe', 'lsoe'].indexOf(st.fn.c.cty) >= 0 && perSel * n > 50000), limitT: '本单约 ' + this.money(perSel * n) + '，超过客户公开采购限额 ¥50,000（53 号文：限额以上需询比 / 竞价）。可导出三家比价单（京东 / 天猫 / 平台会员价）附在审批材料里。', compare: () => this.flash('已导出三家比价单：每个 SKU 的京东、天猫与平台会员价对照（演示）', false),
@@ -3425,7 +3425,7 @@ class Component extends DCLogic {
   }
   client() { return this.clients().find((c) => c.id === this.state.client) || null; }
   oSkus() {
-    // 已经过商品池「行政办公池」筛选规则：剔除关键词「临期」、结算价 / 会员价 < 95%（例：晨光中性笔临期包装 未出现在前台）
+    // 已经过商品池「行政办公池」商品规则：剔除关键词「临期」、平台利润率 ≥ 5%（例：晨光中性笔临期包装 未出现在前台）；平台利润率不对会员展示
     const T = [
       ['o1', 'paper', '办公文具', '得力 A4 复印纸 70g 5 包', '厂家发货 · 5 包 / 箱', 109, 139, 4800, ['xz_meet', 'bg_supply', 'bg_print', 'bg_new']],
       ['o2', 'ink', '打印耗材', '惠普 803 墨盒 黑色', '京东自营 · 原装', 129, 159, 1250, ['bg_print']],
@@ -4417,7 +4417,7 @@ class Component extends DCLogic {
         const tiles = [
           { id: 't1', t: '集采严选', d: '企业福利补货季', rule: '近 30 日销量 ≥ 2000', fg: '#0f766e', bg: 'linear-gradient(135deg,#e9fbf5 0%,#f7fdfb 100%)', img: 'b-jingmi', f: (x) => x.sold >= 2000 },
           { id: 't2', t: '每日上新', d: '新品试单专区', rule: '最近上架的 3 款', fg: '#a16207', bg: 'linear-gradient(135deg,#fff8e6 0%,#fffdf5 100%)', img: 'b-xiaoxiong', f: (x) => latest.indexOf(x.id) >= 0 },
-          { id: 't3', t: '品质之选', d: '口碑品质好物', rule: '利润率 ≥ 20% 且有货', fg: '#1d4ed8', bg: 'linear-gradient(135deg,#eef4ff 0%,#f8fbff 100%)', img: 'b-yuze', f: (x) => x.rate >= 20 && x.inStock },
+          { id: 't3', t: '品质之选', d: '口碑品质好物', rule: '市场价利润率 ≥ 20% 且有货', fg: '#1d4ed8', bg: 'linear-gradient(135deg,#eef4ff 0%,#f8fbff 100%)', img: 'b-yuze', f: (x) => x.rate >= 20 && x.inStock },
           { id: 't4', t: '品牌直供', d: '大牌采购专场', rule: '品牌方直供（不含平台自有品牌）', fg: '#be123c', bg: 'linear-gradient(135deg,#fff0f3 0%,#fffafb 100%)', img: 'b-huawei', f: (x) => ['发发臻选', '发发卡券'].indexOf(x.brand) < 0 }];
         const bns = ch.banners; const bi = (st.v3bn || 0) % bns.length; const bn = bns[bi];
         const F = st.v3f || {}; const setF = (o) => this.setState({ v3f: Object.assign({}, F, o) });
@@ -4528,7 +4528,7 @@ class Component extends DCLogic {
     badges.push({ t: cfg.w + '货盘', bg: '#0d9488' });
     if (p.source !== '入驻商家') badges.push({ t: '一键代发', bg: '#173a34' });
     return { id: p.id, img: this.pimg(p), imgCls: '', title: p.name, spec: this.specOf(p) + ' · ' + p.source,
-      marginLabel: per ? '市场价' : this.isEnt() ? '企业会员价' : '毛利率 ' + ((p.market - p.member) / p.market * 100).toFixed(1) + '%',
+      marginLabel: per ? '市场价' : this.isEnt() ? '企业会员价' : '市场价利润率 ' + ((p.market - p.member) / p.market * 100).toFixed(1) + '%',
       price: this.money2(pr), strike: this.money2(p.market), tags: p.subs.slice(0, 3).map((t) => ({ t: t })),
       sold: p.sold.toLocaleString('zh-CN'), yday: Math.max(3, Math.round(p.sold / 160)), stock: (800 + (p.sold * 37) % 12000).toLocaleString('zh-CN'),
       badges: badges.slice(0, 3), delay: (i % 10) * 30 + 'ms',
@@ -4642,9 +4642,9 @@ class Component extends DCLogic {
     Object.assign(O, {
       agSubs: a.subs.map((x) => ({ name: x.name, cls: x.id === sub.id ? 'on' : '', pick: () => this.setState({ bSub: x.id, draft: '' }) })),
       agGuiTitle: '「' + sub.name + '」· ' + a.name, agGuiSub: '池内 ' + items.length + ' 款 · 按销量排序', agPool: a.pool,
-      agRule: '已按池内筛选规则剔除：含「临期」关键词、结算价 / 会员价 ≥ 95% 的商品',
+      agRule: '已按池内商品规则过滤：临期、不可售等商品不展示',
       agGrid: items.map((p) => ({ name: p.name, spec: p.spec, img: this.pimg(p), price: this.money2(P(p)), strike: this.money2(p.market),
-        extra: per ? '认证后享会员价' : ent ? '企业会员价' : '毛利 ' + ((p.market - P(p)) / p.market * 100).toFixed(0) + '%', tags: [{ t: p.g }, { t: a.name }],
+        extra: per ? '认证后享会员价' : ent ? '企业会员价' : '市场价利润率 ' + ((p.market - P(p)) / p.market * 100).toFixed(0) + '%', tags: [{ t: p.g }, { t: a.name }],
         add: () => { this.addItem(p.id, 1); this.flash('已加入采购车 · ' + p.name, true); }, buy: () => this.buyOnly([p.id], [1]) })),
       v2Ph: sub.ph, v2Ctx: '应用：' + a.name + ' · ' + sub.name, v2NoTpl: true, v2HasTpl: false, v3HasCh: false, v3GuiScene: false, v3GuiRes: false, v3GuiAsk: false,
       v3HasGuide: true, v3GuideLabel: '试试：', v3Guides: qs.map((q) => ({ t: q.t, isTpl: false, cls: '', title: '点击后填入输入框，可修改再发送', pick: () => this.setState({ draft: q.t }) })),
@@ -5031,7 +5031,7 @@ class Component extends DCLogic {
       ...(() => { const r = (sel.rows || []).find((x) => x.key === st.pd); if (!r || st.ws !== 'plan') return { pdOn: false, pdClose: () => this.setState({ pd: '' }), pd: { kv: [], tags: [] } };
         const d = r.detail; const p = d.p; const isV = p.cat === 'voucher'; const P2 = this.priceOf(p);
         return { pdOn: true, pdClose: () => this.setState({ pd: '' }), pd: { planName: d.plan, img: this.imgOf(p), imgCls: isV ? 'face' : '', name: p.name, price: this.money2(P2), strike: p.market > P2 ? this.money2(p.market) : '',
-          margin: !isV && !per ? '毛利率 ' + ((p.market - p.member) / p.market * 100).toFixed(1) + '%' : '',
+          margin: !isV && !per ? '市场价利润率 ' + ((p.market - p.member) / p.market * 100).toFixed(1) + '%' : '',
           kv: (isV ? [['类型', p.physical ? '实体卡' : '电子卡'], ['来源', p.source], ['数量', st.headcount + ' 张（每人 1 张）']] : [['规格', this.specOf(p)], ['来源', p.source], ['已售', String(p.sold)], ['发货', p.source === '入驻商家' ? '商家发货 · 48 小时内' : '一键代发 · 支持名单直发']]).map((x) => ({ k: x[0], v: x[1] })),
           tags: (p.subs || []).slice(0, 4).map((t) => ({ t: t })),
           why: '选品结果中的 SKU：' + (d.p.cat === 'voucher' ? '卡券' : d.p.cat === 'gift' ? '礼包（供应商整箱发货，一个 SKU）' : '爆品') + '。勾选后与其他已选商品一起加购',
