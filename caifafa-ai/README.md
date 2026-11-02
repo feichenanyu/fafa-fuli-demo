@@ -6,7 +6,7 @@
 
 | 分类 | 文档 | 版本 | 日期 |
 | --- | --- | --- | --- |
-| 产品形态与版本规划 | [采发发产品形态与版本规划](https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/product-form.html) | v1.0 | 2026-11-02 |
+| 产品形态与版本规划 | [采发发产品形态与版本规划](https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/product-form.html) | v1.1 | 2026-11-02 |
 | 需求文档（PRD / Spec） | 暂无 | | |
 | 原型 Demo | 暂无 | | |
 | 决策与评审记录 | 暂无 | | |

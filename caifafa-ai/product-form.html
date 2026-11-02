@@ -114,6 +114,23 @@ h2 { font-size: 22px; font-weight: 600; line-height: 1.4; }
 .mainline b { color: var(--fire-900); font-weight: 600; margin-right: 6px; }
 .mainline i { font-style: normal; color: var(--fire); }
 
+
+/* Member route */
+.route { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; display: grid; gap: 12px; }
+.lane { display: grid; grid-template-columns: 64px 1fr; gap: 12px; align-items: stretch; }
+.lane-name { font-size: 14px; font-weight: 600; align-self: center; }
+.lane-steps, .path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+.lane-steps li, .path li { position: relative; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; align-content: start; }
+.lane-steps li + li::before, .path li + li::before { content: "→"; position: absolute; left: -18px; top: 50%; transform: translateY(-50%); color: #9CA3AF; font-size: 13px; }
+.lane-steps b, .path b { font-size: 14px; font-weight: 600; }
+.lane-steps span, .path span { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+.lane-steps li.paid { border-style: dashed; border-color: var(--water); }
+.merge { font-size: 12.5px; color: var(--water-700); padding-left: 76px; }
+.merge::before { content: "↓ "; }
+.path { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.path em { font-style: normal; font-family: var(--font-mono); font-size: 11.5px; color: var(--water-700); margin-top: 4px; }
+.path li.gap { border: 2px solid var(--water); background: var(--cyan-50); }
+
 /* Roadmap */
 .road { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; counter-reset: v; }
 .stage { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; display: grid; gap: 8px; align-content: start; position: relative; }
@@ -153,9 +170,6 @@ td li + li { margin-top: 2px; }
 .decide span { font-size: 13.5px; color: var(--muted); }
 .foot { font-size: 12.5px; color: var(--muted); }
 
-.crumb { font-size: 13px; color: var(--muted); }
-.crumb a { color: var(--water-700); text-decoration: none; }
-.crumb a:hover { text-decoration: underline; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline-offset: 2px; }
 
 @media (max-width: 900px) {
@@ -181,6 +195,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline
   .bridge::before, .bridge::after { display: none; }
   .bridge span br { display: none; }
   .bridge span::after { content: " ↓"; }
+  .lane { grid-template-columns: 1fr; }
+  .lane-steps, .path { grid-template-columns: 1fr; gap: 18px; }
+  .lane-steps li + li::before, .path li + li::before { content: "↓"; left: 50%; top: -16px; transform: none; }
+  .merge { padding-left: 0; }
   .road { grid-template-columns: 1fr; }
   .road .stage:last-child { grid-column: auto; }
   table, thead, tbody, tr, th, td { display: block; width: 100% !important; }
@@ -200,7 +218,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline
 </head>
 <body>
 <main class="wrap">
-  <nav class="crumb" aria-label="面包屑"><a href="./">采发发 AI 融合版 · 文档中心</a> / 产品形态与版本规划</nav>
 
   <header class="head">
     <div class="eyebrow">
@@ -242,15 +259,48 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline
     <p class="note">资金流：会员付款给平台，平台再与入驻商家结算。卖家端由卖家侧另行规划。</p>
   </section>
 
+
+  <section class="sec" aria-labelledby="sr">
+    <div class="sec-head"><span class="sec-no">02</span><h2 id="sr">会员用户路线：新老会员从不同入口进入，之后走同一条成交路线</h2></div>
+    <div class="route">
+      <div class="lane">
+        <span class="lane-name">新会员</span>
+        <ol class="lane-steps">
+          <li><b>自主注册</b><span>成为免费个人版用户，线索同步流转给销售</span></li>
+          <li><b>免费体验</b><span>可见场景、价格展示、AI 每日积分受限</span></li>
+          <li><b>升级免费企业版</b><span>填写企业资料，价格正常展示，可以下单</span></li>
+          <li class="paid"><b>开通高级会员权益包</b><span>销售跟进推动开通，解锁更多场景与权益</span></li>
+        </ol>
+      </div>
+      <div class="lane">
+        <span class="lane-name">老会员</span>
+        <ol class="lane-steps">
+          <li><b>原账号登录</b><span>无需重新注册、认证</span></li>
+          <li><b>权益自动映射</b><span>首页默认开放年货节场景</span></li>
+          <li><b>数据延续</b><span>余额、订单、商城都在</span></li>
+        </ol>
+      </div>
+      <p class="merge">进入新版后，两类会员走同一条路线</p>
+      <ol class="path">
+        <li><b>找货</b><span>场景、搜索、商品详情，AI 预算选品</span><em>V1.0</em></li>
+        <li class="gap"><b>谈单</b><span>对客选品清单，分享商城给客户</span><em>V1.0 · 新增</em></li>
+        <li><b>成交</b><span>代发、询价、建商城；收银台、消息通知</span><em>V1.0</em></li>
+        <li><b>经营</b><span>商城数据与订单，AI 问数、巡检</span><em>V1.3</em></li>
+        <li><b>复购</b><span>档期切换，沉睡会员唤醒</span><em>V1.2 / V1.3</em></li>
+      </ol>
+    </div>
+    <p class="note">“谈单”是按用户路线补上的断点：会员拿到货盘后，要有能直接给客户看的东西。AI 积分暂不开放购买，Q1 之后再考虑。</p>
+  </section>
+
   <section class="sec" aria-labelledby="s2">
-    <div class="sec-head"><span class="sec-no">02</span><h2 id="s2">版本路线：先保春节成交，再铺开 AI，最后对外</h2></div>
+    <div class="sec-head"><span class="sec-no">03</span><h2 id="s2">版本路线：先保春节成交，再铺开 AI，最后对外</h2></div>
     <div class="mainline"><b>主线 · 选品与价格能力</b><span>11/20 AI 选品（运营 + 会员）</span><i aria-hidden="true">→</i><span>12/18 贴链接找同款比价</span><i aria-hidden="true">→</i><span>之后：对客报价单</span></div>
     <ol class="road">
       <li class="stage now">
         <span class="now-badge">本月</span>
         <span class="when">V1.0 · 11/20</span>
         <h3>年货节版</h3>
-        <p>场景运营、一键成交、运营和会员 AI 选品、商品库清洗</p>
+        <p>注册与升级、场景运营、一键成交、对客选品清单、AI 选品</p>
         <div class="tags"><span class="tag t-deal">交易</span><span class="tag t-base">底层</span></div>
       </li>
       <li class="stage">
@@ -262,7 +312,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline
       <li class="stage">
         <span class="when">V1.2 · 12/18</span>
         <h3>运营与价格能力</h3>
-        <p>京东运营组件、找同款比价、清单直接下单、价格审核</p>
+        <p>京东运营组件、找同款比价、清单直接下单、价格审核、档期切换</p>
         <div class="tags"><span class="tag t-grow">增长</span><span class="tag t-base">底层</span></div>
       </li>
       <li class="stage">
@@ -281,7 +331,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline
   </section>
 
   <section class="sec" aria-labelledby="s3">
-    <div class="sec-head"><span class="sec-no">03</span><h2 id="s3">每个版本带来的业务价值</h2><span class="sec-note">粗体为一句话价值</span></div>
+    <div class="sec-head"><span class="sec-no">04</span><h2 id="s3">每个版本带来的业务价值</h2><span class="sec-note">粗体为一句话价值</span></div>
     <div class="matrix-wrap">
       <table>
         <thead>
@@ -296,9 +346,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline
         <tbody>
           <tr class="now">
             <th scope="row">年货节版<span class="when">V1.0 · 11/20</span></th>
-            <td class="core" data-label="核心功能">场景运营 · 一键成交 · AI 选品</td>
-            <td class="v" data-label="对平台"><b class="hl">拿下春节档</b><span class="sub">GMV 和预付款；选品定价规则化</span></td>
-            <td class="v" data-label="对会员"><b class="hl">拿货盘直接谈单</b><span class="sub">一键建商城，AI 出选品清单</span></td>
+            <td class="core" data-label="核心功能">注册升级 · 场景运营 · 一键成交 · 对客选品清单 · AI 选品</td>
+            <td class="v" data-label="对平台"><b class="hl">拿下春节档</b><span class="sub">GMV、预付款和新会员线索；选品定价规则化</span></td>
+            <td class="v" data-label="对会员"><b class="hl">拿货盘直接谈单</b><span class="sub">对客选品清单、一键建商城，AI 按预算选品</span></td>
             <td class="v" data-label="对终端客户企业"><b class="hl">福利更快落地</b><span class="sub">货源可信，发票合规</span></td>
           </tr>
           <tr>
@@ -310,9 +360,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline
           </tr>
           <tr>
             <th scope="row">运营与价格能力<span class="when">V1.2 · 12/18</span></th>
-            <td class="core" data-label="核心功能">京东组件 · 找同款比价 · 清单下单</td>
+            <td class="core" data-label="核心功能">京东组件 · 找同款比价 · 清单下单 · 档期切换</td>
             <td class="v" data-label="对平台"><b class="hl">价格可信成卖点</b><span class="sub">京东资源价值释放</span></td>
-            <td class="v" data-label="对会员"><b class="hl">报价有依据</b><span class="sub">贴链接即可比价</span></td>
+            <td class="v" data-label="对会员"><b class="hl">报价有依据</b><span class="sub">贴链接即可比价；春节后商城平滑换季</span></td>
             <td class="v" data-label="对终端客户企业"><b class="hl">价格透明可比</b><span class="sub">有评价可参考</span></td>
           </tr>
           <tr>
@@ -335,7 +385,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline
   </section>
 
   <section class="sec" aria-labelledby="s4">
-    <div class="sec-head"><span class="sec-no">04</span><h2 id="s4">请您拍板</h2></div>
+    <div class="sec-head"><span class="sec-no">05</span><h2 id="s4">请您拍板</h2></div>
     <div class="decide">
       <ol>
         <li><div><b>认可产品形态与版本节奏</b><span>11/20 版本带上 AI 选品；工时不够时，先顺延一键创建商城，保场景运营和一键成交。</span></div></li>
