@@ -1,5 +1,14 @@
 # 发发福利 · **采 · Demo 与文档
 
+## 采发发 AI 融合版（当前方向）
+
+| 内容 | 链接 |
+| --- | --- |
+| 文档中心（AI 融合版所有文档的入口） | https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/ |
+| 采发发产品形态与版本规划 v1.0（2026-11-02） | https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/product-form.html |
+
+以下为发发福利、帮帮采与采发发 Agent 探索阶段的 Demo 与文档（已归档）。
+
 在线访问（无需登录）：
 
 | 内容 | 链接 |

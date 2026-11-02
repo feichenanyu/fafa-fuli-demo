@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>采发发产品形态与版本规划</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 采发发官网视觉规范 v1.0：水木相生，青碧为主，火色只做点缀 */
+  /* 布局：一页两屏 —— 第一屏 结论 + 价值链 + 版本路线；第二屏 价值矩阵 + 请您拍板 */
+  --water: #0D9488;
+  --water-700: #096F66;
+  --water-50: #DAEEED;
+  --cyan-50: #DBF4F1;
+  --cyan-900: #0B655B;
+  --wood: #10B981;
+  --wood-50: #DBF4EC;
+  --wood-900: #086546;
+  --fire: #F59E0B;
+  --fire-50: #FDF0DA;
+  --fire-900: #865606;
+  --bg: #F3F4F6;
+  --surface: #FFFFFF;
+  --ink: #374151;
+  --muted: #6B7280;
+  --line: #E5E7EB;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding: 40px 32px 56px; display: grid; gap: 40px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; color: var(--ink); }
+p { margin: 0; }
+
+/* Header */
+.head { display: grid; gap: 16px; }
+.eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+.brand { display: inline-flex; align-items: center; gap: 8px; color: var(--water-700); font-weight: 600; }
+.brand-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--water); color: #F3F4F6; font-family: var(--font-mono); font-size: 11px; display: grid; place-items: center; }
+.eyebrow .sep { width: 1px; height: 12px; background: var(--line); }
+h1 { font-size: 34px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
+h1 em { font-style: normal; color: var(--water); }
+.lead { font-size: 16px; line-height: 1.75; max-width: 62ch; }
+.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 4px; }
+.principle { background: var(--surface); border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow); border-top: 3px solid var(--water); }
+.principle b { display: block; font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.principle span { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* Section heads */
+.sec { display: grid; gap: 16px; }
+.sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.sec-no { font-family: var(--font-mono); font-size: 13px; color: var(--water); }
+h2 { font-size: 22px; font-weight: 600; line-height: 1.4; }
+.sec-note { font-size: 13px; color: var(--muted); }
+
+/* Value chain */
+.chain { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; display: grid; gap: 16px; }
+.chain-row { display: grid; grid-template-columns: 1fr 120px 1fr 120px 1fr; align-items: stretch; }
+.node { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; }
+.node.focus { border: 2px solid var(--water); background: var(--cyan-50); }
+.node h3 { font-size: 16px; font-weight: 600; }
+.node .gain { font-size: 13px; color: var(--muted); }
+.node.focus .gain { color: var(--cyan-900); }
+.flow { display: grid; align-content: center; gap: 10px; padding: 0 8px; }
+.flow div { position: relative; font-size: 12px; color: var(--muted); text-align: center; padding-bottom: 6px; }
+.flow div::after { content: ""; position: absolute; left: 4px; right: 4px; bottom: 0; height: 1.5px; background: #9CA3AF; }
+.flow .fwd::before, .flow .back::before { content: ""; position: absolute; bottom: -3.5px; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+.flow .fwd::before { right: 0; border-left: 7px solid #9CA3AF; }
+.flow .back::before { left: 0; border-right: 7px solid #9CA3AF; }
+.supply { display: grid; grid-template-columns: 1fr 120px 1fr 120px 1fr; }
+.supply .node { border-style: dashed; }
+.supply-label { grid-column: 1; font-size: 12px; color: var(--muted); padding: 0 0 6px 16px; border-left: 1.5px solid #9CA3AF; margin-left: 50%; }
+
+
+/* Product form */
+.form { display: grid; grid-template-columns: 1fr 120px 1fr; gap: 0; align-items: stretch; }
+.panel { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; align-content: start; }
+.panel.member { outline: 2px solid var(--water); outline-offset: -2px; }
+.panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.panel-head h3 { font-size: 16px; font-weight: 600; }
+.panel-head span { font-size: 12.5px; color: var(--muted); }
+.roles, .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.roles li, .steps li { display: grid; gap: 2px; }
+.roles b, .steps b { font-size: 14px; font-weight: 600; }
+.does { font-size: 13px; color: var(--muted); }
+.ai { font-size: 12.5px; color: var(--cyan-900); background: var(--cyan-50); border-left: 3px solid #14B8A6; padding: 3px 8px; border-radius: 0 4px 4px 0; justify-self: start; margin-top: 2px; }
+.steps { counter-reset: st; }
+.steps li { counter-increment: st; padding-left: 30px; position: relative; }
+.steps li::before { content: counter(st); position: absolute; left: 0; top: 1px; width: 20px; height: 20px; border-radius: 999px; background: var(--water); color: #F3F4F6; font-family: var(--font-mono); font-size: 11px; display: grid; place-items: center; }
+.bridge { display: grid; place-items: center; padding: 0 10px; position: relative; }
+.bridge::before { content: ""; position: absolute; left: 10px; right: 10px; top: 50%; height: 1.5px; background: #9CA3AF; }
+.bridge::after { content: ""; position: absolute; right: 8px; top: calc(50% - 3.25px); border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 7px solid #9CA3AF; }
+.bridge span { position: relative; background: var(--bg); font-size: 12px; color: var(--muted); text-align: center; padding: 6px 4px; line-height: 1.6; }
+.base { grid-column: 1 / -1; margin-top: 12px; background: var(--water-50); border-radius: var(--radius); padding: 12px 18px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; }
+.base b { font-size: 14px; font-weight: 600; color: var(--water-700); }
+.base span { font-size: 13px; color: var(--ink); }
+.note { font-size: 12.5px; color: var(--muted); }
+.mainline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; background: var(--fire-50); border: 1px solid #FBD89D; border-radius: var(--radius); padding: 10px 16px; font-size: 13.5px; }
+.mainline b { color: var(--fire-900); font-weight: 600; margin-right: 6px; }
+.mainline i { font-style: normal; color: var(--fire); }
+
+/* Roadmap */
+.road { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; counter-reset: v; }
+.stage { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; display: grid; gap: 8px; align-content: start; position: relative; }
+.stage.now { outline: 2px solid var(--water); outline-offset: -2px; }
+.stage .when { font-family: var(--font-mono); font-size: 13px; color: var(--water-700); font-variant-numeric: tabular-nums; }
+.stage h3 { font-size: 16px; font-weight: 600; }
+.stage p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.now-badge { position: absolute; top: 14px; right: 14px; font-size: 11px; padding: 1px 8px; border-radius: 999px; background: var(--fire-50); color: var(--fire-900); border: 1px solid var(--fire); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.tag { font-size: 11.5px; padding: 1px 8px; border-radius: 4px; border: 1px solid; line-height: 1.6; }
+.t-deal { background: var(--cyan-50); color: var(--cyan-900); border-color: #14B8A6; }
+.t-grow { background: var(--wood-50); color: var(--wood-900); border-color: var(--wood); }
+.t-base { background: #F3F4F6; color: #4B5563; border-color: #D1D5DB; }
+
+/* Matrix */
+.matrix-wrap { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; line-height: 1.6; }
+thead th { text-align: left; font-weight: 600; font-size: 13px; color: var(--water-700); background: var(--water-50); padding: 12px 14px; white-space: nowrap; }
+thead th .who { display: block; font-weight: 400; font-size: 12px; color: var(--cyan-900); }
+tbody th, tbody td { text-align: left; vertical-align: top; padding: 14px; border-top: 1px solid var(--line); }
+tbody th { width: 136px; font-weight: 600; white-space: nowrap; }
+tbody th .when { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--water-700); }
+tbody tr.now th { box-shadow: inset 3px 0 0 var(--water); }
+td.core { color: var(--muted); width: 26%; font-size: 13px; }
+td.v { color: #4B5563; }
+.hl { display: block; font-size: 15px; font-weight: 600; color: var(--water-700); line-height: 1.4; }
+.sub { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+td ul { margin: 0; padding-left: 1.1em; }
+td li + li { margin-top: 2px; }
+
+/* Decision */
+.decide { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; display: grid; gap: 16px; border-left: 4px solid var(--fire); }
+.decide ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: d; }
+.decide li { counter-increment: d; display: grid; grid-template-columns: 32px 1fr; gap: 12px; }
+.decide li::before { content: counter(d); width: 28px; height: 28px; border-radius: 999px; background: var(--water); color: #F3F4F6; display: grid; place-items: center; font-family: var(--font-mono); font-size: 13px; }
+.decide b { display: block; font-size: 15px; font-weight: 600; }
+.decide span { font-size: 13.5px; color: var(--muted); }
+.foot { font-size: 12.5px; color: var(--muted); }
+
+.crumb { font-size: 13px; color: var(--muted); }
+.crumb a { color: var(--water-700); text-decoration: none; }
+.crumb a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline-offset: 2px; }
+
+@media (max-width: 900px) {
+  .road { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .road .stage:last-child { grid-column: span 2; }
+}
+@media (max-width: 760px) {
+  .wrap { padding: 28px 16px 40px; gap: 32px; }
+  h1 { font-size: 26px; }
+  .principles { grid-template-columns: 1fr; }
+  .chain { padding: 16px; }
+  .chain-row { grid-template-columns: 1fr; gap: 0; }
+  .flow { grid-template-columns: 1fr 1fr; padding: 8px 0; }
+  .flow div::after { display: none; }
+  .flow .fwd::before, .flow .back::before { display: none; }
+  .flow .fwd { text-align: left; } .flow .back { text-align: right; }
+  .flow .fwd::after { content: "↓"; display: inline; position: static; background: none; margin-left: 4px; }
+  .flow .back::after { content: "↑"; display: inline; position: static; background: none; margin-left: 4px; }
+  .supply { grid-template-columns: 1fr; }
+  .supply-label { display: none; }
+  .form { grid-template-columns: 1fr; }
+  .bridge { padding: 10px 0; }
+  .bridge::before, .bridge::after { display: none; }
+  .bridge span br { display: none; }
+  .bridge span::after { content: " ↓"; }
+  .road { grid-template-columns: 1fr; }
+  .road .stage:last-child { grid-column: auto; }
+  table, thead, tbody, tr, th, td { display: block; width: 100% !important; }
+  thead { display: none; }
+  tbody tr { border-top: 1px solid var(--line); padding: 8px 0; }
+  tbody tr:first-child { border-top: 0; }
+  tbody th, tbody td { border-top: 0; padding: 6px 16px; }
+  tbody tr.now th { box-shadow: none; }
+  tbody th { font-size: 15px; }
+  td::before { content: attr(data-label); display: block; font-size: 12px; font-weight: 600; color: var(--water-700); margin-bottom: 2px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .stage { transition: transform 150ms cubic-bezier(0.23,1,0.32,1), box-shadow 150ms cubic-bezier(0.23,1,0.32,1); }
+  .stage:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <nav class="crumb" aria-label="面包屑"><a href="./">采发发 AI 融合版 · 文档中心</a> / 产品形态与版本规划</nav>
+
+  <header class="head">
+    <div class="eyebrow">
+      <span class="brand">采发发 88buys</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span>产品部 · 三院 · 2026-11-02</span>
+    </div>
+    <h1>以存量交易为圆心，<em>把 AI 嵌进会员端和运营后台</em></h1>
+    <p class="lead">采发发不再另起一套 AI-native 系统，而是以 88buys.com 的存量交易为圆心，把 AI 一步步嵌进会员端和新的运营管理后台。每个版本都写清业务价值；该用 AI 用 AI，该用工程用工程，每个 AI 功能都有规则或手动兜底；底座先行，商品和订单 2~3 个月内可被 Agent 调用。第一个落点是 11/20 年货节版。</p>
+  </header>
+
+  <section class="sec" aria-labelledby="s1">
+    <div class="sec-head"><span class="sec-no">01</span><h2 id="s1">产品形态：运营配好，会员一键成交，AI 嵌在每个环节</h2></div>
+    <div class="form">
+      <div class="panel">
+        <div class="panel-head"><h3>新运营管理后台</h3><span>按角色用 AI</span></div>
+        <ul class="roles">
+          <li><b>商品运营</b><span class="does">管商品池、定价规则</span><span class="ai">AI 选品 · AI 查商品和订单 · 商品池效果与 GMV</span></li>
+          <li><b>场景运营</b><span class="does">配二级场景、装修商城模板</span><span class="ai">AI 生成场景头图和卖点 · 场景转化数据</span></li>
+          <li><b>会员运营</b><span class="does">会员激活、培训</span><span class="ai">AI 找出沉睡会员并生成触达话术 · 会员使用情况</span></li>
+          <li><b>管理员</b><span class="does">全局经营、账号权限</span><span class="ai">AI 问数看全平台 · 经营日报与异常解读</span></li>
+        </ul>
+      </div>
+      <div class="bridge" aria-hidden="true"><span>运营配好<br>场景、商品池<br>商城模板</span></div>
+      <div class="panel member">
+        <div class="panel-head"><h3>会员端（服务商）</h3><span>场景里一键成交</span></div>
+        <ol class="steps">
+          <li><b>场景首页</b><span class="does">春节年货、员工福利、工会慰问等二级场景</span></li>
+          <li><b>场景商品</b><span class="does">代发价、集采价、市场价，不露接口价</span><span class="ai">AI 按预算和人数选品</span></li>
+          <li><b>一键操作</b><span class="does">加购 · 询价 · 上架到商城 · 建商城</span><span class="ai">AI 预填建商城向导 · AI 生图（12 月）</span></li>
+          <li><b>收银台</b><span class="does">对公转账、扫码付（个人代付需确认）</span></li>
+        </ol>
+      </div>
+      <div class="base">
+        <b>商品与 AI 底座</b>
+        <span>3.0 商品库清洗 + 运营导入补字段标签 · 统一选品引擎（AI 选品与商品池规则用同一套条件）</span>
+      </div>
+    </div>
+    <p class="note">资金流：会员付款给平台，平台再与入驻商家结算。卖家端由卖家侧另行规划。</p>
+  </section>
+
+  <section class="sec" aria-labelledby="s2">
+    <div class="sec-head"><span class="sec-no">02</span><h2 id="s2">版本路线：先保春节成交，再铺开 AI，最后对外</h2></div>
+    <div class="mainline"><b>主线 · 选品与价格能力</b><span>11/20 AI 选品（运营 + 会员）</span><i aria-hidden="true">→</i><span>12/18 贴链接找同款比价</span><i aria-hidden="true">→</i><span>之后：对客报价单</span></div>
+    <ol class="road">
+      <li class="stage now">
+        <span class="now-badge">本月</span>
+        <span class="when">V1.0 · 11/20</span>
+        <h3>年货节版</h3>
+        <p>场景运营、一键成交、运营和会员 AI 选品、商品库清洗</p>
+        <div class="tags"><span class="tag t-deal">交易</span><span class="tag t-base">底层</span></div>
+      </li>
+      <li class="stage">
+        <span class="when">V1.1 · 12/4</span>
+        <h3>消费商城改版</h3>
+        <p>商城交易链路新版、统一商品展示、商城 AI 生图</p>
+        <div class="tags"><span class="tag t-deal">交易</span><span class="tag t-base">补漏洞</span></div>
+      </li>
+      <li class="stage">
+        <span class="when">V1.2 · 12/18</span>
+        <h3>运营与价格能力</h3>
+        <p>京东运营组件、找同款比价、清单直接下单、价格审核</p>
+        <div class="tags"><span class="tag t-grow">增长</span><span class="tag t-base">底层</span></div>
+      </li>
+      <li class="stage">
+        <span class="when">V1.3 · 1/12 灰度</span>
+        <h3>AI 经营助手</h3>
+        <p>AI 问数、订单巡检、员工商城 AI 导购</p>
+        <div class="tags"><span class="tag t-grow">增长</span><span class="tag t-base">提效</span></div>
+      </li>
+      <li class="stage">
+        <span class="when">Q2</span>
+        <h3>对外与 CRM</h3>
+        <p>入驻外部 AI 平台、企业直客采购、CRM AI 改版</p>
+        <div class="tags"><span class="tag t-grow">增长</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="sec" aria-labelledby="s3">
+    <div class="sec-head"><span class="sec-no">03</span><h2 id="s3">每个版本带来的业务价值</h2><span class="sec-note">粗体为一句话价值</span></div>
+    <div class="matrix-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">版本</th>
+            <th scope="col">核心功能</th>
+            <th scope="col">对平台</th>
+            <th scope="col">对会员<span class="who">服务商</span></th>
+            <th scope="col">对终端客户企业</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="now">
+            <th scope="row">年货节版<span class="when">V1.0 · 11/20</span></th>
+            <td class="core" data-label="核心功能">场景运营 · 一键成交 · AI 选品</td>
+            <td class="v" data-label="对平台"><b class="hl">拿下春节档</b><span class="sub">GMV 和预付款；选品定价规则化</span></td>
+            <td class="v" data-label="对会员"><b class="hl">拿货盘直接谈单</b><span class="sub">一键建商城，AI 出选品清单</span></td>
+            <td class="v" data-label="对终端客户企业"><b class="hl">福利更快落地</b><span class="sub">货源可信，发票合规</span></td>
+          </tr>
+          <tr>
+            <th scope="row">消费商城改版<span class="when">V1.1 · 12/4</span></th>
+            <td class="core" data-label="核心功能">交易链路新版 · 统一商品展示 · AI 生图</td>
+            <td class="v" data-label="对平台"><b class="hl">提升商城转化</b><span class="sub">各货源统一展示，交易客诉减少</span></td>
+            <td class="v" data-label="对会员"><b class="hl">商城更专业</b><span class="sub">装修换图不用自己设计</span></td>
+            <td class="v" data-label="对终端客户企业"><b class="hl">员工下单更顺</b><span class="sub">商城带企业自己的品牌</span></td>
+          </tr>
+          <tr>
+            <th scope="row">运营与价格能力<span class="when">V1.2 · 12/18</span></th>
+            <td class="core" data-label="核心功能">京东组件 · 找同款比价 · 清单下单</td>
+            <td class="v" data-label="对平台"><b class="hl">价格可信成卖点</b><span class="sub">京东资源价值释放</span></td>
+            <td class="v" data-label="对会员"><b class="hl">报价有依据</b><span class="sub">贴链接即可比价</span></td>
+            <td class="v" data-label="对终端客户企业"><b class="hl">价格透明可比</b><span class="sub">有评价可参考</span></td>
+          </tr>
+          <tr>
+            <th scope="row">AI 经营助手<span class="when">V1.3 · 1/12 灰度</span></th>
+            <td class="core" data-label="核心功能">AI 问数 · 订单巡检 · 员工商城 AI 导购</td>
+            <td class="v" data-label="对平台"><b class="hl">会员用得更深</b><span class="sub">AI 帮会员看数、盯单，活跃留存提升</span></td>
+            <td class="v" data-label="对会员"><b class="hl">问一句知经营</b><span class="sub">缺货、超时订单提前提醒</span></td>
+            <td class="v" data-label="对终端客户企业"><b class="hl">员工选品有导购</b><span class="sub">按额度推荐，额度用得满</span></td>
+          </tr>
+          <tr>
+            <th scope="row">对外与 CRM<span class="when">Q2</span></th>
+            <td class="core" data-label="核心功能">外部 AI 平台入驻 · 企业直客采购 · CRM AI 改版</td>
+            <td class="v" data-label="对平台"><b class="hl">新增获客渠道</b><span class="sub">外部 AI 平台引流，新增企业直客</span></td>
+            <td class="v" data-label="对会员"><b class="hl">客户跟进提效</b><span class="sub">商机有 AI 整理提醒</span></td>
+            <td class="v" data-label="对终端客户企业"><b class="hl">说需求就能采购</b><span class="sub">在常用 AI 工具里比价下单</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="s4">
+    <div class="sec-head"><span class="sec-no">04</span><h2 id="s4">请您拍板</h2></div>
+    <div class="decide">
+      <ol>
+        <li><div><b>认可产品形态与版本节奏</b><span>11/20 版本带上 AI 选品；工时不够时，先顺延一键创建商城，保场景运营和一键成交。</span></div></li>
+        <li><div><b>春节档目标</b><span>请给出 GMV 和预付款充值的目标值。产品侧将按这个目标反推各版本的验收标准。</span></div></li>
+      </ol>
+    </div>
+    <p class="foot">不纳入本期规划：财务、企业码相关 AI。</p>
+  </section>
+
+</main>
+</body>
+</html>
