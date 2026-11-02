@@ -110,6 +110,17 @@ h2 { font-size: 22px; font-weight: 600; line-height: 1.4; }
 .base b { font-size: 14px; font-weight: 600; color: var(--water-700); }
 .base span { font-size: 13px; color: var(--ink); }
 .note { font-size: 12.5px; color: var(--muted); }
+.demo { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; display: grid; gap: 12px; }
+.demo-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.demo-head b { font-size: 15px; font-weight: 600; }
+.demo-head span { font-size: 12.5px; color: var(--muted); }
+.demo-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.demo-shots figure { margin: 0; display: grid; gap: 6px; }
+.demo-shots img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 8px; }
+.demo-shots figcaption { font-size: 12.5px; color: var(--ink); }
+.demo-shots figcaption em { font-style: normal; color: var(--water-700); font-weight: 600; margin-right: 6px; }
+@media (max-width: 760px) { .demo-shots { grid-template-columns: 1fr; } }
+
 .mainline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; background: var(--fire-50); border: 1px solid #FBD89D; border-radius: var(--radius); padding: 10px 16px; font-size: 13.5px; }
 .mainline b { color: var(--fire-900); font-weight: 600; margin-right: 6px; }
 .mainline i { font-style: normal; color: var(--fire); }
@@ -257,6 +268,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--water); outline
       </div>
     </div>
     <p class="note">资金流：会员付款给平台，平台再与入驻商家结算。卖家端由卖家侧另行规划。</p>
+    <div class="demo">
+      <div class="demo-head"><b>会员端长这样：11/20 年货节版示意</b><span>Demo 示意，数据为演示数据；会员侧不展示接口价</span></div>
+      <div class="demo-shots">
+        <figure><a href="assets/demo-scene-home.jpg" target="_blank" rel="noopener" title="点击查看大图"><img src="assets/demo-scene-home.jpg" alt="会员端场景首页示意：时令营销入口、新春年货节二级场景、场景货盘、更多场景与企业工作台" loading="lazy"></a><figcaption><em>① 场景首页</em>运营配好的二级场景和货盘，会员开通的场景一屏可见</figcaption></figure>
+        <figure><a href="assets/demo-scene-goods.jpg" target="_blank" rel="noopener" title="点击查看大图"><img src="assets/demo-scene-goods.jpg" alt="会员端场景商品列表示意：按货源、品牌、类目筛选，展示会员价、市场价和利润率，每个商品可加购、询价、上架、下单" loading="lazy"></a><figcaption><em>② 场景商品</em>会员价、市场价、利润率一目了然，加购、询价、上架、下单一键完成</figcaption></figure>
+      </div>
+    </div>
   </section>
 
 
