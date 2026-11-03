@@ -6,6 +6,7 @@
 
 | 分类 | 文档 | 版本 | 日期 |
 | --- | --- | --- | --- |
+| 产品形态与版本规划 | [采发发买家侧产品形态与版本规划](https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/buyer-side-plan.html) | v1.0 | 2026-11-03 |
 | 产品形态与版本规划 | [采发发产品形态与版本规划](https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/product-form.html) | v1.1 | 2026-11-02 |
 | 需求文档（PRD / Spec） | 暂无 | | |
 | 原型 Demo | 暂无 | | |
