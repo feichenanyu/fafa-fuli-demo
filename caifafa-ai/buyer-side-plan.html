@@ -154,10 +154,21 @@ h2 { font-size: 21px; font-weight: 600; line-height: 1.4; }
 .decide li span { display: block; font-size: 12.5px; color: var(--muted); }
 .foot { font-size: 12px; color: var(--muted); }
 
+.road { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.stage .why, .stage .pg { font-size: 13px; color: var(--ink); line-height: 1.6; }
+.stage .why b, .stage .pg b, .stage .p0s b { display: block; font-size: 12px; color: var(--water-700); font-weight: 600; margin-bottom: 1px; }
+.vals { list-style: none; margin: 0; padding: 8px 10px; display: grid; gap: 3px; background: var(--water-50); border-radius: 8px; }
+.vals li { font-size: 12.5px; line-height: 1.55; }
+.vals li b { color: var(--water-700); font-weight: 600; margin-right: 6px; }
+.p0s { font-size: 12.5px; }
+.p0list { display: flex; flex-wrap: wrap; gap: 4px 6px; }
+.p0list span { background: #FDECEC; color: #9B1C1C; border: 1px solid #F5B5B5; border-radius: 4px; padding: 0 6px; font-size: 12px; line-height: 1.6; }
+.panel-why { font-size: 13.5px; color: var(--muted); max-width: 70ch; margin-top: 2px; }
+.panel-why b { color: var(--ink); }
+@media (max-width: 760px) { .road { grid-template-columns: 1fr; } }
 @media (max-width: 900px) {
   .goals, .rules { grid-template-columns: 1fr; }
   .facts, .decide { grid-template-columns: 1fr; }
-  .road { grid-template-columns: 1fr 1fr; }
   .path { grid-template-columns: 1fr; }
   .path li + li::before { content: "↓"; left: 50%; top: -20px; transform: none; }
   .price { grid-template-columns: 1fr; }
@@ -232,35 +243,46 @@ h2 { font-size: 21px; font-weight: 600; line-height: 1.4; }
   <div class="road" role="tablist" aria-label="版本">
     <button class="stage" role="tab" id="tab-V1" aria-controls="panel" data-v="V1">
       <span class="when">V1 · 11/20</span><h3>年货节存量增长版</h3>
-      <p>年货节场景与一键成交兼容全渠道；商品池字段补充与标签化；C 端购物车、分类、个人中心迁到新前端；项目对象打底。</p>
-      <p class="gate"><i>门槛：</i>存量交易 GMV、活跃服务商、项目归属占比</p>
-      <span class="open">查看 6 项任务 →</span>
+      <p class="why"><b>为什么做</b>春节档是全年最大的存量交易窗口，先保住存量服务商的年货节成交；同时从第一笔订单起积累项目和货源数据，为闭环打底。</p>
+      <p class="pg"><b>产品目标</b>基于存量服务商做年货节营销增长；C 端购物车、分类、个人中心先迁到新前端；为项目闭环打底。</p>
+      <ul class="vals"><li><b>服务商</b>春节备货更快，场景货盘更全</li><li><b>员工</b>购物车、分类、个人中心用起来更顺</li><li><b>平台</b>拿下春节档存量 GMV；项目与货源数据开始积累</li></ul>
+      <p class="p0s"><b>P0 任务</b><span class="p0list" data-v="V1"></span></p>
+      <p class="gate"><i>门槛：</i>存量交易 GMV、活跃服务商、项目归属订单占比</p>
+      <span class="open">查看任务清单 →</span>
     </button>
     <button class="stage" role="tab" id="tab-V2" aria-controls="panel" data-v="V2">
       <span class="when">V2 · 约 12/4–12/9</span><h3>C 端商城体验版</h3>
-      <p>C 端 AI 选品与统一商品展示上线；找得到、下得顺、有数据，赶在 1 月兑换高峰前。</p>
+      <p class="why"><b>为什么做</b>员工 1 月集中兑换，商城好不好用决定甲方是否续约；AI 选品和统一展示放在这一版，不压缩工期保质量。</p>
+      <p class="pg"><b>产品目标</b>员工在项目商城里顺利完成兑换；C 端 AI 选品与统一商品展示上线；商家拿到分层数据。</p>
+      <ul class="vals"><li><b>甲方与员工</b>说一句话就能按额度选到商品，福利选得到、值得换</li><li><b>服务商</b>商城带 AI 选品、展示统一，续约更容易</li><li><b>商家</b>拿到展示、点击、成交分层数据</li></ul>
+      <p class="p0s"><b>P0 任务</b><span class="p0list" data-v="V2"></span></p>
       <p class="gate"><i>门槛：</i>兑换转化率、搜索无结果率、埋点覆盖 100%、AI 选品效果</p>
-      <span class="open">查看 6 项任务 →</span>
+      <span class="open">查看任务清单 →</span>
     </button>
     <button class="stage" role="tab" id="tab-V3" aria-controls="panel" data-v="V3">
-      <span class="cond">待商家侧</span>
-      <span class="when">V3 · 商品库上线后</span><h3>平台商家选品适配版</h3>
-      <p>平台商家商品进入会员与站点选品；会员端、运营端 AI 选品；工作台重构。</p>
+      <span class="cond">待商家侧</span><span class="when">V3 · 商品库上线后</span><h3>平台商家选品适配版</h3>
+      <p class="why"><b>为什么做</b>服务商大量用自己的供应商，平台供给占比低；平台商家的货进不了服务商选品，平台就挣不到供给侧的钱。</p>
+      <p class="pg"><b>产品目标</b>平台商家商品进入会员选品和站点选品；会员端、运营端 AI 选品上线；工作台按项目闭环重构。</p>
+      <ul class="vals"><li><b>服务商</b>用上平台商家的货，选品范围更大</li><li><b>商家</b>商品进入服务商的项目和商城</li><li><b>平台</b>平台供给 GMV 开始增长</li></ul>
+      <p class="p0s"><b>P0 任务</b><span class="p0list" data-v="V3"></span></p>
       <p class="gate"><i>门槛：</i>平台供给 GMV 占比、上架平台商家商品的商城数</p>
-      <span class="open">查看 6 项任务 →</span>
+      <span class="open">查看任务清单 →</span>
     </button>
     <button class="stage" role="tab" id="tab-V4" aria-controls="panel" data-v="V4">
       <span class="when">V4 · 12/31 前</span><h3>项目闭环补全版</h3>
-      <p>项目供货价、商家可见项目数据、订单来源对接结算；补回自助注册。</p>
-      <p class="gate"><i>验收：</i>走完闭环的项目数、按项目供货价成交的订单数</p>
-      <span class="open">查看 4 项任务 →</span>
+      <p class="why"><b>为什么做</b>验证新商业模型能否成立：服务商拿到项目价、商家拿到项目数据、平台按订单来源结算佣金。</p>
+      <p class="pg"><b>产品目标</b>跑通一条完整的项目闭环。</p>
+      <ul class="vals"><li><b>服务商</b>拿到更低的项目成本价，利润更有保障</li><li><b>商家</b>有数据、有结果地给项目价</li><li><b>平台</b>闭环跑通，验证「挣供给侧的钱」可行</li></ul>
+      <p class="p0s"><b>P0 任务</b><span class="p0list" data-v="V4"></span></p>
+      <p class="gate"><i>门槛：</i>走完闭环的项目数、按项目供货价成交的订单数</p>
+      <span class="open">查看任务清单 →</span>
     </button>
   </div>
   <p class="cut"><b>延期取舍</b>先砍 P2（如一键创建商城、自助注册），再顺延 P1；项目闭环必须保住。商家侧商品库若晚于 12 月中旬上线，V3 整版顺延到 Q1，闭环先用现有入驻商家商品跑通。</p>
 
   <div class="panel" id="panel" role="tabpanel">
     <div class="panel-head">
-      <div><h3 id="p-title"></h3><p class="panel-goal" id="p-goal"></p></div>
+      <div><h3 id="p-title"></h3><p class="panel-goal" id="p-goal"></p><p class="panel-why" id="p-why"></p></div>
       <div class="toolbar" role="group" aria-label="按优先级筛选">
         <span>优先级</span>
         <button class="chip" data-f="all" aria-pressed="true">全部</button>
@@ -306,6 +328,7 @@ const GOALS = {
   V3: { title: "V3 · 商家侧商品库上线后 · 平台商家选品适配版", goal: "让平台商家的商品进入会员选品和站点选品，上线会员端与运营端 AI 选品，完成工作台重构。" },
   V4: { title: "V4 · 12/31 前 · 项目闭环补全版", goal: "跑通一条完整的项目闭环；自助注册补回（延期时先砍）。" }
 };
+const WHY = {"V1": "春节档是全年最大的存量交易窗口，先保住存量服务商的年货节成交；同时从第一笔订单起积累项目和货源数据，为闭环打底。", "V2": "员工 1 月集中兑换，商城好不好用决定甲方是否续约；AI 选品和统一展示放在这一版，不压缩工期保质量。", "V3": "服务商大量用自己的供应商，平台供给占比低；平台商家的货进不了服务商选品，平台就挣不到供给侧的钱。", "V4": "验证新商业模型能否成立：服务商拿到项目价、商家拿到项目数据、平台按订单来源结算佣金。"};
 let curV = "V1", filter = "all";
 const $ = (id) => document.getElementById(id);
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -315,6 +338,7 @@ function render() {
   const v = DATA.find((d) => d.key === curV);
   $("p-title").textContent = GOALS[curV].title;
   $("p-goal").innerHTML = "<b>产品目标：</b>" + esc(GOALS[curV].goal);
+  $("p-why").innerHTML = "<b>为什么做：</b>" + esc(WHY[curV]);
   let nTask = 0, nSub = 0;
   const html = v.tasks.map((t) => {
     const subs = t.subs.filter((s) => filter === "all" || s.p === filter);
@@ -363,6 +387,7 @@ $("expand").addEventListener("click", () => {
 });
 const h = (location.hash || "").replace("#", "").toUpperCase();
 if (["V1", "V2", "V3", "V4"].includes(h)) curV = h;
+document.querySelectorAll(".p0list").forEach((el) => { const v = DATA.find((d) => d.key === el.dataset.v); el.innerHTML = v.tasks.filter((t) => t.p === "P0").map((t) => `<span>${t.id} ${esc(t.name.replace(/（.*?）/g, ""))}</span>`).join(""); });
 render();
 </script>
 </body>
