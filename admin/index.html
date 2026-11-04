@@ -404,6 +404,26 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 .dplus{white-space:nowrap}.db-brand .dplus{font-size:11.5px}.dslot.empty .dimg{background:transparent;width:100%;flex:1}
 .dz{border:1px solid var(--border-subtle);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 1px 2px #0f14180a}
 .flt{display:flex;flex-direction:column;gap:14px}.fill-n{margin-left:6px;font-size:11px;background:var(--warn-soft,#fdf0da);color:#865606;border-radius:999px;padding:0 6px}
+.mp.bf{width:min(860px,100%)}
+.bf-b{padding:16px 20px;display:flex;flex-direction:column;gap:16px;overflow:auto;min-height:0}
+.bf-s{border:1px solid var(--border-subtle,#e5e7eb);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.bf-sh{display:flex;align-items:center;gap:8px}
+.bf-no{width:22px;height:22px;border-radius:999px;background:var(--brand,#0d9488);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+.bf-v{font-size:12px;color:var(--brand-700,#066b5f);background:var(--brand-soft,#e7f4f3);border-radius:4px;padding:1px 6px}
+.bf-note{margin:0;font-size:12.5px;color:var(--text-3);line-height:20px}
+.bf-note .lk{margin-left:4px}
+.bf-t td,.bf-t th{font-size:13px;padding:8px 10px}
+.bf-t tr.fx td{color:var(--text-3)}
+.bf-g{display:grid;font-size:12.5px;border-top:1px solid var(--line)}.bf-gr{display:grid;grid-template-columns:1.3fr .5fr .6fr 2fr 1fr;gap:10px;padding:8px 10px;border-bottom:1px solid var(--line);align-items:center}.bf-gh{color:var(--text-3);background:var(--bg-2,#F9FAFB)}.bf-gr.fx{color:var(--text-3)}.bf-gr.bf-ge{grid-template-columns:.5fr 1.2fr 1.3fr 2.5fr}
+
+.bf-drop{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;border:1.5px dashed var(--border,#d1d5db);border-radius:10px;height:72px;color:var(--text-2);font-size:13.5px;cursor:pointer}
+.bf-drop:hover{border-color:var(--brand,#0d9488);color:var(--brand-700,#066b5f)}
+.bf-drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.bf-res{display:flex;flex-direction:column;gap:8px}
+.bf-sum{display:flex;align-items:center;gap:8px;font-size:14px}
+.bf-compat{margin:0;padding-left:1.2em;font-size:12.5px;color:#865606}
+.bf-done{display:flex;align-items:center;gap:12px;background:var(--brand-soft,#e7f4f3);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--brand-700,#066b5f)}
+.mp-f .btn.dis{opacity:.5}
 .memf{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
 .memf-l{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:32px}
 .memf-t{font-size:12.5px;background:var(--brand-soft,#e7f4f3);color:var(--brand-700,#066b5f);border-radius:6px;padding:3px 8px}
@@ -587,7 +607,7 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 <!-- ================= 商品中心 · 商品库 ================= -->
 <sc-if value="{{isGoods}}" hint-placeholder-val="{{ false }}">
 <div class="pg fu">
-<div class="ph"><div><h1>商品库</h1><p>商品只从各供应商（货源）商品库同步获取，后台不录入商品；只有「已上架」的商品会进入前台频道与 AI 候选池</p></div><div class="ph-a"><button class="btn btn-o" onClick="{{gFillBatch}}">批量补齐字段<span class="fill-n">{{gFillN}}</span></button><button class="btn btn-o" onClick="{{gExport}}">导出</button></div></div>
+<div class="ph"><div><h1>商品库</h1><p>商品只从各供应商（货源）商品库同步获取，后台不录入商品；只有「已上架」的商品会进入前台频道与 AI 候选池</p></div><div class="ph-a"><button class="btn btn-o" onClick="{{gFillBatch}}">批量补齐字段<span class="fill-n">待补齐 {{gFillN}}</span></button><button class="btn btn-o" onClick="{{gExport}}">导出</button></div></div>
 <div class="v3ff">
 <div class="v3frow"><span class="v3fl">商品</span><div class="v3fc v3fc3"><input class="v3in" aria-label="商品名称" placeholder="查询商品名称" value="{{gq}}" onChange="{{onGq}}"><input class="v3in" aria-label="品牌" placeholder="查询品牌" value="{{gBrand}}" onChange="{{onGBrand}}"><select class="v3in" aria-label="状态" value="{{gStatus}}" onChange="{{onGStatus}}"><option value="">状态：全部</option><option value="on">已上架</option><option value="pending">待审核</option><option value="off">已下架</option><option value="err">异常</option></select></div></div>
 <div class="v3frow"><span class="v3fl">货源</span><div class="v3fc v3cks"><sc-for list="{{gSrcOpts}}" as="c" hint-placeholder-count="5"><button class="v3ck {{c.cls}}" role="checkbox" aria-checked="{{c.ck}}" onClick="{{c.pick}}"><span class="pl-ck {{c.cls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span>{{c.label}}</button></sc-for></div></div>
@@ -894,7 +914,7 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 <sc-if value="{{sc.pr2.detOn}}" hint-placeholder-val="{{ false }}"><div class="pr-per"><sc-for list="{{sc.pr2.detPer}}" as="p" hint-placeholder-count="2"><span>{{p.t}}</span></sc-for><span>多条规则的重叠部分已按估算去重前计入，实际以保存后为准</span></div></sc-if>
 <div class="pr-save"><button class="btn btn-p {{sc.pr2.saveCls}}" onClick="{{sc.pr2.save}}" disabled="{{sc.ro}}">保存并生效</button><sc-if value="{{sc.pr2.dirty}}" hint-placeholder-val="{{ false }}"><button class="btn btn-o" onClick="{{sc.pr2.reset}}">放弃修改</button><em>有未保存的修改</em></sc-if></div>
 </div>
-<div class="card"><h3>补充字段说明<span>人工补齐字段由商品运营在「商品库」不定期补齐：单个商品点「补齐」，或用「批量补齐字段」Excel 导入；补齐后用于商品展示与 AI 选品，后续可作为规则条件</span></h3>
+<div class="card"><h3>补充字段说明<span>人工补齐字段由商品运营在「商品库」不定期补齐：单个商品点「补齐」，或「批量补齐字段」下载模板、填好上传；字段在「补齐字段配置」维护</span></h3>
 <div class="tw" style="border: 0"><table class="tbl"><thead><tr><th>货源</th><th>补齐方式</th><th>字段</th></tr></thead><tbody>
 <tr><td>天猫超市</td><td><span class="pill p-warn">人工补齐</span></td><td>券前价 · 近 28 天在架天数 · 近 28 天平均到手价 · 近 28 天最低到手价 · 商品营销标签</td></tr>
 <tr><td>京东</td><td><span class="pill p-warn">人工补齐</span></td><td>实际价（到手价）· 销量等级</td></tr>
@@ -1105,6 +1125,29 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 </sc-if>
 
 <!-- ===== 抽屉：通用新增 / 编辑 ===== -->
+<sc-if value="{{bfOn}}" hint-placeholder-val="{{ false }}"><div class="mp-mask"><div class="mp bf" role="dialog" aria-label="批量补齐字段">
+<div class="mp-h"><b>批量补齐字段</b><button class="x" aria-label="关闭" onClick="{{bf.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<div class="bf-b">
+<div class="seg" role="tablist" aria-label="货源"><sc-for list="{{bf.srcTabs}}" as="t" hint-placeholder-count="2"><button class="{{t.cls}}" role="tab" onClick="{{t.pick}}">{{t.t}}</button></sc-for></div>
+<section class="bf-s"><div class="bf-sh"><span class="bf-no">1</span><b>下载模板</b><span class="bf-v">{{bf.ver}}</span><div style="flex: 1"></div><button class="btn btn-p sm" onClick="{{bf.down}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>下载模板</button></div>
+<p class="bf-note">{{bf.tplName}} · {{bf.pendT}}。模板列如下，列由「商品中心 › 补齐字段配置」生成。</p>
+<div class="bf-g"><div class="bf-gr bf-gh"><span>列名</span><span>必填</span><span>类型</span><span>填写规则</span><span>示例</span></div><sc-for list="{{bf.fields}}" as="f" hint-placeholder-count="5"><div class="{{f.cls}}"><span>{{f.name}}</span><span>{{f.req}}</span><span>{{f.type}}</span><span>{{f.rule}}</span><span class="mono">{{f.eg}}</span></div></sc-for></div>
+</section>
+<section class="bf-s"><div class="bf-sh"><span class="bf-no">2</span><b>上传填好的表格</b></div>
+<sc-if value="{{bf.notDone}}" hint-placeholder-val="{{ true }}">
+<label class="bf-drop"><input type="file" accept=".csv,.xlsx" onChange="{{bf.pick}}" aria-label="选择表格文件"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5M7 9l5-5 5 5M5 20h14"></path></svg><sc-if value="{{bf.noFile}}" hint-placeholder-val="{{ true }}"><span>点击选择文件（.csv / .xlsx）</span></sc-if><sc-if value="{{bf.hasFile}}" hint-placeholder-val="{{ false }}"><span><b>{{bf.fname}}</b> · 点击重新选择</span></sc-if></label>
+<p class="bf-note">空单元格不覆盖原值；按列名匹配，缺少的列视为未填，多出的列忽略。没有文件可<button class="lk" onClick="{{bf.demo}}">用示例表格试一下</button></p>
+</sc-if>
+<sc-if value="{{bf.hasRes}}" hint-placeholder-val="{{ false }}"><div class="bf-res">
+<div class="bf-sum"><b>{{bf.sumT}}</b><div style="flex: 1"></div><sc-if value="{{bf.hasErr}}" hint-placeholder-val="{{ false }}"><button class="lk" onClick="{{bf.dlErr}}">下载失败明细</button></sc-if></div>
+<sc-if value="{{bf.hasCompat}}" hint-placeholder-val="{{ false }}"><ul class="bf-compat"><sc-for list="{{bf.compat}}" as="c" hint-placeholder-count="1"><li>{{c.t}}</li></sc-for></ul></sc-if>
+<sc-if value="{{bf.hasErr}}" hint-placeholder-val="{{ false }}"><div class="bf-g"><div class="bf-gr bf-ge bf-gh"><span>行号</span><span>SKU 编码</span><span>字段</span><span>原因</span></div><sc-for list="{{bf.errs}}" as="x" hint-placeholder-count="2"><div class="bf-gr bf-ge"><span class="mono">{{x.row}}</span><span class="mono">{{x.sku}}</span><span>{{x.field}}</span><span style="color: var(--danger)">{{x.why}}</span></div></sc-for><p class="bf-note">{{bf.errMore}}</p></div></sc-if>
+</div></sc-if>
+<sc-if value="{{bf.isDone}}" hint-placeholder-val="{{ false }}"><div class="bf-done"><b>{{bf.doneT}}</b><button class="lk" onClick="{{bf.reup}}">继续上传</button></div></sc-if>
+</section>
+</div>
+<div class="mp-f"><button class="btn btn-o" onClick="{{bf.close}}">关闭</button><sc-if value="{{bf.notDone}}" hint-placeholder-val="{{ true }}"><button class="btn btn-p {{bf.commitCls}}" onClick="{{bf.commit}}">{{bf.commitT}}</button></sc-if></div>
+</div></div></sc-if>
 <sc-if value="{{fmOpen}}" hint-placeholder-val="{{ false }}">
 <div class="drw-ov" onClick="{{fmClose}}"></div>
 <aside class="drw" role="dialog" aria-label="{{fm.title}}"><div class="dlg-h"><b>{{fm.title}}</b><button class="x" aria-label="关闭" onClick="{{fmClose}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
@@ -1124,6 +1167,7 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 </div></sc-for></div>
 </div>
 <div class="dlg-f"><button class="btn btn-o" onClick="{{fmClose}}">取消</button><button class="btn btn-p" onClick="{{fmSave}}">{{fm.saveLabel}}</button></div></aside>
+
 <sc-if value="{{mpOn}}" hint-placeholder-val="{{ false }}"><div class="mp-mask"><div class="mp" role="dialog" aria-label="选择指定会员">
 <div class="mp-h"><b>选择指定会员</b><button class="x" aria-label="关闭" onClick="{{mp.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
 <div class="mp-b">
@@ -1180,7 +1224,7 @@ const NAV = [
   { label: '', mods: [{ id: 'home', name: '工作台', subs: [] }] },
   { label: '平台底座', mods: [
     { id: 'cust', name: '客户中心', subs: [{ id: 'cert', name: '企业认证' }, { id: 'company', name: '企业客户' }, { id: 'member', name: '用户与成员' }, { id: 'lead', name: '咨询需求单' }] },
-    { id: 'goods', name: '商品中心', subs: [{ id: 'goods', name: '商品库' }, { id: 'pool', name: '商品池' }, { id: 'category', name: '商品类目' }, { id: 'brand', name: '品牌管理' }, { id: 'tag', name: '标签管理', alias: ['tagtype'] }, { id: 'tagtype', name: '标签类型', hidden: true }] },
+    { id: 'goods', name: '商品中心', subs: [{ id: 'goods', name: '商品库' }, { id: 'fillcfg', name: '补齐字段配置' }, { id: 'pool', name: '商品池' }, { id: 'category', name: '商品类目' }, { id: 'brand', name: '品牌管理' }, { id: 'tag', name: '标签管理', alias: ['tagtype'] }, { id: 'tagtype', name: '标签类型', hidden: true }] },
     { id: 'trade', name: '交易中心', subs: [{ id: 'order', name: '订单' }, { id: 'af', name: '售后' }] },
     { id: 'fin', name: '账户与财务', subs: [{ id: 'points', name: '积分账户（AI 额度）' }, { id: 'activity', name: '活动账户' }, { id: 'prepay', name: '商品预付款' }, { id: 'inv', name: '发票管理' }, { id: 'flow', name: '流水与对账', alias: ['recon'] }, { id: 'recon', name: '对账单', hidden: true }] }
   ] },
@@ -1300,6 +1344,17 @@ function crudSeed() {
       { id: 'tt2', name: '节日标', desc: '春节、中秋、重阳等节日', front: '展示', ai: '参与', status: '启用' },
       { id: 'tt3', name: '人群标', desc: '长辈、员工、客户、新人等送礼对象', front: '不展示', ai: '参与', status: '启用' },
       { id: 'tt4', name: '营销标', desc: '爆款、新品、限时等运营标识', front: '展示', ai: '不参与', status: '启用' }
+    ],
+    // 人工补齐字段配置：模板列、单个补齐表单、上传校验都按这里生成；字段编码创建后不可改
+    fillVer: { 天猫超市: 3, 京东自营: 2 },
+    fillFields: [
+      { id: 'ff1', src: '天猫超市', name: '券前价', code: 'tmPre', type: '金额', req: true, rule: '大于 0，最多 2 位小数', eg: '139.00', sort: 1, status: '启用' },
+      { id: 'ff2', src: '天猫超市', name: '近28天在架天数', code: 'tmDays', type: '整数', req: true, min: 0, max: 28, rule: '0–28 的整数', eg: '26', sort: 2, status: '启用' },
+      { id: 'ff3', src: '天猫超市', name: '近28天平均到手价', code: 'tmAvg', type: '金额', req: true, rule: '大于 0，最多 2 位小数', eg: '126.50', sort: 3, status: '启用' },
+      { id: 'ff4', src: '天猫超市', name: '近28天最低到手价', code: 'tmMin', type: '金额', req: true, rule: '大于 0，不高于近28天平均到手价', eg: '119.00', sort: 4, status: '启用' },
+      { id: 'ff5', src: '天猫超市', name: '商品营销标签', code: 'tmTags', type: '文本', req: false, rule: '多个用「，」分隔，最多 5 个', eg: '88VIP 专享，3 件 9 折', sort: 5, status: '启用' },
+      { id: 'ff6', src: '京东自营', name: '实际价（到手价）', code: 'jdReal', type: '金额', req: true, rule: '大于 0，最多 2 位小数', eg: '72.90', sort: 1, status: '启用' },
+      { id: 'ff7', src: '京东自营', name: '销量等级', code: 'jdLv', type: '枚举', opts: 'S,A,B,C', req: true, rule: '只能填 S / A / B / C', eg: 'A', sort: 2, status: '启用' }
     ],
     tagsLib: [
       { id: 'g1', name: '节日福利', type: '场景标', source: '人工', status: '启用', desc: '春节、中秋等节日统一发放' },
@@ -1761,18 +1816,32 @@ function buildDefs(self, st, role) {
     save: (v) => Object.assign(v, { member: Number(v.member), cost: Number(v.cost) })
   };
   // ---------- 商品库：人工补齐字段（商品运营不定期补齐，按货源显示对应字段）----------
+  D.fillcfg = {
+    page: 'fillcfg', title: '补齐字段配置', noun: '补齐字段', store: 'fillFields', edit: ['admin', 'goods'], newLabel: '新增字段',
+    desc: '定义商品运营需要人工补齐的字段。批量补齐模板的列、单个补齐表单、上传校验都按这里生成；字段增减后模板版本自动 +1',
+    tabs: { opts: [['', '全部'], ['天猫超市', '天猫超市'], ['京东自营', '京东自营']], get: (r) => r.src },
+    filters: [{ k: 'q', type: 'text', ph: '字段名 / 编码', match: (r, v) => (r.name + r.code).includes(v) }],
+    cols: [{ t: '字段名（模板列名）', cell: (r) => N(r.name, r.code, '', { mono: false }) }, { t: '货源', cell: (r) => T(r.src) }, { t: '类型', cell: (r) => T(r.type + (r.type === '枚举' ? '：' + r.opts : '')) },
+      { t: '必填', cell: (r) => (r.req ? { type: 'pill', v: '必填', pCls: 'p-warn' } : T('选填')) }, { t: '校验规则', cell: (r) => T(r.rule || '—') }, { t: '示例', cell: (r) => T(r.eg || '—') },
+      { t: '启用', cell: (r) => swCell(r, 'fillFields', '启用', '停用', '字段状态') }],
+    acts: () => [{ t: '编辑', k: 'edit' }],
+    blank: () => ({ src: '天猫超市', name: '', code: '', type: '文本', opts: '', req: false, rule: '', eg: '', sort: 99, status: '启用' }),
+    form: (v, isNew) => [{ k: 'src', t: '货源', type: 'radio', opts: ['天猫超市', '京东自营'], ro: !isNew }, { k: 'name', t: '字段名（模板列名）', type: 'text', req: true, w: 'half', hint: '上传时按列名匹配，改名后请重新下载模板' },
+      { k: 'code', t: '字段编码', type: 'text', req: true, w: 'half', ro: !isNew, ph: '英文，如 tmPre', hint: '写入商品库的字段，创建后不可改' },
+      { k: 'type', t: '类型', type: 'radio', opts: ['金额', '整数', '文本', '枚举'], w: 'half' }, { k: 'req', t: '必填', type: 'switch', w: 'half' },
+      { k: 'opts', t: '可选值', type: 'text', show: v.type === '枚举', ph: '用英文逗号分隔，如 S,A,B,C' }, { k: 'rule', t: '校验规则说明', type: 'text', ph: '写给填表的人看，如：0–28 的整数' }, { k: 'eg', t: '示例', type: 'text', w: 'half' }],
+    save: (v) => Object.assign(v, { sort: Number(v.sort) || 99 }),
+    afterSave: (rec) => ({ fillVer: Object.assign({}, st.fillVer, { [rec.src]: ((st.fillVer || {})[rec.src] || 1) + 1 }) }),
+    savedMsg: (rec, isNew) => (isNew ? '已新增字段「' + rec.name + '」，' + rec.src + '模板升级为 v' + (((st.fillVer || {})[rec.src] || 1) + 1) : '已保存，' + rec.src + '模板版本 +1')
+  };
   D.gfill = {
     page: '', title: '补齐字段', noun: '补齐字段', store: 'goods', edit: ['admin', 'goods'],
     prep: (r) => Object.assign({}, r, r.fill || {}),
-    form: (v) => [{ k: 'name', t: '商品', type: 'static', v: v.name + ' · ' + v.src },
-      ...(v.src === '天猫超市' ? [{ k: 'tmPre', t: '券前价（元）', type: 'num', w: 'half', hint: '猫超前台用券前的价格' }, { k: 'tmDays', t: '近 28 天在架天数', type: 'num', w: 'half' },
-        { k: 'tmAvg', t: '近 28 天平均到手价（元）', type: 'num', w: 'half' }, { k: 'tmMin', t: '近 28 天最低到手价（元）', type: 'num', w: 'half' },
-        { k: 'tmTags', t: '商品营销标签', type: 'text', ph: '多个用「，」分隔，如：88VIP 专享，猫超 3 件 9 折' }] : []),
-      ...(v.src === '京东自营' ? [{ k: 'jdReal', t: '实际价（到手价，元）', type: 'num', w: 'half' }, { k: 'jdLv', t: '销量等级', type: 'radio', opts: ['S', 'A', 'B', 'C'], w: 'half', hint: '按京东前台销量区间分级' },
-        { k: 'jdApi', t: '接口补齐（只读）', type: 'static', v: '好评率 ' + (v.jdGood || '同步中') + ' · 评价数 ' + (v.jdCmts || '同步中') }] : []),
-      { k: 'sysF', t: '期望系统补齐（只读）', type: 'static', v: '系统销量、品牌等级（S / A / B / C）、品牌归属（国内 / 国外品牌）· 待系统上线后自动回填' },
-      { k: 'fillAt', t: '最近补齐', type: 'static', v: (v.fill && v.fill.at) || '尚未补齐' }],
-    save: (v, isNew, old) => { const keys = old.src === '天猫超市' ? ['tmPre', 'tmDays', 'tmAvg', 'tmMin', 'tmTags'] : ['jdReal', 'jdLv']; const f = Object.assign({}, old.fill || {}); keys.forEach((k) => { f[k] = ['tmTags', 'jdLv'].includes(k) ? (v[k] || '') : (v[k] === '' || v[k] == null ? '' : Number(v[k])); }); f.at = nowStr() + ' · ' + self.meName(); const out = Object.assign({}, old, { fill: f }); return out; },
+    form: (v) => { const FF = st.fillFields.filter((f) => f.status === '启用' && f.src === v.src).sort((x, y) => x.sort - y.sort);
+      return [{ k: 'name', t: '商品', type: 'static', v: v.name + ' · ' + v.src }].concat(FF.map((f) => (f.type === '枚举' ? { k: f.code, t: f.name, type: 'radio', opts: String(f.opts || '').split(',').map((x) => x.trim()).filter(Boolean), w: 'half', hint: f.rule } : { k: f.code, t: f.name + (f.type === '金额' ? '（元）' : ''), type: f.type === '文本' ? 'text' : 'num', w: f.type === '文本' ? 'full' : 'half', ph: f.eg ? '如 ' + f.eg : '', hint: f.rule })))
+        .concat(v.src === '京东自营' ? [{ k: 'jdApi', t: '接口补齐（只读）', type: 'static', v: '好评率 ' + (v.jdGood || '同步中') + ' · 评价数 ' + (v.jdCmts || '同步中') }] : [])
+        .concat([{ k: 'sysF', t: '期望系统补齐（只读）', type: 'static', v: '系统销量、品牌等级（S / A / B / C）、品牌归属（国内 / 国外品牌）· 待系统上线后自动回填' }, { k: 'fillAt', t: '最近补齐', type: 'static', v: (v.fill && v.fill.at) || '尚未补齐' }]); },
+    save: (v, isNew, old) => { const FF = st.fillFields.filter((f) => f.status === '启用' && f.src === old.src); const f = Object.assign({}, old.fill || {}); FF.forEach((x) => { const val = v[x.code]; f[x.code] = (x.type === '金额' || x.type === '整数') ? (val === '' || val == null ? '' : Number(val)) : (val || ''); }); f.at = nowStr() + ' · ' + self.meName(); return Object.assign({}, old, { fill: f }); },
     savedMsg: (rec) => '已补齐「' + rec.name.slice(0, 14) + '」，回写商品库'
   };
   // ---------- 交易中心 ----------
@@ -2592,7 +2661,73 @@ class Component extends DCLogic {
       f.adv && f.advPct !== '' ? '利润率 ' + (f.advOp === '小于' ? '<' : '≥') + ' ' + f.advPct + '%' : '', (f.kws || []).length ? '剔除词 ' + f.kws.length : '', (f.brands || []).length ? '剔除品牌 ' + f.brands.length : '',
       f.pr && f.prAmt !== '' ? '会员价 ' + f.prOp + ' ¥' + f.prAmt : '', f.ships && f.ships.length === 1 ? '仅' + f.ships[0] : ''].filter(Boolean);
   }
-  fillKeys(g) { return g.src === '天猫超市' ? ['tmPre', 'tmDays', 'tmAvg', 'tmMin', 'tmTags'] : g.src === '京东自营' ? ['jdReal', 'jdLv'] : []; }
+  fillDefs(src) { return (this.state.fillFields || []).filter((f) => f.status === '启用' && f.src === src).sort((x, y) => x.sort - y.sort); }
+  fillKeys(g) { return this.fillDefs(g.src).filter((f) => f.req).map((f) => f.code); }
+  skuOf(g) { return g.id.toUpperCase() + '0' + (g.sold % 97); }
+  // 批量补齐：模板 = 固定列（SKU 编码、商品名称）+ 当前启用字段；上传按表头列名匹配
+  bfCheck(src, header, rows) {
+    const st = this.state; const defs = this.fillDefs(src); const clean = (h) => String(h || '').replace(/（勿改）|\(勿改\)/g, '').trim();
+    const H = header.map(clean); const iSku = H.indexOf('SKU 编码');
+    const res = { total: rows.length, ok: [], err: [], ignored: H.filter((h) => h && h !== 'SKU 编码' && h !== '商品名称' && !defs.some((f) => f.name === h)), missing: defs.filter((f) => !H.includes(f.name)).map((f) => f.name) };
+    if (iSku < 0) { res.err.push({ row: 1, sku: '—', field: '表头', why: '缺少「SKU 编码」列，请使用下载的模板' }); return res; }
+    rows.forEach((cells, idx) => {
+      const rowNo = idx + 2; const sku = String(cells[iSku] || '').trim(); if (!sku) return;
+      const g = (st.goods || []).find((x) => this.skuOf(x) === sku);
+      if (!g) { res.err.push({ row: rowNo, sku: sku, field: 'SKU 编码', why: '商品库中找不到该 SKU' }); return; }
+      if (g.src !== src) { res.err.push({ row: rowNo, sku: sku, field: 'SKU 编码', why: '该商品货源是「' + g.src + '」，不属于本模板' }); return; }
+      const patch = {}; const errs = [];
+      defs.forEach((f) => { const i = H.indexOf(f.name); if (i < 0) return; const raw = String(cells[i] == null ? '' : cells[i]).trim(); if (raw === '') return;
+        if (f.type === '金额') { if (!/^\d+(\.\d{1,2})?$/.test(raw) || Number(raw) <= 0) { errs.push([f.name, '「' + raw + '」不是有效金额（' + f.rule + '）']); return; } patch[f.code] = Number(raw); }
+        else if (f.type === '整数') { const n = Number(raw); if (!/^\d+$/.test(raw) || (f.min != null && n < f.min) || (f.max != null && n > f.max)) { errs.push([f.name, '「' + raw + '」不符合：' + f.rule]); return; } patch[f.code] = n; }
+        else if (f.type === '枚举') { const ok = String(f.opts || '').split(',').map((x) => x.trim()); if (!ok.includes(raw)) { errs.push([f.name, '「' + raw + '」不在可选值 ' + ok.join(' / ') + ' 内']); return; } patch[f.code] = raw; }
+        else patch[f.code] = raw; });
+      const merged = Object.assign({}, g.fill || {}, patch);
+      if (merged.tmMin !== undefined && merged.tmAvg !== undefined && merged.tmMin !== '' && merged.tmAvg !== '' && Number(merged.tmMin) > Number(merged.tmAvg)) errs.push(['近28天最低到手价', '高于近28天平均到手价']);
+      defs.filter((f) => f.req).forEach((f) => { if ((merged[f.code] === undefined || merged[f.code] === '') && !errs.some((e) => e[0] === f.name)) errs.push([f.name, '必填，表格和商品库里都没有值']); });
+      if (errs.length) errs.forEach((e) => res.err.push({ row: rowNo, sku: sku, field: e[0], why: e[1] })); else res.ok.push({ id: g.id, name: g.name, patch: patch });
+    });
+    return res;
+  }
+  bfVals() {
+    const st = this.state; const B = st.bf; const set = (p) => this.setState({ bf: Object.assign({}, this.state.bf, p) });
+    const SRCS = ['天猫超市', '京东自营'];
+    const base = { bfOn: !!B, bfOpen: () => this.setState({ bf: { src: '天猫超市', fname: '', res: null, done: null } }) };
+    if (!B) return Object.assign(base, { bf: { srcTabs: [], fields: [], tplName: '', ver: '', pendT: '', down: () => {}, pick: () => {}, demo: () => {}, hasFile: false, noFile: true, fname: '', hasRes: false, sumT: '', compat: [], hasCompat: false, errs: [], hasErr: false, noErr: true, errMore: '', dlErr: () => {}, commit: () => {}, commitT: '', commitCls: 'dis', close: () => {}, reup: () => {}, isDone: false, notDone: true, doneT: '' } });
+    const defs = this.fillDefs(B.src); const ver = (st.fillVer || {})[B.src] || 1;
+    const goods = (st.goods || []).filter((g) => g.src === B.src);
+    const pend = goods.filter((g) => this.fillKeys(g).some((k) => { const f = g.fill || {}; return f[k] === undefined || f[k] === ''; }));
+    const tplName = '商品补齐模板_' + B.src + '_v' + ver + '.csv';
+    const header = ['SKU 编码（勿改）', '商品名称（勿改）'].concat(defs.map((f) => f.name));
+    const esc = (x) => { const s = String(x == null ? '' : x); return /[",\n，]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    const csvOf = (rows) => '﻿' + rows.map((r) => r.map(esc).join(',')).join('\n');
+    const dl = (name, text) => { try { const blob = new Blob([text], { type: 'text/csv;charset=utf-8' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); return true; } catch (e) { return false; } };
+    const parse = (text) => { const out = []; let row = [], cur = '', q = false; const t = String(text).replace(/^﻿/, ''); for (let i = 0; i < t.length; i++) { const ch = t[i]; if (q) { if (ch === '"') { if (t[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; } else if (ch === '"') q = true; else if (ch === ',') { row.push(cur); cur = ''; } else if (ch === '\n' || ch === '\r') { if (ch === '\r' && t[i + 1] === '\n') i++; row.push(cur); out.push(row); row = []; cur = ''; } else cur += ch; } if (cur !== '' || row.length) { row.push(cur); out.push(row); } return out.filter((r) => r.some((c) => String(c).trim() !== '')); };
+    const R = B.res;
+    return Object.assign(base, { bf: {
+      srcTabs: SRCS.map((s) => ({ t: s, cls: s === B.src ? 'on' : '', pick: () => set({ src: s, fname: '', res: null, done: null }) })),
+      fields: [['SKU 编码', '必填', '文本', '用于匹配商品，勿改', '—'], ['商品名称', '—', '文本', '仅供核对，上传时不读取', '—']].map((x) => ({ name: x[0], req: x[1], type: x[2], rule: x[3], eg: x[4], fixed: true, cls: 'bf-gr fx' }))
+        .concat(defs.map((f) => ({ name: f.name, req: f.req ? '必填' : '选填', type: f.type + (f.type === '枚举' ? '（' + f.opts + '）' : ''), rule: f.rule || '—', eg: f.eg || '—', fixed: false, cls: 'bf-gr' }))),
+      tplName: tplName, ver: 'v' + ver, pendT: '预填本货源全部 ' + goods.length + ' 个商品，其中待补齐 ' + pend.length + ' 个',
+      down: () => { const rows = [header].concat(goods.map((g) => [this.skuOf(g), g.name].concat(defs.map((f) => { const v = (g.fill || {})[f.code]; return v == null ? '' : v; })))); if (dl(tplName, csvOf(rows))) this.flash('已下载 ' + tplName); else this.flash('当前环境不支持下载'); },
+      pick: (e) => { const file = e && e.target && e.target.files && e.target.files[0]; if (!file) return; const name = file.name;
+        if (!/\.csv$/i.test(name)) { set({ fname: name, res: { total: 0, ok: [], err: [{ row: '—', sku: '—', field: '文件', why: '演示环境只解析 .csv（Excel 里「另存为 CSV UTF-8」即可）；正式版直接支持 .xlsx' }], ignored: [], missing: [] }, done: null }); return; }
+        const rd = new FileReader(); rd.onload = () => { const rows = parse(rd.result); set({ fname: name, res: rows.length ? this.bfCheck(B.src, rows[0], rows.slice(1)) : { total: 0, ok: [], err: [{ row: 1, sku: '—', field: '文件', why: '文件是空的' }], ignored: [], missing: [] }, done: null }); }; rd.readAsText(file, 'utf-8'); try { e.target.value = ''; } catch (x) {} },
+      demo: () => { const hd = ['SKU 编码（勿改）', '商品名称（勿改）'].concat(defs.filter((f) => f.code !== 'tmTags').map((f) => f.name)).concat(['备注']);
+        const sample = pend.map((g, i) => [this.skuOf(g), g.name].concat(defs.filter((f) => f.code !== 'tmTags').map((f) => (i === 0 && f.type === '金额' ? '12.345' : f.type === '金额' ? String(Math.round(g.member * (f.code === 'tmPre' ? 1.08 : f.code === 'tmMin' ? 0.9 : 0.96) * 10) / 10) : f.type === '整数' ? '25' : f.type === '枚举' ? 'B' : ''))).concat(['']));
+        sample.push(['XX0000', '不存在的商品'].concat(defs.filter((f) => f.code !== 'tmTags').map(() => '')).concat(['']));
+        set({ fname: '示例_' + tplName.replace('.csv', '_已填写.csv'), res: this.bfCheck(B.src, hd, sample), done: null }); },
+      hasFile: !!B.fname, noFile: !B.fname, fname: B.fname || '',
+      hasRes: !!R && !B.done, sumT: R ? '共 ' + R.total + ' 行：可回写 ' + R.ok.length + ' 行，失败 ' + new Set(R.err.map((x) => x.row)).size + ' 行' : '',
+      compat: R ? [].concat(R.missing.length ? ['表格缺少列：' + R.missing.join('、') + '（视为未填，不覆盖商品库原值）'] : []).concat(R.ignored.length ? ['表格多出列：' + R.ignored.join('、') + '（已忽略）'] : []).map((t) => ({ t: t })) : [], hasCompat: !!R && (R.missing.length + R.ignored.length) > 0,
+      errs: R ? R.err.slice(0, 8) : [], hasErr: !!R && R.err.length > 0, noErr: !R || !R.err.length, errMore: R && R.err.length > 8 ? '另有 ' + (R.err.length - 8) + ' 条，请下载失败明细' : '',
+      dlErr: () => { if (!R) return; if (dl('补齐失败明细_' + B.src + '.csv', csvOf([['行号', 'SKU 编码', '字段', '原因']].concat(R.err.map((x) => [x.row, x.sku, x.field, x.why]))))) this.flash('已下载失败明细'); },
+      commitT: R ? '确认回写 ' + R.ok.length + ' 个商品' : '确认回写', commitCls: R && R.ok.length ? '' : 'dis',
+      commit: () => { if (!R || !R.ok.length) { this.flash('没有可回写的行'); return; } const t = nowStr() + ' · ' + this.meName() + '（批量导入 ' + 'v' + ver + '）'; const P = {}; R.ok.forEach((x) => { P[x.id] = x.patch; });
+        this.setState({ goods: st.goods.map((g) => (P[g.id] ? Object.assign({}, g, { fill: Object.assign({}, g.fill || {}, P[g.id], { at: t }) }) : g)) }); this.pushLog('商品库', '批量补齐字段', B.src + ' · ' + R.ok.length + ' 个商品'); set({ done: { n: R.ok.length, fail: new Set(R.err.map((x) => x.row)).size } }); },
+      reup: () => set({ fname: '', res: null, done: null }),
+      isDone: !!B.done, notDone: !B.done, doneT: B.done ? '已回写 ' + B.done.n + ' 个商品到商品库' + (B.done.fail ? '；失败的 ' + B.done.fail + ' 行未写入，可下载失败明细修改后重新上传' : '') : '',
+      close: () => this.setState({ bf: null }) } });
+  }
   rateOf(g) { return g.member > 0 ? (g.member - g.cost) / g.member * 100 : 0; }
   ruleBase(g, r) { return ((r.mode === 'ex' && !r.src) || g.src === r.src) && (!r.cats.length || r.cats.includes(g.cat)) && (!r.brands.length || r.brands.includes(g.brand)); }
   plMatch(g, r) { return g.status !== 'off' && this.ruleBase(g, r) && (r.rmin === '' || r.rmin == null || this.rateOf(g) >= Number(r.rmin)); }
@@ -3710,7 +3845,7 @@ class Component extends DCLogic {
       gAi: () => { set({ aiOpen: true, aiLoading: true, aiPick: {} }); setTimeout(() => this.setState({ aiLoading: false }), 1000); },
       gOn: setGoodsStatus('on'), gOff: setGoodsStatus('off'), gExport: () => this.flash('已生成导出任务，完成后站内信通知；文件带操作人水印'),
       gFillN: String((st.goods || []).filter((g) => { const k = this.fillKeys(g); const f = g.fill || {}; return k.some((x) => f[x] === undefined || f[x] === ''); }).length),
-      gFillBatch: () => this.confirm('批量补齐字段（Excel）', '① 下载补齐模板：按货源分天猫超市、京东两个 Sheet，预填 SKU、商品名和已有值；② 商品运营填写券前价、近 28 天在架天数 / 平均到手价 / 最低到手价、营销标签（猫超），实际价（到手价）、销量等级（京东）；③ 上传后按 SKU 校验并回写商品库，失败行可下载原因。演示：点「导入」直接补齐当前待补齐的商品。', '导入', false, () => { const t = nowStr(); this.setState({ goods: st.goods.map((g) => { const k = this.fillKeys(g); if (!k.length) return g; const f = Object.assign({}, g.fill || {}); const dv = { tmPre: Math.round(g.member * 1.08), tmDays: 26, tmAvg: Math.round(g.member * 0.97 * 10) / 10, tmMin: Math.round(g.member * 0.92 * 10) / 10, tmTags: '猫超满减', jdReal: Math.round(g.member * 0.95 * 10) / 10, jdLv: 'B' }; k.forEach((x) => { if (f[x] === undefined || f[x] === '') f[x] = dv[x]; }); f.at = t + ' · ' + this.meName() + '（批量导入）'; return Object.assign({}, g, { fill: f }); }) }); this.pushLog('商品库', '批量补齐字段', 'Excel 导入'); this.flash('已按 SKU 回写商品库：补齐字段 · 失败 0 行'); }),
+      gFillBatch: () => this.setState({ bf: { src: '天猫超市', fname: '', res: null, done: null } }), ...this.bfVals(),
       gAllCls: allOn ? 'on' : '', gAllCk: String(allOn), gAll: () => { const m = {}; if (!allOn) gl.forEach((g) => { m[g.id] = true; }); set({ gSel: m }); },
       gRows: gRows, gEmpty: !gRows.length, gCostHidden: !canCost,
       aiOpen: st.aiOpen, aiLoading: st.aiLoading, aiReady: !st.aiLoading, aiRows: aiRows, aiPickN: aiPickN, aiNone: st.aiLoading || !aiPickN, aiClose: () => set({ aiOpen: false }),
