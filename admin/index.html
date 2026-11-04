@@ -403,7 +403,8 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 .db-nav .dslots{grid-template-columns:repeat(4,minmax(0,1fr))}.db-nav .dslot{flex-direction:row;align-items:center;gap:8px;padding:8px}.db-nav .dimg{width:44px;height:44px;flex:none;border-radius:10px;overflow:hidden}.db-nav .dslot.empty .dimg{width:100%;height:44px;background:transparent}.db-nav .dtx{padding:0}.db-nav .dtx .pill,.db-nav .dtx small:not(.dtgt){display:none}
 .dplus{white-space:nowrap}.db-brand .dplus{font-size:11.5px}.dslot.empty .dimg{background:transparent;width:100%;flex:1}
 .dz{border:1px solid var(--border-subtle);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 1px 2px #0f14180a}
-.flt{display:flex;flex-direction:column;gap:14px}.memf{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.flt{display:flex;flex-direction:column;gap:14px}.fill-n{margin-left:6px;font-size:11px;background:var(--warn-soft,#fdf0da);color:#865606;border-radius:999px;padding:0 6px}
+.memf{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
 .memf-l{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:32px}
 .memf-t{font-size:12.5px;background:var(--brand-soft,#e7f4f3);color:var(--brand-700,#066b5f);border-radius:6px;padding:3px 8px}
 .memf-none{font-size:13px;color:var(--text-3)}
@@ -586,7 +587,7 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 <!-- ================= 商品中心 · 商品库 ================= -->
 <sc-if value="{{isGoods}}" hint-placeholder-val="{{ false }}">
 <div class="pg fu">
-<div class="ph"><div><h1>商品库</h1><p>商品只从各供应商（货源）商品库同步获取，后台不录入商品；只有「已上架」的商品会进入前台频道与 AI 候选池</p></div><div class="ph-a"><button class="btn btn-o" onClick="{{gExport}}">导出</button></div></div>
+<div class="ph"><div><h1>商品库</h1><p>商品只从各供应商（货源）商品库同步获取，后台不录入商品；只有「已上架」的商品会进入前台频道与 AI 候选池</p></div><div class="ph-a"><button class="btn btn-o" onClick="{{gFillBatch}}">批量补齐字段<span class="fill-n">{{gFillN}}</span></button><button class="btn btn-o" onClick="{{gExport}}">导出</button></div></div>
 <div class="v3ff">
 <div class="v3frow"><span class="v3fl">商品</span><div class="v3fc v3fc3"><input class="v3in" aria-label="商品名称" placeholder="查询商品名称" value="{{gq}}" onChange="{{onGq}}"><input class="v3in" aria-label="品牌" placeholder="查询品牌" value="{{gBrand}}" onChange="{{onGBrand}}"><select class="v3in" aria-label="状态" value="{{gStatus}}" onChange="{{onGStatus}}"><option value="">状态：全部</option><option value="on">已上架</option><option value="pending">待审核</option><option value="off">已下架</option><option value="err">异常</option></select></div></div>
 <div class="v3frow"><span class="v3fl">货源</span><div class="v3fc v3cks"><sc-for list="{{gSrcOpts}}" as="c" hint-placeholder-count="5"><button class="v3ck {{c.cls}}" role="checkbox" aria-checked="{{c.ck}}" onClick="{{c.pick}}"><span class="pl-ck {{c.cls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span>{{c.label}}</button></sc-for></div></div>
@@ -595,8 +596,8 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 <div class="v3frow v3fsel"><span class="v3fl">已选条件</span><div class="v3fc" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><sc-if value="{{gNoChips}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: var(--text-3)">未选择</span></sc-if><sc-for list="{{gChips}}" as="c" hint-placeholder-count="2"><span class="v3chip">{{c.t}}<button onClick="{{c.x}}" aria-label="移除条件"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-for><div style="flex: 1"></div><button class="v3so" onClick="{{gReset}}">重置</button><sc-for list="{{gSorts}}" as="s" hint-placeholder-count="2"><button class="v3so {{s.cls}}" onClick="{{s.pick}}">{{s.label}} <span aria-hidden="true">{{s.arrow}}</span></button></sc-for></div></div>
 </div>
 <sc-if value="{{gHasSel}}" hint-placeholder-val="{{ false }}"><div class="selbar fu"><span>已选 <b>{{gSelN}}</b> 件</span><button class="btn btn-ai" style="height: 30px" onClick="{{gAi}}" disabled="{{gNoEdit}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"></path></svg>AI 打标建议</button><button class="btn btn-o" style="height: 30px" onClick="{{gOn}}" disabled="{{gNoEdit}}">上架</button><button class="btn btn-o" style="height: 30px" onClick="{{gOff}}" disabled="{{gNoEdit}}">下架</button><button class="lk" onClick="{{gClear}}">取消选择</button><sc-if value="{{gNoEdit}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--text-3)">当前角色只读</span></sc-if></div></sc-if>
-<div class="tw"><table class="tbl"><thead><tr><th style="width: 40px"><button class="pl-ck {{gAllCls}}" role="checkbox" aria-checked="{{gAllCk}}" aria-label="全选本页" onClick="{{gAll}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button></th><th>商品</th><th>货源</th><th>类目</th><th class="r">会员价</th><th class="r">接口价</th><th class="r">利润率</th><th>运营标签</th><th>状态</th><th class="r">操作</th></tr></thead><tbody>
-<sc-for list="{{gRows}}" as="r" hint-placeholder-count="6"><tr><td><button class="pl-ck {{r.ckCls}}" role="checkbox" aria-checked="{{r.ck}}" aria-label="选择 {{r.name}}" onClick="{{r.toggle}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button></td><td><div class="pn"><img class="thumb" src="{{r.img}}" alt=""><div><div>{{r.name}}</div><small>{{r.brand}} · ID {{r.id}} · 销量 {{r.sold}}</small></div></div></td><td>{{r.src}}</td><td>{{r.cat}}</td><td class="r mono">{{r.member}}</td><td class="r mono {{r.costCls}}">{{r.cost}}</td><td class="r mono {{r.costCls}}">{{r.rate}}</td><td><sc-for list="{{r.tags}}" as="t" hint-placeholder-count="1"><span class="tag">{{t.t}}</span></sc-for><sc-if value="{{r.noTag}}" hint-placeholder-val="{{ false }}"><span style="color: var(--text-3); font-size: 12px">未打标</span></sc-if></td><td><span class="pill {{r.sCls}}">{{r.sLabel}}</span></td><td class="r"><sc-if value="{{gCanEdit}}" hint-placeholder-val="{{ true }}"><div class="acts"><button class="lk" onClick="{{r.edit}}">编辑</button><button class="lk danger" onClick="{{r.del}}">删除</button></div></sc-if></td></tr></sc-for>
+<div class="tw"><table class="tbl"><thead><tr><th style="width: 40px"><button class="pl-ck {{gAllCls}}" role="checkbox" aria-checked="{{gAllCk}}" aria-label="全选本页" onClick="{{gAll}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button></th><th>商品</th><th>货源</th><th>类目</th><th class="r">会员价</th><th class="r">接口价</th><th class="r">利润率</th><th>运营标签</th><th>补齐字段</th><th>状态</th><th class="r">操作</th></tr></thead><tbody>
+<sc-for list="{{gRows}}" as="r" hint-placeholder-count="6"><tr><td><button class="pl-ck {{r.ckCls}}" role="checkbox" aria-checked="{{r.ck}}" aria-label="选择 {{r.name}}" onClick="{{r.toggle}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></button></td><td><div class="pn"><img class="thumb" src="{{r.img}}" alt=""><div><div>{{r.name}}</div><small>{{r.brand}} · ID {{r.id}} · 销量 {{r.sold}}</small></div></div></td><td>{{r.src}}</td><td>{{r.cat}}</td><td class="r mono">{{r.member}}</td><td class="r mono {{r.costCls}}">{{r.cost}}</td><td class="r mono {{r.costCls}}">{{r.rate}}</td><td><sc-for list="{{r.tags}}" as="t" hint-placeholder-count="1"><span class="tag">{{t.t}}</span></sc-for><sc-if value="{{r.noTag}}" hint-placeholder-val="{{ false }}"><span style="color: var(--text-3); font-size: 12px">未打标</span></sc-if></td><td><span class="pill {{r.fillCls}}">{{r.fillT}}</span><small class="sub">{{r.fillSub}}</small></td><td><span class="pill {{r.sCls}}">{{r.sLabel}}</span></td><td class="r"><sc-if value="{{gCanEdit}}" hint-placeholder-val="{{ true }}"><div class="acts"><sc-if value="{{r.canFill}}" hint-placeholder-val="{{ true }}"><button class="lk" onClick="{{r.fill}}">补齐</button></sc-if><button class="lk" onClick="{{r.edit}}">编辑</button><button class="lk danger" onClick="{{r.del}}">删除</button></div></sc-if></td></tr></sc-for>
 </tbody></table><sc-if value="{{gEmpty}}" hint-placeholder-val="{{ false }}"><div class="empty">没有符合条件的商品，试试重置筛选</div></sc-if></div>
 <sc-if value="{{gCostHidden}}" hint-placeholder-val="{{ false }}"><div style="font-size: 12px; color: var(--text-3)">接口价、利润率按你的字段权限已隐藏</div></sc-if>
 </div>
@@ -868,6 +869,8 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 <div class="flt-r"><label>库存</label><div class="flt-c"><div class="seg2"><button class="{{r.stNone}}" onClick="{{r.setStNone}}" disabled="{{sc.ro}}">不判断</button><button class="{{r.stAll}}" onClick="{{r.setStAll}}" disabled="{{sc.ro}}">全国有货</button><button class="{{r.stProv}}" onClick="{{r.setStProv}}" disabled="{{sc.ro}}">省份有货</button></div>
 <sc-if value="{{r.isProv}}" hint-placeholder-val="{{ false }}"><div class="seg2 pr-prov"><sc-for list="{{r.provs}}" as="o" hint-placeholder-count="8"><button class="{{o.cls}}" onClick="{{o.pick}}" disabled="{{sc.ro}}">{{o.t}}</button></sc-for></div><em>{{r.provN}}</em></sc-if>
 <em>非必填；不选则不判断库存；全国有货 = 全国任一省份有货</em></div></div>
+<div class="flt-r"><label>利润率</label><div class="flt-c"><div class="flt-in"><select class="sel" value="{{r.mgOp}}" onChange="{{r.onMgOp}}" disabled="{{sc.ro}}" aria-label="比较方式"><option value="大于等于">大于等于</option><option value="小于">小于</option></select><input class="v3in" style="width: 110px" placeholder="不限" value="{{r.mg}}" onChange="{{r.onMg}}" disabled="{{sc.ro}}" aria-label="利润率"><span>%</span></div><em>利润率 =（会员价 − 成本价）÷ 会员价，成本价即结算价；平台内部指标，不对会员开放；不填 = 不限</em></div></div>
+<div class="flt-r"><label>会员价区间</label><div class="flt-c"><div class="flt-in"><input class="v3in" style="width: 110px" placeholder="最低价" value="{{r.pmin}}" onChange="{{r.onPmin}}" disabled="{{sc.ro}}" aria-label="最低会员价"><span>—</span><input class="v3in" style="width: 110px" placeholder="最高价" value="{{r.pmax}}" onChange="{{r.onPmax}}" disabled="{{sc.ro}}" aria-label="最高会员价"><span>元</span></div><em>按商品库会员价筛选；可只填一端，不填 = 不限</em></div></div>
 <div class="flt-r"><label>发货方式</label><div class="flt-c"><div class="v3cks"><sc-for list="{{r.ships}}" as="o" hint-placeholder-count="2"><button class="v3ck {{o.cls}}" role="checkbox" aria-checked="{{o.ck}}" onClick="{{o.pick}}" disabled="{{sc.ro}}"><span class="pl-ck {{o.cls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span>{{o.t}}</button></sc-for></div><em>不选 = 不限发货方式</em></div></div>
 </div>
 </section></sc-for>
@@ -889,13 +892,9 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 <sc-if value="{{sc.pr2.detOver}}" hint-placeholder-val="{{ false }}"><span class="pr-det-t over">预计 <b class="mono">{{sc.pr2.detN}}</b> 个商品 · 超过 1 万，请收窄规则（加品类 / 品牌 / 关键词或排他）后重新检测</span></sc-if>
 </div>
 <sc-if value="{{sc.pr2.detOn}}" hint-placeholder-val="{{ false }}"><div class="pr-per"><sc-for list="{{sc.pr2.detPer}}" as="p" hint-placeholder-count="2"><span>{{p.t}}</span></sc-for><span>多条规则的重叠部分已按估算去重前计入，实际以保存后为准</span></div></sc-if>
-<div class="pr-save"><button class="btn btn-p {{sc.pr2.saveCls}}" onClick="{{sc.pr2.save}}" disabled="{{sc.ro}}">保存并生效</button><sc-if value="{{sc.pr2.dirty}}" hint-placeholder-val="{{ false }}"><button class="btn btn-o" onClick="{{sc.pr2.reset}}">放弃修改</button><em>有未保存的修改，下方为预览</em></sc-if></div>
+<div class="pr-save"><button class="btn btn-p {{sc.pr2.saveCls}}" onClick="{{sc.pr2.save}}" disabled="{{sc.ro}}">保存并生效</button><sc-if value="{{sc.pr2.dirty}}" hint-placeholder-val="{{ false }}"><button class="btn btn-o" onClick="{{sc.pr2.reset}}">放弃修改</button><em>有未保存的修改</em></sc-if></div>
 </div>
-<div class="card"><h3>规则结果 · {{sc.pr2.sum}}<span>演示数据：规则范围内 {{sc.pr2.scope}} 款 → 上架 {{sc.pr2.inN}} 款、自动下架 {{sc.pr2.downN}} 款、排他剔除 {{sc.pr2.exN}} 款；逐条明细见「商品明细」</span></h3>
-<sc-if value="{{sc.pr2.noDrops}}" hint-placeholder-val="{{ false }}"><div class="empty">规则范围内的商品全部上架</div></sc-if>
-<div class="tw" style="border: 0"><table class="tbl"><thead><tr><th>商品</th><th>货源 · 发货方式</th><th class="r">会员价</th><th>状态</th><th>原因</th></tr></thead><tbody><sc-for list="{{sc.pr2.drops}}" as="x" hint-placeholder-count="3"><tr><td>{{x.name}}</td><td style="color: var(--text-2)">{{x.src}}</td><td class="r mono">{{x.member}}</td><td><span class="pill {{x.pill}}">{{x.state}}</span></td><td style="color: var(--text-2)">{{x.why}}</td></tr></sc-for></tbody></table></div>
-</div>
-<div class="card"><h3>补充字段说明<span>商品库补齐以下字段后，用于商品展示与 AI 选品，后续可作为规则条件</span></h3>
+<div class="card"><h3>补充字段说明<span>人工补齐字段由商品运营在「商品库」不定期补齐：单个商品点「补齐」，或用「批量补齐字段」Excel 导入；补齐后用于商品展示与 AI 选品，后续可作为规则条件</span></h3>
 <div class="tw" style="border: 0"><table class="tbl"><thead><tr><th>货源</th><th>补齐方式</th><th>字段</th></tr></thead><tbody>
 <tr><td>天猫超市</td><td><span class="pill p-warn">人工补齐</span></td><td>券前价 · 近 28 天在架天数 · 近 28 天平均到手价 · 近 28 天最低到手价 · 商品营销标签</td></tr>
 <tr><td>京东</td><td><span class="pill p-warn">人工补齐</span></td><td>实际价（到手价）· 销量等级</td></tr>
@@ -1228,15 +1227,15 @@ const nowStr = () => { const d = new Date(); const p = (x) => String(x).padStart
 // 商品池统一为「一池一套商品规则」：旧的按货源多条规则折算为一套（品类取并集，利润率阈值沿用）
 // 商品规则 v2：每条规则内条件同时满足，多条规则满足任一即上架；排他规则按分类 / 品牌剔除
 const R2SEED = {
-  p1: { rules: [{ cats: ['节日礼包'], stock: '全国' }, { srcs: ['京东自营', '天猫超市'], cats: ['休闲食品', '粮油'], brands: ['三只松鼠', '柴火大院'], stock: '全国', ships: ['电商发货'] }], ex: { cats: [], brands: ['百草味'] } },
-  p2: { rules: [{ cats: ['小家电', '家纺'], brands: ['美的', '水星家纺'], stock: '全国' }, { cats: ['节日礼包'], kws: ['礼包', '礼盒'] }], ex: { cats: [], brands: [] } },
+  p1: { rules: [{ cats: ['节日礼包'], stock: '全国', mg: '15' }, { srcs: ['京东自营', '天猫超市'], cats: ['休闲食品', '粮油'], brands: ['三只松鼠', '柴火大院'], stock: '全国', ships: ['电商发货'] }], ex: { cats: [], brands: ['百草味'] } },
+  p2: { rules: [{ cats: ['小家电', '家纺'], brands: ['美的', '水星家纺'], stock: '全国', mg: '20' }, { cats: ['节日礼包'], kws: ['礼包', '礼盒'], mg: '20' }], ex: { cats: [], brands: [] } },
   p3: { rules: [{ cats: ['节日礼包'] }], ex: { cats: [], brands: [] } },
   p4: { rules: [{ srcs: ['卡券'], cats: ['影音会员', '购物卡'] }], ex: { cats: [], brands: [] } },
-  p5: { rules: [{ cats: ['日化清洁', '纸品'], brands: ['蓝月亮', '舒洁'], stock: '全国' }], ex: { cats: [], brands: [] } },
+  p5: { rules: [{ cats: ['日化清洁', '纸品'], brands: ['蓝月亮', '舒洁'], stock: '全国', mg: '10', pmin: '20' }], ex: { cats: [], brands: [] } },
   p6: { rules: [{ srcs: ['供应商直供'], cats: ['家纺'], brands: ['水星家纺'] }], ex: { cats: [], brands: [] } },
   p7: { rules: [{ cats: ['办公文具', '打印耗材'], brands: ['得力', '惠普', '晨光'], stock: '全国' }, { cats: ['茶水饮料', '数码配件'], brands: ['农夫山泉', '雀巢', '罗技'], stock: '全国', ships: ['电商发货'] }], ex: { cats: [], brands: [] } }
 };
-const R2RULE = (r) => Object.assign({ srcs: [], cats: [], kws: [], brands: [], stock: '', provs: [], ships: [] }, r || {});
+const R2RULE = (r) => Object.assign({ srcs: [], cats: [], kws: [], brands: [], stock: '', provs: [], ships: [], mgOp: '大于等于', mg: '', pmin: '', pmax: '' }, r || {});
 function poolToSingle(p) {
   if (p.prule) return p.r2 ? p : Object.assign({}, p, { r2: { rules: [R2RULE({})], ex: { cats: [], brands: [] } } });
   const rs = (p.rules || []).filter((r) => r.mode !== 'ex');
@@ -1760,6 +1759,21 @@ function buildDefs(self, st, role) {
       { k: 'status', t: '状态', type: 'radio', opts: [['pending', '待审核'], ['on', '上架'], ['off', '下架']], hint: '新增商品默认「待审核」，审核通过才进入前台频道与 AI 候选池' }],
     validate: (v) => (Number(v.member) > 0 && Number(v.cost) > 0 && Number(v.member) < Number(v.cost) ? { member: '会员价低于接口价（倒挂），请确认后再保存' } : {}),
     save: (v) => Object.assign(v, { member: Number(v.member), cost: Number(v.cost) })
+  };
+  // ---------- 商品库：人工补齐字段（商品运营不定期补齐，按货源显示对应字段）----------
+  D.gfill = {
+    page: '', title: '补齐字段', noun: '补齐字段', store: 'goods', edit: ['admin', 'goods'],
+    prep: (r) => Object.assign({}, r, r.fill || {}),
+    form: (v) => [{ k: 'name', t: '商品', type: 'static', v: v.name + ' · ' + v.src },
+      ...(v.src === '天猫超市' ? [{ k: 'tmPre', t: '券前价（元）', type: 'num', w: 'half', hint: '猫超前台用券前的价格' }, { k: 'tmDays', t: '近 28 天在架天数', type: 'num', w: 'half' },
+        { k: 'tmAvg', t: '近 28 天平均到手价（元）', type: 'num', w: 'half' }, { k: 'tmMin', t: '近 28 天最低到手价（元）', type: 'num', w: 'half' },
+        { k: 'tmTags', t: '商品营销标签', type: 'text', ph: '多个用「，」分隔，如：88VIP 专享，猫超 3 件 9 折' }] : []),
+      ...(v.src === '京东自营' ? [{ k: 'jdReal', t: '实际价（到手价，元）', type: 'num', w: 'half' }, { k: 'jdLv', t: '销量等级', type: 'radio', opts: ['S', 'A', 'B', 'C'], w: 'half', hint: '按京东前台销量区间分级' },
+        { k: 'jdApi', t: '接口补齐（只读）', type: 'static', v: '好评率 ' + (v.jdGood || '同步中') + ' · 评价数 ' + (v.jdCmts || '同步中') }] : []),
+      { k: 'sysF', t: '期望系统补齐（只读）', type: 'static', v: '系统销量、品牌等级（S / A / B / C）、品牌归属（国内 / 国外品牌）· 待系统上线后自动回填' },
+      { k: 'fillAt', t: '最近补齐', type: 'static', v: (v.fill && v.fill.at) || '尚未补齐' }],
+    save: (v, isNew, old) => { const keys = old.src === '天猫超市' ? ['tmPre', 'tmDays', 'tmAvg', 'tmMin', 'tmTags'] : ['jdReal', 'jdLv']; const f = Object.assign({}, old.fill || {}); keys.forEach((k) => { f[k] = ['tmTags', 'jdLv'].includes(k) ? (v[k] || '') : (v[k] === '' || v[k] == null ? '' : Number(v[k])); }); f.at = nowStr() + ' · ' + self.meName(); const out = Object.assign({}, old, { fill: f }); return out; },
+    savedMsg: (rec) => '已补齐「' + rec.name.slice(0, 14) + '」，回写商品库'
   };
   // ---------- 交易中心 ----------
   D.order = {
@@ -2378,11 +2392,11 @@ class Component extends DCLogic {
       ],
       certTab: 'pending', certQ: '', certTime: 'all', certId: '', plainCode: false, rejOpen: false, rejPick: '', rejNote: '',
       goods: [
-        { id: 'h1', jd: 79.9, name: '柴火大院 五常稻花香大米 5kg', brand: '柴火大院', src: '京东自营', cat: '粮油', member: 69.9, cost: 52.0, sold: 12380, tags: ['节日福利', '员工关怀'], status: 'on' },
-        { id: 'h2', jd: 139, name: '三只松鼠 坚果大礼包 1.5kg', brand: '三只松鼠', src: '天猫超市', cat: '休闲食品', member: 128, cost: 131.5, sold: 8920, tags: ['中秋', '年货'], status: 'err' },
+        { id: 'h1', fill: { jdReal: 72.9, jdLv: 'A', at: '11-02 15:10 · 王磊' }, jdGood: '98%', jdCmts: '12.6 万', jd: 79.9, name: '柴火大院 五常稻花香大米 5kg', brand: '柴火大院', src: '京东自营', cat: '粮油', member: 69.9, cost: 52.0, sold: 12380, tags: ['节日福利', '员工关怀'], status: 'on' },
+        { id: 'h2', fill: { tmPre: 139, tmDays: 28, tmAvg: 126.5, tmMin: 119, tmTags: '88VIP 专享, 猫超 3 件 9 折', at: '11-02 15:20 · 王磊' }, jd: 139, name: '三只松鼠 坚果大礼包 1.5kg', brand: '三只松鼠', src: '天猫超市', cat: '休闲食品', member: 128, cost: 131.5, sold: 8920, tags: ['中秋', '年货'], status: 'err' },
         { id: 'h4', outProv: ['北京', '上海'], jd: 118, noSale: '天猫超市部分城市无货', name: '良品铺子 零食礼盒 1.2kg', brand: '良品铺子', src: '天猫超市', cat: '休闲食品', member: 99, cost: 78, sold: 6410, tags: ['节日福利', '下午茶'], status: 'on' },
         { id: 'h12', jd: 129, name: '百草味 年货坚果礼盒', brand: '百草味', src: '京东自营', cat: '休闲食品', member: 109, cost: 85, sold: 3150, tags: [], status: 'pending' },
-        { id: 'h13', jd: 99, name: '蓝月亮 深层洁净洗衣液 3kg×2', brand: '蓝月亮', src: '京东自营', cat: '日化清洁', member: 79.9, cost: 61, sold: 9870, tags: ['员工关怀', '工会慰问'], status: 'on' },
+        { id: 'h13', fill: { jdReal: 76.9, jdLv: 'S', at: '11-03 10:05 · 王磊' }, jdGood: '97%', jdCmts: '32.1 万', jd: 99, name: '蓝月亮 深层洁净洗衣液 3kg×2', brand: '蓝月亮', src: '京东自营', cat: '日化清洁', member: 79.9, cost: 61, sold: 9870, tags: ['员工关怀', '工会慰问'], status: 'on' },
         { id: 'h14', jd: 69.9, name: '舒洁 抽纸 3 层 24 包', brand: '舒洁', src: '天猫超市', cat: '纸品', member: 59.9, cost: 47, sold: 15200, tags: [], status: 'pending' },
         { id: 'g7', jd: 459, name: '水星家纺 全棉四件套 1.8m', brand: '水星家纺', src: '供应商直供', cat: '家纺', member: 399, cost: 290, sold: 1260, tags: ['节日福利', '年会奖品'], status: 'on' },
         { id: 'g8', jd: 349, name: '美的 智能电饭煲 4L', brand: '美的', src: '京东自营', cat: '小家电', member: 299, cost: 241, sold: 2340, tags: ['员工关怀'], status: 'off' },
@@ -2519,7 +2533,7 @@ class Component extends DCLogic {
     this._memAll = Array.from(new Set(out)); return this._memAll; }
   provs() { return ['北京', '上海', '天津', '重庆', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新疆']; }
   shipLbl(x) { return { 电商发货: '电商发货（京东物流、猫超仓）', 厂家发货: '厂家发货（厂直配送、商家仓）' }[x] || x; }
-  r2Empty(r) { return !(r.srcs.length || r.cats.length || r.kws.length || r.brands.length || r.stock || r.ships.length); }
+  r2Empty(r) { return !(r.srcs.length || r.cats.length || r.kws.length || r.brands.length || r.stock || r.ships.length || r.mg !== '' || r.pmin !== '' || r.pmax !== ''); }
   r2Scope(g, r) { return (!r.srcs.length || r.srcs.includes(g.src)) && (!r.cats.length || r.cats.includes(g.cat)); }
   r2Why(g, r) {
     if (r.srcs.length && !r.srcs.includes(g.src)) return '货源「' + g.src + '」不在规则内';
@@ -2529,9 +2543,13 @@ class Component extends DCLogic {
     if (r.stock === '全国' && g.outAll) return '全国无货';
     if (r.stock === '省份' && (g.outAll || r.provs.some((p) => (g.outProv || []).includes(p)))) return (g.outAll ? '全国无货' : '所选省份无货：' + r.provs.filter((p) => (g.outProv || []).includes(p)).join('、'));
     if (r.ships.length && !r.ships.includes(this.gShip(g))) return this.gShip(g) + '，未勾选该发货方式';
+    if (r.mg !== '' && r.mg != null) { const x = this.rateOf(g); const lt = r.mgOp === '小于'; if (lt ? x >= +r.mg : x < +r.mg) return '利润率 ' + x.toFixed(1) + '%，' + (lt ? '不低于 ' : '低于 ') + r.mg + '%'; }
+    if (r.pmin !== '' && r.pmin != null && g.member < +r.pmin) return '会员价 ¥' + g.member + ' 低于 ¥' + r.pmin;
+    if (r.pmax !== '' && r.pmax != null && g.member > +r.pmax) return '会员价 ¥' + g.member + ' 高于 ¥' + r.pmax;
     return '';
   }
   r2Ex(g, ex) { if (!ex) return ''; if ((ex.cats || []).includes(g.cat)) return '分类「' + g.cat + '」'; if ((ex.brands || []).includes(g.brand)) return '品牌「' + g.brand + '」'; return ''; }
+  r2TagsMg(r) { return r.mg !== '' ? '利润率 ' + (r.mgOp === '小于' ? '<' : '≥') + ' ' + r.mg + '%' : ''; }
   r2Tags(r2) { if (!r2) return []; const rs = r2.rules.filter((r) => !this.r2Empty(r)); return [rs.length + ' 条规则'].concat(rs.slice(0, 2).map((r) => (r.cats.length ? r.cats.slice(0, 2).join('、') + (r.cats.length > 2 ? ' 等' : '') : r.srcs.length ? r.srcs.join('、') : r.brands.length ? r.brands.slice(0, 2).join('、') : r.kws.length ? '关键词 ' + r.kws[0] : '不限'))).concat(((r2.ex.cats || []).length + (r2.ex.brands || []).length) ? ['排他 ' + ((r2.ex.cats || []).length + (r2.ex.brands || []).length) + ' 项'] : []); }
   // 规则检测：按商品库全量（约 500 万 SKU）的分货源 / 品类规模估算命中数（演示用估算模型）
   r2Est(r2) {
@@ -2546,6 +2564,8 @@ class Component extends DCLogic {
       if (r.kws.length) n *= Math.min(1, r.kws.length * 0.03);
       if (r.stock === '全国') n *= 0.92; else if (r.stock === '省份') n *= Math.max(0.5, 0.9 - r.provs.length * 0.01);
       if (r.ships.length === 1) n *= r.ships[0] === '电商发货' ? 0.78 : 0.22;
+      if (r.mg !== '') n *= r.mgOp === '小于' ? Math.min(1, +r.mg / 40) : Math.max(0.05, 1 - +r.mg / 40);
+      if (r.pmin !== '' || r.pmax !== '') { const lo = r.pmin === '' ? 0 : +r.pmin, hi = r.pmax === '' ? 2000 : +r.pmax; n *= Math.max(0.03, Math.min(1, (Math.min(hi, 2000) - Math.min(lo, 2000)) / 600)); }
       return n;
     };
     const per = r2.rules.map(one);
@@ -2572,6 +2592,7 @@ class Component extends DCLogic {
       f.adv && f.advPct !== '' ? '利润率 ' + (f.advOp === '小于' ? '<' : '≥') + ' ' + f.advPct + '%' : '', (f.kws || []).length ? '剔除词 ' + f.kws.length : '', (f.brands || []).length ? '剔除品牌 ' + f.brands.length : '',
       f.pr && f.prAmt !== '' ? '会员价 ' + f.prOp + ' ¥' + f.prAmt : '', f.ships && f.ships.length === 1 ? '仅' + f.ships[0] : ''].filter(Boolean);
   }
+  fillKeys(g) { return g.src === '天猫超市' ? ['tmPre', 'tmDays', 'tmAvg', 'tmMin', 'tmTags'] : g.src === '京东自营' ? ['jdReal', 'jdLv'] : []; }
   rateOf(g) { return g.member > 0 ? (g.member - g.cost) / g.member * 100 : 0; }
   ruleBase(g, r) { return ((r.mode === 'ex' && !r.src) || g.src === r.src) && (!r.cats.length || r.cats.includes(g.cat)) && (!r.brands.length || r.brands.includes(g.brand)); }
   plMatch(g, r) { return g.status !== 'off' && this.ruleBase(g, r) && (r.rmin === '' || r.rmin == null || this.rateOf(g) >= Number(r.rmin)); }
@@ -2777,7 +2798,7 @@ class Component extends DCLogic {
     const KIND = st.page === 'pool' ? 'pool' : st.page === 'topic' ? 'topic' : 'scene';
     const CFG = {
       scene: { store: 'scenes', mod: '场景管理', inL: '在场景中', edit: ['admin', 'content'], ro: '场景由内容运营维护，当前角色只读', tabs: [['guide', '引导词'], ['deco', '页面装修'], ['rule', '商品来源'], ['goods', '商品明细'], ['price', '会员价']] },
-      pool: { store: 'pools', mod: '商品池', inL: '在池中', edit: ['admin', 'goods', 'content'], ro: '商品池由商品运营 / 内容运营维护，当前角色只读', tabs: [['rule', '商品规则'], ['goods', '商品明细'], ['price', '定价规则'], ['show', '前台展示'], ['refs', '被引用']] },
+      pool: { store: 'pools', mod: '商品池', inL: '在池中', edit: ['admin', 'goods', 'content'], ro: '商品池由商品运营 / 内容运营维护，当前角色只读', tabs: [['rule', '商品规则'], ['goods', '商品明细'], ['show', '前台展示'], ['refs', '被引用']] },
       topic: { store: 'topics', mod: '专题管理', inL: '在专题中', edit: ['admin', 'content'], ro: '专题由内容运营维护，当前角色只读', tabs: [['rule', '商品规则与排他'], ['goods', '商品明细'], ['refs', '被引用']] }
     }[KIND];
     const LBL = { in: CFG.inL, man: '白名单', down: '自动下架', ex: '黑名单', excl: '排他剔除', flt: '筛选剔除' };
@@ -2912,7 +2933,7 @@ class Component extends DCLogic {
             preview: cfg ? gl.map((g) => { const p = this.prPrice(g, s.id, cur); return { name: g.name, cat: g.cat, brand: g.brand, src: g.src, cost: cc ? '¥' + g.cost : '***', mk: cc ? this.prMargin(g) + '%' : '***', rule: p.rule, v: '¥' + p.v, mg: cc ? p.mg + '%' : '***', st: p.st, stCls: p.st === '触底下架' ? 'p-err' : p.st === '顶价封顶' ? 'p-warn' : 'p-ok' }; }) : [] } }; })(),
         ...(() => { const FB = { pr2: { on: false, rules: [], addRule: () => 0, exCats: [], exBrands: [], exCatQ: '', onExCatQ: () => 0, exBrandQ: '', onExBrandQ: () => 0, exCatN: '', exBrandN: '', detect: () => 0, detOn: false, detNone: true, detOk: false, detOver: false, detN: '', detPer: [], detStale: false, save: () => 0, saveCls: 'dis', saveTip: '', reset: () => 0, dirty: false, sum: '', scope: '', inN: '', downN: '', exN: '', drops: [], noDrops: true, detLoading: false } };
           if (KIND !== 'pool') return FB;
-          const LIMIT = 10000; const blankR = () => ({ srcs: [], cats: [], kws: [], brands: [], stock: '', provs: [], ships: [] });
+          const LIMIT = 10000; const blankR = () => ({ srcs: [], cats: [], kws: [], brands: [], stock: '', provs: [], ships: [], mgOp: '大于等于', mg: '', pmin: '', pmax: '' });
           const saved = s.r2 || { rules: [blankR()], ex: { cats: [], brands: [] } }; const dirty = !!(st.r2Dr && st.r2Dr.id === s.id); const d = dirty ? st.r2Dr.d : saved;
           const setD = (nd) => { if (!canEdit) return; this.setState({ r2Dr: { id: s.id, d: nd } }); };
           const setR = (i, p) => setD({ rules: d.rules.map((r, k) => (k === i ? Object.assign({}, r, p) : r)), ex: d.ex });
@@ -2944,6 +2965,8 @@ class Component extends DCLogic {
                 stNone: r.stock === '' ? 'on' : '', stAll: r.stock === '全国' ? 'on' : '', stProv: r.stock === '省份' ? 'on' : '', isProv: r.stock === '省份',
                 setStNone: () => setR(i, { stock: '', provs: [] }), setStAll: () => setR(i, { stock: '全国', provs: [] }), setStProv: () => setR(i, { stock: '省份' }),
                 provs: this.provs().map((x) => ({ t: x, cls: r.provs.includes(x) ? 'on' : '', pick: () => setR(i, { provs: togA(r.provs, x) }) })), provN: r.provs.length ? '已选 ' + r.provs.length + ' 个省份：所选省份均有货才上架' : '请选择省份',
+                mgOp: r.mgOp || '大于等于', onMgOp: (e) => setR(i, { mgOp: e.target.value }), mg: String(r.mg == null ? '' : r.mg), onMg: (e) => setR(i, { mg: String(e.target.value).replace(/[^\d.]/g, '') }),
+                pmin: String(r.pmin == null ? '' : r.pmin), onPmin: (e) => setR(i, { pmin: String(e.target.value).replace(/[^\d.]/g, '') }), pmax: String(r.pmax == null ? '' : r.pmax), onPmax: (e) => setR(i, { pmax: String(e.target.value).replace(/[^\d.]/g, '') }),
                 ships: ['电商发货', '厂家发货'].map((x) => ({ t: this.shipLbl(x), cls: r.ships.includes(x) ? 'on' : '', ck: String(r.ships.includes(x)), pick: () => setR(i, { ships: togA(r.ships, x) }) })),
                 hitN: String(rows.filter((x) => x.k !== 'down' && x.from === '规则 ' + (i + 1)).length) }; }),
             addRule: () => setD({ rules: d.rules.concat([blankR()]), ex: d.ex }),
@@ -2958,6 +2981,7 @@ class Component extends DCLogic {
             saveCls: okToSave ? '' : 'dis', saveTip: !detFresh ? (dirty ? '规则有改动，请先点「规则检测」' : '保存前请先点「规则检测」') : det.n >= LIMIT ? '预计商品数超过 1 万，请收窄规则后重新检测' : '检测通过，可以保存',
             save: () => { if (!canEdit) return; if (!detFresh) { this.flash('请先点「规则检测」，预计商品数低于 1 万才能保存'); return; } if (det.n >= LIMIT) { this.flash('预计商品数 ' + det.n.toLocaleString('zh-CN') + ' 个，超过 1 万上限，请收窄规则'); return; }
               if (d.rules.some((r) => r.stock === '省份' && !r.provs.length)) { this.flash('库存选了「省份有货」，请选择省份'); return; }
+              if (d.rules.some((r) => r.pmin !== '' && r.pmax !== '' && +r.pmin > +r.pmax)) { this.flash('会员价区间的最低价不能高于最高价'); return; }
               if (hash === savedHash) { this.flash('规则没有变化'); return; }
               this.confirm('保存「' + s.name + '」的商品规则？', '规则检测预计 ' + det.n.toLocaleString('zh-CN') + ' 个商品。保存后立即生效：自动上架 ' + up.length + ' 款、自动下架 ' + down.length + ' 款；白名单与黑名单商品保持不变。', '保存并生效', false, doSave); },
             reset: () => this.setState({ r2Dr: null }), dirty: dirty,
@@ -3244,7 +3268,7 @@ class Component extends DCLogic {
           return {
             t: f.t, req: !!f.req && !f.ro, wCls: f.w === 'half' ? 'half' : 'full', hint: f.hint || '', hasHint: !!f.hint && !err, err: err || '', hasErr: !!err, errCls: err ? 'err' : '', ro: !!f.ro, ph: f.ph || '',
             isText: f.type === 'text', isNum: f.type === 'num', isDate: f.type === 'date', isArea: f.type === 'area', isSel: f.type === 'select', isRadio: f.type === 'radio', isChips: f.type === 'chips', isSwitch: f.type === 'switch', isImg: f.type === 'img', isStatic: f.type === 'static', isPick: f.type === 'pick', ...pickOf(f, val), isMembers: f.type === 'members', memN: (Array.isArray(val) ? val : []).length, memNone: !(Array.isArray(val) ? val : []).length, memHas: !!(Array.isArray(val) ? val : []).length, memTags: (Array.isArray(val) ? val : []).slice(0, 6).map((x) => ({ t: x })), memMore: (Array.isArray(val) ? val : []).length > 6 ? '等 ' + (Array.isArray(val) ? val : []).length + ' 家' : '', memOpen: () => { if (f.ro) return; this.setState({ mp: { k: f.k, sel: (Array.isArray(val) ? val : []).slice(), chk: {}, lq: '', rq: '', lp: 1, rp: 1 } }); },
-            v: val == null ? '' : String(val), on: (e) => setV({ [f.k]: e.target.value }),
+            v: f.type === 'static' && f.v !== undefined ? String(f.v) : (val == null ? '' : String(val)), on: (e) => setV({ [f.k]: e.target.value }),
             opts: (f.opts || []).map(optPair).map((o) => ({ v: String(o[0]), t: o[1], cls: (f.type === 'chips' ? (val || []).map(String).includes(String(o[0])) : String(val) === String(o[0])) ? 'on' : '', ck: String(f.type === 'chips' ? (val || []).map(String).includes(String(o[0])) : String(val) === String(o[0])),
               pick: () => { if (f.ro) return; if (f.type === 'chips') { const a = (val || []).slice(); const i = a.map(String).indexOf(String(o[0])); if (i >= 0) a.splice(i, 1); else a.push(o[0]); setV({ [f.k]: a }); } else setV({ [f.k]: typeof o[0] === 'number' ? o[0] : o[0] }); } })),
             swCls: val ? 'on' : '', swOn: String(!!val), toggle: () => setV({ [f.k]: !val }),
@@ -3424,7 +3448,8 @@ class Component extends DCLogic {
         tags: g.tags.map((t) => ({ t: t })), noTag: !g.tags.length, sLabel: ckPill(g.status)[0], sCls: ckPill(g.status)[1],
         ck: String(!!st.gSel[g.id]), ckCls: st.gSel[g.id] ? 'on' : '',
         toggle: () => { const m = Object.assign({}, st.gSel); m[g.id] = !m[g.id]; set({ gSel: m }); },
-        edit: () => this.openForm('goods', g.id), del: this.crudDelRef('goods', g)
+        edit: () => this.openForm('goods', g.id), del: this.crudDelRef('goods', g),
+        ...(() => { const k = this.fillKeys(g); const f = g.fill || {}; const miss = k.filter((x) => f[x] === undefined || f[x] === '').length; return { canFill: k.length > 0, fillT: !k.length ? '无需补齐' : miss ? '待补齐 ' + miss + ' 项' : '已补齐', fillSub: k.length && !miss ? f.at || '' : '', fillCls: !k.length ? 'p-mute' : miss ? 'p-warn' : 'p-ok', fill: () => this.openForm('gfill', g.id) }; })()
       };
     });
     const allOn = gl.length > 0 && gl.every((g) => st.gSel[g.id]);
@@ -3684,6 +3709,8 @@ class Component extends DCLogic {
       gHasSel: selIds.length > 0, gSelN: selIds.length, gNoEdit: !gEdit, gClear: () => set({ gSel: {} }),
       gAi: () => { set({ aiOpen: true, aiLoading: true, aiPick: {} }); setTimeout(() => this.setState({ aiLoading: false }), 1000); },
       gOn: setGoodsStatus('on'), gOff: setGoodsStatus('off'), gExport: () => this.flash('已生成导出任务，完成后站内信通知；文件带操作人水印'),
+      gFillN: String((st.goods || []).filter((g) => { const k = this.fillKeys(g); const f = g.fill || {}; return k.some((x) => f[x] === undefined || f[x] === ''); }).length),
+      gFillBatch: () => this.confirm('批量补齐字段（Excel）', '① 下载补齐模板：按货源分天猫超市、京东两个 Sheet，预填 SKU、商品名和已有值；② 商品运营填写券前价、近 28 天在架天数 / 平均到手价 / 最低到手价、营销标签（猫超），实际价（到手价）、销量等级（京东）；③ 上传后按 SKU 校验并回写商品库，失败行可下载原因。演示：点「导入」直接补齐当前待补齐的商品。', '导入', false, () => { const t = nowStr(); this.setState({ goods: st.goods.map((g) => { const k = this.fillKeys(g); if (!k.length) return g; const f = Object.assign({}, g.fill || {}); const dv = { tmPre: Math.round(g.member * 1.08), tmDays: 26, tmAvg: Math.round(g.member * 0.97 * 10) / 10, tmMin: Math.round(g.member * 0.92 * 10) / 10, tmTags: '猫超满减', jdReal: Math.round(g.member * 0.95 * 10) / 10, jdLv: 'B' }; k.forEach((x) => { if (f[x] === undefined || f[x] === '') f[x] = dv[x]; }); f.at = t + ' · ' + this.meName() + '（批量导入）'; return Object.assign({}, g, { fill: f }); }) }); this.pushLog('商品库', '批量补齐字段', 'Excel 导入'); this.flash('已按 SKU 回写商品库：补齐字段 · 失败 0 行'); }),
       gAllCls: allOn ? 'on' : '', gAllCk: String(allOn), gAll: () => { const m = {}; if (!allOn) gl.forEach((g) => { m[g.id] = true; }); set({ gSel: m }); },
       gRows: gRows, gEmpty: !gRows.length, gCostHidden: !canCost,
       aiOpen: st.aiOpen, aiLoading: st.aiLoading, aiReady: !st.aiLoading, aiRows: aiRows, aiPickN: aiPickN, aiNone: st.aiLoading || !aiPickN, aiClose: () => set({ aiOpen: false }),
