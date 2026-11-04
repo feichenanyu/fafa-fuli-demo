@@ -188,6 +188,12 @@ h2 { font-size: 21px; font-weight: 600; line-height: 1.4; }
 .smap .none { font-size: 12px; color: #C2C7CE; padding: 6px 8px; }
 .smap .divider { grid-column: 1 / -1; border-top: 2px dashed var(--fire); position: relative; margin: 2px 0; }
 .smap .divider span { position: absolute; right: 0; top: -10px; background: var(--surface); padding: 0 8px; font-family: var(--font-mono); font-size: 11px; color: var(--fire-900); }
+.smap { grid-template-columns: 132px repeat(6, minmax(150px, 1fr)); min-width: 1080px; }
+.smap .rel i { font-style: normal; font-size: 11.5px; line-height: 1.5; color: var(--ink); margin-top: 4px; }
+.smap .story .so { display: block; font-size: 12px; color: var(--muted); margin-top: 3px; }
+.smap .story.core { border-left-color: var(--fire); background: #FFFBF3; border-color: #FBD89D; font-weight: 500; }
+.smap .story.core .so { color: var(--fire-900); font-weight: 400; }
+.smap .star { color: var(--fire); margin-right: 4px; }
 @media (max-width: 900px) {
   .goals, .rules { grid-template-columns: 1fr; }
   .facts, .decide { grid-template-columns: 1fr; }
@@ -333,7 +339,8 @@ h2 { font-size: 21px; font-weight: 600; line-height: 1.4; }
 </section>
 
 <section class="sec" aria-labelledby="s5">
-  <div class="sec-head"><span class="sec-no">05</span><h2 id="s5">买家侧用户故事地图</h2><span class="sec-note">横轴是服务商做一个项目的旅程，纵轴是版本；故事下方标注对应任务</span></div>
+  <div class="sec-head"><span class="sec-no">05</span><h2 id="s5">买家侧用户故事地图</h2><span class="sec-note">★ 核心故事撑起本版目标，其余为配套</span></div>
+  <p class="support"><b>主线：</b>服务商把一个政企项目完整做在平台上。V1 先让项目有记录、春节交易不流失；V2 让员工兑换顺畅、甲方满意；V3 让平台商家的货进入选品；V4 用项目供货价跑通闭环。</p>
   <div class="mapscroll"><div class="smap">
     <div class="corner">旅程 →</div>
     <div class="step"><em>01 · 服务商</em><b>报备项目</b></div>
@@ -342,35 +349,35 @@ h2 { font-size: 21px; font-weight: 600; line-height: 1.4; }
     <div class="step"><em>04 · 服务商</em><b>成交</b></div>
     <div class="step"><em>05 · 员工</em><b>员工兑换</b></div>
     <div class="step"><em>06 · 服务商</em><b>经营复盘</b></div>
-    <div class="rel r1"><b>V1</b><span>11/20</span></div>
-    <div class="cell r1"><div class="story">存量商城一键确认，补齐项目信息<small>V1-4.2</small></div><div class="story">建商城、上架、询价时顺手报备<small>V1-4.4</small></div><div class="story">看到「未报备」提示，一键去报备<small>V1-4.8</small></div><div class="story">报备时知道信息用于经营统计、避免项目冲突<small>V1-4.5</small></div></div>
-    <div class="cell r1"><div class="story">打开工作台先看到年货节场景<small>V1-5.1</small></div><div class="story">场景里看到多渠道货盘、会员价和利润率<small>V1-1.2</small></div><div class="story">阿里权益会员上架时自动换成自有货源<small>V1-1.3</small></div></div>
-    <div class="cell r1"><div class="story">大单发集采询价单，关联项目的优先跟进谈价<small>V1-2.4 · 运营配合</small></div></div>
-    <div class="cell r1"><div class="story">一键代发、一键上架，所有渠道商品都能用<small>V1-2.2 / V1-2.3</small></div><div class="story">上架时用加价规则或定价策略定销售价<small>V1-2.3 / V1-2.6</small></div><div class="story">用场景模板一键创建商城<small>V1-2.5</small></div></div>
-    <div class="cell r1"><div class="story">在新的购物车、分类、个人中心里兑换更顺<small>V1-7</small></div></div>
-    <div class="cell r1"><div class="story">在经营概览里按项目看订单、交易额和利润<small>V1-3.1</small></div></div>
+    <div class="rel r1"><b>V1</b><span>11/20</span><i>春节档存量成交不能丢；项目信息从第一笔订单起积累</i></div>
+    <div class="cell r1"><div class="story core"><span class="star">★</span>想存量商城一键确认项目信息<span class="so">以便不费事就完成报备，项目有据可查、避免冲突</span><small>V1-4.2</small></div><div class="story">想建商城、上架、询价时顺手报备<span class="so">以便新项目不漏报</span><small>V1-4.4</small></div><div class="story">想看到「未报备」提示一键报备<span class="so">以便在做的项目不会漏掉</span><small>V1-4.8</small></div></div>
+    <div class="cell r1"><div class="story core"><span class="star">★</span>想在年货节场景里看到多渠道货盘、会员价和利润率<span class="so">以便一处备齐春节货，一眼看到能赚多少</span><small>V1-1</small></div><div class="story">想上架时平台猫超 / 优品自动换成自有货源<span class="so">以便有阿里权益也能直接用场景</span><small>V1-1.3</small></div></div>
+    <div class="cell r1"><div class="story">想大单发集采询价单<span class="so">以便关联项目的询价有运营优先帮谈价</span><small>V1-2.4</small></div></div>
+    <div class="cell r1"><div class="story core"><span class="star">★</span>想一键代发、一键上架所有渠道商品，按加价规则或定价策略定价<span class="so">以便春节备货不用逐个处理，价格自动算好</span><small>V1-2</small></div></div>
+    <div class="cell r1"><div class="story">想在新的购物车、分类、个人中心里兑换<span class="so">以便兑换高峰前先把体验稳住</span><small>V1-7</small></div></div>
+    <div class="cell r1"><div class="story">想在经营概览里按项目看订单、交易额和利润<span class="so">以便一个甲方多个商城不用自己汇总</span><small>V1-3</small></div></div>
     <div class="divider"><span>11/20 · 年货节</span></div>
-    <div class="rel r2"><b>V2</b><span>约 12/4–12/9</span></div>
+    <div class="rel r2"><b>V2</b><span>约 12/4–12/9</span><i>1 月员工集中兑换，商城好不好用决定甲方是否续约</i></div>
     <div class="cell r2"><div class="none">—</div></div>
     <div class="cell r2"><div class="none">—</div></div>
     <div class="cell r2"><div class="none">—</div></div>
     <div class="cell r2"><div class="none">—</div></div>
-    <div class="cell r2"><div class="story">说出需求和额度，AI 在商城已上架商品里推荐<small>V2-6</small></div><div class="story">搜得准，不同货源的商品展示一致<small>V2-2 / V2-1</small></div><div class="story">购物车、订单、售后全渠道统一<small>V2-4</small></div></div>
-    <div class="cell r2"><div class="story">商城的展示、点击、成交数据分层记录<small>V2-5</small></div></div>
-    <div class="rel r2"><b>V3</b><span>商品库上线后</span></div>
+    <div class="cell r2"><div class="story core"><span class="star">★</span>想说出需求和额度，AI 在商城里推荐商品<span class="so">以便快速选满额度，甲方看到福利真正落地</span><small>V2-6</small></div><div class="story core"><span class="star">★</span>想搜得准，不同货源的商品展示一致<span class="so">以便找得到想要的，不会因为找不到而放弃兑换</span><small>V2-2 / V2-1</small></div><div class="story">想购物车、订单、售后全渠道统一<span class="so">以便兑换不卡壳，减少员工和甲方投诉</span><small>V2-4</small></div></div>
+    <div class="cell r2"><div class="story">想商城的展示、点击、成交数据分层记录<span class="so">以便以后能向商家证明商品在哪类项目里卖得好</span><small>V2-5</small></div></div>
+    <div class="rel r2"><b>V3</b><span>商品库上线后</span><i>平台供给占比低，平台商家的货要进入服务商的选品</i></div>
     <div class="cell r2"><div class="none">—</div></div>
-    <div class="cell r2"><div class="story">在找货里选到平台商家的商品<small>V3-1.1</small></div><div class="story">一句话说条件，AI 在可见货盘里选品<small>V3-5.1</small></div></div>
-    <div class="cell r2"><div class="story">用对客选品清单把平台货拿去给客户看<small>V3-6.2</small></div></div>
-    <div class="cell r2"><div class="story">平台商家商品照常上架、建商城、定价<small>V3-1.2 / V3-2</small></div></div>
+    <div class="cell r2"><div class="story core"><span class="star">★</span>想在找货里选到平台商家的商品<span class="so">以便选品范围更大，有更多利润空间</span><small>V3-1</small></div><div class="story">想一句话说条件，AI 在可见货盘里选品<span class="so">以便少翻页，更快找到合适的货</span><small>V3-5</small></div></div>
+    <div class="cell r2"><div class="story">想用对客选品清单把平台货给客户看<span class="so">以便直接拿平台货去谈单</span><small>V3-6.2</small></div></div>
+    <div class="cell r2"><div class="story core"><span class="star">★</span>想平台商家商品照常上架、建商城、定价<span class="so">以便用平台货和用其他货一样顺手</span><small>V3-1.2 / V3-2</small></div></div>
     <div class="cell r2"><div class="none">—</div></div>
-    <div class="cell r2"><div class="story">工作台按「项目 → 找货 → 谈单 → 成交 → 数据」重排<small>V3-6.1</small></div></div>
-    <div class="rel r3"><b>V4</b><span>12/31 前</span></div>
-    <div class="cell r3"><div class="story">新服务商在官网自助注册<small>V4-4</small></div></div>
+    <div class="cell r2"><div class="story">想工作台按「项目 → 找货 → 谈单 → 成交 → 数据」排列<span class="so">以便按做项目的顺序工作，不用到处找入口</span><small>V3-6.1</small></div></div>
+    <div class="rel r3"><b>V4</b><span>12/31 前</span><i>验证商业模型：服务商拿到项目价，商家拿到数据，平台按来源收佣</i></div>
+    <div class="cell r3"><div class="story">想新服务商在官网自助注册<span class="so">以便不用等销售开通就能用</span><small>V4-4</small></div></div>
     <div class="cell r3"><div class="none">—</div></div>
-    <div class="cell r3"><div class="story">带着项目数据向商家申请项目供货价<small>V4-1.1</small></div></div>
-    <div class="cell r3"><div class="story">谈定的项目价在询价、项目下单和项目商城里直接生效<small>V4-1.2</small></div></div>
+    <div class="cell r3"><div class="story core"><span class="star">★</span>想带着项目数据向商家申请项目供货价<span class="so">以便拿到比基础供货价更低的成本，保住项目利润</span><small>V4-1.1</small></div></div>
+    <div class="cell r3"><div class="story core"><span class="star">★</span>想谈定的项目价在项目内直接生效<span class="so">以便不用转到线下成交，订单记在自己名下</span><small>V4-1.2</small></div></div>
     <div class="cell r3"><div class="none">—</div></div>
-    <div class="cell r3"><div class="story">知道商家只看到项目四项信息和我的名称<small>V4-2</small></div></div>
+    <div class="cell r3"><div class="story">想知道商家只看到四项项目信息和自己的名称<span class="so">以便放心报备，不担心被商家绕开</span><small>V4-2</small></div></div>
   </div></div>
 </section>
 
