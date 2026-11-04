@@ -194,6 +194,19 @@ h2 { font-size: 21px; font-weight: 600; line-height: 1.4; }
 .smap .story.core { border-left-color: var(--fire); background: #FFFBF3; border-color: #FBD89D; font-weight: 500; }
 .smap .story.core .so { color: var(--fire-900); font-weight: 400; }
 .smap .star { color: var(--fire); margin-right: 4px; }
+.smap .story .sol { display: block; font-size: 12px; color: var(--water-700); margin-top: 5px; padding-top: 5px; border-top: 1px dashed var(--line); font-weight: 400; }
+.smap .story .sol small { display: inline; margin-left: 4px; }
+.smap .story .ev { display: inline-block; margin-top: 4px; font-size: 10.5px; color: var(--muted); background: #F3F4F6; border-radius: 3px; padding: 0 5px; font-weight: 400; }
+.smap .story .ev.pending { color: var(--fire-900); background: var(--fire-50); }
+.smap .story > small { display: none; }
+.ask { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px; display: grid; gap: 8px; border-left: 4px solid #9CA3AF; }
+.ask h3 { font-size: 15px; }
+.ask p { font-size: 13px; color: var(--muted); }
+.ask ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ask li { background: #F9FAFB; border-radius: 8px; padding: 10px 12px; display: grid; gap: 2px; font-size: 13px; }
+.ask li small { font-family: var(--font-mono); font-size: 11px; color: var(--water-700); }
+.ask li span { color: var(--ink); font-size: 12.5px; }
+@media (max-width: 760px) { .ask ul { grid-template-columns: 1fr; } }
 @media (max-width: 900px) {
   .goals, .rules { grid-template-columns: 1fr; }
   .facts, .decide { grid-template-columns: 1fr; }
@@ -339,46 +352,47 @@ h2 { font-size: 21px; font-weight: 600; line-height: 1.4; }
 </section>
 
 <section class="sec" aria-labelledby="s5">
-  <div class="sec-head"><span class="sec-no">05</span><h2 id="s5">买家侧用户故事地图</h2><span class="sec-note">★ 核心故事撑起本版目标，其余为配套</span></div>
-  <p class="support"><b>主线：</b>服务商把一个政企项目完整做在平台上。V1 先让项目有记录、春节交易不流失；V2 让员工兑换顺畅、甲方满意；V3 让平台商家的货进入选品；V4 用项目供货价跑通闭环。</p>
+  <div class="sec-head"><span class="sec-no">05</span><h2 id="s5">买家侧用户故事地图</h2><span class="sec-note">从服务商自己要干的活出发；★ 为本版核心故事</span></div>
+  <p class="support"><b>读法：</b>横向是服务商接一个春节福利项目的真实工作；每条故事先写服务商在什么情况下要什么、为了什么，再写我们提供什么。标「待验证」的需求还没有一线证据，需要先找服务商确认。</p>
   <div class="mapscroll"><div class="smap">
-    <div class="corner">旅程 →</div>
-    <div class="step"><em>01 · 服务商</em><b>报备项目</b></div>
-    <div class="step"><em>02 · 服务商</em><b>找货</b></div>
-    <div class="step"><em>03 · 服务商</em><b>谈单</b></div>
-    <div class="step"><em>04 · 服务商</em><b>成交</b></div>
-    <div class="step"><em>05 · 员工</em><b>员工兑换</b></div>
-    <div class="step"><em>06 · 服务商</em><b>经营复盘</b></div>
-    <div class="rel r1"><b>V1</b><span>11/20</span><i>春节档存量成交不能丢；项目信息从第一笔订单起积累</i></div>
-    <div class="cell r1"><div class="story core"><span class="star">★</span>想存量商城一键确认项目信息<span class="so">以便不费事就完成报备，项目有据可查、避免冲突</span><small>V1-4.2</small></div><div class="story">想建商城、上架、询价时顺手报备<span class="so">以便新项目不漏报</span><small>V1-4.4</small></div><div class="story">想看到「未报备」提示一键报备<span class="so">以便在做的项目不会漏掉</span><small>V1-4.8</small></div></div>
-    <div class="cell r1"><div class="story core"><span class="star">★</span>想在年货节场景里看到多渠道货盘、会员价和利润率<span class="so">以便一处备齐春节货，一眼看到能赚多少</span><small>V1-1</small></div><div class="story">想上架时平台猫超 / 优品自动换成自有货源<span class="so">以便有阿里权益也能直接用场景</span><small>V1-1.3</small></div></div>
-    <div class="cell r1"><div class="story">想大单发集采询价单<span class="so">以便关联项目的询价有运营优先帮谈价</span><small>V1-2.4</small></div></div>
-    <div class="cell r1"><div class="story core"><span class="star">★</span>想一键代发、一键上架所有渠道商品，按加价规则或定价策略定价<span class="so">以便春节备货不用逐个处理，价格自动算好</span><small>V1-2</small></div></div>
-    <div class="cell r1"><div class="story">想在新的购物车、分类、个人中心里兑换<span class="so">以便兑换高峰前先把体验稳住</span><small>V1-7</small></div></div>
-    <div class="cell r1"><div class="story">想在经营概览里按项目看订单、交易额和利润<span class="so">以便一个甲方多个商城不用自己汇总</span><small>V1-3</small></div></div>
+    <div class="corner">服务商的工作 →</div>
+    <div class="step"><em>01 · 服务商</em><b>接到项目</b></div>
+    <div class="step"><em>02 · 服务商</em><b>配货</b></div>
+    <div class="step"><em>03 · 服务商</em><b>和甲方敲定</b></div>
+    <div class="step"><em>04 · 服务商</em><b>交付上线</b></div>
+    <div class="step"><em>05 · 员工 / 服务商</em><b>员工兑换期</b></div>
+    <div class="step"><em>06 · 服务商</em><b>结算与续约</b></div>
+    <div class="rel r1"><b>V1</b><span>11/20</span><i>春节档：先让服务商把年货节的货配齐、按时交付</i></div>
+    <div class="cell r1"><div class="story">当同一个甲方可能被别人抢走时，我要证明这个客户是我先跟的<span class="so">以便客户不被商家或其他服务商绕开</span><span class="sol">我们提供：项目报备，记录报备时间，为归属保护留凭证<small>V1-4</small></span><span class="ev">依据：11/2 会议</span></div></div>
+    <div class="cell r1"><div class="story core"><span class="star">★</span>当年货节要在短时间内给多家甲方配货时，我要在一个地方找齐货、看清能赚多少<span class="so">以便不用在几个平台间来回比价</span><span class="sol">我们提供：年货节场景多渠道货盘，展示会员价与利润率<small>V1-1</small></span><span class="ev">依据：10/31 会议</span></div></div>
+    <div class="cell r1"><div class="story">当甲方要大批量采购时，我要拿到比公开价更好的价格<span class="so">以便报价有竞争力</span><span class="sol">我们提供：集采询价单，关联项目的由运营优先帮谈价<small>V1-2.4</small></span><span class="ev pending">依据：待验证</span></div></div>
+    <div class="cell r1"><div class="story core"><span class="star">★</span>当选定商品后，我要一次把多渠道的货代发或放进甲方商城，价格自动加好<span class="so">以便春节前按时交付，不用逐个处理</span><span class="sol">我们提供：一键代发、一键上架兼容全渠道，加价规则 / 定价策略自动定价<small>V1-2</small></span><span class="ev">依据：10/31 会议</span></div></div>
+    <div class="cell r1"><div class="story">当员工开始兑换时，我不想因为商城难用被甲方投诉<span class="so">以便兑换高峰前体验先稳住</span><span class="sol">我们提供：购物车、分类、个人中心迁到新前端<small>V1-7</small></span><span class="ev">依据：11/2 会议</span></div></div>
+    <div class="cell r1"><div class="story">当一个甲方有好几个商城时，我要看到这个甲方的总账<span class="so">以便算清这单到底赚了多少</span><span class="sol">我们提供：经营概览按项目汇总<small>V1-3</small></span><span class="ev">依据：11/2 续录</span></div></div>
     <div class="divider"><span>11/20 · 年货节</span></div>
-    <div class="rel r2"><b>V2</b><span>约 12/4–12/9</span><i>1 月员工集中兑换，商城好不好用决定甲方是否续约</i></div>
+    <div class="rel r2"><b>V2</b><span>约 12/4–12/9</span><i>兑换高峰：员工选得到、选得快，甲方才会续约</i></div>
     <div class="cell r2"><div class="none">—</div></div>
     <div class="cell r2"><div class="none">—</div></div>
     <div class="cell r2"><div class="none">—</div></div>
     <div class="cell r2"><div class="none">—</div></div>
-    <div class="cell r2"><div class="story core"><span class="star">★</span>想说出需求和额度，AI 在商城里推荐商品<span class="so">以便快速选满额度，甲方看到福利真正落地</span><small>V2-6</small></div><div class="story core"><span class="star">★</span>想搜得准，不同货源的商品展示一致<span class="so">以便找得到想要的，不会因为找不到而放弃兑换</span><small>V2-2 / V2-1</small></div><div class="story">想购物车、订单、售后全渠道统一<span class="so">以便兑换不卡壳，减少员工和甲方投诉</span><small>V2-4</small></div></div>
-    <div class="cell r2"><div class="story">想商城的展示、点击、成交数据分层记录<span class="so">以便以后能向商家证明商品在哪类项目里卖得好</span><small>V2-5</small></div></div>
-    <div class="rel r2"><b>V3</b><span>商品库上线后</span><i>平台供给占比低，平台商家的货要进入服务商的选品</i></div>
+    <div class="cell r2"><div class="story core"><span class="star">★</span>当员工面对几百件商品不知道选什么时，他想按额度快速选好<span class="so">以便额度用得满，甲方看到福利真正落地</span><span class="sol">我们提供：C 端商城 AI 选品，在已上架商品里推荐<small>V2-6</small></span><span class="ev">依据：11/2 会议</span></div><div class="story core"><span class="star">★</span>当员工搜不到想要的东西时，他会放弃兑换<span class="so">以便找得到想要的，不留未兑换余额</span><span class="sol">我们提供：搜索修正、规则排序、全渠道统一商品展示<small>V2-2 / V2-1</small></span><span class="ev">依据：11/2 会议</span></div><div class="story">当兑换出了问题时，员工要能顺利售后<span class="so">以便少一些员工和甲方的投诉</span><span class="sol">我们提供：购物车、订单、售后全渠道统一<small>V2-4</small></span><span class="ev pending">依据：待验证</span></div></div>
     <div class="cell r2"><div class="none">—</div></div>
-    <div class="cell r2"><div class="story core"><span class="star">★</span>想在找货里选到平台商家的商品<span class="so">以便选品范围更大，有更多利润空间</span><small>V3-1</small></div><div class="story">想一句话说条件，AI 在可见货盘里选品<span class="so">以便少翻页，更快找到合适的货</span><small>V3-5</small></div></div>
-    <div class="cell r2"><div class="story">想用对客选品清单把平台货给客户看<span class="so">以便直接拿平台货去谈单</span><small>V3-6.2</small></div></div>
-    <div class="cell r2"><div class="story core"><span class="star">★</span>想平台商家商品照常上架、建商城、定价<span class="so">以便用平台货和用其他货一样顺手</span><small>V3-1.2 / V3-2</small></div></div>
+    <div class="rel r2"><b>V3</b><span>商品库上线后</span><i>供给差异化：服务商需要别人没有的、有价差的货</i></div>
     <div class="cell r2"><div class="none">—</div></div>
-    <div class="cell r2"><div class="story">想工作台按「项目 → 找货 → 谈单 → 成交 → 数据」排列<span class="so">以便按做项目的顺序工作，不用到处找入口</span><small>V3-6.1</small></div></div>
-    <div class="rel r3"><b>V4</b><span>12/31 前</span><i>验证商业模型：服务商拿到项目价，商家拿到数据，平台按来源收佣</i></div>
-    <div class="cell r3"><div class="story">想新服务商在官网自助注册<span class="so">以便不用等销售开通就能用</span><small>V4-4</small></div></div>
+    <div class="cell r2"><div class="story core"><span class="star">★</span>当京东、猫超的货人人都有、价格拼不过别人时，我要找到有价差的货<span class="so">以便有利润空间，报价不被比下去</span><span class="sol">我们提供：平台商家商品进入找货和场景<small>V3-1</small></span><span class="ev">依据：11/2 会议</span></div><div class="story">当要快速找到合适商品时，我想直接说条件<span class="so">以便少翻页，更快配好货</span><span class="sol">我们提供：会员端 AI 选品<small>V3-5</small></span><span class="ev pending">依据：待验证</span></div></div>
+    <div class="cell r2"><div class="story">当要给甲方看方案时，我要一份能直接发出去的商品清单<span class="so">以便不用自己做表格</span><span class="sol">我们提供：对客选品清单与分享<small>V3-6.2</small></span><span class="ev pending">依据：待验证</span></div></div>
+    <div class="cell r2"><div class="story core"><span class="star">★</span>当用了平台商家的货时，上架、建商城、定价要和以前一样<span class="so">以便换货源不增加工作量</span><span class="sol">我们提供：平台商家商品兼容上架、建商城和定价规则<small>V3-1.2 / V3-2</small></span></div></div>
+    <div class="cell r2"><div class="none">—</div></div>
+    <div class="cell r2"><div class="none">—</div></div>
+    <div class="rel r3"><b>V4</b><span>12/31 前</span><i>闭环：有确定项目的服务商，凭项目拿到更低成本</i></div>
+    <div class="cell r3"><div class="story">当我把项目信息给到平台时，我要确定商家不会绕过我直接找甲方<span class="so">以便放心报备</span><span class="sol">我们提供：商家只看到四项项目信息和服务商名称<small>V4-2</small></span><span class="ev">依据：11/2 会议</span></div></div>
     <div class="cell r3"><div class="none">—</div></div>
-    <div class="cell r3"><div class="story core"><span class="star">★</span>想带着项目数据向商家申请项目供货价<span class="so">以便拿到比基础供货价更低的成本，保住项目利润</span><small>V4-1.1</small></div></div>
-    <div class="cell r3"><div class="story core"><span class="star">★</span>想谈定的项目价在项目内直接生效<span class="so">以便不用转到线下成交，订单记在自己名下</span><small>V4-1.2</small></div></div>
+    <div class="cell r3"><div class="story core"><span class="star">★</span>当我手上有确定的项目时，我要凭项目拿到更低的供货价<span class="so">以便报价更有竞争力，利润更有保障</span><span class="sol">我们提供：带项目数据向商家申请项目供货价<small>V4-1.1</small></span><span class="ev">依据：11/2 会议</span></div></div>
+    <div class="cell r3"><div class="story core"><span class="star">★</span>当和商家谈好价格后，我要在平台上直接按这个价成交<span class="so">以便不用转到线下，订单记在自己名下</span><span class="sol">我们提供：项目价在询价、项目下单、项目商城内生效<small>V4-1.2</small></span><span class="ev">依据：11/2 会议</span></div></div>
     <div class="cell r3"><div class="none">—</div></div>
-    <div class="cell r3"><div class="story">想知道商家只看到四项项目信息和自己的名称<span class="so">以便放心报备，不担心被商家绕开</span><small>V4-2</small></div></div>
+    <div class="cell r3"><div class="none">—</div></div>
   </div></div>
+  <div class="ask"><h3>平台需要服务商配合的事（不是服务商自己的需求）</h3><p>这些是平台为了数据和结算需要服务商做的，必须用服务商真正想要的东西来换，不能当成用户需求来写。</p><ul><li><b>补齐项目信息</b><small>V1-4</small><span>换来：经营总账（V1）、客户归属凭证（V1）、项目供货价资格（V4）</span></li><li><b>订单带来源</b><small>V1-4.7</small><span>换来：商家自带客户的订单可减免佣金（卖家侧规则）</span></li><li><b>展示、点击、成交分层记录</b><small>V2-5</small><span>换来：商家据此给出更好的价格和营销支持（V4 起）</span></li></ul></div>
 </section>
 
 <section class="sec" aria-labelledby="s6">
