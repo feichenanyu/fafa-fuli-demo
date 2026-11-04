@@ -2809,7 +2809,7 @@ class Component extends DCLogic {
     const tog = (arr, v) => ((arr || []).includes(v) ? arr.filter((x) => x !== v) : (arr || []).concat([v]));
     // ---- 商品明细筛选 ----
     const F = st.scF || {};
-    const seg = F.seg || 'in', q = F.q || '', form = F.form || '';
+    const seg = F.seg && F.seg !== 'all' ? F.seg : 'in', q = F.q || '', form = F.form || '';
     const segOk = (x, k) => (k === 'in' ? isIn(x) : k === 'down' ? x.k === 'down' : k === 'white' ? x.man : k === 'black' ? x.k === 'ex' : k === 'excl' ? x.k === 'excl' : k === 'flt' ? x.k === 'flt' : true);
     const formOk = (x) => !form || (x.g.form || '爆品') === form;
     const cnt = (k) => now.filter((x) => segOk(x, k) && formOk(x)).length;
@@ -2995,7 +2995,7 @@ class Component extends DCLogic {
         },
         // 商品明细
         kpis: [[CFG.inL, cnt('in')], ['自动下架', cnt('down')], ['白名单 / 黑名单', cnt('white') + ' / ' + cnt('black')]].concat(KIND === 'topic' || KIND === 'pool' ? [['排他剔除', cnt('excl')]] : [['近 7 天变动', (s.log || []).length]]).map((x) => ({ k: x[0], v: String(x[1]) })),
-        segs: [['in', CFG.inL], ['down', '自动下架'], ['white', '白名单'], ['black', '黑名单']].concat(KIND === 'topic' || KIND === 'pool' ? [['excl', '排他剔除']] : []).concat([['all', '全部']]).map((x) => ({ label: x[1], n: cnt(x[0]), cls: seg === x[0] ? 'on' : '', pick: () => set({ scF: Object.assign({}, F, { seg: x[0] }) }) })),
+        segs: [['in', CFG.inL], ['down', '自动下架'], ['white', '白名单'], ['black', '黑名单']].concat(KIND === 'topic' || KIND === 'pool' ? [['excl', '排他剔除']] : []).map((x) => ({ label: x[1], n: cnt(x[0]), cls: seg === x[0] ? 'on' : '', pick: () => set({ scF: Object.assign({}, F, { seg: x[0] }) }) })),
         forms: [['', '全部类型'], ['爆品', '爆品'], ['礼包', '礼包'], ['卡券', '卡券']].map((f) => ({ t: f[1], n: now.filter((x) => segOk(x, seg) && (!f[0] || (x.g.form || '爆品') === f[0])).length, cls: form === f[0] ? 'on' : '', pick: () => set({ scF: Object.assign({}, F, { form: f[0] }) }) })),
         q: q, onQ: (e) => set({ scF: Object.assign({}, F, { q: e.target.value }) }),
         rows: rows.map((x) => ({ name: x.g.name, brand: x.g.brand, src: x.g.src, form: x.g.form || '爆品', img: IMG[x.g.id] || IMG.ph, member: this.money2(x.g.member), rate: canCost ? this.rateOf(x.g).toFixed(1) + '%' : (x.why.startsWith('利润率') ? '低于阈值' : '达标'), rateCls: canCost ? (this.rateOf(x.g) < 0 ? 'neg' : '') : 'mask',
