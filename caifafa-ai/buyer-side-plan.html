@@ -166,6 +166,28 @@ h2 { font-size: 21px; font-weight: 600; line-height: 1.4; }
 .panel-why { font-size: 13.5px; color: var(--muted); max-width: 70ch; margin-top: 2px; }
 .panel-why b { color: var(--ink); }
 @media (max-width: 760px) { .road { grid-template-columns: 1fr; } }
+.mapscroll { overflow-x: auto; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+.smap { display: grid; grid-template-columns: 84px repeat(6, minmax(150px, 1fr)); gap: 8px; min-width: 1000px; }
+.smap .corner { display: flex; align-items: flex-end; font-size: 12px; color: var(--muted); padding: 6px; }
+.smap .step { background: var(--water-700); color: #fff; border-radius: 8px; padding: 8px 10px; display: grid; gap: 1px; }
+.smap .step em { font-style: normal; font-family: var(--font-mono); font-size: 11px; opacity: .8; }
+.smap .step b { font-size: 14px; }
+.smap .rel { border-radius: 8px; padding: 8px 10px; display: grid; align-content: center; gap: 2px; }
+.smap .rel b { font-family: var(--font-mono); font-size: 14px; color: var(--ink); }
+.smap .rel span { font-size: 11.5px; color: var(--muted); }
+.smap .rel.r1 { background: var(--fire-50); border: 1px solid var(--fire); }
+.smap .rel.r1 b { color: var(--fire-900); }
+.smap .rel.r2 { background: var(--cyan-50); }
+.smap .rel.r3 { background: #F3F4F6; border: 1px dashed #D1D5DB; }
+.smap .cell { display: grid; gap: 6px; align-content: start; padding: 6px; border-radius: 8px; min-width: 0; }
+.smap .cell.r1 { background: var(--surface); border: 1px solid var(--line); }
+.smap .cell.r2 { background: #F4FAF9; }
+.smap .cell.r3 { background: #F9FAFB; }
+.smap .story { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--water); border-radius: 6px; padding: 6px 8px; font-size: 12.5px; line-height: 1.45; color: var(--ink); }
+.smap .story small { display: block; font-family: var(--font-mono); font-size: 10.5px; color: var(--water-700); margin-top: 3px; }
+.smap .none { font-size: 12px; color: #C2C7CE; padding: 6px 8px; }
+.smap .divider { grid-column: 1 / -1; border-top: 2px dashed var(--fire); position: relative; margin: 2px 0; }
+.smap .divider span { position: absolute; right: 0; top: -10px; background: var(--surface); padding: 0 8px; font-family: var(--font-mono); font-size: 11px; color: var(--fire-900); }
 @media (max-width: 900px) {
   .goals, .rules { grid-template-columns: 1fr; }
   .facts, .decide { grid-template-columns: 1fr; }
@@ -311,7 +333,49 @@ h2 { font-size: 21px; font-weight: 600; line-height: 1.4; }
 </section>
 
 <section class="sec" aria-labelledby="s5">
-  <div class="sec-head"><span class="sec-no">05</span><h2 id="s5">请您拍板</h2></div>
+  <div class="sec-head"><span class="sec-no">05</span><h2 id="s5">买家侧用户故事地图</h2><span class="sec-note">横轴是服务商做一个项目的旅程，纵轴是版本；故事下方标注对应任务</span></div>
+  <div class="mapscroll"><div class="smap">
+    <div class="corner">旅程 →</div>
+    <div class="step"><em>01 · 服务商</em><b>报备项目</b></div>
+    <div class="step"><em>02 · 服务商</em><b>找货</b></div>
+    <div class="step"><em>03 · 服务商</em><b>谈单</b></div>
+    <div class="step"><em>04 · 服务商</em><b>成交</b></div>
+    <div class="step"><em>05 · 员工</em><b>员工兑换</b></div>
+    <div class="step"><em>06 · 服务商</em><b>经营复盘</b></div>
+    <div class="rel r1"><b>V1</b><span>11/20</span></div>
+    <div class="cell r1"><div class="story">存量商城一键确认，补齐项目信息<small>V1-4.2</small></div><div class="story">建商城、上架、询价时顺手报备<small>V1-4.4</small></div><div class="story">看到「未报备」提示，一键去报备<small>V1-4.8</small></div><div class="story">报备时知道信息用于经营统计、避免项目冲突<small>V1-4.5</small></div></div>
+    <div class="cell r1"><div class="story">打开工作台先看到年货节场景<small>V1-5.1</small></div><div class="story">场景里看到多渠道货盘、会员价和利润率<small>V1-1.2</small></div><div class="story">阿里权益会员上架时自动换成自有货源<small>V1-1.3</small></div></div>
+    <div class="cell r1"><div class="story">大单发集采询价单，关联项目的优先跟进谈价<small>V1-2.4 · 运营配合</small></div></div>
+    <div class="cell r1"><div class="story">一键代发、一键上架，所有渠道商品都能用<small>V1-2.2 / V1-2.3</small></div><div class="story">上架时用加价规则或定价策略定销售价<small>V1-2.3 / V1-2.6</small></div><div class="story">用场景模板一键创建商城<small>V1-2.5</small></div></div>
+    <div class="cell r1"><div class="story">在新的购物车、分类、个人中心里兑换更顺<small>V1-7</small></div></div>
+    <div class="cell r1"><div class="story">在经营概览里按项目看订单、交易额和利润<small>V1-3.1</small></div></div>
+    <div class="divider"><span>11/20 · 年货节</span></div>
+    <div class="rel r2"><b>V2</b><span>约 12/4–12/9</span></div>
+    <div class="cell r2"><div class="none">—</div></div>
+    <div class="cell r2"><div class="none">—</div></div>
+    <div class="cell r2"><div class="none">—</div></div>
+    <div class="cell r2"><div class="none">—</div></div>
+    <div class="cell r2"><div class="story">说出需求和额度，AI 在商城已上架商品里推荐<small>V2-6</small></div><div class="story">搜得准，不同货源的商品展示一致<small>V2-2 / V2-1</small></div><div class="story">购物车、订单、售后全渠道统一<small>V2-4</small></div></div>
+    <div class="cell r2"><div class="story">商城的展示、点击、成交数据分层记录<small>V2-5</small></div></div>
+    <div class="rel r2"><b>V3</b><span>商品库上线后</span></div>
+    <div class="cell r2"><div class="none">—</div></div>
+    <div class="cell r2"><div class="story">在找货里选到平台商家的商品<small>V3-1.1</small></div><div class="story">一句话说条件，AI 在可见货盘里选品<small>V3-5.1</small></div></div>
+    <div class="cell r2"><div class="story">用对客选品清单把平台货拿去给客户看<small>V3-6.2</small></div></div>
+    <div class="cell r2"><div class="story">平台商家商品照常上架、建商城、定价<small>V3-1.2 / V3-2</small></div></div>
+    <div class="cell r2"><div class="none">—</div></div>
+    <div class="cell r2"><div class="story">工作台按「项目 → 找货 → 谈单 → 成交 → 数据」重排<small>V3-6.1</small></div></div>
+    <div class="rel r3"><b>V4</b><span>12/31 前</span></div>
+    <div class="cell r3"><div class="story">新服务商在官网自助注册<small>V4-4</small></div></div>
+    <div class="cell r3"><div class="none">—</div></div>
+    <div class="cell r3"><div class="story">带着项目数据向商家申请项目供货价<small>V4-1.1</small></div></div>
+    <div class="cell r3"><div class="story">谈定的项目价在询价、项目下单和项目商城里直接生效<small>V4-1.2</small></div></div>
+    <div class="cell r3"><div class="none">—</div></div>
+    <div class="cell r3"><div class="story">知道商家只看到项目四项信息和我的名称<small>V4-2</small></div></div>
+  </div></div>
+</section>
+
+<section class="sec" aria-labelledby="s6">
+  <div class="sec-head"><span class="sec-no">06</span><h2 id="s6">请您拍板</h2></div>
   <ol class="decide">
     <li>商家基准佣金率<span>终端企业入驻及会员服务费延后到明年</span></li>
     <li>商家差异价只开放两档<span>基础供货价 + 项目供货价，不做会员专属价</span></li>
