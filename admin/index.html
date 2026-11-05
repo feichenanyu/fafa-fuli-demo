@@ -414,6 +414,8 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 .bf-note .lk{margin-left:4px}
 .bf-t td,.bf-t th{font-size:13px;padding:8px 10px}
 .bf-t tr.fx td{color:var(--text-3)}
+.pk-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.pk-sum{font-size:13px;color:var(--text-2);flex:1;min-width:120px}.pk-row .v3ck{margin-left:auto}.pr-no{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--brand-50,#DAEEED);color:var(--brand,#0D9488);font-size:12px;font-weight:600;flex:none}.pr-name{max-width:300px;font-weight:600}.gf{background:var(--surface,#fff);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:10px;margin:10px 0}.gf-r{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}.gf-f{display:grid;gap:4px;font-size:12px;color:var(--text-3)}.gf-f .v3in{width:170px}.gf-rg{display:flex;align-items:center;gap:6px}.gf-rg .v3in{width:80px}.gf-rg i{font-style:normal;color:var(--text-3)}.gf-n{font-size:12.5px;color:var(--text-2)}.gf-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 12px;margin-bottom:10px;border-radius:8px;background:var(--brand-50,#DAEEED);font-size:13px}.gck{border:0;background:none;padding:2px;cursor:pointer;display:inline-grid}
+
 .bf-g{display:grid;font-size:12.5px;border-top:1px solid var(--line)}.bf-gr{display:grid;grid-template-columns:1.3fr .5fr .6fr 2fr 1fr;gap:10px;padding:8px 10px;border-bottom:1px solid var(--line);align-items:center}.bf-gh{color:var(--text-3);background:var(--bg-2,#F9FAFB)}.bf-gr.fx{color:var(--text-3)}.bf-gr.bf-ge{grid-template-columns:.5fr 1.2fr 1.3fr 2.5fr}
 
 .bf-drop{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;border:1.5px dashed var(--border,#d1d5db);border-radius:10px;height:72px;color:var(--text-2);font-size:13.5px;cursor:pointer}
@@ -865,10 +867,10 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 </sc-if>
 <sc-if value="{{sc.isGoods}}" hint-placeholder-val="{{ false }}">
 <div class="plsum"><sc-for list="{{sc.kpis}}" as="k" hint-placeholder-count="4"><div><span>{{k.k}}</span><b>{{k.v}}</b></div></sc-for></div>
-<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><div class="seg" role="tablist"><sc-for list="{{sc.segs}}" as="t" hint-placeholder-count="4"><button class="{{t.cls}}" role="tab" onClick="{{t.pick}}">{{t.label}}<span>{{t.n}}</span></button></sc-for></div><input class="v3in" style="max-width: 240px" aria-label="搜索商品" placeholder="商品 / 品牌" value="{{sc.q}}" onChange="{{sc.onQ}}"><div style="flex: 1"></div><button class="btn btn-o" onClick="{{sc.exp}}">导出清单</button><sc-if value="{{sc.canEdit}}" hint-placeholder-val="{{ true }}"><button class="btn btn-o" onClick="{{sc.imp}}">批量导入</button><button class="btn btn-p" onClick="{{sc.addOpen}}">＋ 添加白名单商品</button></sc-if></div>
-<div class="tw"><table class="tbl"><thead><tr><th style="width: 84px" title="排序值越小越靠前；不填按销量排在后面">排序值</th><th>商品</th><th>货源</th><th class="r">会员价</th><th class="r">利润率</th><th>状态</th><th>进入方式 / 原因</th><th>最近变动</th><th class="r">白名单 / 黑名单</th></tr></thead><tbody>
-<sc-for list="{{sc.rows}}" as="g" hint-placeholder-count="4"><tr><td><input class="v3in sv-in" inputmode="numeric" placeholder="—" aria-label="排序值" value="{{g.sv}}" onChange="{{g.onSv}}" disabled="{{g.svDis}}"></td><td><div class="pn"><img class="thumb" src="{{g.img}}" alt=""><div>{{g.name}}<small>{{g.brand}}</small></div></div></td><td>{{g.src}}</td><td class="r mono">{{g.member}}</td><td class="r mono {{g.rateCls}}">{{g.rate}}</td><td><span class="pill {{g.sCls}}">{{g.state}}</span></td><td style="font-size: 12px; color: var(--text-2)">{{g.from}}<small class="sub">{{g.why}}</small></td><td style="font-size: 12px; color: var(--text-3)">{{g.last}}</td><td class="r"><sc-if value="{{sc.canEdit}}" hint-placeholder-val="{{ true }}"><div class="acts"><sc-if value="{{g.canPin}}" hint-placeholder-val="{{ true }}"><button class="lk" onClick="{{g.pinT}}">{{g.pinLabel}}</button></sc-if><sc-if value="{{g.canEx}}" hint-placeholder-val="{{ true }}"><button class="lk danger" onClick="{{g.ex}}">{{g.exLabel}}</button></sc-if></div></sc-if></td></tr></sc-for>
-</tbody></table><sc-if value="{{sc.empty}}" hint-placeholder-val="{{ false }}"><div class="empty">没有符合条件的商品</div></sc-if></div>
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><div class="seg" role="tablist"><sc-for list="{{sc.segs}}" as="t" hint-placeholder-count="4"><button class="{{t.cls}}" role="tab" onClick="{{t.pick}}">{{t.label}}<span>{{t.n}}</span></button></sc-for></div><div style="flex: 1"></div><button class="btn btn-o" onClick="{{sc.exp}}">导出清单</button><sc-if value="{{sc.canEdit}}" hint-placeholder-val="{{ true }}"><button class="btn btn-o" onClick="{{sc.imp}}">批量导入</button><button class="btn btn-p" onClick="{{sc.addOpen}}">＋ 添加白名单商品</button></sc-if></div>
+<div class="gf"><div class="gf-r"><label class="gf-f"><span>关键词</span><input class="v3in" type="search" placeholder="商品名称 / SKU 编码" value="{{sc.q}}" onChange="{{sc.onQ}}"></label><label class="gf-f"><span>品类</span><input class="v3in" type="search" placeholder="输入品类" value="{{sc.flt.cat}}" onChange="{{sc.flt.onCat}}"></label><label class="gf-f"><span>品牌</span><input class="v3in" type="search" placeholder="输入品牌" value="{{sc.flt.brand}}" onChange="{{sc.flt.onBrand}}"></label><div class="gf-f"><span>会员价（元）</span><div class="gf-rg"><input class="v3in" inputmode="decimal" placeholder="最低" aria-label="最低会员价" value="{{sc.flt.pmin}}" onChange="{{sc.flt.onPmin}}"><i>—</i><input class="v3in" inputmode="decimal" placeholder="最高" aria-label="最高会员价" value="{{sc.flt.pmax}}" onChange="{{sc.flt.onPmax}}"></div></div><sc-if value="{{sc.flt.canCost}}" hint-placeholder-val="{{ true }}"><div class="gf-f"><span>利润率（%）</span><div class="gf-rg"><input class="v3in" inputmode="decimal" placeholder="最低" aria-label="最低利润率" value="{{sc.flt.rmin}}" onChange="{{sc.flt.onRmin}}"><i>—</i><input class="v3in" inputmode="decimal" placeholder="最高" aria-label="最高利润率" value="{{sc.flt.rmax}}" onChange="{{sc.flt.onRmax}}"></div></div></sc-if></div><div class="gf-r"><div class="gf-f gf-w"><span>货源</span><div class="seg2"><sc-for list="{{sc.flt.srcs}}" as="o" hint-placeholder-count="4"><button class="{{o.cls}}" onClick="{{o.pick}}">{{o.t}}</button></sc-for></div></div><div class="gf-f gf-w"><span>进入方式</span><div class="seg2"><sc-for list="{{sc.flt.froms}}" as="o" hint-placeholder-count="3"><button class="{{o.cls}}" onClick="{{o.pick}}">{{o.t}}</button></sc-for></div></div><div style="flex: 1"></div><span class="gf-n">{{sc.flt.n}}</span><sc-if value="{{sc.flt.active}}" hint-placeholder-val="{{ false }}"><button class="btn btn-o sm" onClick="{{sc.flt.reset}}">重置</button></sc-if></div></div><sc-if value="{{sc.sel.on}}" hint-placeholder-val="{{ false }}"><div class="gf-bar"><b>已选 {{sc.sel.n}} 款</b><sc-if value="{{sc.canEdit}}" hint-placeholder-val="{{ true }}"><button class="btn btn-o sm" onClick="{{sc.sel.white}}">加入白名单</button><button class="btn btn-o sm" style="color: var(--danger)" onClick="{{sc.sel.black}}">加入黑名单</button><button class="btn btn-o sm" onClick="{{sc.sel.clear}}">移出黑白名单</button></sc-if><button class="lk" onClick="{{sc.sel.clr}}">取消选择</button></div></sc-if><div class="tw"><table class="tbl"><thead><tr><th style="width: 40px"><button class="gck {{sc.sel.allCls}}" role="checkbox" aria-checked="{{sc.sel.allCk}}" aria-label="全选当前筛选结果" onClick="{{sc.sel.all}}"><span class="pl-ck {{sc.sel.allCls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span></button></th><th style="width: 84px" title="排序值越小越靠前；不填按销量排在后面">排序值</th><th>商品</th><th>货源</th><th class="r">会员价</th><th class="r">利润率</th><th>状态</th><th>进入方式 / 原因</th><th>最近变动</th><th class="r">白名单 / 黑名单</th></tr></thead><tbody>
+<sc-for list="{{sc.rows}}" as="g" hint-placeholder-count="4"><tr><td><button class="gck {{g.ckCls}}" role="checkbox" aria-checked="{{g.ck}}" aria-label="选择 {{g.name}}" onClick="{{g.tog}}"><span class="pl-ck {{g.ckCls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span></button></td><td><input class="v3in sv-in" inputmode="numeric" placeholder="—" aria-label="排序值" value="{{g.sv}}" onChange="{{g.onSv}}" disabled="{{g.svDis}}"></td><td><div class="pn"><img class="thumb" src="{{g.img}}" alt=""><div>{{g.name}}<small>{{g.brand}} · {{g.sku}}</small></div></div></td><td>{{g.src}}</td><td class="r mono">{{g.member}}</td><td class="r mono {{g.rateCls}}">{{g.rate}}</td><td><span class="pill {{g.sCls}}">{{g.state}}</span></td><td style="font-size: 12px; color: var(--text-2)">{{g.from}}<small class="sub">{{g.why}}</small></td><td style="font-size: 12px; color: var(--text-3)">{{g.last}}</td><td class="r"><sc-if value="{{sc.canEdit}}" hint-placeholder-val="{{ true }}"><div class="acts"><sc-if value="{{g.canPin}}" hint-placeholder-val="{{ true }}"><button class="lk" onClick="{{g.pinT}}">{{g.pinLabel}}</button></sc-if><sc-if value="{{g.canEx}}" hint-placeholder-val="{{ true }}"><button class="lk danger" onClick="{{g.ex}}">{{g.exLabel}}</button></sc-if></div></sc-if></td></tr></sc-for>
+</tbody></table><sc-if value="{{sc.empty}}" hint-placeholder-val="{{ false }}"><div class="empty">{{sc.emptyT}}</div></sc-if></div>
 
 <div class="card"><h3>自动上下架与黑白名单记录<span>最近 8 条</span></h3><sc-if value="{{sc.noLog}}" hint-placeholder-val="{{ false }}"><div class="empty" style="padding: 16px">暂无变动</div></sc-if><div class="tl"><sc-for list="{{sc.log}}" as="l" hint-placeholder-count="3"><div><i></i><div>{{l.t}}<small>{{l.time}}</small></div></div></sc-for></div></div>
 </sc-if>
@@ -877,18 +879,15 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 </sc-if>
 <sc-if value="{{sc.isPr2}}" hint-placeholder-val="{{ false }}">
 <div class="card"><h3>商品规则</h3>
-<p class="pr-lead"><b>规则说明：</b>可设置多条规则，每条规则内的条件需同时满足；商品满足任一条规则即自动上架，都不满足则自动下架。排他规则命中的分类 / 品牌一律剔除。白名单、黑名单商品不受规则影响。保存前需先做规则检测，预计商品数低于 1 万才能保存生效（为保证性能，本期先限制，后续放开）。</p>
+<p class="pr-lead"><b>规则说明：</b>可设置多条规则，每条规则需填写规则名称，规则内的条件需同时满足；商品满足任一条规则即自动上架，都不满足则自动下架。品类、品牌默认为「包含所选」，勾选「排除」后为「排除所选」。白名单、黑名单商品不受规则影响。保存前需先做规则检测，预计商品数低于 1 万才能保存生效（为保证性能，本期先限制，后续放开）。</p>
 <div class="pr-rules">
 <sc-for list="{{sc.pr2.rules}}" as="r" hint-placeholder-count="2"><section class="pr-rule">
-<div class="pr-rh"><b>规则 {{r.n}}</b><span>当前命中 {{r.hitN}} 款</span><div style="flex: 1"></div><sc-if value="{{r.canDel}}" hint-placeholder-val="{{ false }}"><button class="lk danger" onClick="{{r.del}}">删除规则</button></sc-if></div>
+<div class="pr-rh"><span class="pr-no">{{r.n}}</span><input class="v3in pr-name" placeholder="规则名称，如：节日礼包 · 高毛利" value="{{r.name}}" onChange="{{r.onName}}" disabled="{{sc.ro}}" aria-label="规则名称"><span>当前命中 {{r.hitN}} 款</span><div style="flex: 1"></div><sc-if value="{{r.canDel}}" hint-placeholder-val="{{ false }}"><button class="lk danger" onClick="{{r.del}}">删除规则</button></sc-if></div>
 <div class="flt">
 <div class="flt-r"><label>商品货源</label><div class="flt-c"><div class="v3cks"><sc-for list="{{r.srcs}}" as="o" hint-placeholder-count="4"><button class="v3ck {{o.cls}}" role="checkbox" aria-checked="{{o.ck}}" onClick="{{o.pick}}" disabled="{{sc.ro}}"><span class="pl-ck {{o.cls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span>{{o.t}}</button></sc-for></div><em>多选；不选 = 全部货源</em></div></div>
-<div class="flt-r"><label>商品品类</label><div class="flt-c"><input class="v3in pr-q" type="search" aria-label="搜索品类" placeholder="输入关键词检索品类" value="{{r.catQ}}" onChange="{{r.onCatQ}}"><div class="seg2"><sc-for list="{{r.cats}}" as="o" hint-placeholder-count="6"><button class="{{o.cls}}" onClick="{{o.pick}}" disabled="{{sc.ro}}">{{o.t}}</button></sc-for></div><em>多选；{{r.catN}}</em></div></div>
+<div class="flt-r"><label>商品品类</label><div class="flt-c"><div class="pk-row"><button class="btn btn-o sm" onClick="{{r.pickCat}}" disabled="{{sc.ro}}">选择品类</button><span class="pk-sum">{{r.catSum}}</span><button class="v3ck {{r.catExCls}}" role="checkbox" aria-checked="{{r.catExCk}}" onClick="{{r.togCatEx}}" disabled="{{sc.ro}}"><span class="pl-ck {{r.catExCls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span>排除所选品类</button></div><em>{{r.catN}}</em></div></div>
 <div class="flt-r"><label>商品关键词</label><div class="flt-c"><div class="flt-in"><input class="v3in" style="flex: 1" placeholder="多个关键词用「，」分隔" value="{{r.kw}}" onChange="{{r.onKw}}" disabled="{{sc.ro}}" aria-label="商品关键词"></div><em>商品名称包含任一关键词即满足</em></div></div>
-<div class="flt-r"><label>商品品牌</label><div class="flt-c"><input class="v3in pr-q" type="search" aria-label="搜索品牌" placeholder="输入关键词检索品牌" value="{{r.brandQ}}" onChange="{{r.onBrandQ}}"><div class="seg2"><sc-for list="{{r.brands}}" as="o" hint-placeholder-count="6"><button class="{{o.cls}}" onClick="{{o.pick}}" disabled="{{sc.ro}}">{{o.t}}</button></sc-for></div><em>多选；{{r.brandN}}</em></div></div>
-<div class="flt-r"><label>库存</label><div class="flt-c"><div class="seg2"><button class="{{r.stNone}}" onClick="{{r.setStNone}}" disabled="{{sc.ro}}">不判断</button><button class="{{r.stAll}}" onClick="{{r.setStAll}}" disabled="{{sc.ro}}">全国有货</button><button class="{{r.stProv}}" onClick="{{r.setStProv}}" disabled="{{sc.ro}}">省份有货</button></div>
-<sc-if value="{{r.isProv}}" hint-placeholder-val="{{ false }}"><div class="seg2 pr-prov"><sc-for list="{{r.provs}}" as="o" hint-placeholder-count="8"><button class="{{o.cls}}" onClick="{{o.pick}}" disabled="{{sc.ro}}">{{o.t}}</button></sc-for></div><em>{{r.provN}}</em></sc-if>
-<em>非必填；不选则不判断库存；全国有货 = 全国任一省份有货</em></div></div>
+<div class="flt-r"><label>商品品牌</label><div class="flt-c"><div class="pk-row"><button class="btn btn-o sm" onClick="{{r.pickBrand}}" disabled="{{sc.ro}}">选择品牌</button><span class="pk-sum">{{r.brandSum}}</span><button class="v3ck {{r.brandExCls}}" role="checkbox" aria-checked="{{r.brandExCk}}" onClick="{{r.togBrandEx}}" disabled="{{sc.ro}}"><span class="pl-ck {{r.brandExCls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span>排除所选品牌</button></div><em>{{r.brandN}}</em></div></div>
 <div class="flt-r"><label>利润率</label><div class="flt-c"><div class="flt-in"><select class="sel" value="{{r.mgOp}}" onChange="{{r.onMgOp}}" disabled="{{sc.ro}}" aria-label="比较方式"><option value="大于等于">大于等于</option><option value="小于">小于</option></select><input class="v3in" style="width: 110px" placeholder="不限" value="{{r.mg}}" onChange="{{r.onMg}}" disabled="{{sc.ro}}" aria-label="利润率"><span>%</span></div><em>利润率 =（会员价 − 成本价）÷ 会员价，成本价即结算价；平台内部指标，不对会员开放；不填 = 不限</em></div></div>
 <div class="flt-r"><label>会员价区间</label><div class="flt-c"><div class="flt-in"><input class="v3in" style="width: 110px" placeholder="最低价" value="{{r.pmin}}" onChange="{{r.onPmin}}" disabled="{{sc.ro}}" aria-label="最低会员价"><span>—</span><input class="v3in" style="width: 110px" placeholder="最高价" value="{{r.pmax}}" onChange="{{r.onPmax}}" disabled="{{sc.ro}}" aria-label="最高会员价"><span>元</span></div><em>按商品库会员价筛选；可只填一端，不填 = 不限</em></div></div>
 <div class="flt-r"><label>发货方式</label><div class="flt-c"><div class="v3cks"><sc-for list="{{r.ships}}" as="o" hint-placeholder-count="2"><button class="v3ck {{o.cls}}" role="checkbox" aria-checked="{{o.ck}}" onClick="{{o.pick}}" disabled="{{sc.ro}}"><span class="pl-ck {{o.cls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span>{{o.t}}</button></sc-for></div><em>不选 = 不限发货方式</em></div></div>
@@ -897,19 +896,13 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 </div>
 <div style="margin-top: 12px"><button class="btn btn-o" onClick="{{sc.pr2.addRule}}" disabled="{{sc.ro}}">＋ 添加规则（或）</button></div>
 </div>
-<div class="card"><h3>排他规则<span>命中的商品一律剔除，即使满足上面的规则</span></h3>
-<div class="flt">
-<div class="flt-r"><label>剔除分类</label><div class="flt-c"><input class="v3in pr-q" type="search" aria-label="搜索分类" placeholder="输入关键词检索分类" value="{{sc.pr2.exCatQ}}" onChange="{{sc.pr2.onExCatQ}}"><div class="seg2"><sc-for list="{{sc.pr2.exCats}}" as="o" hint-placeholder-count="6"><button class="{{o.cls}}" onClick="{{o.pick}}" disabled="{{sc.ro}}">{{o.t}}</button></sc-for></div><em>{{sc.pr2.exCatN}}</em></div></div>
-<div class="flt-r"><label>剔除品牌</label><div class="flt-c"><input class="v3in pr-q" type="search" aria-label="搜索品牌" placeholder="输入关键词检索品牌" value="{{sc.pr2.exBrandQ}}" onChange="{{sc.pr2.onExBrandQ}}"><div class="seg2"><sc-for list="{{sc.pr2.exBrands}}" as="o" hint-placeholder-count="6"><button class="{{o.cls}}" onClick="{{o.pick}}" disabled="{{sc.ro}}">{{o.t}}</button></sc-for></div><em>{{sc.pr2.exBrandN}}</em></div></div>
-</div>
-</div>
 <div class="card pr-det"><h3>规则检测<span>按商品库全量估算本规则的预计商品数，低于 1 万才可保存生效</span></h3>
 <div class="pr-det-b">
 <button class="btn btn-o" onClick="{{sc.pr2.detect}}" disabled="{{sc.ro}}">规则检测</button>
 <sc-if value="{{sc.pr2.detLoading}}" hint-placeholder-val="{{ false }}"><span class="pr-det-t">正在检测…</span></sc-if>
 <sc-if value="{{sc.pr2.detNone}}" hint-placeholder-val="{{ true }}"><span class="pr-det-t">{{sc.pr2.saveTip}}</span></sc-if>
 <sc-if value="{{sc.pr2.detOk}}" hint-placeholder-val="{{ false }}"><span class="pr-det-t ok">预计 <b class="mono">{{sc.pr2.detN}}</b> 个商品 · 低于 1 万，可以保存</span></sc-if>
-<sc-if value="{{sc.pr2.detOver}}" hint-placeholder-val="{{ false }}"><span class="pr-det-t over">预计 <b class="mono">{{sc.pr2.detN}}</b> 个商品 · 超过 1 万，请收窄规则（加品类 / 品牌 / 关键词或排他）后重新检测</span></sc-if>
+<sc-if value="{{sc.pr2.detOver}}" hint-placeholder-val="{{ false }}"><span class="pr-det-t over">预计 <b class="mono">{{sc.pr2.detN}}</b> 个商品 · 超过 1 万，请收窄规则（加品类 / 品牌 / 关键词，或排除部分品类 / 品牌）后重新检测</span></sc-if>
 </div>
 <sc-if value="{{sc.pr2.detOn}}" hint-placeholder-val="{{ false }}"><div class="pr-per"><sc-for list="{{sc.pr2.detPer}}" as="p" hint-placeholder-count="2"><span>{{p.t}}</span></sc-for><span>多条规则的重叠部分已按估算去重前计入，实际以保存后为准</span></div></sc-if>
 <div class="pr-save"><button class="btn btn-p {{sc.pr2.saveCls}}" onClick="{{sc.pr2.save}}" disabled="{{sc.ro}}">保存并生效</button><sc-if value="{{sc.pr2.dirty}}" hint-placeholder-val="{{ false }}"><button class="btn btn-o" onClick="{{sc.pr2.reset}}">放弃修改</button><em>有未保存的修改</em></sc-if></div>
@@ -1148,6 +1141,19 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 </div>
 <div class="mp-f"><button class="btn btn-o" onClick="{{bf.close}}">关闭</button><sc-if value="{{bf.notDone}}" hint-placeholder-val="{{ true }}"><button class="btn btn-p {{bf.commitCls}}" onClick="{{bf.commit}}">{{bf.commitT}}</button></sc-if></div>
 </div></div></sc-if>
+<sc-if value="{{mpOn}}" hint-placeholder-val="{{ false }}"><div class="mp-mask"><div class="mp" role="dialog" aria-label="{{mp.title}}">
+<div class="mp-h"><b>{{mp.title}}</b><button class="x" aria-label="关闭" onClick="{{mp.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<div class="mp-b">
+<div class="mp-col"><div class="mp-ch">{{mp.lHead}}</div><div class="mp-s"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" aria-label="{{mp.ph}}" placeholder="{{mp.ph}}" value="{{mp.lq}}" onChange="{{mp.onLq}}"></div>
+<div class="mp-l"><sc-for list="{{mp.left}}" as="m" hint-placeholder-count="8"><button class="mp-i {{m.cls}}" role="checkbox" aria-checked="{{m.ck}}" onClick="{{m.pick}}"><span class="pl-ck {{m.cls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span>{{m.t}}</button></sc-for><sc-if value="{{mp.lEmpty}}" hint-placeholder-val="{{ false }}"><div class="mp-e">{{mp.emptyT}}</div></sc-if></div>
+<div class="mp-pg"><button class="{{mp.lPrevCls}}" aria-label="上一页" onClick="{{mp.lPrev}}">‹</button><span class="mp-pn">{{mp.lPage}}</span><span>/ {{mp.lPages}}</span><button class="{{mp.lNextCls}}" aria-label="下一页" onClick="{{mp.lNext}}">›</button></div></div>
+<div class="mp-mid"><button class="btn btn-p sm {{mp.moveCls}}" onClick="{{mp.move}}">› 选择</button></div>
+<div class="mp-col"><div class="mp-ch">已选 {{mp.rHead}}</div><div class="mp-s"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" aria-label="{{mp.phR}}" placeholder="{{mp.phR}}" value="{{mp.rq}}" onChange="{{mp.onRq}}"></div>
+<div class="mp-l"><sc-for list="{{mp.right}}" as="m" hint-placeholder-count="2"><div class="mp-r"><span>{{m.t}}</span><button class="mp-del" aria-label="移除 {{m.t}}" onClick="{{m.del}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button></div></sc-for><sc-if value="{{mp.rEmpty}}" hint-placeholder-val="{{ true }}"><div class="mp-e">在左侧勾选后点「选择」</div></sc-if></div>
+<div class="mp-pg"><button class="{{mp.rPrevCls}}" aria-label="上一页" onClick="{{mp.rPrev}}">‹</button><span class="mp-pn">{{mp.rPage}}</span><span>/ {{mp.rPages}}</span><button class="{{mp.rNextCls}}" aria-label="下一页" onClick="{{mp.rNext}}">›</button></div></div>
+</div>
+<div class="mp-f"><button class="btn btn-o" onClick="{{mp.close}}">取消</button><button class="btn btn-p" onClick="{{mp.ok}}">确定</button></div>
+</div></div></sc-if>
 <sc-if value="{{fmOpen}}" hint-placeholder-val="{{ false }}">
 <div class="drw-ov" onClick="{{fmClose}}"></div>
 <aside class="drw" role="dialog" aria-label="{{fm.title}}"><div class="dlg-h"><b>{{fm.title}}</b><button class="x" aria-label="关闭" onClick="{{fmClose}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
@@ -1168,19 +1174,7 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 </div>
 <div class="dlg-f"><button class="btn btn-o" onClick="{{fmClose}}">取消</button><button class="btn btn-p" onClick="{{fmSave}}">{{fm.saveLabel}}</button></div></aside>
 
-<sc-if value="{{mpOn}}" hint-placeholder-val="{{ false }}"><div class="mp-mask"><div class="mp" role="dialog" aria-label="选择指定会员">
-<div class="mp-h"><b>选择指定会员</b><button class="x" aria-label="关闭" onClick="{{mp.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
-<div class="mp-b">
-<div class="mp-col"><div class="mp-ch">{{mp.lHead}}</div><div class="mp-s"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" aria-label="搜索会员" placeholder="请输入会员名称搜索" value="{{mp.lq}}" onChange="{{mp.onLq}}"></div>
-<div class="mp-l"><sc-for list="{{mp.left}}" as="m" hint-placeholder-count="8"><button class="mp-i {{m.cls}}" role="checkbox" aria-checked="{{m.ck}}" onClick="{{m.pick}}"><span class="pl-ck {{m.cls}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"></path></svg></span>{{m.t}}</button></sc-for><sc-if value="{{mp.lEmpty}}" hint-placeholder-val="{{ false }}"><div class="mp-e">没有匹配的会员</div></sc-if></div>
-<div class="mp-pg"><button class="{{mp.lPrevCls}}" aria-label="上一页" onClick="{{mp.lPrev}}">‹</button><span class="mp-pn">{{mp.lPage}}</span><span>/ {{mp.lPages}}</span><button class="{{mp.lNextCls}}" aria-label="下一页" onClick="{{mp.lNext}}">›</button></div></div>
-<div class="mp-mid"><button class="btn btn-p sm {{mp.moveCls}}" onClick="{{mp.move}}">› 选择</button></div>
-<div class="mp-col"><div class="mp-ch">已选 {{mp.rHead}}</div><div class="mp-s"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" aria-label="搜索已选会员" placeholder="请输入会员名称搜索" value="{{mp.rq}}" onChange="{{mp.onRq}}"></div>
-<div class="mp-l"><sc-for list="{{mp.right}}" as="m" hint-placeholder-count="2"><div class="mp-r"><span>{{m.t}}</span><button class="mp-del" aria-label="移除 {{m.t}}" onClick="{{m.del}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button></div></sc-for><sc-if value="{{mp.rEmpty}}" hint-placeholder-val="{{ true }}"><div class="mp-e">在左侧勾选会员后点「选择」</div></sc-if></div>
-<div class="mp-pg"><button class="{{mp.rPrevCls}}" aria-label="上一页" onClick="{{mp.rPrev}}">‹</button><span class="mp-pn">{{mp.rPage}}</span><span>/ {{mp.rPages}}</span><button class="{{mp.rNextCls}}" aria-label="下一页" onClick="{{mp.rNext}}">›</button></div></div>
-</div>
-<div class="mp-f"><button class="btn btn-o" onClick="{{mp.close}}">取消</button><button class="btn btn-p" onClick="{{mp.ok}}">确定</button></div>
-</div></div></sc-if>
+
 </sc-if>
 
 <!-- ===== 通用确认 ===== -->
@@ -1269,19 +1263,19 @@ const stopE = (e) => { if (e && e.stopPropagation) e.stopPropagation(); };
 const nowStr = () => { const d = new Date(); const p = (x) => String(x).padStart(2, '0'); return p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()); };
 
 // 商品池统一为「一池一套商品规则」：旧的按货源多条规则折算为一套（品类取并集，利润率阈值沿用）
-// 商品规则 v2：每条规则内条件同时满足，多条规则满足任一即上架；排他规则按分类 / 品牌剔除
+// 商品规则 v2：每条规则内条件同时满足，多条规则满足任一即上架；品类 / 品牌可勾选排除
 const R2SEED = {
-  p1: { rules: [{ cats: ['节日礼包'], stock: '全国', mg: '15' }, { srcs: ['京东自营', '天猫超市'], cats: ['休闲食品', '粮油'], brands: ['三只松鼠', '柴火大院'], stock: '全国', ships: ['电商发货'] }], ex: { cats: [], brands: ['百草味'] } },
-  p2: { rules: [{ cats: ['小家电', '家纺'], brands: ['美的', '水星家纺'], stock: '全国', mg: '20' }, { cats: ['节日礼包'], kws: ['礼包', '礼盒'], mg: '20' }], ex: { cats: [], brands: [] } },
-  p3: { rules: [{ cats: ['节日礼包'] }], ex: { cats: [], brands: [] } },
-  p4: { rules: [{ srcs: ['卡券'], cats: ['影音会员', '购物卡'] }], ex: { cats: [], brands: [] } },
-  p5: { rules: [{ cats: ['日化清洁', '纸品'], brands: ['蓝月亮', '舒洁'], stock: '全国', mg: '10', pmin: '20' }], ex: { cats: [], brands: [] } },
-  p6: { rules: [{ srcs: ['供应商直供'], cats: ['家纺'], brands: ['水星家纺'] }], ex: { cats: [], brands: [] } },
-  p7: { rules: [{ cats: ['办公文具', '打印耗材'], brands: ['得力', '惠普', '晨光'], stock: '全国' }, { cats: ['茶水饮料', '数码配件'], brands: ['农夫山泉', '雀巢', '罗技'], stock: '全国', ships: ['电商发货'] }], ex: { cats: [], brands: [] } }
+  p1: { rules: [{ name: '节日礼包 · 高毛利', cats: ['节日礼包'], brands: ['百草味'], brandEx: true, mg: '15' }, { name: '休闲粮油 · 品牌电商', srcs: ['京东自营', '天猫超市'], cats: ['休闲食品', '粮油'], brands: ['三只松鼠', '柴火大院'], ships: ['电商发货'] }] },
+  p2: { rules: [{ name: '家电家纺 · 品牌', cats: ['小家电', '家纺'], brands: ['美的', '水星家纺'], mg: '20' }, { name: '礼包礼盒', cats: ['节日礼包'], kws: ['礼包', '礼盒'], mg: '20' }] },
+  p3: { rules: [{ name: '节日礼包', cats: ['节日礼包'] }] },
+  p4: { rules: [{ name: '影音会员与购物卡', srcs: ['卡券'], cats: ['影音会员', '购物卡'] }] },
+  p5: { rules: [{ name: '日化纸品 · 品牌', cats: ['日化清洁', '纸品'], brands: ['蓝月亮', '舒洁'], mg: '10', pmin: '20' }] },
+  p6: { rules: [{ name: '水星家纺 · 厂家直供', srcs: ['供应商直供'], cats: ['家纺'], brands: ['水星家纺'] }] },
+  p7: { rules: [{ name: '办公文具耗材', cats: ['办公文具', '打印耗材'], brands: ['得力', '惠普', '晨光'] }, { name: '茶水饮料 · 数码配件', cats: ['茶水饮料', '数码配件'], brands: ['农夫山泉', '雀巢', '罗技'], ships: ['电商发货'] }] }
 };
-const R2RULE = (r) => Object.assign({ srcs: [], cats: [], kws: [], brands: [], stock: '', provs: [], ships: [], mgOp: '大于等于', mg: '', pmin: '', pmax: '' }, r || {});
+const R2RULE = (r) => Object.assign({ name: '', srcs: [], cats: [], catEx: false, kws: [], brands: [], brandEx: false, ships: [], mgOp: '大于等于', mg: '', pmin: '', pmax: '' }, r || {});
 function poolToSingle(p) {
-  if (p.prule) return p.r2 ? p : Object.assign({}, p, { r2: { rules: [R2RULE({})], ex: { cats: [], brands: [] } } });
+  if (p.prule) return p.r2 ? p : Object.assign({}, p, { r2: { rules: [R2RULE({ name: '规则 1' })], ex: { cats: [], brands: [] } } });
   const rs = (p.rules || []).filter((r) => r.mode !== 'ex');
   const allC = rs.length && rs.every((r) => (r.cats || []).length), allF = rs.length && rs.every((r) => (r.forms || []).length);
   const uniq = (a) => Array.from(new Set(a));
@@ -1294,8 +1288,8 @@ function poolToSingle(p) {
   if (!f.adv && rm.length) { f.adv = true; f.advOp = '大于等于'; f.advPct = String(Math.min.apply(null, rm)); }
   const shows = (p.shows || []).map((x) => ['场景商品'].concat(x.slice(1)));
   const cs = p.colSubs || {}; const colSubs = { 场景商品: cs['场景商品'] || '全部货源 · 按品类浏览' };
-  const s2 = R2SEED[p.id] || { rules: [{ cats: f.cats }], ex: { cats: [], brands: f.brands || [] } };
-  const r2 = { rules: s2.rules.map(R2RULE), ex: { cats: (s2.ex.cats || []).slice(), brands: (s2.ex.brands || []).slice() } };
+  const s2 = R2SEED[p.id] || { rules: [{ name: '规则 1', cats: f.cats }] };
+  const r2 = { rules: s2.rules.map(R2RULE), ex: { cats: [], brands: [] } };
   return Object.assign({}, p, { flt: f, r2: r2, rules: [], prule: true, shows: shows, colSubs: colSubs, vis: p.vis || '不开放', visCos: p.visCos || [] });
 }
 function crudSeed() {
@@ -2010,17 +2004,17 @@ function buildDefs(self, st, role) {
   };
   D.pool = {
     page: 'pool', title: '商品池', noun: '商品池', store: 'pools', edit: ['admin', 'goods', 'content'], newLabel: '新建商品池',
-    desc: '商品池按商品规则自动上下架：多条规则满足任一即上架，都不满足则下架；排他规则按分类 / 品牌剔除；白名单 / 黑名单不受规则影响。可被子场景、资源频道、专题绑定复用',
+    desc: '商品池按商品规则自动上下架：多条规则满足任一即上架，都不满足则下架；每条规则有规则名称，品类 / 品牌可选「排除」；白名单 / 黑名单不受规则影响。可被子场景、资源频道、专题绑定复用',
     tabs: { opts: [['', '全部'], ['启用', '启用'], ['停用', '停用']], get: (r) => r.status },
     filters: [{ k: 'q', type: 'text', ph: '商品池名称 / 说明', match: (r, v) => (r.name + r.desc).includes(v) }, { k: 'owner', type: 'select', label: '负责人', opts: [['王磊', '王磊'], ['王悦', '王悦']], match: (r, v) => r.owner === v }],
-    cols: [{ t: '商品池', cell: (r) => N(r.name, (r.desc || '').length > 16 ? r.desc.slice(0, 16) + '…' : r.desc) }, { t: '商品规则', cell: (r) => ({ type: 'tags', tags: self.r2Tags(r.r2).slice(0, 3), empty: '未设置' }) },
+    cols: [{ t: '商品池', cell: (r) => N(r.name, (r.desc || '').length > 16 ? r.desc.slice(0, 16) + '…' : r.desc) }, { t: '商品规则', cell: (r) => ({ type: 'tags', tags: self.r2Tags(r.r2), empty: '未设置' }) },
       { t: '池内商品', cell: (r) => { const ids = self.poolIn(r.id); const n = new Set(ids.map((id) => (st.goods.find((g) => g.id === id) || {}).src)).size; return N(ids.length + ' 款', '来自 ' + n + ' 个货源'); } },
       { t: '会员可见', cell: (r) => (r.vis === '全部会员' ? { type: 'pill', v: '全部会员', pCls: 'p-ok' } : r.vis === '指定会员' ? N('指定 ' + (r.visCos || []).length + ' 家', (r.visCos || []).map((x) => x.slice(0, 6)).join('、')) : { type: 'pill', v: '不开放', pCls: 'p-mute' }) },
       { t: '被引用', cls: 'r', cell: (r) => M(String(self.refsOf('pool', r.id).length)) }, { t: '负责人', cell: (r) => T(r.owner) }, { t: '更新', cell: (r) => T(r.upd) }, { t: '启用', cell: (r) => swCell(r, 'pools', '启用', '停用', '启用状态') }],
     onView: (r) => self.setState({ scDet: r.id, scTab: 'rule', scRd: null, scF: null }),
     acts: (r) => [{ t: '管理', k: 'view' }, { t: '编辑', k: 'edit' }, { t: '复制', run: () => { const id = 'p' + Date.now(); self.setState({ pools: [Object.assign(JSON.parse(JSON.stringify(r)), { id: id, name: r.name + '（副本）', status: '停用', log: [] })].concat(st.pools) }); self.pushLog('商品池', '复制', r.name); self.flash('已复制为「' + r.name + '（副本）」，默认停用'); } }, { t: '删除', k: 'del', danger: true }],
     delBlock: (r) => { const n = self.refsOf('pool', r.id).length; return n ? '它正被 ' + n + ' 处引用，请先在场景 / 频道 / 专题中解除绑定。' : null; },
-    blank: () => ({ name: '', desc: '', owner: self.meName(), vis: '不开放', visCos: [], rules: [], prule: true, r2: { rules: [R2RULE({})], ex: { cats: [], brands: [] } }, flt: { adv: false, advOp: '大于等于', advPct: '', cats: [], kws: [], brands: [], pr: false, prOp: '大于', prAmt: '', unsale: true, ships: ['电商发货', '厂家发货'] }, excl: [], manual: [], pin: [], auto: true, status: '停用', upd: '', log: [] }),
+    blank: () => ({ name: '', desc: '', owner: self.meName(), vis: '不开放', visCos: [], rules: [], prule: true, r2: { rules: [R2RULE({ name: '规则 1' })], ex: { cats: [], brands: [] } }, flt: { adv: false, advOp: '大于等于', advPct: '', cats: [], kws: [], brands: [], pr: false, prOp: '大于', prAmt: '', unsale: true, ships: ['电商发货', '厂家发货'] }, excl: [], manual: [], pin: [], auto: true, status: '停用', upd: '', log: [] }),
     form: (v) => [{ k: 'name', t: '商品池名称', type: 'text', req: true }, { k: 'desc', t: '用途说明', type: 'area', ph: '给其他运营看的说明，如：年货场景通用，利润率 ≥ 10%' }, { k: 'owner', t: '负责人', type: 'select', opts: [['王磊', '王磊'], ['王悦', '王悦'], ['朱萍萍', '朱萍萍']], w: 'half' }, { k: 'status', t: '状态', type: 'radio', opts: ['启用', '停用'], w: 'half' },
       { k: 'vis', t: '会员可见范围', type: 'radio', opts: ['不开放', '全部会员', '指定会员'], hint: '对会员可见的商品池，会员在自己的店铺 / 商城装修时才能引用；不开放 = 只供平台运营的场景、频道、专题使用' },
       { k: 'visCos', t: '指定会员', type: 'members', req: v.vis === '指定会员', show: v.vis === '指定会员', hint: '只有选中的会员能在装修时看到并引用本池；点「选择会员」可按名称搜索' }],
@@ -2602,15 +2596,25 @@ class Component extends DCLogic {
     this._memAll = Array.from(new Set(out)); return this._memAll; }
   provs() { return ['北京', '上海', '天津', '重庆', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新疆']; }
   shipLbl(x) { return { 电商发货: '电商发货（京东物流、猫超仓）', 厂家发货: '厂家发货（厂直配送、商家仓）' }[x] || x; }
-  r2Empty(r) { return !(r.srcs.length || r.cats.length || r.kws.length || r.brands.length || r.stock || r.ships.length || r.mg !== '' || r.pmin !== '' || r.pmax !== ''); }
-  r2Scope(g, r) { return (!r.srcs.length || r.srcs.includes(g.src)) && (!r.cats.length || r.cats.includes(g.cat)); }
+  r2Empty(r) { return !(r.srcs.length || r.cats.length || r.kws.length || r.brands.length || r.ships.length || r.mg !== '' || r.pmin !== '' || r.pmax !== ''); }
+  r2Name(r, i) { return String(r.name || '').trim() || '规则 ' + (i + 1); }
+  r2Scope(g, r) { return (!r.srcs.length || r.srcs.includes(g.src)) && (!r.cats.length || (r.catEx ? !r.cats.includes(g.cat) : r.cats.includes(g.cat))); }
+  // 大数据量选择：品类 / 品牌 / 会员统一用「搜索 + 勾选」弹窗
+  pkAll(kind) { const st = this.state;
+    if (kind === 'cat') return Array.from(new Set(((st.cats || []).filter((x) => x.parent && x.status === '启用').map((x) => x.name)).concat((st.goods || []).map((g) => g.cat))));
+    if (kind === 'brand') return Array.from(new Set(((st.brands || []).filter((x) => x.status === '启用').map((x) => x.name)).concat((st.goods || []).map((g) => g.brand))));
+    return this.memberAll(); }
+  pkApply(MP) { const st = this.state; const to = MP.to || {}; const pool = (st.pools || []).find((x) => x.id === to.pool); if (!pool) { this.setState({ mp: null }); return; }
+    const d = st.r2Dr && st.r2Dr.id === pool.id ? st.r2Dr.d : pool.r2;
+    const nd = { rules: d.rules.map((r, k) => (k === to.i ? Object.assign({}, r, { [to.f]: MP.sel.slice() }) : r)), ex: d.ex };
+    this.setState({ mp: null, r2Dr: { id: pool.id, d: nd } }); }
   r2Why(g, r) {
     if (r.srcs.length && !r.srcs.includes(g.src)) return '货源「' + g.src + '」不在规则内';
-    if (r.cats.length && !r.cats.includes(g.cat)) return '品类「' + g.cat + '」不在规则内';
+    if (r.cats.length && !r.catEx && !r.cats.includes(g.cat)) return '品类「' + g.cat + '」不在规则内';
+    if (r.cats.length && r.catEx && r.cats.includes(g.cat)) return '品类「' + g.cat + '」被规则排除';
     if (r.kws.length && !r.kws.some((k) => g.name.includes(k))) return '名称不含关键词「' + r.kws.join('」「') + '」';
-    if (r.brands.length && !r.brands.includes(g.brand)) return '品牌「' + g.brand + '」不在规则内';
-    if (r.stock === '全国' && g.outAll) return '全国无货';
-    if (r.stock === '省份' && (g.outAll || r.provs.some((p) => (g.outProv || []).includes(p)))) return (g.outAll ? '全国无货' : '所选省份无货：' + r.provs.filter((p) => (g.outProv || []).includes(p)).join('、'));
+    if (r.brands.length && !r.brandEx && !r.brands.includes(g.brand)) return '品牌「' + g.brand + '」不在规则内';
+    if (r.brands.length && r.brandEx && r.brands.includes(g.brand)) return '品牌「' + g.brand + '」被规则排除';
     if (r.ships.length && !r.ships.includes(this.gShip(g))) return this.gShip(g) + '，未勾选该发货方式';
     if (r.mg !== '' && r.mg != null) { const x = this.rateOf(g); const lt = r.mgOp === '小于'; if (lt ? x >= +r.mg : x < +r.mg) return '利润率 ' + x.toFixed(1) + '%，' + (lt ? '不低于 ' : '低于 ') + r.mg + '%'; }
     if (r.pmin !== '' && r.pmin != null && g.member < +r.pmin) return '会员价 ¥' + g.member + ' 低于 ¥' + r.pmin;
@@ -2619,7 +2623,7 @@ class Component extends DCLogic {
   }
   r2Ex(g, ex) { if (!ex) return ''; if ((ex.cats || []).includes(g.cat)) return '分类「' + g.cat + '」'; if ((ex.brands || []).includes(g.brand)) return '品牌「' + g.brand + '」'; return ''; }
   r2TagsMg(r) { return r.mg !== '' ? '利润率 ' + (r.mgOp === '小于' ? '<' : '≥') + ' ' + r.mg + '%' : ''; }
-  r2Tags(r2) { if (!r2) return []; const rs = r2.rules.filter((r) => !this.r2Empty(r)); return [rs.length + ' 条规则'].concat(rs.slice(0, 2).map((r) => (r.cats.length ? r.cats.slice(0, 2).join('、') + (r.cats.length > 2 ? ' 等' : '') : r.srcs.length ? r.srcs.join('、') : r.brands.length ? r.brands.slice(0, 2).join('、') : r.kws.length ? '关键词 ' + r.kws[0] : '不限'))).concat(((r2.ex.cats || []).length + (r2.ex.brands || []).length) ? ['排他 ' + ((r2.ex.cats || []).length + (r2.ex.brands || []).length) + ' 项'] : []); }
+  r2Tags(r2) { if (!r2) return []; return r2.rules.map((r, i) => [r, i]).filter((x) => !this.r2Empty(x[0])).map((x) => this.r2Name(x[0], x[1])); }
   // 规则检测：按商品库全量（约 500 万 SKU）的分货源 / 品类规模估算命中数（演示用估算模型）
   r2Est(r2) {
     const CAT = { 粮油: 182000, 休闲食品: 426000, 日化清洁: 263000, 纸品: 91000, 家纺: 118000, 小家电: 307000, 杯壶: 64000, 影音会员: 1200, 购物卡: 860, 节日礼包: 6800, 办公文具: 152000, 打印耗材: 41000, 茶水饮料: 203000, 数码配件: 236000 };
@@ -2627,11 +2631,10 @@ class Component extends DCLogic {
     const ALL = 5000000;
     const one = (r) => {
       if (this.r2Empty(r)) return ALL;
-      let n = r.cats.length ? r.cats.reduce((a, c) => a + (CAT[c] || 20000), 0) : ALL;
+      const cN = r.cats.reduce((a, c) => a + (CAT[c] || 20000), 0); let n = r.cats.length ? (r.catEx ? Math.max(0, ALL - cN) : cN) : ALL;
       if (r.srcs.length) n *= Math.min(1, r.srcs.reduce((a, s) => a + (SRC[s] || 0.05), 0));
-      if (r.brands.length) n *= Math.min(1, r.brands.length * 0.004);
+      if (r.brands.length) n *= r.brandEx ? Math.max(0.5, 1 - r.brands.length * 0.002) : Math.min(1, r.brands.length * 0.004);
       if (r.kws.length) n *= Math.min(1, r.kws.length * 0.03);
-      if (r.stock === '全国') n *= 0.92; else if (r.stock === '省份') n *= Math.max(0.5, 0.9 - r.provs.length * 0.01);
       if (r.ships.length === 1) n *= r.ships[0] === '电商发货' ? 0.78 : 0.22;
       if (r.mg !== '') n *= r.mgOp === '小于' ? Math.min(1, +r.mg / 40) : Math.max(0.05, 1 - +r.mg / 40);
       if (r.pmin !== '' || r.pmax !== '') { const lo = r.pmin === '' ? 0 : +r.pmin, hi = r.pmax === '' ? 2000 : +r.pmax; n *= Math.max(0.03, Math.min(1, (Math.min(hi, 2000) - Math.min(lo, 2000)) / 600)); }
@@ -2639,8 +2642,6 @@ class Component extends DCLogic {
     };
     const per = r2.rules.map(one);
     let tot = per.reduce((a, b) => a + b, 0);
-    const exN = (r2.ex.cats || []).reduce((a, c) => a + (CAT[c] || 20000), 0) / ALL;
-    tot *= Math.max(0, 1 - exN) * (1 - Math.min(0.5, (r2.ex.brands || []).length * 0.002));
     const rd = (x) => (x >= 1000 ? Math.round(x / 100) * 100 : Math.round(x));
     return { total: rd(tot), per: per.map(rd) };
   }
@@ -2850,15 +2851,14 @@ class Component extends DCLogic {
         const scoped = rs.filter((x) => this.r2Scope(g, x[0]));
         if (!man && !scoped.length) return;
         const hit = rs.find((x) => !this.r2Why(g, x[0]));
-        const offWhy = '商品' + (STATUS[g.status] || ['已下架'])[0]; const exW = this.r2Ex(g, r2.ex);
+        const offWhy = '商品' + (STATUS[g.status] || ['已下架'])[0];
         let k, why;
         if (man) { k = g.status === 'on' ? 'man' : 'down'; why = g.status === 'on' ? '运营加入白名单，不受规则影响' : offWhy; }
         else if ((cfg.excl || []).includes(g.id)) { k = 'ex'; why = '运营加入黑名单，规则不会再自动上架'; }
         else if (g.status !== 'on') { k = 'down'; why = offWhy; }
-        else if (hit && exW) { k = 'excl'; why = '排他规则剔除：' + exW; }
-        else if (hit) { k = 'in'; why = '满足规则 ' + (hit[1] + 1); }
+        else if (hit) { k = 'in'; why = '满足「' + this.r2Name(hit[0], hit[1]) + '」'; }
         else { k = 'down'; why = '未满足任一规则：' + this.r2Why(g, scoped[0][0]); }
-        out.push({ g: g, k: k, why: why, from: man ? '白名单' : hit ? '规则 ' + (hit[1] + 1) : '商品规则', pin: (cfg.pin || []).includes(g.id), man: man });
+        out.push({ g: g, k: k, why: why, ri: hit ? hit[1] : -1, from: man ? '白名单' : hit ? this.r2Name(hit[0], hit[1]) : '商品规则', pin: (cfg.pin || []).includes(g.id), man: man });
       });
       this.sortBySv(out, cfg);
       return out;
@@ -2969,7 +2969,21 @@ class Component extends DCLogic {
     const segOk = (x, k) => (k === 'in' ? isIn(x) : k === 'down' ? x.k === 'down' : k === 'white' ? x.man : k === 'black' ? x.k === 'ex' : k === 'excl' ? x.k === 'excl' : k === 'flt' ? x.k === 'flt' : true);
     const formOk = (x) => !form || (x.g.form || '爆品') === form;
     const cnt = (k) => now.filter((x) => segOk(x, k) && formOk(x)).length;
-    const rows = now.filter((x) => segOk(x, seg) && formOk(x)).filter((x) => !q || (x.g.name + x.g.brand).includes(q.trim()));
+    const fv = (k) => String(F[k] || '').trim(); const num = (k) => (fv(k) === '' ? null : Number(fv(k)));
+    const fSrc = F.src || '', fFrom = F.from || '';
+    const fltOk = (x) => { const g = x.g; const kq = fv('q');
+      if (kq && !(g.name + ' ' + this.skuOf(g) + ' ' + g.id).toLowerCase().includes(kq.toLowerCase())) return false;
+      if (fv('brand') && !String(g.brand).includes(fv('brand'))) return false;
+      if (fv('cat') && !String(g.cat).includes(fv('cat'))) return false;
+      if (fSrc && g.src !== fSrc) return false;
+      if (fFrom === 'white' && !x.man) return false; if (fFrom === 'rule' && (x.man || x.ri == null || x.ri < 0)) return false;
+      if (num('pmin') != null && g.member < num('pmin')) return false; if (num('pmax') != null && g.member > num('pmax')) return false;
+      if (canCost && num('rmin') != null && this.rateOf(g) < num('rmin')) return false; if (canCost && num('rmax') != null && this.rateOf(g) > num('rmax')) return false;
+      return true; };
+    const rows = now.filter((x) => segOk(x, seg) && formOk(x)).filter(fltOk);
+    const fActive = ['q', 'brand', 'cat', 'pmin', 'pmax', 'rmin', 'rmax'].some((k) => fv(k) !== '') || !!fSrc || !!fFrom;
+    const SEL = st.scSel && st.scSel.id === s.id ? st.scSel.ids : []; const selRows = rows.filter((x) => SEL.includes(x.g.id));
+    const setSel = (ids) => set({ scSel: { id: s.id, ids: ids } });
     const PILLS = { in: 'p-ok', man: 'p-brand', down: 'p-mute', ex: 'p-err', excl: 'p-warn' };
     const lastLog = (id) => { const l = (s.log || []).find((x) => x[2] === id); return l ? l[0] + ' ' + l[1].split('：')[0] : '—'; };
     // ---- 场景：引导词 + AI ----
@@ -3066,10 +3080,10 @@ class Component extends DCLogic {
             rules: rules.map((r, i) => ({ n: String(i + 1), cond: this.prRuleTxt(r), rate: '+' + r.rate + '%', note: r.note || '', hits: String(gl.filter((g) => rules.find((x) => this.prHit(x, g)) === r).length), edit: () => canEdit && this.openForm('prule', r.id), up: () => canEdit && mv(r, -1), down: () => canEdit && mv(r, 1), del: () => { if (!canEdit) return; this.setState({ prules: st.prules.filter((x) => x.id !== r.id) }); this.pushLog('商品池', '删除定价规则', s.name); this.flash('已删除规则'); } })), noRules: !rules.length,
             addRule: () => canEdit && this.openForm('prule', null, { pool: s.id, sys: cur, sysTxt: s.name + ' · ' + cur, cats: [], brands: [], srcs: [] }),
             preview: cfg ? gl.map((g) => { const p = this.prPrice(g, s.id, cur); return { name: g.name, cat: g.cat, brand: g.brand, src: g.src, cost: cc ? '¥' + g.cost : '***', mk: cc ? this.prMargin(g) + '%' : '***', rule: p.rule, v: '¥' + p.v, mg: cc ? p.mg + '%' : '***', st: p.st, stCls: p.st === '触底下架' ? 'p-err' : p.st === '顶价封顶' ? 'p-warn' : 'p-ok' }; }) : [] } }; })(),
-        ...(() => { const FB = { pr2: { on: false, rules: [], addRule: () => 0, exCats: [], exBrands: [], exCatQ: '', onExCatQ: () => 0, exBrandQ: '', onExBrandQ: () => 0, exCatN: '', exBrandN: '', detect: () => 0, detOn: false, detNone: true, detOk: false, detOver: false, detN: '', detPer: [], detStale: false, save: () => 0, saveCls: 'dis', saveTip: '', reset: () => 0, dirty: false, sum: '', scope: '', inN: '', downN: '', exN: '', drops: [], noDrops: true, detLoading: false } };
+        ...(() => { const FB = { pr2: { on: false, rules: [], addRule: () => 0, detect: () => 0, detOn: false, detNone: true, detOk: false, detOver: false, detN: '', detPer: [], detStale: false, save: () => 0, saveCls: 'dis', saveTip: '', reset: () => 0, dirty: false, sum: '', scope: '', inN: '', downN: '', exN: '', drops: [], noDrops: true, detLoading: false } };
           if (KIND !== 'pool') return FB;
-          const LIMIT = 10000; const blankR = () => ({ srcs: [], cats: [], kws: [], brands: [], stock: '', provs: [], ships: [], mgOp: '大于等于', mg: '', pmin: '', pmax: '' });
-          const saved = s.r2 || { rules: [blankR()], ex: { cats: [], brands: [] } }; const dirty = !!(st.r2Dr && st.r2Dr.id === s.id); const d = dirty ? st.r2Dr.d : saved;
+          const LIMIT = 10000; const blankR = (n) => ({ name: '规则 ' + n, srcs: [], cats: [], catEx: false, kws: [], brands: [], brandEx: false, ships: [], mgOp: '大于等于', mg: '', pmin: '', pmax: '' });
+          const saved = s.r2 || { rules: [blankR(1)], ex: { cats: [], brands: [] } }; const dirty = !!(st.r2Dr && st.r2Dr.id === s.id); const d = dirty ? st.r2Dr.d : saved;
           const setD = (nd) => { if (!canEdit) return; this.setState({ r2Dr: { id: s.id, d: nd } }); };
           const setR = (i, p) => setD({ rules: d.rules.map((r, k) => (k === i ? Object.assign({}, r, p) : r)), ex: d.ex });
           const togA = (arr, v) => ((arr || []).includes(v) ? arr.filter((x) => x !== v) : (arr || []).concat([v]));
@@ -3083,7 +3097,7 @@ class Component extends DCLogic {
           const cur = this.setItems(Object.assign({}, s, { prule: true, r2: saved }), {}); const rows = this.setItems(Object.assign({}, s, { prule: true, r2: d }), {});
           const inIds = (rs) => rs.filter((x) => x.k === 'in' || x.k === 'man').map((x) => x.g.id); const a0 = inIds(cur), a1 = inIds(rows);
           const up = a1.filter((id) => !a0.includes(id)), down = a0.filter((id) => !a1.includes(id)); const nm = (id) => ((st.goods || []).find((g) => g.id === id) || { name: id }).name;
-          const drops = rows.filter((x) => (x.k === 'down' || x.k === 'excl') && !x.man);
+          const drops = rows.filter((x) => x.k === 'down' && !x.man);
           const okToSave = detFresh && det.n < LIMIT && !d.rules.every((r) => this.r2Empty(r));
           const doSave = () => { const t = nowStr(); const lg = up.map((id) => [t, '自动上架 ' + nm(id).slice(0, 12) + '：满足商品规则', id]).concat(down.map((id) => [t, '自动下架 ' + nm(id).slice(0, 12) + '：' + ((rows.find((x) => x.g.id === id) || {}).why || '不再满足任一规则'), id]));
             patchS({ r2: d, prule: true, rules: [], log: lg.concat(s.log || []), upd: '今天 ' + t.slice(6) }, '保存商品规则（规则检测预计 ' + det.n.toLocaleString('zh-CN') + ' 个商品）', true); this.setState({ r2Dr: null });
@@ -3092,37 +3106,36 @@ class Component extends DCLogic {
             rules: d.rules.map((r, i) => { const qk = (f) => 'r' + i + f;
               return { n: String(i + 1), canDel: d.rules.length > 1 && canEdit, del: () => setD({ rules: d.rules.filter((_, k) => k !== i), ex: d.ex }), isEmpty: this.r2Empty(r),
                 srcs: srcAll.map((x) => ({ t: x, cls: r.srcs.includes(x) ? 'on' : '', ck: String(r.srcs.includes(x)), pick: () => setR(i, { srcs: togA(r.srcs, x) }) })),
-                catQ: Q[qk('c')] || '', onCatQ: (e) => setQ(qk('c'), e.target.value), catN: r.cats.length ? '已选 ' + r.cats.length + ' 个' : '不选 = 全部品类',
-                cats: filt(catAll, r.cats, Q[qk('c')]).map((x) => ({ t: x, cls: r.cats.includes(x) ? 'on' : '', pick: () => setR(i, { cats: togA(r.cats, x) }) })),
+                name: r.name || '', onName: (e) => setR(i, { name: e.target.value }),
+                catSum: r.cats.length ? r.cats.slice(0, 6).join('、') + (r.cats.length > 6 ? ' 等 ' + r.cats.length + ' 个' : '') : '未选择',
+                catN: !r.cats.length ? '不选 = 全部品类' : r.catEx ? '已勾选排除：所选 ' + r.cats.length + ' 个品类的商品不满足本规则' : '商品属于所选 ' + r.cats.length + ' 个品类之一即满足',
+                pickCat: () => { if (!canEdit) return; this.setState({ mp: { kind: 'cat', to: { pool: s.id, i: i, f: 'cats' }, sel: r.cats.slice(), chk: {}, lq: '', rq: '', lp: 1, rp: 1 } }); },
+                catExCls: r.catEx ? 'on' : '', catExCk: String(!!r.catEx), togCatEx: () => setR(i, { catEx: !r.catEx }),
                 kw: r.kws.join('，'), onKw: (e) => setR(i, { kws: String(e.target.value).split(/[,，]/).map((x) => x.trim()).filter(Boolean) }),
-                brandQ: Q[qk('b')] || '', onBrandQ: (e) => setQ(qk('b'), e.target.value), brandN: r.brands.length ? '已选 ' + r.brands.length + ' 个' : '不选 = 全部品牌',
-                brands: filt(brandAll, r.brands, Q[qk('b')]).map((x) => ({ t: x, cls: r.brands.includes(x) ? 'on' : '', pick: () => setR(i, { brands: togA(r.brands, x) }) })),
-                stNone: r.stock === '' ? 'on' : '', stAll: r.stock === '全国' ? 'on' : '', stProv: r.stock === '省份' ? 'on' : '', isProv: r.stock === '省份',
-                setStNone: () => setR(i, { stock: '', provs: [] }), setStAll: () => setR(i, { stock: '全国', provs: [] }), setStProv: () => setR(i, { stock: '省份' }),
-                provs: this.provs().map((x) => ({ t: x, cls: r.provs.includes(x) ? 'on' : '', pick: () => setR(i, { provs: togA(r.provs, x) }) })), provN: r.provs.length ? '已选 ' + r.provs.length + ' 个省份：所选省份均有货才上架' : '请选择省份',
+                brandSum: r.brands.length ? r.brands.slice(0, 6).join('、') + (r.brands.length > 6 ? ' 等 ' + r.brands.length + ' 个' : '') : '未选择',
+                brandN: !r.brands.length ? '不选 = 全部品牌' : r.brandEx ? '已勾选排除：所选 ' + r.brands.length + ' 个品牌的商品不满足本规则' : '商品属于所选 ' + r.brands.length + ' 个品牌之一即满足',
+                pickBrand: () => { if (!canEdit) return; this.setState({ mp: { kind: 'brand', to: { pool: s.id, i: i, f: 'brands' }, sel: r.brands.slice(), chk: {}, lq: '', rq: '', lp: 1, rp: 1 } }); },
+                brandExCls: r.brandEx ? 'on' : '', brandExCk: String(!!r.brandEx), togBrandEx: () => setR(i, { brandEx: !r.brandEx }),
                 mgOp: r.mgOp || '大于等于', onMgOp: (e) => setR(i, { mgOp: e.target.value }), mg: String(r.mg == null ? '' : r.mg), onMg: (e) => setR(i, { mg: String(e.target.value).replace(/[^\d.]/g, '') }),
                 pmin: String(r.pmin == null ? '' : r.pmin), onPmin: (e) => setR(i, { pmin: String(e.target.value).replace(/[^\d.]/g, '') }), pmax: String(r.pmax == null ? '' : r.pmax), onPmax: (e) => setR(i, { pmax: String(e.target.value).replace(/[^\d.]/g, '') }),
                 ships: ['电商发货', '厂家发货'].map((x) => ({ t: this.shipLbl(x), cls: r.ships.includes(x) ? 'on' : '', ck: String(r.ships.includes(x)), pick: () => setR(i, { ships: togA(r.ships, x) }) })),
-                hitN: String(rows.filter((x) => x.k !== 'down' && x.from === '规则 ' + (i + 1)).length) }; }),
-            addRule: () => setD({ rules: d.rules.concat([blankR()]), ex: d.ex }),
-            exCatQ: Q.exc || '', onExCatQ: (e) => setQ('exc', e.target.value), exBrandQ: Q.exb || '', onExBrandQ: (e) => setQ('exb', e.target.value),
-            exCats: filt(catAll, d.ex.cats || [], Q.exc).map((x) => ({ t: x, cls: (d.ex.cats || []).includes(x) ? 'on' : '', pick: () => setD({ rules: d.rules, ex: Object.assign({}, d.ex, { cats: togA(d.ex.cats, x) }) }) })),
-            exBrands: filt(brandAll, d.ex.brands || [], Q.exb).map((x) => ({ t: x, cls: (d.ex.brands || []).includes(x) ? 'on' : '', pick: () => setD({ rules: d.rules, ex: Object.assign({}, d.ex, { brands: togA(d.ex.brands, x) }) }) })),
-            exCatN: (d.ex.cats || []).length ? '已选 ' + d.ex.cats.length + ' 个' : '未设置', exBrandN: (d.ex.brands || []).length ? '已选 ' + d.ex.brands.length + ' 个' : '未设置',
+                hitN: String(rows.filter((x) => x.k !== 'down' && x.ri === i).length) }; }),
+            addRule: () => setD({ rules: d.rules.concat([blankR(d.rules.length + 1)]), ex: d.ex }),
             detect: () => { if (d.rules.every((r) => this.r2Empty(r))) { this.flash('至少设置 1 条有条件的规则'); return; } const e = this.r2Est(d); this.setState({ r2Det: { id: s.id, hash: hash, n: e.total, per: e.per, loading: true } }); setTimeout(() => { const x = this.state.r2Det; if (x && x.hash === hash) this.setState({ r2Det: Object.assign({}, x, { loading: false }) }); }, 700); },
             detLoading: !!det && det.hash === hash && !!det.loading, detOn: detFresh, detNone: !det || det.hash !== hash, detStale: !!det && det.hash !== hash,
             detOk: detFresh && det.n < LIMIT, detOver: detFresh && det.n >= LIMIT, detN: detFresh ? det.n.toLocaleString('zh-CN') : '',
-            detPer: detFresh ? det.per.map((n, i) => ({ t: '规则 ' + (i + 1) + ' 约 ' + n.toLocaleString('zh-CN') + ' 个' })) : [],
+            detPer: detFresh ? det.per.map((n, i) => ({ t: this.r2Name(d.rules[i] || {}, i) + ' 约 ' + n.toLocaleString('zh-CN') + ' 个' })) : [],
             saveCls: okToSave ? '' : 'dis', saveTip: !detFresh ? (dirty ? '规则有改动，请先点「规则检测」' : '保存前请先点「规则检测」') : det.n >= LIMIT ? '预计商品数超过 1 万，请收窄规则后重新检测' : '检测通过，可以保存',
             save: () => { if (!canEdit) return; if (!detFresh) { this.flash('请先点「规则检测」，预计商品数低于 1 万才能保存'); return; } if (det.n >= LIMIT) { this.flash('预计商品数 ' + det.n.toLocaleString('zh-CN') + ' 个，超过 1 万上限，请收窄规则'); return; }
-              if (d.rules.some((r) => r.stock === '省份' && !r.provs.length)) { this.flash('库存选了「省份有货」，请选择省份'); return; }
+              if (d.rules.some((r) => !String(r.name || '').trim())) { this.flash('请填写每条规则的规则名称'); return; }
+              { const ns = d.rules.map((r) => String(r.name).trim()); if (new Set(ns).size !== ns.length) { this.flash('规则名称不能重复'); return; } }
               if (d.rules.some((r) => r.pmin !== '' && r.pmax !== '' && +r.pmin > +r.pmax)) { this.flash('会员价区间的最低价不能高于最高价'); return; }
               if (hash === savedHash) { this.flash('规则没有变化'); return; }
               this.confirm('保存「' + s.name + '」的商品规则？', '规则检测预计 ' + det.n.toLocaleString('zh-CN') + ' 个商品。保存后立即生效：自动上架 ' + up.length + ' 款、自动下架 ' + down.length + ' 款；白名单与黑名单商品保持不变。', '保存并生效', false, doSave); },
             reset: () => this.setState({ r2Dr: null }), dirty: dirty,
-            scope: String(rows.filter((x) => !x.man).length), inN: String(rows.filter((x) => x.k === 'in').length), downN: String(rows.filter((x) => x.k === 'down' && !x.man).length), exN: String(rows.filter((x) => x.k === 'excl').length),
+            scope: String(rows.filter((x) => !x.man).length), inN: String(rows.filter((x) => x.k === 'in').length), downN: String(rows.filter((x) => x.k === 'down' && !x.man).length), exN: '0',
             sum: dirty ? '预览（未保存）' : '当前生效',
-            drops: drops.map((x) => ({ name: x.g.name, why: x.why, src: x.g.src + ' · ' + this.gShip(x.g), member: '¥' + x.g.member, pill: x.k === 'excl' ? 'p-warn' : 'p-mute', state: x.k === 'excl' ? '排他剔除' : '自动下架' })), noDrops: !drops.length } }; })(),
+            drops: drops.map((x) => ({ name: x.g.name, why: x.why, src: x.g.src + ' · ' + this.gShip(x.g), member: '¥' + x.g.member, pill: 'p-mute', state: '自动下架' })), noDrops: !drops.length } }; })(),
         ...(() => { if (KIND !== 'pool') return { shows: [], noShows: true, colSubs: [], showAdd: [] }; const sh = s.shows || []; const cs = s.colSubs || {}; const put = (v, msg) => { patchS(Object.assign({ shows: v }, {})); if (msg) this.pushLog('商品池', msg, s.name); };
           const COLS = ['场景商品'];
           return { shows: sh.map((x, i) => ({ col: x[0], label: x[1], tag: x[2], cond: x[3], onCls: x[4] ? 'on' : '', onS: x[4] ? 'true' : 'false', n: i + 1,
@@ -3153,18 +3166,34 @@ class Component extends DCLogic {
           this.confirm('保存「' + s.name + '」的商品' + (KIND === 'scene' ? '来源' : '规则') + '？', '将自动上架 ' + up.length + ' 款、自动下架 ' + down.length + ' 款；手动加入与手动排除的商品保持不变。', '保存并生效', false, () => { const t = nowStr(); const lg = up.map((id) => [t, '自动上架 ' + nm(id) + '：规则调整后命中', id]).concat(down.map((id) => [t, '自动下架 ' + nm(id) + '：规则调整后不再命中', id])); this.setState({ [storeOf]: this.state[storeOf].map((x) => (x.id === s.id ? Object.assign({}, x, dr, { log: lg.concat(x.log || []) }) : x)), scRd: null }); this.pushLog(CFG.mod, '修改商品规则', s.name + '（上架 ' + up.length + ' / 下架 ' + down.length + '）'); this.flash('已生效：上架 ' + up.length + ' 款、下架 ' + down.length + ' 款'); });
         },
         // 商品明细
-        kpis: [[CFG.inL, cnt('in')], ['自动下架', cnt('down')], ['白名单 / 黑名单', cnt('white') + ' / ' + cnt('black')]].concat(KIND === 'topic' || KIND === 'pool' ? [['排他剔除', cnt('excl')]] : [['近 7 天变动', (s.log || []).length]]).map((x) => ({ k: x[0], v: String(x[1]) })),
-        segs: [['in', CFG.inL], ['down', '自动下架'], ['white', '白名单'], ['black', '黑名单']].concat(KIND === 'topic' || KIND === 'pool' ? [['excl', '排他剔除']] : []).map((x) => ({ label: x[1], n: cnt(x[0]), cls: seg === x[0] ? 'on' : '', pick: () => set({ scF: Object.assign({}, F, { seg: x[0] }) }) })),
+        kpis: [[CFG.inL, cnt('in')], ['自动下架', cnt('down')], ['白名单 / 黑名单', cnt('white') + ' / ' + cnt('black')]].concat(KIND === 'topic' ? [['排他剔除', cnt('excl')]] : [['近 7 天变动', (s.log || []).length]]).map((x) => ({ k: x[0], v: String(x[1]) })),
+        segs: [['in', CFG.inL], ['down', '自动下架'], ['white', '白名单'], ['black', '黑名单']].concat(KIND === 'topic' ? [['excl', '排他剔除']] : []).map((x) => ({ label: x[1], n: cnt(x[0]), cls: seg === x[0] ? 'on' : '', pick: () => set({ scF: Object.assign({}, F, { seg: x[0] }) }) })),
         forms: [['', '全部类型'], ['爆品', '爆品'], ['礼包', '礼包'], ['卡券', '卡券']].map((f) => ({ t: f[1], n: now.filter((x) => segOk(x, seg) && (!f[0] || (x.g.form || '爆品') === f[0])).length, cls: form === f[0] ? 'on' : '', pick: () => set({ scF: Object.assign({}, F, { form: f[0] }) }) })),
         q: q, onQ: (e) => set({ scF: Object.assign({}, F, { q: e.target.value }) }),
-        rows: rows.map((x) => ({ name: x.g.name, brand: x.g.brand, src: x.g.src, form: x.g.form || '爆品', img: IMG[x.g.id] || IMG.ph, member: this.money2(x.g.member), rate: canCost ? this.rateOf(x.g).toFixed(1) + '%' : (x.why.startsWith('利润率') ? '低于阈值' : '达标'), rateCls: canCost ? (this.rateOf(x.g) < 0 ? 'neg' : '') : 'mask',
+        flt: (() => { const setF = (k) => (e) => set({ scF: Object.assign({}, F, { [k]: e.target.value }), scSel: null }); const pickF = (k, v) => () => set({ scF: Object.assign({}, F, { [k]: v }), scSel: null });
+          const srcs = uniq(now.map((x) => x.g.src));
+          return { brand: F.brand || '', onBrand: setF('brand'), cat: F.cat || '', onCat: setF('cat'), pmin: F.pmin || '', onPmin: setF('pmin'), pmax: F.pmax || '', onPmax: setF('pmax'), rmin: F.rmin || '', onRmin: setF('rmin'), rmax: F.rmax || '', onRmax: setF('rmax'), canCost: canCost,
+            srcs: [['', '全部货源']].concat(srcs.map((x) => [x, x])).map((x) => ({ t: x[1], cls: fSrc === x[0] ? 'on' : '', pick: pickF('src', x[0]) })),
+            froms: [['', '全部'], ['rule', '规则命中'], ['white', '白名单']].map((x) => ({ t: x[1], cls: fFrom === x[0] ? 'on' : '', pick: pickF('from', x[0]) })),
+            active: fActive, n: '筛选结果 ' + rows.length + ' 款', reset: () => set({ scF: { seg: F.seg, form: F.form }, scSel: null }) }; })(),
+        sel: (() => { const allOn = rows.length > 0 && rows.every((x) => SEL.includes(x.g.id)); const ids = selRows.map((x) => x.g.id);
+          const batch = (kind) => () => { if (!canEdit || !ids.length) return; const t = nowStr(); let man = (s.manual || []).slice(), ex = (s.excl || []).slice(); const nm2 = (id) => nm(id);
+            if (kind === 'black') { man = man.filter((x) => !ids.includes(x)); ex = uniq(ex.concat(ids)); }
+            else if (kind === 'white') { ex = ex.filter((x) => !ids.includes(x)); man = uniq(man.concat(ids)); }
+            else { man = man.filter((x) => !ids.includes(x)); ex = ex.filter((x) => !ids.includes(x)); }
+            const act = { black: '加入黑名单', white: '加入白名单', clear: '移出黑白名单' }[kind];
+            patchS({ manual: man, excl: ex, pin: kind === 'white' ? s.pin : (s.pin || []).filter((p) => !ids.includes(p)), log: ids.map((id) => [t, act + ' ' + nm2(id) + '：' + this.meName(), id]).concat(s.log || []) }, '批量' + act + '（' + ids.length + ' 款）');
+            setSel([]); this.flash('已' + act + ' ' + ids.length + ' 款' + (kind === 'clear' ? '，按规则自动上下架' : kind === 'black' ? '，规则不会再自动上架' : '，不受规则影响')); };
+          return { n: String(ids.length), on: ids.length > 0, allCls: allOn ? 'on' : '', allCk: String(allOn), all: () => setSel(allOn ? [] : rows.map((x) => x.g.id)), clr: () => setSel([]),
+            black: batch('black'), white: batch('white'), clear: batch('clear') }; })(),
+        rows: rows.map((x) => ({ ckCls: SEL.includes(x.g.id) ? 'on' : '', ck: String(SEL.includes(x.g.id)), tog: () => setSel(tog(SEL, x.g.id)), sku: this.skuOf(x.g) + ' · ' + x.g.cat, name: x.g.name, brand: x.g.brand, src: x.g.src, form: x.g.form || '爆品', img: IMG[x.g.id] || IMG.ph, member: this.money2(x.g.member), rate: canCost ? this.rateOf(x.g).toFixed(1) + '%' : (x.why.startsWith('利润率') ? '低于阈值' : '达标'), rateCls: canCost ? (this.rateOf(x.g) < 0 ? 'neg' : '') : 'mask',
           state: LBL[x.k], sCls: PILLS[x.k], sv: this.svOf(s, x.g.id) == null ? '' : String(this.svOf(s, x.g.id)), svDis: !canEdit || !isIn(x),
           onSv: (e) => { const v = String(e.target.value).replace(/[^\d]/g, ''); const m = Object.assign({}, s.sortv || {}); if (v === '') delete m[x.g.id]; else m[x.g.id] = Number(v); patchS({ sortv: m, pin: (s.pin || []).filter((p) => p !== x.g.id) }, v === '' ? '清空排序值 ' + x.g.name.slice(0, 10) : '设置排序值 ' + x.g.name.slice(0, 10) + ' = ' + v); }, why: x.why, from: x.from, last: lastLog(x.g.id),
           canPin: false, pinLabel: x.pin ? '取消置顶' : '置顶', pinT: () => { patchS({ pin: tog(s.pin, x.g.id) }, x.pin ? '取消置顶' : '置顶'); },
           exLabel: x.man ? '移出白名单' : x.k === 'ex' ? '移出黑名单' : '加入黑名单', canEx: x.man || (x.k !== 'down' && x.k !== 'excl'), ex: () => {
             if (x.man) { patchS({ manual: tog(s.manual, x.g.id), pin: (s.pin || []).filter((p) => p !== x.g.id), log: [[nowStr(), '移出白名单 ' + x.g.name.slice(0, 10), x.g.id]].concat(s.log || []) }, '移出白名单'); this.flash('已移出白名单，按规则自动上下架'); return; }
             const ex = x.k === 'ex'; patchS({ excl: tog(s.excl, x.g.id), pin: ex ? s.pin : (s.pin || []).filter((p) => p !== x.g.id), log: [[nowStr(), (ex ? '移出黑名单 ' : '加入黑名单 ') + x.g.name.slice(0, 10) + '：' + this.meName(), x.g.id]].concat(s.log || []) }, ex ? '移出黑名单' : '加入黑名单'); this.flash(ex ? '已移出黑名单，按规则自动上下架' : '已加入黑名单，规则不会再把它自动上架'); } })),
-        empty: !rows.length,
+        empty: !rows.length, emptyT: fActive ? '没有符合筛选条件的商品，试试放宽条件或点「重置」' : '没有符合条件的商品',
         addOpen: () => set({ scAdd: { sel: {}, src: '', cat: '', brand: '', rmin: '', q: '', form: '' } }),
         imp: () => set({ imp: { kind: KIND, id: s.id, step: 'pick' } }),
         exp: () => { this.pushLog(CFG.mod, '导出商品清单', s.name + '（' + rows.length + ' 条）'); this.flash('已按当前筛选导出「' + s.name + '」商品清单 ' + rows.length + ' 条（商品、类型、货源、会员价、状态、进入方式、最近变动），文件带操作人水印'); },
@@ -3344,25 +3373,26 @@ class Component extends DCLogic {
     const F = st.fm;
     // ---------- 指定会员：穿梭框弹窗 ----------
     const MP = st.mp; const PG = 10;
-    out.mpOn = !!(MP && F);
-    out.mp = { lHead: '', rHead: '', lq: '', rq: '', onLq: () => {}, onRq: () => {}, left: [], right: [], lPage: '1', lPages: '1', rPage: '1', rPages: '1', lPrev: () => {}, lNext: () => {}, rPrev: () => {}, rNext: () => {}, lPrevCls: 'dis', lNextCls: 'dis', rPrevCls: 'dis', rNextCls: 'dis', move: () => {}, moveCls: 'dis', ok: () => {}, close: () => {}, lEmpty: false, rEmpty: true };
-    if (MP && F) {
+    const PK = MP && MP.kind ? MP.kind : 'member'; const PKT = { member: ['选择指定会员', '会员', '家'], cat: ['选择商品品类', '品类', '个'], brand: ['选择商品品牌', '品牌', '个'] }[PK] || ['选择', '', '个'];
+    out.mpOn = !!(MP && (F || MP.kind));
+    out.mp = { lHead: '', rHead: '', lq: '', rq: '', onLq: () => {}, onRq: () => {}, left: [], right: [], lPage: '1', lPages: '1', rPage: '1', rPages: '1', lPrev: () => {}, lNext: () => {}, rPrev: () => {}, rNext: () => {}, lPrevCls: 'dis', lNextCls: 'dis', rPrevCls: 'dis', rNextCls: 'dis', move: () => {}, moveCls: 'dis', ok: () => {}, close: () => {}, lEmpty: false, rEmpty: true, title: '', ph: '', phR: '', emptyT: '' };
+    if (MP && (F || MP.kind)) {
       const setM = (p) => this.setState({ mp: Object.assign({}, MP, p) });
-      const all = this.memberAll(); const lq = (MP.lq || '').trim(), rq = (MP.rq || '').trim();
+      const all = this.pkAll(PK); const lq = (MP.lq || '').trim(), rq = (MP.rq || '').trim();
       const lAll = all.filter((x) => !MP.sel.includes(x) && (!lq || x.includes(lq))); const rAll = MP.sel.filter((x) => !rq || x.includes(rq));
       const lPages = Math.max(1, Math.ceil(lAll.length / PG)), rPages = Math.max(1, Math.ceil(rAll.length / PG)); const lp = Math.min(MP.lp, lPages), rp = Math.min(MP.rp, rPages);
-      const chkN = Object.keys(MP.chk).filter((k) => MP.chk[k]).length; const total = 10949 + all.length;
-      out.mp = { lHead: chkN + '/' + total.toLocaleString('zh-CN') + ' 家', rHead: MP.sel.length + ' 家', lq: MP.lq, rq: MP.rq,
+      const chkN = Object.keys(MP.chk).filter((k) => MP.chk[k]).length; const total = PK === 'member' ? 10949 + all.length : all.length;
+      out.mp = { title: PKT[0], ph: '请输入' + PKT[1] + '名称搜索', phR: '搜索已选' + PKT[1], emptyT: '没有匹配的' + PKT[1], lHead: chkN + '/' + total.toLocaleString('zh-CN') + ' ' + PKT[2], rHead: MP.sel.length + ' ' + PKT[2], lq: MP.lq, rq: MP.rq,
         onLq: (e) => setM({ lq: e.target.value, lp: 1 }), onRq: (e) => setM({ rq: e.target.value, rp: 1 }),
         left: lAll.slice((lp - 1) * PG, lp * PG).map((x) => ({ t: x, cls: MP.chk[x] ? 'on' : '', ck: String(!!MP.chk[x]), pick: () => setM({ chk: Object.assign({}, MP.chk, { [x]: !MP.chk[x] }) }) })),
         right: rAll.slice((rp - 1) * PG, rp * PG).map((x) => ({ t: x, del: () => setM({ sel: MP.sel.filter((y) => y !== x) }) })),
         lPage: String(lp), lPages: String(lPages), rPage: String(rp), rPages: String(rPages),
         lPrev: () => lp > 1 && setM({ lp: lp - 1 }), lNext: () => lp < lPages && setM({ lp: lp + 1 }), rPrev: () => rp > 1 && setM({ rp: rp - 1 }), rNext: () => rp < rPages && setM({ rp: rp + 1 }),
         lPrevCls: lp > 1 ? '' : 'dis', lNextCls: lp < lPages ? '' : 'dis', rPrevCls: rp > 1 ? '' : 'dis', rNextCls: rp < rPages ? '' : 'dis',
-        move: () => { const add = Object.keys(MP.chk).filter((k) => MP.chk[k] && !MP.sel.includes(k)); if (!add.length) { this.flash('先在左侧勾选会员'); return; } setM({ sel: MP.sel.concat(add), chk: {} }); },
+        move: () => { const add = Object.keys(MP.chk).filter((k) => MP.chk[k] && !MP.sel.includes(k)); if (!add.length) { this.flash('先在左侧勾选' + PKT[1]); return; } setM({ sel: MP.sel.concat(add), chk: {} }); },
         moveCls: chkN ? '' : 'dis', lEmpty: !lAll.length, rEmpty: !rAll.length,
         close: () => this.setState({ mp: null }),
-        ok: () => { const fm = this.state.fm; this.setState({ mp: null, fm: Object.assign({}, fm, { vals: Object.assign({}, fm.vals, { [MP.k]: MP.sel.slice() }) }) }); } };
+        ok: () => { if (MP.kind) { this.pkApply(MP); return; } const fm = this.state.fm; this.setState({ mp: null, fm: Object.assign({}, fm, { vals: Object.assign({}, fm.vals, { [MP.k]: MP.sel.slice() }) }) }); } };
     }
     out.fmOpen = !!F; out.fm = { title: '', fields: [], hasTip: false, tip: '', saveLabel: '保存' };
     out.fmClose = () => set({ fm: null });
