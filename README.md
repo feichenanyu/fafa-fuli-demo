@@ -75,6 +75,7 @@ Markdown 原文在 [`docs/`](docs/) 目录。
 
 | 内容 | 链接 |
 | --- | --- |
+| 采发发买家侧产品形态与版本规划（版本清单） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/version-plan/ |
 | 买家侧数据准备清单 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/datalist.html |
 | 采发发 C端商城产品 Spec（V1 / V2） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/c-mall-spec.html |
 | 采发发 C端兑换商城 · 设计稿 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/c-mall-design/ |
