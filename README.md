@@ -79,7 +79,7 @@ Markdown 原文在 [`docs/`](docs/) 目录。
 | 买家侧数据准备清单 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/datalist.html |
 | 采发发 C端商城产品 Spec（V1 / V2） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/c-mall-spec.html |
 | 采发发 C端兑换商城 · 设计稿 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/c-mall-design/ |
-| 运营管理后台 Demo v1.7 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/admin-demo/ |
-| 运营管理后台 PRD v1.1 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/admin-prd.html |
+| 运营管理后台 Demo v1.7（Q4 首期开放：工作台 / 场景 / 商品池 / 埋点） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/admin-demo/ |
+| 运营管理后台 PRD v1.1（Q4 节选：场景 / 商品池 / 工作台 / 埋点 / 非功能需求） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/admin-prd.html |
 | 年货节 Demo（分采通场景运营首页 v2） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/nhj-demo/ |
 | 年货节 PRD（会员端 V1.0 年货节版 Spec） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/nhj-prd.html |

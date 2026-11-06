@@ -1214,24 +1214,15 @@ const ICON = {
   data: 'M4 20V10M10 20V4M16 20v-7M22 20H2',
   sys: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 15H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 9 4.6V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z'
 };
+const Q4_OPEN = ['home', 'bscene', 'bapp', 'bhot', 'scene', 'pool', 'track'];
 const NAV = [
   { label: '', mods: [{ id: 'home', name: '工作台', subs: [] }] },
-  { label: '平台底座', mods: [
-    { id: 'cust', name: '客户中心', subs: [{ id: 'cert', name: '企业认证' }, { id: 'company', name: '企业客户' }, { id: 'member', name: '用户与成员' }, { id: 'lead', name: '咨询需求单' }] },
-    { id: 'goods', name: '商品中心', subs: [{ id: 'goods', name: '商品库' }, { id: 'fillcfg', name: '补齐字段配置' }, { id: 'pool', name: '商品池' }, { id: 'category', name: '商品类目' }, { id: 'brand', name: '品牌管理' }, { id: 'tag', name: '标签管理', alias: ['tagtype'] }, { id: 'tagtype', name: '标签类型', hidden: true }] },
-    { id: 'trade', name: '交易中心', subs: [{ id: 'order', name: '订单' }, { id: 'af', name: '售后' }] },
-    { id: 'fin', name: '账户与财务', subs: [{ id: 'points', name: '积分账户（AI 额度）' }, { id: 'activity', name: '活动账户' }, { id: 'prepay', name: '商品预付款' }, { id: 'inv', name: '发票管理' }, { id: 'flow', name: '流水与对账', alias: ['recon'] }, { id: 'recon', name: '对账单', hidden: true }] }
-  ] },
   { label: '业务应用', mods: [
-    { id: 'fafa', name: '采发发 Agent', subs: [{ id: 'bscene', name: '三大应用与子场景', alias: ['bapp'] }, { id: 'bapp', name: '三大应用', hidden: true }, { id: 'bhot', name: '热门运营场景' }, { id: 'scene', name: '福利场景专区' }, { id: 'chan', name: '频道运营' }, { id: 'topic', name: '专题管理' }, { id: 'benefit', name: '权益包' }, { id: 'kb', name: '专家咨询知识库', alias: ['kbmiss', 'kbpolicy', 'kbrule'] }, { id: 'kbpolicy', name: '合规与采购政策', hidden: true }, { id: 'kbrule', name: '合规规则', hidden: true }, { id: 'kbmiss', name: '未命中问题', hidden: true }, { id: 'bset', name: '应用设置' }] },
-    { id: 'jicai', name: '发发集采', dis: true, subs: [] },
-    { id: 'fct', name: '分采通', dis: true, subs: [] }
+    { id: 'fafa', name: '场景管理', subs: [{ id: 'bscene', name: '三大应用与子场景', alias: ['bapp'] }, { id: 'bapp', name: '三大应用', hidden: true }, { id: 'bhot', name: '热门运营场景' }, { id: 'scene', name: '福利场景专区' }] },
+    { id: 'goods', name: '商品中心', subs: [{ id: 'pool', name: '商品池' }] }
   ] },
   { label: '数据与智能', mods: [
-    { id: 'data', name: '数据与智能', subs: [{ id: 'ask', name: '智能查数' }, { id: 'task', name: '定时任务' }, { id: 'track', name: '埋点管理' }, { id: 'aiapps', name: 'AI 应用管理' }] }
-  ] },
-  { label: '系统设置', mods: [
-    { id: 'sys', name: '系统设置', subs: [{ id: 'roles', name: '角色与权限' }, { id: 'staff', name: '员工账号' }, { id: 'log', name: '操作日志' }] }
+    { id: 'data', name: '数据与智能', subs: [{ id: 'track', name: '埋点管理' }] }
   ] }
 ];
 const STATUS = {
@@ -2552,6 +2543,7 @@ class Component extends DCLogic {
   modOf(page) { for (const g of NAV) for (const m of g.mods) { if (m.id === page && !m.subs.length) return m; if (m.subs.some((s) => s.id === page)) return m; } return null; }
   subOf(page) { for (const g of NAV) for (const m of g.mods) for (const s of m.subs) if (s.id === page) return s; return null; }
   canPage(page, role) {
+    if (!Q4_OPEN.includes(page)) return false;
     const m = this.modOf(page); if (!m) return false;
     const EXTRA = { lead: ['cs'], kb: ['cs'], kbmiss: ['cs'], kbpolicy: ['cs'], kbrule: ['cs'] };
     if (!ACCESS[role].includes(m.id) && !(EXTRA[page] || []).includes(role)) return false;
@@ -2559,6 +2551,7 @@ class Component extends DCLogic {
     return true;
   }
   go(page, extra) {
+    if (!Q4_OPEN.includes(page)) { this.flash('该入口暂未开放'); return; }
     const o = Object.assign({ page: page, certId: '', afId: '', chId: '', cdet: null, scDet: '', scRd: null }, extra || {});
     const tabs = (this.state.pgTabs || ['home']).slice(); const tp = page === 'recon' ? 'flow' : ['kbmiss', 'kbpolicy', 'kbrule'].includes(page) ? 'kb' : page === 'tagtype' ? 'tag' : page;
     if (!tabs.includes(tp)) { tabs.push(tp); if (tabs.length > 8) tabs.splice(1, 1); }
