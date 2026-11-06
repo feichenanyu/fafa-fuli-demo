@@ -68,3 +68,17 @@ Markdown 原文在 [`docs/`](docs/) 目录。
 - AI：先识别意图，采购需求 2–6 轮反问收窄（追问卡片 + 右侧需求画像），输出全部满足条件的 SKU，支持多选筛选与多选加购
 - 后台：场景新增 AI 反问配置（目标规模、最多轮数、可反问维度）
 - 文档：前台 PRD v2.1、后台 PRD v1.1、Spec v2.1、Prompt v2.1 同步更新
+
+## 采发发 Q4 资料清单
+
+清单页：https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/
+
+| 内容 | 链接 |
+| --- | --- |
+| 买家侧数据准备清单 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/datalist.html |
+| 采发发 C端商城产品 Spec（V1 / V2） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/c-mall-spec.html |
+| 采发发 C端兑换商城 · 设计稿 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/c-mall-design/ |
+| 运营管理后台 Demo v1.7 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/admin-demo/ |
+| 运营管理后台 PRD v1.1 | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/admin-prd.html |
+| 年货节 Demo（分采通场景运营首页 v2） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/nhj-demo/ |
+| 年货节 PRD（会员端 V1.0 年货节版 Spec） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/nhj-prd.html |

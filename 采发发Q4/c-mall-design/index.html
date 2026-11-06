@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>采发发 C端兑换商城 · 设计稿</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#c2410c;--warm-soft:#fff4e8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fb923c;--warm-soft:#3a2614}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+
+.wrap{max-width:1440px;margin:0 auto;padding:28px 16px 80px}
+h1{font-size:26px;margin:0 0 6px}.sub{color:var(--text-3);margin:0 0 24px;font-size:15px}
+h2{font-size:17px;margin:32px 0 14px}
+.row{display:flex;flex-wrap:wrap;gap:28px 24px;align-items:flex-start}
+.sc{margin:0;display:flex;flex-direction:column;gap:8px}
+.sc-frame{display:block;position:relative;overflow:hidden;border-radius:14px;border:1px solid var(--border);background:#fff;box-shadow:0 6px 20px rgba(15,20,24,.06)}
+.sc-frame:hover{border-color:var(--brand)}
+.sc-frame iframe{border:0;transform-origin:0 0;pointer-events:none;display:block}
+figcaption{display:flex;justify-content:space-between;gap:8px;font-size:14px}
+figcaption a{text-decoration:none;color:var(--ink);font-weight:600}
+figcaption span{color:var(--text-3);font-size:12px}
+</style></head><body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 Q4</a><span class="crumb">设计稿 Demo · 采发发 C端兑换商城</span>
+<a class="btn" href="../">全部清单</a><a class="btn" href="../docs/c-mall-spec.html">C 端产品 Spec</a><a class="btn pri" href="Main.html">从首页开始体验</a></div></header>
+<main class="wrap"><h1>采发发 C端兑换商城 · 设计稿</h1>
+<p class="sub">员工兑换主流程：找货 → 详情 → 加购 / 立即兑换 → 结算。点任意一屏打开原尺寸页面，页面内可直接点击跳转。同步：2026-11-06</p>
+<h2>员工兑换主流程（10 屏）</h2><div class="row"><figure class="sc">
+<a class="sc-frame" href="Main.html" style="width:242px;height:732px" aria-label="打开 首页">
+<iframe src="Main.html" title="首页" loading="lazy" tabindex="-1" style="width:390px;height:1180px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="Main.html">首页</a><span>390×1180</span></figcaption></figure><figure class="sc">
+<a class="sc-frame" href="Category.html" style="width:242px;height:523px" aria-label="打开 分类">
+<iframe src="Category.html" title="分类" loading="lazy" tabindex="-1" style="width:390px;height:844px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="Category.html">分类</a><span>390×844</span></figcaption></figure><figure class="sc">
+<a class="sc-frame" href="Search.html" style="width:242px;height:620px" aria-label="打开 搜索结果">
+<iframe src="Search.html" title="搜索结果" loading="lazy" tabindex="-1" style="width:390px;height:1000px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="Search.html">搜索结果</a><span>390×1000</span></figcaption></figure><figure class="sc">
+<a class="sc-frame" href="AI.html" style="width:242px;height:523px" aria-label="打开 AI 帮我挑">
+<iframe src="AI.html" title="AI 帮我挑" loading="lazy" tabindex="-1" style="width:390px;height:844px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="AI.html">AI 帮我挑</a><span>390×844</span></figcaption></figure><figure class="sc">
+<a class="sc-frame" href="Detail.html" style="width:242px;height:1327px" aria-label="打开 商品详情（统一模板 · 天猫超市示例）">
+<iframe src="Detail.html" title="商品详情（统一模板 · 天猫超市示例）" loading="lazy" tabindex="-1" style="width:390px;height:2140px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="Detail.html">商品详情（统一模板 · 天猫超市示例）</a><span>390×2140</span></figcaption></figure><figure class="sc">
+<a class="sc-frame" href="Spec.html" style="width:242px;height:523px" aria-label="打开 规格弹窗">
+<iframe src="Spec.html" title="规格弹窗" loading="lazy" tabindex="-1" style="width:390px;height:844px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="Spec.html">规格弹窗</a><span>390×844</span></figcaption></figure><figure class="sc">
+<a class="sc-frame" href="Cart.html" style="width:242px;height:608px" aria-label="打开 购物车">
+<iframe src="Cart.html" title="购物车" loading="lazy" tabindex="-1" style="width:390px;height:980px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="Cart.html">购物车</a><span>390×980</span></figcaption></figure><figure class="sc">
+<a class="sc-frame" href="Checkout.html" style="width:242px;height:608px" aria-label="打开 确认订单">
+<iframe src="Checkout.html" title="确认订单" loading="lazy" tabindex="-1" style="width:390px;height:980px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="Checkout.html">确认订单</a><span>390×980</span></figcaption></figure><figure class="sc">
+<a class="sc-frame" href="Result.html" style="width:242px;height:523px" aria-label="打开 兑换成功">
+<iframe src="Result.html" title="兑换成功" loading="lazy" tabindex="-1" style="width:390px;height:844px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="Result.html">兑换成功</a><span>390×844</span></figcaption></figure><figure class="sc">
+<a class="sc-frame" href="Mine.html" style="width:242px;height:523px" aria-label="打开 我的">
+<iframe src="Mine.html" title="我的" loading="lazy" tabindex="-1" style="width:390px;height:844px;transform:scale(0.62)"></iframe></a>
+<figcaption><a href="Mine.html">我的</a><span>390×844</span></figcaption></figure></div>
+<h2>同一详情模板，渠道只差个性字段</h2><div class="row"><figure class="sc">
+<a class="sc-frame" href="Channels.html" style="width:1204px;height:630px" aria-label="打开 详情页渠道差异对照">
+<iframe src="Channels.html" title="详情页渠道差异对照" loading="lazy" tabindex="-1" style="width:1720px;height:900px;transform:scale(0.7)"></iframe></a>
+<figcaption><a href="Channels.html">详情页渠道差异对照</a><span>1720×900</span></figcaption></figure></div>
+</main></body></html>
