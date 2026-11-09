@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>采发发Agent · 买家端产品版本规划（2026.11–2027.01）</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">通用 · 版本规划 · 采发发Agent · 买家端产品版本规划（2026.11–2027.01）</span>
+<a class="btn" href="../">全部文档</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-结论">结论</a><a href="#h-三院负责任务盘点">三院负责任务盘点</a><a href="#h-版本总览">版本总览</a><a href="#h-V1-2026年11月-采购成交闭环">V1 · 2026年11月 · 采购成交闭环</a><a href="#h-V2-2026年12月-采购效率与数据可见">V2 · 2026年12月 · 采购效率与数据可见</a><a href="#h-V3-2027年1月-体验增强与共建">V3 · 2027年1月 · 体验增强与共建</a><a href="#h-与卖家版的耦合点">与卖家版的耦合点</a><a href="#h-待确认事项与风险">待确认事项与风险</a></nav>
+<article><h1 id="h-采发发Agent-买家端产品版本规划-2026-11–2027-01">采发发Agent · 买家端产品版本规划（2026.11–2027.01）</h1>
+<div class="docmeta"><span class="pill old">历史版</span><span class="pill kind">通用 · 版本规划</span><span>最后更新 2026-10-31 15:24</span></div><div class="oldnote">这是历史版本，保留作参考；当前以「采发发买家侧产品形态与版本规划」为准，<a href="../">回文档中心查看</a>。</div><p>Oct 31, 2026 · @sanyuan</p>
+<h2 id="h-结论">结论</h2>
+<p>买家端按卖家版的三个版本窗口同步排期：11月打通春节福利采购成交闭环，12月提升采购效率并让经营数据可见，1月做体验增强并与卖家版共建帮助中心、公告。</p>
+<ul>
+<li><p><strong>V1 · 11月 · 采购成交闭环</strong>：登录认证 → 预付款 → 场景内AI选品 → 下单 → 采购订单 → 售后；运营侧完成企业审核、汇款认账和场景配置。11-20 前全量上线，承接春节福利采购。</p>
+</li>
+<li><p><strong>V2 · 12月 · 效率与数据</strong>：完整角色权限、多地址下单、语义选品、选品知识库；经营、用户、激活和选品漏斗看板与卖家版看板同期上线。</p>
+</li>
+<li><p><strong>V3 · 1月 · 体验增强与共建</strong>：附件解析、推荐理由、多渠道比价（复用卖家版商品对比）；帮助中心、公告管理与卖家版合建一套。</p>
+</li>
+</ul>
+<p>关键耦合有三处：买家采购订单就是卖家供货订单的来源；权限模型需在 V1 交付最小版，供卖家版业务助手和资产检索使用；卖家侧「企业经营账户」目前没有 PD，而账户体系由你负责，需先明确归属。</p>
+<p>依据：钉钉《采发发Agent &amp; 分采通 Q4产品规划》「采发发agent」页（2026-10-31 15:16 版本）、<a href="https://oss.elebuys.com/cdn/1/other/1793429533908_51e4741e.html#release-1">采发发Agent · 产品能力路线图</a>。</p>
+<h2 id="h-三院负责任务盘点">三院负责任务盘点</h2>
+<p>拆解表中 PD 含「三院」的子任务共 51 条：P0 31 条、P1 14 条、P2 5 条、P3 1 条；其中 9 条与盛川或 nico 共同负责。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>范围</th>
+<th>模块</th>
+<th>任务</th>
+<th>子任务数</th>
+<th>P0 / P1 / P2 / P3</th>
+<th>协同 PD</th>
+<th>TL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基础</td>
+<td>数据清洗</td>
+<td>商品数据清洗（3.0商品库 → agent商品库 + 同步机制）</td>
+<td>1</td>
+<td>1 / 0 / 0 / 0</td>
+<td>—</td>
+<td>侯局</td>
+</tr>
+<tr>
+<td>基础</td>
+<td>数据埋点</td>
+<td>埋点体系（事件字典、AI专属事件、公共属性）、用户激活埋点</td>
+<td>4</td>
+<td>3 / 1 / 0 / 0</td>
+<td>nico（激活）</td>
+<td>巴韶&amp;侯局</td>
+</tr>
+<tr>
+<td>基础</td>
+<td>数据看板</td>
+<td>经营看板、用户看板、激活漏斗、选品漏斗</td>
+<td>4</td>
+<td>0 / 4 / 0 / 0</td>
+<td>nico（激活）</td>
+<td>侯局</td>
+</tr>
+<tr>
+<td>通用</td>
+<td>客户端</td>
+<td>多端载体（小程序/H5/PC，App，桌面版）</td>
+<td>3</td>
+<td>1 / 0 / 2 / 0</td>
+<td>盛川</td>
+<td>巴韶</td>
+</tr>
+<tr>
+<td>通用</td>
+<td>用户体系</td>
+<td>会员身份（注册流程优化、个人/企业两级）</td>
+<td>2</td>
+<td>2 / 0 / 0 / 0</td>
+<td>Nico（注册）</td>
+<td>侯局</td>
+</tr>
+<tr>
+<td>通用</td>
+<td>员工权限</td>
+<td>企业成员、角色权限、数据范围</td>
+<td>3</td>
+<td>1 / 2 / 0 / 0</td>
+<td>—</td>
+<td>侯局</td>
+</tr>
+<tr>
+<td>通用</td>
+<td>账户体系</td>
+<td>买家侧企业采购账户（预付款、账单中心、异常处理）</td>
+<td>3</td>
+<td>3 / 0 / 0 / 0</td>
+<td>—</td>
+<td>侯局</td>
+</tr>
+<tr>
+<td>买家侧</td>
+<td>智能选品</td>
+<td>需求理解、召回过滤、排序推荐、多轮调整、比价、选品下单、知识与评测</td>
+<td>16</td>
+<td>10 / 3 / 3 / 0</td>
+<td>—</td>
+<td>云程、老罗（下单）</td>
+</tr>
+<tr>
+<td>买家侧</td>
+<td>资产库</td>
+<td>采购订单（列表、详情、操作）</td>
+<td>3</td>
+<td>3 / 0 / 0 / 0</td>
+<td>—</td>
+<td>老罗</td>
+</tr>
+<tr>
+<td>运营侧</td>
+<td>企业管理</td>
+<td>企业列表详情、认证审核、汇款认账、冻结与黑名单</td>
+<td>4</td>
+<td>4 / 0 / 0 / 0</td>
+<td>—</td>
+<td>侯局</td>
+</tr>
+<tr>
+<td>运营侧</td>
+<td>内容管理</td>
+<td>场景/频道配置、选品提示词话术、福利知识库问答</td>
+<td>3</td>
+<td>2 / 1 / 0 / 0</td>
+<td>—</td>
+<td>老罗</td>
+</tr>
+<tr>
+<td>运营侧</td>
+<td>买家侧内容运营</td>
+<td>任务引导、应用案例、帮助中心、公告、上线培训</td>
+<td>5</td>
+<td>1 / 3 / 0 / 1</td>
+<td>nico</td>
+<td>老罗</td>
+</tr>
+</tbody></table>
+</div><p>表外提醒：「通用-账户体系-卖家侧企业经营账户」3 条子任务未填 PD、优先级和 TL，卖家版 V1 对账结算依赖它。</p>
+<h2 id="h-版本总览">版本总览</h2>
+<img src="media/agent-plan/media/image1.png" style="width:6in;height:2.96428in" alt="版本总览 · 卖家版与买家端三版对照" /><p>版本总览 · 卖家版与买家端三版对照</p>
+<p>上行为卖家版路线图，下行为买家端；虚线是各版必须两侧一起定的耦合项，详见「与卖家版的耦合点」。</p>
+<h2 id="h-V1-2026年11月-采购成交闭环">V1 · 2026年11月 · 采购成交闭环</h2>
+<p>目标：服务商和企业能在春节场景里用 AI 选完商品并下单，运营能审核企业、认款和上场景。覆盖你全部 31 条 P0，另加权限最小版。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>V1 交付范围</th>
+<th>优先级</th>
+<th>依赖/备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>商品数据</td>
+<td>3.0商品库清洗至 agent 商品库，建立同步机制</td>
+<td>P0</td>
+<td>选品召回的前提；与卖家版平台商品库共用一套结构</td>
+</tr>
+<tr>
+<td>埋点</td>
+<td>事件字典（浏览→对话→意图→方案→换品→导出→加购→下单→支付）、AI 专属事件、公共属性</td>
+<td>P0</td>
+<td>与盛川「AI 埋点」统一口径，写入「埋点口径」页</td>
+</tr>
+<tr>
+<td>多端</td>
+<td>PC 主站 + H5 + 小程序承载买家主链路</td>
+<td>P0</td>
+<td>与盛川共同；容量不足时 PC 先行</td>
+</tr>
+<tr>
+<td>会员身份</td>
+<td>PC 未登录体验与注册、移动端资料完善与赠积分；个人可浏览不可下单，上传营业执照升级企业</td>
+<td>P0</td>
+<td>与 Nico 共同；卖家版复用同一账号体系</td>
+</tr>
+<tr>
+<td>员工权限</td>
+<td>成员邀请（链接/手机号）、加入审核、移除、转让管理员；<strong>权限最小版</strong>：管理员/成员两角色，本人/全企业两档数据范围</td>
+<td>P0（最小版从 P1 提前）</td>
+<td>卖家版 V1 业务助手、资产按权限检索、经营账户资金权限都依赖它</td>
+</tr>
+<tr>
+<td>采购账户</td>
+<td>预付款（汇款认账充值、下单扣款、明细；不可退、无人工匹配入账）；账单中心（流水、订单导出、开票申请，初期线下开票）；余额不足、扣款失败、重复支付处理</td>
+<td>P0</td>
+<td>—</td>
+</tr>
+<tr>
+<td>智能选品 · 需求理解</td>
+<td>选品单结构化字段；一句话抽取字段及追问策略；合规约束（工会人均限额、禁购类目、单品上限）</td>
+<td>P0</td>
+<td>选品单字段与卖家版「智能选品」需求字段对齐</td>
+</tr>
+<tr>
+<td>智能选品 · 召回与排序</td>
+<td>统一商品库 + 场景/运营标签召回；硬过滤（无货剔除、库存紧张降权、不可售区域、黑名单、价格带）；排序因子（价格力、服务商利润空间、品牌力、销量、电商仓时效、效期）；推荐比重（如猫超≤ 50%）</td>
+<td>P0</td>
+<td>入驻商家商品要等卖家版 V1 供货入库后才进召回</td>
+</tr>
+<tr>
+<td>智能选品 · 多轮调整</td>
+<td>换品、删品、锁定、调预算、调人数，局部重算</td>
+<td>P0</td>
+<td>依赖盛川 V1「任务上下文管理」</td>
+</tr>
+<tr>
+<td>智能选品 · 下单</td>
+<td>立即下单/预付款下单，个人用户引导升级；下单前价格、库存二次校验及替换建议</td>
+<td>P0</td>
+<td>—</td>
+</tr>
+<tr>
+<td>采购订单</td>
+<td>跨来源聚合列表（状态 Tab、筛选、导出）；详情（拆单子订单、物流、支付、收货）；取消、确认收货、申请售后、再来一单</td>
+<td>P0</td>
+<td>入驻商家子订单即卖家「供货订单」</td>
+</tr>
+<tr>
+<td>运营 · 企业管理</td>
+<td>企业列表/详情、认证审核（驳回、重提）、汇款认账与账户调整审核、冻结/解冻与黑名单</td>
+<td>P0</td>
+<td>共用运营后台</td>
+</tr>
+<tr>
+<td>运营 · 场景内容</td>
+<td>场景/频道配置（名称、商品池、定价规则模板、上下线时间）；选品提示词/场景指引话术</td>
+<td>P0</td>
+<td>春节场景需在 11-20 前配好</td>
+</tr>
+<tr>
+<td>上线培训</td>
+<td>面向客服、客户运营、市场、销售的新功能培训（每版重复）</td>
+<td>P0</td>
+<td>与 nico 共同</td>
+</tr>
+</tbody></table>
+</div><p>阶段结果：春节场景可从登录走到售后，订单可按来源拆单并流入卖家供货链路，埋点从第一天起采集。</p>
+<h2 id="h-V2-2026年12月-采购效率与数据可见">V2 · 2026年12月 · 采购效率与数据可见</h2>
+<p>目标：企业内多角色协作采购，选品更准、下单更快；经营和选品效果可量化。与卖家版 V2「经营与 AI 使用看板」「套餐与积分售卖」同期。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>V2 交付范围</th>
+<th>优先级</th>
+<th>依赖/备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>员工权限</td>
+<td>完整角色矩阵（管理员/采购员/财务）；数据范围增加「本部门」，覆盖订单、方案、账单</td>
+<td>P1</td>
+<td>在 V1 最小版上扩展，卖家版同步复用</td>
+</tr>
+<tr>
+<td>智能选品</td>
+<td>语义检索 + 结构化筛选混合（「适合女性员工」「有面子的」）</td>
+<td>P1</td>
+<td>—</td>
+</tr>
+<tr>
+<td>选品下单</td>
+<td>多地址下单、导入地址下单</td>
+<td>P1</td>
+<td>春节后企业分发场景常见</td>
+</tr>
+<tr>
+<td>选品知识</td>
+<td>福利选品知识库（节日场景、行业偏好、合规标准、往期爆款）；运营侧福利知识库问答维护、答不准转专家</td>
+<td>P1</td>
+<td>由商品运营沉淀；可与「福利采购专家 skill」一起推进</td>
+</tr>
+<tr>
+<td>埋点</td>
+<td>用户激活体系埋点（注册→完善资料→登录→核心动作→7日留存）</td>
+<td>P1</td>
+<td>与 nico 共同；支撑 Nico 的 7 天激活任务流</td>
+</tr>
+<tr>
+<td>数据看板</td>
+<td>经营看板（GMV、订单数、客单价、复购，按场景/来源）；用户看板；激活漏斗；选品漏斗（对话→方案→加购→下单）</td>
+<td>P1</td>
+<td>与卖家版经营看板、盛川 AI 看板共用看板框架和口径</td>
+</tr>
+<tr>
+<td>买家内容运营</td>
+<td>任务引导：各技能默认提示词、示例需求、所需资料说明，一键填入</td>
+<td>P1</td>
+<td>与 nico 共同；卖家版同功能在 V3，建议一套配置能力两侧复用</td>
+</tr>
+<tr>
+<td>积分展示（耦合）</td>
+<td>买家账户中心承接套餐、积分余额与消费入口</td>
+<td>—</td>
+<td>功能归盛川；买家选品接口随卖家 V2 存量迁移接入 AI 网关</td>
+</tr>
+<tr>
+<td>上线培训</td>
+<td>V2 新功能培训</td>
+<td>P0</td>
+<td>—</td>
+</tr>
+</tbody></table>
+</div><p>阶段结果：采购员、财务各看各的数据；运营能看到春节场景的 GMV 和选品转化，支撑 1 月复盘。</p>
+<h2 id="h-V3-2027年1月-体验增强与共建">V3 · 2027年1月 · 体验增强与共建</h2>
+<p>目标：降低需求录入和决策成本，帮助与公告买卖两侧合建一套。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>V3 交付范围</th>
+<th>优先级</th>
+<th>依赖/备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>智能选品</td>
+<td>附件需求解析：需求文档、往年采购清单 Excel、招标文件 → 选品单</td>
+<td>P2</td>
+<td>复用盛川 V1「资产按需检索与读取」</td>
+</tr>
+<tr>
+<td>智能选品</td>
+<td>推荐理由：每个商品一句推荐原因（价格、口碑、适配场景）</td>
+<td>P2</td>
+<td>—</td>
+</tr>
+<tr>
+<td>商品对比与比价</td>
+<td>多渠道比价（市场价/平均到手价/京东价），标注价格优势</td>
+<td>P2</td>
+<td>复用卖家版 V2「商品对比」组件；不展示平台利润率</td>
+</tr>
+<tr>
+<td>帮助中心</td>
+<td>操作指南、常见问题、规则说明，支持搜索和页面入口</td>
+<td>P1 → 对齐 V3</td>
+<td>与卖家版 V3「帮助中心与公告管理」合建，按买家/卖家分类；V1、V2 只随功能交付必要说明</td>
+</tr>
+<tr>
+<td>公告与更新</td>
+<td>新功能、规则调整、维护通知，配置展示位置与时间</td>
+<td>P1 → 对齐 V3</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>上线培训</td>
+<td>V3 新功能培训</td>
+<td>P0</td>
+<td>—</td>
+</tr>
+</tbody></table>
+</div><p><strong>规划池（V3 之后）</strong></p>
+<ul>
+<li><p>App 版本、桌面版本（P2，与盛川共同）</p>
+</li>
+<li><p>应用案例：展示需求、过程和成果，从案例进入任务（P3，与 nico 共同）</p>
+</li>
+<li><p>可选：卖家版 V3 IM 频道上线后，评估买家选品在 IM 中调用（拆解表未列，不承诺）</p>
+</li>
+</ul>
+<h2 id="h-与卖家版的耦合点">与卖家版的耦合点</h2>
+<p>共 8 处耦合，其中 4 处在 V1 就要定下接口或口径，否则两侧各自开发后难合并。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>耦合点</th>
+<th>卖家版（盛川）</th>
+<th>买家端（三院）</th>
+<th>需要的约定</th>
+<th>定下时点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>订单链路</td>
+<td>V1 供货订单：接单/拒单、发货、售后、对账结算</td>
+<td>V1 采购订单按来源拆单</td>
+<td>买家子订单即卖家供货订单来源；状态、物流、售后单双向同步；卖家拒单或缺货时，买家订单如何取消、款项如何退回预付款余额</td>
+<td>V1 排期前</td>
+</tr>
+<tr>
+<td>商品库</td>
+<td>V1 商品提报 → 平台挑选入库；轻定制字段</td>
+<td>V1 3.0商品清洗、选品召回</td>
+<td>同一张商品表结构；入驻商家商品入库后按商品池规则自动上下架进入召回</td>
+<td>V1 排期前</td>
+</tr>
+<tr>
+<td>身份与权限</td>
+<td>V1 业务助手、资产按权限检索；经营账户成员资金权限；V3 IM 身份</td>
+<td>V1 成员 + 权限最小版，V2 完整矩阵</td>
+<td>角色、数据范围模型由买家端统一提供，卖家版调用</td>
+<td>V1 排期前</td>
+</tr>
+<tr>
+<td>埋点口径</td>
+<td>V1 AI 埋点（任务、积分、网关计费流水）</td>
+<td>V1 事件字典、AI 专属事件、公共属性</td>
+<td>共用「埋点口径」页一套事件与属性命名；token 消耗以计量平台流水为准</td>
+<td>V1 排期前</td>
+</tr>
+<tr>
+<td>选品 → 报价/方案</td>
+<td>V1 做报价、做方案；跨技能上下文延续</td>
+<td>V1 选品单与选品结果</td>
+<td>选品单字段纳入 Agent 上下文结构，服务商选完可直接带入对客报价、方案</td>
+<td>V1</td>
+</tr>
+<tr>
+<td>AI 网关与积分</td>
+<td>V1 计量平台，V2 存量接口迁移、套餐积分售卖</td>
+<td>买家选品调用模型；账户中心入口</td>
+<td>买家选品接口列入 V2 迁移清单；积分页面归盛川，买家端给入口</td>
+<td>V2</td>
+</tr>
+<tr>
+<td>看板</td>
+<td>V2 经营看板、AI 使用看板</td>
+<td>V2 经营、用户、激活、选品漏斗看板</td>
+<td>同一看板框架和指标口径，按买家/卖家分页</td>
+<td>V2</td>
+</tr>
+<tr>
+<td>帮助、公告、任务引导</td>
+<td>V3 帮助中心与公告管理；卖家内容运营 P2</td>
+<td>帮助、公告对齐 V3；任务引导 V2</td>
+<td>一套内容运营后台，按端分类配置；任务引导买家先做、卖家复用</td>
+<td>V2</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-待确认事项与风险">待确认事项与风险</h2>
+<p>最大风险是 V1 容量：31 条 P0 加权限最小版要在 11-20 前全量上线，且与卖家版 V1 六项建设并行。</p>
+<ul>
+<li><p><input disabled="" type="checkbox"> <strong>卖家侧企业经营账户归属</strong>：拆解表未填 PD/优先级/TL，卖家版 V1 对账结算依赖它。账户体系归你，需确认是否由三院接，以及是否进 V1。</p>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>供货订单来源与退款</strong>：卖家路线图列为「详细排期前需要明确」，答案就是买家采购订单的拆单规则；需与盛川、老罗、侯局一起定。</p>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>权限最小版前移</strong>：本规划把角色/数据范围最小版从 P1 提到 V1，需侯局确认工作量。</p>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>多端范围</strong>：小程序/H5/PC 为 P0，容量不足时是否接受 11-20 先上 PC、H5 和小程序在 11 月底补齐。</p>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>帮助中心、公告后移</strong>：买家侧是 P1，本规划对齐卖家版放 V3 合建；若买家侧需提前，则由买家先建、卖家 V3 扩展。</p>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>两个「智能选品」边界</strong>：卖家选品从商家自有商品中找，买家选品从平台统一商品库找；需确认需求字段和对客口径共用一套，避免重复建设。</p>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>日期</strong>：卖家路线图注明具体日期待工作量和依赖评估后确定，本规划版本窗口随之调整。</p>
+</li>
+</ul>
+<p>V1 容量不足时可后移的候选：推荐比重精细化、合规约束中单品价格上限以外的规则、移动端赠积分流程。不建议后移的：下单、采购订单、预付款、企业审核和场景配置。</p>
+<hr><p class="meta">最后更新 2026-10-31 15:24（北京时间）· 同步自 Claude 文档 2026-11-09 · Markdown 原文：<a href="agent-plan.md">agent-plan.md</a></p></article></div>
+</body></html>

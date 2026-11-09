@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>采发发会员工作台 V1 PRD</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">V1 · PRD · 采发发会员工作台 V1 PRD</span>
+<a class="btn" href="../">全部文档</a><a class="btn pri" href="../../采发发Q4/ws-demo/">打开 Demo</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-1-文档信息与范围">1. 文档信息与范围</a><a href="#h-2-角色与权限">2. 角色与权限</a><a href="#h-3-入口与信息架构">3. 入口与信息架构</a><a href="#h-4-项目">4. 项目</a><a href="#h-5-档期卡与场景货盘">5. 档期卡与场景货盘</a><a href="#h-6-询价">6. 询价</a><a href="#h-7-首页会员面板与栏目下线">7. 首页会员面板与栏目下线</a><a href="#h-8-新手指引-P0">8. 新手指引（P0）</a><a href="#h-9-运营后台-权限-脱敏-留痕">9. 运营后台：权限、脱敏、留痕</a><a href="#h-10-埋点-上线与验收">10. 埋点、上线与验收</a><a href="#h-11-待确认">11. 待确认</a></nav>
+<article><h1 id="h-采发发会员工作台-V1-PRD">采发发会员工作台 V1 PRD</h1>
+<div class="docmeta"><span class="pill new">最新</span><span class="pill kind">V1 · PRD</span><span>最后更新 2026-11-09 10:19</span></div><p>2026-11-09 · @sanyuan</p>
+<h2 id="h-1-文档信息与范围">1. 文档信息与范围</h2>
+<p>本 PRD 定义会员工作台 V1（11/20 上线）的前后台行为：服务商在工作台按项目看商城、询价单、订单和经营数据，从项目直接发起建商城、选品和询价。场景货盘在会员首页（即年货节版场景运营首页）展示；工作台只保留档期卡，为当前档期的热门货盘增加曝光。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>版本</td>
+<td>V1 · 年货节存量增长版，2026-11-20 上线</td>
+</tr>
+<tr>
+<td>端</td>
+<td>会员端 PC（工作台、首页会员面板）· 新运营管理后台</td>
+</tr>
+<tr>
+<td>一句话价值</td>
+<td>服务商按甲方项目看账，从项目发起询价、选品和建商城</td>
+</tr>
+<tr>
+<td>解决什么</td>
+<td>增长（存量年货节 GMV）+ 底层能力（项目信息积累）</td>
+</tr>
+<tr>
+<td>关联文档</td>
+<td>买家侧产品形态与版本规划 v1.0；会员端 V1.0 年货节版场景运营 Spec（11/05）；会员工作台调整方案；会员工作台 V1 产品说明书</td>
+</tr>
+<tr>
+<td>对应任务</td>
+<td>V1-3、V1-4、V1-5、V1-10（V1-9.2 货盘入口放会员首页；工作台只保留档期卡引流）；询价表单变更来自 V1-2.4</td>
+</tr>
+</tbody></table>
+</div><p><strong>本期做</strong></p>
+<ul>
+<li>项目：存量商城自动生成、项目列表、新增、详情、编辑、合并、从项目发起动作。</li>
+<li>入口：年货节档期卡（曝光当前档期热门货盘，点击跳会员首页）、项目、我的询价单；首页常用功能可选项新增。场景货盘本身在会员首页，见场景运营 Spec。</li>
+<li>询价表单新增必填：选商城、客户类型、预算。</li>
+<li>新手指引、项目数据权限与脱敏、埋点。</li>
+<li>名片、企微营销下线（P2）。</li>
+</ul>
+<p><strong>本期不做（去向）</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>事项</th>
+<th>去向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>栏目完整重组、订单合并为全货源入口</td>
+<td>V3</td>
+</tr>
+<tr>
+<td>报价单</td>
+<td>后续版本</td>
+</tr>
+<tr>
+<td>项目 AI 选品开通</td>
+<td>V2</td>
+</tr>
+<tr>
+<td>项目供货价、项目信息回传商家</td>
+<td>V4</td>
+</tr>
+<tr>
+<td>项目月报、新建看板</td>
+<td>不做；经营数据复用现有口径</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-2-角色与权限">2. 角色与权限</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>端</th>
+<th>本期能做的事</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>服务商管理员</td>
+<td>会员端</td>
+<td>看本企业全部项目；新增、编辑、合并项目；取用货盘、发起询价</td>
+</tr>
+<tr>
+<td>服务商业务员（子账号）</td>
+<td>会员端</td>
+<td>看自己有商城权限的项目；编辑和合并项目需「项目管理」权限点；取用货盘、发起询价</td>
+</tr>
+<tr>
+<td>商品运营</td>
+<td>运营后台</td>
+<td>处理询价单；看项目汇总</td>
+</tr>
+<tr>
+<td>指定角色（如运营负责人）</td>
+<td>运营后台</td>
+<td>看单个项目明细（脱敏、留痕）</td>
+</tr>
+</tbody></table>
+</div><p><strong>新增权限点</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>权限点</th>
+<th>控制内容</th>
+<th>无权限时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>项目管理</td>
+<td>新增、编辑、合并项目</td>
+<td>按钮隐藏，项目只读</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li>项目可见范围跟随商城权限：子账号能看到的项目 = 其有权限的商城所属项目 + 自己创建的项目。</li>
+<li>老账号迁移：管理员默认拥有「项目管理」；子账号按原「商城管理」权限映射。</li>
+<li>货盘上架、代发、加购沿用场景首页 Spec 的权限点；询价不设权限点。</li>
+</ul>
+<h2 id="h-3-入口与信息架构">3. 入口与信息架构</h2>
+<p>V1 只新增入口，原有 7 个一级菜单（商城、订单、企业码、数据、营销、客户、财务）的路由和页面不改。入口图见产品说明书第二节。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>新入口</th>
+<th>位置</th>
+<th>目标页</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>年货节档期卡</td>
+<td>工作台首页顶部通栏</td>
+<td>会员首页对应场景 / 货盘</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>项目</td>
+<td>工作台一级菜单第一位</td>
+<td>项目列表</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>我的询价单</td>
+<td>工作台「订单」下新增分组「询价」</td>
+<td>询价单列表</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>常用功能可选项</td>
+<td>首页会员面板「企业工作台」</td>
+<td>我的项目、询价单</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>待办「询价单」</td>
+<td>首页会员面板待办</td>
+<td>我的询价单（筛选待处理）</td>
+<td>P0</td>
+</tr>
+</tbody></table>
+</div><p>页面清单：项目列表、项目详情、新增 / 编辑项目弹窗、合并项目弹窗、询价弹窗（变更）、我的询价单、询价单详情抽屉、新手指引。场景货盘、场景商品池属于会员首页，见场景运营 Spec。</p>
+<h2 id="h-4-项目">4. 项目</h2>
+<p>项目是服务商为一个甲方做的一笔生意，商城、询价单、订单都挂在项目下。V1 不做独立报备入口：存量商城自动生成项目，询价时顺手补信息。</p>
+<h3 id="h-4-1-数据模型">4.1 数据模型</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>项目 ID</td>
+<td>系统生成</td>
+<td>—</td>
+</tr>
+<tr>
+<td>项目名称</td>
+<td>文本 ≤ 30 字</td>
+<td>必填；自动生成时 = 商城名称</td>
+</tr>
+<tr>
+<td>项目类型</td>
+<td>单选：采购 / 集采</td>
+<td>默认采购</td>
+</tr>
+<tr>
+<td>归属方</td>
+<td>系统带出</td>
+<td>采购项目 → 服务商；集采项目 → 商家；不可编辑</td>
+</tr>
+<tr>
+<td>客户类型</td>
+<td>单选</td>
+<td>可为空；枚举见 4.2</td>
+</tr>
+<tr>
+<td>预算类型</td>
+<td>单选</td>
+<td>可为空；枚举见 4.2</td>
+</tr>
+<tr>
+<td>预算金额</td>
+<td>金额（元），整数</td>
+<td>可为空</td>
+</tr>
+<tr>
+<td>兑换价格带</td>
+<td>系统计算</td>
+<td>按项目下商城实际订单计算，不可填；无订单显示「暂无」</td>
+</tr>
+<tr>
+<td>信息来源</td>
+<td>系统</td>
+<td>系统生成 / 服务商填写 / 询价带入 / 运营补录，按字段记录</td>
+</tr>
+<tr>
+<td>创建时间</td>
+<td>系统</td>
+<td>为后续项目供货价资格留依据；合并后取最早的一个</td>
+</tr>
+</tbody></table>
+</div><p>关系：一个项目可有多个商城；一个商城只属于一个项目。订单通过商城归到项目；询价单通过所选商城归到项目，选「还没建商城」时为未关联。</p>
+<h3 id="h-4-2-枚举">4.2 枚举</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>选项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>客户类型</td>
+<td>政府机关 / 事业单位 / 央企国企 / 民营企业 / 外资企业 / 其他</td>
+</tr>
+<tr>
+<td>预算类型</td>
+<td>工会福利 / 行政福利 / 营销礼品 / 办公采购 / 其他</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-4-3-存量商城自动生成项目">4.3 存量商城自动生成项目</h3>
+<ul>
+<li>上线时一次性为所有存量商城生成项目：一个商城一个项目，名称 = 商城名称，项目类型 = 采购，创建时间 = 商城创建时间。上线后新建的商城若没有从项目发起，同样自动生成。</li>
+<li>客户类型按商城名称关键词推断（如含「局」「厅」「委」→ 政府机关；「医院」「学校」→ 事业单位）；命中多个或无法判断时留空。关键词词典由产品提供初版，存配置表，不写死在代码里。</li>
+<li>推断结果的信息来源记为「系统生成」，项目详情中标「系统推断，可修改」。</li>
+<li>兑换价格带按历史订单计算，每日 T+1 更新。</li>
+</ul>
+<h3 id="h-4-4-项目列表">4.4 项目列表</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>列</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>项目名称</td>
+<td>点击进详情；下方小字显示项目类型、客户类型（空则显示「待补全」）</td>
+</tr>
+<tr>
+<td>商城数</td>
+<td>项目下商城数</td>
+</tr>
+<tr>
+<td>询价中</td>
+<td>待跟进 + 跟进中的询价单数</td>
+</tr>
+<tr>
+<td>交易额</td>
+<td>项目下全部商城订单金额，复用现有经营概览口径</td>
+</tr>
+<tr>
+<td>利润</td>
+<td>复用现有经营概览口径</td>
+</tr>
+<tr>
+<td>最近成交</td>
+<td>最近一笔订单时间</td>
+</tr>
+<tr>
+<td>操作</td>
+<td>详情 · 发起询价 · 更多（建商城、去选品、编辑）</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li>筛选：项目名称 / 商城名称搜索、项目类型、客户类型（含「未填」）、信息待补全（是 / 否）。</li>
+<li>排序：默认按最近成交时间倒序；交易额、利润可点表头排序。每页 20 条。</li>
+<li>顶部提示条（有则显示）：「N 个项目还缺客户类型或预算，补全后可按客户类型看经营数据」·「M 个询价单未关联商城」，各带跳转。</li>
+<li>批量勾选 ≥ 2 个项目后，列表上方出现「合并项目」。</li>
+<li>右上角「新增项目」。无「项目管理」权限时，勾选框、新增和编辑均隐藏。</li>
+<li>空状态：「还没有项目。建一个商城，项目会自动生成」+「去建商城」「新增项目」。</li>
+</ul>
+<h3 id="h-4-5-新增-编辑项目">4.5 新增 / 编辑项目</h3>
+<ul>
+<li>弹窗字段：项目名称（必填）、项目类型、客户类型、预算类型、预算金额；归属方随项目类型只读显示。</li>
+<li>同一企业下项目名称不可重复，重复时提示「已有同名项目，可直接合并」。</li>
+<li>弹窗底部固定提示：「项目信息用于经营管理数据统计，本版不提供给任何第三方。已完善信息的项目，其集采询价优先跟进。」不写保护承诺。</li>
+<li>保存后 toast「已保存」，信息来源记为「服务商填写」。</li>
+</ul>
+<h3 id="h-4-6-项目详情">4.6 项目详情</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>区块</th>
+<th>内容与规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>顶部</td>
+<td>项目名称、类型标签、创建时间；右侧按钮：发起询价（主）、去选品、建商城、编辑</td>
+</tr>
+<tr>
+<td>项目信息</td>
+<td>客户类型、预算类型、预算金额、归属方、兑换价格带；空字段显示「去补全」；系统推断的字段带「系统推断」标记</td>
+</tr>
+<tr>
+<td>经营数据</td>
+<td>订单数、交易额、利润、兑换价格带；时间范围：近 30 天 / 本年 / 全部，默认全部；口径同经营概览</td>
+</tr>
+<tr>
+<td>商城 Tab</td>
+<td>商城名称、状态、商品数、交易额；点击跳商城运营中心；「移到其他项目」（需项目管理权限）</td>
+</tr>
+<tr>
+<td>询价单 Tab</td>
+<td>询价单号、商品数、询价类型、状态、提交时间；点击打开询价单详情抽屉</td>
+</tr>
+<tr>
+<td>订单 Tab</td>
+<td>订单号、商城、金额、状态、下单时间；最近 50 条，「查看全部」跳现有订单管理并带商城筛选</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-4-7-从项目发起动作">4.7 从项目发起动作</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>动作</th>
+<th>跳转</th>
+<th>自动带上</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发起询价</td>
+<td>询价弹窗（未选商品时可在弹窗内搜索添加）</td>
+<td>商城（项目只有一个商城时自动选中）、客户类型、预算，可改</td>
+</tr>
+<tr>
+<td>去选品</td>
+<td>会员首页场景商品池，顶部显示「正在为「xx 项目」选品 ✕」</td>
+<td>上架时默认勾选本项目的商城</td>
+</tr>
+<tr>
+<td>建商城</td>
+<td>现有建商城流程</td>
+<td>新商城挂到本项目，不再自动生成新项目</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-4-8-合并项目">4.8 合并项目</h3>
+<ol>
+<li>在项目列表勾选 2–10 个项目，点「合并项目」。</li>
+<li>弹窗列出所选项目（名称、商城数、交易额、客户类型），单选「保留哪个项目的名称和信息」，默认选交易额最大的。</li>
+<li>确认文案：「合并后，N 个商城、M 个询价单和全部订单将归到「xx」，其他项目将被删除。」</li>
+<li>合并后：未保留项目的商城、询价单归入保留项目；保留项目的空字段用其他项目的值补上；创建时间取最早的；经营数据和价格带重新计算。</li>
+<li>合并记录写入操作日志（操作人、时间、被合并项目）。是否支持撤销见待确认。</li>
+</ol>
+<p>异常：所选项目项目类型不同时，弹窗提示「项目类型不一致，合并后以保留项目为准」；合并过程中有人编辑同一项目时，提示「项目已变化，请刷新后重试」。</p>
+<h2 id="h-5-档期卡与场景货盘">5. 档期卡与场景货盘</h2>
+<p>场景货盘和场景商品池在会员首页（即年货节版场景运营首页，规则以场景运营 Spec 为准）。工作台不放货盘列表，只保留档期卡，用来给当前档期的热门货盘增加曝光。</p>
+<h3 id="h-5-1-档期卡">5.1 档期卡</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>位置</td>
+<td>工作台首页顶部通栏</td>
+</tr>
+<tr>
+<td>内容</td>
+<td>档期名 + 距节日 N 天 + 一句运营文案；当前档期热门货盘最多 3 个，每个显示货盘名、商品数、缩略图；右侧「去选货」</td>
+</tr>
+<tr>
+<td>热门货盘来源</td>
+<td>场景配置的「时令档期」运营位，运营指定货盘及顺序；未指定时按货盘排序值取前 3 个</td>
+</tr>
+<tr>
+<td>跳转</td>
+<td>点货盘 → 会员首页对应二级场景；点「去选货」→ 会员首页当前档期一级场景</td>
+</tr>
+<tr>
+<td>可见</td>
+<td>只展示对会员可见且生效中的场景和货盘；没有时不显示通栏</td>
+</tr>
+<tr>
+<td>收起</td>
+<td>可收起为一行提示，按账号记住；换档期后重新展开</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-5-2-工作台与会员首页的衔接">5.2 工作台与会员首页的衔接</h3>
+<ul>
+<li>项目「去选品」：跳会员首页场景商品池并带项目参数；顶部显示「正在为「xx 项目」选品 ✕」，上架弹窗默认勾选该项目的商城，询价弹窗预填该项目的商城、客户类型、预算。上下文在首页内切换场景时保持，点 ✕ 退出。</li>
+<li>首页产生的上架任务和询价单归到对应商城的项目，在工作台项目详情里可见。</li>
+<li>版本规划 V1-9.2（会员工作台增加货盘入口）按此调整：货盘入口在会员首页，不在工作台。</li>
+</ul>
+<h2 id="h-6-询价">6. 询价</h2>
+<h3 id="h-6-1-询价弹窗变更">6.1 询价弹窗变更</h3>
+<p>在场景首页 Spec「询价」表单基础上，新增顶部「项目信息」区，三项必填：</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用在哪个商城</td>
+<td>必填；下拉搜索本企业有权限的商城，每项显示「商城名 · 所属项目」；末项「还没建商城」</td>
+</tr>
+<tr>
+<td>客户类型</td>
+<td>必填；选商城后用其项目的值预填，可改</td>
+</tr>
+<tr>
+<td>预算</td>
+<td>必填；预算类型 + 预算金额（元），同样预填可改</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li>提交后：询价单关联所选商城的项目；若项目的客户类型或预算为空，用本次填写值补上（信息来源 = 询价带入）；已有值且不同时，不覆盖项目，只记在询价单上。</li>
+<li>选「还没建商城」：询价单状态为未关联；以后建商城时弹提示「你有 N 个询价单未关联商城，要挂到这个商城吗」。</li>
+<li>场景首页、货盘、搜索结果、商品详情、项目详情处发起的询价都用同一弹窗。</li>
+<li>场景首页 Spec 的询价表单需同步补上这三项。</li>
+</ul>
+<h3 id="h-6-2-我的询价单">6.2 我的询价单</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>列</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>询价单号</td>
+<td>点击打开详情抽屉</td>
+</tr>
+<tr>
+<td>商品</td>
+<td>首个商品名 +「等 N 件」</td>
+</tr>
+<tr>
+<td>询价类型</td>
+<td>大批量采购 / 定制需求 / 价格咨询 / 货期咨询</td>
+</tr>
+<tr>
+<td>商城 / 项目</td>
+<td>未关联显示「未关联」+「去关联」</td>
+</tr>
+<tr>
+<td>提交人、提交时间</td>
+<td>—</td>
+</tr>
+<tr>
+<td>状态</td>
+<td>待跟进 / 跟进中 / 已关闭（悬停显示关闭原因）</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li>筛选：状态、询价类型、项目、是否关联、提交时间。子账号只看自己提交的和自己有权限商城下的。</li>
+<li>详情抽屉：全部表单字段、商品明细、状态变更记录、运营对外的跟进说明（内部跟进记录不展示）。会员端只读；未关联的可在抽屉里选择商城。</li>
+<li>本版不生成报价单。</li>
+</ul>
+<h2 id="h-7-首页会员面板与栏目下线">7. 首页会员面板与栏目下线</h2>
+<h3 id="h-7-1-首页会员面板">7.1 首页会员面板</h3>
+<ul>
+<li>「企业工作台」常用功能由用户自己选择。可选列表新增「我的项目」「询价单」，带 NEW 标记；不改用户已选的功能。</li>
+<li>待办 2×2 中「询价单（待处理）」= 状态为待跟进或跟进中的询价单数，点击进我的询价单并带状态筛选。</li>
+</ul>
+<h3 id="h-7-2-名片-企微营销下线-P2">7.2 名片、企微营销下线（P2）</h3>
+<ul>
+<li>范围：「营销」下「名片营销」「企微营销」两个分组；「卡券营销」保留。「客户」下的企微好友、企微客户群不动。</li>
+<li>前提：技术拉近 90 天这两组页面的访问量和访问企业数，确认无人使用后再下线。</li>
+<li>方式：只从菜单隐藏，数据保留；直接访问旧路由时显示「该功能已下线，如需使用请联系客户经理」。</li>
+</ul>
+<h2 id="h-8-新手指引-P0">8. 新手指引（P0）</h2>
+<p>新手指引和功能同版上线；指引组件做成通用能力，后续版本新增或重构入口时复用。</p>
+<h3 id="h-8-1-分步引导">8.1 分步引导</h3>
+<p>每个账号上线后首次进入工作台触发，蒙层高亮目标入口，气泡含标题、一句说明、「下一步」「跳过」和步骤数。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>步</th>
+<th>高亮</th>
+<th>标题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>年货节档期卡</td>
+<td>年货节热门货盘</td>
+<td>运营推荐的当季热门货盘，点进去就能选货上架</td>
+</tr>
+<tr>
+<td>2</td>
+<td>「项目」菜单</td>
+<td>按甲方看生意</td>
+<td>你的商城已按项目整理好，商城、询价、订单和账都在一页</td>
+</tr>
+<tr>
+<td>3</td>
+<td>「我的询价单」</td>
+<td>询价进度在这里</td>
+<td>提交的询价单和跟进状态都能在这里看到</td>
+</tr>
+<tr>
+<td>4</td>
+<td>右上角「新功能指引」</td>
+<td>随时重看</td>
+<td>忘了入口在哪，点这里再看一遍</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li>最后一步按钮为「知道了」。跳过或完成后不再自动弹出。</li>
+<li>工作台右上角增加「新功能指引」，点击重新播放。</li>
+<li>某一步的目标不可见（如无可见场景、无权限）时跳过该步，步骤数重新计算。</li>
+</ul>
+<h3 id="h-8-2-其他指引">8.2 其他指引</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>形式</th>
+<th>触发</th>
+<th>内容</th>
+<th>关闭</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NEW 角标</td>
+<td>入口未被点击过</td>
+<td>项目、我的询价单、常用功能可选项</td>
+<td>点击一次消失；上线 30 天后统一去掉</td>
+</tr>
+<tr>
+<td>首页气泡</td>
+<td>上线后首次进入首页</td>
+<td>指向常用功能「编辑」：「新增「我的项目」「询价单」，可加入常用」</td>
+<td>关闭或点击后不再出现</td>
+</tr>
+<tr>
+<td>空状态</td>
+<td>列表为空</td>
+<td>见 4.4、6.2；都带跳转按钮</td>
+<td>—</td>
+</tr>
+<tr>
+<td>老页面提示</td>
+<td>进入「我的商城」「经营概览」</td>
+<td>顶部轻提示：「现在也可以在「项目」里按甲方查看」+ 去看看</td>
+<td>可关闭，关闭后不再出现</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li>指引状态按账号记录（服务端），换浏览器不重复弹；子账号各自独立。</li>
+<li>老菜单含 iframe 页面，指引只高亮主应用内的入口，不覆盖 iframe 内容。</li>
+</ul>
+<h2 id="h-9-运营后台-权限-脱敏-留痕">9. 运营后台：权限、脱敏、留痕</h2>
+<p>项目视图上线后，运营后台就能看到项目明细，权限和脱敏必须同版上线。新功能放在新运营管理后台，菜单：会员运营 → 项目数据。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>规则</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>不存终端企业联系人和联系方式字段；平台消息和通知只发给服务商账号</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>项目数据页默认只看汇总：按客户类型、预算类型、项目类型统计项目数与 GMV，及带客户类型和预算的项目 GMV 覆盖率</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>查看单个项目明细需「项目明细查看」角色权限</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>客户名称（即项目 / 商城名称中的甲方名）加密存储；运营后台显示脱敏名称，如「某央企国企·北京」；含客户名称的明细不支持导出</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>查看、导出项目明细记日志（谁、何时、哪个项目），管理员可查</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>涉及项目和客户信息的页面加明水印（查看人账号 + 时间），导出的汇总文件同样带水印</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>待补录项目清单：列出有交易、信息不全的项目，按交易额排序；运营可代补，来源记为「运营补录」</td>
+<td>P1</td>
+</tr>
+</tbody></table>
+</div><p>询价单后台列表沿用场景首页 Spec，新增「项目」「客户类型」「预算」三列和「是否关联」筛选，项目名同样脱敏显示。</p>
+<h2 id="h-10-埋点-上线与验收">10. 埋点、上线与验收</h2>
+<h3 id="h-10-1-埋点">10.1 埋点</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>事件</th>
+<th>属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>wb_guide_show / step / skip / finish / replay</td>
+<td>步骤、账号类型（管理员 / 子账号）</td>
+</tr>
+<tr>
+<td>wb_entry_click</td>
+<td>入口（档期卡 / 档期卡货盘 / 项目 / 询价单）、来源（菜单 / 首页常用 / 待办 / 气泡 / 空状态 / 老页面提示）</td>
+</tr>
+<tr>
+<td>wb_project_view</td>
+<td>项目 ID、停留时长</td>
+</tr>
+<tr>
+<td>wb_project_edit</td>
+<td>字段、来源（列表 / 详情 / 询价带入）</td>
+</tr>
+<tr>
+<td>wb_project_merge</td>
+<td>合并项目数、商城数</td>
+</tr>
+<tr>
+<td>wb_project_action</td>
+<td>动作（询价 / 选品 / 建商城）、项目 ID</td>
+</tr>
+<tr>
+<td>inquiry_submit（扩展）</td>
+<td>是否关联商城、预填字段是否被改、发起位置</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-10-2-上线">10.2 上线</h3>
+<ul>
+<li>上线前：存量商城生成项目的脚本在预发环境跑一遍，核对项目数 = 商城数、项目交易额合计 = 经营概览总额；抽 50 个商城人工看客户类型推断。</li>
+<li>灰度：先开 3–5 家友好服务商，运行 2 天无问题后 11/20 全量。</li>
+<li>回滚：新入口可按开关隐藏；项目数据不影响老菜单，关入口即可回退。</li>
+</ul>
+<h3 id="h-10-3-验收标准">10.3 验收标准</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 存量商城 100% 生成项目，项目交易额合计与经营概览一致</li>
+<li><input disabled="" type="checkbox"> 无法推断的客户类型为空，并在列表显示「待补全」</li>
+<li><input disabled="" type="checkbox"> 合并后商城、询价单、订单全部归到保留项目，经营数据重新汇总，创建时间取最早</li>
+<li><input disabled="" type="checkbox"> 询价不填商城、客户类型、预算时无法提交；从项目发起时三项预填</li>
+<li><input disabled="" type="checkbox"> 无「项目管理」权限的子账号看不到新增、编辑、合并；只看到有权限商城的项目</li>
+<li><input disabled="" type="checkbox"> 新手指引每个账号只自动弹一次，可跳过、可重看；换浏览器不重弹</li>
+<li><input disabled="" type="checkbox"> 会员端任何页面不出现接口价；运营后台无权限角色看不到项目明细，客户名称脱敏</li>
+</ul>
+<p><strong>版本门槛</strong>（目标值待与运营商定）：存量交易 GMV、货盘上架商城数、自助询价数、带客户类型和预算的项目 GMV 覆盖率、档期卡货盘点击后的上架与询价数、入口发现率（上线 2 周内点过项目或我的询价单的活跃服务商占比）。</p>
+<h2 id="h-11-待确认">11. 待确认</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 合并项目后能否拆分或撤销</li>
+<li><input disabled="" type="checkbox"> 客户类型推断的关键词词典初版（产品出，业务核对）</li>
+<li><input disabled="" type="checkbox"> 新手指引组件由哪个前端工程承载</li>
+<li><input disabled="" type="checkbox"> 「合并项目」单次上限（暂定 10 个）</li>
+</ul>
+<hr><p class="meta">最后更新 2026-11-09 10:19（北京时间）· 同步自 Claude 文档 2026-11-09 · Markdown 原文：<a href="ws-prd.md">ws-prd.md</a></p></article></div>
+</body></html>

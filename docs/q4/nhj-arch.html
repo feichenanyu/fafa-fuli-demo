@@ -1,0 +1,1150 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分采通 V1.0 年货节版：产品架构与工作台栏目改版</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">V1 · 架构方案 · 分采通 V1.0 年货节版：产品架构与工作台栏目改版</span>
+<a class="btn" href="../">全部文档</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-版本定位">版本定位</a><a href="#h-产品架构">产品架构</a><a href="#h-核心业务链路">核心业务链路</a><a href="#h-工作台栏目改版">工作台栏目改版</a><a href="#h-任务拆解">任务拆解</a><a href="#h-范围取舍与依赖">范围取舍与依赖</a><a href="#h-待确认">待确认</a></nav>
+<article><h1 id="h-分采通-V1-0-年货节版-产品架构与工作台栏目改版">分采通 V1.0 年货节版：产品架构与工作台栏目改版</h1>
+<div class="docmeta"><span class="pill old">历史版</span><span class="pill kind">V1 · 架构方案</span><span>最后更新 2026-10-28 14:57</span></div><div class="oldnote">这是历史版本，保留作参考；当前以「会员工作台调整方案 / 年货节 Spec」为准，<a href="../">回文档中心查看</a>。</div><p>Oct 28, 2026 · @sanyuan</p>
+<h2 id="h-版本定位">版本定位</h2>
+<p>V1.0 年货节版 11 月 20 日上线，12 月初年货节推广启动。一句话：服务商打开分采通就能按春节场景选品，一键代发、一键上架或用模板开出春节商城；工作台围绕「代发 · 商城 · 资金」三件事重排，去掉无人使用的营销入口。</p>
+<p>本版从「货架 + 工具」转为「场景运营」：给服务商的不再是 50 多万个 SKU 和一堆菜单，而是一套能直接卖给企业客户的春节方案。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>本版做</th>
+<th>本版不做（去向）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>场景首页（春节年货 / 员工福利 / 工会慰问），按权益包可见</td>
+<td>场景加价（节后看数据再定）</td>
+</tr>
+<tr>
+<td>资源广场增加平台货源和卡券</td>
+<td>一键套用已有商城（后续）</td>
+</tr>
+<tr>
+<td>全品类代发（合并猫超代发与其他代发）、一键上架、用模板新建商城</td>
+<td>C 端消费商城交易链路改版（V1.1，暂定 12/4）</td>
+</tr>
+<tr>
+<td>运营管理后台分采通渠道：场景、商品池、渠道定价、代发订单</td>
+<td>装修组件、京东评价 / 相似品、取消退款（V1.2）</td>
+</tr>
+<tr>
+<td>工作台栏目改版与精简、品牌替换为分采通</td>
+<td>AI 问数、AI 导购（V1.3，1/12 灰度）；本版只预留入口位</td>
+</tr>
+<tr>
+<td>万鲤会员猫超代发兼容、上门取件</td>
+<td>企业码改动（独立模块，不进场景不进代发）</td>
+</tr>
+<tr>
+<td>全链路埋点、历史数据清洗、老功能迁移</td>
+<td>礼包搭建</td>
+</tr>
+</tbody></table>
+</div><p>已定的价格口径：代发按会员价扣款；平台货源上架的定价基准由会员在会员价 / 平均到手价 / 市场价中选；自有猫超 / 优品不进场景，下单和上架时按 SKU ID 替换为同品。</p>
+<h2 id="h-产品架构">产品架构</h2>
+<p>V1.0 在现有分采通上叠加场景运营：前台新增场景首页，业务层新增场景运营和全品类代发，货盘与场景配置走发发福利的运营管理后台（分采通渠道）；商城运营、猫超集采、企业码保持不动。</p>
+<img src="media/nhj-arch/media/image1.png" style="width:6in;height:5.42857in" alt="分采通 V1.0 产品架构 · 5 层" /><p>分采通 V1.0 产品架构 · 5 层</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>层</th>
+<th>归属系统</th>
+<th>本版要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>会员端前台</td>
+<td>分采通</td>
+<td>首页改为场景页，模版广场并入场景；资源广场保留为全量货盘；工作台见下文</td>
+</tr>
+<tr>
+<td>业务能力</td>
+<td>分采通</td>
+<td>三个一键动作（代发、上架、新建商城）在首页和资源广场共用；卡券只能代发，不能上架</td>
+</tr>
+<tr>
+<td>运营管理后台</td>
+<td>发发福利共享后台</td>
+<td>新增分采通渠道：场景、商品池、渠道定价、代发订单、场景数据；定价与发发福利分开</td>
+</tr>
+<tr>
+<td>底座</td>
+<td>两边共用</td>
+<td>商品复用统一商品库；权益包、预存款、商城运营留在分采通；历史订单清洗与指标口径统一在本版完成</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-核心业务链路">核心业务链路</h2>
+<p>年货节的成交走三条路：勾选商品后代发下单、勾选商品后上架到自己的商城、选场景模板新建商城。工作台是这三条路的「后半程」：代发批次、上架结果、新商城都落到工作台里跟进。</p>
+<img src="media/nhj-arch/media/image2.png" style="width:6in;height:3.125in" alt="场景选品到成交 · 3 条路径" /><p>场景选品到成交 · 3 条路径</p>
+<p>自有猫超 / 优品商品不进场景，但代发和上架时会按 SKU ID 替换为服务商自有账号的同品。</p>
+<h2 id="h-工作台栏目改版">工作台栏目改版</h2>
+<p>2026-10-30 用「分采通业务演示专用」账号实测：工作台有「常用」快捷菜单 + 工作台首页 + 9 个一级菜单，共 85 个页面，比知识库记录的多出「商品」「供应商」两个一级和「其他代发」「商城扩展应用」等分组。最大的发现是：非猫超货源的代发已经存在（订单 · 其他代发，7 页），所以 V1.0 的全品类代发是「合并两套代发」，不是新建。</p>
+<h3 id="h-现状与改版结论">现状与改版结论</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>发现</th>
+<th>对 V1.0 的影响</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>代发有两套：猫超代发（2 页）和其他代发（7 页，货源为电商精选 / 精选商品 / 自有供应商商品），导入规则不同</td>
+<td>全品类代发 = 两套合并，重点是统一规则和批次管理</td>
+</tr>
+<tr>
+<td>两个「下单管理 / 下单历史」列表显示同一批批次（如批次 6860、6343）</td>
+<td>批次数据已经共用，合并下单管理的改动量小</td>
+</tr>
+<tr>
+<td>商品 · 商品替换日志已有「原商品会员价 / 替换商品会员价 / 上架商城」字段</td>
+<td>同品替换的记录复用这页，不新建</td>
+</tr>
+<tr>
+<td>财务 · 账户管理已有商品结算账户 / 活动账户 / 技术服务账户；商品交易明细已有「采购-商品、采购-运费、退款-订单退款」类型</td>
+<td>代发从商品结算账户扣款，流水走商品交易明细，不再新增「代发交易明细」</td>
+</tr>
+<tr>
+<td>「常用」快捷菜单已存在，最多 10 个，演示账号未设置</td>
+<td>用它预置年货节快捷入口，首页不再做「常用功能」模块</td>
+</tr>
+<tr>
+<td>工作台首页现有 4 块：订单数据、经营数据（BI）、业务数据、关注客户</td>
+<td>在现有 4 块上改，不推倒重做</td>
+</tr>
+<tr>
+<td>名片小程序未授权，数据监测累计访客 42；企微群发、话术、企微好友 / 群 / 流失均无数据</td>
+<td>支持下线；演示账号不代表全量，下线前拉全量使用数据</td>
+</tr>
+<tr>
+<td>其他代发价格列出现「协议价」，已选商品显示「会员价 / 协议价」</td>
+<td>「协议价」不在名词字典里，代发合并前要定口径</td>
+</tr>
+<tr>
+<td>商品 · 本地资源场景有 9 页（特惠电影…小象超市），每页都是同样的定价规则列表</td>
+<td>与新的「场景运营」同名易混，建议分组改名「本地生活资源」</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-侧栏新旧对照">侧栏新旧对照</h3>
+<p>一级菜单 9 个保持不动。合并 9 页为全品类代发 5 页，下线 9 页，挪位 2 页，其余保留。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>一级</th>
+<th>分组</th>
+<th>现有栏目</th>
+<th>变化</th>
+<th>V1.0 改什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>常用</td>
+<td>—</td>
+<td>快捷菜单（用户自选，最多 10 个）</td>
+<td>改造</td>
+<td>未设置过的用户默认预置：全品类代发 · 批量下单、下单管理、已选商品、我的商城、账户管理；已设置的不覆盖</td>
+</tr>
+<tr>
+<td>工作台</td>
+<td>—</td>
+<td>工作台首页</td>
+<td>改造</td>
+<td>见下一节</td>
+</tr>
+<tr>
+<td>商城</td>
+<td>商城管理</td>
+<td>我的商城、我的礼包</td>
+<td>改造</td>
+<td>我的商城增加「用场景模板新建」入口和「来自场景模板」标识；我的礼包不动</td>
+</tr>
+<tr>
+<td>商城</td>
+<td>商城扩展应用</td>
+<td>互动营销、预算分发、促销增购、用户权益、销售渠道、个性配置</td>
+<td>保留</td>
+<td>6 页都是插件介绍目录；建议 V1.2 合并为一页带分类</td>
+</tr>
+<tr>
+<td>商品</td>
+<td>商品管理</td>
+<td>商品库、商品发布、商品导入</td>
+<td>保留</td>
+<td>服务商自有商品；「退货地址设置」从其他代发挪到本组（页面自述用于商品录入）</td>
+</tr>
+<tr>
+<td>商品</td>
+<td>供应商商品</td>
+<td>挑选商品、商品变更审核、商品替换日志</td>
+<td>改造</td>
+<td>商品替换日志增加「替换场景」（代发 / 上架），记录自有猫超 / 优品同品替换</td>
+</tr>
+<tr>
+<td>商品</td>
+<td>本地资源场景</td>
+<td>特惠电影、快速电影、点餐服务、美团外卖、高德打车、鲜花蛋糕、淘宝闪购、大润发、小象超市</td>
+<td>改名</td>
+<td>分组名改为「本地生活资源」；9 页合一带 Tab 放 V1.2</td>
+</tr>
+<tr>
+<td>订单</td>
+<td>全品类代发（新）</td>
+<td>合并「猫超代发」2 页 +「其他代发」5 页</td>
+<td>合并</td>
+<td>见下方「全品类代发」；放在订单第一组</td>
+</tr>
+<tr>
+<td>订单</td>
+<td>商城订单</td>
+<td>订单管理、订单导出、服务订单、下单提醒</td>
+<td>改造</td>
+<td>「代售后查询」从其他代发挪到本组（它按商城列代售后服务，属于商城订单）；订单管理的订单来源已含代发宝、猫超集采、发发集采等 7 类，不动</td>
+</tr>
+<tr>
+<td>订单</td>
+<td>猫超集采</td>
+<td>集采报价、下单管理</td>
+<td>保留</td>
+<td>单独报价</td>
+</tr>
+<tr>
+<td>企业码</td>
+<td>服务企业 · 订单中心</td>
+<td>7 页</td>
+<td>保留</td>
+<td>独立模块；11 月对账口径按 Q4 任务 43.1 单独上线</td>
+</tr>
+<tr>
+<td>数据</td>
+<td>—</td>
+<td>订单分析、用户分析、经营概览、订单明细</td>
+<td>保留</td>
+<td>代发是否计入经营概览待确认；V1.3 AI 问数接替入口</td>
+</tr>
+<tr>
+<td>营销</td>
+<td>名片营销</td>
+<td>我的名片、数据监测、名片设置</td>
+<td>下线</td>
+<td>3 页</td>
+</tr>
+<tr>
+<td>营销</td>
+<td>卡券营销</td>
+<td>卡券兑换、卡券推广、卡券营销</td>
+<td>保留</td>
+<td>营销下只剩这一组</td>
+</tr>
+<tr>
+<td>营销</td>
+<td>企微营销</td>
+<td>群群发、客户群发、销售话术</td>
+<td>下线</td>
+<td>3 页</td>
+</tr>
+<tr>
+<td>客户</td>
+<td>客户关系</td>
+<td>企微好友、企微客户群、客户流失</td>
+<td>下线（待确认）</td>
+<td>3 页，依赖企微配置</td>
+</tr>
+<tr>
+<td>客户</td>
+<td>线索公海 · 客户关系 · 销售管理</td>
+<td>企业线索、联系人线索、企业客户、联系人、销售报价、客户跟进、商机管理、客户合同</td>
+<td>保留</td>
+<td>不动</td>
+</tr>
+<tr>
+<td>供应商</td>
+<td>自有供应商</td>
+<td>供应商管理、新增、导入、供应商登录（门户）</td>
+<td>保留</td>
+<td>服务商自己的供应商，与平台入驻商家不是一回事，文案上要区分</td>
+</tr>
+<tr>
+<td>财务</td>
+<td>平台财务</td>
+<td>账户管理、发票管理、集采财务、营业额申报</td>
+<td>改造</td>
+<td>账户管理的商品结算账户即代发扣款账户：加「用于全品类代发」说明和余额预警（页面已有「可用额度预警」，确认是否可复用）</td>
+</tr>
+<tr>
+<td>财务</td>
+<td>商城财务</td>
+<td>短信管理、额度管理、额度明细、开票审核、微信支付配置</td>
+<td>保留</td>
+<td>不动</td>
+</tr>
+<tr>
+<td>财务</td>
+<td>交易明细</td>
+<td>服务交易明细、猫超交易明细、商品交易明细</td>
+<td>改造</td>
+<td>商品交易明细增加批次号、货源筛选，作为代发资金流水；猫超交易明细（商城猫超订单的支付宝流水）保留</td>
+</tr>
+</tbody></table>
+</div><p>顺带改的非菜单入口：顶栏「导入导出」增加代发导入记录和一键上架任务；「消息」增加代发批次待支付、子单异常、余额不足三类；工作台 Logo 目前仍是「采发发 · 会员端」，按 Q4 任务 36.2 替换为分采通。</p>
+<h3 id="h-工作台首页">工作台首页</h3>
+<p>在现有 4 块上改：顶部加公告和年货节专区，「订单数据」升级为「待办」并并列新增「资金」，经营数据加「代发订单」 Tab，业务数据和关注客户不动。</p>
+<img src="media/nhj-arch/media/image3.png" style="width:6in;height:4.83036in" alt="工作台首页线框 · 现有 4 块 + 新增 3 块" /><p>工作台首页线框 · 现有 4 块 + 新增 3 块</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>模块</th>
+<th>现状</th>
+<th>V1.0</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>公告与更新日志</td>
+<td>无（顶栏只有弹窗广告）</td>
+<td>新增：改版公告 + 更新日志链接 + 学习中心链接；首次登录触发 3 步新手引导</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>年货节专区</td>
+<td>无</td>
+<td>新增：运营配置的档期 Banner + 当前档期场景卡（按权益包可见，最多 3 张）+「开春节商城」</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>待办</td>
+<td>「订单数据」：待付款、待发货、售后中，只统计商城订单</td>
+<td>保留 3 项，增加代发待确认批次、代发异常子单；每项点击带筛选进列表</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>资金</td>
+<td>无（余额在财务 · 账户管理）</td>
+<td>新增：商品结算账户余额、本月代发扣款、低于预警值标红 +「去充值」</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>经营数据</td>
+<td>BI 嵌入：商城订单 / 集采订单两个 Tab；总 GMV（到手价）、毛利额、毛利率、订单总数、动销商品数、客单价、售后率 + 趋势图</td>
+<td>增加「代发订单」 Tab，指标同口径；V1.3 由 AI 问数接替</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>业务数据</td>
+<td>方案 / 报价单两个 Tab</td>
+<td>不动；是否保留跟「挑选入方案」一起定</td>
+<td>—</td>
+</tr>
+<tr>
+<td>7</td>
+<td>关注客户</td>
+<td>CRM 关注客户列表</td>
+<td>不动</td>
+<td>—</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-全品类代发-两套合一">全品类代发：两套合一</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>新栏目</th>
+<th>来自</th>
+<th>V1.0 做什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>已选商品</td>
+<td>其他代发 · 已选商品</td>
+<td>场景首页和资源广场勾选的商品都进这里，支持全部货源和卡券；从这里发起批量下单</td>
+</tr>
+<tr>
+<td>批量下单</td>
+<td>猫超代发 · 批量下单 + 其他代发 · 批量下单</td>
+<td>一个入口；两种老模板继续可用；校验结果逐行显示库存、可配送、同品替换、会员价、运费</td>
+</tr>
+<tr>
+<td>下单管理</td>
+<td>猫超代发 · 下单管理 + 其他代发 · 下单历史</td>
+<td>合为一页；增加来源入口、场景名字段和筛选；批次详情按货源拆子单，子单级发起售后</td>
+</tr>
+<tr>
+<td>商品变更通知</td>
+<td>其他代发</td>
+<td>保留（字段：会员价、市场价、新会员价、新市场价、库存），覆盖已选商品里的全部货源</td>
+</tr>
+<tr>
+<td>代发选品</td>
+<td>其他代发 · 代发选品</td>
+<td>不再单独展示：老地址重定向到资源广场「平台货源」；它的「自有供应商商品」 Tab 去向待确认</td>
+</tr>
+</tbody></table>
+</div><p>两套代发现在的规则不一致，合并时按货源分别校验：</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>规则</th>
+<th>猫超代发（现）</th>
+<th>其他代发（现）</th>
+<th>V1.0 建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文件格式</td>
+<td>.xlsx，另有在线表格</td>
+<td>.csv</td>
+<td>统一 .xlsx + 在线表格，兼容老 .csv</td>
+</tr>
+<tr>
+<td>商品标识</td>
+<td>SKU ID</td>
+<td>商品 ID</td>
+<td>两种都识别，按标识判断货源</td>
+</tr>
+<tr>
+<td>每行数量</td>
+<td>1–50</td>
+<td>1–99999</td>
+<td>按货源校验，各自沿用</td>
+</tr>
+<tr>
+<td>合单</td>
+<td>一行一单，不合并</td>
+<td>按收货人姓名 + 手机号 + 地址合并</td>
+<td>按货源：猫超子单不合并，其他货源沿用合并（待确认）</td>
+</tr>
+<tr>
+<td>单次上限</td>
+<td>5000 行</td>
+<td>5000 条</td>
+<td>5000 行</td>
+</tr>
+<tr>
+<td>扣款</td>
+<td>确认支付后从预存款扣</td>
+<td>同左</td>
+<td>商品结算账户按会员价扣款</td>
+</tr>
+<tr>
+<td>售后</td>
+<td>在下单管理查看</td>
+<td>联系专属客服</td>
+<td>子单级发起；万鲤会员支持上门取件</td>
+</tr>
+</tbody></table>
+</div><p>卡券代发的交付方式（电子卡密还是实体卡）会改变收件信息字段；「取消未发货子单并退款」在 V1.2，本版仍走人工。</p>
+<h3 id="h-权限点">权限点</h3>
+<p>企业控制台 → 组织管理的角色权限新增 4 个权限点：代发下单、代发支付（扣商品结算账户）、一键上架、新建商城。下单和支付分开，便于业务员建单、财务付款。</p>
+<p>老账号迁移：管理员默认全开；原来有猫超代发或其他代发任一权限的子账号，自动获得代发下单和代发支付。企业控制台「我的权益」增加「可见场景」；「企微配置」随企微栏目一起隐藏（待确认）。</p>
+<h3 id="h-下线与迁移">下线与迁移</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>对象</th>
+<th>页面数</th>
+<th>处理方式</th>
+<th>历史数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>名片营销</td>
+<td>3</td>
+<td>菜单隐藏；/module/market/card/* 重定向工作台首页并提示已下线</td>
+<td>保留不删；是否提供导出待确认</td>
+</tr>
+<tr>
+<td>企微营销</td>
+<td>3</td>
+<td>同上（/module/customer/groupSending、customerSending、script）</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>客户 · 企微好友 / 客户群 / 客户流失</td>
+<td>3</td>
+<td>同上（/module/wechat/friend、group、exposures），待确认</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>猫超代发 · 批量下单 / 下单管理</td>
+<td>2</td>
+<td>老路由重定向到全品类代发对应页</td>
+<td>批次已共用，来源标为猫超</td>
+</tr>
+<tr>
+<td>其他代发 · 代发选品 / 已选商品 / 批量下单 / 下单历史 / 商品变更通知</td>
+<td>5</td>
+<td>重定向到全品类代发对应页；代发选品重定向资源广场</td>
+<td>已选商品、批次原样保留</td>
+</tr>
+<tr>
+<td>其他代发 · 退货地址设置 / 代售后查询</td>
+<td>2</td>
+<td>菜单挪到商品管理 / 商城订单，路由不变</td>
+<td>不动</td>
+</tr>
+<tr>
+<td>模版广场（导航入口）</td>
+<td>1</td>
+<td>/shop/template 重定向首页；模板详情页保留供场景链接</td>
+<td>运营逐个关联到场景</td>
+</tr>
+</tbody></table>
+</div><p>建议下线前 1 周发站内公告和短信 / 企微群通知，上线后 2 周内老地址保留重定向提示（时长待与运营商定）。</p>
+<p>实测范围：只读访问全部 85 个栏目和礼管家老后台的代发、订单、财务页；未执行建商城、下单、挑选、保存等任何确认操作。礼管家嵌入页（订单分析、短信、额度、卡券营销等）只看了入口，未逐页展开。</p>
+<h2 id="h-任务拆解">任务拆解</h2>
+<p>V1.0 拆为 8 个模块、54 项任务，其中 P0 44 项、P1 10 项。P1 是产能不够时可后移到 V1.2（12/18）的部分。「端」一列：会员端 = qiyegou 工作台与首页；运营后台 = 发发福利运营管理后台的分采通渠道；运营中心 = 商城运营中心（cashstore）。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>任务数</th>
+<th>P0</th>
+<th>关键依赖</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A 商品与定价底座</td>
+<td>4</td>
+<td>4</td>
+<td>统一商品库对分采通开放；「协议价」口径</td>
+</tr>
+<tr>
+<td>B 场景运营</td>
+<td>11</td>
+<td>9</td>
+<td>A；商品运营 11/20 前配好春节货盘</td>
+</tr>
+<tr>
+<td>C 全品类代发</td>
+<td>8</td>
+<td>7</td>
+<td>A3 同品替换；合单规则、卡券交付方式</td>
+</tr>
+<tr>
+<td>D 定价策略兼容</td>
+<td>7</td>
+<td>6</td>
+<td>A2 会员价；平均到手价缺失时的回退规则</td>
+</tr>
+<tr>
+<td>E 工作台精简（含低频收起）</td>
+<td>8</td>
+<td>5</td>
+<td>近 90 天栏目访问数据</td>
+</tr>
+<tr>
+<td>F 数据 BI 看板</td>
+<td>5</td>
+<td>3</td>
+<td>F1 口径先定再做看板</td>
+</tr>
+<tr>
+<td>G 版本更新与新手指引</td>
+<td>7</td>
+<td>6</td>
+<td>B、C、E 的页面定稿</td>
+</tr>
+<tr>
+<td>H 迁移与上线</td>
+<td>4</td>
+<td>4</td>
+<td>万鲤账户余额盘点（Q4 任务 42）</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-A-商品与定价底座">A 商品与定价底座</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>任务</th>
+<th>内容与验收要点</th>
+<th>端</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A1</td>
+<td>平台货源开放</td>
+<td>统一商品库的京东 / 1688 / 平台精选 / 入驻商家和卡券按渠道对分采通开放；字段映射到资源广场和场景商品卡</td>
+<td>后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>分采通渠道定价</td>
+<td>平台货源与卡券在分采通的会员价规则，复用发发福利定价模板、与发发福利分开配置；会员端不展示平台货源接口价</td>
+<td>运营后台</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>同品替换</td>
+<td>代发和上架时按 SKU ID 替换为服务商自有猫超 / 优品同品；无同品时的处理待定；记录写入商品替换日志（加「替换场景」字段）</td>
+<td>后端 + 会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>价格口径补齐</td>
+<td>定「协议价」口径及是否继续展示；补进名词字典；商品卡每个价格都写清口径</td>
+<td>产品</td>
+<td>P0（需求评审前）</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-B-场景运营">B 场景运营</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>任务</th>
+<th>内容与验收要点</th>
+<th>端</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B1</td>
+<td>场景管理</td>
+<td>场景 / 子场景的新增编辑、档期、排序、上下线、可见权益包、场景说明与热销指引</td>
+<td>运营后台</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>B2</td>
+<td>场景商品池</td>
+<td>子场景绑定商品池（复用发发福利商品池，含卡券 SKU）；按规则自动上下架；无货商品不展示</td>
+<td>运营后台</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>B3</td>
+<td>场景模板关联</td>
+<td>场景关联现有商城模板详情（只存链接，不迁移数据）</td>
+<td>运营后台</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>B4</td>
+<td>场景数据</td>
+<td>按场景统计浏览、勾选、代发单量与金额、上架商品数、新建商城数</td>
+<td>运营后台</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>B5</td>
+<td>场景首页</td>
+<td>场景 Tab、场景头部、子场景、场景商品卡（来源、成本价及口径、市场价、库存状态、发货仓、卡券标识）；默认落在当前档期</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>B6</td>
+<td>一键动作栏</td>
+<td>勾选后出现：加入已选 / 代发下单 / 上架到商城；含卡券时提示上架将跳过卡券；首页与资源广场共用</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>B7</td>
+<td>用模板新建商城</td>
+<td>场景模板卡片 +「用此模板新建商城」；只新建不覆盖、套用模板装修、归创建人；我的商城加「来自场景模板」标识</td>
+<td>会员端</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>B8</td>
+<td>资源广场改造</td>
+<td>增加平台货源 Tab（按来源二级）和卡券 Tab；新增「按场景」筛选；成本列按货源切换（自有 = 接口价，其余 = 会员价）；承接代发选品重定向</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>B9</td>
+<td>权益包可见</td>
+<td>场景按权益包显示；企业控制台「我的权益」显示可见场景；一个场景都看不到时的兜底页</td>
+<td>会员端 + 后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>B10</td>
+<td>模版广场下线</td>
+<td>导航入口去掉；/shop/template 重定向首页；模板详情页保留</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>B11</td>
+<td>首批场景配置</td>
+<td>春节年货、员工福利、工会慰问的子场景、货盘、商品打标、关联模板；老会员默认开放规则</td>
+<td>商品 / 内容运营</td>
+<td>P0</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-C-全品类代发">C 全品类代发</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>任务</th>
+<th>内容与验收要点</th>
+<th>端</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C1</td>
+<td>已选商品统一</td>
+<td>场景与资源广场勾选的商品都进已选；支持全部货源和卡券；从已选发起批量下单</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>批量下单统一入口</td>
+<td>.xlsx + 在线表格，兼容老 .csv；识别 SKU ID 与商品 ID；按货源校验数量和合单规则；单次 ≤ 5000 行</td>
+<td>会员端 + 后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>校验、确认与扣款</td>
+<td>逐行显示库存、可配送、同品替换、会员价、运费；待确认 → 确认支付，从商品结算账户按会员价扣款；余额不足时保留批次并引导充值</td>
+<td>会员端 + 后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>下单管理合并</td>
+<td>猫超下单管理 + 其他代发下单历史合为一页；增加来源入口、场景名；批次详情按货源拆子单；子单级发起售后</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>商品变更通知</td>
+<td>覆盖已选商品中全部货源的价格与库存变更</td>
+<td>会员端</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>卡券代发</td>
+<td>交付方式（电子卡密 / 实体卡）、收件字段、开票方式；定下来前卡券不开放代发</td>
+<td>产品 + 后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>万鲤会员兼容</td>
+<td>万鲤会员可走平台猫超代发链路；退换货支持上门取件（Q4 任务 38）</td>
+<td>后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>老功能迁移</td>
+<td>两套代发的批次、已选商品原样保留；7 个老路由重定向；代发选品重定向资源广场</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-D-定价策略兼容">D 定价策略兼容</h3>
+<p>现状：商城运营中心的定价策略、智能运营只对自有猫超 / 自有优品生效；本地资源场景各有一套「基于会员价上调 x%」的定价规则，本版不动。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>任务</th>
+<th>内容与验收要点</th>
+<th>端</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D1</td>
+<td>定价策略覆盖平台货源</td>
+<td>规则可按货源、类目、价格区间设置；自有货源规则保持不变；定价策略操作记录同步覆盖</td>
+<td>运营中心</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>定价基准可选</td>
+<td>会员价 / 平均到手价 / 市场价三选一；平均到手价缺失（非猫超、部分猫超）时的回退基准待定</td>
+<td>运营中心</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>一键上架必定价</td>
+<td>上架前必须选加价规则或启用定价策略；批量上架任务结果进导入导出</td>
+<td>会员端 + 运营中心</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>我的商品增加平台货源 Tab</td>
+<td>字段：会员价、市场价、平均到手价（有则显示）、分销价、销售价、利润率；支持批量改价、上下架</td>
+<td>运营中心</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>价格联动与亏本拦截</td>
+<td>会员价或基准价变动后售价是否重算；售价低于会员价时接入现有「亏本下单配置」</td>
+<td>运营中心 + 后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>智能运营覆盖平台货源</td>
+<td>按条件自动上下架扩到平台货源</td>
+<td>运营中心</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>卡券排除</td>
+<td>卡券不进入我的商品、不参与定价策略</td>
+<td>后端</td>
+<td>P0</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-E-工作台精简-含低频功能收起">E 工作台精简（含低频功能收起）</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>任务</th>
+<th>内容与验收要点</th>
+<th>端</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>E1</td>
+<td>无人用栏目下线</td>
+<td>名片 3 页、企微营销 3 页、客户下企微 3 页（待确认）及企微配置；下线前拉全量使用数据；老路由重定向并提示</td>
+<td>会员端</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>低频功能收起</td>
+<td>侧栏底部增加「更多」折叠组，默认收起；候选：商城扩展应用 6 页、本地资源场景 9 页、供应商 4 页、营业额申报、服务订单、下单提醒、短信管理，以近 90 天访问数据定稿；收起不收权限，常用与搜索仍可达</td>
+<td>会员端</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>E3</td>
+<td>栏目挪位与改名</td>
+<td>全品类代发放订单第一组；退货地址设置 → 商品管理；代售后查询 → 商城订单；本地资源场景 → 本地生活资源</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>E4</td>
+<td>常用菜单预置</td>
+<td>未设置过的用户默认 5 项：批量下单、下单管理、已选商品、我的商城、账户管理；已设置的不覆盖</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>E5</td>
+<td>工作台首页改版</td>
+<td>公告、年货节专区、待办（原订单数据 + 代发待确认 / 异常）、资金；业务数据和关注客户不动</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>E6</td>
+<td>品牌替换</td>
+<td>工作台 Logo「采发发 · 会员端」改为分采通（Q4 任务 36.2）</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>E7</td>
+<td>权限点</td>
+<td>新增代发下单、代发支付、一键上架、新建商城 4 个权限点；老账号按原代发权限映射</td>
+<td>会员端 + 后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>E8</td>
+<td>顶栏补充</td>
+<td>导入导出增加代发导入和上架任务；消息增加待支付、子单异常、余额不足通知</td>
+<td>会员端</td>
+<td>P1</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-F-数据-BI-看板">F 数据 BI 看板</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>任务</th>
+<th>内容与验收要点</th>
+<th>端</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F1</td>
+<td>指标口径</td>
+<td>代发是否计入经营概览；总 GMV（到手价）、毛利额对代发的算法；「企业代付金额」（Q4 任务 43.1）；输出指标字典</td>
+<td>产品 + 数据</td>
+<td>P0（先于 F3、F4）</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>历史订单清洗</td>
+<td>订单来源、货源、商品 / 类目 / 场景标签统一；也是 V1.3 AI 问数的数据底座</td>
+<td>数据</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>工作台经营数据加代发 Tab</td>
+<td>现有商城订单 / 集采订单旁加「代发订单」，7 个指标同口径</td>
+<td>BI</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>订单明细筛选</td>
+<td>订单来源增加「全品类代发」，增加场景筛选</td>
+<td>BI</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>埋点</td>
+<td>场景浏览、勾选、加入已选、代发、上架、新建商城、新手引导完成率、收起栏目点击</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+</tbody></table>
+</div><p>老板看板改版（Q4 任务 45.1）按原计划 12 月做，不在 V1.0。</p>
+<h3 id="h-G-版本更新与新手指引">G 版本更新与新手指引</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>任务</th>
+<th>内容与验收要点</th>
+<th>端</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>G1</td>
+<td>改版公告</td>
+<td>工作台首页公告条、登录弹窗（可复用弹窗广告）、短信 / 企微群文案</td>
+<td>会员端 + 运营</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>G2</td>
+<td>更新日志页</td>
+<td>版本号、变更清单、老功能去向对照（猫超代发 / 其他代发 / 模版广场 / 下线栏目）</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>G3</td>
+<td>首次登录引导</td>
+<td>3 步：场景首页 → 一键动作 → 全品类代发 / 新建商城；可跳过、可从帮助重看；按账号记录完成状态</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>G4</td>
+<td>功能点气泡</td>
+<td>已选商品、合并后的下单管理、商品结算账户、「更多」收起组各一次性提示</td>
+<td>会员端</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>G5</td>
+<td>老路由提示</td>
+<td>被合并或下线的页面重定向后，顶部提示「该功能已移至 …」</td>
+<td>会员端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>G6</td>
+<td>学习中心内容</td>
+<td>操作手册、短视频、FAQ：场景选品、全品类代发、一键上架、定价基准、同品替换、新建商城（与 Q4 任务 46 对齐）</td>
+<td>内容运营</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>G7</td>
+<td>内部培训</td>
+<td>客服、客户运营、销售、区代的培训与考核；统一答疑口径</td>
+<td>产品 + 运营</td>
+<td>P0</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-H-迁移与上线">H 迁移与上线</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>任务</th>
+<th>内容与验收要点</th>
+<th>端</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>H1</td>
+<td>灰度白名单</td>
+<td>先对 1–2 家友好服务商开放场景首页和全品类代发，再按批放量</td>
+<td>后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>老数据迁移</td>
+<td>代发批次、已选商品、权限映射、老会员默认场景；迁移后核对</td>
+<td>后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>H3</td>
+<td>回滚预案</td>
+<td>场景首页、全品类代发各设开关，可切回老首页和老代发入口</td>
+<td>后端</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>H4</td>
+<td>上线前置条件</td>
+<td>春节场景货盘已配（B11）；万鲤账户余额盘点完成（Q4 任务 42）；培训完成（G7）</td>
+<td>产品</td>
+<td>P0</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-范围取舍与依赖">范围取舍与依赖</h2>
+<p>场景首页、商品池、全品类代发、一键上架不能砍；工作台里跟它们绑定的全品类代发两页、代发交易明细、权限点也是 P0。产能不够时按下表顺序后移到 V1.2（12/18）。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>后移项</th>
+<th>后移后 V1.0 的最小形态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>春节模板视觉更新</td>
+<td>沿用现有模板，只在场景里链接</td>
+</tr>
+<tr>
+<td>2</td>
+<td>一键新建商城</td>
+<td>模板详情保留原有「使用模板」流程</td>
+</tr>
+<tr>
+<td>3</td>
+<td>工作台精简（名片 / 企微下线）</td>
+<td>菜单保留，仅做开关配置预埋</td>
+</tr>
+<tr>
+<td>4</td>
+<td>工作台首页 P1（经营数据「代发订单」 Tab）</td>
+<td>经营数据保持商城 / 集采两个 Tab，代发数据先看下单管理</td>
+</tr>
+</tbody></table>
+</div><p>第 4 项是本文新增的建议，路线图里只列了前 3 项。</p>
+<p>外部依赖：</p>
+<ul>
+<li><p>运营管理后台分采通渠道（场景、商品池、渠道定价）须先于会员端可用，运营要在 11/20 前配好春节场景和货盘。</p>
+</li>
+<li><p>商品运营在春节档前完成场景商品打标。</p>
+</li>
+<li><p>现有商城能否承接平台货源下单和售后；不能的话，V1.0 一键上架只开放自有猫超 / 优品，平台货源上架随 V1.1 开放。</p>
+</li>
+<li><p>万鲤账户迁移（Q4 任务 42）影响预存款扣款，需在 V1.0 上线前完成余额盘点。</p>
+</li>
+</ul>
+<h2 id="h-待确认">待确认</h2>
+<p>前 4 条影响工作台字段和开发量，建议需求评审前定。</p>
+<ol>
+<li><p>卡券代发的交付方式（电子卡密发给收件人，还是实体卡寄送）和开票方式。</p>
+</li>
+<li><p>同品替换的边界：服务商自有账号没有对应 SKU 时，按平台货源下单还是提示不可替换？替换后是否仍按会员价扣款？</p>
+</li>
+<li><p>代发订单是否计入 BI 经营概览，代发的开票入口放在平台财务 · 发票管理还是下单管理。</p>
+</li>
+<li><p>其他代发里的「协议价」是什么口径，与会员价的关系；全品类代发统一按会员价扣款后，协议价是否还展示。</p>
+</li>
+<li><p>客户下的企微好友、企微客户群、客户流失，以及企业控制台的企微配置，是否与企微营销一起下线；下线前拉使用数据确认。</p>
+</li>
+<li><p>名片、企微的历史数据是否给用户提供导出。</p>
+</li>
+<li><p>「挑选入方案」和工作台「业务数据 → 方案」是否保留。</p>
+</li>
+<li><p>工作台首页「待办」是否加入商城侧的汇款充值审核和订单审核（它们在商城运营中心，跨系统取数）。</p>
+</li>
+<li><p>代发选品的「自有供应商商品」 Tab 去哪里：资源广场加一个 Tab，还是放在商品 · 商品库；两套代发合单规则是否按货源各自沿用。</p>
+</li>
+</ol>
+<p>依据：<a href="https://claude.ai/artifact/T2PFj2BMaf242nvMUqQc2V">分采通 11–1月产品规划</a> · <a href="https://claude.ai/artifact/HSx9AMFwmFKUrLXvAmSfVR">分采通系统产品架构与栏目设计框架</a> · 知识库《06-系统菜单与路由映射》 · 《采发发分采通Q4子任务拆解》。前一份框架把营销栏目列为「保留」，本文按更新的路线图改为下线名片和企微。</p>
+<hr><p class="meta">最后更新 2026-10-28 14:57（北京时间）· 同步自 Claude 文档 2026-11-09 · Markdown 原文：<a href="nhj-arch.md">nhj-arch.md</a></p></article></div>
+</body></html>

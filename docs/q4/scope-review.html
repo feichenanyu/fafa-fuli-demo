@@ -1,0 +1,1762 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>采发发各版本交付范围审查表</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">通用 · 审查表 · 采发发各版本交付范围审查表</span>
+<a class="btn" href="../">全部文档</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-V1-0-年货节版-11-20">V1.0 年货节版 · 11/20</a><a href="#h-V1-1-消费商城改版-12-4">V1.1 消费商城改版 · 12/4</a><a href="#h-V1-2-运营与价格能力-12-18">V1.2 运营与价格能力 · 12/18</a><a href="#h-V1-3-AI-经营助手-1-12-灰度">V1.3 AI 经营助手 · 1/12 灰度</a><a href="#h-Q1-对外与-CRM-春节后">Q1 对外与 CRM（春节后）</a><a href="#h-不纳入本规划的原任务项">不纳入本规划的原任务项</a></nav>
+<article><h1 id="h-采发发各版本交付范围审查表">采发发各版本交付范围审查表</h1>
+<div class="docmeta"><span class="pill new">最新</span><span class="pill kind">通用 · 审查表</span><span>最后更新 2026-11-02 13:30</span></div><p>2026-11-02 · @sanyuan</p>
+<p>按版本分节、每节按终端分表。交付项由 10/31 会议、今天的决策和之前拆分的三份任务表（Q4 重点任务推进表、采发发 Agent 任务拆解、采发发分采通 Q4 子任务拆解）重新排列而来，“来源”列标出出处。业务价值按“激活 / 增长 / 体验 / GMV”四类标注，每条只标一个主要方向；优先级是产品侧建议；审查栏默认“待审”，调整内容写在备注栏。</p>
+<p>来源缩写：推进表 = Q4 重点任务推进表（审查版）；Agent 拆解 = 采发发 Agent 任务拆解；Q4 拆解 = 采发发分采通 Q4 子任务拆解；10/31 = Q4 产品规划会；11/2 = 今天确认的决策；Demo = 场景运营首页 Demo v2。</p>
+<h2 id="h-V1-0-年货节版-11-20">V1.0 年货节版 · 11/20</h2>
+<p>目标：新老会员都能进入新版，并在场景里走完“找货 → 谈单 → 成交”；运营配好场景、商品池和权益包；AI 选品同时给运营和会员用。共 56 项，会员端按用户路线的环节排列。</p>
+<h3 id="h-会员端">会员端</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>环节</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0-01</td>
+<td>进入</td>
+<td>自主注册</td>
+<td>增长｜新客自助开户，线索自动进销售</td>
+<td>入口：官网（SEO 落地页）、销售邀请链接 / 邀请码、采发发登录页；手机号 + 验证码即开户为免费个人版，不要求填企业资料；注册即记录来源渠道和归属销售</td>
+<td>用户路线、10/31</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-01a</td>
+<td>进入</td>
+<td>官网开户入口</td>
+<td>增长｜官网 SEO 流量直接转成开户</td>
+<td>官网首页和 SEO 落地页嵌入手机号开户组件；携带渠道参数（UTM、关键词、落地页）写入线索；开户后免登进入采发发；官网内容与 SEO 由市场负责，产品侧提供开户组件和来源参数</td>
+<td>11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-02</td>
+<td>进入</td>
+<td>免费个人版体验限制</td>
+<td>激活｜先免费用起来，再引导升级</td>
+<td>可见场景受限；价格展示受限（不显示会员价）；AI 每日可用积分受限，积分暂不开放购买；受限处引导升级</td>
+<td>用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-03</td>
+<td>进入</td>
+<td>升级免费企业版</td>
+<td>激活｜认证即可下单，扫清首单门槛</td>
+<td>填写企业资料、上传营业执照 → 审核 → 价格正常展示、可以下单；驳回后可重新提交</td>
+<td>用户路线、Agent 拆解</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-04</td>
+<td>进入</td>
+<td>权益包与场景可见性</td>
+<td>增长｜高级权益包带来付费会员</td>
+<td>展示当前版本和已开通的高级会员权益包；不可见的场景不展示、不可咨询开通</td>
+<td>用户路线、11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-05</td>
+<td>进入</td>
+<td>老会员登录与权益映射</td>
+<td>激活｜老会员原账号直进，不流失</td>
+<td>原账号登录，无需重新注册认证；按原权益默认开放年货节场景；余额、订单、已有商城延续；映射规则待定</td>
+<td>推进表、用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-06</td>
+<td>进入</td>
+<td>老功能迁移</td>
+<td>体验｜新旧入口不并存，不迷路</td>
+<td>模板广场下线并重定向；猫超代发历史批次迁入全品类代发</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-07</td>
+<td>进入</td>
+<td>新手引导与更新日志</td>
+<td>激活｜引导会员走完首单</td>
+<td>新老会员分开引导，覆盖首单完整流程；更新日志、站内公告、模板上新弹窗</td>
+<td>推进表、用户路线</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-08</td>
+<td>找货</td>
+<td>场景首页框架</td>
+<td>GMV｜春节货盘拿来即卖</td>
+<td>场景 Tab、场景头部（档期倒计时）、子场景、场景商品、本场景商城模板入口</td>
+<td>推进表、Demo</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-09</td>
+<td>找货</td>
+<td>场景内搜索</td>
+<td>体验｜场景内快速找货</td>
+<td>在当前场景商品范围内搜索</td>
+<td>Demo、用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-10</td>
+<td>找货</td>
+<td>场景商品列表与筛选</td>
+<td>GMV｜按利润率组货，好卖的先上</td>
+<td>货源、品牌、类目、价格带、利润率、发货仓、商品形态；仅看有货 / 可上架；分页与全选</td>
+<td>Demo</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-11</td>
+<td>找货</td>
+<td>商品详情页</td>
+<td>GMV｜看清价格规格，当场下单</td>
+<td>规格、来源、发货仓、价格（代发价 / 集采价 / 市场价）、是否可上架；详情内可加购、询价、上架</td>
+<td>用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-12</td>
+<td>找货</td>
+<td>价格展示规则</td>
+<td>体验｜价格看得懂，接口价不外泄</td>
+<td>代发价（会员价）、市场价、市场价利润率；精选商品展示集采价和起订量；京东、猫超商品集采只显示“询价”；任何位置不展示接口价</td>
+<td>10/31、11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-13</td>
+<td>找货</td>
+<td>AI 预算选品</td>
+<td>激活｜一句话出方案，新会员也会用</td>
+<td>预算、人数、场景、偏好与排除；缺信息追问；只在可见商品池内选；推荐理由；结果可加购 / 上架 / 询价；白名单开放</td>
+<td>Agent 拆解、11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-14</td>
+<td>谈单</td>
+<td>对客选品清单</td>
+<td>GMV｜清单直接拿去谈单</td>
+<td>勾选商品导出 Excel；按会员设定的加价显示对客价，不露会员价和利润</td>
+<td>用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-15</td>
+<td>谈单</td>
+<td>分享商城给客户</td>
+<td>GMV｜客户看到商城效果，促成签单</td>
+<td>商城链接、二维码，客户可预览效果</td>
+<td>用户路线、Demo</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-16</td>
+<td>成交</td>
+<td>一键加购与购物车</td>
+<td>GMV｜选好即买，下单路径更短</td>
+<td>单件加购、批量加购、购物车结算</td>
+<td>Demo</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-17</td>
+<td>成交</td>
+<td>批量下单</td>
+<td>GMV｜大单一次下完</td>
+<td>发到一个收货地址；按来源拆子单，按会员价扣款</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-18</td>
+<td>成交</td>
+<td>名单代发</td>
+<td>GMV｜员工福利一人一份直接发</td>
+<td>下载名单模板、上传名单、异常行修正；一人一份发货；卡券按手机号发卡密</td>
+<td>推进表、Demo</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-19</td>
+<td>成交</td>
+<td>一键询价</td>
+<td>GMV｜集采大单有线上入口</td>
+<td>场景页、商品详情、AI 选品结果、购物车均可发起；询价单含商品、数量、期望价、交期、收货地、开票信息；状态：已提交 / 跟进中 / 已回复 / 已关闭；V1.0 报价由运营线下或沿用老系统猫超集采报价回复，线上报价单在 V1.1</td>
+<td>10/31、11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-21</td>
+<td>成交</td>
+<td>一键上架到我的商城</td>
+<td>GMV｜选好的商品直接上架在售</td>
+<td>选择商城；定价基准（会员价 / 平均到手价 / 市场价）上调百分比，或按商城定价策略；售价预览；卡券自动跳过</td>
+<td>推进表、Demo</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-22</td>
+<td>成交</td>
+<td>平均到手价缺失回退</td>
+<td>体验｜上架定价有兜底，不出错</td>
+<td>平均到手价仅部分天猫超市商品有，缺失时的回退规则待定</td>
+<td>Demo</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-23</td>
+<td>成交</td>
+<td>同品替换</td>
+<td>GMV｜优先卖会员自有货源</td>
+<td>下单和上架时按 SKU ID 替换为会员自有猫超 / 优品同品；替换日志</td>
+<td>推进表、Demo</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-24</td>
+<td>成交</td>
+<td>一键创建商城</td>
+<td>激活｜会员自己就能建商城</td>
+<td>选模板 → 名称 / 短信签名 → 定价 → 创建；与商品池动态绑定，性能方案未定时先用快照</td>
+<td>推进表、11/2</td>
+<td>P1（可顺延）</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-26</td>
+<td>成交</td>
+<td>收银台</td>
+<td>GMV｜多种支付，急单快成交</td>
+<td>对公转账（沿用老系统）、扫码付（支付宝 / 微信）、预付款余额，可组合支付</td>
+<td>11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-27</td>
+<td>成交</td>
+<td>个人代付与发票</td>
+<td>体验｜个人付款合规，发票只开企业</td>
+<td>个人扫码弹代付确认并记录付款人、协议版本；发票只开给认证企业；退款原路退回</td>
+<td>11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-28</td>
+<td>成交</td>
+<td>订单与开票归属</td>
+<td>体验｜新入口订单可查、可开票</td>
+<td>场景下产生的代发、集采订单在老系统订单列表可查，走原开票流程；需验证串通</td>
+<td>用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-29</td>
+<td>经营</td>
+<td>站内消息通知</td>
+<td>体验｜报价、下架、异常及时知晓</td>
+<td>询价回复、商品池规则下架影响已上架商品、订单异常、认证结果</td>
+<td>用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-30</td>
+<td>—</td>
+<td>万鲤会员猫超代发</td>
+<td>GMV｜万鲤会员可下猫超代发单</td>
+<td>万鲤会员下单可走平台猫超代发链路</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-31</td>
+<td>—</td>
+<td>万鲤会员上门取件</td>
+<td>体验｜退换货上门取件</td>
+<td>退换货支持上门取件；取件运费规则</td>
+<td>推进表、Q4 拆解</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-32</td>
+<td>—</td>
+<td>工作台精简</td>
+<td>体验｜工作台只留高频功能</td>
+<td>下线名片、企微等无人使用的栏目；下线前拉使用数据确认；同时拉各入口点击率、会员每天第一个点击、待办查看频次，作为 V1.1 工作台改版依据</td>
+<td>推进表</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-新运营管理后台">新运营管理后台</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0-33</td>
+<td>后台框架与角色权限</td>
+<td>体验｜运营按角色用 AI，响应更快</td>
+<td>商品运营、场景运营、会员运营、管理员四个角色；菜单与按钮权限；只收新功能，不搬旧功能</td>
+<td>10/31、11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-34</td>
+<td>会员权益包配置与开通</td>
+<td>增长｜销售能卖高级权益包</td>
+<td>权益包定义（可见场景、权益项）；销售或运营为会员开通高级会员权益包；到期管理</td>
+<td>用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-35</td>
+<td>免费版体验额度配置</td>
+<td>增长｜体验额度可调，控制转化节奏</td>
+<td>个人版可见场景范围、价格展示规则、AI 每日积分额度</td>
+<td>用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-36</td>
+<td>注册线索流转</td>
+<td>增长｜线索不漏跟，渠道转化可算</td>
+<td>新注册用户自动进入销售线索：有邀请码的归属对应销售，官网等自然流量按规则分配；线索带来源渠道；销售跟进目标是开通高级会员权益包；记录跟进状态和转化结果</td>
+<td>用户路线、10/31</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-37</td>
+<td>企业认证审核</td>
+<td>激活｜认证审核快，会员早下单</td>
+<td>营业执照校验、驳回原因、重新提交</td>
+<td>Agent 拆解</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-38</td>
+<td>二级场景管理</td>
+<td>GMV｜按节日、人群上货盘</td>
+<td>场景、子场景、档期与上下线、权益包可见；绑定商品池和商城模板</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-39</td>
+<td>商品池规则</td>
+<td>GMV｜货盘自动上下架，不卖缺货品</td>
+<td>规则字段：来源、类目、品牌、价格带、平台利润率、库存、标签；自动上下架；手动增删、排序值、指定会员可见</td>
+<td>推进表、10/29</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-40</td>
+<td>频道、货盘统一为商品池</td>
+<td>体验｜所有货盘一套规则管</td>
+<td>发发福利的频道、货盘用商品池承载，只是展示方式不同</td>
+<td>11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-41</td>
+<td>定价规则模板</td>
+<td>GMV｜会员价自动算，调价不亏单</td>
+<td>以接口价为基准，按来源、类目、价格带设加价规则自动算会员价；接口价变动自动重算</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-42</td>
+<td>商城模板管理</td>
+<td>激活｜模板复制即开店</td>
+<td>模板装修、所属场景、绑定商品池；模板字段沿用老系统</td>
+<td>推进表、Demo</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-43</td>
+<td>询价单处理</td>
+<td>GMV｜询价不漏单，大单有人跟</td>
+<td>询价工作台：询价单列表、按商品来源分配跟进人、跟进记录；向商家或渠道询底价；V1.0 不做线上报价单，回复结果记入跟进记录并通知会员；工时不够时先用线下表单</td>
+<td>10/31、11/2、用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-44</td>
+<td>清单导入写回</td>
+<td>体验｜商品数据补全，AI 选品更准</td>
+<td>模板以统一商品 ID 为主键；校验 → 差异预览 → 写回；来源优先级（人工 &gt; AI &gt; 接口）；按批次回滚</td>
+<td>11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-45</td>
+<td>标签字典</td>
+<td>体验｜标签统一，找货更准</td>
+<td>场景、节日、适用人群、运营标签的枚举值</td>
+<td>11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-46</td>
+<td>商品运营 AI 选品</td>
+<td>GMV｜运营一句话上新货盘</td>
+<td>一句话 → 规则条件 → 命中数量和样品预览 → 保存为商品池规则</td>
+<td>11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-47</td>
+<td>春节场景与模板配置</td>
+<td>GMV｜春节货盘按时上线</td>
+<td>春节年货、员工福利、工会慰问场景配置完成；3 类春节商城模板可投产</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-底座与数据">底座与数据</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0-48</td>
+<td>3.0 商品库清洗</td>
+<td>体验｜商品数据干净，AI 能调用</td>
+<td>年货节相关类目优先；规格单位、库存状态、效期、电商仓 / 商家仓字段规范</td>
+<td>11/2、Q4 拆解</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-49</td>
+<td>统一类目与品牌库</td>
+<td>体验｜多来源商品统一筛选</td>
+<td>各 API 来源商品映射到统一类目、品牌；类目模板（食品保质期、3C 型号）</td>
+<td>推进表、Q4 拆解</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-50</td>
+<td>同品对应关系</td>
+<td>GMV｜支撑同品替换与比价</td>
+<td>按 SKU ID 建立自有猫超 / 优品与平台商品的同品对应表</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-51</td>
+<td>字段权限</td>
+<td>体验｜接口价零外泄</td>
+<td>会员侧接口不返回接口价、平台利润率；个人版不返回会员价；运营侧可见全部价格口径</td>
+<td>11/2、用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-52</td>
+<td>AI 可调用的选品接口</td>
+<td>激活｜运营和会员共用一套 AI 选品</td>
+<td>与商品池规则同一套条件结构；按调用方返回字段；按 AI 积分额度限流；接口按 MCP 标准预留</td>
+<td>11/2、Q4 拆解</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-53</td>
+<td>全链路埋点</td>
+<td>增长｜激活、转化、成交可量化</td>
+<td>注册、升级、权益开通、场景浏览、加购、询价、报价、成单、代发、上架、建商城、对客清单导出、AI 选品；官网开户漏斗（访问 → 开户 → 升级企业版 → 开通权益包）；公共属性（企业、版本、场景、来源渠道、归属销售）</td>
+<td>推进表、Agent 拆解、用户路线</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-54</td>
+<td>数据清洗与指标口径</td>
+<td>GMV｜成交数据口径统一</td>
+<td>历史订单清洗；代发订单是否计入经营概览等口径定稿</td>
+<td>推进表</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-55</td>
+<td>AI 评测集</td>
+<td>体验｜AI 结果有质量门槛</td>
+<td>约 100 条 case；意图解析准确率、采纳率；接口价诱导类问题泄露数为 0</td>
+<td>Agent 拆解、11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0-56</td>
+<td>万鲤会员账户迁移</td>
+<td>增长｜万鲤会员并入，会员基数扩大</td>
+<td>账户盘点、分批迁移、结转对账；是否在春节前迁移待定</td>
+<td>Q4 拆解</td>
+<td>待定</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-运营与推广">运营与推广</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0-57</td>
+<td>宣发与培训</td>
+<td>激活｜老会员学会用新功能</td>
+<td>改版预告；操作手册、短视频、FAQ；内部培训；老用户分批线上培训；年货节宣发物料，11/19 前就绪</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h2 id="h-V1-1-消费商城改版-12-4">V1.1 消费商城改版 · 12/4</h2>
+<p>目标：老商城升级为新版交易链路、各货源统一商品展示；会员商城可用 AI 做品牌化装修。共 25 项（含由 V1.0 后移的集采报价闭环和建商城 AI 向导）。</p>
+<h3 id="h-C-端消费商城">C 端消费商城</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.1-01</td>
+<td>购物车改版</td>
+<td>体验｜员工下单更顺</td>
+<td>增删改、失效提醒、凑单</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-02</td>
+<td>确认订单与支付改版</td>
+<td>体验｜支付清晰，减少客诉</td>
+<td>不再在确认页默认扣商城额度和优惠券；跳转统一收银台，由用户选择组合支付或纯支付宝 / 微信</td>
+<td>10/31、推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-03</td>
+<td>售后改版</td>
+<td>体验｜售后可自查</td>
+<td>按子单发起售后、进度查询</td>
+<td>推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-04</td>
+<td>统一商品展示</td>
+<td>GMV｜各货源统一展示，商城转化提升</td>
+<td>各货源（自有猫超 / 优品、平台货源）使用同一套列表和详情</td>
+<td>11/2、推进表</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-05</td>
+<td>个人中心与分类页</td>
+<td>体验｜整站体验统一</td>
+<td>一级页面全部改版，把之前没做完的全部兼容上</td>
+<td>10/31</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-06</td>
+<td>搜索与频道对标天猫超市</td>
+<td>GMV｜员工找货快，下单多</td>
+<td>搜索框、搜索结果聚合、频道页；关键样式固定为最佳实践，不让站点乱配</td>
+<td>10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-07</td>
+<td>体验修复</td>
+<td>体验｜消除高频体验问题</td>
+<td>返回后滚动定位丢失、搜索后定位不到等问题一次扫掉</td>
+<td>10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-08</td>
+<td>已有商城灰度切换</td>
+<td>GMV｜平稳切换，春节下单不中断</td>
+<td>按商城灰度切到新版交易链路；与运营确认切换节奏</td>
+<td>推进表</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-09</td>
+<td>C 端埋点</td>
+<td>GMV｜改版前后转化可对比</td>
+<td>搜索、浏览、加购、下单、支付；改版前后转化可对比</td>
+<td>推进表</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-会员端-">会员端</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.1-10</td>
+<td>装修分层</td>
+<td>激活｜品牌可改，会员愿意用模板</td>
+<td>同步层（页面结构、组件、商品池绑定）跟随模板；品牌层（名称、logo、主色、banner）归会员私有</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-11</td>
+<td>商城 AI 生图</td>
+<td>激活｜不会设计也能装出好商城</td>
+<td>按商城名、logo、主题、主色生成 banner 和氛围图；不生成商品实物图和他人 logo；内容审核；配额控制</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-12</td>
+<td>商城 AI 换主题色</td>
+<td>体验｜一句话换风格</td>
+<td>框架不变，一句话切换配色组件</td>
+<td>10/31</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-13</td>
+<td>建商城向导补齐</td>
+<td>激活｜加价有依据，建商城一步到位</td>
+<td>加价建议（按目标利润率反推加价率）、装修步骤接入 AI 生图</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-14</td>
+<td>一键创建商城（顺延时）</td>
+<td>激活｜承接 V1.0 顺延的建商城</td>
+<td>如 V1.0 顺延，在本版交付</td>
+<td>推进表</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-16</td>
+<td>对客选品分享页</td>
+<td>GMV｜客户手机上看方案，促成签单</td>
+<td>对客选品清单生成分享链接 / H5，客户在手机上查看；只显示对客价</td>
+<td>用户路线</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-17</td>
+<td>短信通知</td>
+<td>体验｜关键消息不错过</td>
+<td>询价回复、认证结果、商品下架影响商城等关键消息同步短信</td>
+<td>用户路线</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-18</td>
+<td>报价单查看与确认</td>
+<td>GMV｜报价在线确认，大单不流失</td>
+<td>运营推送报价单后站内消息和短信通知；报价单含集采单价、数量、运费、交期、有效期、税率；会员可确认、拒绝或留言议价，议价后运营改价重推；过期自动失效</td>
+<td>老系统猫超集采报价、用户路线</td>
+<td>P1</td>
+<td>待审</td>
+<td>由 V1.0 后移</td>
+</tr>
+<tr>
+<td>1.1-19</td>
+<td>报价单转集采订单</td>
+<td>GMV｜集采大单线上成单</td>
+<td>会员确认报价后一键生成集采订单，订单关联报价单；走收银台支付（对公转账为主，可用预付款）；之后按集采订单履约、售后、开票</td>
+<td>老系统猫超集采报价、用户路线</td>
+<td>P1</td>
+<td>待审</td>
+<td>由 V1.0 后移</td>
+</tr>
+<tr>
+<td>1.1-20</td>
+<td>建商城向导 AI 预填</td>
+<td>激活｜一句话建商城</td>
+<td>一句话预填模板、商城名称、短信签名建议（仍走报备审核）、选品；与 1.1-13 向导补齐一起交付</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td>由 V1.0 后移</td>
+</tr>
+<tr>
+<td>1.1-22</td>
+<td>工作台改版：待办与异常</td>
+<td>体验｜待办一屏看全，点了就处理</td>
+<td>待支付订单、待确认报价、代发异常、待审批售后、下架商品影响的商城、权益或认证到期；按紧急程度排序，点击直达处理页</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-23</td>
+<td>工作台改版：经营概览</td>
+<td>GMV｜生意好坏一眼看清</td>
+<td>本月成交额、商城订单数、预付款余额、环比上月、档期倒计时</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-24</td>
+<td>工作台改版：常用工具</td>
+<td>体验｜高频功能一步直达</td>
+<td>按会员自己的使用频率排序，露出 6～8 个入口，其余收进“全部功能”；入口取舍依据 1.0-32 拉取的使用数据</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.1-25</td>
+<td>工作台按会员阶段切换</td>
+<td>激活｜每个阶段的会员都知道下一步做什么</td>
+<td>新注册个人版：新手任务（完成认证、看一个场景、导出第一份对客清单），完成后引导升级企业版；企业版未成交：引导首单、建第一个商城；久未下单：顶部换成档期召回</td>
+<td>11/2、用户路线</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-新运营管理后台-">新运营管理后台</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.1-21</td>
+<td>报价单生成与推送</td>
+<td>GMV｜报价标准化，毛利可控</td>
+<td>按询价单生成报价单（集采价、运费、交期、有效期、税率），流程和字段沿用老系统猫超集采报价；报价低于毛利底线需审批；推送会员，议价后改价重推并保留版本</td>
+<td>老系统猫超集采报价</td>
+<td>P1</td>
+<td>待审</td>
+<td>由 V1.0 后移</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-底座">底座</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.1-15</td>
+<td>动态绑定同步方案</td>
+<td>体验｜商城跟随商品池自动更新</td>
+<td>会员商城只保存“引用商品池 + 会员覆盖项（加价、隐藏、排序）”，展示时合并；商品池变更走增量事件</td>
+<td>11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h2 id="h-V1-2-运营与价格能力-12-18">V1.2 运营与价格能力 · 12/18</h2>
+<p>目标：价格可信、京东资源用起来、商品数据质量提升；会员能贴链接比价、传清单下单。共 16 项（报价转订单已移至 V1.1 集采报价闭环）。</p>
+<h3 id="h-新运营管理后台--">新运营管理后台</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.2-01</td>
+<td>京东装修组件</td>
+<td>GMV｜京东资源变成会员卖点</td>
+<td>企业热卖、精选场景、超级大牌、今日必买、趋势好物、新品上新；仅对开通京东资源的会员可用</td>
+<td>推进表、10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-02</td>
+<td>公共装修组件</td>
+<td>体验｜商城装修更灵活</td>
+<td>分类、品牌组件；图片可配置跳转（商品分类、商品详情、专题）</td>
+<td>推进表</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-03</td>
+<td>商品池装修组件</td>
+<td>GMV｜运营货盘直接上商城</td>
+<td>商品池可直接装修进页面</td>
+<td>10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-04</td>
+<td>精选商品价格审核</td>
+<td>GMV｜价格可信，会员敢推</td>
+<td>上架必须附京东 / 天猫公允价链接；超出公允价一定比例转人工复核；存量精选商品完成复核</td>
+<td>推进表、10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-05</td>
+<td>精选供应商排名规则修补</td>
+<td>体验｜供应商排名看质量</td>
+<td>不再按上架先后占坑位</td>
+<td>推进表、10/31</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-06</td>
+<td>AI 批量打标</td>
+<td>体验｜打标提效，找货更准</td>
+<td>AI 按标签字典打场景标签，运营抽检确认后写回</td>
+<td>11/2、10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-07</td>
+<td>商品质检</td>
+<td>体验｜错误商品自动拦截</td>
+<td>检测类目 / 品牌错误、市场价虚高、标题违规</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-08</td>
+<td>场景运营 AI 内容</td>
+<td>GMV｜场景上新更快</td>
+<td>AI 生成场景头图、卖点文案、子场景描述</td>
+<td>11/2</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-09</td>
+<td>商品池特殊字段</td>
+<td>GMV｜规则选品更精细</td>
+<td>猫超近 28 天在架天数、券前价；京东到手价；通过导入写入，供规则选品使用</td>
+<td>10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-18</td>
+<td>档期切换（运营侧）</td>
+<td>GMV｜春节后货盘及时换季</td>
+<td>春节档结束后场景下线、下一档期场景上线；商品池换货、商城模板换季</td>
+<td>用户路线</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-会员端与商城">会员端与商城</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.2-10</td>
+<td>京东评价组件</td>
+<td>GMV｜有评价可参考，促转化</td>
+<td>商品详情页展示评价；好评率回写商品库</td>
+<td>推进表、10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-11</td>
+<td>相似品推荐组件</td>
+<td>GMV｜缺货有替代，提升客单</td>
+<td>商品详情页展示相似品</td>
+<td>推进表</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-12</td>
+<td>找同款比价</td>
+<td>GMV｜比价有依据，会员敢报价</td>
+<td>贴京东 / 淘宝链接或商品图，找平台同品或相似品，显示会员价和市场价利润率</td>
+<td>11/2、10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-13</td>
+<td>清单直接下单</td>
+<td>GMV｜客户清单直接变订单</td>
+<td>上传 Excel 或图片 → AI 匹配 SKU 和会员价 → 生成代发批次 → 会员确认后下单</td>
+<td>11/2、10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-14</td>
+<td>资源产品化</td>
+<td>GMV｜本地生活资源可售</td>
+<td>本地生活在商城里直观展示；企业码本地生活场景展示与跳转，不改企业码业务逻辑</td>
+<td>推进表</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-20</td>
+<td>档期切换（会员侧）</td>
+<td>GMV｜商城一键换季，接住复购</td>
+<td>档期结束前提醒；已有商城一键换季（套用下一档期模板和商品池）</td>
+<td>用户路线</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-售后">售后</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.2-15</td>
+<td>猫超取消退款</td>
+<td>体验｜发货前可取消</td>
+<td>代发子单发货前可取消，退款原路回预存款</td>
+<td>推进表</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-底座-">底座</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.2-16</td>
+<td>京东 API 补充</td>
+<td>体验｜支撑评价、相似品展示</td>
+<td>评价、相似品接口；梳理京东 VOP 新接口，明确京东商品与接口更新的负责人</td>
+<td>推进表、10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.2-17</td>
+<td>同品 / 相似品识别</td>
+<td>GMV｜支撑找同款和比价</td>
+<td>商品结构化后，建立跨来源同品与相似品匹配规则；支撑找同款和比价</td>
+<td>10/31</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h2 id="h-V1-3-AI-经营助手-1-12-灰度">V1.3 AI 经营助手 · 1/12 灰度</h2>
+<p>目标：会员和运营问一句就能看数、盯单；员工商城有 AI 导购。共 17 项。注意：1/12 与春节 1/10 封版重叠，见 1.3-12。</p>
+<h3 id="h-会员端--">会员端</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.3-01</td>
+<td>AI 问数</td>
+<td>激活｜问一句知经营，会员天天用</td>
+<td>自然语言查订单、代发、场景、商城经营数据；回答带图表和指标口径说明；替换工作台“数据”入口，原报表保留兜底</td>
+<td>推进表</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-02</td>
+<td>订单巡检</td>
+<td>体验｜异常订单提前发现</td>
+<td>缺货、发货超时、物流停滞的订单主动提醒，并给出处理建议（如换同品）</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-03</td>
+<td>对话查订单</td>
+<td>体验｜查单不用翻列表</td>
+<td>“上周给 XX 客户的单发了吗”；可并入 AI 问数</td>
+<td>Agent 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-13</td>
+<td>推广文案与海报</td>
+<td>GMV｜推广物料自动生成，带动成交</td>
+<td>为会员的商城和春节福利生成群发文案、短信模板（含合规检查）和海报，复用 AI 生图</td>
+<td>11/2</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-14</td>
+<td>商城体检与定价建议</td>
+<td>GMV｜优化定价和货品，提升动销</td>
+<td>指出不动销、缺货该换同品、加价偏高的商品，给出定价建议</td>
+<td>11/2</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-16</td>
+<td>工作台 AI 入口</td>
+<td>激活｜AI 有固定入口，会员天天用</td>
+<td>工作台嵌入“问一句”对话框，AI 问数、订单巡检结果从这里进入</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-17</td>
+<td>工作台机会提醒</td>
+<td>GMV｜主动推商机，带动复购</td>
+<td>当前档期推荐货盘、可上架新品、降价商品、久未下单的客户商城</td>
+<td>11/2</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-C-端消费商城-">C 端消费商城</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.3-04</td>
+<td>员工商城 AI 导购</td>
+<td>GMV｜员工福利额度用得满</td>
+<td>员工对话式选品；结合商品信息、京东评价、相似品、历史成交；按剩余额度推荐；结果直接加购下单；先在春节模板商城灰度</td>
+<td>推进表</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-15</td>
+<td>商城智能客服</td>
+<td>体验｜员工问题自动答</td>
+<td>回答员工的物流、售后、兑换规则问题，答不了转服务商客服</td>
+<td>11/2</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-新运营管理后台---">新运营管理后台</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.3-05</td>
+<td>商品运营 AI 查数</td>
+<td>GMV｜商品池效果随时可查</td>
+<td>AI 查商品和订单；看商品池应用效果与 GMV</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-06</td>
+<td>管理员 AI 问数</td>
+<td>GMV｜经营异常及时发现</td>
+<td>全平台 GMV、场景和商品池表现；每日经营日报与异常解读</td>
+<td>11/2</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-07</td>
+<td>会员运营 AI</td>
+<td>激活｜唤醒沉睡会员</td>
+<td>识别沉睡会员并生成触达话术；查会员使用情况</td>
+<td>11/2</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-08</td>
+<td>销售数字化</td>
+<td>增长｜销售拓客有工具、可追踪</td>
+<td>销售生成邀请码、推广链接和文案；查看自己发展的客户是否激活</td>
+<td>10/31</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-底座--">底座</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.3-09</td>
+<td>数据反哺 AI</td>
+<td>体验｜AI 越用越准</td>
+<td>V1.0 清洗后的订单、场景、商品数据接入 AI；AI 问答和推荐效果回流埋点</td>
+<td>推进表</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-10</td>
+<td>AI 专属埋点</td>
+<td>激活｜AI 使用情况可量化</td>
+<td>每轮对话 token 消耗、追问次数、采纳 / 放弃原因</td>
+<td>Agent 拆解</td>
+<td>P1</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-11</td>
+<td>AI 成本监控与计费</td>
+<td>增长｜AI 积分可定价收费</td>
+<td>模型路由、成本看板；积分（token）计费规则</td>
+<td>Q4 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>1.3-12</td>
+<td>独立灰度环境</td>
+<td>体验｜不影响春节封版稳定</td>
+<td>避开春节 1/10 封版；与研发确认走独立灰度还是改到春节后</td>
+<td>11/2</td>
+<td>P0</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h2 id="h-Q1-对外与-CRM-春节后">Q1 对外与 CRM（春节后）</h2>
+<p>目标：自己的交易和 AI 能力跑稳后，对外入驻获客、验证企业直客，并补齐选品主线的报价环节。共 11 项。</p>
+<h3 id="h-对外-外部-AI-平台入驻">对外：外部 AI 平台入驻</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q1-01</td>
+<td>平台调研与选择</td>
+<td>增长｜选准首批获客平台</td>
+<td>WorkBuddy、千问、Kimi、扣子的接入方式、鉴权、计费、审核规则；定首批入驻平台</td>
+<td>Q4 拆解、11/2</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>Q1-02</td>
+<td>可调用能力与 MCP 服务</td>
+<td>增长｜能力可被外部 AI 调用</td>
+<td>选品、下单、订单查询、售后能力清单；MCP server、鉴权、限流、接入文档</td>
+<td>Q4 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>Q1-03</td>
+<td>账号授权映射</td>
+<td>增长｜外部用户零门槛开通</td>
+<td>外部平台调用时的身份识别；注册即开通，不让用户手动绑定</td>
+<td>Q4 拆解、Agent 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>Q1-04</td>
+<td>应用发布上架</td>
+<td>增长｜打开新获客渠道</td>
+<td>CUI 应用需求评审与平台上架</td>
+<td>Q4 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-企业直客">企业直客</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q1-05</td>
+<td>新建采购任务</td>
+<td>增长｜新增企业直客客群</td>
+<td>面向企业行政采购：说出需求 → 选品比价 → 下单；一件代发直接下单，集采转询价</td>
+<td>10/31</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>Q1-06</td>
+<td>企业成员与审批</td>
+<td>激活｜满足企业管控，企业愿意用</td>
+<td>成员邀请、角色（管理员 / 采购员 / 财务 / 只读）、数据范围、一级审批</td>
+<td>Agent 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-会员端-选品主线进阶">会员端：选品主线进阶</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q1-07</td>
+<td>对客报价单</td>
+<td>GMV｜正式报价一键生成，促成签单</td>
+<td>企业抬头、有效期、税率；只显示分销价，不露会员价和利润；导出 Excel；可转订单</td>
+<td>Agent 拆解、Q4 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>Q1-08</td>
+<td>多档方案与局部调整</td>
+<td>GMV｜多档方案，提升采纳率</td>
+<td>经济 / 标准 / 品质三档；换品、锁定、调预算后局部重算；方案版本可回退</td>
+<td>Agent 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>Q1-09</td>
+<td>方案转订单与采纳率</td>
+<td>GMV｜AI 选品到成交可量化</td>
+<td>方案与订单关联，统计采纳率；下单前价格、库存二次校验</td>
+<td>Agent 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+<tr>
+<td>Q1-10</td>
+<td>福利选品知识库</td>
+<td>体验｜选品经验沉淀，方案更准</td>
+<td>节日场景、行业偏好、合规标准（如工会人均限额、禁购类目）、往期爆款；由商品运营沉淀</td>
+<td>Agent 拆解</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h3 id="h-CRM">CRM</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>交付项</th>
+<th>业务价值</th>
+<th>细化内容</th>
+<th>来源</th>
+<th>优先级</th>
+<th>审查</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q1-11</td>
+<td>CRM AI 改版</td>
+<td>增长｜销售跟进提效，转化更多客户</td>
+<td>线索评分、跟进记录摘要、商机下一步建议、销售报价</td>
+<td>11/2</td>
+<td>P2</td>
+<td>待审</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><h2 id="h-不纳入本规划的原任务项">不纳入本规划的原任务项</h2>
+<p>以下是之前三份任务表里有、但本次没有排进会员侧版本的任务及去向，供核对有无遗漏。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>原任务</th>
+<th>来源</th>
+<th>去向</th>
+<th>依据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>商品设计 / AI 商品模改</td>
+<td>Q4 拆解</td>
+<td>砍掉</td>
+<td>10/31</td>
+</tr>
+<tr>
+<td>桌面客户端、手机 APP</td>
+<td>Q4 拆解</td>
+<td>本季度砍掉，先用 PC / H5 / 小程序验证</td>
+<td>10/31</td>
+</tr>
+<tr>
+<td>独立的采发发 Agent 用户、账户体系（资金、积分、活动账户）</td>
+<td>Agent 拆解、Q4 拆解</td>
+<td>沿用 88buys.com 老系统，只补收银台、扫码付、代付确认</td>
+<td>11/2</td>
+</tr>
+<tr>
+<td>第三方分账</td>
+<td>Q4 拆解</td>
+<td>不做：会员付款给平台，平台与商家结算</td>
+<td>11/2</td>
+</tr>
+<tr>
+<td>商家端统一、入驻供货、智能装修、订单分析、ERP 连接器、AI 店铺</td>
+<td>Q4 拆解、Agent 拆解</td>
+<td>归卖家侧版本规划</td>
+<td>11/2</td>
+</tr>
+<tr>
+<td>财务、企业码相关 AI</td>
+<td>—</td>
+<td>不纳入</td>
+<td>11/2</td>
+</tr>
+<tr>
+<td>外部 AI 平台入驻（原 Q4）</td>
+<td>Q4 拆解</td>
+<td>移到 Q1</td>
+<td>11/2</td>
+</tr>
+<tr>
+<td>分采通品牌、域名变更</td>
+<td>Q4 拆解</td>
+<td>暂不处理</td>
+<td>11/2</td>
+</tr>
+<tr>
+<td>爆品 / 礼包 / 卡券商品类型区分</td>
+<td>Q4 拆解</td>
+<td>不再区分，卡券仅作为可代发的商品形态</td>
+<td>10/29</td>
+</tr>
+<tr>
+<td>标书标案、智能客服（机器人、工单）</td>
+<td>Q4 拆解</td>
+<td>未排期，待定</td>
+<td>—</td>
+</tr>
+<tr>
+<td>支付宝小程序商城、小程序主体重新申请</td>
+<td>Q4 拆解、10/31</td>
+<td>待定，需确认是否随 V1.0 上线</td>
+<td>—</td>
+</tr>
+<tr>
+<td>商品变价提醒</td>
+<td>11/2</td>
+<td>放到定价策略中拆解</td>
+<td>11/2</td>
+</tr>
+</tbody></table>
+</div><hr><p class="meta">最后更新 2026-11-02 13:30（北京时间）· 同步自 Claude 文档 2026-11-09 · Markdown 原文：<a href="scope-review.md">scope-review.md</a></p></article></div>
+</body></html>

@@ -1,5 +1,9 @@
 # 发发福利 · **采 · Demo 与文档
 
+## 采发发买家侧 Q4 文档中心（所有文档的统一入口）
+
+https://feichenanyu.github.io/fafa-fuli-demo/docs/ —— 按产品版本 V1–V4 分组，标注最新 / 历史版与最后更新时间；文档原文在 `docs/q4/`，Demo 在 `采发发Q4/`。原「采发发Q4」清单页已重定向到这里。
+
 ## 采发发 AI 融合版（当前方向）
 
 | 内容 | 链接 |
@@ -17,7 +21,7 @@
 | 采发发 Agent Demo v0.3（福利 / 行政 / 办公三大应用 · 服务商 / 企业账号 · 纯 AI 对话首页） | https://feichenanyu.github.io/fafa-fuli-demo/agent/ |
 | 运营管理后台 Demo v1.7（商品池：规则名称 + 规则内排除 + 弹窗选品类 / 品牌 + 明细筛选） | https://feichenanyu.github.io/fafa-fuli-demo/admin/ |
 | **采 Demo v0.3（企业终端采购 · 发发福利 Agent UI） | https://feichenanyu.github.io/fafa-fuli-demo/bangbang/ |
-| 文档中心 | https://feichenanyu.github.io/fafa-fuli-demo/docs/ |
+| 文档中心（已改为采发发买家侧 Q4 文档中心，本节文档在页底存档区） | https://feichenanyu.github.io/fafa-fuli-demo/docs/ |
 | 前台 PRD v2.1（一页融合版） | https://feichenanyu.github.io/fafa-fuli-demo/docs/prd-frontend.html |
 | 产品 Spec v2.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/spec.html |
 | 运营管理后台 PRD v1.1 | https://feichenanyu.github.io/fafa-fuli-demo/docs/prd-admin.html |

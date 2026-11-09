@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分采通首页、资源广场与模板广场场景化重构：产品架构思路</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">V1 · 架构思路 · 分采通首页、资源广场与模板广场场景化重构：产品架构思路</span>
+<a class="btn" href="../">全部文档</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-已确认的前提">已确认的前提</a><a href="#h-目标架构">目标架构</a><a href="#h-场景模型">场景模型</a><a href="#h-三个页面怎么改">三个页面怎么改</a><a href="#h-三个一键动作">三个一键动作</a><a href="#h-定价分开怎么落">定价分开怎么落</a><a href="#h-运营后台与边界">运营后台与边界</a><a href="#h-分期建议">分期建议</a><a href="#h-需要你拍板的点">需要你拍板的点</a></nav>
+<article><h1 id="h-分采通首页-资源广场与模板广场场景化重构-产品架构思路">分采通首页、资源广场与模板广场场景化重构：产品架构思路</h1>
+<div class="docmeta"><span class="pill old">历史版</span><span class="pill kind">V1 · 架构思路</span><span>最后更新 2026-10-27 21:36</span></div><div class="oldnote">这是历史版本，保留作参考；当前以「年货节 Spec」为准，<a href="../">回文档中心查看</a>。</div><p>Oct 27, 2026 · @sanyuan</p>
+<p>思路是把分采通前台从「货架 + 模板库」改成「场景运营」：运营在发发福利的统一商品库上按场景配商品池和商城模板，服务商进场景后一键代发下单、一键上架到自己的商城、一键用模板开商城；价格仍走分采通自己的会员价和服务商加价规则。</p>
+<h2 id="h-已确认的前提">已确认的前提</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>议题</th>
+<th>结论</th>
+<th>对架构的影响</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>底座</td>
+<td>商品复用发发福利，定价分开</td>
+<td>商品库、商品池、场景配置用运营管理后台；会员价规则、服务商加价仍在分采通</td>
+</tr>
+<tr>
+<td>2</td>
+<td>页面结构</td>
+<td>首页 = 场景页，模板广场并入场景，资源广场保留为全量货盘</td>
+<td>前台从 3 个页面变为 2 个；模板不再是独立频道</td>
+</tr>
+<tr>
+<td>3</td>
+<td>一键下单</td>
+<td>做与猫超代发相似的全品类代发</td>
+<td>代发从「只支持猫超」扩到商品库全部来源</td>
+</tr>
+<tr>
+<td>4</td>
+<td>交互</td>
+<td>本期纯 GUI，预留 AI 位</td>
+<td>页面和卡片按结构化数据设计，下一版可直接被对话调用</td>
+</tr>
+</tbody></table>
+</div><p>我做了以下默认假设，不对的话直接改：</p>
+<ul>
+<li><p>场景里不含礼包（分采通已去掉礼包业务）；卡券是否进场景列在最后的待确认里。</p>
+</li>
+<li><p>企业码继续独立，不进场景、不进代发。</p>
+</li>
+<li><p>用户还是分采通的服务商（会员），不是发发福利的企业采购用户。</p>
+</li>
+</ul>
+<h2 id="h-目标架构">目标架构</h2>
+<img src="media/home-refactor/media/image1.png" style="width:6in;height:4.22321in" alt="分采通重构目标架构 · 4 层" /><p>分采通重构目标架构 · 4 层</p>
+<p>前台只留场景首页和资源广场两个入口，共用三个一键动作；商品、商品池、场景配置和拆单复用发发福利，会员价、服务商定价、商城运营中心和账户留在分采通。</p>
+<h2 id="h-场景模型">场景模型</h2>
+<p>场景是这次重构的核心对象：运营在后台把商品池、商城模板和定价参照打包成一个场景，前台服务商进场景就能做 3 件事。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>含义</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>场景</td>
+<td>档期或主题，首页一级 Tab</td>
+<td>春节年货、劳保福利、餐补福利、日常福利</td>
+</tr>
+<tr>
+<td>子场景</td>
+<td>场景下的细分用途，决定商品池和模板</td>
+<td>员工年货、客户送礼、高温补贴</td>
+</tr>
+<tr>
+<td>商品池</td>
+<td>绑定在场景 / 子场景上，来自发发福利统一商品库，按规则自动上下架</td>
+<td>春节粮油池、春节零食池</td>
+</tr>
+<tr>
+<td>商城模板</td>
+<td>绑定在场景上的整套商城方案（微页面 + 特色专题），专题的商品来源就是场景商品池</td>
+<td>银行劳保商城、春节员工福利商城</td>
+</tr>
+<tr>
+<td>定价参照</td>
+<td>场景给出「建议加价」，服务商上架或开商城时可一键套用；不改会员价</td>
+<td>销售价 = 平均到手价 × 100%，上限市场价（沿用运营中心定价策略的公式）</td>
+</tr>
+<tr>
+<td>场景指引</td>
+<td>热销推荐、话术、案例；本期展示，下一版做 AI 提示词</td>
+<td>「500 元预算适合哪种商城」</td>
+</tr>
+</tbody></table>
+</div><p>场景内的 3 个一键动作：</p>
+<ol>
+<li><p>一键代发：服务商替客户把场景商品发到一个或多个收件人，按会员价扣预存款。</p>
+</li>
+<li><p>一键上架：把场景商品（整池或勾选）上架到自己管理的某个商城。</p>
+</li>
+<li><p>一键用商城：用场景的商城模板新开一个商城，或套到已有商城。</p>
+</li>
+</ol>
+<h2 id="h-三个页面怎么改">三个页面怎么改</h2>
+<p>前台从 3 个页面收成 2 个：场景首页负责「按场景找生意」，资源广场负责「按货找商品」，两边用同一套商品卡片和同样 3 个动作。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>页面</th>
+<th>现状</th>
+<th>重构后</th>
+<th>主要模块</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>首页</td>
+<td>Banner + 资源中心（猫超 / 优品 / 企业码 Tab）+ 「大家都在用」8 个类目推荐 + 快捷入口</td>
+<td>场景落地页：一级 Tab 是场景，默认当前档期（如春节）</td>
+<td>场景 Tab · 子场景卡片 · 场景商品池（分组展示）· 场景商城模板 · 场景指引 · 三个一键动作 · 会员卡与订单角标（保留）· 顶部 AI 对话框占位</td>
+</tr>
+<tr>
+<td>资源广场</td>
+<td>自有猫超 / 自有优品两个货池，筛选丰富但只有「挑选」一个动作</td>
+<td>全量货盘：统一商品库里对分采通开放的全部来源（猫超 / 优品 / 京东 / 1688 / 平台精选等）</td>
+<td>按来源分 Tab · 保留现有筛选（价格力、利润率、营销标签、库存地区）· 新增「按场景筛选」· 动作从「挑选」扩为代发 / 上架 / 加入方案</td>
+</tr>
+<tr>
+<td>模板广场</td>
+<td>独立页面，按热门 / 季节 / 节日等分类列出商城模版</td>
+<td>取消独立页面，模板挂到场景下；老入口重定向到场景首页</td>
+<td>模板作为场景的一个模块：预览 · 适合客户 · 推荐理由 · 一键用商城</td>
+</tr>
+</tbody></table>
+</div><p>商品卡片统一展示：会员价（明确标注，解决现在首页价格不标口径的问题）、市场价、平均到手价（有则显示）、库存状态、来源与发货仓（电商仓 / 商家仓）、价格力标签。</p>
+<h2 id="h-三个一键动作">三个一键动作</h2>
+<img src="media/home-refactor/media/image2.png" style="width:6in;height:2.30357in" alt="三个一键动作 · 各 5 步" /><p>三个一键动作 · 各 5 步</p>
+<p>上架和用模板的最后一步都落到商城运营中心已有的「我的商品」和「装修」上，前一步的定价也复用现有改价 / 定价策略；代发要把猫超代发扩到全来源，按来源拆单、分别发货和售后是新增能力。</p>
+<h2 id="h-定价分开怎么落">定价分开怎么落</h2>
+<p>同一个商品在两个渠道各有一个会员价：发发福利按场景 / 频道算，分采通按分采通自己的规则算，场景只给建议加价，不改会员价。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>价格</th>
+<th>发发福利</th>
+<th>分采通（重构后）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>接口价</td>
+<td>统一商品库，两边共用</td>
+<td>同左</td>
+</tr>
+<tr>
+<td>会员价</td>
+<td>按场景 / 频道定价模板从接口价算出，不同场景可以不同</td>
+<td>按分采通渠道规则从接口价算出（如按来源 / 类目加价），不随场景变</td>
+</tr>
+<tr>
+<td>分销价</td>
+<td>无</td>
+<td>服务商自定：改价或定价策略（现有能力），场景可带默认建议</td>
+</tr>
+<tr>
+<td>销售价</td>
+<td>无</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>代发结算</td>
+<td>—</td>
+<td>会员价 + 运费，扣分采通预存款</td>
+</tr>
+</tbody></table>
+</div><p>对系统的要求：</p>
+<ul>
+<li><p>价格引擎要多一个「渠道」维度：商品 × 渠道（发发福利某场景 / 分采通）→ 会员价。分采通渠道可以直接复用发发福利的「定价规则模板」来配，只是不挂在场景上。</p>
+</li>
+<li><p>场景的「建议加价」只是改价 / 定价策略的默认值，服务商上架时可以改。</p>
+</li>
+<li><p>现在运营中心的成本列和定价公式基准都是「接口价」。定价分开后，服务商的成本应该是会员价，这里要一起改（见待确认）。</p>
+</li>
+</ul>
+<h2 id="h-运营后台与边界">运营后台与边界</h2>
+<p>分采通在运营管理后台里作为一个新渠道接入，和发发福利共用商品和场景配置能力，分开配定价和内容。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>后台能力</th>
+<th>发发福利已有</th>
+<th>分采通需要新增</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>统一商品库 + 运营标签</td>
+<td>是</td>
+<td>增加「对分采通开放」的范围控制（按来源 / 类目）</td>
+</tr>
+<tr>
+<td>商品池（规则自动上下架）</td>
+<td>是</td>
+<td>商品池可标注使用渠道，同一个池可以两边共用</td>
+</tr>
+<tr>
+<td>场景 / 频道运营</td>
+<td>是</td>
+<td>分采通场景列表（独立配置）、子场景、场景指引</td>
+</tr>
+<tr>
+<td>定价规则模板</td>
+<td>是</td>
+<td>分采通渠道会员价规则；场景建议加价</td>
+</tr>
+<tr>
+<td>商城模板管理</td>
+<td>否（发发福利不做商城）</td>
+<td>模板库从模板广场迁入后台，模板里的特色专题绑定商品池，模板挂到场景</td>
+</tr>
+<tr>
+<td>数据看板</td>
+<td>是</td>
+<td>按场景统计浏览、代发单量、上架商品数、用模板开商城数</td>
+</tr>
+</tbody></table>
+</div><p>这次不碰的：</p>
+<ul>
+<li><p>企业码：独立模块，不进场景和代发。</p>
+</li>
+<li><p>猫超集采：单独报价，保持原样。</p>
+</li>
+<li><p>商城运营中心内部（装修、订单、财务、用户）：只接收上架和模板的输入，内部不动。</p>
+</li>
+<li><p>客户与销售（CRM）、名片 / 企微营销：不在这次范围。</p>
+</li>
+<li><p>礼包：不做。</p>
+</li>
+</ul>
+<h2 id="h-分期建议">分期建议</h2>
+<p>建议先做能复用现有能力的部分（上架、用模板都能落到运营中心已有的商品与装修能力上），全品类代发涉及京东 / 1688 等新来源的下单、拆单、物流和售后，风险最高，放在第二步。没有定日期，等你定。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>范围</th>
+<th>依赖</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一期</td>
+<td>后台分采通渠道（场景、商品池绑定、模板迁入、会员价规则）· 场景首页 · 资源广场换数据源 · 一键上架 · 一键用商城模板</td>
+<td>发发福利商品库和商品池能力已可用；价格引擎支持渠道维度</td>
+</tr>
+<tr>
+<td>二期</td>
+<td>全品类代发（按来源拆单、物流、售后）· 猫超代发并入 · 场景数据看板</td>
+<td>发发福利交易中台拆单能力；各来源下单接口</td>
+</tr>
+<tr>
+<td>三期</td>
+<td>场景内 AI 对话（按人数和预算推荐、生成对客方案）· 老入口下线</td>
+<td>场景标签商品、选品 / 下单接口</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-需要你拍板的点">需要你拍板的点</h2>
+<p>前 4 个会直接改变一期范围，建议先定。</p>
+<ol>
+<li><p>分采通会员价规则：粒度是全渠道统一加价、按来源还是按类目？场景是否允许单独的活动会员价（本文默认不允许）？</p>
+</li>
+<li><p>服务商看到的成本：运营中心和资源广场里的成本列、定价策略的基准，是否从「接口价」改为「会员价」？</p>
+</li>
+<li><p>一键上架后的同步方式：一次性复制到商城，还是与场景商品池动态同步（池子下架、商城跟着下架）？</p>
+</li>
+<li><p>全品类代发放一期还是二期？扣款是否沿用分采通预存款？订单是否复用发发福利交易中台按来源拆单？</p>
+</li>
+<li><p>一键用商城：只新建商城，还是也允许覆盖已有商城的装修？模板支持 5 类商城里的哪几类？</p>
+</li>
+<li><p>场景内容范围：卡券（作为 SKU）是否进场景？「挑选入方案」是否保留？</p>
+</li>
+<li><p>场景对哪些服务商可见：全部会员，还是按权益包控制？</p>
+</li>
+<li><p>老功能迁移：猫超代发菜单是否并入全品类代发？模板广场里现有模版如何归入场景？</p>
+</li>
+<li><p>上线时间，以及与发发福利 11-20 版本的先后关系（两边共用运营后台和商品库）。</p>
+</li>
+</ol>
+<hr><p class="meta">最后更新 2026-10-27 21:36（北京时间）· 同步自 Claude 文档 2026-11-09 · Markdown 原文：<a href="home-refactor.md">home-refactor.md</a></p></article></div>
+</body></html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>采发发会员工作台调整方案</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">V1 · 方案 · 采发发会员工作台调整方案</span>
+<a class="btn" href="../">全部文档</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-一-现状问题">一、现状问题</a><a href="#h-二-调整原则">二、调整原则</a><a href="#h-三-分版本调整">三、分版本调整</a><a href="#h-四-V3-目标栏目">四、V3 目标栏目</a><a href="#h-五-需要补进版本规划的事项">五、需要补进版本规划的事项</a></nav>
+<article><h1 id="h-采发发会员工作台调整方案">采发发会员工作台调整方案</h1>
+<div class="docmeta"><span class="pill new">最新</span><span class="pill kind">V1 · 方案</span><span>最后更新 2026-11-09 09:57</span></div><p>Nov 9, 2026 · @sanyuan</p>
+<p>会员工作台改成以「项目」为主线：V1（11/20）只新增项目视图、货盘入口和询价单，老菜单不动；V3 按「项目 → 找货 → 谈单 → 成交 → 数据」一次重组，和订单全货源统一同步做，不改两遍。</p>
+<p>依据：买家侧产品形态与版本规划 v1.0（11/03）、11/06 工作台决策、现有工作台菜单（知识库 06）、11/07 自有供应商与店铺连接器讨论会。</p>
+<h2 id="h-一-现状问题">一、现状问题</h2>
+<p>现有工作台 7 个一级菜单（商城、订单、企业码、数据、营销、客户、财务）是按老系统模块和渠道拼起来的，不是按服务商做项目的顺序。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>表现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>没有项目</td>
+<td>商城、询价、订单、经营数据分在 4 个菜单；一个甲方开几个商城，服务商只能自己汇总</td>
+</tr>
+<tr>
+<td>订单按渠道拆</td>
+<td>商城订单、猫超代发、猫超集采各一组，得先知道货从哪来才知道去哪找</td>
+</tr>
+<tr>
+<td>找货不在工作台</td>
+<td>资源广场、模板广场、场景首页都在工作台外；运营货盘还靠线下表格转发</td>
+</tr>
+<tr>
+<td>无用栏目</td>
+<td>名片营销、企微营销占着菜单位</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-二-调整原则">二、调整原则</h2>
+<ol>
+<li><p><strong>项目是主线</strong>：商城、询价单、订单都挂在项目下，建商城、选品上架、询价都从项目发起。</p>
+</li>
+<li><p><strong>V1 只加不搬，V3 一次重组</strong>：老菜单含大量 iframe 和微应用，搬一次成本高；重组与 V3 购物车、订单全货源统一一起做，不改两遍。</p>
+</li>
+<li><p><strong>按任务分组，不按渠道</strong>：V3 起订单不再分猫超代发、猫超集采，货源只是筛选条件。</p>
+</li>
+<li><p><strong>边界不变</strong>：企业码保持独立模块；财务不做 AI；客户（CRM）AI 改版在 Q1，这轮不动。</p>
+</li>
+<li><p><strong>新增和重构都带新手指引</strong>：每一版只要新增入口或调整栏目位置，都要同版上线新手指引，避免用户找不到入口。内容包括：首次进入的分步引导（可跳过、可重看）、新入口 NEW 角标、空状态引导；重构时加一项「旧入口去哪了」提示，老位置保留一段时间的跳转。指引做成通用组件，V1 建好，后续版本复用。</p>
+</li>
+</ol>
+<h2 id="h-三-分版本调整">三、分版本调整</h2>
+<p>四个版本里，工作台只在 V1 和 V3 有结构变化，V2、V4 只在项目和谈单里加功能。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>工作台改什么</th>
+<th>带来的价值</th>
+<th>对应任务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>V1 · 11/20</strong> 轻量调整</td>
+<td>年货节档期卡（曝光当前档期热门货盘）；新增「项目」入口（列表 + 详情，详情一页聚合商城、询价单、订单和经营数据）；从项目发起建商城、选品上架、询价；新增「我的询价单」（场景货盘在会员首页，工作台只保留档期卡引流）；项目数据权限；下线名片、企微（P2）；新手指引（分步引导 + NEW 角标 + 空状态）</td>
+<td>按项目看账；询价进度有地方查</td>
+<td>V1-5、V1-4、V1-10</td>
+</tr>
+<tr>
+<td><strong>V2 · ~12/4</strong> 小补</td>
+<td>项目详情加「申请开通 AI 选品」，可看本项目 AI 用量和带来的兑换；按钮加 NEW 角标和气泡提示</td>
+<td>AI 按项目可控开通</td>
+<td>V2-6.4</td>
+</tr>
+<tr>
+<td><strong>V3 · 商品库上线后</strong> 完整重构</td>
+<td>栏目按「项目 → 找货 → 谈单 → 成交 → 数据」重组；「我的商品」纳入平台商家商品；订单、售后合成全货源统一入口；谈单栏目新增对客选品清单；新手指引（含旧入口去向提示和老位置跳转）</td>
+<td>按做项目的顺序工作</td>
+<td>V3-6、V3-2、V3-7</td>
+</tr>
+<tr>
+<td><strong>V4 · 12/31 前</strong> 补全</td>
+<td>谈单栏目加「项目供货价申请」，自动带项目四项信息；项目详情显示按项目供货价成交的订单；新入口加 NEW 角标和气泡提示</td>
+<td>凭数据拿到项目成本价</td>
+<td>V4-1、V4-2.2</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-四-V3-目标栏目">四、V3 目标栏目</h2>
+<img src="media/ws-plan/media/image1.png" style="width:6in;height:2.61607in" alt="V3 工作台目标栏目 · 5 栏 + 支撑栏目" /><p>V3 工作台目标栏目 · 5 栏 + 支撑栏目</p>
+<p>服务商从项目进入，沿找货、谈单、成交、数据往右走；每栏底部注明内容从现有哪个菜单迁来。专供店和自有供应商管理的位置见第五节第 1 条。</p>
+<h2 id="h-五-需要补进版本规划的事项">五、需要补进版本规划的事项</h2>
+<ol>
+<li><p><strong>按 11/07 结论更新 V3</strong>：自有供应商保留并做强，所有供给以店铺（平台店 / 专供店）出现。「找货」要同时容纳两类店铺；服务商管理自有供应商（绑定、账期、差异价）放哪个栏目，等卖家侧店铺方案后定，先写为待定。</p>
+</li>
+<li><p><strong>V3 顺延时，工作台重构改到 V4</strong>：重构（V3-6）基本不依赖商品库，而 V4 的项目供货价需要谈单栏目，不应跟着 V3 整版推到 Q1。</p>
+</li>
+<li><p><strong>首页会员面板同步改</strong>：常用功能由用户自己选择，V1 把「我的项目」「询价单」加入可选列表，并用气泡提示用户加入，不改用户已选的功能。</p>
+</li>
+<li><p><strong>下线名片、企微前看数据</strong>：拉近 90 天访问量确认无人使用。「客户」下的企微好友、企微客户群跟 Q1 CRM 改版走，这次不动。</p>
+</li>
+</ol>
+<hr><p class="meta">最后更新 2026-11-09 09:57（北京时间）· 同步自 Claude 文档 2026-11-09 · Markdown 原文：<a href="ws-plan.md">ws-plan.md</a></p></article></div>
+</body></html>

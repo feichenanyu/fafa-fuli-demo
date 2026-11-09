@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>采发发 运营管理后台 PRD v1.1（Q4 首期开放范围）</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">V1 · PRD · 采发发 运营管理后台 PRD v1.1（Q4 首期开放范围）</span>
+<a class="btn" href="../">全部文档</a><a class="btn pri" href="../../采发发Q4/admin-demo/">打开 Demo</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-六-场景管理">六、场景管理</a><a href="#h-七-资源管理-节选-商品池">七、资源管理（节选：商品池）</a><a href="#h-十-工作台-节选">十、工作台（节选）</a><a href="#h-十四-埋点规则与埋点管理">十四、埋点规则与埋点管理</a><a href="#h-十五-非功能需求-节选">十五、非功能需求（节选）</a></nav>
+<article><h1 id="h-采发发-运营管理后台-PRD-v1-1-首期接入-发发福利">采发发 运营管理后台 PRD v1.1（首期接入：发发福利）</h1>
+<div class="docmeta"><span class="pill new">最新</span><span class="pill kind">V1 · PRD</span><span>最后更新 2026-11-06 17:49</span></div><p>Oct 20, 2026 · @sanyuan</p>
+<blockquote>
+<p><strong>采发发 Q4 首期开放范围（节选）</strong>：本页只收录场景、商品池、工作台、埋点、非功能需求相关章节，其他模块暂不开放；场景配置首期不含 AI 相关功能（AI 场景层、引导词、AI 反问与选品、场景推荐）；章节编号沿用完整版 PRD v1.1。</p>
+</blockquote>
+<h2 id="h-六-场景管理">六、场景管理</h2>
+<p>场景管理决定前台「精选福利场景」下每个二级场景的页面和卖哪些商品。内容运营在场景详情里按页签维护：页面装修｜商品来源｜商品明细。</p>
+<h3 id="h-6-1-场景基本信息">6.1 场景基本信息</h3>
+<p>新建场景只填 2 项，其余配置都在详情页签里完成。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+<th>前台生效</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>场景名称</td>
+<td>必填，如「新春年货节」</td>
+<td>场景频道栏</td>
+</tr>
+<tr>
+<td>有效期</td>
+<td>开始日期 + 结束日期；常驻场景打开「长期有效」，不填结束日期</td>
+<td>到期次日 0 点自动下线</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li>标语与主视觉：取页面装修 Banner 第 1 帧的标题与图片，不再单独填写。</li>
+<li>排序：在场景列表中「上移 / 下移」，即时同步前台顺序。</li>
+<li>上线 / 下线：在场景详情操作；上线前须在售商品 ≥ 3 款。</li>
+<li>自动下线：「上线中」的场景过了结束日期自动变为「已下线」，并写入变动记录；列表显示剩余天数，如「剩 18 天 · 到期自动下线」。</li>
+<li>待上线场景到开始日期不自动上线，仍需手动上线（见十六）。</li>
+<li>取消的字段：简称（默认取名称）、角标、细分用途、状态选择。</li>
+</ul>
+<h3 id="h-6-4-页面装修-场景页与资源频道页共用">6.4 页面装修（场景页与资源频道页共用）</h3>
+<p>装修画布按 PC 前台 1440 宽版式绘制，与前台 Beta03 的二级场景页、资源频道页一一对应；手机端装修后续迭代。场景在「场景详情 › 页面装修」，频道在「频道详情 › 页面装修」，用同一套装修器。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模板</th>
+<th>适用</th>
+<th>Banner 右侧的运营板块</th>
+<th>可加组件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>丰富型</td>
+<td>节庆大促</td>
+<td>Banner 轮播（最多 5 帧）+ 场景专区 ×6（3 列 × 2 行）</td>
+<td>核心品牌</td>
+</tr>
+<tr>
+<td>精简型</td>
+<td>常驻场景、资源频道</td>
+<td>Banner + 专题方块 ×4（2 × 2）</td>
+<td>核心品牌</td>
+</tr>
+</tbody></table>
+</div><div class="tbl"><table>
+<thead>
+<tr>
+<th>板块</th>
+<th>坑位数</th>
+<th>建议尺寸</th>
+<th>前台表现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Banner 轮播</td>
+<td>1–5 帧</td>
+<td>1053×600</td>
+<td>自动轮播；第 1 帧的标题与图片同时作为场景标语与主视觉</td>
+</tr>
+<tr>
+<td>场景专区</td>
+<td>6</td>
+<td>400×300（可选）</td>
+<td>链专题 / 品牌时自动露出 3 个商品缩略图 + 款数 +「进入专区」；自定义则展示图片</td>
+</tr>
+<tr>
+<td>专题方块</td>
+<td>4</td>
+<td>300×200（可选）</td>
+<td>标题 + 副标题 + 商品数</td>
+</tr>
+<tr>
+<td>核心品牌（组件）</td>
+<td>5 / 10 / 15 / 20 可选，每行 5 个</td>
+<td>200×200 Logo（可选）</td>
+<td>品牌 Logo + 在售款数</td>
+</tr>
+<tr>
+<td>系统板块</td>
+<td>—</td>
+<td>—</td>
+<td>场景页：爆款 / 礼包 / 卡券栏目 + 商品列表；频道页：带筛选的频道商品；只展示，不可装修</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li>链接目标：每个坑位都可选专题、品牌商品列表、自定义图片 + 链接（站内路径或白名单 https 域名）。</li>
+<li>搜索选择：选专题可按名称搜、按状态（上线中 / 待上线 / 草稿）筛，已结束的不出现；选品牌可按名称、首字母、英文名搜，可只看「有在售商品」；单次最多显示 50 条。</li>
+<li>模板与组件：切换模板需二次确认，已配置的坑位保留，切回可恢复；组件可添加、移除、上下移；核心品牌坑位数调小时，超出部分配置保留但不展示。</li>
+<li>发布：空坑位前台自动隐藏；任何修改后状态为「有未发布修改」，PC 预览后发布，1 分钟内生效。</li>
+<li>引用：装修引用的专题在专题「被引用」页签可见，引用中的专题不可删除；专题下线后该坑位前台隐藏并在工作台提醒替换。</li>
+<li>权限：内容运营、超管可改；其他角色只读。</li>
+</ul>
+<p><strong>前台文案字段（10-22 补齐）</strong>：场景运营页上所有标题与小标签都在后台有维护入口，前台不写死。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>前台位置</th>
+<th>字段</th>
+<th>维护入口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>场景栏按钮</td>
+<td>场景简称、状态小标签（预热中 / 热卖中 / 常驻）、档期文案</td>
+<td>场景管理 › 编辑基本信息</td>
+</tr>
+<tr>
+<td>Banner</td>
+<td>小标签（留空 = 状态小标签 + 档期）、标题、副标题、按钮文案（留空 = 立即选购）、图片、跳转</td>
+<td>页面装修 › Banner 坑位</td>
+</tr>
+<tr>
+<td>场景专区（丰富型 6 个）</td>
+<td>专区名称、小标签（角标，≤ 10 字）、小标签颜色（橙 / 红 / 蓝 / 绿 / 紫）、内容来源（专题 / 品牌商品列表 / 规则 / 自定义）</td>
+<td>页面装修 › 场景专区坑位</td>
+</tr>
+<tr>
+<td>专区规则</td>
+<td>预置规则：场景礼包按销量、京东 / 天猫直供、类目热销（7 日销量）、场景卡券、低折扣爆款（≤ 8 折）；只在本场景商品来源内出货</td>
+<td>页面装修 › 场景专区坑位</td>
+</tr>
+<tr>
+<td>业务栏目副标题、卖点筛选项与卖点标签</td>
+<td>见 7.2「前台展示」</td>
+<td>商品池 › 前台展示</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-6-5-商品来源与商品明细">6.5 商品来源与商品明细</h3>
+<p>场景商品 = 绑定的商品池 ∪ 绑定的专题 ∪ 自定义规则命中 ∪ 手动加入 − 手动排除，计算方式与商品池、专题、频道归置共用一套（见 7.6）。</p>
+<ul>
+<li>商品来源：勾选商品池与专题；可选补充自定义规则（货源、类目、品牌、商品类型、利润率下限）。保存前显示「保存后自动上架 N 款、自动下架 N 款」。</li>
+<li>自动上下架：每小时按规则重算；商品下架或利润率低于阈值时自动下架，回升后自动上架；关闭后只在保存规则时生效。</li>
+<li>商品明细：分段「在场景中 / 自动下架 / 手动矫正 / 近 7 天变动」，可按商品类型（爆品 / 礼包 / 卡券）和关键词筛选；每款商品显示进入方式与原因；可导出清单。</li>
+<li>手动矫正：手动加入（多选，不设失效时间，不受规则自动下架影响）、手动排除（不再自动上架）、置顶；支持批量导入（7.6）。</li>
+<li>自动上下架与矫正都写入变动记录，商品运营对场景商品只读。</li>
+</ul>
+<h3 id="h-6-7-顶部广告位">6.7 顶部广告位</h3>
+<p>场景首页顶部的弧形轮播广告：图片、短标题、副标题、角标、跳转（场景 / 频道 / 专题 / 商品 / 外链）、投放时间、排序、定向人群；同时在线 ≤ 5 个。</p>
+<h2 id="h-七-资源管理-节选-商品池">七、资源管理（节选：商品池）</h2>
+<h3 id="h-7-2-商品池">7.2 商品池</h3>
+<p>商品池是运营自定义的通用商品集合（如「年货精选池」「电子卡券池」），一次维护，被场景、资源频道、专题引用；池内商品变化自动同步到引用处。菜单：商品中心 › 商品池。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>页签 / 字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基本信息</td>
+<td>名称、说明、负责人、启用 / 停用；可复制为新池</td>
+</tr>
+<tr>
+<td>商品规则</td>
+<td>至少 1 条：货源 + 类目 + 品牌 + 商品类型 + 利润率下限；利润率 =（会员价 − 供货价）÷ 会员价</td>
+</tr>
+<tr>
+<td>商品明细</td>
+<td>在池中 / 自动下架 / 手动矫正 / 近 7 天变动；按爆品 / 礼包 / 卡券筛选；可手动加入、排除、置顶、批量导入、导出</td>
+</tr>
+<tr>
+<td>被引用</td>
+<td>列出引用它的场景、频道、专题；停用前提示影响范围</td>
+</tr>
+</tbody></table>
+</div><p>商品池列表显示池内款数及爆品 / 礼包 / 卡券各自数量。新品命中规则自动进池，商品下架或利润率不达标自动出池。</p>
+<p><strong>前台展示（商品池页签，10-22 新增）</strong>：场景运营页业务栏目（爆款限定 / 精选礼包 / 福利卡券）下的筛选项和卖点标签在货盘（商品池）里维护，引用本池的场景 / 频道直接读取，保存后 1 分钟内同步。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>栏目副标题</td>
+<td>每个业务栏目 1 条，如「爆款限定：福利精选 · 独立 SKU」</td>
+</tr>
+<tr>
+<td>筛选项名称</td>
+<td>前台筛选按钮文字，如「休闲零食」「¥150–300」「电子卡」</td>
+</tr>
+<tr>
+<td>卖点标签</td>
+<td>按钮右侧小标签，≤ 6 字，如「618 同价」「低于商超」「卡密即发」；必须是可核实的事实（价格对比、发货方式、价保周期），不用「最低价」「第一」等绝对化用语</td>
+</tr>
+<tr>
+<td>匹配条件</td>
+<td>筛选项对应的商品范围：类目 / 价格区间 / 卡券形态，只能引用本池商品字段</td>
+</tr>
+<tr>
+<td>显示</td>
+<td>开关；关闭后前台隐藏该筛选项</td>
+</tr>
+</tbody></table>
+</div><p>场景绑定多个商品池时，按「商品来源」中排在第一的池展示；没有配置时前台只显示「全部」。卖点标签与筛选项的增删改写操作日志。</p>
+<h3 id="h-7-9-商品池定价规则-10-23-新增-10-26-改版">7.9 商品池定价规则（10-23 新增，10-26 改版）</h3>
+<p>位置：商品中心 › 商品池 › 详情 ›「定价规则」页签。<strong>取消独立的「定价模板」</strong>，定价规则直接写在商品池里：商品池同时管「卖什么」和「卖多少钱」，场景 / 频道只绑定商品池。会员价不是商品的固定字段，而是按用户所在业务系统与场景实时算出；前台只显示「会员价」，不另设「场景价」。首期不叠加会员等级折扣。</p>
+<p><strong>① 生效的业务系统</strong>：同一个商品池可对多套业务系统生效——发发福利 / 发发集采 / 分采通 / 企业终端采购，<strong>每个业务系统一套定价</strong>（默认加价率、条件规则、底价、顶价、取整各自独立）。未启用的系统不能引用本池；停止生效时该系统下的规则保留，引用本池的场景 / 频道不再使用本池商品与价格（需二次确认）。</p>
+<p><strong>② 每套系统的基础设置</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基准价</td>
+<td>固定为接口价（供应链给到平台的价格）</td>
+</tr>
+<tr>
+<td>默认加价率</td>
+<td>未命中任何条件规则时使用；会员价 = 接口价 ×（1 + 加价率）</td>
+</tr>
+<tr>
+<td>最低毛利（底价）</td>
+<td>底价 = 接口价 ×（1 + 最低毛利）；取整后低于底价时向上取整到底价；接口价上涨导致触底的商品自动从本池在该系统下架，进工作台待办「定价触底商品」</td>
+</tr>
+<tr>
+<td>顶价</td>
+<td>≤ 市场价 / ≤ 平均到手价 / 不限；超过顶价的按顶价封顶</td>
+</tr>
+<tr>
+<td>取整</td>
+<td>不取整 / 到角 / 到元 / 尾数 9</td>
+</tr>
+</tbody></table>
+</div><p><strong>③ 条件规则</strong>：每条规则 = 条件 + 加价率，条件可组合，不选即不限：</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类目</td>
+<td>多选叶子类目</td>
+</tr>
+<tr>
+<td>品牌</td>
+<td>多选启用中的品牌</td>
+</tr>
+<tr>
+<td>货源</td>
+<td>多选：京东自营 / 天猫超市 / 1688 / 供应商直供 / 卡券等</td>
+</tr>
+<tr>
+<td>市场价利润率区间</td>
+<td>≥ 下限、&lt; 上限，可只填一端；利润率 =（市场价 − 接口价）÷ 市场价</td>
+</tr>
+</tbody></table>
+</div><p>规则按顺序自上而下匹配，<strong>命中第一条即停</strong>，都不命中用默认加价率；运营可上移 / 下移调整优先级。列表显示每条规则实际命中的商品数（已被上面规则命中的不重复计）。例：休闲食品且利润率 ≥ 42% → +15%；其余休闲食品 → +10%；三只松鼠 / 良品铺子 → +12%；京东自营的低毛利粮油（利润率 &lt; 20%）→ +6%；其余 +10%。</p>
+<p><strong>④ 价格预览</strong>：池内商品在当前系统下的接口价、市场价利润率、命中规则、会员价、毛利率与状态（正常 / 顶价封顶 / 触底下架）。接口价、利润率仅商品运营 / 财务 / 管理员可见。</p>
+<p><strong>⑤ 场景 / 频道取价</strong></p>
+<ol>
+<li>场景 / 频道属于哪个业务系统，就用所绑商品池在该系统下的规则（发发福利前台 → 发发福利规则）。</li>
+<li><strong>同一 SKU 出现在场景绑定的多个商品池时，取最低价</strong>；场景详情新增只读的「会员价」页签，逐个商品显示价格来自哪个池、命中哪条规则，调价需到对应商品池。</li>
+<li>不在任何已绑定池内的商品（如全站搜索结果）用平台默认加价率（+12%）。</li>
+<li>规则修改后 1 分钟内生效；已下单的订单按下单时的价格快照不变；所有修改记操作日志。</li>
+</ol>
+<p>首期加价率均为演示数字，待商务确认。</p>
+<h2 id="h-十-工作台-节选">十、工作台（节选）</h2>
+<h3 id="h-10-2-工作台待办">10.2 工作台待办</h3>
+<p>待审核企业认证、待认账 / 待认领流水、待复核（调账 / 发放 / 退款）、待开票、待介入售后、待跟进集采咨询、异常商品、即将到期的场景 / 专题、装修引用已下线专题、物流异常包裹、定时任务告警（附 AI 异常摘要）。待办按当前账号的角色、业务线与数据范围过滤；超时项标红。</p>
+<h3 id="h-10-3-核心数据">10.3 核心数据</h3>
+<p>GMV 与订单数（按来源入口：AI 方案 / 频道 / 专题 / 品牌商品列表 / 场景页）、新增企业与认证通过率、预付款充值额、活动账户发放与核销率、售后率、集采咨询转单率。</p>
+<h2 id="h-十四-埋点规则与埋点管理">十四、埋点规则与埋点管理</h2>
+<p>埋点<strong>自建</strong>，覆盖前台 AI 对话、前台发发福利 GUI 界面与运营后台。目的：分析用户行为，归因每笔成交来自哪个入口（AI 方案 / 引导词 / 频道 / 专题 / 品牌商品列表 / 装修坑位），并支撑自然语言查数与埋点监控。</p>
+<h3 id="h-14-1-采集方案">14.1 采集方案</h3>
+<ul>
+<li>前端 SDK：自动采集页面浏览与停留时长；关键交互用代码埋点主动上报。</li>
+<li>上报：批量异步上报到自建日志服务，失败本地缓存重试；入数仓后 T+0（分钟级）可查。</li>
+<li>关联：用 session_id、plan_id（AI 方案）、order_id 把行为与订单、商品、账户打通。</li>
+<li>服务端事件：支付成功、订单创建、退款等以服务端上报为准，不依赖前端。</li>
+</ul>
+<h3 id="h-14-2-命名规范">14.2 命名规范</h3>
+<ul>
+<li>事件名：<code>{业务线}_{页面}_{对象}_{动作}</code>，全小写下划线，如 <code>fafa_res_card_click</code>、<code>admin_invoice_upload_submit</code>。</li>
+<li>业务线：fafa（发发福利）、jicai（发发集采）、fct（分采通）、admin（运营后台）。</li>
+<li>动作枚举：view（页面浏览）、expose（曝光）、click、switch、input、submit、success、fail。</li>
+<li>曝光口径：元素 ≥ 50% 可见且持续 ≥ 1 秒，同一页面生命周期内同一元素只报一次。</li>
+</ul>
+<h3 id="h-14-3-公共属性-每条事件必带">14.3 公共属性（每条事件必带）</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>event_time / event_id</td>
+<td>事件时间、唯一 ID</td>
+</tr>
+<tr>
+<td>user_id / company_id / account_type</td>
+<td>用户、企业、个人 / 企业（未登录用设备 ID）</td>
+</tr>
+<tr>
+<td>biz_line</td>
+<td>业务线</td>
+</tr>
+<tr>
+<td>session_id</td>
+<td>会话 ID，30 分钟无操作重置</td>
+</tr>
+<tr>
+<td>column / channel_id / scene_id</td>
+<td>当前栏目、频道、场景</td>
+</tr>
+<tr>
+<td>ui_mode</td>
+<td>对话框展开 / 收缩态</td>
+</tr>
+<tr>
+<td>page / referrer</td>
+<td>当前页面与来源页面</td>
+</tr>
+<tr>
+<td>app_version / platform</td>
+<td>版本、PC / H5</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-14-4-前台-AI-对话事件">14.4 前台·AI 对话事件</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>事件</th>
+<th>触发</th>
+<th>关键属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fafa_ai_guide_click</td>
+<td>点击引导问句</td>
+<td>guide_id、是否填空句</td>
+</tr>
+<tr>
+<td>fafa_ai_slot_input</td>
+<td>修改填空句中的空</td>
+<td>slot_name、是否选用候选值</td>
+</tr>
+<tr>
+<td>fafa_ai_message_submit</td>
+<td>发送一条需求</td>
+<td>来源（自由输入 / 引导词 / 填空句）、字数</td>
+</tr>
+<tr>
+<td>fafa_ai_scene_detect</td>
+<td>AI 识别到场景</td>
+<td>scene_id、用户是否取消</td>
+</tr>
+<tr>
+<td>fafa_ai_plan_expose / fafa_ai_plan_click</td>
+<td>方案卡曝光 / 点开</td>
+<td>plan_id、方案形态、循环轮数、是否放宽</td>
+</tr>
+<tr>
+<td>fafa_ai_plan_adjust</td>
+<td>换一批 / 换品 / 改利润率 / 改预算口径</td>
+<td>plan_id、调整类型</td>
+</tr>
+<tr>
+<td>fafa_ai_plan_cart</td>
+<td>方案加入采购车</td>
+<td>plan_id、商品数、金额</td>
+</tr>
+<tr>
+<td>fafa_ai_reco_click</td>
+<td>点击场景推荐商品或提问建议</td>
+<td>是否兜底、位置</td>
+</tr>
+<tr>
+<td>fafa_ai_feedback</td>
+<td>点赞 / 点踩 / 中断</td>
+<td>原因</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-14-5-前台-GUI-事件">14.5 前台·GUI 事件</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>区域</th>
+<th>事件</th>
+<th>关键属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>顶部广告位</td>
+<td>fafa_home_ad_expose / click</td>
+<td>ad_id、位置、跳转类型</td>
+</tr>
+<tr>
+<td>栏目与频道</td>
+<td>fafa_home_column_switch、fafa_home_channel_switch</td>
+<td>切换前后、是否收缩态、是否来自「更多」</td>
+</tr>
+<tr>
+<td>收缩态</td>
+<td>fafa_home_mini_show、fafa_home_mini_expand</td>
+<td>滚动深度</td>
+</tr>
+<tr>
+<td>场景运营页</td>
+<td>fafa_scene_banner_click、fafa_scene_zone_click、fafa_scene_tab_switch</td>
+<td>scene_id、zone_id</td>
+</tr>
+<tr>
+<td>资源频道装修坑位</td>
+<td>fafa_res_banner_click、fafa_res_topic_click、fafa_res_brand_click</td>
+<td>channel_id、topic_id / brand</td>
+</tr>
+<tr>
+<td>频道商品筛选</td>
+<td>fafa_res_filter_submit、fafa_res_filter_reset、fafa_res_sort_switch</td>
+<td>筛选项与取值、结果数</td>
+</tr>
+<tr>
+<td>商品卡</td>
+<td>fafa_res_card_expose / click</td>
+<td>sku_id、位置、来源入口</td>
+</tr>
+<tr>
+<td>商品操作</td>
+<td>fafa_card_cart_click、fafa_card_buy_click、fafa_card_inquiry_click、fafa_res_batch_submit</td>
+<td>sku_id、数量、是否无货</td>
+</tr>
+<tr>
+<td>结算链路</td>
+<td>fafa_checkout_view、fafa_checkout_pay_submit、fafa_order_pay_success（服务端）</td>
+<td>order_id、支付构成、归因入口</td>
+</tr>
+<tr>
+<td>升级引导</td>
+<td>fafa_upgrade_prompt_expose / click、fafa_cert_submit</td>
+<td>触发位置</td>
+</tr>
+<tr>
+<td>充值 / 开票 / 售后</td>
+<td>fafa_recharge_submit、fafa_invoice_apply_submit、fafa_aftersale_submit</td>
+<td>方式、金额、类型</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-14-6-运营后台事件">14.6 运营后台事件</h3>
+<p>配置发布（admin_config_publish，含对象类型与版本）、AI 建议采纳（admin_ai_suggest_adopt / modify / reject）、导出（admin_export_submit）、资金操作发起与复核、定时任务创建与告警处理、自然语言查数提问（只记问题类型，不记结果数据）。</p>
+<h3 id="h-14-7-归因规则">14.7 归因规则</h3>
+<ul>
+<li>订单归因入口取同一会话内、该商品「加购或立即下单前最后一次点击」的来源（AI 方案 / 引导词 / 频道 / 专题 / 品牌商品列表 / 装修坑位 / 场景页 / 搜索）。</li>
+<li>来自 AI 方案的订单记录 plan_id，可追溯到对话与引导词。</li>
+<li>归因结果写入订单「来源入口」字段（8.1）。</li>
+</ul>
+<h3 id="h-14-8-埋点管理-后台功能">14.8 埋点管理（后台功能）</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>事件字典</td>
+<td>登记事件名、含义、触发时机、属性及是否必填、负责人、所属业务线；状态：草稿 → 待开发 → 已上线 → 已废弃；按版本留存变更</td>
+</tr>
+<tr>
+<td>上报质量</td>
+<td>各事件上报量趋势、必填属性缺失率、未登记事件列表</td>
+</tr>
+<tr>
+<td>实时调试</td>
+<td>输入用户 ID 或设备 ID，查看最近事件流，用于测试验收</td>
+</tr>
+<tr>
+<td>监控</td>
+<td>与定时任务中心的埋点监控模板联动（13.2）</td>
+</tr>
+</tbody></table>
+</div><p>研发流程：需求评审时产品在字典登记事件 → 开发按字典实现 → 测试用实时调试验收 → 上线后状态改为已上线；未登记的事件不入正式数仓。</p>
+<h3 id="h-14-9-隐私与合规">14.9 隐私与合规</h3>
+<p>不采集手机号、证件号、银行账号等敏感信息；输入框内容只记字数与来源，不记原文（AI 对话内容由对话日志单独管理）；明细数据保留 13 个月，汇总数据长期保留；隐私政策中说明行为数据的采集与用途。</p>
+<h2 id="h-十五-非功能需求-节选">十五、非功能需求（节选）</h2>
+<h3 id="h-15-1-非功能需求">15.1 非功能需求</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>安全</td>
+<td>后台账号强制二次验证；敏感字段（手机号、信用代码、银行账号）列表脱敏，查看明文留痕</td>
+</tr>
+<tr>
+<td>资金一致性</td>
+<td>所有账户变动先写流水再改余额，支持按流水重算余额；日对账差异为 0 才算关账</td>
+</tr>
+<tr>
+<td>同步时效</td>
+<td>第三方货源价格库存至少每 30 分钟同步一次；下单前实时校验价格与库存</td>
+</tr>
+<tr>
+<td>配置生效</td>
+<td>发布后 1 分钟内在前台生效；支持一键回滚到上一次发布</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>列表页 10 万条内筛选 ≤ 2 秒；导出超过 5 万条走异步任务</td>
+</tr>
+<tr>
+<td>审计</td>
+<td>操作日志保留 ≥ 3 年；资金类日志不可删除</td>
+</tr>
+<tr>
+<td>合规</td>
+<td>出版物须校验《出版物经营许可证》；个人账号任何接口不得返回成本与会员价</td>
+</tr>
+</tbody></table>
+</div><hr><p class="meta">最后更新 2026-11-06 17:49（北京时间）· 同步自 Claude 文档 2026-11-09 · Markdown 原文：<a href="admin-prd.md">admin-prd.md</a></p></article></div>
+</body></html>

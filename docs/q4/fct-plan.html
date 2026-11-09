@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分采通 11–1月产品规划</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">通用 · 版本规划 · 分采通 11–1月产品规划</span>
+<a class="btn" href="../">全部文档</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-版本节奏总览">版本节奏总览</a><a href="#h-V1-0-年货节版-11月">V1.0 年货节版（11月）</a><a href="#h-V1-1-消费商城改版-12月初">V1.1 消费商城改版（12月初）</a><a href="#h-V1-2-运营与体验补齐-12月中">V1.2 运营与体验补齐（12月中）</a><a href="#h-V1-3-AI-版-1月">V1.3 AI 版（1月）</a><a href="#h-老用户运营-宣发与培训">老用户运营：宣发与培训</a><a href="#h-风险与待决策">风险与待决策</a></nav>
+<article><h1 id="h-分采通-11–1月产品规划">分采通 11–1月产品规划</h1>
+<div class="docmeta"><span class="pill old">历史版</span><span class="pill kind">通用 · 版本规划</span><span>最后更新 2026-10-28 11:29</span></div><div class="oldnote">这是历史版本，保留作参考；当前以「采发发买家侧产品形态与版本规划」为准，<a href="../">回文档中心查看</a>。</div><p>Oct 28, 2026 · @sanyuan</p>
+<h2 id="h-版本节奏总览">版本节奏总览</h2>
+<p>11–1 月分四个版本：V1.0 年货节版 11/20 上线，做场景化运营和全品类代发；V1.1 消费商城改版单独发布，暂定 12/4；V1.2 12/18 补齐装修与详情组件、售后和埋点；V1.3 1/12 灰度 AI 问数和 AI 导购。</p>
+<img src="media/fct-plan/media/image1.png" style="width:6in;height:2.71428in" alt="分采通版本节奏 · 3 个版本" /><p>分采通版本节奏 · 3 个版本</p>
+<p>V1.0 是硬节点，必须在年货节推广前上线；消费商城改版不卡年货节节点，独立发布。V1.3 之后 C 端不再大改，保春节兑换高峰稳定。年货节推广的起止时间是预估，待市场确认。</p>
+<h2 id="h-V1-0-年货节版-11月">V1.0 年货节版（11月）</h2>
+<p>11 月 20 日上线，12 月初年货节推广启动。目标：服务商打开首页就能按春节场景选品，一键代发或上架商城，承接年货节流量。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>任务</th>
+<th>子项</th>
+<th>业务价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基础设施</td>
+<td>商品体系建设</td>
+<td>商品已通过 API 全量接入，本版补管理能力：在统一商品库中建类目体系和品牌库（与发发福利共用）并完成各来源映射；规则化选品（按来源、类目、品牌、价格带、毛利率、库存自动入池）；定价规则（以接口价为基准按来源、类目加价算出会员价）；自有猫超 / 优品不进场景</td>
+<td>选品和定价从人工逐个处理变成规则批量生成，年货节可按档期快速换货盘；也是场景商品池、分类品牌组件、同品替换和 AI 问数的基础</td>
+</tr>
+<tr>
+<td>运营能力提升 · 场景化运营</td>
+<td>场景首页</td>
+<td>场景 Tab、场景头部、子场景、场景商品、场景商城模板；首批上线春节年货、员工福利、工会慰问等场景，按权益包可见</td>
+<td>从「给过程」转向「给结果」：服务商直接拿到春节方案，缩短从选品到成交的时间</td>
+</tr>
+<tr>
+<td>运营能力提升 · 场景化运营</td>
+<td>商品池管理</td>
+<td>运营后台场景管理、子场景绑定商品池、场景关联模板、档期与上下线</td>
+<td>运营按档期换场景和货盘，年货节期间不依赖研发</td>
+</tr>
+<tr>
+<td>运营能力提升 · 场景化运营</td>
+<td>一件代发 / 上架商城</td>
+<td>全品类代发（合并猫超代发，批次内按来源拆子单，按会员价从预存款扣款）；一键上架到我的商城，定价基准由会员在会员价 / 平均到手价 / 市场价中手动选；下单和上架时按 SKU ID 替换为服务商自有猫超 / 优品的同品；用场景模板一键新建商城</td>
+<td>年货节的主成交路径：选品直接变成代发订单或商城上架；同品替换让自有账号的服务商也能用场景选品</td>
+</tr>
+<tr>
+<td>资源优化</td>
+<td>平台猫超万鲤会员代发兼容</td>
+<td>万鲤会员下单可走平台猫超代发链路</td>
+<td>多一条年货节成交渠道，扩大猫超货源的销量</td>
+</tr>
+<tr>
+<td>运营能力提升 · 售后优化</td>
+<td>上门取件兼容万鲤会员</td>
+<td>万鲤会员退换货支持上门取件</td>
+<td>万鲤会员代发在本版放量，售后同步到位，减少客服工单和客诉</td>
+</tr>
+<tr>
+<td>体验</td>
+<td>春节商城模板</td>
+<td>春节、工会、地域三类模板做到可直接投产，带场景卖点；模板视觉更新</td>
+<td>解决「模板只能演示」：服务商当天就能开出春节商城给客户用</td>
+</tr>
+<tr>
+<td>体验</td>
+<td>工作台精简</td>
+<td>下线营销下的名片、企微等无人使用栏目；企业控制台企微配置同步隐藏（待确认）</td>
+<td>减少无效入口，新老用户更快找到场景和代发；降低维护成本</td>
+</tr>
+<tr>
+<td>数据监控</td>
+<td>数据埋点</td>
+<td>场景浏览、勾选、代发、上架、新建商城全链路埋点；运营后台场景数据</td>
+<td>年货节可按场景复盘转化，为 12 月优化和 1 月 AI 问数打底</td>
+</tr>
+<tr>
+<td>数据监控</td>
+<td>数据清洗</td>
+<td>历史订单清洗；商品、类目、场景标签统一；统一指标口径（含代发订单是否计入经营概览）</td>
+<td>年货节数据一开始就按统一口径沉淀；也是 AI 问数和 AI 导购的数据底座</td>
+</tr>
+<tr>
+<td>迁移</td>
+<td>老功能迁移</td>
+<td>模版广场下线并重定向；猫超代发历史批次迁入；老会员按权益包默认开放场景</td>
+<td>老用户无感切换，首页不出现空白</td>
+</tr>
+</tbody></table>
+</div><p>已定的价格与货源口径：</p>
+<ul>
+<li><p>代发按会员价扣款。</p>
+</li>
+<li><p>平台货源上架的定价基准有三种：会员价、平均到手价、市场价，会员手动选。</p>
+</li>
+<li><p>自有猫超 / 优品商品不进场景；下单和上架时按 SKU ID 做同品替换。</p>
+</li>
+</ul>
+<h2 id="h-V1-1-消费商城改版-12月初">V1.1 消费商城改版（12月初）</h2>
+<p>暂定 12 月 4 日上线，与年货节版分开发布，赶在 1 月员工兑换高峰之前。目标：消费商城的购物车、订单、支付、售后一次改到位，并支持所有货源商品。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>任务</th>
+<th>子项</th>
+<th>业务价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>体验 · C 端消费商城</td>
+<td>消费商城交易链路改版</td>
+<td>在已规划的购物车、售后改版基础上，增加订单、支付改版</td>
+<td>页面老旧、体验不流畅的核心链路一次改到位，提高员工兑换完成率</td>
+</tr>
+<tr>
+<td>体验 · C 端消费商城</td>
+<td>全货源兼容</td>
+<td>购物车、订单、支付、售后支持所有货源商品（自有猫超 / 自有优品、平台货源）</td>
+<td>平台货源一键上架到商城后，员工能顺畅下单、支付和售后</td>
+</tr>
+<tr>
+<td>体验 · C 端消费商城</td>
+<td>已有商城切换</td>
+<td>已有商城按商城灰度切到新版交易链路</td>
+<td>不影响服务商正在运营的春节商城</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-V1-2-运营与体验补齐-12月中">V1.2 运营与体验补齐（12月中）</h2>
+<p>12 月 18 日上线，赶在 1 月员工兑换高峰之前。目标：补齐商城装修和商品详情组件，补齐售后和价格审核，补上 C 端埋点，给 1 月的 AI 导购备好数据。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>任务</th>
+<th>子项</th>
+<th>业务价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>体验 · C 端消费商城</td>
+<td>装修组件运营能力补充</td>
+<td>首页由装修搭建，只补组件能力：图片组件上传后可配置跳转链接（商品分类、商品详情、专题等）；其他组件待补的跳转和配置项待盘点</td>
+<td>服务商和运营自己就能搭出场景化、好看的首页（春节福利、生日福利等入口），不依赖研发</td>
+</tr>
+<tr>
+<td>资源优化</td>
+<td>京东 API 补充</td>
+<td>接入评价、相似品推荐等 API；在已改版的商品详情页增加京东评价组件和相似品推荐组件</td>
+<td>员工下单更放心，缺货不流失；也是 1 月 AI 导购的推荐数据来源</td>
+</tr>
+<tr>
+<td>资源优化</td>
+<td>资源产品化</td>
+<td>电影票、本地生活在商城里直观展示；支付宝、医保通等外部链接的展示和跳转优化</td>
+<td>把已有的核心资源变成可卖的商品，增加商城可消费的品类</td>
+</tr>
+<tr>
+<td>运营能力提升 · 售后优化</td>
+<td>猫超取消退款流程</td>
+<td>代发子单未发货前可取消，退款原路回预存款</td>
+<td>减少人工处理取消退款，降低年货节后半段的客诉</td>
+</tr>
+<tr>
+<td>基础设施 · 商品体系</td>
+<td>精选商品价格审核</td>
+<td>精选商品上架必须附京东 / 天猫公允价链接；市场价虚高拦截；修补精选供应商排名规则</td>
+<td>防止商家靠虚标市场价、高毛利刷排名；市场价已是上架定价基准之一，虚高会直接带高商城售价</td>
+</tr>
+<tr>
+<td>数据监控</td>
+<td>数据埋点（C 端）</td>
+<td>商城搜索、浏览、加购、下单、支付埋点</td>
+<td>评估交易链路改版效果；给 AI 导购冷启动和效果评估</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-V1-3-AI-版-1月">V1.3 AI 版（1月）</h2>
+<p>1 月 12 日灰度上线，赶在春节兑换高峰前。目标：落地会议定的年底 2–3 个 AI 功能——工作台数据分析升级为 AI 问数，C 端消费商城增加 AI 导购。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>任务</th>
+<th>子项</th>
+<th>业务价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AI · 工作台</td>
+<td>数据分析 → AI 问数</td>
+<td>自然语言查询订单、代发、场景、商城经营数据；回答带图表和指标口径说明；替换工作台「数据」入口，原报表保留作兑底</td>
+<td>服务商不用翻报表就能问「春节场景卖了多少」，用数据指导补货和换场景</td>
+</tr>
+<tr>
+<td>AI · C 端商城</td>
+<td>AI 导购</td>
+<td>员工在商城里对话式选礼（预算 / 积分、送给谁、偏好）；结合京东评价、相似品和历史成交推荐；推荐结果直接加购下单；先在春节模板商城灰度</td>
+<td>解决员工「不知道买什么」，提高兑换转化和积分消耗，增强服务商商城的卖点</td>
+</tr>
+<tr>
+<td>数据监控</td>
+<td>数据反哺给 AI</td>
+<td>V1.0 清洗后的订单、场景、商品数据接入 AI；AI 问答和推荐效果回流埋点</td>
+<td>让 AI 结果可信、可衡量，形成「数据 → 推荐 → 成交 → 数据」闭环</td>
+</tr>
+<tr>
+<td>AI · 会员端（可选）</td>
+<td>AI 选品助手</td>
+<td>首页搜索框升级为对话入口；按场景和预算推荐商品，可查历史成交和毛利率</td>
+<td>会议候选的第 3 个 AI 功能；产能不够就放到节后</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-老用户运营-宣发与培训">老用户运营：宣发与培训</h2>
+<p>改版后首页、入口和下单方式都变了，老用户要先知道、会用，才能在年货节转化成交。产品侧提供材料和站内触达能力，运营侧执行；按版本节点安排如下。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>节点</th>
+<th>事项</th>
+<th>内容</th>
+<th>业务价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V1.0 上线前</td>
+<td>改版预告</td>
+<td>站内公告 Banner、登录弹窗、短信 / 企微群通知：首页改为场景页、模版广场下线、猫超代发并入全品类代发、名片和企微下线</td>
+<td>老用户提前知道变化，减少「找不到入口」的客诉</td>
+</tr>
+<tr>
+<td>V1.0 上线前</td>
+<td>培训材料</td>
+<td>操作手册、短视频和 FAQ，覆盖场景选品、全品类代发、一键上架、定价基准选择、同品替换、新建商城</td>
+<td>用户自助学会；客服、运营、区代统一口径</td>
+</tr>
+<tr>
+<td>V1.0 上线前</td>
+<td>内部培训</td>
+<td>客服、客户运营、销售和区代的新功能培训与考核</td>
+<td>上线当天就能答疑和带客户上手</td>
+</tr>
+<tr>
+<td>V1.0 上线时</td>
+<td>新功能引导</td>
+<td>首次登录新手引导、更新日志（需纳入 V1.0 产品需求）</td>
+<td>老用户第一次进来就知道场景和一键动作在哪</td>
+</tr>
+<tr>
+<td>V1.0 上线后</td>
+<td>老用户线上培训</td>
+<td>分批线上培训 / 直播，结合春节场景演示从选品到代发、开商城</td>
+<td>把老用户引到新功能上，转成年货节成交</td>
+</tr>
+<tr>
+<td>V1.0 上线后</td>
+<td>重点客户一对一</td>
+<td>客户运营回访头部活跃会员，协助完成首笔全品类代发或首个春节商城</td>
+<td>保住核心客户的年货节业务，也得到一手反馈</td>
+</tr>
+<tr>
+<td>V1.0 上线后</td>
+<td>反馈收集</td>
+<td>客服工单打标签、简短问卷；按周整理问题</td>
+<td>作为 V1.2 优化输入</td>
+</tr>
+<tr>
+<td>年货节推广期</td>
+<td>年货节宣发</td>
+<td>春节场景海报、场景方案册、企微 / 朋友圈素材，供服务商转发给其企业客户</td>
+<td>帮服务商把春节方案卖给终端企业，带动平台成交</td>
+</tr>
+<tr>
+<td>V1.1 上线时</td>
+<td>消费商城改版通知</td>
+<td>告知服务商切换节奏和变化；提供可转发给企业 HR 和员工的兑换指引</td>
+<td>服务商和终端员工平稳过渡到新版商城</td>
+</tr>
+<tr>
+<td>V1.3 上线时</td>
+<td>AI 功能推广</td>
+<td>邀请灰度客户；AI 问数、AI 导购使用指南和示例问题</td>
+<td>提高 AI 功能使用率，收集效果反馈</td>
+</tr>
+</tbody></table>
+</div><p>效果用 V1.0 埋点衡量：老会员使用场景页、全品类代发、一键上架的比例，具体目标待与运营商定。</p>
+<h2 id="h-风险与待决策">风险与待决策</h2>
+<p>价格口径已定；消费商城改版已拆成独立版本，V1.0 只留年货节必需的内容。最大的风险是 V1.0 与 V1.1 之间的衔接。</p>
+<ol>
+<li><p><strong>平台货源上架早于商城兼容</strong>：V1.0 就能把平台货源一键上架到商城，但商城全货源兼容要到 V1.1。需确认现有商城能否支持平台货源下单和售后；不支持的话，V1.0 的一键上架只开放自有猫超 / 优品，平台货源上架随 V1.1 开放。</p>
+</li>
+<li><p><strong>V1.0 范围</strong>：需要取舍时按这个顺序后移到 V1.2——模板视觉更新 → 一键新建商城 → 工作台精简。场景首页、商品池、全品类代发、一键上架不能砍。</p>
+</li>
+<li><p><strong>V1.1 上线日期</strong>：12/4 是暂定，按购物车、售后已有规划的进度调整；最晚不晚于 12/18，否则来不及承接 1 月兑换高峰。</p>
+</li>
+<li><p><strong>全货源兼容的边界</strong>：不同货源的售后规则（猫超、京东、入驻商家等）和支付方式是否统一，商城里怎么展示差异，需在需求评审前梳理。</p>
+</li>
+<li><p><strong>同品替换的边界</strong>：服务商自有账号里没有对应 SKU 时，是按平台货源下单还是提示不可替换？替换后代发扣款是否仍按会员价？</p>
+</li>
+<li><p><strong>平均到手价覆盖不全</strong>：只有部分天猫超市商品有，且 T+1 更新。会员选它做基准时，没有该价的商品怎么定价？价格变化后商城售价是否跟着动？</p>
+</li>
+<li><p><strong>名片、企微下线</strong>：下线前拉一次使用数据确认确实无人使用，并提前通知老用户。</p>
+</li>
+<li><p><strong>1 月是兑换高峰</strong>：春节是 2 月 6 日，V1.3 的 C 端功能必须灰度；1 月下旬起不再上新功能。</p>
+</li>
+<li><p><strong>AI 导购依赖 V1.2</strong>：需要京东评价、相似品组件和 C 端埋点。V1.2 滑期，AI 导购就只能用商品库标签做简单推荐；AI 问数的数据清洗已在 V1.0。</p>
+</li>
+<li><p><strong>场景化定价</strong>：所有版本都不做场景加价。年货节后看模板使用和场景转化数据，再决定节后做不做。</p>
+</li>
+<li><p><strong>第 3 个 AI 功能</strong>：AI 选品助手和 AI 运营提效（商城美化建议、图片生成）选哪个，待与陈金飞、商月良对齐。</p>
+</li>
+</ol>
+<hr><p class="meta">最后更新 2026-10-28 11:29（北京时间）· 同步自 Claude 文档 2026-11-09 · Markdown 原文：<a href="fct-plan.md">fct-plan.md</a></p></article></div>
+</body></html>

@@ -1,57 +1,140 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>发发福利 文档中心</title><style>
-:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625}}
+<title>采发发 · 文档中心</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
 *{box-sizing:border-box}
 html{scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
 a{color:var(--brand-700)}
-.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
 .top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
 .crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
 .btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
-.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
-.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
-.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
-.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
-.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
-article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
-article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
-article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
-article h3{font-size:18px;margin:28px 0 8px}
-article h4{font-size:16px;margin:20px 0 6px}
-article p,article li{color:var(--ink)}
-article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
-article blockquote p{margin:4px 0}
-.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
-table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
-th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
-th{background:var(--code);font-weight:600;white-space:nowrap}
-tr:last-child td{border-bottom:0}
-code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
-pre code{background:none;padding:0;white-space:pre-wrap;word-break:break-word}
-hr{border:0;border-top:1px solid var(--border);margin:28px 0}
-.meta{color:var(--text-3);font-size:14px;margin-bottom:24px}
-@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
 
-.hub{max-width:960px;margin:0 auto;padding:40px 16px 80px}
-.hub h1{font-size:28px;margin:0 0 6px}.hub .sub{color:var(--text-3);margin:0 0 28px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.card{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;text-decoration:none;color:var(--ink)}
-.card:hover{border-color:var(--brand)}
-.tag{align-self:flex-start;font-size:12px;font-weight:600;color:var(--brand-700);background:var(--brand-soft);border-radius:999px;padding:2px 10px}
-.card b{font-size:17px;line-height:1.4}.card span{color:var(--text-2);font-size:14px;line-height:1.6}
-.row{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 32px}
-.sec{font-size:14px;font-weight:600;color:var(--text-3);margin:0 0 12px}
-.md{font-size:13px;color:var(--text-3)}</style></head>
-<body><main class="hub">
-<h1>发发福利 · **采 · 文档中心</h1><p class="sub">产品需求、Spec 与 AI Prompt 设计文档，配套可交互 Demo。最近同步：2026-10-27</p>
-<p class="sec">Demo</p>
-<div class="row"><a class="btn pri" href="../">买家端 Demo · Beta 0.3</a><a class="btn pri" href="../admin/">运营管理后台 Demo v1.2</a><a class="btn pri" href="../bangbang/">**采 Demo v0.3</a></div>
-<p class="sec">文档</p>
-<div class="grid"><a class="card" href="prd-frontend.html"><span class="tag">前台 PRD</span><b>发发福利 PRD v2.1（一页融合版）</b><span>发发福利买家端（Beta 0.3 一页融合）：顶部搜索、底部发发对话框、多轮反问收窄、选品结果与 GUI 的产品需求。</span><span class="md">13 个章节 · Markdown 原文：prd-frontend.md</span></a><a class="card" href="prd-admin.html"><span class="tag">后台 PRD</span><b>采发发 运营管理后台 PRD v1.1（首期接入：发发福利）</b><span>采发发运营管理后台（首期接入发发福利）：场景（含 AI 反问配置）、频道、专题、权益包、企业认证、订单与财务等模块需求。</span><span class="md">16 个章节 · Markdown 原文：prd-admin.md</span></a><a class="card" href="spec.html"><span class="tag">产品 Spec</span><b>发发福利首期产品 Spec v2.1</b><span>发发福利首期用户故事与验收标准：搜索、底部对话框、追问卡片、多轮反问与选品结果。</span><span class="md">7 个章节 · Markdown 原文：spec.md</span></a><a class="card" href="prompt.html"><span class="tag">Prompt 设计</span><b>发发福利 AI Prompt 设计 v2.1</b><span>发发福利 AI 的角色设定、意图识别与 2–6 轮反问收窄、选品结果、选择推荐与合规边界等 Prompt 设计。</span><span class="md">11 个章节 · Markdown 原文：prompt.md</span></a><a class="card" href="bb-spec.html"><span class="tag">**采 · Spec</span><b>**采 首期产品 Spec v0.2</b><span>**采（企业终端采购）首期范围、关键决策、22 条用户故事、验收标准与指标。</span><span class="md">7 个章节 · Markdown 原文：bb-spec.md</span></a><a class="card" href="bb-prd.html"><span class="tag">**采 · PRD</span><b>**采 PRD v0.2（会员前台 + 运营后台）</b><span>**采会员前台（左菜单 + AI 工作流 + 产出物）与运营后台「**采」应用：商品库、上下架与定价规则、场景运营。</span><span class="md">6 个章节 · Markdown 原文：bb-prd.md</span></a><a class="card" href="bb-prompt.html"><span class="tag">**采 · AI 选品 Prompt</span><b>**采 AI 选品 Prompt v0.2</b><span>小帮的边界、工具、loop 与追问规则、选品与方案组合规则、输出格式、异常处理与评测用例。</span><span class="md">9 个章节 · Markdown 原文：bb-prompt.md</span></a></div>
+.hub{max-width:1080px;margin:0 auto;padding:36px 16px 80px}
+.hub h1{font-size:28px;line-height:1.3;margin:0 0 6px}
+.lead{color:var(--text-2);margin:0 0 18px;font-size:15px}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 28px}
+.jump a{font-size:14px;text-decoration:none;border:1px solid var(--border);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 12px}
+.jump a:hover{border-color:var(--brand)}
+.grp{margin:0 0 36px}
+.g-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.g-head h2{font-size:19px;margin:0}
+.g-sub{color:var(--text-3);font-size:14px;flex:1;min-width:200px}
+.g-last{color:var(--text-3);font-size:13px}
+.list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:14px;background:var(--surface);overflow:hidden}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto 92px;gap:16px;align-items:center;padding:14px 18px;text-decoration:none;color:var(--ink);border-top:1px solid var(--border)}
+.item:first-child{border-top:0}
+.item:hover{background:var(--brand-soft)}
+.i-main{display:flex;flex-direction:column;gap:2px;min-width:0}
+.i-title{font-weight:600;font-size:16px;line-height:1.45}
+.i-desc{color:var(--text-2);font-size:14px;line-height:1.55}
+.i-sup{display:block;color:var(--text-3);font-size:13px}
+.i-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.i-date{display:flex;flex-direction:column;align-items:flex-end;font-size:13px;color:var(--text-3);font-variant-numeric:tabular-nums}
+.i-date b{color:var(--ink);font-weight:600;font-size:14px}
+.is-old .i-title{color:var(--text-2)}
+.olds{margin-top:10px}
+.olds summary{cursor:pointer;color:var(--text-3);font-size:14px;padding:4px 2px}
+.olds .list{margin-top:8px}
+.empty{color:var(--text-3);font-size:14px;margin:0;padding:14px 18px;border:1px dashed var(--border);border-radius:14px}
+.foot{margin-top:44px;padding-top:16px;border-top:1px solid var(--border);color:var(--text-3);font-size:14px}
+.foot a{margin-right:14px}
+@media (max-width:720px){.item{grid-template-columns:minmax(0,1fr);gap:8px}.i-tags{justify-content:flex-start}.i-date{flex-direction:row;gap:6px;align-items:baseline}}
+</style></head><body>
+<main class="hub">
+<h1>采发发买家侧 · Q4 文档中心</h1>
+<p class="lead">按产品版本 V1–V4 归集 PRD、Spec、方案、规划与可交互 Demo，22 份文档、5 个 Demo / 设计稿。每组内最新版在前，旧方案收在「历史版本」里；日期为该文档最后更新时间（北京时间）。最近同步：2026-11-09。</p>
+<nav class="jump" aria-label="跳转"><a href="#通用">通用</a><a href="#V1">V1</a><a href="#V2">V2</a><a href="#V3">V3</a><a href="#V4">V4</a></nav>
+<section class="grp" id="通用"><div class="g-head"><h2>通用</h2><span class="g-sub">跨版本的规划、任务与数据准备</span><span class="g-last">最近更新 2026-11-09</span></div><div class="list"><a class="item" href="../caifafa-ai/buyer-side-plan.html">
+<span class="i-main"><span class="i-title">采发发买家侧产品形态与版本规划</span><span class="i-desc">V1–V4 四个版本的目标、任务清单、门槛指标与依赖，持续更新。</span></span>
+<span class="i-tags"><span class="pill kind">版本规划</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-09</b><span>13:42</span></span></a><a class="item" href="q4/datalist.html">
+<span class="i-main"><span class="i-title">买家侧数据准备清单</span><span class="i-desc">买卖双方数据约定、六类数据准备清单、画像积累方式与 11 月行动项。</span></span>
+<span class="i-tags"><span class="pill kind">数据清单</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-06</b><span>15:46</span></span></a><a class="item" href="q4/tasks.html">
+<span class="i-main"><span class="i-title">采发发买家侧任务拆解（按版本）</span><span class="i-desc">按版本拆分的买家侧任务、优先级与负责人。</span></span>
+<span class="i-tags"><span class="pill kind">任务拆解</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-03</b><span>17:21</span></span></a><a class="item" href="q4/scope-review.html">
+<span class="i-main"><span class="i-title">采发发各版本交付范围审查表</span><span class="i-desc">各版本交付范围逐项审查：做什么、不做什么、依赖与风险。</span></span>
+<span class="i-tags"><span class="pill kind">审查表</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-02</b><span>13:30</span></span></a></div><details class="olds"><summary>历史版本 5 份</summary><div class="list"><a class="item is-old" href="../caifafa-ai/product-form.html">
+<span class="i-main"><span class="i-title">采发发产品形态与版本规划 v1.1</span><span class="i-desc">11/02 的产品形态与五个版本节奏（网页版）。<span class="i-sup">已被「采发发买家侧产品形态与版本规划」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">版本规划</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-11-02</b><span>16:41</span></span></a><a class="item is-old" href="q4/report.html">
+<span class="i-main"><span class="i-title">采发发产品形态与版本规划（汇报稿）</span><span class="i-desc">11/02 向徐总汇报的产品形态与版本规划，含拍板事项。<span class="i-sup">已被「采发发买家侧产品形态与版本规划」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">汇报稿</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-11-02</b><span>11:13</span></span></a><a class="item is-old" href="q4/q4-iter.html">
+<span class="i-main"><span class="i-title">采发发产品形态与Q4迭代思路（会员侧）</span><span class="i-desc">10/31 会后的会员侧产品形态与 Q4 迭代思路、11 月 AI 应用。<span class="i-sup">已被「采发发买家侧产品形态与版本规划」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">迭代思路</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-11-02</b><span>10:28</span></span></a><a class="item is-old" href="q4/agent-plan.html">
+<span class="i-main"><span class="i-title">采发发Agent · 买家端产品版本规划（2026.11–2027.01）</span><span class="i-desc">采发发 Agent 买家端 2026.11–2027.01 三版规划（10/31 之前的方向）。<span class="i-sup">已被「采发发买家侧产品形态与版本规划」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">版本规划</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-10-31</b><span>15:24</span></span></a><a class="item is-old" href="q4/fct-plan.html">
+<span class="i-main"><span class="i-title">分采通 11–1月产品规划</span><span class="i-desc">分采通 11–1 月四个版本规划（并入采发发之前）。<span class="i-sup">已被「采发发买家侧产品形态与版本规划」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">版本规划</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-10-28</b><span>11:29</span></span></a></div></details></section><section class="grp" id="V1"><div class="g-head"><h2>V1 · 11/20 年货节存量增长版</h2><span class="g-sub">会员工作台、年货节场景运营、运营管理后台首期</span><span class="g-last">最近更新 2026-11-09</span></div><div class="list"><a class="item" href="../采发发Q4/ws-demo/">
+<span class="i-main"><span class="i-title">会员工作台 V1 Demo</span><span class="i-desc">年货节档期卡、项目列表与详情、合并项目、我的询价单、新手指引。</span></span>
+<span class="i-tags"><span class="pill kind">Demo</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-09</b><span>10:39</span></span></a><a class="item" href="../采发发Q4/admin-demo/">
+<span class="i-main"><span class="i-title">运营管理后台 Demo v1.7（Q4 首期开放范围）</span><span class="i-desc">只开放工作台、场景、商品池、埋点管理；场景配置已去掉 AI 功能。</span></span>
+<span class="i-tags"><span class="pill kind">Demo</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-06</b><span>17:49</span></span></a><a class="item" href="../采发发Q4/nhj-demo/">
+<span class="i-main"><span class="i-title">年货节场景运营首页 Demo v2</span><span class="i-desc">会员首页：场景货盘、一键加购 / 询价 / 上架 / 建商城。</span></span>
+<span class="i-tags"><span class="pill kind">Demo</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-02</b><span>16:58</span></span></a><a class="item" href="q4/ws-prd.html">
+<span class="i-main"><span class="i-title">采发发会员工作台 V1 PRD</span><span class="i-desc">会员工作台 V1 的功能需求、字段与规则。</span></span>
+<span class="i-tags"><span class="pill kind">PRD</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-09</b><span>10:19</span></span></a><a class="item" href="q4/ws-manual.html">
+<span class="i-main"><span class="i-title">采发发会员工作台 V1 产品说明书</span><span class="i-desc">V1 工作台入口变化、功能说明、新手指引、权限与埋点。</span></span>
+<span class="i-tags"><span class="pill kind">产品说明书</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-09</b><span>10:08</span></span></a><a class="item" href="q4/ws-plan.html">
+<span class="i-main"><span class="i-title">采发发会员工作台调整方案</span><span class="i-desc">工作台以「项目」为主线：V1 只加不搬，V3 一次重组。</span></span>
+<span class="i-tags"><span class="pill kind">方案</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-09</b><span>09:57</span></span></a><a class="item" href="q4/admin-prd.html">
+<span class="i-main"><span class="i-title">采发发 运营管理后台 PRD v1.1（Q4 首期开放范围）</span><span class="i-desc">节选：场景管理、商品池（含定价规则）、工作台、埋点、非功能需求。</span></span>
+<span class="i-tags"><span class="pill kind">PRD</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-06</b><span>17:49</span></span></a><a class="item" href="q4/nhj-spec.html">
+<span class="i-main"><span class="i-title">采发发会员端 V1.0 年货节版 · 场景运营与交易链路 产品 Spec（前台+后台）</span><span class="i-desc">年货节版场景首页、场景商品池、交易动作、商城模板与运营后台配套。</span></span>
+<span class="i-tags"><span class="pill kind">Spec</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-05</b><span>15:36</span></span></a></div><details class="olds"><summary>历史版本 5 份</summary><div class="list"><a class="item is-old" href="../采发发Q4/scene-demo/">
+<span class="i-main"><span class="i-title">分采通场景运营前台 Demo</span><span class="i-desc">早期场景首页与资源广场（含自有猫超 / 优品演示开关）。<span class="i-sup">已被「年货节场景运营首页 Demo v2」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">Demo</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-10-30</b><span>18:06</span></span></a><a class="item is-old" href="q4/scene-prd.html">
+<span class="i-main"><span class="i-title">分采通 V1.0 场景运营产品需求</span><span class="i-desc">分采通 V1.0 场景运营产品需求。<span class="i-sup">已被「年货节 Spec」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">PRD</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-10-30</b><span>17:14</span></span></a><a class="item is-old" href="q4/nhj-arch.html">
+<span class="i-main"><span class="i-title">分采通 V1.0 年货节版：产品架构与工作台栏目改版</span><span class="i-desc">分采通 V1.0 年货节版的产品架构与工作台栏目改版。<span class="i-sup">已被「会员工作台调整方案 / 年货节 Spec」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">架构方案</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-10-28</b><span>14:57</span></span></a><a class="item is-old" href="q4/fct-columns.html">
+<span class="i-main"><span class="i-title">分采通系统产品架构与栏目设计框架</span><span class="i-desc">分采通系统产品架构与栏目设计框架。<span class="i-sup">已被「会员工作台调整方案」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">框架</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-10-28</b><span>09:27</span></span></a><a class="item is-old" href="q4/home-refactor.html">
+<span class="i-main"><span class="i-title">分采通首页、资源广场与模板广场场景化重构：产品架构思路</span><span class="i-desc">首页、资源广场与模板广场场景化重构的产品架构思路。<span class="i-sup">已被「年货节 Spec」取代</span></span></span>
+<span class="i-tags"><span class="pill kind">架构思路</span><span class="pill old">历史版</span></span>
+<span class="i-date"><b>2026-10-27</b><span>21:36</span></span></a></div></details></section><section class="grp" id="V2"><div class="g-head"><h2>V2 · 约 12/4 C 端体验版</h2><span class="g-sub">C 端消费兑换商城：统一展示、找得到、AI 选品、全流程埋点</span><span class="g-last">最近更新 2026-11-09</span></div><div class="list"><a class="item" href="../采发发Q4/c-mall-design/">
+<span class="i-main"><span class="i-title">采发发 C端兑换商城 · 设计稿</span><span class="i-desc">员工兑换主流程 10 屏 + 4 个渠道详情页 + 渠道差异对照，可点击体验。</span></span>
+<span class="i-tags"><span class="pill kind">设计稿</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-09</b><span>13:41</span></span></a><a class="item" href="q4/mall-prd.html">
+<span class="i-main"><span class="i-title">采发发 C 端消费兑换商城 PRD</span><span class="i-desc">C 端消费兑换商城 PRD：员工兑换主流程、各页面需求与规则。</span></span>
+<span class="i-tags"><span class="pill kind">PRD</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-09</b><span>09:07</span></span></a><a class="item" href="q4/mall-unified.html">
+<span class="i-main"><span class="i-title">采发发 C 端消费兑换商城 · 统一商城产品说明</span><span class="i-desc">统一商城产品说明，附改动清单与六个核心页面字段说明。</span></span>
+<span class="i-tags"><span class="pill kind">产品说明</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-06</b><span>13:14</span></span></a><a class="item" href="q4/c-spec.html">
+<span class="i-main"><span class="i-title">采发发 C端商城产品 Spec（V1 / V2）</span><span class="i-desc">C 端商城 V1 新前端首批与 V2 体验版：统一展示、搜索修正、AI 选品、全流程埋点。</span></span>
+<span class="i-tags"><span class="pill kind">Spec</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-06</b><span>11:21</span></span></a></div></section><section class="grp" id="V3"><div class="g-head"><h2>V3 · 商品库上线后</h2><span class="g-sub">商品库可被 AI 调用、工作台完整重组、订单全货源统一</span><span class="g-last">最近更新 2026-11-03</span></div><div class="list"><a class="item" href="q4/goods-ai.html">
+<span class="i-main"><span class="i-title">商品库可被 AI 调用：任务拆解与可行性</span><span class="i-desc">商品库可被 AI 调用：5 层 22 项任务拆解、买卖家交互点与可行性判断。</span></span>
+<span class="i-tags"><span class="pill kind">可行性</span><span class="pill new">最新</span></span>
+<span class="i-date"><b>2026-11-03</b><span>10:25</span></span></a></div></section><section class="grp" id="V4"><div class="g-head"><h2>V4 · 12/31 前</h2><span class="g-sub">项目供货价、商家数据回传</span></div><p class="empty">暂无独立文档。本版范围见版本规划 V4 一节。</p></section>
+<div class="foot"><p>其他项目的存档文档（不在 Q4 范围）：</p>
+<a href="prd-frontend.html">发发福利 前台 PRD</a><a href="spec.html">发发福利 Spec</a><a href="prd-admin.html">发发福利 运营后台 PRD</a><a href="prompt.html">发发福利 Prompt</a><a href="bb-spec.html">帮帮采 Spec</a><a href="bb-prd.html">帮帮采 PRD</a><a href="bb-prompt.html">帮帮采 Prompt</a></div>
 </main></body></html>

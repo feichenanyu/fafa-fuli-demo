@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>采发发会员工作台 V1 产品说明书</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">V1 · 产品说明书 · 采发发会员工作台 V1 产品说明书</span>
+<a class="btn" href="../">全部文档</a><a class="btn pri" href="../../采发发Q4/ws-demo/">打开 Demo</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-一-版本信息与目标">一、版本信息与目标</a><a href="#h-二-入口与栏目变化">二、入口与栏目变化</a><a href="#h-三-功能说明">三、功能说明</a><a href="#h-四-新手指引-P0">四、新手指引（P0）</a><a href="#h-五-权限与数据安全">五、权限与数据安全</a><a href="#h-六-埋点与上线门槛">六、埋点与上线门槛</a><a href="#h-七-待确认问题">七、待确认问题</a></nav>
+<article><h1 id="h-采发发会员工作台-V1-产品说明书">采发发会员工作台 V1 产品说明书</h1>
+<div class="docmeta"><span class="pill new">最新</span><span class="pill kind">V1 · 产品说明书</span><span>最后更新 2026-11-09 10:08</span></div><p>Nov 9, 2026 · @sanyuan</p>
+<h2 id="h-一-版本信息与目标">一、版本信息与目标</h2>
+<p>V1 在 11/20 上线，对工作台做轻量调整：只新增入口，不动老菜单和路由。服务商可以在一个地方按项目看商城、询价单、订单和经营数据，从项目发起询价、选品和建商城。场景货盘在会员首页（即年货节版场景运营首页）；工作台保留档期卡，给当前档期热门货盘增加曝光。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>版本</td>
+<td>V1 · 年货节存量增长版，2026-11-20 上线</td>
+</tr>
+<tr>
+<td>端</td>
+<td>会员端 PC 工作台、首页会员面板；新运营管理后台（权限与统计）</td>
+</tr>
+<tr>
+<td>面向</td>
+<td>服务商（管理员与业务员子账号）</td>
+</tr>
+<tr>
+<td>解决的问题</td>
+<td>工作台没有「项目」，一个甲方的商城、询价、订单分在多个菜单</td>
+</tr>
+<tr>
+<td>业务价值</td>
+<td>服务商按项目看账、从项目发起动作；项目信息开始积累</td>
+</tr>
+<tr>
+<td>对应任务</td>
+<td>V1-5 工作台轻量调整、V1-4 项目关系、V1-3 按项目看经营、V1-10 权限与脱敏</td>
+</tr>
+</tbody></table>
+</div><p><strong>本版做</strong>：年货节档期卡、项目列表与详情、合并项目、从项目发起动作、我的询价单、首页会员面板同步、新手指引、名片与企微下线（P2）。</p>
+<p><strong>本版不做</strong>：栏目完整重组与订单合并（V3）、项目报备独立入口、报价单（后续版本）、AI 选品开通（V2）、项目供货价（V4）、新建看板。</p>
+<h2 id="h-二-入口与栏目变化">二、入口与栏目变化</h2>
+<img src="media/ws-manual/media/image1.png" style="width:6in;height:3.15178in" alt="V1 工作台入口 · 档期卡 + 2 处新增 + 首页面板同步 + 会员首页衔接" /><p>V1 工作台入口 · 档期卡 + 2 处新增 + 首页面板同步 + 会员首页衔接</p>
+<p>蓝色为 V1 新增，灰色为原有菜单，虚线框为会员首页（不属于工作台）；栏目完整重组在 V3，见「采发发会员工作台调整方案」。</p>
+<h2 id="h-三-功能说明">三、功能说明</h2>
+<h3 id="h-3-1-年货节档期卡-P0">3.1 年货节档期卡（P0）</h3>
+<ul>
+<li><p>目的：给当前档期的热门货盘增加曝光，把工作台流量引到会员首页。</p>
+</li>
+<li><p>工作台顶部通栏：档期名 + 距节日 N 天 + 热门货盘（最多 3 个，运营指定）+「去选货」；点货盘跳会员首页对应场景。</p>
+</li>
+<li><p>只展示对会员可见且生效中的场景，没有时不显示；可收起，换档期后重新展开。</p>
+</li>
+<li><p>场景货盘和商品池本身在会员首页（年货节版场景运营首页），工作台不放货盘列表；版本规划 V1-9.2 按此调整。</p>
+</li>
+</ul>
+<h3 id="h-3-2-项目列表-P0">3.2 项目列表（P0）</h3>
+<p>服务商按甲方项目看全局，不用在几个菜单间来回切。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>列</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>项目名称</td>
+<td>存量商城自动生成的项目默认用商城名称</td>
+</tr>
+<tr>
+<td>商城数</td>
+<td>挂在本项目下的商城数</td>
+</tr>
+<tr>
+<td>询价中</td>
+<td>状态为待跟进或跟进中的询价单数</td>
+</tr>
+<tr>
+<td>交易额、利润</td>
+<td>复用现有经营概览口径</td>
+</tr>
+<tr>
+<td>操作</td>
+<td>查看详情、建商城、去选品、发起询价</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li><p>存量商城上线时自动生成项目：一个商城对应一个项目，无需服务商确认。客户类型按商城名称推断，无法判断的留空，服务商可在项目详情里修改。</p>
+</li>
+<li><p>未关联项目的商城和询价单在列表上方单独提示。</p>
+</li>
+<li><p>「新增项目」按钮：填项目名称、项目类型（采购 / 集采）、客户类型、预算类型、预算金额，只有名称必填。</p>
+</li>
+<li><p>「合并项目」（V1 做）：同一甲方有多个商城时，服务商勾选多个项目合并为一个；合并时选择保留哪个项目的名称和项目信息，商城、询价单、订单全部归到合并后的项目，经营数据按合并后重新汇总。</p>
+</li>
+</ul>
+<h3 id="h-3-3-项目详情-P0">3.3 项目详情（P0）</h3>
+<p>一页聚合本项目的已有数据，不新增业务逻辑。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>区块</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>项目信息</td>
+<td>项目类型、客户类型、预算类型、预算金额、归属方、创建时间，可编辑；兑换价格带按商城实际订单自动计算，不可填</td>
+</tr>
+<tr>
+<td>经营数据</td>
+<td>订单数、交易额、利润、兑换价格带，复用现有口径</td>
+</tr>
+<tr>
+<td>商城</td>
+<td>本项目下的商城，点击跳商城运营中心</td>
+</tr>
+<tr>
+<td>询价单</td>
+<td>本项目的询价单及状态</td>
+</tr>
+<tr>
+<td>订单</td>
+<td>本项目商城的订单，点击跳现有订单详情</td>
+</tr>
+</tbody></table>
+</div><p>编辑项目信息时显示报备提示：项目信息用于经营管理数据统计，本版不提供给任何第三方；已报备项目的集采询价优先跟进。不承诺项目保护。</p>
+<h3 id="h-3-4-从项目发起动作-P0">3.4 从项目发起动作（P0）</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>动作</th>
+<th>跳转</th>
+<th>自动带上</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>建商城</td>
+<td>现有建商城流程</td>
+<td>新商城挂到本项目</td>
+</tr>
+<tr>
+<td>去选品</td>
+<td>会员首页场景商品池</td>
+<td>上架时默认选中本项目的商城</td>
+</tr>
+<tr>
+<td>发起询价</td>
+<td>询价表单</td>
+<td>商城、客户类型、预算预填，可改</td>
+</tr>
+</tbody></table>
+</div><h3 id="h-3-5-我的询价单-P0">3.5 我的询价单（P0）</h3>
+<ul>
+<li><p>询价表单必填「选商城」（可选「还没建商城」）、「客户类型」「预算」，写入所选商城对应的项目；场景首页 Spec 的询价表单同步补上这三项。</p>
+</li>
+<li><p>列表字段：询价单号、商品、所属商城（未选显示「未关联」）、提交人、提交时间、状态。</p>
+</li>
+<li><p>状态：待跟进 → 跟进中 → 已关闭（带关闭原因）；会员端只读。</p>
+</li>
+<li><p>「未关联」的询价单可在详情里挂到商城；建商城时也会提示挂上。</p>
+</li>
+</ul>
+<h3 id="h-3-6-首页会员面板同步-P0">3.6 首页会员面板同步（P0）</h3>
+<ul>
+<li><p>常用功能由用户自己选择。V1 把「我的项目」「询价单」加入可选列表，不改用户已选的功能。</p>
+</li>
+<li><p>待办中「询价单（待处理）」点击进「我的询价单」。</p>
+</li>
+</ul>
+<h3 id="h-3-7-名片-企微营销下线-P2">3.7 名片、企微营销下线（P2）</h3>
+<ul>
+<li><p>下线前拉近 90 天访问量，确认无人使用。</p>
+</li>
+<li><p>「客户」下的企微好友、企微客户群不动，跟 Q1 CRM 改版走。</p>
+</li>
+</ul>
+<h2 id="h-四-新手指引-P0">四、新手指引（P0）</h2>
+<p>V1 的入口都是新加的，存量服务商的习惯还在老菜单里。新手指引和功能同版上线，确保他们找得到入口。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>形式</th>
+<th>触发</th>
+<th>内容</th>
+<th>关闭与再次查看</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分步引导（蒙层高亮）</td>
+<td>每个账号上线后首次进入工作台</td>
+<td>不超过 4 步：年货节档期卡 → 项目 → 我的询价单 → 新功能指引（随时重看）；每步一句话说清「这里能做什么」</td>
+<td>可跳过；工作台右上角「新功能指引」可重看</td>
+</tr>
+<tr>
+<td>新入口标记</td>
+<td>入口没被点击过</td>
+<td>项目、我的询价单入口加「NEW」角标</td>
+<td>点击一次消失；最长保留 30 天</td>
+</tr>
+<tr>
+<td>首页会员面板气泡</td>
+<td>上线后首次进入首页</td>
+<td>指向常用功能的「编辑」：「新增「我的项目」「询价单」，可加入常用」</td>
+<td>关闭后不再出现</td>
+</tr>
+<tr>
+<td>空状态引导</td>
+<td>列表为空</td>
+<td>项目为空：「先建一个商城，项目会自动生成」；询价单为空：「在场景货盘或搜索里点「询价」即可发起」，都带跳转按钮</td>
+<td>—</td>
+</tr>
+<tr>
+<td>老入口提示</td>
+<td>老菜单中已有等价新入口的页面（如我的商城）</td>
+<td>页面顶部轻提示「现在也可以在「项目」里按甲方查看」</td>
+<td>可关闭，关闭后不再出现</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li><p>指引状态按账号记录（不按浏览器），子账号各自看一遍。</p>
+</li>
+<li><p>指引文案讲「能帮你做什么」，不讲功能名。</p>
+</li>
+<li><p>指引组件做成通用能力，V2、V3 新增或重构入口时复用。</p>
+</li>
+</ul>
+<h2 id="h-五-权限与数据安全">五、权限与数据安全</h2>
+<p>项目视图上线后运营后台就能看到项目明细，所以权限和脱敏必须同版上线（V1-10）。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>规则</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>服务商只看自己的项目；子账号沿用原「商城管理」「代发」权限映射</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>不存终端企业联系人和联系方式；通知只发给服务商账号</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>运营后台默认只看汇总；看单个项目明细需特定角色权限</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>客户名称加密存储，运营后台显示脱敏名称（如「某央企国企·北京」）；含客户名称的明细不支持导出</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>运营查看、导出项目明细留痕</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>运营后台涉及项目和客户信息的页面加明水印</td>
+<td>P1</td>
+</tr>
+</tbody></table>
+</div><h2 id="h-六-埋点与上线门槛">六、埋点与上线门槛</h2>
+<p>用埋点判断服务商是否找到了新入口，用门槛判断是否可以进入下一版。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>事件</th>
+<th>属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>新手指引曝光、每步完成、跳过、重看</td>
+<td>步骤、账号类型</td>
+</tr>
+<tr>
+<td>入口点击：档期卡（含热门货盘）、项目、我的询价单</td>
+<td>来源（工作台 / 首页会员面板 / 气泡 / 空状态）</td>
+</tr>
+<tr>
+<td>项目详情浏览、编辑项目信息</td>
+<td>编辑的字段</td>
+</tr>
+<tr>
+<td>从项目发起动作</td>
+<td>建商城 / 选品 / 询价</td>
+</tr>
+</tbody></table>
+</div><p><strong>门槛</strong>（沿用版本规划 V1，目标值待与运营商定）：存量交易 GMV、货盘上架商城数、自助询价数、带客户类型和预算的项目占比（按 GMV 覆盖率计）。另加一项入口发现率：上线 2 周内点过「项目」或「我的询价单」的活跃服务商占比。</p>
+<h2 id="h-七-待确认问题">七、待确认问题</h2>
+<ul>
+<li><p><input disabled="" type="checkbox"> 新手指引组件由哪个前端工程承载（老菜单含 iframe 页面，蒙层高亮可能覆盖不到）。</p>
+</li>
+<li><p><input disabled="" type="checkbox"> 合并项目后能否拆分、是否需要撤销。</p>
+</li>
+</ul>
+<hr><p class="meta">最后更新 2026-11-09 10:08（北京时间）· 同步自 Claude 文档 2026-11-09 · Markdown 原文：<a href="ws-manual.md">ws-manual.md</a></p></article></div>
+</body></html>
