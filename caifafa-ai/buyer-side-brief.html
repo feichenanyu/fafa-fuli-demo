@@ -92,6 +92,9 @@ td:first-child { color: var(--muted); white-space: nowrap; }
 .ver ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 13.5px; line-height: 1.55; }
 .ver .right { display: grid; gap: 6px; align-content: start; }
 
+.shopv { background: var(--water-50); border-radius: 8px; padding: 8px 10px; }
+.shopv ul { padding-left: 0; list-style: none; font-size: 13px; }
+.shopv li b { color: var(--water-700); margin-right: 6px; }
 /* 05 stories */
 .route { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .leg { display: grid; gap: 8px; align-content: start; }
@@ -256,16 +259,25 @@ td:first-child { color: var(--muted); white-space: nowrap; }
       <div class="mid">
         <p class="strat"><span class="lbl">战略目标</span>商业模型从买家侧收费转向卖家侧收费；交易统一到平台，卖家在买家侧看得到自己的价值。</p>
         <p class="goal"><span class="lbl">产品目标</span>新入驻供应商和已入驻商家的货以店铺进来；成交按店铺归因；返点带动采购。</p>
-        <p class="val">业务价值：平台店的成交看得见、算得清，平台按店铺抽佣</p>
+        <div class="shopv"><span class="lbl">店铺给服务商带来什么</span>
+          <ul>
+            <li><b>看得清</b>每件货属于哪家店，订单按店铺拆单，售后找得到责任方</li>
+            <li><b>留得住</b>关注常用的店，上新、返点活动第一时间看到，不用每次重新找货</li>
+            <li><b>赚得多</b>参加店铺的返点活动；同款在不同店之间比利润、无货时互相替代</li>
+            <li><b>选得准</b>店铺评分在 V4 上线，按发货和售后表现选店</li>
+          </ul>
+        </div>
+        <p class="val">业务价值：服务商多了一批可以长期合作的店，卖家的成交看得见，平台按店铺抽佣</p>
       </div>
       <div class="right">
         <ul>
           <li>店铺化第一批：新入驻供应商、已入驻商家（猫超、京东迁移放 Q1）</li>
+          <li>会员端店铺页：关注常用的店，上新和返点活动第一时间看到</li>
           <li>购物车、订单、售后按店铺统一</li>
           <li>同品推荐：无货替代、高利润提示</li>
           <li>返点活动：进度、达标建议、活动账户</li>
         </ul>
-        <p class="gate">门槛：平台店 GMV 占比、上架平台店商品的商城数、返点活动参与数</p>
+        <p class="gate">门槛：平台店 GMV 占比、上架平台店商品的商城数、返点活动参与数、关注店铺的服务商数</p>
       </div>
     </article>
 
@@ -328,9 +340,10 @@ td:first-child { color: var(--muted); white-space: nowrap; }
     <div class="card leg">
       <span class="when">V3</span><h3>所有货以店铺进来</h3>
       <ul>
-        <li><p><span class="who s">服务商</span>按店铺挑货</p><p>和靠谱的店长期合作</p></li>
+        <li><p><span class="who s">服务商</span>按店铺挑货，看清货从谁家来</p><p>出了问题找得到责任方</p></li>
+        <li><p><span class="who s">服务商</span>关注常用的店，跟进上新和活动</p><p>有稳定货源，不用每次重新找货</p></li>
         <li><p><span class="who s">服务商</span>跟踪返点进度并按建议达标</p><p>拿到返点，更多选用平台店的货</p></li>
-        <li><p><span class="who">服务商</span>无货时一键换同款</p><p>商城不缺货</p></li>
+        <li><p><span class="who">服务商</span>无货时换成别家店的同款</p><p>商城不缺货，还能比出更高利润</p></li>
       </ul>
     </div>
     <div class="card leg">
