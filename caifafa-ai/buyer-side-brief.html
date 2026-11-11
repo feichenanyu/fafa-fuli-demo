@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>采发发买家侧产品形态与产品规划（汇报版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --water: #0D9488; --water-700: #096F66; --water-50: #DAEEED;
+  --fire: #F59E0B; --fire-50: #FDF0DA; --fire-900: #865606;
+  --bg: #F3F4F6; --surface: #FFFFFF; --ink: #374151; --muted: #6B7280; --line: #E5E7EB;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius: 12px; --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 40px 32px 56px; display: grid; gap: 34px; }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: 30px; line-height: 1.35; font-weight: 700; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--water); }
+h2 { font-size: 20px; font-weight: 600; }
+h3 { font-size: 16px; font-weight: 600; }
+.eyebrow { font-size: 13px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+.eyebrow b { color: var(--water-700); }
+.lead { font-size: 16px; line-height: 1.75; max-width: 70ch; }
+.head { display: grid; gap: 12px; }
+.sec { display: grid; gap: 14px; }
+.sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.sec-no { font-family: var(--font-mono); font-size: 13px; color: var(--water); }
+.sec-note { font-size: 13px; color: var(--muted); }
+.card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px; }
+
+/* 01 strategy line */
+.line { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; counter-reset: s; }
+.line li { counter-increment: s; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 14px 12px; display: grid; gap: 4px; align-content: start; border-top: 4px solid var(--water); position: relative; }
+.line li:first-child { border-top-color: var(--fire); }
+.line li.later { border-top-color: #9CA3AF; }
+.line .when { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.line b { font-size: 17px; }
+.line span { font-size: 13px; line-height: 1.55; }
+.core-q { border-left: 4px solid var(--water); font-weight: 600; font-size: 15.5px; }
+
+/* 02 model */
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.shift { display: grid; gap: 8px; }
+.shift .row { display: grid; grid-template-columns: 84px minmax(0, 1fr) 18px minmax(0, 1fr); gap: 8px; align-items: center; font-size: 13.5px; }
+.shift .row > b { color: var(--muted); font-weight: 600; font-size: 12.5px; }
+.shift .old { color: var(--muted); }
+.shift .new { font-weight: 600; background: var(--water-50); border-radius: 6px; padding: 4px 8px; }
+.shift .ar { color: var(--water); text-align: center; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; color: var(--water-700); background: #F7FAFA; }
+td:first-child { color: var(--muted); white-space: nowrap; }
+.tbl-wrap { overflow-x: auto; }
+.rule { font-size: 13.5px; line-height: 1.6; }
+.rule b { color: var(--water-700); margin-right: 6px; }
+.rules { display: grid; gap: 6px; }
+
+/* 03 form */
+.form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr); gap: 12px; }
+.end { display: grid; gap: 8px; align-content: start; }
+.end.focus { outline: 2px solid var(--water); }
+.end .sub { font-size: 12.5px; color: var(--muted); }
+.end ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.end li { font-size: 13.5px; line-height: 1.5; background: #F7FAFA; border-radius: 6px; padding: 6px 9px; }
+.end li b { display: block; }
+.end li span { color: var(--muted); font-size: 12.5px; }
+.axis { font-size: 13.5px; }
+.axis b { color: var(--water-700); }
+
+/* 04 roadmap */
+.road { display: grid; gap: 12px; }
+.ver { display: grid; grid-template-columns: 170px minmax(0, 1fr) minmax(0, 1fr); gap: 16px; border-left: 4px solid var(--water); }
+.ver.v1 { border-left-color: var(--fire); }
+.ver.q1 { border-left-color: #9CA3AF; }
+.ver .id { display: grid; gap: 4px; align-content: start; }
+.ver .when { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.ver .name { font-size: 19px; font-weight: 700; }
+.ver .cond { justify-self: start; font-size: 11.5px; background: var(--fire-50); color: var(--fire-900); border-radius: 999px; padding: 1px 9px; }
+.ver .mid { display: grid; gap: 8px; align-content: start; }
+.ver .strat { background: #FFF7E6; border-radius: 8px; padding: 8px 10px; font-size: 14px; font-weight: 600; line-height: 1.55; }
+.ver .lbl { display: block; font-size: 11.5px; font-weight: 600; color: var(--muted); }
+.ver .goal { font-size: 13.5px; line-height: 1.6; }
+.ver .val { font-size: 13px; color: var(--water-700); font-weight: 600; }
+.ver .gate { font-size: 12.5px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 6px; }
+.ver ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 13.5px; line-height: 1.55; }
+.ver .right { display: grid; gap: 6px; align-content: start; }
+
+/* 05 stories */
+.route { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.leg { display: grid; gap: 8px; align-content: start; }
+.leg .when { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.leg ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.leg li { border: 1px solid var(--line); border-left: 3px solid var(--water); border-radius: 6px; padding: 7px 9px; display: grid; gap: 2px; }
+.leg li p:first-child { font-size: 13.5px; font-weight: 700; line-height: 1.45; }
+.leg li p:last-child { font-size: 12px; color: var(--water-700); font-weight: 600; }
+.who { display: inline-block; font-size: 11px; font-weight: 600; color: #fff; background: var(--water-700); border-radius: 3px; padding: 0 5px; margin-right: 6px; vertical-align: 1px; }
+.who.s { background: var(--fire-900); }
+
+/* 06 data */
+.data td:first-child { font-family: var(--font-mono); font-size: 12px; }
+.foot { font-size: 12.5px; color: var(--muted); }
+
+@media (max-width: 960px) {
+  .line { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .two, .form { grid-template-columns: 1fr; }
+  .ver { grid-template-columns: 1fr; gap: 10px; }
+  .route { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .wrap { padding: 24px 16px 40px; }
+  .line, .route { grid-template-columns: 1fr; }
+  .shift .row { grid-template-columns: 1fr; }
+  .shift .ar { display: none; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header class="head">
+  <p class="eyebrow"><b>采发发 88buys</b><span>买家侧 · 产品形态与产品规划</span><span>2026-11-11</span></p>
+  <h1>买家侧的核心是<em>成交</em>：让服务商的每一笔生意，都在采发发上更容易做成</h1>
+  <p class="lead">卖家侧这次把一切供给统一为店铺、收费转向卖家侧。买家侧对应要做三件事：守住存量服务商的交易，把交付体验做到让甲方续约，再让每一笔成交都归到店铺上，卖家才看得到买家侧的价值。</p>
+</header>
+
+<section class="sec" aria-labelledby="s1">
+  <div class="sec-head"><span class="sec-no">01</span><h2 id="s1">战略主线：五步走</h2><span class="sec-note">前一步的数据达到门槛，再启动下一步的新功能</span></div>
+  <ol class="line">
+    <li><span class="when">V1 · 11/20</span><b>守住存量</b><span>年货节货盘线上直达服务商，交易和项目数据沉到平台</span></li>
+    <li><span class="when">V2 · 约 12/4</span><b>做好交付</b><span>员工在商城里找得到、换得顺，甲方愿意续约</span></li>
+    <li><span class="when">V3 · 店铺上线后</span><b>统一供给</b><span>所有货以店铺进来，成交按店铺归因</span></li>
+    <li><span class="when">V4 · 12/31 前</span><b>买卖协同</b><span>项目价、店铺评分、双边经营数据</span></li>
+    <li class="later"><span class="when">Q1</span><b>AI 提效</b><span>标案分析、AI 选品、AI 问数</span></li>
+  </ol>
+  <p class="card core-q">每一版只回答一个问题：这一版让哪一类成交，更多地发生在采发发上？</p>
+</section>
+
+<section class="sec" aria-labelledby="s2">
+  <div class="sec-head"><span class="sec-no">02</span><h2 id="s2">商业模型：跟着卖家侧一起变</h2><span class="sec-note">店铺与佣金规则以卖家侧为准</span></div>
+  <div class="two">
+    <div class="card shift">
+      <h3>三个变化</h3>
+      <div class="row"><b>货的单位</b><span class="old">货源类型</span><span class="ar">→</span><span class="new">店铺</span></div>
+      <div class="row"><b>平台收入</b><span class="old">买家侧加价、会员费</span><span class="ar">→</span><span class="new">卖家侧抽佣、订单服务费、返点</span></div>
+      <div class="row"><b>自有货迁移</b><span class="old">劝供应商转成平台商家</span><span class="ar">→</span><span class="new">先开专供店，私域关系不变（Q1）</span></div>
+      <div class="row"><b>买家侧核心</b><span class="old">成交</span><span class="ar">→</span><span class="new">成交，并归因到店铺</span></div>
+    </div>
+    <div class="card rules">
+      <h3>三条规则</h3>
+      <p class="rule"><b>场景是主视角，店铺是属性</b>服务商先看场景（怎么做生意），商品上带店铺（货从谁家来）。两者不冲突。</p>
+      <p class="rule"><b>平台场景只放平台店的货</b>服务商出方案时可以混入自己自营店的货（专供店上线后同理），只有他自己看得到；混入行为留下数据，用来和卖家谈转平台店。</p>
+      <p class="rule"><b>店铺只在会员端和运营端出现</b>员工商城只展示品牌和发货说明，商城的品牌属于服务商。</p>
+    </div>
+  </div>
+  <div class="card tbl-wrap">
+    <table>
+      <thead><tr><th></th><th>平台店 · 入驻商家店</th><th>平台店 · 渠道店</th><th>专供店</th><th>会员自营店</th></tr></thead>
+      <tbody>
+        <tr><td>谁开店</td><td>入驻商家</td><td>京东、猫超、优品等</td><td>服务商的自有供应商</td><td>服务商自己（含阿里权益）</td></tr>
+        <tr><td>谁能看到</td><td>所有会员</td><td>所有会员</td><td>只有绑定的服务商</td><td>只有服务商自己</td></tr>
+        <tr><td>结算开票</td><td>平台</td><td>平台</td><td>平台</td><td>阿里权益走会员企业支付宝</td></tr>
+        <tr><td>平台收费</td><td>抽佣</td><td>按渠道协议</td><td>订单服务费</td><td>待定</td></tr>
+        <tr><td>进场景、返点</td><td>参与</td><td>参与</td><td>不参与</td><td>不参与</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s3">
+  <div class="sec-head"><span class="sec-no">03</span><h2 id="s3">产品形态：三个端，一条项目主线</h2><span class="sec-note">会员端是成交发生的地方</span></div>
+  <div class="form">
+    <div class="card end">
+      <h3>运营管理后台</h3><p class="sub">把供给组织成生意</p>
+      <ul>
+        <li><b>商品池与标签</b><span>规则圈货，标签补齐渠道字段</span></li>
+        <li><b>场景货盘</b><span>按稳定性筛选、按预算档位组货</span></li>
+        <li><b>AI 助手开通与用量</b><span>按项目审批，按次数管控</span></li>
+        <li><b>数据权限</b><span>客户信息脱敏、留痕、水印</span></li>
+      </ul>
+    </div>
+    <div class="card end focus">
+      <h3>会员端（服务商）</h3><p class="sub">以项目为中心做生意</p>
+      <ul>
+        <li><b>项目视图</b><span>一个甲方的商城、询价、订单、总账在一处</span></li>
+        <li><b>场景货盘</b><span>在工作台和站点装修里直接筛选、一键上架</span></li>
+        <li><b>自助成交</b><span>搜货、询价、代发、加购，统一从预付款扣款</span></li>
+        <li><b>店铺与返点</b><span>按店铺选货，跟踪返点进度和达标建议</span></li>
+        <li><b>同品推荐</b><span>无货换同款，利润更高时提示</span></li>
+      </ul>
+    </div>
+    <div class="card end">
+      <h3>员工商城（C 端）</h3><p class="sub">服务商交付给甲方的门面</p>
+      <ul>
+        <li><b>统一商品展示</b><span>不论货源，看起来是一个商城</span></li>
+        <li><b>搜索与推荐</b><span>搜得到，按余额推荐</span></li>
+        <li><b>AI 助手</b><span>在搜索结果里按额度帮员工挑</span></li>
+        <li><b>到店场景</b><span>企业码商家列表与收款码</span></li>
+      </ul>
+    </div>
+  </div>
+  <p class="card axis"><b>项目贯穿三端：</b>存量商城自动生成项目 → 询价时顺手带上客户类型和预算 → 订单按项目和店铺归因 → 项目数据促成项目价 → 脱敏后回传给卖家。</p>
+</section>
+
+<section class="sec" aria-labelledby="s4">
+  <div class="sec-head"><span class="sec-no">04</span><h2 id="s4">版本规划</h2><span class="sec-note">每版一个战略目标、一句业务价值、一组门槛</span></div>
+  <div class="road">
+
+    <article class="card ver v1">
+      <div class="id"><span class="when">V1 · 11/20</span><span class="name">存量激活版</span></div>
+      <div class="mid">
+        <p class="strat"><span class="lbl">战略目标</span>守住存量服务商的年货节交易，把交易、项目、店铺数据沉到平台，作为后面所有版本的数据底座。</p>
+        <p class="goal"><span class="lbl">产品目标</span>运营货盘不再靠线下表格转发；服务商自己筛选、上架、询价、下单；工作台以项目为中心。</p>
+        <p class="val">业务价值：年货节存量 GMV 不流失，数据从第一笔订单开始积累</p>
+      </div>
+      <div class="right">
+        <ul>
+          <li>场景货盘线上化，货盘入口进工作台和站点装修</li>
+          <li>一键上架、询价、代发，统一收银</li>
+          <li>工作台精简改版，新增项目视图</li>
+          <li>员工商城新前端首批：购物车、分类、个人中心</li>
+          <li>东方甄选接入年货节货盘</li>
+          <li>订单来源、店铺字段、埋点打底；客户数据权限与脱敏</li>
+        </ul>
+        <p class="gate">门槛：存量 GMV、货盘上架商城数、自助询价数、信息完整的项目占比</p>
+      </div>
+    </article>
+
+    <article class="card ver">
+      <div class="id"><span class="when">V2 · 约 12/4–12/9</span><span class="name">交付体验版</span></div>
+      <div class="mid">
+        <p class="strat"><span class="lbl">战略目标</span>让交付质量成为服务商留在平台的理由：员工愿意用，甲方续约，服务商就离不开采发发。</p>
+        <p class="goal"><span class="lbl">产品目标</span>员工找得到、换得顺；从进入商城到兑换的每一步都有数据。</p>
+        <p class="val">业务价值：赶在 1 月兑换高峰前上线，服务商不再替商城背锅</p>
+      </div>
+      <div class="right">
+        <ul>
+          <li>统一商品展示，标签联动商城详情</li>
+          <li>搜索与推荐规则</li>
+          <li>员工商城 AI 助手：按项目开通，按对话次数管控</li>
+          <li>全流程埋点，漏斗与流失报表</li>
+          <li>到店场景（企业码）</li>
+        </ul>
+        <p class="gate">门槛：兑换转化率、搜索无结果率、埋点覆盖率、AI 采纳率与每次对话成本</p>
+      </div>
+    </article>
+
+    <article class="card ver">
+      <div class="id"><span class="when">V3 · 卖家侧店铺上线后</span><span class="name">店铺化版</span><span class="cond">时间跟随卖家侧</span></div>
+      <div class="mid">
+        <p class="strat"><span class="lbl">战略目标</span>商业模型从买家侧收费转向卖家侧收费；交易统一到平台，卖家在买家侧看得到自己的价值。</p>
+        <p class="goal"><span class="lbl">产品目标</span>新入驻供应商和已入驻商家的货以店铺进来；成交按店铺归因；返点带动采购。</p>
+        <p class="val">业务价值：平台店的成交看得见、算得清，平台按店铺抽佣</p>
+      </div>
+      <div class="right">
+        <ul>
+          <li>店铺化第一批：新入驻供应商、已入驻商家（猫超、京东迁移放 Q1）</li>
+          <li>购物车、订单、售后按店铺统一</li>
+          <li>同品推荐：无货替代、高利润提示</li>
+          <li>返点活动：进度、达标建议、活动账户</li>
+        </ul>
+        <p class="gate">门槛：平台店 GMV 占比、上架平台店商品的商城数、返点活动参与数</p>
+      </div>
+    </article>
+
+    <article class="card ver">
+      <div class="id"><span class="when">V4 · 12/31 前</span><span class="name">买卖协同版</span></div>
+      <div class="mid">
+        <p class="strat"><span class="lbl">战略目标</span>用数据把买卖双方连起来：项目数据促成项目价，店铺评分督促履约，双方都看得懂自己的经营。</p>
+        <p class="goal"><span class="lbl">产品目标</span>跑通项目价闭环；店铺评分上线；服务商和卖家各有一版经营分析。</p>
+        <p class="val">业务价值：验证平台撮合价值，为 Q1 的定价和抽佣策略提供依据</p>
+      </div>
+      <div class="right">
+        <ul>
+          <li>项目供货价：申请、谈定、按价成交</li>
+          <li>店铺评分：发货、售后、缺货、价格稳定性</li>
+          <li>服务商经营分析：按项目、店铺、品类</li>
+          <li>卖家经营数据：成交、项目需求、商品表现（脱敏）</li>
+        </ul>
+        <p class="gate">门槛：走完闭环的项目数、按项目价成交的订单数、评分覆盖率</p>
+      </div>
+    </article>
+
+    <article class="card ver q1">
+      <div class="id"><span class="when">2027 Q1</span><span class="name">AI 提效版</span></div>
+      <div class="mid">
+        <p class="strat"><span class="lbl">战略目标</span>用 AI 提升服务商的经营效率，成为工具付费和交易留存的理由。</p>
+        <p class="val">业务价值：服务商投标和选品更快；自有货交易以专供店进平台</p>
+      </div>
+      <div class="right">
+        <ul>
+          <li>AI 标案分析（优先）：读招标文件，推荐货盘和报价，一键生成项目</li>
+          <li>会员端与运营端 AI 选品、AI 问数与经营日报</li>
+          <li>店铺化第二批：专供店承接自有供应商；猫超、京东迁移</li>
+          <li>千人千面选品</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s5">
+  <div class="sec-head"><span class="sec-no">05</span><h2 id="s5">每一版，谁能多做成什么</h2><span class="sec-note">粗体是谁做什么，绿色是带来的结果</span></div>
+  <div class="route">
+    <div class="card leg">
+      <span class="when">V1</span><h3>货盘自助取用</h3>
+      <ul>
+        <li><p><span class="who s">服务商</span>在工作台直接取用运营货盘</p><p>不再从线下表格里导入</p></li>
+        <li><p><span class="who s">服务商</span>一键上架到甲方商城</p><p>不用找人导入、逐个改价</p></li>
+        <li><p><span class="who s">服务商</span>自助搜货、询价、下单</p><p>当场给甲方答复</p></li>
+        <li><p><span class="who">服务商</span>按项目看商城、订单和总账</p><p>复盘和续约有依据</p></li>
+      </ul>
+    </div>
+    <div class="card leg">
+      <span class="when">V2</span><h3>商城让甲方满意</h3>
+      <ul>
+        <li><p><span class="who s">员工</span>搜得到、看得懂想要的商品</p><p>甲方觉得福利花得值</p></li>
+        <li><p><span class="who s">员工</span>让 AI 助手按额度挑好商品</p><p>额度用满，不被投诉</p></li>
+        <li><p><span class="who">服务商</span>看到员工卡在哪一步</p><p>在甲方发现前先解决</p></li>
+      </ul>
+    </div>
+    <div class="card leg">
+      <span class="when">V3</span><h3>所有货以店铺进来</h3>
+      <ul>
+        <li><p><span class="who s">服务商</span>按店铺挑货</p><p>和靠谱的店长期合作</p></li>
+        <li><p><span class="who s">服务商</span>跟踪返点进度并按建议达标</p><p>拿到返点，更多选用平台店的货</p></li>
+        <li><p><span class="who">服务商</span>无货时一键换同款</p><p>商城不缺货</p></li>
+      </ul>
+    </div>
+    <div class="card leg">
+      <span class="when">V4</span><h3>买卖双方看懂生意</h3>
+      <ul>
+        <li><p><span class="who s">服务商</span>凭项目数据拿到项目供货价</p><p>成本更低，订单记在自己名下</p></li>
+        <li><p><span class="who s">服务商</span>按店铺评分选店</p><p>交付少出错</p></li>
+        <li><p><span class="who s">卖家</span>看到买家侧带来的成交和需求</p><p>愿意给更好的价格和返点</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s6">
+  <div class="sec-head"><span class="sec-no">06</span><h2 id="s6">数据节奏：前一版采集，后一版给人看</h2><span class="sec-note">先内部验证口径，再给服务商，最后脱敏给卖家</span></div>
+  <div class="card tbl-wrap">
+    <table class="data">
+      <thead><tr><th>版本</th><th>开始采集</th><th>内部看</th><th>服务商看</th><th>卖家看</th></tr></thead>
+      <tbody>
+        <tr><td>V1</td><td>订单来源、店铺字段、项目关系、询价</td><td>存量 GMV 与货盘使用周报</td><td>项目视图：订单、交易额、利润</td><td>—</td></tr>
+        <tr><td>V2</td><td>员工商城全流程埋点、AI 对话</td><td>转化漏斗、流失、AI 成本</td><td>项目兑换情况、未兑换余额</td><td>—</td></tr>
+        <tr><td>V3</td><td>店铺维度、返点流水、同品替换</td><td>平台店 GMV 占比</td><td>返点进度</td><td>—</td></tr>
+        <tr><td>V4</td><td>项目价申请与结果</td><td>闭环项目数、月度复盘</td><td>经营分析、店铺评分</td><td>成交、项目需求、商品表现</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="foot">客户数据的底线已写进系统：不存终端企业联系方式，项目明细只给所属服务商，给卖家的数据只有汇总且做脱敏。</p>
+</section>
+
+</main>
+</body>
+</html>
