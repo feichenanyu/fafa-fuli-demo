@@ -95,6 +95,12 @@ td:first-child { color: var(--muted); white-space: nowrap; }
 .shopv { background: var(--water-50); border-radius: 8px; padding: 8px 10px; }
 .shopv ul { padding-left: 0; list-style: none; font-size: 13px; }
 .shopv li b { color: var(--water-700); margin-right: 6px; }
+.target { display:flex; gap:10px; flex-wrap:wrap; }
+.target .t { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 10px 16px; display:grid; }
+.target .t b { font-size: 22px; color: var(--water-700); font-family: var(--font-mono); }
+.target .t span { font-size: 12.5px; color: var(--muted); }
+.form2 { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
+@media (max-width: 960px){ .form2 { grid-template-columns: 1fr; } }
 /* 05 stories */
 .route { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .leg { display: grid; gap: 8px; align-content: start; }
@@ -128,74 +134,82 @@ td:first-child { color: var(--muted); white-space: nowrap; }
 <main class="wrap">
 
 <header class="head">
-  <p class="eyebrow"><b>采发发 88buys</b><span>买家侧 · 产品形态与产品规划</span><span>2026-11-11</span></p>
-  <h1>买家侧的核心是<em>成交</em>：让服务商的每一笔生意，都在采发发上更容易做成</h1>
-  <p class="lead">卖家侧这次把一切供给统一为店铺、收费转向卖家侧。买家侧对应要做三件事：守住存量服务商的交易，把交付体验做到让甲方续约，再让每一笔成交都归到店铺上，卖家才看得到买家侧的价值。</p>
+  <p class="eyebrow"><b>采发发 88buys</b><span>买家侧 · 产品形态与产品规划</span><span>2026-11-12 · 按 11/11–11/12 会议调整</span></p>
+  <h1>买家侧的核心是<em>订单</em>：让服务商和供应商之间的每一笔订单，都在采发发上流转</h1>
+  <p class="lead">平台不把别人的生意拿过来，而是让别人的生意更好做。先做行业基础设施：把服务商和自有供应商在微信群里对的单，搬到平台上。别人卖软件，我们卖的是订单与供应链管理网络。</p>
+  <div class="target">
+    <div class="t"><b>日均 10 万单</b><span>明年目标</span></div>
+    <div class="t"><b>日均 100 万单</b><span>三年目标</span></div>
+    <div class="t"><b>看单数，不看金额</b><span>衡量标准</span></div>
+  </div>
 </header>
 
 <section class="sec" aria-labelledby="s1">
   <div class="sec-head"><span class="sec-no">01</span><h2 id="s1">战略主线：五步走</h2><span class="sec-note">前一步的数据达到门槛，再启动下一步的新功能</span></div>
   <ol class="line">
-    <li><span class="when">V1 · 11/20</span><b>守住存量</b><span>年货节货盘线上直达服务商，交易和项目数据沉到平台</span></li>
-    <li><span class="when">V2 · 约 12/4</span><b>做好交付</b><span>员工在商城里找得到、换得顺，甲方愿意续约</span></li>
-    <li><span class="when">V3 · 与卖家店铺同步</span><b>统一供给</b><span>所有货以店铺进来，成交按店铺归因</span></li>
-    <li><span class="when">V4 · 12/31 前</span><b>买卖协同</b><span>项目价、店铺评分、双边经营数据</span></li>
-    <li class="later"><span class="when">Q1</span><b>AI 提效</b><span>标案分析、AI 选品、AI 问数</span></li>
+    <li><span class="when">V1 · 11/20</span><b>守住存量</b><span>年货节货盘线上直达服务商，订单和项目数据沉到平台</span></li>
+    <li><span class="when">V2 · 约 12/4</span><b>做好交付</b><span>把员工商城和场景商城做到最好，甲方愿意续约</span></li>
+    <li><span class="when">V3 · 与卖家店铺同步</span><b>连接供给</b><span>店铺做底层，自有供应商用专供店连进来，订单在平台流转</span></li>
+    <li><span class="when">V4 · 12/31 前</span><b>买卖协同</b><span>订单、成本、履约数据，让双方看懂生意</span></li>
+    <li class="later"><span class="when">Q1</span><b>网络激活</b><span>大会与邀请裂变，AI 接入店铺和订单</span></li>
   </ol>
-  <p class="card core-q">每一版只回答一个问题：这一版让哪一类成交，更多地发生在采发发上？</p>
+  <p class="card core-q">每一版只回答一个问题：这一版让哪一类订单，更多地在采发发上流转？</p>
 </section>
 
 <section class="sec" aria-labelledby="s2">
-  <div class="sec-head"><span class="sec-no">02</span><h2 id="s2">商业模型：跟着卖家侧一起变</h2><span class="sec-note">店铺与佣金规则以卖家侧为准</span></div>
+  <div class="sec-head"><span class="sec-no">02</span><h2 id="s2">商业模型：从做交易，到做订单网络</h2><span class="sec-note">店铺体系与卖家侧共用一套</span></div>
   <div class="two">
     <div class="card shift">
-      <h3>三个变化</h3>
-      <div class="row"><b>货的单位</b><span class="old">货源类型</span><span class="ar">→</span><span class="new">店铺</span></div>
-      <div class="row"><b>平台收入</b><span class="old">买家侧加价、会员费</span><span class="ar">→</span><span class="new">卖家侧抽佣、订单服务费、返点</span></div>
-      <div class="row"><b>自有货迁移</b><span class="old">劝供应商转成平台商家</span><span class="ar">→</span><span class="new">先开专供店，私域关系不变（Q1）</span></div>
-      <div class="row"><b>买家侧核心</b><span class="old">成交</span><span class="ar">→</span><span class="new">成交，并归因到店铺</span></div>
+      <h3>四个变化</h3>
+      <div class="row"><b>衡量标准</b><span class="old">交易额</span><span class="ar">→</span><span class="new">订单数（日均单量）</span></div>
+      <div class="row"><b>平台收入</b><span class="old">买家侧加价、会员费</span><span class="ar">→</span><span class="new">订单服务费为主，买卖两端都收</span></div>
+      <div class="row"><b>对待私域</b><span class="old">劝供应商转到平台交易</span><span class="ar">→</span><span class="new">先做工具，不急着成交</span></div>
+      <div class="row"><b>货的单位</b><span class="old">货源类型</span><span class="ar">→</span><span class="new">店铺（底层统一）</span></div>
     </div>
     <div class="card rules">
       <h3>三条规则</h3>
-      <p class="rule"><b>场景是主视角，店铺是属性</b>服务商先看场景（怎么做生意），商品上带店铺（货从谁家来）。两者不冲突。</p>
-      <p class="rule"><b>平台场景只放平台店的货</b>服务商出方案时可以混入自己自营店的货（专供店上线后同理），只有他自己看得到；混入行为留下数据，用来和卖家谈转平台店。</p>
-      <p class="rule"><b>店铺只在会员端和运营端出现</b>员工商城只展示品牌和发货说明，商城的品牌属于服务商。</p>
+      <p class="rule"><b>用户看场景和商品，不逛店铺</b>店铺是底层，用来做流量运营和结算主体。这一阶段不做店铺装修和浏览型店铺页；员工商城不显示店铺。</p>
+      <p class="rule"><b>三种店铺是三种类型，不是一个店打标签</b>场域、收费、运营主体都不同；底层的商品、店铺配置、技术架构只有一套。</p>
+      <p class="rule"><b>专供店只做工具和信息流，不碰资金</b>解决订单分发、发货回传、开票。钱、票、税没有理清之前，不上返点和红包类玩法。</p>
     </div>
   </div>
   <div class="card tbl-wrap">
     <table>
-      <thead><tr><th></th><th>平台店 · 入驻商家店</th><th>平台店 · 渠道店</th><th>专供店</th><th>会员自营店</th></tr></thead>
+      <thead><tr><th></th><th>平台自营店</th><th>会员自营店</th><th>商家专供店</th></tr></thead>
       <tbody>
-        <tr><td>谁开店</td><td>入驻商家</td><td>京东、猫超、优品等</td><td>服务商的自有供应商</td><td>服务商自己（含阿里权益）</td></tr>
-        <tr><td>谁能看到</td><td>所有会员</td><td>所有会员</td><td>只有绑定的服务商</td><td>只有服务商自己</td></tr>
-        <tr><td>结算开票</td><td>平台</td><td>平台</td><td>平台</td><td>阿里权益走会员企业支付宝</td></tr>
-        <tr><td>平台收费</td><td>抽佣</td><td>按渠道协议</td><td>订单服务费</td><td>待定</td></tr>
-        <tr><td>进场景、返点</td><td>参与</td><td>参与</td><td>不参与</td><td>不参与</td></tr>
+        <tr><td>是什么</td><td>飞象自营精选、飞象京东、飞象猫超（现有频道即店铺）；招商来的供应商挂在自营店下，由平台运营</td><td>服务商的自有商品（含阿里权益），自己给自己供货</td><td>供应商给自己的私域客户供货；一个主店铺，按服务商分子店铺</td></tr>
+        <tr><td>场域</td><td>平台交易</td><td>服务商内部使用</td><td>私域交易</td></tr>
+        <tr><td>谁能看到</td><td>所有服务商</td><td>只有服务商自己</td><td>被邀请绑定的服务商</td></tr>
+        <tr><td>平台做什么</td><td>选品、结算、开票、运营</td><td>订单工具</td><td>订单分发、发货回传、开票接入</td></tr>
+        <tr><td>平台收费</td><td>自营差价</td><td>待定</td><td>订单服务费</td></tr>
+        <tr><td>进平台场景</td><td>进</td><td>不进</td><td>不进</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
 <section class="sec" aria-labelledby="s3">
-  <div class="sec-head"><span class="sec-no">03</span><h2 id="s3">产品形态：三个端，一条项目主线</h2><span class="sec-note">会员端是成交发生的地方</span></div>
+  <div class="sec-head"><span class="sec-no">03</span><h2 id="s3">产品形态：三个端，两条主线</h2><span class="sec-note">会员端是订单发生的地方</span></div>
   <div class="form">
     <div class="card end">
       <h3>运营管理后台</h3><p class="sub">把供给组织成生意</p>
       <ul>
         <li><b>商品池与标签</b><span>规则圈货，标签补齐渠道字段</span></li>
         <li><b>场景货盘</b><span>按稳定性筛选、按预算档位组货</span></li>
+        <li><b>飞象自营店</b><span>按渠道和品类开店，招商供应商挂在店下</span></li>
         <li><b>AI 助手开通与用量</b><span>按项目审批，按次数管控</span></li>
         <li><b>数据权限</b><span>客户信息脱敏、留痕、水印</span></li>
       </ul>
     </div>
     <div class="card end focus">
-      <h3>会员端（服务商）</h3><p class="sub">以项目为中心做生意</p>
+      <h3>会员端（服务商）</h3><p class="sub">接项目、找货、管供应商、算账</p>
       <ul>
         <li><b>项目视图</b><span>一个甲方的商城、询价、订单、总账在一处</span></li>
-        <li><b>场景货盘</b><span>在工作台和站点装修里直接筛选、一键上架</span></li>
+        <li><b>场景货盘</b><span>主入口：从场景直接到商品，一键上架</span></li>
         <li><b>自助成交</b><span>搜货、询价、代发、加购，统一从预付款扣款</span></li>
-        <li><b>店铺与返点</b><span>按店铺选货，跟踪返点进度和达标建议</span></li>
-        <li><b>同品推荐</b><span>无货换同款，利润更高时提示</span></li>
+        <li><b>我的供应商（重构）</b><span>发邀请代替开账号；像逛商城一样进自营店和各家专供店选货；订单自动分发、发货回传、发票可查</span></li>
+        <li><b>自有货经营工具</b><span>采购成本、差价、毛利、订单统计</span></li>
+        <li><b>用户中心</b><span>开通、入驻、认证、培训、使用逐环打通；权益中心、学习中心</span></li>
       </ul>
     </div>
     <div class="card end">
@@ -208,7 +222,10 @@ td:first-child { color: var(--muted); white-space: nowrap; }
       </ul>
     </div>
   </div>
-  <p class="card axis"><b>项目贯穿三端：</b>存量商城自动生成项目 → 询价时顺手带上客户类型和预算 → 订单按项目和店铺归因 → 项目数据促成项目价 → 脱敏后回传给卖家。</p>
+  <div class="form2">
+    <p class="card axis"><b>项目主线（对甲方）：</b>存量商城自动生成项目 → 询价时带上客户类型和预算 → 场景选货上架 → 员工兑换 → 按项目看账。</p>
+    <p class="card axis"><b>供应主线（对供应商）：</b>发邀请 → 供应商开专供店 → 下单后自动分发 → 发货和物流回传 → 发票 → 成本和毛利入账。</p>
+  </div>
 </section>
 
 <section class="sec" aria-labelledby="s4">
@@ -218,9 +235,9 @@ td:first-child { color: var(--muted); white-space: nowrap; }
     <article class="card ver v1">
       <div class="id"><span class="when">V1 · 11/20</span><span class="name">存量激活版</span></div>
       <div class="mid">
-        <p class="strat"><span class="lbl">战略目标</span>守住存量服务商的年货节交易，把交易、项目、店铺数据沉到平台，作为后面所有版本的数据底座。</p>
+        <p class="strat"><span class="lbl">战略目标</span>守住存量服务商的年货节订单，把订单、项目、店铺数据沉到平台，作为后面所有版本的数据底座。</p>
         <p class="goal"><span class="lbl">产品目标</span>运营货盘不再靠线下表格转发；服务商自己筛选、上架、询价、下单；工作台以项目为中心。</p>
-        <p class="val">业务价值：年货节存量 GMV 不流失，数据从第一笔订单开始积累</p>
+        <p class="val">业务价值：年货节存量订单不流失，数据从第一笔订单开始积累</p>
       </div>
       <div class="right">
         <ul>
@@ -228,18 +245,18 @@ td:first-child { color: var(--muted); white-space: nowrap; }
           <li>一键上架、询价、代发，统一收银</li>
           <li>工作台精简改版，新增项目视图</li>
           <li>员工商城新前端首批：购物车、分类、个人中心</li>
-          <li>东方甄选接入年货节货盘</li>
+          <li>东方甄选接入年货节货盘（挂在飞象自营下）</li>
           <li>订单来源、店铺字段、埋点打底；客户数据权限与脱敏</li>
         </ul>
-        <p class="gate">门槛：存量 GMV、货盘上架商城数、自助询价数、信息完整的项目占比</p>
+        <p class="gate">门槛：存量订单数与 GMV、货盘上架商城数、自助询价数、信息完整的项目占比</p>
       </div>
     </article>
 
     <article class="card ver">
       <div class="id"><span class="when">V2 · 约 12/4–12/9</span><span class="name">交付体验版</span></div>
       <div class="mid">
-        <p class="strat"><span class="lbl">战略目标</span>让交付质量成为服务商留在平台的理由：员工愿意用，甲方续约，服务商就离不开采发发。</p>
-        <p class="goal"><span class="lbl">产品目标</span>员工找得到、换得顺；从进入商城到兑换的每一步都有数据。</p>
+        <p class="strat"><span class="lbl">战略目标</span>把员工商城和场景商城做到最好，让交付质量成为服务商留在平台的理由。</p>
+        <p class="goal"><span class="lbl">产品目标</span>员工找得到、换得顺；每一步都有数据；服务商从开通到会用的路径打通。</p>
         <p class="val">业务价值：赶在 1 月兑换高峰前上线，服务商不再替商城背锅</p>
       </div>
       <div class="right">
@@ -248,6 +265,7 @@ td:first-child { color: var(--muted); white-space: nowrap; }
           <li>搜索与推荐规则</li>
           <li>员工商城 AI 助手：按项目开通，按对话次数管控</li>
           <li>全流程埋点，漏斗与流失报表</li>
+          <li>用户中心闭环第一步：认证提醒、权益中心、学习中心</li>
           <li>到店场景（企业码）</li>
         </ul>
         <p class="gate">门槛：兑换转化率、搜索无结果率、埋点覆盖率、AI 采纳率与每次对话成本</p>
@@ -255,62 +273,63 @@ td:first-child { color: var(--muted); white-space: nowrap; }
     </article>
 
     <article class="card ver">
-      <div class="id"><span class="when">V3 · 与卖家店铺同步</span><span class="name">店铺化版</span><span class="cond">与卖家侧店铺同步上线</span></div>
+      <div class="id"><span class="when">V3 · 与卖家店铺同步</span><span class="name">供给连接版</span><span class="cond">与卖家侧店铺同步上线</span></div>
       <div class="mid">
-        <p class="strat"><span class="lbl">战略目标</span>商业模型从买家侧收费转向卖家侧收费；交易统一到平台，卖家在买家侧看得到自己的价值。</p>
-        <p class="goal"><span class="lbl">产品目标</span>新入驻供应商和已入驻商家的货以店铺进来；成交按店铺归因；返点带动采购。</p>
+        <p class="strat"><span class="lbl">战略目标</span>让服务商和自有供应商之间的订单在平台上流转，搭起订单与供应链网络的第一层。先做工具，不急着成交。</p>
+        <p class="goal"><span class="lbl">产品目标</span>供应商管理按店铺体系重构；专供店解决对单、发货回传和开票；现有频道归为飞象自营店。</p>
         <div class="shopv"><span class="lbl">店铺给服务商带来什么</span>
           <ul>
-            <li><b>看得清</b>每件货属于哪家店，订单按店铺拆单，售后找得到责任方</li>
-            <li><b>留得住</b>关注常用的店，上新、返点活动第一时间看到，不用每次重新找货</li>
-            <li><b>赚得多</b>参加店铺的返点活动；同款在不同店之间比利润、无货时互相替代</li>
-            <li><b>选得准</b>店铺评分在 V4 上线，按发货和售后表现选店</li>
+            <li><b>不用对单</b>下单后自动分发给供应商，不再在微信群里一单单对</li>
+            <li><b>一处管理</b>所有自有供应商的货、订单、物流、发票都在一个地方</li>
+            <li><b>算得清</b>每笔货的采购成本、差价和毛利自动算出来</li>
+            <li><b>不丢关系</b>平台不碰资金，供货价和账期还是他和供应商自己谈的</li>
           </ul>
         </div>
-        <p class="val">业务价值：服务商多了一批可以长期合作的店，卖家的成交看得见，平台按店铺抽佣</p>
+        <p class="val">业务价值：私域订单进入平台，订单数成为增长指标，订单服务费成为收入</p>
       </div>
       <div class="right">
         <ul>
-          <li>店铺化第一批：新入驻供应商、已入驻商家（猫超、京东迁移放 Q1）</li>
-          <li>会员端店铺页：关注常用的店，上新和返点活动第一时间看到</li>
-          <li>购物车、订单、售后按店铺统一</li>
-          <li>同品推荐：无货替代、高利润提示</li>
-          <li>返点活动：进度、达标建议、活动账户</li>
+          <li>三种店铺上线，与卖家侧共用一套店铺体系</li>
+          <li>我的供应商重构：发邀请代替开账号，进店选货</li>
+          <li>专供店工具：订单自动分发、发货物流回传、发票接入</li>
+          <li>会员自营店：自有商品和阿里权益商品</li>
+          <li>自有货经营工具：采购成本、差价、毛利</li>
+          <li>购物车、订单、售后按店铺统一；无货时同品替代</li>
         </ul>
-        <p class="gate">门槛：平台店 GMV 占比、上架平台店商品的商城数、返点活动参与数、关注店铺的服务商数</p>
+        <p class="gate">门槛：开通专供店的供应商数、经专供店流转的订单数、日均单量</p>
       </div>
     </article>
 
     <article class="card ver">
       <div class="id"><span class="when">V4 · 12/31 前</span><span class="name">买卖协同版</span></div>
       <div class="mid">
-        <p class="strat"><span class="lbl">战略目标</span>用数据把买卖双方连起来：项目数据促成项目价，店铺评分督促履约，双方都看得懂自己的经营。</p>
-        <p class="goal"><span class="lbl">产品目标</span>跑通项目价闭环；店铺评分上线；服务商和卖家各有一版经营分析。</p>
-        <p class="val">业务价值：验证平台撮合价值，为 Q1 的定价和抽佣策略提供依据</p>
+        <p class="strat"><span class="lbl">战略目标</span>用订单数据把买卖双方连得更紧：服务商看懂哪些货和供应商在赚钱，供应商看到自己的履约表现。</p>
+        <p class="goal"><span class="lbl">产品目标</span>服务商经营分析上线；供应商履约数据沉淀为店铺评分；专供店可按服务商设供货规则。</p>
+        <p class="val">业务价值：工具用得越深越离不开，为明年的收费和激活提供数据依据</p>
       </div>
       <div class="right">
         <ul>
-          <li>项目供货价：申请、谈定、按价成交</li>
-          <li>店铺评分：发货、售后、缺货、价格稳定性</li>
-          <li>服务商经营分析：按项目、店铺、品类</li>
-          <li>卖家经营数据：成交、项目需求、商品表现（脱敏）</li>
+          <li>服务商经营分析：按项目、供应商、品类看成本、利润、毛利</li>
+          <li>店铺评分：发货时效、售后、缺货</li>
+          <li>专供店供货规则：按服务商开放不同的商品和价格</li>
+          <li>给卖家的数据：订单、履约表现、项目需求汇总（脱敏）</li>
         </ul>
-        <p class="gate">门槛：走完闭环的项目数、按项目价成交的订单数、评分覆盖率</p>
+        <p class="gate">门槛：经营分析使用率、评分覆盖率、专供店订单的发货回传率</p>
       </div>
     </article>
 
     <article class="card ver q1">
-      <div class="id"><span class="when">2027 Q1</span><span class="name">AI 提效版</span></div>
+      <div class="id"><span class="when">2027 Q1</span><span class="name">网络激活版</span></div>
       <div class="mid">
-        <p class="strat"><span class="lbl">战略目标</span>用 AI 提升服务商的经营效率，成为工具付费和交易留存的理由。</p>
-        <p class="val">业务价值：服务商投标和选品更快；自有货交易以专供店进平台</p>
+        <p class="strat"><span class="lbl">战略目标</span>把工具变成网络：存量服务商邀请供应商，供应商再带来新的服务商；AI 接入店铺和订单。</p>
+        <p class="val">业务价值：一家服务商邀请 10 家供应商，500 多家存量服务商就是 5000 家店</p>
       </div>
       <div class="right">
         <ul>
-          <li>AI 标案分析（优先）：读招标文件，推荐货盘和报价，一键生成项目</li>
-          <li>会员端与运营端 AI 选品、AI 问数与经营日报</li>
-          <li>店铺化第二批：专供店承接自有供应商；猫超、京东迁移</li>
-          <li>千人千面选品</li>
+          <li>会员大会与商家大会激活；邀请开店双方赠订单服务费额度</li>
+          <li>平台向服务商推荐店铺，加为常用供应商</li>
+          <li>AI：标案分析、AI 选品、经营数据问答；店铺能被 AI 调用</li>
+          <li>返点与红包类营销：等钱、票、税方案确定后再上</li>
         </ul>
       </div>
     </article>
@@ -335,23 +354,24 @@ td:first-child { color: var(--muted); white-space: nowrap; }
         <li><p><span class="who s">员工</span>搜得到、看得懂想要的商品</p><p>甲方觉得福利花得值</p></li>
         <li><p><span class="who s">员工</span>让 AI 助手按额度挑好商品</p><p>额度用满，不被投诉</p></li>
         <li><p><span class="who">服务商</span>看到员工卡在哪一步</p><p>在甲方发现前先解决</p></li>
+        <li><p><span class="who">新服务商</span>按指引完成认证和培训</p><p>开通后很快能用起来</p></li>
       </ul>
     </div>
     <div class="card leg">
-      <span class="when">V3</span><h3>所有货以店铺进来</h3>
+      <span class="when">V3</span><h3>和供应商不再对单</h3>
       <ul>
-        <li><p><span class="who s">服务商</span>按店铺挑货，看清货从谁家来</p><p>出了问题找得到责任方</p></li>
-        <li><p><span class="who s">服务商</span>关注常用的店，跟进上新和活动</p><p>有稳定货源，不用每次重新找货</p></li>
-        <li><p><span class="who s">服务商</span>跟踪返点进度并按建议达标</p><p>拿到返点，更多选用平台店的货</p></li>
-        <li><p><span class="who">服务商</span>无货时换成别家店的同款</p><p>商城不缺货，还能比出更高利润</p></li>
+        <li><p><span class="who s">服务商</span>发邀请让供应商开专供店</p><p>不用再给每家供应商开账号</p></li>
+        <li><p><span class="who s">服务商</span>下单后订单自动分发给供应商</p><p>不用在微信群里对单</p></li>
+        <li><p><span class="who s">供应商</span>用一个账号处理所有客户的订单</p><p>省掉一个商务的人力</p></li>
+        <li><p><span class="who">服务商</span>在一处查发货、物流和发票</p><p>单子不再满天飞</p></li>
       </ul>
     </div>
     <div class="card leg">
       <span class="when">V4</span><h3>买卖双方看懂生意</h3>
       <ul>
-        <li><p><span class="who s">服务商</span>凭项目数据拿到项目供货价</p><p>成本更低，订单记在自己名下</p></li>
-        <li><p><span class="who s">服务商</span>按店铺评分选店</p><p>交付少出错</p></li>
-        <li><p><span class="who s">卖家</span>看到买家侧带来的成交和需求</p><p>愿意给更好的价格和返点</p></li>
+        <li><p><span class="who s">服务商</span>按项目和供应商看成本与毛利</p><p>知道哪些货和供应商在赚钱</p></li>
+        <li><p><span class="who s">服务商</span>按履约表现选供应商</p><p>交付少出错</p></li>
+        <li><p><span class="who s">供应商</span>对不同服务商开放不同的货和价</p><p>私域生意照原样搬上来</p></li>
       </ul>
     </div>
   </div>
@@ -363,14 +383,14 @@ td:first-child { color: var(--muted); white-space: nowrap; }
     <table class="data">
       <thead><tr><th>版本</th><th>开始采集</th><th>内部看</th><th>服务商看</th><th>卖家看</th></tr></thead>
       <tbody>
-        <tr><td>V1</td><td>订单来源、店铺字段、项目关系、询价</td><td>存量 GMV 与货盘使用周报</td><td>项目视图：订单、交易额、利润</td><td>—</td></tr>
+        <tr><td>V1</td><td>订单来源、店铺字段、项目关系、询价</td><td>日均单量、存量 GMV、货盘使用</td><td>项目视图：订单、交易额、利润</td><td>—</td></tr>
         <tr><td>V2</td><td>员工商城全流程埋点、AI 对话</td><td>转化漏斗、流失、AI 成本</td><td>项目兑换情况、未兑换余额</td><td>—</td></tr>
-        <tr><td>V3</td><td>店铺维度、返点流水、同品替换</td><td>平台店 GMV 占比</td><td>返点进度</td><td>—</td></tr>
-        <tr><td>V4</td><td>项目价申请与结果</td><td>闭环项目数、月度复盘</td><td>经营分析、店铺评分</td><td>成交、项目需求、商品表现</td></tr>
+        <tr><td>V3</td><td>专供店订单、发货回传、发票、采购成本</td><td>专供店数、经专供店的订单数</td><td>自有货成本、差价、毛利</td><td>自己店里的订单和发货</td></tr>
+        <tr><td>V4</td><td>履约表现、供货规则</td><td>网络规模：每家服务商连了几家店</td><td>经营分析、店铺评分</td><td>履约表现、需求汇总</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="foot">客户数据的底线已写进系统：不存终端企业联系方式，项目明细只给所属服务商，给卖家的数据只有汇总且做脱敏。</p>
+  <p class="foot">正在补的底数：近三年服务商开通的供应商账号数与对应的供应商家数、有订单的供应商数、动销品类。客户数据的底线不变：不存终端企业联系方式，给卖家的数据只有汇总且做脱敏。</p>
 </section>
 
 </main>
