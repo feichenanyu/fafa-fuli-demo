@@ -9,6 +9,7 @@ https://feichenanyu.github.io/fafa-fuli-demo/docs/ —— 按产品版本 V1–V
 | 内容 | 链接 |
 | --- | --- |
 | 文档中心（AI 融合版所有文档的入口） | https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/ |
+| 买家侧产品规划 · 评审版（2026-11-12） | https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/buyer-side-review.html |
 | 买家侧产品形态与产品规划 · 汇报版（2026-11-11） | https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/buyer-side-brief.html |
 | 采发发产品形态与版本规划 v1.1（2026-11-02） | https://feichenanyu.github.io/fafa-fuli-demo/caifafa-ai/product-form.html |
 
