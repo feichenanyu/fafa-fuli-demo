@@ -93,6 +93,15 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 .sched.none { display:block; color:var(--fire-900); background:var(--fire-50); font-size:12.5px; }
 .tbd { font-style:normal; font-size:11px; color:var(--fire-900); background:var(--fire-50); border-radius:4px; padding:0 5px; margin-left:4px; }
 del { color:var(--muted); }
+.sub.unsched { background:#F3F4F6; box-shadow:none; border:1px dashed #D1D5DB; border-top:3px solid #D1D5DB; }
+.sub.unsched > :not(.sched):not(header) { opacity:.5; }
+.sub.unsched h4, .sub.unsched .sid { color:#9CA3AF; }
+.sub ul li.un { color:#9CA3AF; }
+.sub ul li.un small { color:#C0C4CC; }
+.un-tag { font-size:11px; font-weight:600; color:#fff; background:#9CA3AF; border-radius:4px; padding:1px 6px; }
+.chip.unc { background:#F3F4F6; color:#9CA3AF; border:1px dashed #D1D5DB; }
+.flow li.un .st { background:#F3F4F6; border-style:dashed; color:#9CA3AF; }
+.flow li.un .st b { color:#9CA3AF; }
 .lbl { font-size: 11.5px; font-weight: 600; color: var(--muted); }
 
 .cross { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -120,6 +129,7 @@ del { color:var(--muted); }
     <span><b>拆分原则</b>一个小版本 = 一个业务模块的一段完整流程</span>
     <span><b>评审单位</b>小版本，不按功能点零散评审</span>
     <span><b>上线门槛</b>版本门槛达标，再启动下一版本的新功能</span>
+    <span><b style="color:#9CA3AF">灰色</b>研发未排期的小版本和任务</span>
   </div>
 </header>
 
@@ -130,9 +140,9 @@ del { color:var(--muted); }
       <thead><tr><th>版本</th><th>小版本（评审与开发单位）</th><th>依赖</th><th>节奏（评审 → 测试完成）</th></tr></thead>
       <tbody>
         <tr><td>V1 存量激活<small>测完 12/8</small></td><td><span class="chip"><b>V1.1</b>商品池与标签</span><span class="chip"><b>V1.2</b>场景化运营与成交</span><span class="chip"><b>V1.3</b>工作台精简与项目视图</span><span class="chip"><b>V1.4</b>员工商城新前端首批</span><span class="chip"><b>V1.5</b>数据底座与权限 · P1</span></td><td>V1.2 依赖 V1.1</td><td style="font-size:12.5px;line-height:1.7">V1.1 11/10 → 11/24<br>V1.2 11/17 → 12/8<br>V1.3 11/20 → 12/3<br>V1.4 11/6 → 11/26<br>V1.5 11/23 → 11/30 提测</td></tr>
-        <tr><td>V2 交付体验<small>测完 12/18</small></td><td><span class="chip"><b>V2.1</b>统一展示与搜索推荐</span><span class="chip"><b>V2.2</b>员工商城 AI 助手</span><span class="chip"><b>V2.3</b>全流程埋点与报表</span><span class="chip lowc"><b>V2.4</b>到店场景 · 低优先级</span></td><td><span class="chip dep">依赖 V1.4 新前端</span></td><td style="font-size:12.5px;line-height:1.7">V2.1 11/19 → 12/10 提测<br>V2.2 11/20 → 12/18<br>V2.3 11/23 → 11/30 提测<br>V2.4 待定</td></tr>
-        <tr><td>V3 供给连接<small>12/1 评审 · 12/26 测完</small></td><td><span class="chip"><b>V3.1</b>店铺底座</span><span class="chip"><b>V3.2</b>我的供应商重构</span><span class="chip"><b>V3.3</b>专供店订单工具</span><span class="chip"><b>V3.4</b>会员自营店与经营工具</span><span class="chip"><b>V3.5</b>订单与售后按店铺统一</span></td><td><span class="chip dep">依赖卖家侧店铺体系</span> V3.2–3.5 依赖 V3.1</td><td style="font-size:12.5px;line-height:1.7">V3.2 / V3.4 / V3.5：12/1 → 12/26<br><span style="color:var(--fire-900)">V3.1、V3.3 未排期</span></td></tr>
-        <tr><td>V4 买卖协同<small>Q1</small></td><td><span class="chip"><b>V4.1</b>服务商经营分析</span><span class="chip"><b>V4.2</b>店铺评分</span><span class="chip"><b>V4.3</b>专供店供货规则</span></td><td><span class="chip dep">依赖 V3 订单与履约数据</span></td><td>Q1</td></tr>
+        <tr><td>V2 交付体验<small>测完 12/18</small></td><td><span class="chip"><b>V2.1</b>统一展示与搜索推荐</span><span class="chip"><b>V2.2</b>员工商城 AI 助手</span><span class="chip"><b>V2.3</b>全流程埋点与报表</span><span class="chip unc"><b>V2.4</b>到店场景 · 低优先级</span></td><td><span class="chip dep">依赖 V1.4 新前端</span></td><td style="font-size:12.5px;line-height:1.7">V2.1 11/19 → 12/10 提测<br>V2.2 11/20 → 12/18<br>V2.3 11/23 → 11/30 提测<br>V2.4 待定</td></tr>
+        <tr><td>V3 供给连接<small>12/1 评审 · 12/26 测完</small></td><td><span class="chip unc"><b>V3.1</b>店铺底座</span><span class="chip"><b>V3.2</b>我的供应商重构</span><span class="chip unc"><b>V3.3</b>专供店订单工具</span><span class="chip"><b>V3.4</b>会员自营店与经营工具</span><span class="chip"><b>V3.5</b>订单与售后按店铺统一</span></td><td><span class="chip dep">依赖卖家侧店铺体系</span> V3.2–3.5 依赖 V3.1</td><td style="font-size:12.5px;line-height:1.7">V3.2 / V3.4 / V3.5：12/1 → 12/26<br><span style="color:var(--fire-900)">V3.1、V3.3 未排期</span></td></tr>
+        <tr><td>V4 买卖协同<small>Q1</small></td><td><span class="chip unc"><b>V4.1</b>服务商经营分析</span><span class="chip unc"><b>V4.2</b>店铺评分</span><span class="chip unc"><b>V4.3</b>专供店供货规则</span></td><td><span class="chip dep">依赖 V3 订单与履约数据</span></td><td>Q1</td></tr>
       </tbody>
     </table>
   </div>
@@ -197,10 +207,9 @@ del { color:var(--muted); }
         <li>代发售后功能补充；代发入口合并<small>V1-5.7、5.8</small></li>
         <li>隐藏无用功能、栏目调整、迁移指引<small>V1-5.3、5.9、5.10</small></li>
         <li>货盘筛选；货盘入口进会员工作台<small>V1-1.5、V1-9</small><em class="tbd">大兵 · 12/1 测完</em></li>
-        <li>存量商城自动生成项目，项目名用商城名<small>V1-4.2</small><em class="tbd">P2 · 待定</em></li>
-        <li>项目列表、项目详情（商城 / 询价 / 订单 / 经营数据）<small>V1-5.4、5.5、V1-3</small><em class="tbd">未排期</em></li>
-        <li>从项目发起建商城、选品上架、询价<small>V1-5.6</small><em class="tbd">未排期</em></li>
-        <li>年货节场景置顶<small>V1-5.1</small></li>
+        <li class="un">存量商城自动生成项目，项目名用商城名<small>V1-4.2</small><span class="un-tag">未排期</span></li>
+        <li class="un">项目列表、项目详情（商城 / 询价 / 订单 / 经营数据）<small>V1-5.4、5.5、V1-3</small><span class="un-tag">未排期</span></li>
+        <li class="un">从项目发起建商城、选品上架、询价<small>V1-5.6</small><span class="un-tag">未排期</span></li>
       </ul>
       <div class="sched"><span>评审<b>11/20</b></span><span>开发<b style="font-family:var(--font-body)">忽夕、峰云、大兵</b></span><span>提测<b>11/26–11/30</b></span><span>测试<b style="font-family:var(--font-body)">知夏、汤圆</b></span><span>测完 · P0（项目部分 P2）<b>11/27–12/3</b></span></div>
       <div class="meta"><p><b>依赖</b>V1.5 的项目字段</p><p class="rv"><b>评审要点</b>项目详情只聚合已有数据，不新增业务逻辑；合并项目的入口放哪</p></div>
@@ -229,7 +238,7 @@ del { color:var(--muted); }
         <li><del>项目字段、询价信息带入项目</del>、价格带自动计算<small>V1-4.1、4.3、4.4</small></li>
         <li>数据权限：不存终端企业联系方式、明细权限、客户名称脱敏<small>V1-10.1–10.3</small></li>
         <li>访问留痕、页面水印<small>V1-10.4、10.5</small></li>
-        <li>V1 门槛周报<em class="tbd">待定</em></li>
+        <li class="un">V1 门槛周报<span class="un-tag">未排期</span></li>
       </ul>
       <div class="sched"><span>评审<b>11/23</b></span><span>开发<b style="font-family:var(--font-body)">金洋、老罗</b></span><span>提测<b>11/30</b></span><span>测试<b style="font-family:var(--font-body)">未定</b></span><span>测完 · P1<b>未定</b></span></div>
       <div class="meta"><p><b>依赖</b>无（V1.2、V1.3 都依赖它，需最先排期）</p><p class="rv"><b>评审要点</b>店铺类型映射口径与卖家侧对齐（按三种店铺）；周报指标定义</p></div>
@@ -302,8 +311,8 @@ del { color:var(--muted); }
       <div class="meta"><p><b>依赖</b>V1.4 埋点框架</p><p class="rv"><b>评审要点</b>报表由谁看、多久看一次；流失原因的枚举</p></div>
     </article>
 
-    <article class="card sub">
-      <header><span class="sid">V2.4</span><h4>到店场景</h4><span class="low">低优先级</span><span class="side">C 端 · 企业码模块对接</span></header>
+    <article class="card sub unsched">
+      <header><span class="sid">V2.4</span><h4>到店场景</h4><span class="low">低优先级</span><span class="side">C 端 · 企业码模块对接</span><span class="un-tag">未排期</span></header>
       <p class="goal">开通企业码到店的商城，员工能找到线下商家并付款</p>
       <ul>
         <li>展示到店商家列表；未开通的商城不显示入口<small>V2-7.1</small></li>
@@ -331,17 +340,17 @@ del { color:var(--muted); }
       <li><div class="st"><b>供应商开专供店</b><span>认证后开通，对该服务商可见</span><i>V3.1 · V3.2</i></div></li>
       <li><div class="st"><b>进店选货</b><span>自营店、专供店、飞象自营店，像逛商城</span><i>V3.2</i></div></li>
       <li><div class="st"><b>下单</b><span>购物车按店铺分组、按店铺拆单</span><i>V3.5</i></div></li>
-      <li><div class="st"><b>订单自动分发</b><span>推送到供应商店铺，不再微信对单</span><i>V3.3</i></div></li>
-      <li><div class="st"><b>发货回传</b><span>供应商回传发货和物流</span><i>V3.3</i></div></li>
-      <li><div class="st"><b>开票</b><span>接入开票服务，平台上可查</span><i>V3.3</i></div></li>
+      <li class="un"><div class="st"><b>订单自动分发</b><span>推送到供应商店铺，不再微信对单</span><i>V3.3</i></div></li>
+      <li class="un"><div class="st"><b>发货回传</b><span>供应商回传发货和物流</span><i>V3.3</i></div></li>
+      <li class="un"><div class="st"><b>开票</b><span>接入开票服务，平台上可查</span><i>V3.3</i></div></li>
       <li class="back"><div class="st"><b>成本毛利入账</b><span>采购成本、差价、毛利自动算</span><i>V3.4</i></div></li>
     </ol>
     <p class="note">专供店只做工具和信息流，不碰资金：供货价和账期还是服务商和供应商自己谈。平台收订单服务费。</p>
   </div>
 
   <div class="subs">
-    <article class="card sub first">
-      <header><span class="sid">V3.1</span><h4>店铺底座</h4><span class="side">全端 · 与卖家侧共用一套</span></header>
+    <article class="card sub unsched first">
+      <header><span class="sid">V3.1</span><h4>店铺底座</h4><span class="side">全端 · 与卖家侧共用一套</span><span class="un-tag">未排期</span></header>
       <p class="goal">三种店铺类型落地，后面所有小版本的地基</p>
       <ul>
                 <li>现有频道归为飞象自营店（自营精选、京东、猫超）；东方甄选挂在自营店下</li>
@@ -360,14 +369,14 @@ del { color:var(--muted); }
         <li>供应商接受后开专供店（需认证），对该服务商可见</li>
         <li>商城模式：看到自营店和各家专供店，进店选货、上架</li>
         <li>未认证时的功能限制与认证提醒</li>
-        <li>存量供应商账号的迁移引导（迁移策略）<em class="tbd">未排人</em></li>
+        <li class="un">存量供应商账号的迁移引导（迁移策略）<span class="un-tag">未排期</span></li>
       </ul>
       <div class="sched"><span>评审<b>12/1</b></span><span>开发<b style="font-family:var(--font-body)">磐璃、向阳、大兵</b></span><span>提测<b>—</b></span><span>测试<b style="font-family:var(--font-body)">—</b></span><span>测完 · P0（待与卖家侧确认）<b>12/26</b></span></div>
       <div class="meta"><p><b>依赖</b>V3.1</p><p class="rv"><b>评审要点</b>邀请链接机制细节（卖家侧待补）；存量账号迁移节奏</p></div>
     </article>
 
-    <article class="card sub">
-      <header><span class="sid">V3.3</span><h4>专供店订单工具</h4><span class="side">会员端 + 卖家侧</span></header>
+    <article class="card sub unsched">
+      <header><span class="sid">V3.3</span><h4>专供店订单工具</h4><span class="side">会员端 + 卖家侧</span><span class="un-tag">未排期</span></header>
       <p class="goal">服务商和供应商之间不再在微信群里对单</p>
       <ul>
         <li>服务商下单后，订单自动分发到供应商店铺（接口调整）</li>
@@ -398,7 +407,7 @@ del { color:var(--muted); }
       <ul>
         <li>购物车按店铺分组，订单按店铺拆单<small>V3-7</small></li>
         <li>订单列表与详情统一；售后统一（含猫超取消退款）<small>V3-7.2、7.3</small></li>
-        <li>无货时推荐其他店铺的同款或相似品，一键替换<small>V3-8.1</small><em class="tbd">P2</em></li>
+        <li class="un">无货时推荐其他店铺的同款或相似品，一键替换<small>V3-8.1</small><span class="un-tag">未排期</span></li>
         <li>场景混入：出方案时可加入自营店、专供店的货，仅自己可见<small>V3-10.3</small></li>
       </ul>
       <div class="sched"><span>评审<b>12/1</b></span><span>开发<b style="font-family:var(--font-body)">飞鱼</b></span><span>提测<b>—</b></span><span>测试<b style="font-family:var(--font-body)">—</b></span><span>测完 · P0<b>12/26</b></span></div>
@@ -428,8 +437,8 @@ del { color:var(--muted); }
   </div>
 
   <div class="subs">
-    <article class="card sub">
-      <header><span class="sid">V4.1</span><h4>服务商经营分析</h4><span class="side">会员端</span></header>
+    <article class="card sub unsched">
+      <header><span class="sid">V4.1</span><h4>服务商经营分析</h4><span class="side">会员端</span><span class="un-tag">未排期</span></header>
       <p class="goal">服务商知道钱从哪里来</p>
       <ul>
         <li>按项目、供应商、店铺、品类看交易额、成本、毛利、流失<small>V4-6.1</small></li>
@@ -440,8 +449,8 @@ del { color:var(--muted); }
       <div class="meta"><p><b>依赖</b>V3.4 的成本数据</p><p class="rv"><b>评审要点</b>毛利口径与 V3.4 一致</p></div>
     </article>
 
-    <article class="card sub">
-      <header><span class="sid">V4.2</span><h4>店铺评分</h4><span class="side">会员端 + 卖家侧</span></header>
+    <article class="card sub unsched">
+      <header><span class="sid">V4.2</span><h4>店铺评分</h4><span class="side">会员端 + 卖家侧</span><span class="un-tag">未排期</span></header>
       <p class="goal">服务商选店有依据，供应商知道怎么改进</p>
       <ul>
         <li>评分维度：发货时效、签收率、售后率与时效、缺货率、价格稳定性<small>V4-5.1</small></li>
@@ -452,8 +461,8 @@ del { color:var(--muted); }
       <div class="meta"><p><b>依赖</b>V3.3 的发货回传</p><p class="rv"><b>评审要点</b>样本不足的店铺怎么显示</p></div>
     </article>
 
-    <article class="card sub">
-      <header><span class="sid">V4.3</span><h4>专供店供货规则</h4><span class="side">卖家侧配置 + 会员端生效</span></header>
+    <article class="card sub unsched">
+      <header><span class="sid">V4.3</span><h4>专供店供货规则</h4><span class="side">卖家侧配置 + 会员端生效</span><span class="un-tag">未排期</span></header>
       <p class="goal">供应商的私域生意按原样搬上来</p>
       <ul>
         <li>主店铺 + 子店铺：按服务商开放不同的商品范围和价格</li>
