@@ -84,6 +84,9 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 .sub .meta { display: grid; gap: 4px; font-size: 12.5px; border-top: 1px dashed var(--line); padding-top: 6px; }
 .sub .meta b { color: var(--muted); font-weight: 600; margin-right: 6px; }
 .sub .meta .rv { color: var(--fire-900); }
+.rvd { display:inline-block; font-size:11.5px; font-weight:600; background:var(--fire); color:#fff; border-radius:6px; padding:1px 8px; }
+.low { display:inline-block; font-size:11.5px; background:var(--line); color:var(--muted); border-radius:6px; padding:1px 8px; }
+.chip.lowc { background:var(--line); color:var(--muted); }
 .lbl { font-size: 11.5px; font-weight: 600; color: var(--muted); }
 
 .cross { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -104,7 +107,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 <main class="wrap">
 
 <header class="head">
-  <p class="eyebrow"><b>采发发 88buys</b><span>买家侧 · 产品规划评审版</span><span>2026-11-12 · 按 11/11–11/12 会议口径</span></p>
+  <p class="eyebrow"><b>采发发 88buys</b><span>买家侧 · 产品规划评审版</span><span>2026-11-12 · 按 11/11–11/12 会议口径</span><span>已定评审：V1.2 场景化运营 11/17 · V2.2 AI 助手 11/20</span></p>
   <h1>四个版本、十七个小版本：每个小版本是一个<em>能独立评审、独立开发、独立上线</em>的业务模块</h1>
   <p class="lead">每个版本先说清它要跑通的业务闭环，再按业务模块拆成小版本。小版本按依赖顺序进入评审：上一个小版本评审通过，下一个才开始出方案；同一版本内没有依赖的小版本可以并行开发。</p>
   <div class="rules">
@@ -118,12 +121,12 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
   <div class="sec-head"><span class="sec-no">00</span><h2 id="s0">总览：版本 × 小版本</h2><span class="sec-note">橙色是跨版本依赖</span></div>
   <div class="card tbl-wrap">
     <table class="mx">
-      <thead><tr><th>版本</th><th>小版本（评审与开发单位）</th><th>依赖</th></tr></thead>
+      <thead><tr><th>版本</th><th>小版本（评审与开发单位）</th><th>依赖</th><th>已定评审时间</th></tr></thead>
       <tbody>
-        <tr><td>V1 存量激活<small>11/20</small></td><td><span class="chip"><b>V1.1</b>商品池与标签</span><span class="chip"><b>V1.2</b>场景化运营与成交</span><span class="chip"><b>V1.3</b>工作台精简与项目视图</span><span class="chip"><b>V1.4</b>员工商城新前端首批</span><span class="chip"><b>V1.5</b>数据底座与权限</span></td><td>V1.2 依赖 V1.1</td></tr>
-        <tr><td>V2 交付体验<small>约 12/4–12/9</small></td><td><span class="chip"><b>V2.1</b>统一展示与搜索推荐</span><span class="chip"><b>V2.2</b>员工商城 AI 助手</span><span class="chip"><b>V2.3</b>全流程埋点与报表</span><span class="chip"><b>V2.4</b>到店场景</span></td><td><span class="chip dep">依赖 V1.4 新前端</span></td></tr>
-        <tr><td>V3 供给连接<small>与卖家店铺同步</small></td><td><span class="chip"><b>V3.1</b>店铺底座</span><span class="chip"><b>V3.2</b>我的供应商重构</span><span class="chip"><b>V3.3</b>专供店订单工具</span><span class="chip"><b>V3.4</b>会员自营店与经营工具</span><span class="chip"><b>V3.5</b>订单与售后按店铺统一</span></td><td><span class="chip dep">依赖卖家侧店铺体系</span> V3.2–3.5 依赖 V3.1</td></tr>
-        <tr><td>V4 买卖协同<small>12/31 前</small></td><td><span class="chip"><b>V4.1</b>服务商经营分析</span><span class="chip"><b>V4.2</b>店铺评分</span><span class="chip"><b>V4.3</b>专供店供货规则</span></td><td><span class="chip dep">依赖 V3 订单与履约数据</span></td></tr>
+        <tr><td>V1 存量激活<small>11/20</small></td><td><span class="chip"><b>V1.1</b>商品池与标签</span><span class="chip"><b>V1.2</b>场景化运营与成交</span><span class="chip"><b>V1.3</b>工作台精简与项目视图</span><span class="chip"><b>V1.4</b>员工商城新前端首批</span><span class="chip"><b>V1.5</b>数据底座与权限</span></td><td>V1.2 依赖 V1.1</td><td><span class="rvd">V1.2 · 11/17</span></td></tr>
+        <tr><td>V2 交付体验<small>约 12/4–12/9</small></td><td><span class="chip"><b>V2.1</b>统一展示与搜索推荐</span><span class="chip"><b>V2.2</b>员工商城 AI 助手</span><span class="chip"><b>V2.3</b>全流程埋点与报表</span><span class="chip lowc"><b>V2.4</b>到店场景 · 低优先级</span></td><td><span class="chip dep">依赖 V1.4 新前端</span></td><td><span class="rvd">V2.2 · 11/20</span></td></tr>
+        <tr><td>V3 供给连接<small>与卖家店铺同步</small></td><td><span class="chip"><b>V3.1</b>店铺底座</span><span class="chip"><b>V3.2</b>我的供应商重构</span><span class="chip"><b>V3.3</b>专供店订单工具</span><span class="chip"><b>V3.4</b>会员自营店与经营工具</span><span class="chip"><b>V3.5</b>订单与售后按店铺统一</span></td><td><span class="chip dep">依赖卖家侧店铺体系</span> V3.2–3.5 依赖 V3.1</td><td>待定</td></tr>
+        <tr><td>V4 买卖协同<small>12/31 前</small></td><td><span class="chip"><b>V4.1</b>服务商经营分析</span><span class="chip"><b>V4.2</b>店铺评分</span><span class="chip"><b>V4.3</b>专供店供货规则</span></td><td><span class="chip dep">依赖 V3 订单与履约数据</span></td><td>待定</td></tr>
       </tbody>
     </table>
   </div>
@@ -166,7 +169,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
     </article>
 
     <article class="card sub first">
-      <header><span class="sid">V1.2</span><h4>场景化运营与成交</h4><span class="side">运营端 + 会员端 · 研发：商品池、工作台</span></header>
+      <header><span class="sid">V1.2</span><h4>场景化运营与成交</h4><span class="rvd">评审 11/17</span><span class="side">运营端 + 会员端 · 研发：商品池、工作台</span></header>
       <p class="goal">运营货盘线上直达服务商，服务商自己选品、上架、代发、询价</p>
       <ul>
         <li>年货节二级场景配置，绑定规则商品池；货盘准入标准、运营推荐<small>V1-1.1、1.6</small></li>
@@ -236,7 +239,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
     <h3>业务闭环：员工找货 → 兑换 → 卡点被记录 → 服务商和运营据此调整</h3>
     <ol class="flow">
       <li><div class="st"><b>员工进商城</b><span>统一展示，不论货源</span><i>V2.1</i></div></li>
-      <li><div class="st"><b>找货</b><span>分类 / 搜索 / 推荐位 / AI 助手 / 到店</span><i>V2.1 · V2.2 · V2.4</i></div></li>
+      <li><div class="st"><b>找货</b><span>分类 / 搜索 / 推荐位 / AI 助手（到店后补）</span><i>V2.1 · V2.2</i></div></li>
       <li><div class="st"><b>加购兑换</b><span>额度内推荐，允许混合付时放宽</span><i>V2.2</i></div></li>
       <li><div class="st"><b>每一步落埋点</b><span>无结果、失败原因、流失点</span><i>V2.3</i></div></li>
       <li><div class="st"><b>服务商看兑换</b><span>登录率、额度使用率、未兑换余额</span><i>V2.3</i></div></li>
@@ -258,8 +261,8 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
       <div class="meta"><p><b>依赖</b>V1.4</p><p class="rv"><b>评审要点</b>排序规则细则（服务商置顶第二位）；推荐位不做个性化</p></div>
     </article>
 
-    <article class="card sub">
-      <header><span class="sid">V2.2</span><h4>员工商城 AI 助手</h4><span class="side">C 端 + 运营端 · 研发：AI 选品（规则设定中）</span></header>
+    <article class="card sub first">
+      <header><span class="sid">V2.2</span><h4>员工商城 AI 助手</h4><span class="rvd">评审 11/20</span><span class="side">C 端 + 运营端 · 研发：AI 选品（规则设定中）</span></header>
       <p class="goal">员工按额度快速选到商品，平台成本可控</p>
       <ul>
         <li>搜索结果页入口，进入后提示今日可对话次数<small>V2-6.1</small></li>
@@ -270,7 +273,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>次数用完自动降级为规则推荐（余额 + 相似品）<small>V2-6.10</small></li>
         <li>上线前用约 50 条问法评测<small>V2-6.8</small></li>
       </ul>
-      <div class="meta"><p><b>依赖</b>V2.1 的展示与搜索</p><p class="rv"><b>评审要点</b>次数默认值和审批标准由运营定；成本按账单 ÷ 次数事后核算</p></div>
+      <div class="meta"><p><b>依赖</b>V1.4 新前端的搜索结果页；V2.1 的排序规则可后补，不阻塞评审</p><p class="rv"><b>评审要点</b>次数默认值和审批标准由运营定；成本按账单 ÷ 次数事后核算</p></div>
     </article>
 
     <article class="card sub">
@@ -287,14 +290,14 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
     </article>
 
     <article class="card sub">
-      <header><span class="sid">V2.4</span><h4>到店场景</h4><span class="side">C 端 · 企业码模块对接</span></header>
+      <header><span class="sid">V2.4</span><h4>到店场景</h4><span class="low">低优先级</span><span class="side">C 端 · 企业码模块对接</span></header>
       <p class="goal">开通企业码到店的商城，员工能找到线下商家并付款</p>
       <ul>
         <li>展示到店商家列表；未开通的商城不显示入口<small>V2-7.1</small></li>
         <li>点击打开支付宝企业码收款码；消费和开票仍在企业码模块<small>V2-7.2</small></li>
         <li>到店曝光、点击、跳转埋点<small>V2-7.3</small></li>
       </ul>
-      <div class="meta"><p><b>依赖</b>V1.4</p><p class="rv"><b>评审要点</b>商家列表来自接口还是运营配置</p></div>
+      <div class="meta"><p><b>依赖</b>V1.4</p><p><b>排期</b>V2 资源不够时整体后移，不影响 V2 门槛</p><p class="rv"><b>评审要点</b>商家列表来自接口还是运营配置</p></div>
     </article>
   </div>
 </section>
