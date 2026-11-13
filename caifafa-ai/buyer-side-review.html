@@ -87,6 +87,12 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 .rvd { display:inline-block; font-size:11.5px; font-weight:600; background:var(--fire); color:#fff; border-radius:6px; padding:1px 8px; }
 .low { display:inline-block; font-size:11.5px; background:var(--line); color:var(--muted); border-radius:6px; padding:1px 8px; }
 .chip.lowc { background:var(--line); color:var(--muted); }
+.sched { display:grid; grid-template-columns: repeat(5, auto); gap:2px 10px; font-size:11.5px; background:#F7FAFA; border-radius:8px; padding:6px 10px; justify-content:start; }
+.sched span { color:var(--muted); }
+.sched b { display:block; color:var(--ink); font-size:12.5px; font-weight:600; font-family:var(--font-mono); }
+.sched.none { display:block; color:var(--fire-900); background:var(--fire-50); font-size:12.5px; }
+.tbd { font-style:normal; font-size:11px; color:var(--fire-900); background:var(--fire-50); border-radius:4px; padding:0 5px; margin-left:4px; }
+del { color:var(--muted); }
 .lbl { font-size: 11.5px; font-weight: 600; color: var(--muted); }
 
 .cross { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -107,9 +113,9 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 <main class="wrap">
 
 <header class="head">
-  <p class="eyebrow"><b>采发发 88buys</b><span>买家侧 · 产品规划评审版</span><span>2026-11-12 · 按 11/11–11/12 会议口径</span><span>已定评审：V1.2 场景化运营 11/17 · V2.2 AI 助手 11/20</span></p>
+  <p class="eyebrow"><b>采发发 88buys</b><span>买家侧 · 产品规划评审版</span><span>2026-11-12 · 按 11/11–11/12 会议口径</span><span>按 11/13 与研发对齐的节奏同步</span></p>
   <h1>四个版本、十七个小版本：每个小版本是一个<em>能独立评审、独立开发、独立上线</em>的业务模块</h1>
-  <p class="lead">每个版本先说清它要跑通的业务闭环，再按业务模块拆成小版本。小版本按依赖顺序进入评审：上一个小版本评审通过，下一个才开始出方案；同一版本内没有依赖的小版本可以并行开发。</p>
+  <p class="lead">节奏按 11/13 与研发对齐的初步排期：V1 最晚 12/8 测完，V2 12/18 测完，V3 已排期部分 12/26 测完，V4 放到 Q1。每个版本先说清它要跑通的业务闭环，再按业务模块拆成小版本。小版本按依赖顺序进入评审：上一个小版本评审通过，下一个才开始出方案；同一版本内没有依赖的小版本可以并行开发。</p>
   <div class="rules">
     <span><b>拆分原则</b>一个小版本 = 一个业务模块的一段完整流程</span>
     <span><b>评审单位</b>小版本，不按功能点零散评审</span>
@@ -121,12 +127,12 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
   <div class="sec-head"><span class="sec-no">00</span><h2 id="s0">总览：版本 × 小版本</h2><span class="sec-note">橙色是跨版本依赖</span></div>
   <div class="card tbl-wrap">
     <table class="mx">
-      <thead><tr><th>版本</th><th>小版本（评审与开发单位）</th><th>依赖</th><th>已定评审时间</th></tr></thead>
+      <thead><tr><th>版本</th><th>小版本（评审与开发单位）</th><th>依赖</th><th>节奏（评审 → 测试完成）</th></tr></thead>
       <tbody>
-        <tr><td>V1 存量激活<small>11/20</small></td><td><span class="chip"><b>V1.1</b>商品池与标签</span><span class="chip"><b>V1.2</b>场景化运营与成交</span><span class="chip"><b>V1.3</b>工作台精简与项目视图</span><span class="chip"><b>V1.4</b>员工商城新前端首批</span><span class="chip"><b>V1.5</b>数据底座与权限</span></td><td>V1.2 依赖 V1.1</td><td><span class="rvd">V1.2 · 11/17</span></td></tr>
-        <tr><td>V2 交付体验<small>约 12/4–12/9</small></td><td><span class="chip"><b>V2.1</b>统一展示与搜索推荐</span><span class="chip"><b>V2.2</b>员工商城 AI 助手</span><span class="chip"><b>V2.3</b>全流程埋点与报表</span><span class="chip lowc"><b>V2.4</b>到店场景 · 低优先级</span></td><td><span class="chip dep">依赖 V1.4 新前端</span></td><td><span class="rvd">V2.2 · 11/20</span></td></tr>
-        <tr><td>V3 供给连接<small>与卖家店铺同步</small></td><td><span class="chip"><b>V3.1</b>店铺底座</span><span class="chip"><b>V3.2</b>我的供应商重构</span><span class="chip"><b>V3.3</b>专供店订单工具</span><span class="chip"><b>V3.4</b>会员自营店与经营工具</span><span class="chip"><b>V3.5</b>订单与售后按店铺统一</span></td><td><span class="chip dep">依赖卖家侧店铺体系</span> V3.2–3.5 依赖 V3.1</td><td>待定</td></tr>
-        <tr><td>V4 买卖协同<small>12/31 前</small></td><td><span class="chip"><b>V4.1</b>服务商经营分析</span><span class="chip"><b>V4.2</b>店铺评分</span><span class="chip"><b>V4.3</b>专供店供货规则</span></td><td><span class="chip dep">依赖 V3 订单与履约数据</span></td><td>待定</td></tr>
+        <tr><td>V1 存量激活<small>测完 12/8</small></td><td><span class="chip"><b>V1.1</b>商品池与标签</span><span class="chip"><b>V1.2</b>场景化运营与成交</span><span class="chip"><b>V1.3</b>工作台精简与项目视图</span><span class="chip"><b>V1.4</b>员工商城新前端首批</span><span class="chip"><b>V1.5</b>数据底座与权限 · P1</span></td><td>V1.2 依赖 V1.1</td><td style="font-size:12.5px;line-height:1.7">V1.1 11/10 → 11/24<br>V1.2 11/17 → 12/8<br>V1.3 11/20 → 12/3<br>V1.4 11/6 → 11/26<br>V1.5 11/23 → 11/30 提测</td></tr>
+        <tr><td>V2 交付体验<small>测完 12/18</small></td><td><span class="chip"><b>V2.1</b>统一展示与搜索推荐</span><span class="chip"><b>V2.2</b>员工商城 AI 助手</span><span class="chip"><b>V2.3</b>全流程埋点与报表</span><span class="chip lowc"><b>V2.4</b>到店场景 · 低优先级</span></td><td><span class="chip dep">依赖 V1.4 新前端</span></td><td style="font-size:12.5px;line-height:1.7">V2.1 11/19 → 12/10 提测<br>V2.2 11/20 → 12/18<br>V2.3 11/23 → 11/30 提测<br>V2.4 待定</td></tr>
+        <tr><td>V3 供给连接<small>12/1 评审 · 12/26 测完</small></td><td><span class="chip"><b>V3.1</b>店铺底座</span><span class="chip"><b>V3.2</b>我的供应商重构</span><span class="chip"><b>V3.3</b>专供店订单工具</span><span class="chip"><b>V3.4</b>会员自营店与经营工具</span><span class="chip"><b>V3.5</b>订单与售后按店铺统一</span></td><td><span class="chip dep">依赖卖家侧店铺体系</span> V3.2–3.5 依赖 V3.1</td><td style="font-size:12.5px;line-height:1.7">V3.2 / V3.4 / V3.5：12/1 → 12/26<br><span style="color:var(--fire-900)">V3.1、V3.3 未排期</span></td></tr>
+        <tr><td>V4 买卖协同<small>Q1</small></td><td><span class="chip"><b>V4.1</b>服务商经营分析</span><span class="chip"><b>V4.2</b>店铺评分</span><span class="chip"><b>V4.3</b>专供店供货规则</span></td><td><span class="chip dep">依赖 V3 订单与履约数据</span></td><td>Q1</td></tr>
       </tbody>
     </table>
   </div>
@@ -135,9 +141,9 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 <!-- ================= V1 ================= -->
 <section class="sec ver" aria-labelledby="v1">
   <div class="ver-head v1">
-    <span class="vid">V1 · 11/20</span><h2 id="v1">存量激活版</h2>
+    <span class="vid">V1 · 测完 12/8</span><h2 id="v1">存量激活版</h2>
     <p class="strat">战略目标：守住存量服务商的年货节订单，把订单、项目、店铺数据沉到平台，作为后面所有版本的数据底座。</p>
-    <p class="gate">门槛：存量订单数与 GMV、货盘上架商城数、自助询价数、信息完整的项目占比</p>
+    <p class="gate">门槛：存量订单数与 GMV、货盘上架商城数、自助询价数、信息完整的项目占比（项目字段带入已取消，此项待调整）</p>
   </div>
 
   <div class="card loop">
@@ -145,7 +151,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
     <ol class="flow">
       <li><div class="st"><b>运营组货盘</b><span>商品池规则 + 标签圈货，按稳定性筛选</span><i>V1.1</i></div></li>
       <li><div class="st"><b>发布场景</b><span>年货节二级场景，按预算档位组货</span><i>V1.2</i></div></li>
-      <li><div class="st"><b>服务商取货</b><span>工作台、站点装修里看到货盘并筛选</span><i>V1.2</i></div></li>
+      <li><div class="st"><b>服务商取货</b><span>工作台里看到货盘并筛选</span><i>V1.3</i></div></li>
       <li><div class="st"><b>成交</b><span>一键上架 / 代发 / 加购 / 询价，预付款扣款</span><i>V1.2</i></div></li>
       <li><div class="st"><b>员工兑换</b><span>新购物车、分类、个人中心</span><i>V1.4</i></div></li>
       <li><div class="st"><b>订单落数</b><span>带来源、项目、店铺字段</span><i>V1.5</i></div></li>
@@ -162,39 +168,41 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>商品池关联运营应用（场景、货盘），规则驱动自动上下架<small>V1-1.1</small></li>
         <li>猫超、京东字段按清单导入补充，人工字段不被同步覆盖<small>V1-6.1–6.3</small></li>
         <li>补充字段转为商品标签、营销标签，可作选品规则条件<small>V1-6.2</small></li>
-        <li>标签管理：增删改、营销标签有效期<small>V1-6.4</small></li>
+        <li>标签管理：增删改<small>V1-6.4</small></li>
         <li>导入校验与失败明细；新渠道按同一模板接入<small>V1-6.5–6.6</small></li>
       </ul>
+      <div class="sched"><span>评审<b>11/10</b></span><span>开发<b style="font-family:var(--font-body)">磐璃</b></span><span>提测<b>11/12–11/18</b></span><span>测试<b style="font-family:var(--font-body)">汤圆、雪雪</b></span><span>测完 · P0<b>11/17–11/24</b></span></div>
       <div class="meta"><p><b>依赖</b>无</p><p class="rv"><b>评审要点</b>稳定性筛选字段的阈值由谁定；人工字段与渠道同步冲突时以谁为准</p></div>
     </article>
 
     <article class="card sub first">
-      <header><span class="sid">V1.2</span><h4>场景化运营与成交</h4><span class="rvd">评审 11/17</span><span class="side">运营端 + 会员端 · 研发：商品池、工作台</span></header>
+      <header><span class="sid">V1.2</span><h4>场景化运营与成交</h4><span class="side">运营端 + 会员端 · 研发：商品池、工作台</span></header>
       <p class="goal">运营货盘线上直达服务商，服务商自己选品、上架、代发、询价</p>
       <ul>
         <li>年货节二级场景配置，绑定规则商品池；货盘准入标准、运营推荐<small>V1-1.1、1.6</small></li>
         <li>场景首页与商品页：会员价、市场价、市场价利润率，不露接口价<small>V1-1.2</small></li>
-        <li>货盘筛选；货盘入口进会员工作台和站点装修选品<small>V1-1.5、V1-9</small></li>
-        <li>一键上架（兼容全部货源，加价规则与定价策略分开）<small>V1-2.3、2.6</small></li>
+                <li>一键上架（兼容全部货源，加价规则与定价策略分开）<small>V1-2.3、2.6</small></li>
         <li>一键代发、加购结算，统一从预付款扣款<small>V1-2.1、2.2、2.7</small></li>
         <li>一键询价：选商城（或还没建商城），必填数量、预算、交付时间、客户类型<small>V1-2.4</small></li>
-        <li>阿里权益默认同品替换为会员自营店（走会员企业支付宝）<small>V1-1.3</small></li>
-        <li>东方甄选接入年货节货盘（挂在飞象自营下）<small>V1-1.7</small></li>
+                <li>东方甄选接入年货节货盘（挂在飞象自营下）<small>V1-1.7</small><em class="tbd">单独排期：11/16 评审 · 成武 · 11/30 测完</em></li>
       </ul>
+      <div class="sched"><span>评审<b>11/17</b></span><span>开发<b style="font-family:var(--font-body)">磐璃、向阳、大兵</b></span><span>提测<b>11/30</b></span><span>测试<b style="font-family:var(--font-body)">知夏、汤圆、雪雪</b></span><span>测完 · P0<b>12/8</b></span></div>
       <div class="meta"><p><b>依赖</b>V1.1</p><p class="rv"><b>评审要点</b>现有找货搜索能否覆盖场景货盘；线下表格何时停用</p></div>
     </article>
 
     <article class="card sub">
       <header><span class="sid">V1.3</span><h4>工作台精简与项目视图</h4><span class="side">会员端 · 研发：工作台精简改版（设计中）</span></header>
-      <p class="goal">服务商以项目为中心管理商城、询价和订单</p>
+      <p class="goal">工作台先精简、接上货盘入口；项目视图先出方案，暂不排期</p>
       <ul>
         <li>代发售后功能补充；代发入口合并<small>V1-5.7、5.8</small></li>
         <li>隐藏无用功能、栏目调整、迁移指引<small>V1-5.3、5.9、5.10</small></li>
-        <li>存量商城自动生成项目，项目名用商城名<small>V1-4.2</small></li>
-        <li>项目列表、项目详情（商城 / 询价 / 订单 / 经营数据）<small>V1-5.4、5.5、V1-3</small></li>
-        <li>从项目发起建商城、选品上架、询价<small>V1-5.6</small></li>
+        <li>货盘筛选；货盘入口进会员工作台<small>V1-1.5、V1-9</small><em class="tbd">大兵 · 12/1 测完</em></li>
+        <li>存量商城自动生成项目，项目名用商城名<small>V1-4.2</small><em class="tbd">P2 · 待定</em></li>
+        <li>项目列表、项目详情（商城 / 询价 / 订单 / 经营数据）<small>V1-5.4、5.5、V1-3</small><em class="tbd">未排期</em></li>
+        <li>从项目发起建商城、选品上架、询价<small>V1-5.6</small><em class="tbd">未排期</em></li>
         <li>年货节场景置顶<small>V1-5.1</small></li>
       </ul>
+      <div class="sched"><span>评审<b>11/20</b></span><span>开发<b style="font-family:var(--font-body)">忽夕、峰云、大兵</b></span><span>提测<b>11/26–11/30</b></span><span>测试<b style="font-family:var(--font-body)">知夏、汤圆</b></span><span>测完 · P0（项目部分 P2）<b>11/27–12/3</b></span></div>
       <div class="meta"><p><b>依赖</b>V1.5 的项目字段</p><p class="rv"><b>评审要点</b>项目详情只聚合已有数据，不新增业务逻辑；合并项目的入口放哪</p></div>
     </article>
 
@@ -208,6 +216,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>新旧前端登录态和跳转无缝<small>V1-7.4</small></li>
         <li>接入统一埋点框架，带新旧前端标记<small>V1-7.5</small></li>
       </ul>
+      <div class="sched"><span>评审<b>11/6</b></span><span>开发<b style="font-family:var(--font-body)">飞鱼、忽夕、大兵、峰云；埋点 巴韶</b></span><span>提测<b>11/19</b></span><span>测试<b style="font-family:var(--font-body)">雪雪、子清</b></span><span>测完 · P0<b>11/26</b></span></div>
       <div class="meta"><p><b>依赖</b>无</p><p class="rv"><b>评审要点</b>灰度站点名单；回退的触发条件</p></div>
     </article>
 
@@ -217,11 +226,12 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
       <ul>
         <li>订单来源与货源类型字段，按加购入口归因<small>V1-4.7</small></li>
         <li>预留店铺编号、店铺类型字段，现有货源先映射<small>V1-4.9</small></li>
-        <li>项目字段、询价信息带入项目、价格带自动计算<small>V1-4.1、4.3、4.4</small></li>
+        <li><del>项目字段、询价信息带入项目</del>、价格带自动计算<small>V1-4.1、4.3、4.4</small></li>
         <li>数据权限：不存终端企业联系方式、明细权限、客户名称脱敏<small>V1-10.1–10.3</small></li>
         <li>访问留痕、页面水印<small>V1-10.4、10.5</small></li>
-        <li>V1 门槛周报</li>
+        <li>V1 门槛周报<em class="tbd">待定</em></li>
       </ul>
+      <div class="sched"><span>评审<b>11/23</b></span><span>开发<b style="font-family:var(--font-body)">金洋、老罗</b></span><span>提测<b>11/30</b></span><span>测试<b style="font-family:var(--font-body)">未定</b></span><span>测完 · P1<b>未定</b></span></div>
       <div class="meta"><p><b>依赖</b>无（V1.2、V1.3 都依赖它，需最先排期）</p><p class="rv"><b>评审要点</b>店铺类型映射口径与卖家侧对齐（按三种店铺）；周报指标定义</p></div>
     </article>
   </div>
@@ -230,7 +240,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 <!-- ================= V2 ================= -->
 <section class="sec ver" aria-labelledby="v2">
   <div class="ver-head">
-    <span class="vid">V2 · 约 12/4–12/9</span><h2 id="v2">交付体验版</h2>
+    <span class="vid">V2 · 测完 12/18</span><h2 id="v2">交付体验版</h2>
     <p class="strat">战略目标：把员工商城和场景商城做到最好，让交付质量成为服务商留在平台的理由。</p>
     <p class="gate">门槛：兑换转化率、搜索无结果率、P0 埋点覆盖率、AI 采纳率与每次对话成本</p>
   </div>
@@ -252,17 +262,18 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
       <header><span class="sid">V2.1</span><h4>统一展示与搜索推荐</h4><span class="side">C 端 · 研发：BBC 重构 V2、标签管理</span></header>
       <p class="goal">员工搜得到、看得懂</p>
       <ul>
-        <li>全货源统一商品卡与详情模板；关键样式固定<small>V2-1.1、1.2</small></li>
-        <li>标签联动商城详情；京东营销组件；订单样式优化<small>V2-1.3–1.5</small></li>
-        <li>搜索：类目约束、纠错同义词、无结果兜底、综合排序<small>V2-2.1–2.3</small></li>
+        <li>全货源（京东、猫超、优品）统一商品卡与详情模板；关键样式固定<small>V2-1.1、1.2</small></li>
+        <li>标签联动商品详情；京东营销组件；订单样式优化<small>V2-1.3–1.5</small></li>
+        <li>搜索：类目约束、无结果兜底、综合排序<small>V2-2.1–2.3</small><em class="tbd">大兵、政霖 · 11/24 提测</em></li>
         <li>热词与联想；首页、详情、购物车、无结果页推荐位<small>V2-2.5、2.6</small></li>
         <li>可售地区：没有收货地址时按商城默认三级地址</li>
       </ul>
+      <div class="sched"><span>评审<b>11/19</b></span><span>开发<b style="font-family:var(--font-body)">飞鱼、大兵、忽夕、政霖</b></span><span>提测<b>11/24–12/10</b></span><span>测试<b style="font-family:var(--font-body)">雪雪、汤圆、知夏、子清</b></span><span>测完 · P0<b>未定</b></span></div>
       <div class="meta"><p><b>依赖</b>V1.4</p><p class="rv"><b>评审要点</b>排序规则细则（服务商置顶第二位）；推荐位不做个性化</p></div>
     </article>
 
     <article class="card sub first">
-      <header><span class="sid">V2.2</span><h4>员工商城 AI 助手</h4><span class="rvd">评审 11/20</span><span class="side">C 端 + 运营端 · 研发：AI 选品（规则设定中）</span></header>
+      <header><span class="sid">V2.2</span><h4>员工商城 AI 助手</h4><span class="side">C 端 + 运营端 · 研发：AI 选品（规则设定中）</span></header>
       <p class="goal">员工按额度快速选到商品，平台成本可控</p>
       <ul>
         <li>搜索结果页入口，进入后提示今日可对话次数<small>V2-6.1</small></li>
@@ -270,9 +281,10 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>推荐结果直接加购或兑换；无结果回退搜索和分类<small>V2-6.3、6.6</small></li>
         <li>服务商按项目申请，运营在后台审批<small>V2-6.4</small></li>
         <li>按对话次数管控：项目总次数、每人每天、追问不计次、复用结果<small>V2-6.9</small></li>
-        <li>次数用完自动降级为规则推荐（余额 + 相似品）<small>V2-6.10</small></li>
-        <li>上线前用约 50 条问法评测<small>V2-6.8</small></li>
+        <li>次数用完提示下次可用时间（不再降级为规则推荐）<small>V2-6.10</small></li>
+        <li>上线前用约 50 条问法评测<small>V2-6.8</small><em class="tbd">云程、三院、nico</em></li>
       </ul>
+      <div class="sched"><span>评审<b>11/20</b></span><span>开发<b style="font-family:var(--font-body)">云程、老罗、峰云</b></span><span>提测<b>12/11</b></span><span>测试<b style="font-family:var(--font-body)">子清、汤圆</b></span><span>测完 · P0<b>12/18</b></span></div>
       <div class="meta"><p><b>依赖</b>V1.4 新前端的搜索结果页；V2.1 的排序规则可后补，不阻塞评审</p><p class="rv"><b>评审要点</b>次数默认值和审批标准由运营定；成本按账单 ÷ 次数事后核算</p></div>
     </article>
 
@@ -286,6 +298,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>内部漏斗、流失统计报表<small>V2-5.10、5.11</small></li>
         <li>项目详情增加兑换情况（服务商可见）</li>
       </ul>
+      <div class="sched"><span>评审<b>11/23</b></span><span>开发<b style="font-family:var(--font-body)">金洋、巴韶</b></span><span>提测<b>11/30</b></span><span>测试<b style="font-family:var(--font-body)">未定</b></span><span>测完 · P0<b>未定</b></span></div>
       <div class="meta"><p><b>依赖</b>V1.4 埋点框架</p><p class="rv"><b>评审要点</b>报表由谁看、多久看一次；流失原因的枚举</p></div>
     </article>
 
@@ -297,6 +310,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>点击打开支付宝企业码收款码；消费和开票仍在企业码模块<small>V2-7.2</small></li>
         <li>到店曝光、点击、跳转埋点<small>V2-7.3</small></li>
       </ul>
+      <div class="sched none">未排期 · 低优先级</div>
       <div class="meta"><p><b>依赖</b>V1.4</p><p><b>排期</b>V2 资源不够时整体后移，不影响 V2 门槛</p><p class="rv"><b>评审要点</b>商家列表来自接口还是运营配置</p></div>
     </article>
   </div>
@@ -305,7 +319,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 <!-- ================= V3 ================= -->
 <section class="sec ver" aria-labelledby="v3">
   <div class="ver-head">
-    <span class="vid">V3 · 与卖家店铺同步</span><h2 id="v3">供给连接版</h2>
+    <span class="vid">V3 · 12/1 评审 · 12/26 测完</span><h2 id="v3">供给连接版</h2>
     <p class="strat">战略目标：让服务商和自有供应商之间的订单在平台上流转，搭起订单与供应链网络的第一层。先做工具，不急着成交。</p>
     <p class="gate">门槛：开通专供店的供应商数、经专供店流转的订单数、日均单量</p>
   </div>
@@ -330,12 +344,11 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
       <header><span class="sid">V3.1</span><h4>店铺底座</h4><span class="side">全端 · 与卖家侧共用一套</span></header>
       <p class="goal">三种店铺类型落地，后面所有小版本的地基</p>
       <ul>
-        <li>三种店铺类型：平台自营店、会员自营店、商家专供店</li>
-        <li>现有频道归为飞象自营店（自营精选、京东、猫超）；东方甄选挂在自营店下</li>
+                <li>现有频道归为飞象自营店（自营精选、京东、猫超）；东方甄选挂在自营店下</li>
         <li>V1 预留的店铺字段正式启用，历史数据迁移</li>
         <li>同一商品在不同店铺的 SKU 一一映射</li>
-        <li>会员端、运营端展示店铺；员工商城不显示店铺</li>
-      </ul>
+              </ul>
+      <div class="sched none">未排期 · 但 V3.2–V3.5 都依赖它，最晚 12/1 前要定方案</div>
       <div class="meta"><p><b>依赖</b>卖家侧店铺体系</p><p class="rv"><b>评审要点</b>与阿胜对齐店铺数据结构；标准商品参数库的字段先按目标结构设计</p></div>
     </article>
 
@@ -347,8 +360,9 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>供应商接受后开专供店（需认证），对该服务商可见</li>
         <li>商城模式：看到自营店和各家专供店，进店选货、上架</li>
         <li>未认证时的功能限制与认证提醒</li>
-        <li>存量供应商账号的迁移引导</li>
+        <li>存量供应商账号的迁移引导（迁移策略）<em class="tbd">未排人</em></li>
       </ul>
+      <div class="sched"><span>评审<b>12/1</b></span><span>开发<b style="font-family:var(--font-body)">磐璃、向阳、大兵</b></span><span>提测<b>—</b></span><span>测试<b style="font-family:var(--font-body)">—</b></span><span>测完 · P0（待与卖家侧确认）<b>12/26</b></span></div>
       <div class="meta"><p><b>依赖</b>V3.1</p><p class="rv"><b>评审要点</b>邀请链接机制细节（卖家侧待补）；存量账号迁移节奏</p></div>
     </article>
 
@@ -356,11 +370,12 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
       <header><span class="sid">V3.3</span><h4>专供店订单工具</h4><span class="side">会员端 + 卖家侧</span></header>
       <p class="goal">服务商和供应商之间不再在微信群里对单</p>
       <ul>
-        <li>服务商下单后，订单自动分发到供应商店铺</li>
+        <li>服务商下单后，订单自动分发到供应商店铺（接口调整）</li>
         <li>供应商回传发货和物流，服务商实时可见</li>
         <li>接入开票服务，发票在平台可查、一键开通</li>
         <li>订单服务费计费；邀请赠送额度预留</li>
       </ul>
+      <div class="sched none">未排期 · 等卖家侧确认</div>
       <div class="meta"><p><b>依赖</b>V3.1、V3.2</p><p class="rv"><b>评审要点</b>订单服务费买卖两端各收多少；不碰资金的边界</p></div>
     </article>
 
@@ -373,6 +388,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>自营店商品可一键导入专供店，给其他会员供货</li>
         <li>记录采购成本，自动算差价、毛利；订单统计</li>
       </ul>
+      <div class="sched"><span>评审<b>12/1</b></span><span>开发<b style="font-family:var(--font-body)">磐璃、向阳、峰云</b></span><span>提测<b>—</b></span><span>测试<b style="font-family:var(--font-body)">—</b></span><span>测完 · P0<b>12/26</b></span></div>
       <div class="meta"><p><b>依赖</b>V3.1</p><p class="rv"><b>评审要点</b>采购成本的录入方式（手填 / 从专供店订单带出）；自营店是否收费</p></div>
     </article>
 
@@ -382,9 +398,10 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
       <ul>
         <li>购物车按店铺分组，订单按店铺拆单<small>V3-7</small></li>
         <li>订单列表与详情统一；售后统一（含猫超取消退款）<small>V3-7.2、7.3</small></li>
-        <li>无货时推荐其他店铺的同款或相似品，一键替换<small>V3-8.1</small></li>
+        <li>无货时推荐其他店铺的同款或相似品，一键替换<small>V3-8.1</small><em class="tbd">P2</em></li>
         <li>场景混入：出方案时可加入自营店、专供店的货，仅自己可见<small>V3-10.3</small></li>
       </ul>
+      <div class="sched"><span>评审<b>12/1</b></span><span>开发<b style="font-family:var(--font-body)">飞鱼</b></span><span>提测<b>—</b></span><span>测试<b style="font-family:var(--font-body)">—</b></span><span>测完 · P0<b>12/26</b></span></div>
       <div class="meta"><p><b>依赖</b>V3.1</p><p class="rv"><b>评审要点</b>拆单后的开票和售后责任方</p></div>
     </article>
   </div>
@@ -393,7 +410,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 <!-- ================= V4 ================= -->
 <section class="sec ver" aria-labelledby="v4">
   <div class="ver-head">
-    <span class="vid">V4 · 12/31 前</span><h2 id="v4">买卖协同版</h2>
+    <span class="vid">V4 · Q1</span><h2 id="v4">买卖协同版</h2>
     <p class="strat">战略目标：用订单数据把买卖双方连得更紧：服务商看懂哪些货和供应商在赚钱，供应商看到自己的履约表现。</p>
     <p class="gate">门槛：经营分析使用率、店铺评分覆盖率、专供店订单的发货回传率</p>
   </div>
@@ -419,6 +436,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>复用项目视图和经营概览，不新建看板</li>
         <li>平台内部月度复盘：网络规模、订单结构<small>V4-6.4</small></li>
       </ul>
+      <div class="sched none">Q1 · P1</div>
       <div class="meta"><p><b>依赖</b>V3.4 的成本数据</p><p class="rv"><b>评审要点</b>毛利口径与 V3.4 一致</p></div>
     </article>
 
@@ -430,6 +448,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>会员端选货、货盘里展示评分<small>V4-5.2</small></li>
         <li>评分规则公示，供应商可看扣分项<small>V4-5.3</small></li>
       </ul>
+      <div class="sched none">Q1 · P1</div>
       <div class="meta"><p><b>依赖</b>V3.3 的发货回传</p><p class="rv"><b>评审要点</b>样本不足的店铺怎么显示</p></div>
     </article>
 
@@ -441,6 +460,7 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
         <li>服务商只看到对自己开放的商品和价格</li>
         <li>给卖家的数据：订单、履约表现、需求汇总（脱敏白名单）<small>V4-2.4、6.2</small></li>
       </ul>
+      <div class="sched none">Q1 · P1</div>
       <div class="meta"><p><b>依赖</b>V3.1、V3.3</p><p class="rv"><b>评审要点</b>定价配置做多细（会议要求不要做太满）</p></div>
     </article>
   </div>
@@ -473,14 +493,19 @@ th { font-weight: 600; color: var(--water-700); background: #F7FAFA; white-space
 </section>
 
 <section class="sec" aria-labelledby="s6">
-  <div class="sec-head"><span class="sec-no">06</span><h2 id="s6">评审前需要确认</h2></div>
+  <div class="sec-head"><span class="sec-no">06</span><h2 id="s6">评审前需要确认</h2><span class="sec-note">前 6 项来自 11/13 研发节奏</span></div>
   <div class="card tbl-wrap">
     <table class="todo">
-      <thead><tr><th>事项</th><th>影响的小版本</th><th>当前处理</th></tr></thead>
+      <thead><tr><th>事项</th><th>影响的小版本</th><th>建议</th></tr></thead>
       <tbody>
-        <tr><td>专供店的排期</td><td>V3.2、V3.3</td><td>按 11/12 会议放在 V3；与卖家侧对齐后如仍在 Q1，V3.2、V3.3 整体后移</td></tr>
-        <tr><td>返点活动</td><td>原 V3-9</td><td>钱票税方案未定，整体挪到 Q1</td></tr>
-        <tr><td>项目供货价</td><td>原 V4-1</td><td>招商供应商挂在飞象自营店下，暂不做；差异价由 V4.3 供货规则承接</td></tr>
+        <tr><td>店铺底座未排期</td><td>V3.1 → V3.2–3.5</td><td>V3 三个小版本 12/1 评审，店铺类型和店铺字段方案最晚 12/1 前定；“三种店铺类型”任务已删除，需补回或写明由卖家侧承担</td></tr>
+        <tr><td>项目这条线基本空了</td><td>V1.3、V1.5、V1 门槛</td><td>项目字段带入已取消、项目视图未排期；V1 门槛去掉“信息完整的项目占比”，或至少保留询价时选商城、填客户类型的数据</td></tr>
+        <tr><td>订单来源字段是 P1</td><td>V1.5、V1.2</td><td>与场景化运营同在 11/30 提测；建议升 P0、同批上线，否则年货节首批订单分不出来源，门槛周报也做不了</td></tr>
+        <tr><td>阿里权益替换移出 V1</td><td>V1.2、V3.4</td><td>年货节期间阿里权益商品按现状展示，需告知运营</td></tr>
+        <tr><td>专供店订单工具等卖家侧</td><td>V3.3、V3 门槛</td><td>若到 Q1，V3 门槛改为开通邀请的供应商数、自营店下单数</td></tr>
+        <tr><td>缺测试人员</td><td>V1.5、V2.3、V1.4 埋点</td><td>补测试人员和测完时间</td></tr>
+        <tr><td>返点活动</td><td>原 V3-9</td><td>钱票税方案未定，整体在 Q1</td></tr>
+        <tr><td>项目供货价</td><td>原 V4-1</td><td>暂不做；差异价由 V4.3 供货规则承接</td></tr>
         <tr><td>自有供应商数据</td><td>V3 门槛</td><td>老罗出数：开通账号数与供应商家数、有订单的供应商数、动销品类</td></tr>
       </tbody>
     </table>
