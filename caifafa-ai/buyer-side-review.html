@@ -102,6 +102,12 @@ del { color:var(--muted); }
 .chip.unc { background:#F3F4F6; color:#9CA3AF; border:1px dashed #D1D5DB; }
 .flow li.un .st { background:#F3F4F6; border-style:dashed; color:#9CA3AF; }
 .flow li.un .st b { color:#9CA3AF; }
+.split { width:100%; border-collapse:collapse; font-size:13px; }
+.split th { background:#F7FAFA; }
+.split td:first-child { font-weight:600; white-space:nowrap; }
+.flow li.seller .st { background:#fff; border-style:dashed; border-color:var(--fire); }
+.flow li.seller .st i { color:var(--muted); }
+ol.qs { margin:0; padding-left:20px; display:grid; gap:4px; font-size:13.5px; }
 .lbl { font-size: 11.5px; font-weight: 600; color: var(--muted); }
 
 .cross { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -141,8 +147,8 @@ del { color:var(--muted); }
       <tbody>
         <tr><td>V1 存量激活<small>测完 12/8</small></td><td><span class="chip"><b>V1.1</b>商品池与标签</span><span class="chip"><b>V1.2</b>场景化运营与成交</span><span class="chip"><b>V1.3</b>工作台精简与项目视图</span><span class="chip"><b>V1.4</b>员工商城新前端首批</span><span class="chip"><b>V1.5</b>数据底座与权限 · P1</span></td><td>V1.2 依赖 V1.1</td><td style="font-size:12.5px;line-height:1.7">V1.1 11/10 → 11/24<br>V1.2 11/17 → 12/8<br>V1.3 11/20 → 12/3<br>V1.4 11/6 → 11/26<br>V1.5 11/23 → 11/30 提测</td></tr>
         <tr><td>V2 交付体验<small>测完 12/18</small></td><td><span class="chip"><b>V2.1</b>统一展示与搜索推荐</span><span class="chip"><b>V2.2</b>员工商城 AI 助手</span><span class="chip"><b>V2.3</b>全流程埋点与报表</span><span class="chip unc"><b>V2.4</b>到店场景 · 低优先级</span></td><td><span class="chip dep">依赖 V1.4 新前端</span></td><td style="font-size:12.5px;line-height:1.7">V2.1 11/19 → 12/10 提测<br>V2.2 11/20 → 12/18<br>V2.3 11/23 → 11/30 提测<br>V2.4 待定</td></tr>
-        <tr><td>V3 供给连接<small>12/1 评审 · 12/26 测完</small></td><td><span class="chip unc"><b>V3.1</b>店铺底座</span><span class="chip"><b>V3.2</b>我的供应商重构</span><span class="chip unc"><b>V3.3</b>专供店订单工具</span><span class="chip"><b>V3.4</b>会员自营店与经营工具</span><span class="chip"><b>V3.5</b>订单与售后按店铺统一</span></td><td><span class="chip dep">依赖卖家侧店铺体系</span> V3.2–3.5 依赖 V3.1</td><td style="font-size:12.5px;line-height:1.7">V3.2 / V3.4 / V3.5：12/1 → 12/26<br><span style="color:var(--fire-900)">V3.1、V3.3 未排期</span></td></tr>
-        <tr><td>V4 买卖协同<small>Q1</small></td><td><span class="chip unc"><b>V4.1</b>服务商经营分析</span><span class="chip unc"><b>V4.2</b>店铺评分</span><span class="chip unc"><b>V4.3</b>专供店供货规则</span></td><td><span class="chip dep">依赖 V3 订单与履约数据</span></td><td>Q1</td></tr>
+        <tr><td>V3 供给连接<small>12/1 评审 · 12/26 测完</small></td><td><span class="chip unc"><b>V3.1</b>接入卖家店铺与商品</span><span class="chip"><b>V3.2</b>我的供应商重构</span><span class="chip unc"><b>V3.3</b>专供合作（买家侧）</span><span class="chip"><b>V3.4</b>会员自营店与经营工具</span><span class="chip"><b>V3.5</b>订单与售后按店铺统一</span></td><td><span class="chip dep">依赖卖家 1.0 · 2.0</span> V3.2–3.5 依赖 V3.1</td><td style="font-size:12.5px;line-height:1.7">V3.2 / V3.4 / V3.5：12/1 → 12/26<br><span style="color:var(--fire-900)">V3.1、V3.3 未排期</span></td></tr>
+        <tr><td>V4 买卖协同<small>Q1</small></td><td><span class="chip unc"><b>V4.1</b>服务商经营分析</span><span class="chip unc"><b>V4.2</b>店铺评分</span><span class="chip unc"><b>V4.3</b>给卖家的数据</span></td><td><span class="chip dep">依赖 V3 订单与履约数据</span></td><td>Q1</td></tr>
       </tbody>
     </table>
   </div>
@@ -334,58 +340,75 @@ del { color:var(--muted); }
   </div>
 
   <div class="card loop">
-    <h3>业务闭环：邀请供应商 → 进店选货 → 订单自动分发 → 发货回传 → 开票 → 成本毛利入账</h3>
+    <h3>业务闭环：邀请合作 → 确认报价 → 选品下单 → 履约回传 → 对账开票 → 成本毛利入账</h3>
     <ol class="flow">
-      <li><div class="st"><b>服务商发邀请</b><span>代替给供应商开账号</span><i>V3.2</i></div></li>
-      <li><div class="st"><b>供应商开专供店</b><span>认证后开通，对该服务商可见</span><i>V3.1 · V3.2</i></div></li>
-      <li><div class="st"><b>进店选货</b><span>自营店、专供店、飞象自营店，像逛商城</span><i>V3.2</i></div></li>
-      <li><div class="st"><b>下单</b><span>购物车按店铺分组、按店铺拆单</span><i>V3.5</i></div></li>
-      <li class="un"><div class="st"><b>订单自动分发</b><span>推送到供应商店铺，不再微信对单</span><i>V3.3</i></div></li>
-      <li class="un"><div class="st"><b>发货回传</b><span>供应商回传发货和物流</span><i>V3.3</i></div></li>
-      <li class="un"><div class="st"><b>开票</b><span>接入开票服务，平台上可查</span><i>V3.3</i></div></li>
+      <li><div class="st"><b>服务商发起合作</b><span>链接、二维码或手机号邀请供应商</span><i>V3.2</i></div></li>
+      <li class="seller"><div class="st"><b>供应商开店并报价</b><span>注册、认证、开专供店，回复供货范围和代发价</span><i>卖家 1.0 · 2.0</i></div></li>
+      <li class="un"><div class="st"><b>服务商确认报价</b><span>确认后合作生效；改价也要确认</span><i>V3.3</i></div></li>
+      <li><div class="st"><b>按合作身份选品</b><span>只看到对自己开放的商品和价格，选品上架</span><i>V3.2</i></div></li>
+      <li><div class="st"><b>下代发订单</b><span>按店铺拆单，推送到卖家专供订单</span><i>V3.5 · V3.3</i></div></li>
+      <li class="un"><div class="st"><b>履约回传</b><span>发货、发码、核销、售后进度</span><i>V3.3</i></div></li>
+      <li class="un"><div class="st"><b>对账开票</b><span>确认账单、上传付款凭证、收发票</span><i>V3.3</i></div></li>
       <li class="back"><div class="st"><b>成本毛利入账</b><span>采购成本、差价、毛利自动算</span><i>V3.4</i></div></li>
     </ol>
-    <p class="note">专供店只做工具和信息流，不碰资金：供货价和账期还是服务商和供应商自己谈。平台收订单服务费。</p>
+    <p class="note">橙色虚线是卖家侧完成的环节。货款由买卖双方直接收付，平台分别向双方收服务费。</p>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:14px;color:var(--water-700);margin-bottom:8px">分工：卖家侧做底层，买家侧做适配</h3>
+    <div class="tbl-wrap"><table class="split">
+      <thead><tr><th>能力</th><th>卖家侧（商家平台）</th><th>买家侧</th></tr></thead>
+      <tbody>
+        <tr><td>店铺</td><td>开店、认证、资料装修、营业状态、店铺分享（1.0）</td><td>读取店铺；会员端、运营端展示店铺名称和类型，员工商城不展示</td></tr>
+        <tr><td>商品</td><td>商品库、本店 SKU、同品关联到标准商品、上架准入（1.0）</td><td>按“店铺 + SKU”读货，用标准商品做搜索、同款替换和比价</td></tr>
+        <tr><td>合作与价格</td><td>双向邀请、按客户配置供货范围和代发价、改价、到期下架（2.0）</td><td>发起或接受邀请、确认报价和改价、收到下架提醒</td></tr>
+        <tr><td>订单与履约</td><td>专供订单、发货、发码、核销、售后（2.0）</td><td>下单推送、查看进度、发起售后</td></tr>
+        <tr><td>财务</td><td>对账、确认收款、开商品发票；服务费账户（2.0）</td><td>确认账单、上传付款凭证、收发票；买家服务费账户</td></tr>
+      </tbody>
+    </table></div>
   </div>
 
   <div class="subs">
     <article class="card sub unsched first">
-      <header><span class="sid">V3.1</span><h4>店铺底座</h4><span class="side">全端 · 与卖家侧共用一套</span><span class="un-tag">未排期</span></header>
-      <p class="goal">三种店铺类型落地，后面所有小版本的地基</p>
+      <header><span class="sid">V3.1</span><h4>接入卖家店铺与商品</h4><span class="side">全端 · 适配卖家 1.0</span><span class="un-tag">未排期</span></header>
+      <p class="goal">按卖家侧的店铺和商品模型读货、标店铺，买家侧不另建底座</p>
       <ul>
-                <li>现有频道归为飞象自营店（自营精选、京东、猫超）；东方甄选挂在自营店下</li>
-        <li>V1 预留的店铺字段正式启用，历史数据迁移</li>
-        <li>同一商品在不同店铺的 SKU 一一映射</li>
-              </ul>
-      <div class="sched none">未排期 · 但 V3.2–V3.5 都依赖它，最晚 12/1 前要定方案</div>
-      <div class="meta"><p><b>依赖</b>卖家侧店铺体系</p><p class="rv"><b>评审要点</b>与阿胜对齐店铺数据结构；标准商品参数库的字段先按目标结构设计</p></div>
+        <li>商品库按“店铺 + 本店 SKU”读取卖家商品</li>
+        <li>用卖家的同品关联映射到标准商品，供搜索、同款替换、比价使用</li>
+        <li>购物车、订单带店铺和企业主体字段；V1 预留字段改用卖家侧的 ID 和口径，历史数据迁移</li>
+        <li>会员端、运营端展示店铺名称和类型；员工商城不展示</li>
+        <li>现有频道（自营精选、京东、猫超）先做映射，Q1 随卖家 3.0 自营商家迁移</li>
+      </ul>
+      <div class="sched none">未排期 · 依赖卖家 1.0 上线；V3.2–V3.5 都依赖它，12/1 前要对齐 ID 和口径</div>
+      <div class="meta"><p><b>依赖</b>卖家 1.0（店铺、商品库、同品关联）</p><p class="rv"><b>评审要点</b>店铺、企业主体、标准商品、订单的 ID 口径；现有频道的映射方式</p></div>
     </article>
 
     <article class="card sub">
-      <header><span class="sid">V3.2</span><h4>我的供应商重构</h4><span class="side">会员端</span></header>
-      <p class="goal">服务商用邀请代替开账号，像逛商城一样管理供应商</p>
+      <header><span class="sid">V3.2</span><h4>我的供应商重构</h4><span class="side">会员端 · 适配卖家 1.0 · 2.0</span></header>
+      <p class="goal">服务商从邀请到选货都在我的供应商里完成；开店、认证在卖家侧</p>
       <ul>
-        <li>发邀请：链接或二维码，有效期、验证、绑定方式、失效重发</li>
-        <li>供应商接受后开专供店（需认证），对该服务商可见</li>
-        <li>商城模式：看到自营店和各家专供店，进店选货、上架</li>
-        <li>未认证时的功能限制与认证提醒</li>
+        <li>邀请入口：链接、二维码或手机号发起合作邀请；供应商开店、认证由卖家侧完成</li>
+        <li>供应商列表：合作中、待确认、已暂停，按合作状态查看</li>
+        <li>商城模式：进入供应商店铺，按合作身份选货、上架（复用卖家店铺页或自建，待定）</li>
+        <li>供应商未认证、未营业时的状态提示</li>
         <li class="un">存量供应商账号的迁移引导（迁移策略）<span class="un-tag">未排期</span></li>
       </ul>
       <div class="sched"><span>评审<b>12/1</b></span><span>开发<b style="font-family:var(--font-body)">磐璃、向阳、大兵</b></span><span>提测<b>—</b></span><span>测试<b style="font-family:var(--font-body)">—</b></span><span>测完 · P0（待与卖家侧确认）<b>12/26</b></span></div>
-      <div class="meta"><p><b>依赖</b>V3.1</p><p class="rv"><b>评审要点</b>邀请链接机制细节（卖家侧待补）；存量账号迁移节奏</p></div>
+      <div class="meta"><p><b>依赖</b>V3.1；卖家 2.0 双向邀请</p><p class="rv"><b>评审要点</b>进店选货复用卖家店铺页还是自建；存量账号迁移节奏</p></div>
     </article>
 
     <article class="card sub unsched">
-      <header><span class="sid">V3.3</span><h4>专供店订单工具</h4><span class="side">会员端 + 卖家侧</span><span class="un-tag">未排期</span></header>
-      <p class="goal">服务商和供应商之间不再在微信群里对单</p>
+      <header><span class="sid">V3.3</span><h4>专供合作（买家侧）</h4><span class="side">会员端 · 适配卖家 2.0</span><span class="un-tag">未排期</span></header>
+      <p class="goal">服务商和供应商在平台上谈好范围和价格、下单、对账，不再在微信群里对单</p>
       <ul>
-        <li>服务商下单后，订单自动分发到供应商店铺（接口调整）</li>
-        <li>供应商回传发货和物流，服务商实时可见</li>
-        <li>接入开票服务，发票在平台可查、一键开通</li>
-        <li>订单服务费计费；邀请赠送额度预留</li>
+        <li>接受或发起合作，确认商品范围和报价；改价确认、到期下架提醒</li>
+        <li>代发订单推送到卖家专供订单（接口调整）</li>
+        <li>查看发货、发码、核销进度；发起售后，退款由双方线下办理</li>
+        <li>对账确认、上传付款凭证、接收商品发票</li>
+        <li>服务费账户：查看收费、待补扣、充值和服务费发票</li>
       </ul>
-      <div class="sched none">未排期 · 等卖家侧确认</div>
-      <div class="meta"><p><b>依赖</b>V3.1、V3.2</p><p class="rv"><b>评审要点</b>订单服务费买卖两端各收多少；不碰资金的边界</p></div>
+      <div class="sched none">未排期 · 依赖卖家 2.0 排期</div>
+      <div class="meta"><p><b>依赖</b>V3.1、V3.2；卖家 2.0 客户专供</p><p class="rv"><b>评审要点</b>服务费账户与预付款账户是否分开；货款线下收付时买家侧只记录凭证</p></div>
     </article>
 
     <article class="card sub">
@@ -414,6 +437,17 @@ del { color:var(--muted); }
       <div class="meta"><p><b>依赖</b>V3.1</p><p class="rv"><b>评审要点</b>拆单后的开票和售后责任方</p></div>
     </article>
   </div>
+
+  <div class="card">
+    <h3 style="font-size:14px;color:var(--fire-900);margin-bottom:8px">V3 评审前要与卖家侧对齐</h3>
+    <ol class="qs">
+      <li><b>服务费账户：</b>卖家侧写的是货款与服务费分别记账。买家是否单独开服务费账户，还是从预付款账户扣？会影响统一收银台。</li>
+      <li><b>进店选货：</b>卖家店铺分享已能按合作身份展示价格，买家侧是复用卖家店铺页，还是在我的供应商里自建商城模式？</li>
+      <li><b>会员自营店：</b>卖家清单里没有这个概念。服务商自有货和阿里权益，是让会员在卖家侧开店，还是只在买家侧做？要给其他会员供货，会员就成了卖家。</li>
+      <li><b>ID 口径：</b>店铺、企业主体、标准商品、订单的标识统一，双方数据记录都按同一套。</li>
+      <li><b>排期：</b>卖家 1.0、2.0 的上线时间决定买家 V3.1、V3.3 何时能做，以及 V3 能否 12/26 测完。</li>
+    </ol>
+  </div>
 </section>
 
 <!-- ================= V4 ================= -->
@@ -431,7 +465,7 @@ del { color:var(--muted); }
       <li><div class="st"><b>服务商看经营</b><span>按项目、供应商、品类看成本毛利</span><i>V4.1</i></div></li>
       <li><div class="st"><b>店铺评分</b><span>发货、售后、缺货、价格稳定</span><i>V4.2</i></div></li>
       <li><div class="st"><b>选供应商</b><span>按评分和毛利决定和谁合作</span><i>V4.1 · V4.2</i></div></li>
-      <li><div class="st"><b>供应商配规则</b><span>对不同服务商开放不同的货和价</span><i>V4.3</i></div></li>
+      <li class="seller"><div class="st"><b>供应商调价与范围</b><span>按客户配置供货，服务商确认</span><i>卖家 2.0 · V3.3</i></div></li>
       <li class="back"><div class="st"><b>更多订单</b><span>回到 V3 的订单流转</span><i>回到 V3.3</i></div></li>
     </ol>
   </div>
@@ -462,15 +496,14 @@ del { color:var(--muted); }
     </article>
 
     <article class="card sub unsched">
-      <header><span class="sid">V4.3</span><h4>专供店供货规则</h4><span class="side">卖家侧配置 + 会员端生效</span><span class="un-tag">未排期</span></header>
-      <p class="goal">供应商的私域生意按原样搬上来</p>
+      <header><span class="sid">V4.3</span><h4>给卖家的数据</h4><span class="side">卖家侧展示 · 买家侧出数</span><span class="un-tag">未排期</span></header>
+      <p class="goal">供应商看到服务商侧的需求和履约反馈</p>
       <ul>
-        <li>主店铺 + 子店铺：按服务商开放不同的商品范围和价格</li>
-        <li>服务商只看到对自己开放的商品和价格</li>
-        <li>给卖家的数据：订单、履约表现、需求汇总（脱敏白名单）<small>V4-2.4、6.2</small></li>
+        <li>订单、履约表现、需求汇总（脱敏白名单）<small>V4-2.4、6.2</small></li>
+        <li>原“专供店供货规则”已并入 V3.3：卖家 2.0 已按客户配置供货范围和价格，买家侧只需确认报价</li>
       </ul>
       <div class="sched none">Q1 · P1</div>
-      <div class="meta"><p><b>依赖</b>V3.1、V3.3</p><p class="rv"><b>评审要点</b>定价配置做多细（会议要求不要做太满）</p></div>
+      <div class="meta"><p><b>依赖</b>V3.3</p><p class="rv"><b>评审要点</b>脱敏规则与卖家 2.0 经营洞察的口径一致</p></div>
     </article>
   </div>
 </section>
@@ -507,14 +540,14 @@ del { color:var(--muted); }
     <table class="todo">
       <thead><tr><th>事项</th><th>影响的小版本</th><th>建议</th></tr></thead>
       <tbody>
-        <tr><td>店铺底座未排期</td><td>V3.1 → V3.2–3.5</td><td>V3 三个小版本 12/1 评审，店铺类型和店铺字段方案最晚 12/1 前定；“三种店铺类型”任务已删除，需补回或写明由卖家侧承担</td></tr>
+        <tr><td>V3 分工与卖家侧对齐</td><td>V3.1、V3.2、V3.3</td><td>V3.1、V3.3 已改为买家侧适配卖家 1.0、2.0；12/1 评审前对齐 V3 中列出的 5 个问题</td></tr>
         <tr><td>项目这条线基本空了</td><td>V1.3、V1.5、V1 门槛</td><td>项目字段带入已取消、项目视图未排期；V1 门槛去掉“信息完整的项目占比”，或至少保留询价时选商城、填客户类型的数据</td></tr>
         <tr><td>订单来源字段是 P1</td><td>V1.5、V1.2</td><td>与场景化运营同在 11/30 提测；建议升 P0、同批上线，否则年货节首批订单分不出来源，门槛周报也做不了</td></tr>
         <tr><td>阿里权益替换移出 V1</td><td>V1.2、V3.4</td><td>年货节期间阿里权益商品按现状展示，需告知运营</td></tr>
-        <tr><td>专供店订单工具等卖家侧</td><td>V3.3、V3 门槛</td><td>若到 Q1，V3 门槛改为开通邀请的供应商数、自营店下单数</td></tr>
+        <tr><td>专供合作等卖家 2.0</td><td>V3.3、V3 门槛</td><td>若卖家 2.0 到 Q1，V3 门槛改为发出邀请的供应商数、自营店下单数</td></tr>
         <tr><td>缺测试人员</td><td>V1.5、V2.3、V1.4 埋点</td><td>补测试人员和测完时间</td></tr>
         <tr><td>返点活动</td><td>原 V3-9</td><td>钱票税方案未定，整体在 Q1</td></tr>
-        <tr><td>项目供货价</td><td>原 V4-1</td><td>暂不做；差异价由 V4.3 供货规则承接</td></tr>
+        <tr><td>项目供货价</td><td>原 V4-1</td><td>暂不做；按客户差异价由卖家 2.0 供货配置承接</td></tr>
         <tr><td>自有供应商数据</td><td>V3 门槛</td><td>老罗出数：开通账号数与供应商家数、有订单的供应商数、动销品类</td></tr>
       </tbody>
     </table>
