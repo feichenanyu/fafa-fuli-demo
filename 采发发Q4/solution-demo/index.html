@@ -126,132 +126,123 @@ button,input,select{font-family:inherit}
     </section>
     </sc-if>
 
-        <section id="scene-zone" aria-label="场景方案" style="background: #FFFFFF; border-radius: 12px; box-shadow: 0 1px 3px rgba(17,24,39,0.04); padding: 0 20px 18px; display: flex; flex-direction: column; gap: 14px">
-      <div role="tablist" aria-label="场景" style="display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #EEF0F3; flex-wrap: wrap">
+        <section id="scene-zone" aria-label="场景方案" style="display: flex; flex-direction: column; gap: 0; background: #FFFFFF; border-radius: 12px; box-shadow: 0 1px 3px rgba(17,24,39,0.04); overflow: hidden">
+      <div role="tablist" aria-label="场景" style="display: flex; align-items: center; gap: 4px; padding: 0 20px; border-bottom: 1px solid #EEF0F3">
         <sc-for list="{{sh.tabs}}" as="t" hint-placeholder-count="3">
-          <button type="button" role="tab" aria-selected="{{t.active}}" onClick="{{t.pick}}" style="{{t.style}}">
-            {{t.label}}
-            <span style="{{t.badgeStyle}}">{{t.badge}}</span>
-          </button>
+          <button type="button" role="tab" aria-selected="{{t.active}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}<span style="{{t.badgeStyle}}">{{t.badge}}</span></button>
         </sc-for>
         <span style="flex: 1 1 0"></span>
-        <span style="font-size: 12px; color: #A0A6AE">场景由运营持续补充</span>
-        <button type="button" onClick="{{goPlaza}}" style="border: none; background: transparent; padding: 0 0 0 12px; font-size: 13px; color: #0D9488; cursor: pointer">找具体商品？去资源广场 ›</button>
+        <button type="button" onClick="{{goPlaza}}" style="border: none; background: transparent; padding: 0; font-size: 13px; color: #0D9488; cursor: pointer">找具体商品？去资源广场 ›</button>
       </div>
 
-      <div style="border-radius: 12px; padding: 14px 20px; color: #FFFFFF; display: flex; align-items: center; gap: 20px; background: {{sh.scene.bg}}">
-        <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap">
-          <strong style="font-size: 22px; letter-spacing: 0.5px">{{sh.scene.name}}</strong>
-          <span style="font-size: 12px; background: rgba(255,255,255,0.22); border-radius: 4px; padding: 1px 8px">{{sh.scene.kind}} · {{sh.scene.period}}</span>
-          <span style="font-size: 14px; opacity: 0.92">{{sh.scene.desc}}</span>
-        </div>
-        <sc-if value="{{sh.isPeriod}}" hint-placeholder-val="{{true}}">
-          <span style="flex: 0 0 auto; font-size: 13px">距春节还有 <strong style="font-size: 24px">{{daysLeft}}</strong> 天</span>
-        </sc-if>
-      </div>
-
-      <div role="tablist" aria-label="方案" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px">
-        <sc-for list="{{sh.solTabs}}" as="st" hint-placeholder-count="3">
-          <button type="button" role="tab" aria-selected="{{st.active}}" onClick="{{st.pick}}" style="{{st.style}}">
-            <span style="display: flex; align-items: center; gap: 6px; width: 100%">
-              <span style="font-size: 12px; color: #8A9099">{{st.purpose}}</span>
-              <sc-if value="{{st.hot}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; color: #FFFFFF; background: #E2231A; border-radius: 4px; padding: 0 5px">当期主推</span></sc-if>
-              <sc-if value="{{st.isNew}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; color: #FFFFFF; background: #FF6A00; border-radius: 4px; padding: 0 5px">NEW</span></sc-if>
-            </span>
-            <span style="font-size: 16px; font-weight: 700; color: #1F2329; text-align: left">{{st.name}}</span>
-            <span style="display: flex; gap: 8px; align-items: baseline; font-size: 12px; color: #4B5563; white-space: nowrap; min-width: 0">利润最高 <strong style="font-size: 15px; color: #E2231A">{{st.maxProfit}}</strong><span class="clamp1" style="color: #0F7F74">{{st.hl}}</span></span>
-          </button>
-        </sc-for>
-      </div>
-
-      <section aria-label="生意说明" style="border: 1px solid #EEF0F2; border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) 320px">
-      <div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0">
-        <span style="align-self: flex-start; font-size: 12px; color: #FFFFFF; border-radius: 4px; padding: 1px 8px; background: {{sd.sceneColor}}">{{sd.sceneName}} · {{sd.purpose}}</span>
-        <h1 style="margin: 0; font-size: 24px; color: #1F2329">{{sd.name}}</h1>
-        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center">
-          <span style="font-size: 13px; color: #8A9099">适合客户</span>
-          <sc-for list="{{sd.cust}}" as="c" hint-placeholder-count="3"><span style="font-size: 12px; color: #374151; background: #F2F3F5; border-radius: 4px; padding: 2px 8px">{{c}}</span></sc-for>
-        </div>
-        <p style="margin: 0; font-size: 14px; color: #374151; line-height: 1.7">{{sd.sell}}</p>
-        <div style="display: flex; flex-direction: column; gap: 6px; background: #F7F8FA; border-radius: 8px; padding: 12px 14px">
-          <strong style="font-size: 14px; color: #1F2329">这单生意怎么做</strong>
-          <sc-for list="{{sd.how}}" as="h" hint-placeholder-count="3">
-            <div style="display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: #374151; line-height: 1.6"><span style="flex: 0 0 20px; height: 20px; border-radius: 9999px; background: #0D9488; color: #FFFFFF; font-size: 12px; display: inline-flex; align-items: center; justify-content: center">{{h.n}}</span><span>{{h.t}}</span></div>
+      <div style="padding: 18px 24px 22px; display: flex; flex-direction: column; gap: 16px">
+        <div role="tablist" aria-label="方案" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+          <span style="font-size: 13px; color: #8A9099; margin-right: 4px">{{sh.scene.name}} · {{sh.solCount}} 套方案</span>
+          <sc-for list="{{sh.solTabs}}" as="st" hint-placeholder-count="3">
+            <button type="button" role="tab" aria-selected="{{st.active}}" onClick="{{st.pick}}" style="{{st.style}}">{{st.name}}<sc-if value="{{st.isNew}}" hint-placeholder-val="{{false}}"><span style="margin-left: 6px; font-size: 10px; color: #FFFFFF; background: #FF6A00; border-radius: 4px; padding: 0 4px">NEW</span></sc-if></button>
           </sc-for>
         </div>
-      </div>
-      <aside style="background: #F2FAF8; padding: 20px 20px; display: flex; flex-direction: column; gap: 12px">
-        <div style="font-size: 13px; color: #4B5563">利润空间最高</div>
-        <div style="font-size: 34px; font-weight: 700; color: #E2231A; line-height: 1">{{sd.maxProfit}}</div>
-        <div style="font-size: 12px; color: #8A9099">按市场价利润率计算，仅你可见</div>
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <sc-for list="{{sd.adv}}" as="a" hint-placeholder-count="3"><div style="display: flex; gap: 8px; align-items: baseline; font-size: 13px"><span style="flex: 0 0 auto; color: #0F7F74; font-weight: 600">{{a.label}}</span><span style="color: #1F2329">{{a.text}}</span></div></sc-for>
-        </div>
-        <span style="flex: 1 1 0"></span>
-        <button type="button" onClick="{{sd.openCli}}" style="min-height: 40px; border-radius: 9999px; border: none; background: #0D9488; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer">生成甲方版，发给客户</button>
-        <span style="font-size: 12px; color: #8A9099; text-align: center">甲方版隐去会员价和利润，带你的联系方式</span>
-      </aside>
-    </section>
 
-    <section aria-label="爆品货盘" style="border-top: 1px solid #F0F1F3; padding: 16px 0 4px; display: flex; flex-direction: column; gap: 12px">
-      <div style="display: flex; align-items: baseline; gap: 10px"><strong style="font-size: 17px; color: #1F2329">爆品货盘</strong><span style="font-size: 13px; color: #8A9099">{{sd.palCount}} 套 · 直接下单、代发、上架到商城、询价</span></div>
-      <sc-if value="{{sd.noPal}}" hint-placeholder-val="{{false}}"><div style="font-size: 13px; color: #A0A6AE; padding: 8px 0">本方案未配置货盘</div></sc-if>
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
-        <sc-for list="{{sd.pals}}" as="x" hint-placeholder-count="2">
-          <article class="card" style="border: 1px solid #EEF0F2; border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
-            <div style="display: flex; align-items: baseline; gap: 8px"><strong style="font-size: 16px; color: #1F2329">{{x.name}}</strong><span style="font-size: 12px; color: #8A9099">{{x.n}} 款 · {{x.priceRange}}</span></div>
-            <div style="font-size: 13px; color: #4B5563" class="clamp2">{{x.sell}}</div>
-            <div style="display: flex; gap: 8px">
-              <sc-for list="{{x.thumbs}}" as="t" hint-placeholder-count="4">
-                <span class="tile" style="width: 64px; height: 64px; border-radius: 8px; overflow: hidden; background: #F4F5F7; display: flex; align-items: center; justify-content: center">
-                  <sc-if value="{{t.hasImg}}"><img src="{{t.img}}" alt="" style="width: 100%; height: 100%; object-fit: cover"></sc-if>
-                  <sc-if value="{{t.isCard}}"><span style="font-size: 12px; color: #FFFFFF; font-weight: 700; background: #C2413B; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center">{{t.cardFace}}</span></sc-if>
-                  <sc-if value="{{t.isPh}}"><span style="font-size: 11px; color: #A0A6AE">待上传</span></sc-if>
-                </span>
+        <div style="display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 28px; align-items: stretch">
+          <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0">
+            <span style="font-size: 12px; color: #8A9099; letter-spacing: 0.04em">{{sd.purpose}}方案 · 适合 {{sd.custText}}</span>
+            <h2 style="margin: 0; font-size: 22px; line-height: 1.35; color: #1F2329">{{sd.name}}</h2>
+            <p style="margin: 0; font-size: 14px; line-height: 1.75; color: #4B5563">{{sd.claim}}</p>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #EFF1F3; border-bottom: 1px solid #EFF1F3; margin-top: 4px">
+              <sc-for list="{{sd.stats}}" as="k" hint-placeholder-count="3">
+                <span style="{{k.style}}"><strong style="font-size: 20px; color: {{k.color}}; font-variant-numeric: tabular-nums">{{k.v}}</strong><span style="font-size: 12px; color: #8A9099">{{k.l}}</span></span>
               </sc-for>
             </div>
-            <div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{x.adv}}" as="a" hint-placeholder-count="3"><span style="font-size: 12px; color: #0F7F74; background: #E6F4F1; border-radius: 6px; padding: 2px 8px">{{a.text}}</span></sc-for></div>
-            <div style="display: flex; align-items: center; gap: 8px">
-              <span style="font-size: 13px; color: #4B5563">利润空间 <strong style="color: #E2231A">{{x.profit}}</strong></span>
-              <span style="flex: 1 1 0"></span>
-              <button type="button" onClick="{{x.list}}" style="min-height: 32px; padding: 0 14px; border-radius: 9999px; border: 1px solid #9ED4CF; background: #FFFFFF; color: #0D9488; font-size: 13px; cursor: pointer">一键上架</button>
-              <button type="button" onClick="{{x.open}}" style="min-height: 32px; padding: 0 16px; border-radius: 9999px; border: none; background: #0D9488; color: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer">看货盘</button>
+            <span style="flex: 1 1 0"></span>
+            <div style="display: flex; gap: 10px; align-items: center">
+              <button type="button" onClick="{{sd.openCli}}" style="min-height: 38px; padding: 0 18px; border-radius: 9999px; border: none; background: #0D9488; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer">生成甲方版，发给客户</button>
+              <span style="font-size: 12px; color: #8A9099">隐去会员价和利润</span>
             </div>
-          </article>
-        </sc-for>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0">
+            <div style="display: flex; align-items: baseline; gap: 10px"><strong style="font-size: 15px; color: #1F2329">这套方案能帮你做 {{sd.wayCount}} 种生意</strong><span style="font-size: 12px; color: #8A9099">{{sd.combo}}</span></div>
+            <div style="{{sd.waysGrid}}">
+              <sc-for list="{{sd.ways}}" as="w" hint-placeholder-count="3">
+                <button type="button" onClick="{{w.go}}" class="card" style="text-align: left; cursor: pointer; border: 1px solid #EEF0F2; border-radius: 12px; background: #FFFFFF; padding: 0; overflow: hidden; display: flex; flex-direction: column">
+                  <span class="tile" style="height: 112px; display: flex; align-items: center; justify-content: center; background: {{w.bg}}; overflow: hidden; position: relative">
+                    <sc-if value="{{w.isPal}}" hint-placeholder-val="{{true}}"><span style="display: grid; grid-template-columns: repeat(3, 72px); gap: 6px"><sc-for list="{{w.thumbs}}" as="t" hint-placeholder-count="3"><span style="width: 72px; height: 72px; border-radius: 8px; overflow: hidden; background: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(17,24,39,0.08)"><sc-if value="{{t.hasImg}}"><img src="{{t.img}}" alt="" style="width: 100%; height: 100%; object-fit: cover"></sc-if><sc-if value="{{t.isPh}}"><span style="font-size: 10px; color: #A0A6AE">商品图</span></sc-if><sc-if value="{{t.isCard}}"><span style="font-size: 11px; color: #FFFFFF; background: #C2413B; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center">{{t.cardFace}}</span></sc-if></span></sc-for></span></sc-if>
+                    <sc-if value="{{w.isCpk}}" hint-placeholder-val="{{false}}"><span style="width: 150px; height: 88px; border-radius: 10px; color: #FFFFFF; padding: 10px 12px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; background: {{w.face}}; box-shadow: 0 6px 14px rgba(17,24,39,0.18); transform: rotate(-4deg)"><span style="font-size: 12px; font-weight: 600">{{w.faceName}}</span><span style="font-size: 20px; font-weight: 700">{{w.faceVal}}</span></span></sc-if>
+                    <sc-if value="{{w.isTpl}}" hint-placeholder-val="{{false}}"><span style="width: 64px; height: 124px; margin-top: 30px; border-radius: 12px; border: 4px solid #1F2329; overflow: hidden; background: {{w.coverBg}}; display: flex; align-items: flex-start; justify-content: center"><sc-if value="{{w.hasImg}}"><img src="{{w.img}}" alt="" style="width: 100%; display: block"></sc-if></span></sc-if>
+                  </span>
+                  <span style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 5px">
+                    <span style="font-size: 12px; color: #0F7F74">{{w.kind}}</span>
+                    <strong style="font-size: 15px; color: #1F2329">{{w.title}}</strong>
+                    <span style="font-size: 13px; color: #4B5563; line-height: 1.6" class="clamp2">{{w.desc}}</span>
+                    <span style="display: flex; align-items: center; gap: 6px; margin-top: 4px"><span style="font-size: 12px; color: #8A9099">{{w.meta}}</span><span style="flex: 1 1 0"></span><span style="font-size: 13px; color: #0D9488; font-weight: 600">{{w.cta}} ›</span></span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section aria-label="卡券" style="border-top: 1px solid #F0F1F3; padding: 16px 0 4px; display: flex; flex-direction: column; gap: 12px">
-      <div style="display: flex; align-items: baseline; gap: 10px"><strong style="font-size: 17px; color: #1F2329">卡券</strong><span style="font-size: 13px; color: #8A9099">{{sd.cpkCount}} 套 · 买卡发给员工，员工在卡券自带的兑换商城兑换</span></div>
-      <sc-if value="{{sd.noCpk}}" hint-placeholder-val="{{false}}"><div style="font-size: 13px; color: #A0A6AE; padding: 8px 0">本方案未配置卡券</div></sc-if>
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
-        <sc-for list="{{sd.cpks}}" as="x" hint-placeholder-count="2">
-          <article class="card" style="border: 1px solid #EEF0F2; border-radius: 10px; padding: 14px; display: flex; gap: 14px">
-            <div style="flex: 0 0 150px; height: 94px; border-radius: 10px; color: #FFFFFF; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between; background: {{x.bg}}; box-shadow: 0 4px 12px rgba(17,24,39,0.12)">
-              <span style="font-size: 13px; font-weight: 600">{{x.name}}</span>
-              <span style="font-size: 20px; font-weight: 700">{{x.face}}</span>
+    <sc-if value="{{sd.hasPal}}" hint-placeholder-val="{{true}}">
+    <section id="sec-pal" aria-label="爆品货盘" style="display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 90px">
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 12px; color: #8A9099; font-family: ui-monospace, monospace">01</span><strong style="font-size: 18px; color: #1F2329">爆品货盘</strong><span style="font-size: 13px; color: #8A9099">运营组好的货，直接下单、代发或整盘上架到商城</span></div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+        <sc-for list="{{sd.pals}}" as="x" hint-placeholder-count="2">
+          <article class="card" style="background: #FFFFFF; border: 1px solid #EEF0F2; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column">
+            <div onClick="{{x.open}}" class="tile" style="height: 168px; cursor: pointer; position: relative; display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; background: #F4F5F7">
+              <sc-for list="{{x.cover}}" as="t" hint-placeholder-count="3"><span style="{{t.cell}}; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #FFFFFF"><sc-if value="{{t.hasImg}}"><img src="{{t.img}}" alt="" style="width: 100%; height: 100%; object-fit: cover"></sc-if><sc-if value="{{t.isPh}}"><span style="font-size: 11px; color: #C3C8CF">商品图</span></sc-if><sc-if value="{{t.isCard}}"><span style="font-size: 13px; color: #FFFFFF; background: #C2413B; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center">{{t.cardFace}}</span></sc-if></span></sc-for>
+              <span style="position: absolute; left: 10px; top: 10px; font-size: 11px; color: #FFFFFF; background: rgba(7,81,74,0.88); border-radius: 4px; padding: 1px 6px">运营精选货盘</span>
             </div>
-            <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 8px">
-              <div style="display: flex; align-items: baseline; gap: 8px"><strong style="font-size: 16px; color: #1F2329">{{x.name}}</strong><sc-if value="{{x.excl}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #C2410C; background: #FFF1E6; border-radius: 4px; padding: 1px 6px">专款专用</span></sc-if></div>
-              <div style="font-size: 13px; color: #4B5563" class="clamp2">{{x.sell}}</div>
-              <div style="font-size: 12px; color: #8A9099">面值 {{x.faces}} · 可兑换 {{x.n}} 款 · 兑换商城：{{x.mallName}}</div>
-              <div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{x.adv}}" as="a" hint-placeholder-count="2"><span style="font-size: 12px; color: #0F7F74; background: #E6F4F1; border-radius: 6px; padding: 2px 8px">{{a.text}}</span></sc-for></div>
-              <div style="display: flex; align-items: center; gap: 8px">
-                <span style="font-size: 13px; color: #4B5563">利润空间 <strong style="color: #E2231A">{{x.profit}}</strong></span>
+            <div style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1 1 0">
+              <strong style="font-size: 16px; color: #1F2329">{{x.name}}</strong>
+              <span style="font-size: 13px; color: #4B5563; line-height: 1.6" class="clamp2">{{x.sell}}</span>
+              <span style="font-size: 12px; color: #6B7280">共 {{x.n}} 款 · 利润最高 <strong style="color: #E2231A">{{x.maxProfit}}</strong> · {{x.lead}}</span>
+              <span style="flex: 1 1 0"></span>
+              <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px">
+                <span style="font-size: 12px; color: #8A9099; min-width: 0" class="clamp1">{{x.srcText}}</span>
                 <span style="flex: 1 1 0"></span>
-                <button type="button" onClick="{{x.buy}}" style="min-height: 32px; padding: 0 14px; border-radius: 9999px; border: 1px solid #9ED4CF; background: #FFFFFF; color: #0D9488; font-size: 13px; cursor: pointer">买卡</button>
-                <button type="button" onClick="{{x.open}}" style="min-height: 32px; padding: 0 16px; border-radius: 9999px; border: none; background: #0D9488; color: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer">看详情</button>
+                <button type="button" onClick="{{x.open}}" style="flex: 0 0 auto; white-space: nowrap; border: none; background: transparent; padding: 0 4px; font-size: 13px; color: #0D9488; cursor: pointer">货盘详情 ›</button>
+                <button type="button" onClick="{{x.list}}" style="flex: 0 0 auto; white-space: nowrap; min-height: 32px; padding: 0 14px; border-radius: 8px; border: none; background: #0D9488; color: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer">整盘上架</button>
               </div>
             </div>
           </article>
         </sc-for>
       </div>
     </section>
+    </sc-if>
 
-    <section aria-label="商城模板" style="border-top: 1px solid #F0F1F3; padding: 16px 0 4px; display: flex; flex-direction: column; gap: 12px">
-      <div style="display: flex; align-items: baseline; gap: 10px"><strong style="font-size: 17px; color: #1F2329">商城模板</strong><span style="font-size: 13px; color: #8A9099">{{sd.tplCount}} 套 · 滚动看装修，一键开商城，或套用到你已有的商城</span></div>
-      <sc-if value="{{sd.noTpl}}" hint-placeholder-val="{{false}}"><div style="font-size: 13px; color: #A0A6AE; padding: 8px 0">本方案未配置商城模板</div></sc-if>
+    <sc-if value="{{sd.hasCpk}}" hint-placeholder-val="{{true}}">
+    <section id="sec-cpk" aria-label="卡券" style="display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 90px">
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 12px; color: #8A9099; font-family: ui-monospace, monospace">{{sd.cpkNo}}</span><strong style="font-size: 18px; color: #1F2329">卡券</strong><span style="font-size: 13px; color: #8A9099">买卡发给员工，员工在卡券自带的兑换商城里自选</span></div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+        <sc-for list="{{sd.cpks}}" as="x" hint-placeholder-count="2">
+          <article class="card" style="background: #FFFFFF; border: 1px solid #EEF0F2; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column">
+            <div onClick="{{x.open}}" style="height: 168px; cursor: pointer; background: #F7F8FA; display: flex; align-items: center; justify-content: center; position: relative">
+              <span style="width: 220px; height: 128px; border-radius: 12px; color: #FFFFFF; padding: 14px 16px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; background: {{x.bg}}; box-shadow: 0 10px 22px rgba(17,24,39,0.16)"><span style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600"><span>{{x.name}}</span><span style="font-size: 11px; opacity: 0.85">采发发</span></span><span style="font-size: 26px; font-weight: 700">{{x.face}}</span></span>
+              <sc-if value="{{x.excl}}" hint-placeholder-val="{{false}}"><span style="position: absolute; left: 10px; top: 10px; font-size: 11px; color: #C2410C; background: #FFF1E6; border-radius: 4px; padding: 1px 6px">专款专用</span></sc-if>
+            </div>
+            <div style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1 1 0">
+              <strong style="font-size: 16px; color: #1F2329">{{x.name}}</strong>
+              <span style="font-size: 13px; color: #4B5563; line-height: 1.6" class="clamp2">{{x.sell}}</span>
+              <span style="font-size: 12px; color: #6B7280">面值 {{x.faces}} · 可兑换 {{x.n}} 款 · 利润最高 <strong style="color: #E2231A">{{x.maxProfit}}</strong></span>
+              <span style="flex: 1 1 0"></span>
+              <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px">
+                <span style="font-size: 12px; color: #8A9099; min-width: 0" class="clamp1">兑换商城：{{x.mallName}}</span>
+                <span style="flex: 1 1 0"></span>
+                <button type="button" onClick="{{x.open}}" style="flex: 0 0 auto; white-space: nowrap; border: none; background: transparent; padding: 0 4px; font-size: 13px; color: #0D9488; cursor: pointer">卡券详情 ›</button>
+                <button type="button" onClick="{{x.buy}}" style="flex: 0 0 auto; white-space: nowrap; min-height: 32px; padding: 0 18px; border-radius: 8px; border: none; background: #0D9488; color: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer">买卡</button>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+    <sc-if value="{{sd.hasTpl}}" hint-placeholder-val="{{true}}">
+    <section id="sec-tpl" aria-label="商城模板" style="display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 90px">
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 12px; color: #8A9099; font-family: ui-monospace, monospace">{{sd.tplNo}}</span><strong style="font-size: 18px; color: #1F2329">商城模板</strong><span style="font-size: 13px; color: #8A9099">滚动看装修，一键开商城，或套用到你已有的商城</span></div>
       <div style="display: flex; flex-direction: column; gap: 14px"><sc-for list="{{sd.tplsO}}" as="t" hint-placeholder-count="2">
 <article class="card" style="display: flex; gap: 20px; border: 1px solid #EEF0F3; border-radius: 12px; padding: 16px; background: #FFFFFF; min-width: 0">
                   <div style="flex: 0 0 228px; display: flex; flex-direction: column; align-items: center; gap: 8px">
@@ -305,8 +296,7 @@ button,input,select{font-family:inherit}
                 </article>
 </sc-for></div>
     </section>
-  
-    </section>
+    </sc-if>
 
 
     <footer style="border-top: 1px solid #F0F2F4; padding: 20px 0 8px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px; color: #4B5563">
@@ -2275,23 +2265,23 @@ const SSCENES = [
   { id: 'meal', name: '餐补福利', kind: '日常场景', period: '全年常驻', desc: '按天发放的高频福利，现金流稳定', bg: 'linear-gradient(120deg, #1E3A8A 0%, #1D4ED8 55%, #60A5FA 100%)', color: '#1D4ED8', sols: ['s5'] }
 ];
 const SOLS = {
-  s1: { csell: '春节给全员发年货，粮油、零食、家清、礼盒一站配齐。员工可以直接收货到家，也可以凭福利卡在手机商城里自选，一周内送达每位员工。', scene: 'cny', name: '国企员工年货 · 全员发放', purpose: '员工福利', cust: ['国企', '事业单位', '制造业'], hot: true, img: IMG.rice, hl: 'price',
+  s1: { claim: '春节前给全员发年货，预算明确、量大、回款稳；一周内交付到每位员工。', combo: '实物代发保底，卡券让员工自选，商城承接兑换', ways: { pal: { t: '按名单代发年货', d: '粮油、乳品、零食、家清 12 款硬通货，送到每位员工家' } }, csell: '春节给全员发年货，粮油、零食、家清、礼盒一站配齐。员工可以直接收货到家，也可以凭福利卡在手机商城里自选，一周内送达每位员工。', scene: 'cny', name: '国企员工年货 · 全员发放', purpose: '员工福利', cust: ['国企', '事业单位', '制造业'], hot: true, img: IMG.rice, hl: 'price',
     sell: '春节前国企、事业单位都要给全员发年货，预算明确、量大、回款稳。用平台的年货货盘和新春福利卡，一周内就能交付到每位员工。',
     how: ['和甲方确认人数与人均预算（常见 ¥300–1000），预算明确就用货盘直接代发', '想让员工自选：买新春福利卡发给员工，员工在春节商城里兑换', '已经有商城的客户，把春节商城模板套用上去，订单和售后由平台兜底'],
     pals: ['pc1'], cpks: ['cc1', 'cc2'], tpls: ['cnyMall', 'card'] },
-  s2: { csell: '为您的重要客户准备新春礼盒：坚果、糕点、茶礼与小家电，品牌正品、礼盒包装，按名单直送每位客户。', scene: 'cny', name: '金融客户新春答谢', purpose: '客户送礼', cust: ['金融', '车企', '互联网'], hot: false, img: IMG.cashew, hl: 'brand',
+  s2: { claim: '给 VIP 客户送新春礼盒，看重品牌与体面，单价高、利润空间大。', combo: '礼盒按名单直送，商城给客户自选', ways: { pal: { t: '按客户名单直送礼盒', d: '坚果、茶礼、小家电礼盒，品牌正品，物流自动回传' }, tpl: { t: '给客户开新春礼品商城', d: '客户扫码自选礼盒，适合大客户分层答谢' } }, csell: '为您的重要客户准备新春礼盒：坚果、糕点、茶礼与小家电，品牌正品、礼盒包装，按名单直送每位客户。', scene: 'cny', name: '金融客户新春答谢', purpose: '客户送礼', cust: ['金融', '车企', '互联网'], hot: false, img: IMG.cashew, hl: 'brand',
     sell: '银行、券商、车企春节要给 VIP 客户送礼，看重品牌和体面，单价高、利润空间大。',
     how: ['按客户分层定礼盒档次，从商务礼盒货盘里挑', '收集收件人名单，一件代发到每位客户，物流自动回传', '需要定制卡片或包装的，发起询价由平台对接供应商'],
     pals: ['pc2'], cpks: [], tpls: ['cnyMall'] },
-  s3: { isNew: true, csell: '工会新春慰问实用为先：粮油、纸品、家清按部门发放，也可以发粮油提货券由员工自领，经费使用合规、可开票。', scene: 'cny', name: '工会新春慰问', purpose: '工会慰问', cust: ['国企', '事业单位', '金融'], hot: false, img: IMG.detergent, hl: 'stable',
+  s3: { claim: '工会春节慰问讲实用、合规、可开票，按部门发放最省心。', combo: '慰问品按部门代发，提货券员工自领', isNew: true, csell: '工会新春慰问实用为先：粮油、纸品、家清按部门发放，也可以发粮油提货券由员工自领，经费使用合规、可开票。', scene: 'cny', name: '工会新春慰问', purpose: '工会慰问', cust: ['国企', '事业单位', '金融'], hot: false, img: IMG.detergent, hl: 'stable',
     sell: '工会春节慰问讲究实用、合规、可开票，按部门发放，粮油提货券最省心。',
     how: ['按工会经费和人数算人均额度', '实物慰问用工会慰问实用包按部门代发；要员工自领就买粮油提货券', '工会慰问商城给员工自选，经费使用记录清楚'],
     pals: ['pc3', 'pc1'], cpks: ['cc2'], tpls: ['union'] },
-  s4: { csell: '每月为当月生日的员工送上祝福：蛋糕卡专款专用，生日福利卡让员工自选礼品，全年按月发放。', scene: 'bday', name: '员工生日关怀 · 全年', purpose: '生日福利', cust: ['互联网', '金融', '制造业'], hot: true, img: IMG.macadamia, hl: 'brand',
+  s4: { claim: '每月给当月生日的员工发福利，一次签约全年复购。', combo: '蛋糕卡专款专用，生日卡和商城让员工自选', csell: '每月为当月生日的员工送上祝福：蛋糕卡专款专用，生日福利卡让员工自选礼品，全年按月发放。', scene: 'bday', name: '员工生日关怀 · 全年', purpose: '生日福利', cust: ['互联网', '金融', '制造业'], hot: true, img: IMG.macadamia, hl: 'brand',
     sell: '生日福利每月都发，一次签约全年复购。蛋糕卡专款专用，生日福利卡让员工自选礼品。',
     how: ['拿到员工生日名单，按月汇总人数', '每月买生日蛋糕卡或生日福利卡，按名单发到员工手机', '员工在生日商城兑换，你按月对账'],
     pals: ['pb1'], cpks: ['cb1', 'cb2'], tpls: ['bday', 'movie'] },
-  s5: { csell: '按天发放餐补，员工在手机商城里买零食饮料、下午茶，当月有效，按月结算。', scene: 'meal', name: '工作日餐补 · 按天发', purpose: '餐补福利', cust: ['互联网', '制造业'], hot: false, img: IMG.cracker, hl: 'price',
+  s5: { claim: '按天发放的餐补，频次最高、流水最稳。', combo: '餐补卡按天发额度，零食包按周代发', csell: '按天发放餐补，员工在手机商城里买零食饮料、下午茶，当月有效，按月结算。', scene: 'meal', name: '工作日餐补 · 按天发', purpose: '餐补福利', cust: ['互联网', '制造业'], hot: false, img: IMG.cracker, hl: 'price',
     sell: '餐补按天发、按月结，频次最高的福利，适合做长期稳定的流水。',
     how: ['和甲方确认每人每天的餐补额度', '每月买餐补卡，按在职名单发放', '员工在餐补商城买零食饮料，下午茶也可以用零食包按周代发'],
     pals: ['pm1'], cpks: ['cm1'], tpls: ['card'] }
@@ -2885,11 +2875,11 @@ class Component extends DCLogic {
       const ship = share((p) => p.wh === '电商仓');
       const m = margins(ps.map((p) => p.id)); const hi = m.length ? Math.max.apply(null, m) : 0; const lo = m.length ? Math.min.apply(null, m) : 0;
       return [
-        { k: 'price', label: ADV_LABEL.price, text: '比电商到手价低 ' + pct(low), basis: '会员价对比猫超 / 京东到手价', score: low / 15 },
-        { k: 'brand', label: ADV_LABEL.brand, text: '一线品牌占 ' + pct(brand), basis: '品牌等级 S、A 级占比', score: brand / 100 },
-        { k: 'stable', label: ADV_LABEL.stable, text: pct(stable) + ' 货源稳定', basis: '近 28 天在架 ≥ 25 天的商品占比', score: stable / 100 },
-        { k: 'ship', label: ADV_LABEL.ship, text: pct(ship) + ' 支持 24 小时发货', basis: '电商仓发货的商品占比', score: ship / 100 },
-        { k: 'profit', label: ADV_LABEL.profit, text: '利润空间 ' + pct(lo) + '–' + pct(hi), basis: '按市场价利润率计算', score: hi / 40 }
+        { k: 'price', v: '低 ' + pct(low), sl: '比电商到手价', label: ADV_LABEL.price, text: '比电商到手价低 ' + pct(low), basis: '会员价对比猫超 / 京东到手价', score: low / 15 },
+        { k: 'brand', v: pct(brand), sl: '一线品牌占比', label: ADV_LABEL.brand, text: '一线品牌占 ' + pct(brand), basis: '品牌等级 S、A 级占比', score: brand / 100 },
+        { k: 'stable', v: pct(stable), sl: '货源稳定', label: ADV_LABEL.stable, text: pct(stable) + ' 货源稳定', basis: '近 28 天在架 ≥ 25 天的商品占比', score: stable / 100 },
+        { k: 'ship', v: pct(ship), sl: '24 小时发货', label: ADV_LABEL.ship, text: pct(ship) + ' 支持 24 小时发货', basis: '电商仓发货的商品占比', score: ship / 100 },
+        { k: 'profit', v: pct(hi), sl: '利润最高', label: ADV_LABEL.profit, text: '利润空间 ' + pct(lo) + '–' + pct(hi), basis: '按市场价利润率计算', score: hi / 40 }
       ];
     };
     // 运营挑 2–3 项；没挑时默认取分数最高的 3 项
@@ -2922,7 +2912,7 @@ class Component extends DCLogic {
       clearCust: () => this.setState({ ssCust: 'all' }),
       solTabs: ssc.sols.map((k) => { const o = SOLS[k]; const ids = solIds(o); const hl = advPick(ids, [o.hl])[0]; const on = k === ((s.solId && ssc.sols.indexOf(s.solId) >= 0) ? s.solId : ssc.sols[0]);
         return { name: o.name, purpose: o.purpose, hot: o.hot, isNew: !!o.isNew, maxProfit: maxProfit(ids), hl: hl ? hl.text : '', active: on, pick: () => this.setState({ solId: k }),
-          style: 'cursor: pointer; text-align: left; border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; border: ' + (on ? '2px solid ' + ssc.color : '1px solid #EEF0F2') + '; background: ' + (on ? '#FFFBF8' : '#FFFFFF') + '; box-shadow: ' + (on ? '0 4px 14px rgba(17,24,39,0.08)' : 'none') }; }),
+          style: 'min-height: 34px; padding: 0 16px; border-radius: 9999px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; border: 1px solid ' + (on ? '#0D9488' : '#E5E7EB') + '; background: ' + (on ? '#0D9488' : '#FFFFFF') + '; color: ' + (on ? '#FFFFFF' : '#374151') + '; font-weight: ' + (on ? '600' : '400') }; }),
       tabs: SSCENES.map((x) => { const on = x.id === ssc.id; const per = x.kind === '档期场景';
         return { label: x.name, active: on, pick: () => this.setState({ ss: x.id, ssCust: 'all', solId: x.sols[0] }), badge: per ? '档期中' : '日常',
           badgeStyle: 'font-size: 11px; border-radius: 4px; padding: 1px 6px; color: ' + (per ? '#FFFFFF' : '#6B7280') + '; background: ' + (per ? '#E2231A' : '#F2F3F5'),
@@ -2933,13 +2923,28 @@ class Component extends DCLogic {
     // 方案（首页平铺）
     const curSolId = (s.solId && ssc.sols.indexOf(s.solId) >= 0) ? s.solId : ssc.sols[0];
     const solO = SOLS[curSolId]; const soScene = SSCENES.find((x) => x.id === solO.scene); const soIds = solIds(solO);
-    const palCard = (k) => { const x = PALS[k]; return { name: x.name, sell: x.sell, n: x.ids.length, priceRange: priceRange(x.ids), thumbs: x.ids.slice(0, 4).map((id) => thumb(PB[id])), adv: advPick(x.ids, x.adv), profit: profitRange(x.ids), open: () => openPal(k), list: () => openListFor(x.ids, x.ids.map((id) => PB[id])) }; };
-    const cpkCard = (k) => { const c = CPKS[k]; return { name: c.name, bg: c.bg, face: faceText(c, c.faces[c.faces.length - 1]), faces: c.faces.map((f) => faceText(c, f)).join(' / '), sell: c.sell, excl: c.excl, n: c.ids.length, mallName: TPL[c.mall].name, adv: advPick(c.ids, c.adv).slice(0, 2), profit: profitRange(c.ids), open: () => openCpk(k), buy: () => openBuy(k, 0) }; };
+    const imgFirst = (ids) => ids.slice().sort((a, b) => (PB[a] && PB[a].img ? 0 : 1) - (PB[b] && PB[b].img ? 0 : 1));
+    const palCard = (k) => { const x = PALS[k]; const ad = advPick(x.ids, x.adv); return { maxProfit: maxProfit(x.ids), lead: ad[0] ? ad[0].text : '', srcText: Array.from(new Set(x.ids.map((id) => SRC[PB[id].src]))).join(' / '), cover: imgFirst(x.ids).slice(0, 3).map((id, i) => Object.assign(thumb(PB[id]), { cell: i === 0 ? 'grid-row: span 2' : 'grid-row: span 1' })), name: x.name, sell: x.sell, n: x.ids.length, priceRange: priceRange(x.ids), thumbs: x.ids.slice(0, 4).map((id) => thumb(PB[id])), adv: advPick(x.ids, x.adv), profit: profitRange(x.ids), open: () => openPal(k), list: () => openListFor(x.ids, x.ids.map((id) => PB[id])) }; };
+    const cpkCard = (k) => { const c = CPKS[k]; return { maxProfit: maxProfit(c.ids), name: c.name, bg: c.bg, face: faceText(c, c.faces[c.faces.length - 1]), faces: c.faces.map((f) => faceText(c, f)).join(' / '), sell: c.sell, excl: c.excl, n: c.ids.length, mallName: TPL[c.mall].name, adv: advPick(c.ids, c.adv).slice(0, 2), profit: profitRange(c.ids), open: () => openCpk(k), buy: () => openBuy(k, 0) }; };
     const tplCard = (k) => Object.assign(tCover(k), { intro: TPL[k].intro, adv: advPick(TPL_IDS[k] || [], TPL_ADV[k]).slice(0, 2), profit: profitRange(TPL_IDS[k] || []), open: () => openTpd(k), pv: () => pvTpl(k) });
+    const W = solO.ways || {};
+    const wayList = [];
+    if (solO.pals.length) { const x = PALS[solO.pals[0]]; const ids = Array.from(new Set(solO.pals.reduce((a, k) => a.concat(PALS[k].ids), [])));
+      wayList.push({ isPal: true, isCpk: false, isTpl: false, bg: '#F2FAF8', thumbs: imgFirst(ids).slice(0, 3).map((id) => thumb(PB[id])), kind: '爆品货盘 · ' + solO.pals.length + ' 套', title: (W.pal || {}).t || '直接下单 · 一件代发', desc: (W.pal || {}).d || (x.name + '等 ' + ids.length + ' 款，按名单送到每个人'), meta: '利润最高 ' + maxProfit(ids), cta: '去选货', go: () => this.jump('sec-pal') }); }
+    if (solO.cpks.length) { const c = CPKS[solO.cpks[0]]; const ids = Array.from(new Set(solO.cpks.reduce((a, k) => a.concat(CPKS[k].ids), [])));
+      wayList.push({ isPal: false, isCpk: true, isTpl: false, bg: '#FFF5F0', face: c.bg, faceName: c.name, faceVal: faceText(c, c.faces[Math.min(1, c.faces.length - 1)]), kind: '卡券 · ' + solO.cpks.length + ' 套', title: (W.cpk || {}).t || '买卡发员工 · 自选兑换', desc: (W.cpk || {}).d || solO.cpks.map((k) => CPKS[k].name).join('、') + '，员工在兑换商城里自己挑', meta: '利润最高 ' + maxProfit(ids), cta: '去买卡', go: () => this.jump('sec-cpk') }); }
+    if (solO.tpls.length) { const c = tCover(solO.tpls[0]); const ids = Array.from(new Set(solO.tpls.reduce((a, k) => a.concat(TPL_IDS[k] || []), [])));
+      wayList.push({ isPal: false, isCpk: false, isTpl: true, bg: '#F3F6FB', coverBg: c.coverBg, img: c.img, hasImg: c.hasImg, kind: '商城模板 · ' + solO.tpls.length + ' 套', title: (W.tpl || {}).t || '开一个福利商城', desc: (W.tpl || {}).d || solO.tpls.map((k) => TPL[k].name).join('、') + '，装修和商品一并带入', meta: '利润最高 ' + maxProfit(ids), cta: '去开商城', go: () => this.jump('sec-tpl') }); }
     const sd = { name: solO.name, purpose: solO.purpose, sceneName: soScene.name, sceneColor: soScene.color, cust: solO.cust, sell: solO.sell, how: solO.how.map((t, i) => ({ n: i + 1, t: t })),
       maxProfit: maxProfit(soIds), adv: advPick(soIds, null, true),
       pals: solO.pals.map(palCard), cpks: solO.cpks.map(cpkCard), tpls: solO.tpls.map(tplCard), tplsO: solO.tpls.map((k, i) => Object.assign(tplVm(k, i), { adv: advPick(TPL_IDS[k] || [], TPL_ADV[k]).slice(0, 2), profit: profitRange(TPL_IDS[k] || []), detail: () => openTpd(k), apply: () => this.setState({ modal: 'applyTpl', tpdId: k, apMall: s.apMall || MALLS[0].id }) })),
       palCount: solO.pals.length, cpkCount: solO.cpks.length, tplCount: solO.tpls.length, noPal: !solO.pals.length, noCpk: !solO.cpks.length, noTpl: !solO.tpls.length,
+      custText: solO.cust.join(' / '), claim: solO.claim || solO.sell,
+      hasPal: !!solO.pals.length, hasCpk: !!solO.cpks.length, hasTpl: !!solO.tpls.length,
+      cpkNo: solO.pals.length ? '02' : '01', tplNo: '0' + (1 + (solO.pals.length ? 1 : 0) + (solO.cpks.length ? 1 : 0)),
+      stats: [{ v: maxProfit(soIds), l: '利润最高', color: '#E2231A' }].concat(advPick(soIds, null, true).slice(0, 2).map((a) => ({ v: a.v, l: a.sl, color: '#07514A' }))).map((k, i) => Object.assign(k, { style: 'display: flex; flex-direction: column; gap: 2px; padding: 10px 0 10px ' + (i ? '14px' : '0') + '; border-left: ' + (i ? '1px solid #EFF1F3' : 'none') })),
+      ways: wayList, wayCount: wayList.length, combo: solO.combo || '',
+      waysGrid: 'display: grid; grid-template-columns: repeat(' + wayList.length + ', minmax(0, 1fr)); gap: 12px',
       openCli: () => this.setState({ modal: 'cliCfg', cliShow: s.cliShow === undefined ? true : s.cliShow, cliBase: s.cliBase || 'member', cliMk: s.cliMk === undefined ? 20 : s.cliMk }) };
     const backSol = () => openSol(curSolId);
 
@@ -3006,7 +3011,7 @@ class Component extends DCLogic {
 
     // 时令营销条：跳到方案 / 卡券 / 模板
     const myPromo = [
-      { title: '员工年货', tag: '国企全员发放 · 利润最高 ' + maxProfit(solIds(SOLS.s1)), img: IMG.rice, hasImg: true, isCard: false, cardBg: '', cardFace: '', go: () => openSol('s1') },
+      { title: '员工年货', tag: '国企全员发放 · 一周交付', img: IMG.rice, hasImg: true, isCard: false, cardBg: '', cardFace: '', go: () => openSol('s1') },
       { title: '客户送礼', tag: '金融客户新春答谢', img: IMG.cashew, hasImg: true, isCard: false, cardBg: '', cardFace: '', go: () => openSol('s2') },
       { title: '新春福利卡', tag: '买卡发员工 · 自选兑换', img: '', hasImg: false, isCard: true, cardBg: '#C2413B', cardFace: '¥500', go: () => { this.setState({ solId: 's1', ss: 'cny' }); openCpk('cc1'); } },
       { title: '春节年货商城', tag: '模板上新 · 一键开商城', img: '', hasImg: false, isCard: true, cardBg: '#E8664F', cardFace: '模板', go: () => { this.setState({ solId: 's1', ss: 'cny' }); openTpd('cnyMall'); } }
