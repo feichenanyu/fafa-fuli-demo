@@ -26,6 +26,107 @@ button,input,select{font-family:inherit}
 .clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .clamp1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (prefers-reduced-motion: reduce){.card,.pill,.tile img{transition:none}.card:hover .tile img{transform:none}}
+:root{--brand:#0d9488;--brand-600:#077d6e;--brand-700:#066b5f;--brand-100:#e7f4f3;--brand-200:#b7e5dd;--brand-300:#8fd8cc;--brand-accent:#36c7aa;--brand-soft:#eaf8f5;--brand-hover-soft:#dff5f0;
+ --ink:#0f1418;--text-2:#666;--text-3:#929d99;--border:#dfe7e5;--border-subtle:#edf1f0;--border-strong:#c8d3d0;
+ --canvas:#f7f7f7;--surface:#fff;--surface-subtle:#f9f9f9;--surface-muted:#f6f6f6;--hover:#f1f1f1;--menu-selected:#ededee;
+ --warning:#fd6600;--warning-soft:#fff4e8;--danger:#d95e53;--danger-soft:#fff0ed;--neutral-600:#687570;--toast:#173a34;--price:#1d2531;
+ --shadow-raised:0 8px 22px #1f4a420d;--shadow-card:0 0 0 1px var(--border),var(--shadow-raised);--shadow-card-hover:0 0 0 1px var(--brand-300),0 12px 25px #1c6d6014;
+ --shadow-floating:0 0 6px var(--border),0 12px 30px #26322f1f;--shadow-dialog:0 0 0 1px var(--border),0 30px 90px #15413840;--shadow-action:0 8px 18px #0d94882e;
+ --ease:cubic-bezier(.22,1,.36,1);}
+.fu{animation:fadeUp .36s var(--ease) both}
+.fi{animation:fadeIn .3s ease-out both}
+.btn{height:36px;border:0;border-radius:999px;padding:0 16px;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;transition:background .15s,box-shadow .15s,transform .1s,border-color .15s,color .15s}
+.btn:active{transform:scale(.97)}
+.btn-p{background:var(--brand);color:#fff}
+.btn-p:hover{background:var(--brand-600);box-shadow:var(--shadow-action)}
+.btn-o{background:var(--surface);color:var(--ink);border:1px solid var(--border)}
+.btn-o:hover{border-color:var(--brand-300);color:var(--brand-700)}
+.btn-w{background:var(--warning);color:#fff}
+.btn-w:hover{background:#e85d00}
+.btn-lg{height:44px;padding:0 22px;font-size:15px}
+.pc{background:var(--canvas);border-radius:16px;padding:8px;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s,background .2s}
+.pc:hover{background:var(--surface);box-shadow:var(--shadow-card-hover);transform:translateY(-2px)}
+.mono{font-variant-numeric:tabular-nums}
+.btn-s{background:var(--brand-soft);color:#077d6e}
+.btn-s:hover{background:var(--brand-hover-soft)}
+.lsc-bar{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:4px 0 12px;border-bottom:1px solid var(--border-subtle)}
+.lsc{height:40px;border:0;background:transparent;border-radius:999px;padding:0 14px 0 6px;display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--text-2);cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .15s,color .15s}
+.lsc:hover{background:var(--hover);color:var(--ink)}
+.lsc.on{background:var(--ink);color:#fff;font-weight:500}
+.lsc-ico{width:28px;height:28px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex:none}
+.lsc-b{font-size:11px;border-radius:999px;padding:1px 7px;font-weight:500}
+.lsc-all{padding:0 12px;color:var(--brand-700)}
+.lsc-all.on{background:var(--brand-soft);color:var(--brand-700)}
+.lgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.55fr);gap:16px}
+.lban{position:relative;border-radius:20px;padding:28px 28px 44px;overflow:hidden;min-height:300px;display:flex;flex-direction:column;gap:10px;justify-content:flex-start}
+.lban-tag{font-size:12px;font-weight:600;letter-spacing:.04em;position:relative;z-index:1}
+.lban h2{margin:0;font-size:28px;line-height:36px;font-weight:700;position:relative;z-index:1;max-width:80%}
+.lban p{margin:0 0 8px;font-size:14px;line-height:22px;color:var(--text-2);max-width:72%;position:relative;z-index:1}
+.lban-art{position:absolute;right:-24px;bottom:-6px;width:62%;opacity:.95;pointer-events:none}
+.lban-dots{position:absolute;left:28px;bottom:18px;display:flex;gap:6px;z-index:1}
+.ldot{width:8px;height:8px;border-radius:999px;border:0;background:#0f141826;cursor:pointer;padding:0;transition:width .25s,background .25s}
+.ldot.on{width:22px;background:var(--brand)}
+.lzones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lz{background:var(--canvas);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0;transition:box-shadow .2s}
+.lz:hover{box-shadow:var(--shadow-card-hover)}
+.lz-h{display:flex;align-items:center;gap:6px;min-width:0}
+.lz-h b{font-size:15px;font-weight:600;white-space:nowrap}
+.lz-s{font-size:11px;border-radius:6px;padding:1px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lz-items{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.lz-it{border:0;background:transparent;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;font-size:12px;color:var(--danger);font-weight:600}
+.lz-im{width:100%;aspect-ratio:1;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.lz-im img{width:82%;height:82%;object-fit:contain;transition:transform .2s}
+.lz-it:hover .lz-im img{transform:scale(1.06)}
+.lz-go{border:0;background:#fff;border-radius:999px;height:28px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:12px;color:var(--brand-700);cursor:pointer;font-family:inherit}
+.lz-rule{color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.lbiz{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border-subtle);padding-bottom:12px}
+.lbt{border:1px solid transparent;background:transparent;border-radius:14px;padding:8px 18px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;cursor:pointer;font-family:inherit;color:var(--ink);transition:background .15s,border-color .15s}
+.lbt b{font-size:17px;font-weight:600}
+.lbt span{font-size:12px;color:var(--text-3)}
+.lbt:hover{background:var(--hover)}
+.lbt.on{background:var(--brand-soft);border-color:var(--brand-200)}
+.lbt.on b{color:var(--brand-700)}
+.zone-pill{display:inline-flex;align-self:flex-start;align-items:center;gap:10px;background:var(--brand-soft);border:1px solid var(--brand-200);border-radius:999px;padding:6px 8px 6px 14px;font-size:13px;color:var(--brand-700)}
+.zone-pill span{color:var(--text-2)}
+.zone-pill button{width:22px;height:22px;border-radius:999px;border:0;background:#fff;color:var(--text-2);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.lchips{display:flex;gap:8px;flex-wrap:wrap}
+.lchip{height:34px;border:1px solid var(--border);background:#fff;border-radius:999px;padding:0 14px;display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--text-2);cursor:pointer;font-family:inherit;transition:border-color .15s,color .15s,background .15s}
+.lchip:hover{border-color:var(--brand-300);color:var(--brand-700)}
+.lchip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.lchip-t{font-size:11px;color:var(--warning);background:#fff4e8;border-radius:6px;padding:1px 6px}
+.lchip.on .lchip-t{background:#ffffff26;color:#ffd7b8}
+.lpg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.pc{background:var(--canvas);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
+.pc:hover,.pc:focus-within{box-shadow:var(--shadow-card-hover);transform:translateY(-2px)}
+.pc-img{position:relative;aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pc-img img{width:78%;height:78%;object-fit:contain}
+.pc-img img.face{width:88%;height:auto;border-radius:10px;box-shadow:0 8px 18px #0f141822}
+.pc-ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px;background:linear-gradient(180deg,#0f141800 40%,#0f141873);opacity:0;transition:opacity .2s}
+.pc:hover .pc-ov,.pc:focus-within .pc-ov{opacity:1}
+.pc-bd{display:flex;gap:4px;flex-wrap:wrap}
+.pc-badge{font-size:11px;color:#fff;border-radius:6px;padding:2px 6px}
+.pc-acts{display:flex;flex-direction:column;gap:6px}
+.pc-acts button{height:30px;border:0;border-radius:999px;background:#ffffffeb;color:var(--ink);font-size:13px;cursor:pointer;font-family:inherit;transition:background .15s}
+.pc-acts button:hover{background:#fff}
+.pc-acts button.pr{background:var(--brand);color:#fff}
+.pc-acts button.pr:hover{background:var(--brand-600)}
+.pc-b{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px}
+.pc-t{font-size:14px;line-height:20px;height:40px;color:var(--price);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-spec{font-size:12px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-m{font-size:12px;color:var(--brand-700)}
+.pc-p{display:flex;align-items:baseline;gap:6px}
+.pc-price{font-size:18px;font-weight:600;color:var(--danger)}
+.pc-p s{font-size:12px;color:var(--text-3)}
+.pc-tags{display:flex;gap:4px;flex-wrap:wrap;height:20px;overflow:hidden}
+.pc-tags span{font-size:11px;color:var(--warning);border:1px solid #fdd6b5;border-radius:4px;padding:0 5px;line-height:18px}
+.pc-st{font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.pc-img .ph{display:flex;flex-direction:column;align-items:center;gap:6px;color:#C3C8CF;font-size:12px}
+.pc-face{width:86%;aspect-ratio:1.6;border-radius:12px;color:#fff;padding:14px 16px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 18px #0f141822}
+.lz-face{width:100%;aspect-ratio:1;border-radius:10px;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #F4F5F7; padding-bottom: 96px">
@@ -126,123 +227,108 @@ button,input,select{font-family:inherit}
     </section>
     </sc-if>
 
-        <section id="scene-zone" aria-label="场景方案" style="display: flex; flex-direction: column; gap: 0; background: #FFFFFF; border-radius: 12px; box-shadow: 0 1px 3px rgba(17,24,39,0.04); overflow: hidden">
-      <div role="tablist" aria-label="场景" style="display: flex; align-items: center; gap: 4px; padding: 0 20px; border-bottom: 1px solid #EEF0F3">
+        <section id="scene-zone" aria-label="场景方案" style="background: #FFFFFF; border-radius: 12px; box-shadow: 0 1px 3px rgba(17,24,39,0.04); padding: 14px 20px 22px; display: flex; flex-direction: column; gap: 16px">
+      <div class="lsc-bar" role="tablist" aria-label="福利场景">
         <sc-for list="{{sh.tabs}}" as="t" hint-placeholder-count="3">
-          <button type="button" role="tab" aria-selected="{{t.active}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}<span style="{{t.badgeStyle}}">{{t.badge}}</span></button>
+          <button type="button" class="lsc {{t.cls}}" role="tab" onClick="{{t.pick}}"><span class="lsc-ico" style="background: {{t.icoBg}}; color: {{t.icoFg}}">{{t.ico}}</span>{{t.label}}<sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="lsc-b" style="background: #fd6600; color: #fff">{{t.badge}}</span></sc-if></button>
         </sc-for>
-        <span style="flex: 1 1 0"></span>
-        <button type="button" onClick="{{goPlaza}}" style="border: none; background: transparent; padding: 0; font-size: 13px; color: #0D9488; cursor: pointer">找具体商品？去资源广场 ›</button>
+        <div style="flex: 1"></div>
+        <span style="font-size: 12px; color: #929d99">{{sh.scene.period}} · 方案由运营持续上新</span>
+        <button type="button" class="lsc lsc-all" onClick="{{goPlaza}}">资源广场<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
       </div>
 
-      <div style="padding: 18px 24px 22px; display: flex; flex-direction: column; gap: 16px">
-        <div role="tablist" aria-label="方案" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
-          <span style="font-size: 13px; color: #8A9099; margin-right: 4px">{{sh.scene.name}} · {{sh.solCount}} 套方案</span>
-          <sc-for list="{{sh.solTabs}}" as="st" hint-placeholder-count="3">
-            <button type="button" role="tab" aria-selected="{{st.active}}" onClick="{{st.pick}}" style="{{st.style}}">{{st.name}}<sc-if value="{{st.isNew}}" hint-placeholder-val="{{false}}"><span style="margin-left: 6px; font-size: 10px; color: #FFFFFF; background: #FF6A00; border-radius: 4px; padding: 0 4px">NEW</span></sc-if></button>
+      <div class="lgrid">
+        <div class="lban fi" style="background: {{hb.bg}}">
+          <span class="lban-tag" style="color: {{hb.fg}}">{{hb.tag}}</span>
+          <h2 style="color: #0f1418">{{hb.title}}</h2>
+          <p>{{hb.desc}}</p>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; position: relative; z-index: 1; margin-bottom: 6px">
+            <sc-for list="{{hb.stats}}" as="k" hint-placeholder-count="3"><span style="font-size: 12px; color: #4B5563; background: rgba(255,255,255,0.78); border-radius: 999px; padding: 3px 10px">{{k.l}} <strong style="color: {{k.c}}">{{k.v}}</strong></span></sc-for>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; position: relative; z-index: 1"><button type="button" class="btn btn-p" onClick="{{hb.go}}">看方案里的货</button><button type="button" class="btn btn-o" onClick="{{sd.openCli}}">生成甲方版</button></div>
+          <img class="lban-art" src="{{hb.art}}" alt="" aria-hidden="true">
+          <div class="lban-dots"><sc-for list="{{hb.dots}}" as="d" hint-placeholder-count="3"><button type="button" class="ldot {{d.cls}}" aria-label="{{d.label}}" title="{{d.label}}" onClick="{{d.pick}}"></button></sc-for></div>
+        </div>
+        <div class="lzones">
+          <sc-for list="{{zs}}" as="z" hint-placeholder-count="6">
+            <div class="lz">
+              <div class="lz-h"><b>{{z.title}}</b><span class="lz-s" style="color: {{z.fg}}; background: {{z.bg}}">{{z.sub}}</span></div>
+              <div class="lz-items"><sc-for list="{{z.thumbs}}" as="t" hint-placeholder-count="3"><button type="button" class="lz-it" title="{{t.name}}" onClick="{{z.go}}">
+                <sc-if value="{{t.isFace}}" hint-placeholder-val="{{false}}"><span class="lz-face" style="background: {{t.bg}}">{{t.face}}</span></sc-if>
+                <sc-if value="{{t.notFace}}" hint-placeholder-val="{{true}}"><span class="lz-im"><sc-if value="{{t.hasImg}}"><img src="{{t.img}}" alt=""></sc-if><sc-if value="{{t.isPh}}"><span style="font-size: 10px; color: #C3C8CF">商品图</span></sc-if><sc-if value="{{t.isCard}}"><span class="lz-face" style="background: #C2413B">{{t.cardFace}}</span></sc-if></span></sc-if>
+                <span class="mono">{{t.price}}</span></button></sc-for></div>
+              <button type="button" class="lz-go" onClick="{{z.go}}"><span class="lz-rule" title="{{z.rule}}">{{z.rule}}</span><span style="flex: none">{{z.cta}} ›</span></button>
+            </div>
           </sc-for>
         </div>
-
-        <div style="display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 28px; align-items: stretch">
-          <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0">
-            <span style="font-size: 12px; color: #8A9099; letter-spacing: 0.04em">{{sd.purpose}}方案 · 适合 {{sd.custText}}</span>
-            <h2 style="margin: 0; font-size: 22px; line-height: 1.35; color: #1F2329">{{sd.name}}</h2>
-            <p style="margin: 0; font-size: 14px; line-height: 1.75; color: #4B5563">{{sd.claim}}</p>
-            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #EFF1F3; border-bottom: 1px solid #EFF1F3; margin-top: 4px">
-              <sc-for list="{{sd.stats}}" as="k" hint-placeholder-count="3">
-                <span style="{{k.style}}"><strong style="font-size: 20px; color: {{k.color}}; font-variant-numeric: tabular-nums">{{k.v}}</strong><span style="font-size: 12px; color: #8A9099">{{k.l}}</span></span>
-              </sc-for>
-            </div>
-            <span style="flex: 1 1 0"></span>
-            <div style="display: flex; gap: 10px; align-items: center">
-              <button type="button" onClick="{{sd.openCli}}" style="min-height: 38px; padding: 0 18px; border-radius: 9999px; border: none; background: #0D9488; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer">生成甲方版，发给客户</button>
-              <span style="font-size: 12px; color: #8A9099">隐去会员价和利润</span>
-            </div>
-          </div>
-
-          <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0">
-            <div style="display: flex; align-items: baseline; gap: 10px"><strong style="font-size: 15px; color: #1F2329">这套方案能帮你做 {{sd.wayCount}} 种生意</strong><span style="font-size: 12px; color: #8A9099">{{sd.combo}}</span></div>
-            <div style="{{sd.waysGrid}}">
-              <sc-for list="{{sd.ways}}" as="w" hint-placeholder-count="3">
-                <button type="button" onClick="{{w.go}}" class="card" style="text-align: left; cursor: pointer; border: 1px solid #EEF0F2; border-radius: 12px; background: #FFFFFF; padding: 0; overflow: hidden; display: flex; flex-direction: column">
-                  <span class="tile" style="height: 112px; display: flex; align-items: center; justify-content: center; background: {{w.bg}}; overflow: hidden; position: relative">
-                    <sc-if value="{{w.isPal}}" hint-placeholder-val="{{true}}"><span style="display: grid; grid-template-columns: repeat(3, 72px); gap: 6px"><sc-for list="{{w.thumbs}}" as="t" hint-placeholder-count="3"><span style="width: 72px; height: 72px; border-radius: 8px; overflow: hidden; background: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(17,24,39,0.08)"><sc-if value="{{t.hasImg}}"><img src="{{t.img}}" alt="" style="width: 100%; height: 100%; object-fit: cover"></sc-if><sc-if value="{{t.isPh}}"><span style="font-size: 10px; color: #A0A6AE">商品图</span></sc-if><sc-if value="{{t.isCard}}"><span style="font-size: 11px; color: #FFFFFF; background: #C2413B; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center">{{t.cardFace}}</span></sc-if></span></sc-for></span></sc-if>
-                    <sc-if value="{{w.isCpk}}" hint-placeholder-val="{{false}}"><span style="width: 150px; height: 88px; border-radius: 10px; color: #FFFFFF; padding: 10px 12px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; background: {{w.face}}; box-shadow: 0 6px 14px rgba(17,24,39,0.18); transform: rotate(-4deg)"><span style="font-size: 12px; font-weight: 600">{{w.faceName}}</span><span style="font-size: 20px; font-weight: 700">{{w.faceVal}}</span></span></sc-if>
-                    <sc-if value="{{w.isTpl}}" hint-placeholder-val="{{false}}"><span style="width: 64px; height: 124px; margin-top: 30px; border-radius: 12px; border: 4px solid #1F2329; overflow: hidden; background: {{w.coverBg}}; display: flex; align-items: flex-start; justify-content: center"><sc-if value="{{w.hasImg}}"><img src="{{w.img}}" alt="" style="width: 100%; display: block"></sc-if></span></sc-if>
-                  </span>
-                  <span style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 5px">
-                    <span style="font-size: 12px; color: #0F7F74">{{w.kind}}</span>
-                    <strong style="font-size: 15px; color: #1F2329">{{w.title}}</strong>
-                    <span style="font-size: 13px; color: #4B5563; line-height: 1.6" class="clamp2">{{w.desc}}</span>
-                    <span style="display: flex; align-items: center; gap: 6px; margin-top: 4px"><span style="font-size: 12px; color: #8A9099">{{w.meta}}</span><span style="flex: 1 1 0"></span><span style="font-size: 13px; color: #0D9488; font-weight: 600">{{w.cta}} ›</span></span>
-                  </span>
-                </button>
-              </sc-for>
-            </div>
-          </div>
-        </div>
       </div>
-    </section>
 
-    <sc-if value="{{sd.hasPal}}" hint-placeholder-val="{{true}}">
-    <section id="sec-pal" aria-label="爆品货盘" style="display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 90px">
-      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 12px; color: #8A9099; font-family: ui-monospace, monospace">01</span><strong style="font-size: 18px; color: #1F2329">爆品货盘</strong><span style="font-size: 13px; color: #8A9099">运营组好的货，直接下单、代发或整盘上架到商城</span></div>
-      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
-        <sc-for list="{{sd.pals}}" as="x" hint-placeholder-count="2">
-          <article class="card" style="background: #FFFFFF; border: 1px solid #EEF0F2; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column">
-            <div onClick="{{x.open}}" class="tile" style="height: 168px; cursor: pointer; position: relative; display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; background: #F4F5F7">
-              <sc-for list="{{x.cover}}" as="t" hint-placeholder-count="3"><span style="{{t.cell}}; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #FFFFFF"><sc-if value="{{t.hasImg}}"><img src="{{t.img}}" alt="" style="width: 100%; height: 100%; object-fit: cover"></sc-if><sc-if value="{{t.isPh}}"><span style="font-size: 11px; color: #C3C8CF">商品图</span></sc-if><sc-if value="{{t.isCard}}"><span style="font-size: 13px; color: #FFFFFF; background: #C2413B; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center">{{t.cardFace}}</span></sc-if></span></sc-for>
-              <span style="position: absolute; left: 10px; top: 10px; font-size: 11px; color: #FFFFFF; background: rgba(7,81,74,0.88); border-radius: 4px; padding: 1px 6px">运营精选货盘</span>
-            </div>
-            <div style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1 1 0">
-              <strong style="font-size: 16px; color: #1F2329">{{x.name}}</strong>
-              <span style="font-size: 13px; color: #4B5563; line-height: 1.6" class="clamp2">{{x.sell}}</span>
-              <span style="font-size: 12px; color: #6B7280">共 {{x.n}} 款 · 利润最高 <strong style="color: #E2231A">{{x.maxProfit}}</strong> · {{x.lead}}</span>
-              <span style="flex: 1 1 0"></span>
-              <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px">
-                <span style="font-size: 12px; color: #8A9099; min-width: 0" class="clamp1">{{x.srcText}}</span>
-                <span style="flex: 1 1 0"></span>
-                <button type="button" onClick="{{x.open}}" style="flex: 0 0 auto; white-space: nowrap; border: none; background: transparent; padding: 0 4px; font-size: 13px; color: #0D9488; cursor: pointer">货盘详情 ›</button>
-                <button type="button" onClick="{{x.list}}" style="flex: 0 0 auto; white-space: nowrap; min-height: 32px; padding: 0 14px; border-radius: 8px; border: none; background: #0D9488; color: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer">整盘上架</button>
+      <div id="sol-biz" class="lbiz" role="tablist" aria-label="方案内容" style="scroll-margin-top: 90px">
+        <sc-for list="{{bz.tabs}}" as="t" hint-placeholder-count="3">
+          <button type="button" class="lbt {{t.cls}}" role="tab" onClick="{{t.pick}}"><b style="font-size: 17px; font-weight: 600; color: {{t.ink}}">{{t.label}}</b><span style="font-size: 12px; color: #929d99">{{t.sub}}</span></button>
+        </sc-for>
+        <div style="flex: 1"></div>
+        <span style="align-self: center; font-size: 12px; color: #929d99">当前方案：<b style="color: #0f1418; font-weight: 500">{{sd.name}}</b></span>
+      </div>
+      <div class="lchips">
+        <sc-for list="{{bz.chips}}" as="c" hint-placeholder-count="4">
+          <button type="button" class="lchip {{c.cls}}" onClick="{{c.pick}}">{{c.label}}<sc-if value="{{c.hasTag}}" hint-placeholder-val="{{true}}"><span class="lchip-t">{{c.tag}}</span></sc-if></button>
+        </sc-for>
+        <div style="flex: 1"></div>
+        <sc-for list="{{bz.acts}}" as="a" hint-placeholder-count="2"><button type="button" class="btn {{a.cls}}" style="height: 34px; font-size: 13px" onClick="{{a.go}}">{{a.label}}</button></sc-for>
+      </div>
+
+      <sc-if value="{{bz.isPal}}" hint-placeholder-val="{{true}}">
+      <div class="lpg">
+        <sc-for list="{{bz.goods}}" as="p" hint-placeholder-count="10">
+          <div class="pc fu" style="animation-delay: {{p.delay}}">
+            <div class="pc-img" onClick="{{p.open}}" style="cursor: pointer">
+              <sc-if value="{{p.hasImg}}"><img src="{{p.img}}" alt=""></sc-if>
+              <sc-if value="{{p.isPh}}"><span class="ph"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 16l-5-5-8 8"></path></svg>商品图待上传</span></sc-if>
+              <sc-if value="{{p.isCard}}"><span class="pc-face" style="background: {{p.cardBg}}"><span style="font-size: 13px">卡券</span><span style="font-size: 22px; font-weight: 700">{{p.cardFace}}</span></span></sc-if>
+              <div class="pc-ov">
+                <div class="pc-bd"><sc-for list="{{p.badges}}" as="bd" hint-placeholder-count="2"><span class="pc-badge" style="background: {{bd.bg}}">{{bd.t}}</span></sc-for></div>
+                <div class="pc-acts"><button type="button" onClick="{{p.inq}}">集采询价</button><button type="button" onClick="{{p.list}}">上架到商城</button><button type="button" onClick="{{p.add}}">加入购物车</button><button type="button" class="pr" onClick="{{p.order}}">立即下单 / 代发</button></div>
               </div>
             </div>
-          </article>
+            <div class="pc-b">
+              <div class="pc-t">{{p.title}}</div>
+              <div class="pc-spec">{{p.spec}}</div>
+              <div class="pc-m">{{p.marginLabel}}</div>
+              <div class="pc-p"><span class="mono pc-price">{{p.price}}</span><s class="mono">{{p.strike}}</s></div>
+              <div class="pc-tags"><sc-for list="{{p.tags}}" as="tg" hint-placeholder-count="2"><span>{{tg}}</span></sc-for></div>
+              <div class="pc-st mono">已售 {{p.sold}} · 昨日订单 {{p.yday}} · {{p.stock}}</div>
+            </div>
+          </div>
         </sc-for>
       </div>
-    </section>
-    </sc-if>
+      </sc-if>
 
-    <sc-if value="{{sd.hasCpk}}" hint-placeholder-val="{{true}}">
-    <section id="sec-cpk" aria-label="卡券" style="display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 90px">
-      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 12px; color: #8A9099; font-family: ui-monospace, monospace">{{sd.cpkNo}}</span><strong style="font-size: 18px; color: #1F2329">卡券</strong><span style="font-size: 13px; color: #8A9099">买卡发给员工，员工在卡券自带的兑换商城里自选</span></div>
-      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
-        <sc-for list="{{sd.cpks}}" as="x" hint-placeholder-count="2">
-          <article class="card" style="background: #FFFFFF; border: 1px solid #EEF0F2; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column">
-            <div onClick="{{x.open}}" style="height: 168px; cursor: pointer; background: #F7F8FA; display: flex; align-items: center; justify-content: center; position: relative">
-              <span style="width: 220px; height: 128px; border-radius: 12px; color: #FFFFFF; padding: 14px 16px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; background: {{x.bg}}; box-shadow: 0 10px 22px rgba(17,24,39,0.16)"><span style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600"><span>{{x.name}}</span><span style="font-size: 11px; opacity: 0.85">采发发</span></span><span style="font-size: 26px; font-weight: 700">{{x.face}}</span></span>
-              <sc-if value="{{x.excl}}" hint-placeholder-val="{{false}}"><span style="position: absolute; left: 10px; top: 10px; font-size: 11px; color: #C2410C; background: #FFF1E6; border-radius: 4px; padding: 1px 6px">专款专用</span></sc-if>
-            </div>
-            <div style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1 1 0">
-              <strong style="font-size: 16px; color: #1F2329">{{x.name}}</strong>
-              <span style="font-size: 13px; color: #4B5563; line-height: 1.6" class="clamp2">{{x.sell}}</span>
-              <span style="font-size: 12px; color: #6B7280">面值 {{x.faces}} · 可兑换 {{x.n}} 款 · 利润最高 <strong style="color: #E2231A">{{x.maxProfit}}</strong></span>
-              <span style="flex: 1 1 0"></span>
-              <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px">
-                <span style="font-size: 12px; color: #8A9099; min-width: 0" class="clamp1">兑换商城：{{x.mallName}}</span>
-                <span style="flex: 1 1 0"></span>
-                <button type="button" onClick="{{x.open}}" style="flex: 0 0 auto; white-space: nowrap; border: none; background: transparent; padding: 0 4px; font-size: 13px; color: #0D9488; cursor: pointer">卡券详情 ›</button>
-                <button type="button" onClick="{{x.buy}}" style="flex: 0 0 auto; white-space: nowrap; min-height: 32px; padding: 0 18px; border-radius: 8px; border: none; background: #0D9488; color: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer">买卡</button>
+      <sc-if value="{{bz.isCpk}}" hint-placeholder-val="{{false}}">
+      <div class="lpg" style="grid-template-columns: repeat(4, minmax(0, 1fr))">
+        <sc-for list="{{bz.cards}}" as="p" hint-placeholder-count="4">
+          <div class="pc fu" style="animation-delay: {{p.delay}}">
+            <div class="pc-img" onClick="{{p.open}}" style="cursor: pointer; aspect-ratio: 1.25">
+              <span class="pc-face" style="background: {{p.bg}}"><span style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600"><span>{{p.name}}</span><span style="font-size: 11px; opacity: 0.85">采发发</span></span><span style="font-size: 28px; font-weight: 700">{{p.face}}</span></span>
+              <div class="pc-ov">
+                <div class="pc-bd"><sc-for list="{{p.badges}}" as="bd" hint-placeholder-count="1"><span class="pc-badge" style="background: {{bd.bg}}">{{bd.t}}</span></sc-for></div>
+                <div class="pc-acts"><button type="button" onClick="{{p.open}}">看可兑换商品</button><button type="button" onClick="{{p.pvMall}}">预览兑换商城</button><button type="button" class="pr" onClick="{{p.buy}}">买卡</button></div>
               </div>
             </div>
-          </article>
+            <div class="pc-b">
+              <div class="pc-t" style="height: auto">{{p.title}}</div>
+              <div class="pc-spec">{{p.spec}}</div>
+              <div class="pc-m">{{p.line}}</div>
+              <div class="pc-p"><span class="mono pc-price">{{p.price}}</span><span style="font-size: 12px; color: #929d99">利润最高 {{p.maxProfit}}</span></div>
+              <div class="pc-tags"><sc-for list="{{p.tags}}" as="tg" hint-placeholder-count="2"><span>{{tg}}</span></sc-for></div>
+              <div class="pc-st mono">已售 {{p.sold}} · 昨日订单 {{p.yday}} · 兑换商城：{{p.mallName}}</div>
+            </div>
+          </div>
         </sc-for>
       </div>
-    </section>
-    </sc-if>
+      </sc-if>
 
-    <sc-if value="{{sd.hasTpl}}" hint-placeholder-val="{{true}}">
-    <section id="sec-tpl" aria-label="商城模板" style="display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 90px">
-      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 12px; color: #8A9099; font-family: ui-monospace, monospace">{{sd.tplNo}}</span><strong style="font-size: 18px; color: #1F2329">商城模板</strong><span style="font-size: 13px; color: #8A9099">滚动看装修，一键开商城，或套用到你已有的商城</span></div>
+      <sc-if value="{{bz.isTpl}}" hint-placeholder-val="{{false}}">
       <div style="display: flex; flex-direction: column; gap: 14px"><sc-for list="{{sd.tplsO}}" as="t" hint-placeholder-count="2">
 <article class="card" style="display: flex; gap: 20px; border: 1px solid #EEF0F3; border-radius: 12px; padding: 16px; background: #FFFFFF; min-width: 0">
                   <div style="flex: 0 0 228px; display: flex; flex-direction: column; align-items: center; gap: 8px">
@@ -295,8 +381,13 @@ button,input,select{font-family:inherit}
                   </div>
                 </article>
 </sc-for></div>
+      </sc-if>
+
+      <sc-if value="{{bz.empty}}" hint-placeholder-val="{{false}}">
+        <div style="padding: 40px 0; text-align: center; color: #666; background: #f7f7f7; border-radius: 20px">本方案没有配置这类内容，看看方案里的其他做法</div>
+      </sc-if>
+      <div style="font-size: 12px; color: #929d99; text-align: center">方案、专区与货盘由运营按规则配置（场景标签 · 商品池规则 · 库存阈值 · 置顶），优势数据由系统计算</div>
     </section>
-    </sc-if>
 
 
     <footer style="border-top: 1px solid #F0F2F4; padding: 20px 0 8px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px; color: #4B5563">
@@ -2355,6 +2446,26 @@ class Component extends DCLogic {
   resetF() { return { focus: null, group: 'all', src: 'all', price: 'all', margin: '0', wh: 'all', tag: 'all', pl: 'all', onlyList: false, brands: [], cat: 'all', minP: '', maxP: '', inStock: false, kw: '', page: 1 }; }
   goScene(sceneId, subId, extra, target) { this.setState(Object.assign(this.resetF(), { sceneId: sceneId, subId: subId || 'all', bannerIdx: 0 }, extra || {})); setTimeout(() => this.jump(target || 'scene-zone'), 30); }
   toggle(id) { const sel = Object.assign({}, this.state.selected); if (sel[id]) delete sel[id]; else sel[id] = true; this.setState({ selected: sel }); }
+  art() {
+    const box = (c1, c2, rib) => '<rect x="18" y="40" width="64" height="44" rx="6" fill="' + c1 + '"/><rect x="14" y="30" width="72" height="14" rx="4" fill="' + c2 + '"/><rect x="45" y="30" width="10" height="54" fill="' + rib + '"/><path d="M50 30c-6-12-20-12-18-4 2 6 12 4 18 4zm0 0c6-12 20-12 18-4-2 6-12 4-18 4z" fill="' + rib + '"/>';
+    return {
+      rice: '<rect x="22" y="18" width="56" height="66" rx="10" fill="#f3ead8"/><path d="M22 34h56" stroke="#d9c9a6" stroke-width="3"/><rect x="34" y="44" width="32" height="22" rx="4" fill="#0d9488"/><text x="50" y="60" font-size="11" text-anchor="middle" fill="#fff" font-family="sans-serif">5kg</text><path d="M40 18c3-6 17-6 20 0" stroke="#c9b48a" stroke-width="3" fill="none"/>',
+      nuts: '<rect x="16" y="30" width="68" height="50" rx="8" fill="#8a5a2b"/><rect x="16" y="30" width="68" height="14" rx="6" fill="#a7713b"/><circle cx="34" cy="60" r="7" fill="#e7c48d"/><circle cx="50" cy="64" r="7" fill="#d7a868"/><circle cx="66" cy="60" r="7" fill="#e7c48d"/><rect x="38" y="34" width="24" height="6" rx="3" fill="#f5d9a8"/>',
+      oil: '<rect x="36" y="16" width="16" height="10" rx="3" fill="#0d9488"/><path d="M30 30q0-6 8-6h12q8 0 8 6v48q0 6-8 6H38q-8 0-8-6z" fill="#f6c94b"/><rect x="34" y="46" width="20" height="18" rx="3" fill="#fff" opacity=".85"/><path d="M58 40h8q6 0 6 6v16" stroke="#e3b23a" stroke-width="4" fill="none"/>',
+      snack: '<path d="M24 26l52-6 4 58-56 6z" fill="#fd6600"/><path d="M24 26l52-6 1 10-52 6z" fill="#ff8a3d"/><circle cx="48" cy="56" r="12" fill="#fff4e8"/><path d="M42 56h12M48 50v12" stroke="#fd6600" stroke-width="3" stroke-linecap="round"/>',
+      quilt: '<rect x="14" y="30" width="72" height="44" rx="10" fill="#b7e5dd"/><path d="M14 44h72M14 58h72M38 30v44M62 30v44" stroke="#8fd8cc" stroke-width="2"/><rect x="14" y="66" width="72" height="10" rx="5" fill="#0d9488"/>',
+      warmer: '<rect x="26" y="26" width="48" height="52" rx="20" fill="#f6a5a0"/><rect x="34" y="34" width="32" height="36" rx="14" fill="#ffd6d2"/><path d="M50 44c-6 0-6 8 0 12 6-4 6-12 0-12z" fill="#d95e53"/><rect x="44" y="18" width="12" height="10" rx="3" fill="#c8d3d0"/>',
+      goji: '<rect x="20" y="34" width="60" height="46" rx="10" fill="#f9e3cf"/><circle cx="36" cy="52" r="5" fill="#d95e53"/><circle cx="46" cy="60" r="5" fill="#e7756b"/><circle cx="58" cy="52" r="5" fill="#d95e53"/><ellipse cx="64" cy="64" rx="7" ry="5" fill="#9b2f26"/><rect x="28" y="26" width="44" height="12" rx="6" fill="#9b2f26"/>',
+      honey: '<rect x="32" y="22" width="36" height="10" rx="3" fill="#8a5a2b"/><path d="M28 34h44v40q0 8-8 8H36q-8 0-8-8z" fill="#f6c94b"/><path d="M28 48h44" stroke="#e3b23a" stroke-width="3"/><path d="M44 56l6-4 6 4v7l-6 4-6-4z" fill="#fff" opacity=".8"/>',
+      cup: '<rect x="36" y="14" width="28" height="10" rx="4" fill="#687570"/><rect x="34" y="24" width="32" height="62" rx="12" fill="#0d9488"/><rect x="40" y="36" width="6" height="34" rx="3" fill="#8fd8cc" opacity=".8"/>',
+      milk: '<path d="M30 30l8-12h24l8 12v52H30z" fill="#fff" stroke="#c8d3d0" stroke-width="2"/><path d="M30 52c10-6 30 6 40 0v30H30z" fill="#4772ad"/><text x="50" y="44" font-size="9" text-anchor="middle" fill="#4772ad" font-family="sans-serif">有机</text>',
+      gift: box('#d95e53', '#e7756b', '#f6c94b'), gift2: box('#5b4636', '#715844', '#36c7aa'), giftG: box('#7a3e2b', '#9b5a43', '#f6c94b'),
+      giftW: box('#8fd8cc', '#b7e5dd', '#fd6600'), giftS: box('#fd6600', '#ff8a3d', '#fff4e8'), giftB: box('#f6a5a0', '#ffd6d2', '#4772ad'),
+      tea: '<rect x="16" y="34" width="68" height="46" rx="8" fill="#0d9488"/><rect x="16" y="34" width="68" height="12" rx="6" fill="#36c7aa"/><path d="M38 56h20v10q0 8-10 8t-10-8z" fill="#fff"/><path d="M58 59h4q4 0 4 4t-4 4h-4" stroke="#fff" stroke-width="3" fill="none"/>',
+      sea: '<rect x="14" y="34" width="72" height="46" rx="8" fill="#173a34"/><rect x="14" y="34" width="72" height="12" rx="6" fill="#26574e"/><ellipse cx="38" cy="62" rx="10" ry="7" fill="#e7c48d"/><ellipse cx="62" cy="62" rx="12" ry="5" fill="#8a5a2b"/>'
+    };
+  }  svgUri(s) { return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s); }
+  cover(kinds, bg) { const A = this.art(); const pos = [[6, 18, .62], [70, 8, .74], [144, 22, .6]]; let g = ''; kinds.slice(0, 3).forEach((k, i) => { const p = pos[i]; g += '<g transform="translate(' + p[0] + ',' + p[1] + ') scale(' + p[2] + ')">' + (A[k] || A.rice) + '</g>'; }); return this.svgUri('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 100"><rect width="210" height="100" fill="' + bg + '"/>' + g + '</svg>'); }
   renderVals() {
     const s = this.state;
     const ownMc = !!this.props['开通自有猫超'];
@@ -3025,10 +3136,66 @@ class Component extends DCLogic {
     const ns = { items: nsItems, count: nsItems.length, close: () => this.setState({ modal: null, seenNew: true }) };
     const todoSum = 2 + 3 + 1 + 1;
     const acct = { open: !!s.acctOpen, toggle: () => this.setState({ acctOpen: !s.acctOpen }), close: () => this.setState({ acctOpen: false }), todoSum: todoSum };
+
+    // ===== 场景页（参照发发福利 Beta 0.3 一页融合）=====
+    const SC_ICO = { cny: { i: '春', bg: '#fde2dc', fg: '#c2413b' }, bday: { i: '生', bg: '#dff5f0', fg: '#077d6e' }, meal: { i: '餐', bg: '#e3ecfd', fg: '#1d4ed8' } };
+    sh.tabs = SSCENES.map((x) => { const on = x.id === ssc.id; const ic = SC_ICO[x.id];
+      return { label: x.name, cls: on ? 'on' : '', ico: ic.i, icoBg: on ? 'rgba(255,255,255,0.18)' : ic.bg, icoFg: on ? '#fff' : ic.fg, hasBadge: x.kind === '档期场景', badge: '档期中', pick: () => this.setState({ ss: x.id, solId: x.sols[0], biz: null, bzChip: 'all' }) }; });
+    const HERO = { cny: { bg: 'linear-gradient(135deg, #fff1ec 0%, #fff 100%)', fg: '#c2413b' }, bday: { bg: 'linear-gradient(135deg, #e7f4f3 0%, #fff 100%)', fg: '#077d6e' }, meal: { bg: 'linear-gradient(135deg, #e8effd 0%, #fff 100%)', fg: '#1d4ed8' } };
+    const ARTK = { s1: ['rice', 'oil', 'milk'], s2: ['nuts', 'tea', 'honey'], s3: ['oil', 'rice', 'quilt'], s4: ['cup', 'tea', 'nuts'], s5: ['snack', 'milk', 'cup'] };
+    const solIdx = ssc.sols.indexOf(curSolId);
+    const hb = { bg: HERO[ssc.id].bg, fg: HERO[ssc.id].fg,
+      tag: '方案 ' + (solIdx + 1) + '/' + ssc.sols.length + ' · ' + solO.purpose + ' · 适合 ' + solO.cust.join(' / '),
+      title: solO.name, desc: (solO.claim || solO.sell) + (solO.combo ? ' ' + solO.combo + '。' : ''),
+      stats: [{ l: '利润最高', v: maxProfit(soIds), c: '#d95e53' }].concat(advPick(soIds, null, true).slice(0, 2).map((a) => ({ l: a.sl, v: a.v, c: '#066b5f' }))),
+      art: this.cover(ARTK[curSolId] || ['rice', 'nuts', 'cup'], 'transparent'),
+      go: () => this.jump('sol-biz'),
+      dots: ssc.sols.map((k, i) => ({ cls: k === curSolId ? 'on' : '', label: '方案 ' + (i + 1) + '：' + SOLS[k].name, pick: () => this.setState({ solId: k, biz: null, bzChip: 'all' }) })) };
+    // 专区：方案里的每一个货盘 / 卡券 / 模板
+    const curBiz = s.biz || (solO.pals.length ? 'pal' : (solO.cpks.length ? 'cpk' : 'tpl'));
+    const goZone = (biz, chip) => { this.setState({ biz: biz, bzChip: chip }); setTimeout(() => this.jump('sol-biz'), 30); };
+    const zs = [].concat(
+      solO.pals.map((k) => { const x = PALS[k]; return { title: x.name, sub: '爆品货盘 · ' + x.ids.length + ' 款', fg: '#066b5f', bg: '#e7f4f3', rule: '运营推荐：' + x.reason, cta: '进入专区', go: () => goZone('pal', k),
+        thumbs: imgFirst(x.ids).slice(0, 3).map((id) => Object.assign(thumb(PB[id]), { isFace: false, notFace: true, price: '¥' + num(PB[id].member) })) }; }),
+      solO.cpks.map((k) => { const c = CPKS[k]; return { title: c.name, sub: c.excl ? '卡券 · 专款专用' : '卡券 · 员工自选', fg: '#fd6600', bg: '#fff4e8', rule: '兑换商城：' + TPL[c.mall].name + ' · 可兑换 ' + c.ids.length + ' 款', cta: '去买卡', go: () => goZone('cpk', k),
+        thumbs: c.faces.slice(0, 3).map((f) => ({ isFace: true, notFace: false, bg: c.bg, face: faceText(c, f), name: c.name, price: faceText(c, f) })) }; }),
+      solO.tpls.map((k) => { const t = TPL[k]; const ids = TPL_IDS[k] || []; return { title: t.name, sub: '商城模板 · ' + t.type, fg: '#1d4ed8', bg: '#e8effd', rule: t.clients + ' 家服务商在用 · ' + t.reason, cta: '去开商城', go: () => goZone('tpl', k),
+        thumbs: imgFirst(ids).slice(0, 3).map((id) => Object.assign(thumb(PB[id]), { isFace: false, notFace: true, price: '¥' + num(PB[id].member) })) }; })
+    ).slice(0, 6);
+    // 业务栏目：爆品货盘 / 卡券 / 商城模板
+    const chipOn = s.bzChip || 'all';
+    const seed = (id) => { let h = 0; for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) % 9973; return h; };
+    const palIds = solO.pals.filter((k) => chipOn === 'all' || chipOn === k).reduce((a, k) => a.concat(PALS[k].ids.filter((id) => a.indexOf(id) < 0)), []);
+    const PALTAG = { pc1: '员工年货', pc2: '商务礼盒', pc3: '工会慰问', pb1: '生日礼', pm1: '下午茶' };
+    const tagOf = (id) => solO.pals.filter((k) => PALS[k].ids.indexOf(id) >= 0).map((k) => PALTAG[k]).slice(0, 2);
+    const goods = palIds.map((id, i) => { const p = PB[id]; const d = decorate(p); const sd2 = seed(id);
+      return { delay: (i % 10) * 30 + 'ms', img: p.img || '', hasImg: !!p.img, isPh: !p.img && !p.card, isCard: !!p.card, cardBg: p.card ? p.card.bg : '', cardFace: p.card ? p.card.face : '',
+        badges: [{ t: SRC[p.src], bg: '#0d9488' }].concat(p.wh === '电商仓' ? [{ t: '24h 发货', bg: '#fd6600' }] : []),
+        title: p.name, spec: p.spec + ' · ' + SRC[p.src], marginLabel: p.market ? '市场价利润率 ' + pct(marginOf(p.member, p.market)) : '',
+        price: money(p.member), strike: p.market ? money(p.market) : '', tags: tagOf(id),
+        sold: (1200 + sd2 * 3).toLocaleString(), yday: 5 + sd2 % 25, stock: p.stock === '有货' ? '库存充足' : p.stock,
+        open: d.openDetail, inq: d.inqOne, list: d.listOne, add: d.addCart, order: d.orderOne }; });
+    const cardItems = solO.cpks.filter((k) => chipOn === 'all' || chipOn === k).reduce((a, k) => { const c = CPKS[k]; return a.concat(c.faces.map((f, fi) => { const sd2 = seed(k + f);
+      return { delay: (a.length + fi) * 40 + 'ms', name: c.name, bg: c.bg, face: faceText(c, f), title: c.name + ' · 面值 ' + faceText(c, f), spec: '电子卡 · ' + c.faces.map((x) => faceText(c, x)).join(' / ') + ' · 有效期 ' + c.valid,
+        line: '卡密即发 · 员工在「' + TPL[c.mall].name + '」自助兑换', price: '¥' + f.toFixed(2), maxProfit: maxProfit(c.ids), mallName: TPL[c.mall].name,
+        tags: (c.excl ? ['专款专用'] : ['通用']).concat([ssc.name.replace('2027 ', '').replace('春节年货节', '春节')]), badges: [{ t: c.excl ? '专款专用' : '员工自选', bg: c.excl ? '#fd6600' : '#0d9488' }],
+        sold: (300 + sd2 * 2).toLocaleString(), yday: 2 + sd2 % 20,
+        open: () => { this.setState({ cpkFace: fi }); openCpk(k); }, pvMall: () => pvTpl(c.mall), buy: () => openBuy(k, fi) }; })); }, []);
+    const BZ = [{ k: 'pal', l: '爆品货盘', s: '运营组货 · 一件代发', n: solO.pals.length }, { k: 'cpk', l: '卡券', s: '多档面值 · 员工自选', n: solO.cpks.length }, { k: 'tpl', l: '商城模板', s: '装修好 · 一键开商城', n: solO.tpls.length }];
+    const chipList = curBiz === 'pal' ? solO.pals.map((k) => ({ v: k, l: PALS[k].name, t: PALS[k].ids.length + ' 款' }))
+      : curBiz === 'cpk' ? solO.cpks.map((k) => ({ v: k, l: CPKS[k].name, t: CPKS[k].excl ? '专款专用' : '员工自选' }))
+      : solO.tpls.map((k) => ({ v: k, l: TPL[k].name, t: TPL[k].type }));
+    const bz = { isPal: curBiz === 'pal' && goods.length > 0, isCpk: curBiz === 'cpk' && cardItems.length > 0, isTpl: curBiz === 'tpl' && solO.tpls.length > 0,
+      empty: (curBiz === 'pal' && !goods.length) || (curBiz === 'cpk' && !cardItems.length) || (curBiz === 'tpl' && !solO.tpls.length),
+      tabs: BZ.map((t) => ({ ink: curBiz === t.k ? '#066b5f' : '#0f1418', cls: curBiz === t.k ? 'on' : '', label: t.l + (t.n ? ' ' + t.n : ''), sub: t.s, pick: () => this.setState({ biz: t.k, bzChip: 'all' }) })),
+      chips: [{ v: 'all', l: curBiz === 'pal' ? '全部商品' : (curBiz === 'cpk' ? '全部卡券' : '全部模板'), t: '' }].concat(chipList).map((c) => ({ label: c.l, hasTag: !!c.t, tag: c.t, cls: chipOn === c.v ? 'on' : '', pick: () => this.setState({ bzChip: c.v }) })),
+      acts: curBiz === 'pal' && goods.length ? [{ label: '整盘上架', cls: 'btn-o', go: () => openListFor(palIds, palIds.map((id) => PB[id])) }, { label: '整盘下单 / 代发', cls: 'btn-p', go: () => openOrder(palIds, 'direct') }] : [],
+      goods: goods, cards: cardItems };
+    sd.tplsO = sd.tplsO.filter((t, i) => curBiz !== 'tpl' || chipOn === 'all' || solO.tpls[i] === chipOn);
     return {
       viewPal: s.view === 'pal', viewCpk: s.view === 'cpk', viewTpd: s.view === 'tpd', viewCli: s.view === 'cli',
       modalCliCfg: s.modal === 'cliCfg', modalBuyCard: s.modal === 'buyCard', modalApplyTpl: s.modal === 'applyTpl', modalNewSol: s.modal === 'newSol', ns: ns, acct: acct,
-      sh: sh, sd: sd, plv: pl, ck: ck, bc: bc, tpd: tpdV, ap: ap, cf: cf, cli: cli, sx: sx, solName: solO.name, backSol: backSol,
+      hb: hb, zs: zs, bz: bz, sh: sh, sd: sd, plv: pl, ck: ck, bc: bc, tpd: tpdV, ap: ap, cf: cf, cli: cli, sx: sx, solName: solO.name, backSol: backSol,
       daysLeft: daysLeft, promo: myPromo, bannerImgs: bannerImgs, hotWords: hotWords, selCount: selItems.length,
       sceneCount: SCENES.length, balAllowed: this.props['账户查看权限'] !== false, balDenied: this.props['账户查看权限'] === false, balShown: s.showBal, balHidden: !s.showBal,
       balText: s.showBal ? '¥12,860.00' : '¥ ****', balAria: s.showBal ? '隐藏余额' : '显示余额', toggleBal: () => this.setState({ showBal: !s.showBal }), goBal: () => this.flash('演示：打开预付款账户明细'),
