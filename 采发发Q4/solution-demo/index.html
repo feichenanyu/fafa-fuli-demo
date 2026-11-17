@@ -139,6 +139,15 @@ button,input,select{font-family:inherit}
 .zt-phone img{width:100%;min-height:100%;object-fit:cover;object-position:top;display:block;transition:transform 3s ease}
 .zt-card:hover .zt-phone img{transform:translateY(-28%)}
 
+.zmat{display:flex;gap:20px;align-items:stretch;background:linear-gradient(90deg,#FFF8F3 0%,#fff 60%);border:1px solid #F7E2D3;border-radius:20px;padding:18px 20px;margin-top:4px}
+.zmat-tx{display:flex;flex-direction:column;gap:4px;background:#fff;border:1px solid #F1E4DA;border-radius:10px;padding:8px 10px}
+.zmat-row{flex:1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;min-width:0}
+.zmat-p{aspect-ratio:3/4;border:0;padding:0;border-radius:10px;overflow:hidden;display:flex;cursor:pointer;text-align:left;box-shadow:0 4px 14px rgba(194,65,59,.14);transition:transform .2s}
+.zmat-p:hover{transform:translateY(-3px)}
+.zmat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.zmat-c{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #eef1f0;border-radius:16px;padding:10px}
+.clamp3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #F4F5F7; padding-bottom: 96px">
@@ -302,6 +311,20 @@ button,input,select{font-family:inherit}
         </div>
       </div>
 
+      <div class="zmat">
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 0 240px; min-width: 0">
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap"><b style="font-size: 15px; font-weight: 600; color: #0f1418">营销素材</b><span class="lz-s" style="color: #9A3412; background: #FFF1E6">{{ms.count}} 份 · 随方案更新</span></div>
+          <span style="font-size: 12px; color: #666; line-height: 1.6">{{ms.sub}}。海报{{ms.qrHint}}，下载就能发朋友圈、企业群。</span>
+          <div class="zmat-tx"><span style="font-size: 11px; color: #929d99">{{ms.text.name}}</span><span class="clamp3" style="font-size: 12px; color: #374151; line-height: 1.6">{{ms.text.text}}</span><button type="button" onClick="{{ms.text.down}}" style="align-self: flex-start; border: 0; background: transparent; padding: 0; font-size: 12px; color: #066b5f; cursor: pointer">复制文案</button></div>
+          <button type="button" class="btn btn-o" style="height: 34px; font-size: 13px; align-self: flex-start; padding: 0 16px" onClick="{{ms.open}}">打开素材库 ›</button>
+        </div>
+        <div class="zmat-row">
+          <sc-for list="{{ms.posters}}" as="mp" hint-placeholder-count="5">
+            <button type="button" class="zmat-p" onClick="{{mp.pv}}" aria-label="预览 {{mp.name}}" title="{{mp.name}}"><span style="{{mp.posterStyle}}; font-size: 9px; height: 100%; box-sizing: border-box"><span style="font-size: 0.75em; opacity: 0.85; letter-spacing: 0.08em">{{mp.kicker}}</span><span style="font-size: 1.5em; font-weight: 800; line-height: 1.25">{{mp.title}}</span><span class="clamp2" style="font-size: 0.8em; opacity: 0.9; line-height: 1.5">{{mp.sub}}</span><span style="flex: 1 1 0"></span><span style="display: flex; align-items: center; gap: 6%; background: rgba(255,255,255,0.95); color: #1F2329; border-radius: 0.6em; padding: 0.5em 0.6em"><span style="width: 22%; aspect-ratio: 1 / 1; border: 1px dashed #C9CED5; border-radius: 0.3em; flex: 0 0 auto"></span><span style="font-size: 0.75em; color: #8A9099">商城二维码位</span></span></span></button>
+          </sc-for>
+        </div>
+      </div>
+
       <div id="sol-biz" class="lbiz" role="tablist" aria-label="方案内容" style="scroll-margin-top: 90px">
         <sc-for list="{{bz.tabs}}" as="t" hint-placeholder-count="3">
           <button type="button" class="lbt {{t.cls}}" role="tab" onClick="{{t.pick}}"><b style="font-size: 17px; font-weight: 600; color: {{t.ink}}">{{t.label}}</b><span style="font-size: 12px; color: #929d99">{{t.sub}}</span></button>
@@ -431,6 +454,22 @@ button,input,select{font-family:inherit}
 </sc-for></div>
       </sc-if>
 
+      <sc-if value="{{bz.isMat}}" hint-placeholder-val="{{false}}">
+      <div class="zmat-grid">
+        <sc-for list="{{bz.mats}}" as="mc" hint-placeholder-count="6">
+          <div class="zmat-c">
+            <button type="button" onClick="{{mc.pv}}" aria-label="预览 {{mc.name}}" style="aspect-ratio: 3 / 4; border: 0; padding: 0; background: #F2F3F5; display: flex; cursor: pointer; border-radius: 12px; overflow: hidden; text-align: left">
+              <sc-if value="{{mc.isPoster}}" hint-placeholder-val="{{true}}"><span style="{{mc.posterStyle}}; font-size: 11px; height: 100%; box-sizing: border-box"><span style="font-size: 0.75em; opacity: 0.85; letter-spacing: 0.08em">{{mc.kicker}}</span><span style="font-size: 1.5em; font-weight: 800; line-height: 1.25">{{mc.title}}</span><span class="clamp2" style="font-size: 0.8em; opacity: 0.9; line-height: 1.5">{{mc.sub}}</span><span style="flex: 1 1 0"></span><span style="display: flex; align-items: center; gap: 6%; background: rgba(255,255,255,0.95); color: #1F2329; border-radius: 0.6em; padding: 0.5em 0.6em"><span style="width: 22%; aspect-ratio: 1 / 1; border: 1px dashed #C9CED5; border-radius: 0.3em; flex: 0 0 auto"></span><span style="font-size: 0.75em; color: #8A9099">商城二维码位</span></span></span></sc-if>
+              <sc-if value="{{mc.isText}}" hint-placeholder-val="{{false}}"><span style="flex: 1 1 0; background: #fff; padding: 16px 14px; font-size: 12px; line-height: 1.8; color: #374151; overflow: hidden; border: 1px solid #eef1f0; border-radius: 12px">{{mc.text}}</span></sc-if>
+              <sc-if value="{{mc.isFile}}" hint-placeholder-val="{{false}}"><span style="flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: #fff; border: 1px solid #eef1f0; border-radius: 12px"><span style="{{mc.extStyle}}">{{mc.ext}}</span><span style="font-size: 12px; color: #6B7280; padding: 0 12px; text-align: center">{{mc.desc}}</span></span></sc-if>
+            </button>
+            <div style="display: flex; flex-direction: column; gap: 2px"><b class="clamp1" style="font-size: 13px; font-weight: 600; color: #0f1418">{{mc.name}}</b><span style="font-size: 12px; color: #929d99">{{mc.meta}}</span></div>
+            <div style="display: flex; gap: 6px"><button type="button" class="btn btn-o" style="flex: 1; height: 30px; font-size: 12px; padding: 0" onClick="{{mc.pv}}">预览</button><button type="button" class="btn btn-p" style="flex: 1; height: 30px; font-size: 12px; padding: 0" onClick="{{mc.down}}">{{mc.downLabel}}</button></div>
+          </div>
+        </sc-for>
+      </div>
+      </sc-if>
+
       <sc-if value="{{bz.empty}}" hint-placeholder-val="{{false}}">
         <div style="padding: 40px 0; text-align: center; color: #666; background: #f7f7f7; border-radius: 20px">本方案没有配置这类内容，看看方案里的其他做法</div>
       </sc-if>
@@ -545,6 +584,22 @@ button,input,select{font-family:inherit}
 
       <sc-if value="{{bz.isTpl}}" hint-placeholder-val="{{false}}">
       <div style="display: flex; flex-direction: column; gap: 14px">__TPL_CARDS__</div>
+      </sc-if>
+
+      <sc-if value="{{bz.isMat}}" hint-placeholder-val="{{false}}">
+      <div class="zmat-grid">
+        <sc-for list="{{bz.mats}}" as="mc" hint-placeholder-count="6">
+          <div class="zmat-c">
+            <button type="button" onClick="{{mc.pv}}" aria-label="预览 {{mc.name}}" style="aspect-ratio: 3 / 4; border: 0; padding: 0; background: #F2F3F5; display: flex; cursor: pointer; border-radius: 12px; overflow: hidden; text-align: left">
+              <sc-if value="{{mc.isPoster}}" hint-placeholder-val="{{true}}"><span style="{{mc.posterStyle}}; font-size: 11px; height: 100%; box-sizing: border-box"><span style="font-size: 0.75em; opacity: 0.85; letter-spacing: 0.08em">{{mc.kicker}}</span><span style="font-size: 1.5em; font-weight: 800; line-height: 1.25">{{mc.title}}</span><span class="clamp2" style="font-size: 0.8em; opacity: 0.9; line-height: 1.5">{{mc.sub}}</span><span style="flex: 1 1 0"></span><span style="display: flex; align-items: center; gap: 6%; background: rgba(255,255,255,0.95); color: #1F2329; border-radius: 0.6em; padding: 0.5em 0.6em"><span style="width: 22%; aspect-ratio: 1 / 1; border: 1px dashed #C9CED5; border-radius: 0.3em; flex: 0 0 auto"></span><span style="font-size: 0.75em; color: #8A9099">商城二维码位</span></span></span></sc-if>
+              <sc-if value="{{mc.isText}}" hint-placeholder-val="{{false}}"><span style="flex: 1 1 0; background: #fff; padding: 16px 14px; font-size: 12px; line-height: 1.8; color: #374151; overflow: hidden; border: 1px solid #eef1f0; border-radius: 12px">{{mc.text}}</span></sc-if>
+              <sc-if value="{{mc.isFile}}" hint-placeholder-val="{{false}}"><span style="flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: #fff; border: 1px solid #eef1f0; border-radius: 12px"><span style="{{mc.extStyle}}">{{mc.ext}}</span><span style="font-size: 12px; color: #6B7280; padding: 0 12px; text-align: center">{{mc.desc}}</span></span></sc-if>
+            </button>
+            <div style="display: flex; flex-direction: column; gap: 2px"><b class="clamp1" style="font-size: 13px; font-weight: 600; color: #0f1418">{{mc.name}}</b><span style="font-size: 12px; color: #929d99">{{mc.meta}}</span></div>
+            <div style="display: flex; gap: 6px"><button type="button" class="btn btn-o" style="flex: 1; height: 30px; font-size: 12px; padding: 0" onClick="{{mc.pv}}">预览</button><button type="button" class="btn btn-p" style="flex: 1; height: 30px; font-size: 12px; padding: 0" onClick="{{mc.down}}">{{mc.downLabel}}</button></div>
+          </div>
+        </sc-for>
+      </div>
       </sc-if>
 
       <sc-if value="{{bz.empty}}" hint-placeholder-val="{{false}}">
@@ -3000,22 +3055,28 @@ class Component extends DCLogic {
       back: () => this.setState({ view: dBack.view, storeKey: dBack.storeKey, storeBack: dBack.storeBack }), backLabel: (dBack.view === 'store' ? '‹ 返回店铺' : (BACK_LBL[dBack.view] || '‹ 返回')) });
     // ---------- 营销素材 ----------
     const MAT_TYPES = [{ k: 'all', l: '全部' }, { k: 'poster', l: '海报' }, { k: 'text', l: '朋友圈文案' }, { k: 'doc', l: '方案介绍' }];
-    const POSTER_BG = { cny: 'linear-gradient(160deg, #C2413B 0%, #E8664F 60%, #F2A65A 100%)', emp: 'linear-gradient(160deg, #0B6E66 0%, #0D9488 60%, #5CC8B5 100%)', uni: 'linear-gradient(160deg, #1E4F9C 0%, #3B7DD8 60%, #7FB2F0 100%)' };
+    const POSTER_BG = { cny: 'linear-gradient(160deg, #C2413B 0%, #E8664F 60%, #F2A65A 100%)', emp: 'linear-gradient(160deg, #0B6E66 0%, #0D9488 60%, #5CC8B5 100%)', uni: 'linear-gradient(160deg, #1E4F9C 0%, #3B7DD8 60%, #7FB2F0 100%)', bday: 'linear-gradient(160deg, #B4235A 0%, #E0527F 60%, #F5A3B8 100%)', meal: 'linear-gradient(160deg, #B45309 0%, #EA8A1E 60%, #F7C26B 100%)', cnyCard: 'linear-gradient(160deg, #9F1D1D 0%, #D9372B 55%, #F0B44C 100%)' };
     const subImgs = (sb) => Array.from(new Set(sb.groups.reduce((a, g) => a.concat(g.ids), []))).map((id) => byId[id]).filter((p) => p && p.img).slice(0, 3).map((p) => ({ img: p.img }));
     const allImgs = subImgs({ groups: scene.subs.reduce((a, sb) => a.concat(sb.groups), []) });
     const matMall = MALLS.find((m) => m.id === s.matMall);
     const qrOn = !!s.matQr; const needMall = qrOn && !matMall;
-    const MATS = [{ id: 'mp0', type: 'poster', name: scene.name + ' · 主海报', meta: '海报 · 1080×1440 · JPG', kicker: '采发发 · ' + scene.name, title: scene.name, sub: scene.desc }]
-      .concat(scene.subs.map((sb) => ({ id: 'mp-' + sb.id, type: 'poster', name: sb.name + ' · 海报', meta: '海报 · 1080×1440 · JPG', kicker: scene.name, title: sb.name, sub: (SUB_META[sb.id] || {}).desc || '' })))
-      .concat([{ id: 'mt1', type: 'text', name: '朋友圈文案 · 预热', meta: '文案 · 适合朋友圈', text: '【' + scene.name + '】' + scene.subs.map((x) => x.name).join('、') + '一站配齐！' + scene.desc + '。正品保障、可开票，支持按名单代发到每位员工，欢迎咨询。' },
-        { id: 'mt2', type: 'text', name: '社群文案 · 下单提醒', meta: '文案 · 适合企业群', text: '各位好，' + scene.name + '方案已上线：预算可控、品类可选、发货到人。需要方案或报价的，直接私信我，当天出方案。' },
-        { id: 'md1', type: 'doc', name: scene.name + '方案介绍', meta: 'PDF · 12 页 · 4.2 MB', ext: 'PDF', desc: '场景方案、预算档位、商品清单与服务说明' }]);
+    const _msc = SSCENES.find((x) => x.id === (s.ss || 'cny')) || SSCENES[0];
+    const _msid = (s.solId && _msc.sols.indexOf(s.solId) >= 0) ? s.solId : _msc.sols[0]; const _mso = SOLS[_msid]; const _short = _mso.name.split(' · ')[0];
+    const PM = '海报 · 1080×1440 · JPG';
+    const MATS = [{ id: 'mp0-' + _msid, type: 'poster', name: _short + ' · 方案主海报', meta: PM, kicker: _msc.name + ' · ' + _mso.purpose, title: _short, sub: _mso.csell }]
+      .concat(_mso.pals.map((k) => ({ id: 'mpp-' + k, type: 'poster', pb: 'emp', name: PALS[k].name + ' · 货盘海报', meta: PM, kicker: '爆品货盘 · ' + PALS[k].ids.length + ' 款', title: PALS[k].name, sub: PALS[k].sell })))
+      .concat(_mso.cpks.map((k) => ({ id: 'mpc-' + k, type: 'poster', pb: _msc.id === 'cny' ? 'cnyCard' : 'cny', name: CPKS[k].name + ' · 卡券海报', meta: PM, kicker: '福利卡券 · 员工自选', title: CPKS[k].name, sub: CPKS[k].sell.replace('专款专用：', '') })))
+      .concat(_mso.tpls.map((k) => ({ id: 'mpt-' + k, type: 'poster', pb: 'uni', name: TPL[k].name + ' · 商城推广海报', meta: PM, kicker: '员工福利商城', title: TPL[k].name, sub: TPL[k].intro })))
+      .concat([{ id: 'mt1-' + _msid, type: 'text', name: '朋友圈文案 · 方案推荐', meta: '文案 · 适合朋友圈', text: '【' + _short + '】' + _mso.csell + ' 正品保障、可开票，支持按名单发到每位员工，欢迎私信咨询。' },
+        { id: 'mt2-' + _msid, type: 'text', name: '客户群文案 · 下单提醒', meta: '文案 · 适合企业群', text: '各位好，' + _msc.name + '「' + _short + '」方案已上线：' + (_mso.combo || '') + '。需要报价或方案页的直接私信我，当天出方案。' },
+        { id: 'md1-' + _msid, type: 'doc', name: _short + ' · 方案介绍', meta: 'PDF · 12 页 · 4.2 MB', ext: 'PDF', desc: '方案构成、商品清单、卡券与商城说明、服务承诺' },
+        { id: 'md2-' + _msid, type: 'doc', name: _short + ' · 甲方提案', meta: 'PPT · 18 页 · 9.6 MB', ext: 'PPT', desc: '给甲方的提案版，隐去会员价与利润' }]);
     const matSel = s.matSel || {}; const matFav = s.matFav || {};
     const favToggle = (id) => { const n = Object.assign({}, this.state.matFav || {}); const was = !!n[id]; if (was) delete n[id]; else n[id] = true; this.setState({ matFav: n }); this.flash(was ? '已取消收藏' : '已收藏，可在「商城装修 → 我的素材」里使用'); };
     const extCss = (ext, big) => 'width: ' + (big ? 96 : 64) + 'px; height: ' + (big ? 116 : 78) + 'px; border-radius: 8px; color: #FFFFFF; font-size: ' + (big ? 22 : 15) + 'px; font-weight: 800; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; box-sizing: border-box; background: ' + (ext === 'PDF' ? '#E2554B' : '#7C8796');
     const matDown = (m) => { if (m.type === 'text') { this.flash('已复制文案'); return; } if (m.type === 'poster' && needMall) { this.flash('先选择要合成二维码的商城'); return; } this.flash('演示：已下载「' + m.name + '」' + (m.type === 'poster' && qrOn ? '（已合成「' + matMall.name + '」二维码）' : '')); };
     const matVm = (m) => ({ name: m.name, meta: m.meta, isPoster: m.type === 'poster', isText: m.type === 'text', isFile: m.type === 'doc', text: m.text || '', ext: m.ext || '', desc: m.desc || '', extStyle: extCss(m.ext), kicker: m.kicker || '', title: m.title || '', sub: m.sub || '', points: ['正品保障 · 可开票', '预算可控 · 品类可选', '按名单代发到每位员工'].map((x) => ({ t: x })),
-      posterStyle: 'flex: 1 1 0; display: flex; flex-direction: column; gap: 0.35em; padding: 15% 8% 7%; color: #FFFFFF; background: ' + (POSTER_BG[scene.id] || POSTER_BG.emp),
+      posterStyle: 'flex: 1 1 0; display: flex; flex-direction: column; gap: 0.35em; padding: 15% 8% 7%; color: #FFFFFF; background: ' + (POSTER_BG[m.pb || _msc.id] || POSTER_BG.emp),
       showQr: qrOn && !!matMall, noQr: !(qrOn && matMall), qr: QR(7 + (m.id.length * 3)), mallName: matMall ? matMall.name : '',
       downLabel: m.type === 'text' ? '复制' : '下载', down: () => matDown(m),
       fav: !!matFav[m.id], favIcon: matFav[m.id] ? '★' : '☆', favText: matFav[m.id] ? '★ 已收藏' : '☆ 收藏到我的素材', favAria: matFav[m.id] ? '取消收藏' : '收藏到我的素材',
@@ -3026,7 +3087,7 @@ class Component extends DCLogic {
     const mpv = matPvM ? Object.assign(matVm(matPvM), { extStyle: extCss(matPvM.ext, true) }) : matVm(MATS[0]);
     const matSelCount = MATS.filter((m) => matSel[m.id]).length;
     const matFavCount = MATS.filter((m) => matFav[m.id]).length;
-    const mat = { scene: scene.name, qrOn: qrOn, favCount: matFavCount,
+    const mat = { scene: _short, qrOn: qrOn, favCount: matFavCount,
       favSelStyle: 'min-height: 38px; padding: 0 16px; border-radius: 8px; font-size: 14px; background: #FFFFFF; cursor: ' + (matSelCount ? 'pointer' : 'not-allowed') + '; border: 1px solid ' + (matSelCount ? '#F59E0B' : '#E5E7EB') + '; color: ' + (matSelCount ? '#B45309' : '#C3C8CF'),
       favSel: () => { if (!matSelCount) return; const n = Object.assign({}, this.state.matFav || {}); MATS.forEach((m) => { if (matSel[m.id]) n[m.id] = true; }); this.setState({ matFav: n }); this.flash('已收藏 ' + matSelCount + ' 项，可在「商城装修 → 我的素材」里使用'); }, needMall: needMall, selCount: matSelCount, pvOn: !!matPvM, closePv: () => this.setState({ matPv: null }),
       toggleQr: () => this.setState({ matQr: !qrOn }),
@@ -3404,16 +3465,25 @@ class Component extends DCLogic {
         tags: (c.excl ? ['专款专用'] : ['通用']).concat([ssc.name.replace('2027 ', '').replace('春节年货节', '春节')]), badges: [{ t: c.excl ? '专款专用' : '员工自选', bg: c.excl ? '#fd6600' : '#0d9488' }],
         sold: (300 + sd2 * 2).toLocaleString(), yday: 2 + sd2 % 20,
         open: () => { this.setState({ cpkFace: fi }); openCpk(k); }, pvMall: () => pvTpl(c.mall), buy: () => openBuy(k, fi) }; })); }, []);
-    const BZ = [{ k: 'pal', l: '爆品货盘', s: '运营组货 · 一件代发', n: solO.pals.length }, { k: 'cpk', l: '卡券', s: '多档面值 · 员工自选', n: solO.cpks.length }, { k: 'tpl', l: '商城模板', s: '装修好 · 一键开商城', n: solO.tpls.length }];
+    // ===== 营销素材透出（按当前方案生成）=====
+    const MK = { poster: '海报', text: '朋友圈文案', doc: '方案介绍' };
+    const openMatLib = (pv) => this.setState({ modal: 'mat', matPv: pv || null, matSel: {} });
+    const matCards = MATS.map((m) => Object.assign(matVm(m), { kindL: MK[m.type], pv: () => openMatLib(m.id), kind: m.type }));
+    const mcount = { poster: MATS.filter((m) => m.type === 'poster').length, text: MATS.filter((m) => m.type === 'text').length, doc: MATS.filter((m) => m.type === 'doc').length };
+    const ms = { count: MATS.length, sub: '海报 ' + mcount.poster + ' · 文案 ' + mcount.text + ' · 方案介绍 ' + mcount.doc, posters: matCards.filter((m) => m.kind === 'poster').slice(0, 5), text: matCards.find((m) => m.kind === 'text'), open: () => openMatLib(), qrHint: '可一键合成你的商城二维码' };
+    const BZ0 = [{ k: 'pal', l: '爆品货盘', s: '运营组货 · 一件代发', n: solO.pals.length }, { k: 'cpk', l: '卡券', s: '多档面值 · 员工自选', n: solO.cpks.length }, { k: 'tpl', l: '商城模板', s: '装修好 · 一键开商城', n: solO.tpls.length }];
+    const BZ = BZ0.concat([{ k: 'mat', l: '营销素材', s: '海报 · 文案 · 方案介绍', n: MATS.length }]);
     const chipList = curBiz === 'pal' ? solO.pals.map((k) => ({ v: k, l: PALS[k].name, t: PALS[k].ids.length + ' 款' }))
       : curBiz === 'cpk' ? solO.cpks.map((k) => ({ v: k, l: CPKS[k].name, t: CPKS[k].excl ? '专款专用' : '员工自选' }))
+      : curBiz === 'mat' ? [{ v: 'poster', l: '海报', t: mcount.poster + ' 张' }, { v: 'text', l: '朋友圈 / 社群文案', t: mcount.text + ' 条' }, { v: 'doc', l: '方案介绍', t: mcount.doc + ' 份' }]
       : solO.tpls.map((k) => ({ v: k, l: TPL[k].name, t: TPL[k].type }));
-    const bz = { isPal: curBiz === 'pal' && goods.length > 0, isCpk: curBiz === 'cpk' && cardItems.length > 0, isTpl: curBiz === 'tpl' && solO.tpls.length > 0,
+    const bz = { isPal: curBiz === 'pal' && goods.length > 0, isCpk: curBiz === 'cpk' && cardItems.length > 0, isTpl: curBiz === 'tpl' && solO.tpls.length > 0, isMat: curBiz === 'mat', mats: matCards.filter((m) => chipOn === 'all' || m.kind === chipOn),
       empty: (curBiz === 'pal' && !goods.length) || (curBiz === 'cpk' && !cardItems.length) || (curBiz === 'tpl' && !solO.tpls.length),
       tabs: BZ.map((t) => ({ ink: curBiz === t.k ? '#066b5f' : '#0f1418', cls: curBiz === t.k ? 'on' : '', label: t.l + (t.n ? ' ' + t.n : ''), sub: t.s, pick: () => this.setState({ biz: t.k, bzChip: 'all' }) })),
-      chips: [{ v: 'all', l: curBiz === 'pal' ? '全部商品' : (curBiz === 'cpk' ? '全部卡券' : '全部模板'), t: '' }].concat(chipList).map((c) => ({ label: c.l, hasTag: !!c.t, tag: c.t, cls: chipOn === c.v ? 'on' : '', pick: () => this.setState({ bzChip: c.v }) })),
+      chips: [{ v: 'all', l: curBiz === 'pal' ? '全部商品' : (curBiz === 'cpk' ? '全部卡券' : (curBiz === 'mat' ? '全部素材' : '全部模板')), t: '' }].concat(chipList).map((c) => ({ label: c.l, hasTag: !!c.t, tag: c.t, cls: chipOn === c.v ? 'on' : '', pick: () => this.setState({ bzChip: c.v }) })),
       acts: (curBiz !== 'tpl' && chipOn !== 'all' ? [{ label: (curBiz === 'pal' ? '货盘详情' : '卡券详情') + ' ›', cls: 'btn-s', go: () => (curBiz === 'pal' ? openPal(chipOn) : openCpk(chipOn)) }] : []).concat(curBiz === 'pal' && goods.length ? [{ label: '整盘上架', cls: 'btn-o', go: () => openListFor(palIds, palIds.map((id) => PB[id])) }, { label: '整盘下单 / 代发', cls: 'btn-p', go: () => openOrder(palIds, 'direct') }] : []),
       goods: goods, cards: cardItems };
+    if (curBiz === 'mat') bz.acts = [{ label: '打开素材库 · 合成商城二维码', cls: 'btn-p', go: () => openMatLib() }];
     sd.tplsO = sd.tplsO.filter((t, i) => curBiz !== 'tpl' || chipOn === 'all' || solO.tpls[i] === chipOn);
 
     // ===== 通用商品筛选（所有商品列表共用）：来源 / 发货 / 会员价 / 关键词 / 排序 =====
@@ -3470,7 +3540,7 @@ class Component extends DCLogic {
       shown: cardsF.length, total: cardItems.length, reset: () => this.setState({ cfE: 'all', cfR: 'all', cfS: 'def' }) };
     return {
       viewPal: s.view === 'pal', viewCpk: s.view === 'cpk', viewTpd: s.view === 'tpd', viewCli: s.view === 'cli',
-      modalCliCfg: s.modal === 'cliCfg', modalBuyCard: s.modal === 'buyCard', modalApplyTpl: s.modal === 'applyTpl', modalNewSol: s.modal === 'newSol', ns: ns, acct: acct,
+      modalCliCfg: s.modal === 'cliCfg', modalBuyCard: s.modal === 'buyCard', modalApplyTpl: s.modal === 'applyTpl', modalNewSol: s.modal === 'newSol', ns: ns, acct: acct, ms: ms,
       viewSol: s.view === 'sol', zsTop: zsTop, zt: zt, hb: hb, zs: zs, bz: bz, sh: sh, sd: sd, plv: pl, ck: ck, bc: bc, tpd: tpdV, ap: ap, cf: cf, cli: cli, sx: sx, solName: solO.name, backSol: backSol,
       daysLeft: daysLeft, promo: myPromo, bannerImgs: bannerImgs, hotWords: hotWords, selCount: selItems.length,
       sceneCount: SCENES.length, balAllowed: this.props['账户查看权限'] !== false, balDenied: this.props['账户查看权限'] === false, balShown: s.showBal, balHidden: !s.showBal,
