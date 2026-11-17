@@ -58,7 +58,7 @@ button,input,select{font-family:inherit}
 .lsc-all{padding:0 12px;color:var(--brand-700)}
 .lsc-all.on{background:var(--brand-soft);color:var(--brand-700)}
 .lgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.55fr);gap:16px}
-.lban{position:relative;border-radius:20px;padding:28px 28px 44px;overflow:hidden;min-height:300px;display:flex;flex-direction:column;gap:10px;justify-content:flex-start}
+.lban{position:relative;border-radius:20px;padding:28px 28px 44px;overflow:hidden;display:flex;flex-direction:column;gap:10px;justify-content:flex-start}
 .lban-tag{font-size:12px;font-weight:600;letter-spacing:.04em;position:relative;z-index:1}
 .lban h2{margin:0;font-size:28px;line-height:36px;font-weight:700;position:relative;z-index:1;max-width:80%}
 .lban p{margin:0 0 8px;font-size:14px;line-height:22px;color:var(--text-2);max-width:72%;position:relative;z-index:1}
@@ -245,6 +245,16 @@ button,input,select{font-family:inherit}
 .cv-adv > div > span:first-child{font-size:12px;color:#066b5f;font-weight:600}
 .cv-adv b{font-size:24px;color:#0f1418}
 .cv-adv em{font-style:normal;font-size:12px;color:#6B7280}
+.yj-key{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:#374151;margin-top:2px}
+.yj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.yj-card{display:flex;flex-direction:column;gap:10px;background:#fff;border:1px solid #E3EAE8;border-radius:18px;padding:16px 18px;transition:box-shadow .2s,border-color .2s}
+.yj-card:hover{border-color:#0D9488;box-shadow:0 8px 22px rgba(13,148,136,.12)}
+.yj-who{font-size:17px;font-weight:700;color:#0f1418}
+.yj-vis{display:flex;align-items:center;min-height:120px}
+.yj-thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;width:100%}
+.yj-talk{background:#F7FBFA;border-style:dashed}
+.yj-talkbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#F7FBFA;border:1px dashed #CFE3DF;border-radius:16px;padding:14px 18px}
+.yj-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 
 </style>
 </helmet>
@@ -593,8 +603,8 @@ button,input,select{font-family:inherit}
   <div style="max-width: 1280px; margin: 0 auto; padding: 16px 24px 0; display: flex; flex-direction: column; gap: 16px">
     <nav aria-label="面包屑" style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #929d99"><button type="button" onClick="{{backHome}}" style="border: none; background: transparent; padding: 0; color: #066b5f; font-size: 13px; cursor: pointer">‹ 场景首页</button><span>/</span><span>{{sh.scene.name}}</span><span>/</span><span style="color: #0f1418">{{sd.name}}</span></nav>
     <div style="background: #FFFFFF; border-radius: 16px; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px">
-      <div style="border-radius: 20px; padding: 24px 28px; background: {{hb.bg}}; display: flex; gap: 24px; align-items: flex-start; position: relative; overflow: hidden">
-        <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1">
+      <div style="border-radius: 20px; padding: 24px 28px; background: {{hb.bg}}; display: flex; gap: 24px; align-items: flex-start">
+        <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px">
           <span style="font-size: 12px; font-weight: 600; letter-spacing: .04em; color: {{hb.fg}}">{{pbk.sceneName}} · {{pbk.cls}}</span>
           <h1 style="margin: 0; font-size: 26px; line-height: 34px; font-weight: 700; color: #0f1418">{{sd.name}}</h1>
           <p style="margin: 0; font-size: 14px; line-height: 22px; color: #4B5563; max-width: 760px">{{hb.desc}}</p>
@@ -603,90 +613,47 @@ button,input,select{font-family:inherit}
             <div><span>一单多大</span><b>{{pbk.deal}}</b></div>
             <div><span>能赚多少</span><b style="color: #E2231A">利润最高 {{pbk.profit}}</b></div>
           </div>
-        </div>
-        <div style="flex: 0 0 230px; display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1">
-          <button type="button" class="btn btn-p btn-lg" onClick="{{pbk.cliGo}}">生成甲方方案页</button>
-          <button type="button" class="btn btn-o" style="height: 38px; font-size: 14px" onClick="{{pbk.matGo}}">营销素材</button>
+          <div class="yj-key"><span class="pb-win">{{yj.win}}</span><span>难点：{{yj.pains}}</span><span style="color: #929d99">｜</span><span>{{yj.answer}}</span></div>
         </div>
       </div>
 
-      <section class="pb-sec">
-        <div class="pb-h"><b>这个场景难在哪</b><span class="pb-win">{{pbk.win}}</span></div>
-        <div class="pb-pains">
-          <sc-for list="{{pbk.pain}}" as="pp" hint-placeholder-count="3"><div class="pb-pain"><b>{{pp.t}}</b><span>{{pp.d}}</span></div></sc-for>
-        </div>
-        <div class="pb-ans"><span class="pb-ans-k">平台怎么解</span><span style="flex: 1 1 0">{{pbk.answer}}</span></div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap"><sc-for list="{{pbk.adv}}" as="a" hint-placeholder-count="3"><span class="pb-adv"><em>{{a.label}}</em>{{a.text}}</span></sc-for></div>
-      </section>
-
-      <section class="pb-sec" id="pb-calc" style="scroll-margin-top: 90px">
-        <div class="pb-h"><b>算一笔账，选做法</b><span style="font-size: 12px; color: #929d99">输入人数和预算，下面的做法、货、卡、模板都按这个预算匹配</span></div>
-        <div class="pb-calc">
-          <label>人数<input type="number" min="1" value="{{pbk.n}}" onChange="{{pbk.onN}}"><span>人</span></label>
-          <label>{{pbk.unitP}}<input type="number" min="1" value="{{pbk.p}}" onChange="{{pbk.onP}}"><span>元</span></label>
-          <div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{pbk.quick}}" as="q" hint-placeholder-count="5"><button type="button" class="{{q.cls}}" style="height: 30px; font-size: 13px; padding: 0 12px" onClick="{{q.pick}}">{{q.label}}</button></sc-for></div>
-          <div style="flex: 1"></div>
-          <div style="display: flex; flex-direction: column; align-items: flex-end"><span style="font-size: 12px; color: #929d99">单子总额 {{pbk.totalNote}}</span><b class="mono" style="font-size: 24px; color: #0f1418">{{pbk.total}}</b></div>
-        </div>
-        <div class="pb-plays">
-          <sc-for list="{{pbk.plays}}" as="pl" hint-placeholder-count="3">
-            <button type="button" style="{{pl.style}}" onClick="{{pl.pick}}">
-              <sc-if value="{{pl.rec}}" hint-placeholder-val="{{false}}"><span class="pb-rec">按你的预算推荐</span></sc-if>
-              <span style="display: flex; align-items: center; gap: 10px"><span class="pb-ico">{{pl.ico}}</span><span style="display: flex; flex-direction: column"><b style="font-size: 17px; color: #0f1418">{{pl.name}}</b><span style="font-size: 13px; color: #4B5563">{{pl.line}}</span></span></span>
-              <span style="font-size: 12px; color: #6B7280; line-height: 1.6">适合：{{pl.fit}}</span>
-              <span class="pb-kv"><span>预计利润 <b style="color: #E2231A">{{pl.est}}</b></span><span>利润最高 {{pl.profit}}</span><span>{{pl.ship}}</span></span>
-              <sc-if value="{{pl.hasUsed}}" hint-placeholder-val="{{true}}"><span style="font-size: 12px; color: #066b5f">{{pl.used}}</span></sc-if>
-            </button>
-          </sc-for>
-        </div>
-        <div class="pb-api"><span class="pb-ico" style="width: 28px; height: 28px; font-size: 12px">API</span><span style="flex: 1 1 0">{{pbk.api}}</span><button type="button" class="btn btn-o" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{pbk.apiGo}}">去工作台申请 ›</button></div>
-        <span style="font-size: 12px; color: #929d99">预计利润按所选做法商品的市场价利润率均值估算，实际以下单为准</span>
-      </section>
-
-      <section class="pb-sec">
-        <div class="pb-h"><b>「{{pbk.playName}}」怎么做</b></div>
-        <div class="pb-steps">
-          <sc-for list="{{pbk.steps}}" as="st" hint-placeholder-count="4">
-            <div class="pb-step">
-              <span class="pb-n">{{st.n}}</span>
-              <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px">
-                <div style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 15px; color: #0f1418">{{st.t}}</b><span style="font-size: 13px; color: #6B7280">{{st.d}}</span></div>
-                <sc-if value="{{st.isMat}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 8px"><button type="button" class="btn btn-p" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{pbk.cliGo}}">生成甲方方案页</button><button type="button" class="btn btn-o" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{pbk.matGo}}">海报和文案</button></div></sc-if>
-                <sc-if value="{{st.isGoods}}" hint-placeholder-val="{{false}}"><div class="pb-goods"><sc-for list="{{pbk.goods}}" as="g" hint-placeholder-count="6"><button type="button" class="lz-it" onClick="{{pbk.goodsAll}}" title="{{g.name}}"><span class="lz-im"><sc-if value="{{g.hasImg}}"><img src="{{g.img}}" alt=""></sc-if><sc-if value="{{g.isPh}}"><span style="font-size: 10px; color: #C3C8CF">商品图</span></sc-if></span><span class="mono">{{g.price}}</span></button></sc-for><button type="button" class="pb-more" onClick="{{pbk.goodsAll}}">全部货 ›</button></div></sc-if>
-                <sc-if value="{{st.isCards}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 12px; flex-wrap: wrap"><sc-for list="{{pbk.cards}}" as="c" hint-placeholder-count="2"><div class="pb-card"><span class="pb-cface" style="background: {{c.bg}}">{{c.face}}</span><span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><b style="font-size: 14px; color: #0f1418">{{c.name}}</b><span style="font-size: 12px; color: #7C3AED">{{c.form}}</span><span style="font-size: 12px; color: #929d99">面值 {{c.faces}}</span><span style="display: flex; gap: 6px; margin-top: 4px"><button type="button" class="btn btn-p" style="height: 30px; font-size: 12px; padding: 0 12px" onClick="{{c.buy}}">按推荐面值买卡</button><button type="button" class="btn btn-o" style="height: 30px; font-size: 12px; padding: 0 12px" onClick="{{c.open}}">详情</button></span></span></div></sc-for></div></sc-if>
-                <sc-if value="{{st.isMall}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 14px; align-items: center"><button type="button" class="zt-phone" style="flex: 0 0 96px; height: 180px; background: {{pbk.mallCard.coverBg}}" onClick="{{pbk.mallCard.pv}}"><sc-if value="{{pbk.mallCard.hasImg}}"><img src="{{pbk.mallCard.img}}" alt=""></sc-if><sc-if value="{{pbk.mallCard.noImg}}"><span style="display: block; padding: 30px 8px 0; color: #fff; font-size: 12px; font-weight: 700; text-align: center">{{pbk.mallCard.name}}</span></sc-if></button><span style="display: flex; flex-direction: column; gap: 6px"><b style="font-size: 14px; color: #0f1418">兑换商城：{{pbk.mallCard.name}}</b><span style="font-size: 12px; color: #6B7280">{{pbk.mallCard.n}} 款可兑换</span><button type="button" class="btn btn-o" style="height: 30px; font-size: 12px; padding: 0 12px; align-self: flex-start" onClick="{{pbk.mallCard.pv}}">手机预览</button></span></div></sc-if>
-                <sc-if value="{{st.isTpls}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 16px; flex-wrap: wrap"><sc-for list="{{pbk.tpls}}" as="t" hint-placeholder-count="2"><div style="display: flex; gap: 12px; align-items: center"><button type="button" class="zt-phone" style="flex: 0 0 96px; height: 180px; background: {{t.coverBg}}" onClick="{{t.pv}}"><sc-if value="{{t.hasImg}}"><img src="{{t.img}}" alt=""></sc-if><sc-if value="{{t.noImg}}"><span style="display: block; padding: 30px 8px 0; color: #fff; font-size: 12px; font-weight: 700; text-align: center">{{t.name}}</span></sc-if></button><span style="display: flex; flex-direction: column; gap: 6px"><b style="font-size: 14px; color: #0f1418">{{t.name}}</b><span style="font-size: 12px; color: #6B7280">{{t.type}} · {{t.n}} 款商品</span><span style="display: flex; gap: 6px"><button type="button" class="btn btn-p" style="height: 30px; font-size: 12px; padding: 0 12px" onClick="{{t.use}}">用它开商城</button><button type="button" class="btn btn-o" style="height: 30px; font-size: 12px; padding: 0 12px" onClick="{{t.open}}">详情</button></span></span></div></sc-for></div></sc-if>
-                <sc-if value="{{st.isList}}" hint-placeholder-val="{{false}}"><div><button type="button" class="btn btn-p" style="height: 32px; font-size: 13px; padding: 0 16px" onClick="{{pbk.listGo}}">{{pbk.listLabel}}</button></div></sc-if>
+      <section style="display: flex; flex-direction: column; gap: 14px">
+        <div class="pb-h"><b>一键做生意</b><span style="font-size: 13px; color: #6B7280">看客户现在是什么情况，选对应的一种直接做</span></div>
+        <div class="yj-grid">
+          <sc-for list="{{yj.items}}" as="it" hint-placeholder-count="4">
+            <div class="yj-card">
+              <span class="yj-who">{{it.who}}</span>
+              <span style="font-size: 13px; color: #374151; line-height: 1.6; min-height: 42px">{{it.what}}</span>
+              <sc-if value="{{it.hasChips}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{it.chips}}" as="c" hint-placeholder-count="2"><button type="button" class="{{c.cls}}" style="height: 26px; font-size: 12px; padding: 0 10px" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div></sc-if>
+              <div class="yj-vis">
+                <sc-if value="{{it.isGoods}}" hint-placeholder-val="{{true}}"><div class="yj-thumbs"><sc-for list="{{it.thumbs}}" as="g" hint-placeholder-count="4"><span class="lz-im"><sc-if value="{{g.hasImg}}"><img src="{{g.img}}" alt=""></sc-if><sc-if value="{{g.isPh}}"><span style="font-size: 10px; color: #C3C8CF">商品图</span></sc-if></span></sc-for></div></sc-if>
+                <sc-if value="{{it.isCard}}" hint-placeholder-val="{{false}}"><span class="pb-cface" style="background: {{it.cardBg}}; flex: none; width: 150px; height: 92px">{{it.cardFace}}</span></sc-if>
+                <sc-if value="{{it.isTpl}}" hint-placeholder-val="{{false}}"><button type="button" class="zt-phone" style="flex: 0 0 64px; height: 120px; border-width: 4px; border-radius: 14px; background: {{it.cover.coverBg}}" onClick="{{it.pv}}" aria-label="手机预览"><sc-if value="{{it.cover.hasImg}}"><img src="{{it.cover.img}}" alt=""></sc-if><sc-if value="{{it.cover.noImg}}"><span style="display: block; padding: 20px 4px 0; color: #fff; font-size: 10px; font-weight: 700; text-align: center">{{it.cover.name}}</span></sc-if></button></sc-if>
               </div>
+              <span style="font-size: 12px; color: #929d99">{{it.sub}}</span>
+              <div style="display: flex; align-items: center; gap: 10px; margin-top: auto"><span style="font-size: 13px; color: #E2231A; font-weight: 600">{{it.earn}}</span><div style="flex: 1"></div><button type="button" class="btn btn-p" style="height: 36px; font-size: 14px; padding: 0 18px" onClick="{{it.go}}">{{it.btn}}</button></div>
             </div>
           </sc-for>
+        </div>
+        <div class="yj-talkbar">
+          <span class="yj-who" style="font-size: 16px">还在和客户谈？</span>
+          <span style="flex: 1 1 0; font-size: 13px; color: #374151">生成甲方方案页发给客户：场景难点、推荐做法、扫码体验商城、同类案例；不含会员价和利润，可选是否展示报价</span>
+          <button type="button" class="btn btn-o" style="height: 36px; font-size: 13px; padding: 0 14px" onClick="{{yj.mat}}">海报和文案</button>
+          <button type="button" class="btn btn-p" style="height: 36px; font-size: 14px; padding: 0 18px" onClick="{{yj.talk}}">生成甲方方案页</button>
         </div>
       </section>
 
       <section class="pb-sec">
-        <div class="pb-h"><b>成功案例 · {{pbk.playName}}</b><span style="font-size: 12px; color: #929d99">{{pbk.caseNote}}</span></div>
-        <sc-if value="{{pbk.hasCases}}" hint-placeholder-val="{{true}}">
-        <div class="pb-cases">
-          <sc-for list="{{pbk.cases}}" as="c" hint-placeholder-count="2">
-            <div class="pb-case">
-              <b style="font-size: 15px; color: #0f1418; line-height: 1.5">{{c.title}}</b>
-              <span style="font-size: 12px; color: #6B7280">{{c.ind}} · {{c.scale}}</span>
-              <span style="font-size: 13px; color: #374151">用了：{{c.res}}</span>
-              <div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{c.out}}" as="o" hint-placeholder-count="3"><span class="pb-out">{{o.t}}</span></sc-for></div>
-              <button type="button" class="btn btn-o" style="height: 32px; font-size: 13px; padding: 0 14px; align-self: flex-start" onClick="{{c.follow}}">照这个做 ›</button>
-            </div>
-          </sc-for>
-        </div>
-        </sc-if>
-        <sc-if value="{{pbk.hasCases}}" hint-placeholder-val="{{false}}"><span style="display: none"></span></sc-if>
+        <div class="pb-h"><b>同类客户这样做</b><span style="font-size: 12px; color: #929d99">{{pbk.caseNote}}</span></div>
+        <div class="pb-cases"><sc-for list="{{pbk.casesAll}}" as="c" hint-placeholder-count="3"><div class="pb-case"><b style="font-size: 15px; color: #0f1418; line-height: 1.5">{{c.title}}</b><span style="font-size: 12px; color: #6B7280">{{c.ind}} · {{c.scale}}</span><span style="font-size: 13px; color: #374151">用了：{{c.res}}</span><div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{c.out}}" as="o" hint-placeholder-count="3"><span class="pb-out">{{o.t}}</span></sc-for></div></div></sc-for></div>
       </section>
 
       <section class="pb-sec">
-        <div class="pb-h"><b>这个客户全年还能做</b><span style="font-size: 12px; color: #929d99">做完这一单，同一个客户全年还有这些节点</span></div>
+        <div class="pb-h"><b>这个客户全年还能做</b></div>
         <div class="pb-year"><sc-for list="{{pbk.annual}}" as="a" hint-placeholder-count="7"><button type="button" style="{{a.style}}" onClick="{{a.go}}"><span style="font-size: 12px; color: #929d99">{{a.m}}</span><b style="font-size: 15px; color: #0f1418">{{a.t}}</b><span style="font-size: 12px; color: #066b5f">{{a.label}}</span></button></sc-for></div>
       </section>
 
-      <div class="pb-h" style="margin-top: 4px"><b>本方案全部资源</b><span style="font-size: 12px; color: #929d99">想直接挑货、挑卡、挑模板，在这里看全部</span></div>
+      <div class="pb-h" style="margin-top: 4px; border-top: 1px solid #f0f1f3; padding-top: 20px"><b>挑具体的货、卡、模板</b></div>
       <div id="sol-biz" class="lbiz" role="tablist" aria-label="方案内容" style="scroll-margin-top: 90px">
         <sc-for list="{{bz.tabs}}" as="t" hint-placeholder-count="3">
           <button type="button" class="lbt {{t.cls}}" role="tab" onClick="{{t.pick}}"><b style="font-size: 17px; font-weight: 600; color: {{t.ink}}">{{t.label}}</b></button>
@@ -2689,6 +2656,12 @@ button,input,select{font-family:inherit}
         <div style="padding: 20px 24px 4px; font-size: 18px; font-weight: 700">生成甲方版</div>
         <div style="padding: 0 24px 4px; font-size: 13px; color: #8A9099">{{cf.name}} · 甲方看到场景难点、推荐做法、商城体验、案例和优势，看不到会员价和利润</div>
         <div style="padding: 14px 24px 16px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: #F7F8FA; border-radius: 12px; padding: 10px 14px">
+            <span style="font-size: 14px; color: #1F2329; font-weight: 600">报价测算</span>
+            <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #4B5563">人数<input type="number" min="1" value="{{pbk.n}}" onChange="{{pbk.onN}}" style="width: 72px; height: 30px; border: 1px solid #DDE3E1; border-radius: 8px; text-align: center"></label>
+            <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #4B5563">{{pbk.unitP}}<input type="number" min="1" value="{{pbk.p}}" onChange="{{pbk.onP}}" style="width: 72px; height: 30px; border: 1px solid #DDE3E1; border-radius: 8px; text-align: center">元</label>
+            <span style="font-size: 13px; color: #0f1418">总额约 <b>{{pbk.total}}</b></span>
+          </div>
           <div style="display: flex; flex-direction: column; gap: 8px">
             <span style="font-size: 14px; color: #1F2329; font-weight: 600">推荐给甲方的做法</span>
             <div style="display: flex; gap: 8px; flex-wrap: wrap"><sc-for list="{{cf.plays}}" as="c" hint-placeholder-count="3"><button type="button" onClick="{{c.pick}}" style="{{c.style}}">{{c.label}}</button></sc-for></div>
@@ -3856,11 +3829,27 @@ class Component extends DCLogic {
       tpls: solO.tpls.map((k) => Object.assign(tCover(k), { n: (TPL_IDS[k] || []).length, pv: () => pvTpl(k), use: () => this.setState({ modal: 'mall', tplId: k, mallName: solO.name + ' · ' + TPL[k].name }), open: () => openTpd(k) })),
       listGo: () => (curPlay === 'direct' ? openOrder(palIdsAll, 'direct') : this.flash('演示：导入员工名单并发放额度')), listLabel: curPlay === 'direct' ? '整盘下单 / 代发' : '导入名单发额度',
       cliGo: () => this.setState({ modal: 'cliCfg', cliPlay: curPlay }), matGo: () => goMat(),
+      casesAll: casesAll.map((c) => ({ title: '面向' + c.who + '，用「' + PLAYS[c.play].name + '」做' + soScene.name.replace('2027 ', ''), ind: c.ind, scale: c.n.toLocaleString() + ' 人 · ' + (soScene.id === 'meal' ? '每天' : '人均') + ' ¥' + c.p, res: c.res, out: c.out.map((o) => ({ t: o })) })),
       cases: solCases.map((c) => ({ title: '面向' + c.who + '，用「' + PLAYS[c.play].name + '」做' + soScene.name.replace('2027 ', ''), ind: c.ind, scale: c.n.toLocaleString() + ' 人 · ' + (soScene.id === 'meal' ? '每天' : '人均') + ' ¥' + c.p, res: c.res, out: c.out.map((o) => ({ t: o })),
         follow: () => { this.setState({ kN: c.n, kP: c.p, play: c.play }); this.flash('已按这个案例带入：' + c.n + ' 人 · ¥' + c.p + ' · ' + PLAYS[c.play].name); this.jump('pb-calc'); } })),
       hasCases: solCases.length > 0, caseNote: '同类客户、脱敏展示；数据来自平台历史订单',
       annual: ANNUAL.map((a) => ({ m: a.m, t: a.t, has: !!a.sol, cur: a.sol === curSolId, label: a.sol ? (a.sol === curSolId ? '当前方案' : '看方案 ›') : '档期开放后提醒', style: 'display: flex; flex-direction: column; gap: 6px; text-align: left; border-radius: 14px; padding: 12px 14px; cursor: ' + (a.sol && a.sol !== curSolId ? 'pointer' : 'default') + '; border: 1px solid ' + (a.sol === curSolId ? '#0D9488' : '#E8ECEB') + '; background: ' + (a.sol === curSolId ? '#F2FAF8' : (a.sol ? '#fff' : '#F7F8F9')), go: () => { if (a.sol && a.sol !== curSolId) openSol(a.sol); } }))
     };
+    // ===== 方案详情：一键做生意（按会员手上的情况给动作）=====
+    const yjPal = solO.pals.indexOf(s.yjPal) >= 0 ? s.yjPal : solO.pals[0];
+    const yjCpk = solO.cpks.indexOf(s.yjCpk) >= 0 ? s.yjCpk : solO.cpks[0];
+    const yjTpl = solO.tpls.indexOf(s.yjTpl) >= 0 ? s.yjTpl : solO.tpls[0];
+    const yjChips = (list, cur, key, nameOf) => list.length > 1 ? list.map((k) => ({ label: nameOf(k), cls: 'lchip ' + (k === cur ? 'on' : ''), pick: () => { const u = {}; u[key] = k; this.setState(u); } })) : [];
+    const yjPalIds = yjPal ? PALS[yjPal].ids : [];
+    const yjThumbs = (ids) => imgFirst(ids).slice(0, 4).map((id) => Object.assign(thumb(PB[id]), { price: money(PB[id].member) }));
+    const yjList = [];
+    if (yjPal) yjList.push({ k: 'list', who: '客户已经有商城', what: '把「' + PALS[yjPal].name + '」' + yjPalIds.length + ' 款一键上架到你的商城，按你的加价规则定价', earn: '利润最高 ' + maxProfit(yjPalIds), btn: '一键上架', go: () => openListFor(yjPalIds, yjPalIds.map((id) => PB[id])), sub: '已有 ' + MALLS.length + ' 个商城可选', chips: yjChips(solO.pals, yjPal, 'yjPal', (k) => PALS[k].name), thumbs: yjThumbs(yjPalIds), isGoods: true });
+    if (yjPal) yjList.push({ k: 'order', who: '客户要直接发货', what: '「' + PALS[yjPal].name + '」直接下单，或导入名单一件代发到每个人', earn: '利润最高 ' + maxProfit(yjPalIds), btn: '下单 / 代发', go: () => openOrder(yjPalIds, 'direct'), sub: '支持按职级 / 部门设不同标准', chips: yjChips(solO.pals, yjPal, 'yjPal', (k) => PALS[k].name), thumbs: yjThumbs(yjPalIds), isGoods: true });
+    if (yjCpk) { const c = CPKS[yjCpk]; yjList.push({ k: 'card', who: '客户想让员工自己选', what: '买「' + c.name + '」发到员工手机，员工在「' + TPL[c.mall].name + '」兑换', earn: '利润最高 ' + maxProfit(c.ids), btn: '买卡', go: () => openBuy(yjCpk, 0), sub: (CARD_FORM[yjCpk] || '') + ' · 面值 ' + c.faces.map((f) => faceText(c, f)).join(' / '), chips: yjChips(solO.cpks, yjCpk, 'yjCpk', (k) => CPKS[k].name), isCard: true, cardBg: c.img ? 'url(' + c.img + ') center / cover' : c.bg, cardFace: faceText(c, c.faces[c.faces.length - 1]) }); }
+    if (yjTpl) { const t = TPL[yjTpl]; const cv = tCover(yjTpl); yjList.push({ k: 'mall', who: '客户要一个福利商城', what: '用「' + t.name + '」一键建商城，' + (TPL_IDS[yjTpl] || []).length + ' 款商品和节日专题都装修好了', earn: '利润最高 ' + maxProfit(TPL_IDS[yjTpl] || []), btn: '一键建商城', go: () => this.setState({ modal: 'mall', tplId: yjTpl, mallName: solO.name + ' · ' + t.name }), sub: '已有商城也可以只套用专题', sub2: () => this.setState({ modal: 'applyTpl', tpdId: yjTpl, apMall: s.apMall || MALLS[0].id }), chips: yjChips(solO.tpls, yjTpl, 'yjTpl', (k) => TPL[k].name), isTpl: true, cover: cv, pv: () => pvTpl(yjTpl) }); }
+    const yj = { items: yjList.map((x, i) => Object.assign({ isGoods: false, isCard: false, isTpl: false, hasChips: (x.chips || []).length > 0, n: i + 1 }, x)),
+      talk: () => this.setState({ modal: 'cliCfg', cliPlay: curPlay }), mat: () => goMat(),
+      pains: SP.pains.map((p) => p.t).join(' · '), win: SP.win, answer: SP.answer };
     // ----- 甲方版：按服务商选定的打法组织 -----
     const cPlay = playsHere.indexOf(s.cliPlay) >= 0 ? s.cliPlay : curPlay; const cCase = s.cliCase === undefined ? true : !!s.cliCase;
     cf.plays = playsHere.map((k) => ({ label: PLAYS[k].name, style: chip(cPlay === k), pick: () => this.setState({ cliPlay: k }) }));
@@ -4084,7 +4073,7 @@ class Component extends DCLogic {
       shown: cardsF.length, total: cardItems.length, reset: () => this.setState({ cfE: 'all', cfR: 'all', cfS: 'def' }) };
     return {
       viewPal: s.view === 'pal', viewCpk: s.view === 'cpk', viewTpd: s.view === 'tpd', viewCli: s.view === 'cli',
-      modalCliCfg: s.modal === 'cliCfg', modalBuyCard: s.modal === 'buyCard', modalApplyTpl: s.modal === 'applyTpl', modalNewSol: s.modal === 'newSol', ns: ns, acct: acct, ms: ms, ml: ml, viewMat: s.view === 'mat', mpl: mpv2, viewCmp: s.view === 'cmp', cmp: cmp, pbk: pbk, modalSubCfg: s.modal === 'subCfg', subCfg: subCfg,
+      modalCliCfg: s.modal === 'cliCfg', modalBuyCard: s.modal === 'buyCard', modalApplyTpl: s.modal === 'applyTpl', modalNewSol: s.modal === 'newSol', ns: ns, acct: acct, ms: ms, ml: ml, viewMat: s.view === 'mat', mpl: mpv2, viewCmp: s.view === 'cmp', cmp: cmp, pbk: pbk, yj: yj, modalSubCfg: s.modal === 'subCfg', subCfg: subCfg,
       viewSol: s.view === 'sol', zsTop: zsTop, zsGrid: zsGrid, zt: zt, hb: hb, zs: zs, bz: bz, sh: sh, sd: sd, plv: pl, ck: ck, bc: bc, tpd: tpdV, ap: ap, cf: cf, cli: cli, sx: sx, solName: solO.name, backSol: backSol,
       daysLeft: daysLeft, promo: myPromo, bannerImgs: bannerImgs, hotWords: hotWords, selCount: selItems.length,
       sceneCount: SCENES.length, balAllowed: this.props['账户查看权限'] !== false, balDenied: this.props['账户查看权限'] === false, balShown: s.showBal, balHidden: !s.showBal,
