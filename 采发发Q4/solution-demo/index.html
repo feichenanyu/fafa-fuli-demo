@@ -108,7 +108,7 @@ button,input,select{font-family:inherit}
 .pc-acts{display:flex;flex-direction:column;gap:6px}
 .pc-acts button{height:30px;border:0;border-radius:999px;background:#ffffffeb;color:var(--ink);font-size:13px;cursor:pointer;font-family:inherit;transition:background .15s}
 .pc-acts button:hover{background:#fff}
-.pc-acts button.pr{background:var(--brand);color:#fff}
+.pc-acts button.pr{background:var(--brand);color:#fff}.pc-acts .pc-2{display:flex;gap:6px}.pc-acts .pc-2 button{flex:1;height:30px;border:0;border-radius:999px;font-size:13px;cursor:pointer;font-family:inherit}.pc-acts button.pr2{background:#fff;color:var(--brand-700);border:1px solid var(--brand)}
 .pc-acts button.pr:hover{background:var(--brand-600)}
 .pc-b{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px}
 .pc-t{font-size:14px;line-height:20px;height:40px;color:var(--price);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -514,7 +514,7 @@ button,input,select{font-family:inherit}
               <sc-if value="{{p.isCard}}"><span class="pc-face" style="background: {{p.cardBg}}"><span style="font-size: 13px">卡券</span><span style="font-size: 22px; font-weight: 700">{{p.cardFace}}</span></span></sc-if>
               <div class="pc-ov">
                 <div class="pc-bd"><sc-for list="{{p.badges}}" as="bd" hint-placeholder-count="2"><span class="pc-badge" style="background: {{bd.bg}}">{{bd.t}}</span></sc-for></div>
-                <div class="pc-acts"><button type="button" class="dl" onClick="{{p.open}}">查看详情 · 同品 / 相似品</button><button type="button" onClick="{{p.inq}}">集采询价</button><button type="button" onClick="{{p.list}}">上架到商城</button><button type="button" onClick="{{p.add}}">加入购物车</button><button type="button" class="pr" onClick="{{p.order}}">立即下单 / 代发</button></div>
+                <div class="pc-acts"><button type="button" class="dl" onClick="{{p.open}}">查看详情 · 同品 / 相似品</button><button type="button" onClick="{{p.inq}}">集采询价</button><button type="button" onClick="{{p.list}}">上架到商城</button><button type="button" onClick="{{p.add}}">加入购物车</button><span class="pc-2"><button type="button" class="pr" onClick="{{p.order}}">立即下单</button><button type="button" class="pr2" onClick="{{p.daifa}}">代发</button></span></div>
               </div>
             </div>
             <div class="pc-b">
@@ -668,7 +668,6 @@ button,input,select{font-family:inherit}
       </div>
 
       <section style="display: flex; flex-direction: column; gap: 14px">
-        <div class="pb-h"><b>一键做生意</b></div>
         <div class="yj-acc" role="tablist">
           <sc-for list="{{yj.items}}" as="it" hint-placeholder-count="4">
             <div role="tab" aria-selected="{{it.on}}" class="{{it.tabCls}}" onClick="{{it.pickCard}}">
@@ -719,7 +718,7 @@ button,input,select{font-family:inherit}
               <sc-if value="{{p.isCard}}"><span class="pc-face" style="background: {{p.cardBg}}"><span style="font-size: 13px">卡券</span><span style="font-size: 22px; font-weight: 700">{{p.cardFace}}</span></span></sc-if>
               <div class="pc-ov">
                 <div class="pc-bd"><sc-for list="{{p.badges}}" as="bd" hint-placeholder-count="2"><span class="pc-badge" style="background: {{bd.bg}}">{{bd.t}}</span></sc-for></div>
-                <div class="pc-acts"><button type="button" class="dl" onClick="{{p.open}}">查看详情 · 同品 / 相似品</button><button type="button" onClick="{{p.inq}}">集采询价</button><button type="button" onClick="{{p.list}}">上架到商城</button><button type="button" onClick="{{p.add}}">加入购物车</button><button type="button" class="pr" onClick="{{p.order}}">立即下单 / 代发</button></div>
+                <div class="pc-acts"><button type="button" class="dl" onClick="{{p.open}}">查看详情 · 同品 / 相似品</button><button type="button" onClick="{{p.inq}}">集采询价</button><button type="button" onClick="{{p.list}}">上架到商城</button><button type="button" onClick="{{p.add}}">加入购物车</button><span class="pc-2"><button type="button" class="pr" onClick="{{p.order}}">立即下单</button><button type="button" class="pr2" onClick="{{p.daifa}}">代发</button></span></div>
               </div>
             </div>
             <div class="pc-b">
@@ -764,7 +763,58 @@ button,input,select{font-family:inherit}
       </sc-if>
 
       <sc-if value="{{bz.isTpl}}" hint-placeholder-val="{{false}}">
-      <div style="display: flex; flex-direction: column; gap: 14px">__TPL_CARDS__</div>
+      <div style="display: flex; flex-direction: column; gap: 14px"><sc-for list="{{sd.tplsO}}" as="t" hint-placeholder-count="2">
+<article class="card" style="display: flex; gap: 20px; border: 1px solid #EEF0F3; border-radius: 12px; padding: 16px; background: #FFFFFF; min-width: 0">
+                  <div style="flex: 0 0 228px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+                    <div style="width: 216px; height: 432px; border-radius: 30px; background: #1F2329; padding: 8px; box-sizing: border-box; box-shadow: 0 10px 24px rgba(17,24,39,0.16); position: relative">
+                      <span style="position: absolute; left: 50%; top: 12px; transform: translateX(-50%); width: 56px; height: 6px; border-radius: 9999px; background: #3A4048; z-index: 2"></span>
+                      <div class="pvscroll" onClick="{{t.preview}}" title="点击进入完整预览" style="width: 100%; height: 100%; border-radius: 23px; overflow-y: auto; background: #FFFFFF; cursor: pointer; position: relative">
+                        <sc-if value="{{t.hasImg}}" hint-placeholder-val="{{true}}"><img src="{{t.img}}" alt="{{t.name}} 首页装修" style="width: 100%; display: block"></sc-if>
+                        <sc-if value="{{t.noImg}}" hint-placeholder-val="{{false}}">
+                          <div style="background: {{t.coverBg}}; color: #FFFFFF; padding: 40px 14px 24px; display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="font-size: 20px; font-weight: 800">{{t.coverTitle}}</span><span style="font-size: 11px; background: rgba(255,255,255,0.22); border-radius: 9999px; padding: 2px 10px">{{t.coverSub}}</span></div>
+                          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px">
+                            <sc-for list="{{mockCats}}" as="mc" hint-placeholder-count="8"><span style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9px; color: #4B5563"><span style="width: 36px; height: 36px; border-radius: 9999px; background: #F4F5F7; overflow: hidden; display: flex; align-items: center; justify-content: center"><img src="{{mc.img}}" alt="" style="width: 80%; height: 80%; object-fit: contain"></span>{{mc.name}}</span></sc-for>
+                          </div>
+                          <div style="padding: 0 12px 16px; display: flex; flex-direction: column; gap: 8px"><span style="height: 72px; border-radius: 10px; background: linear-gradient(120deg, #FFE9DC, #FFF6EE)"></span><span style="height: 72px; border-radius: 10px; background: linear-gradient(120deg, #DFF1EE, #F2FAF8)"></span><span style="font-size: 10px; color: #A0A6AE; text-align: center">模板装修图待上传</span></div>
+                        </sc-if>
+                      </div>
+                    </div>
+                    <span style="font-size: 12px; color: #8A9099">滚动看装修 · 点击进入预览</span>
+                  </div>
+                  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+                      <span style="font-size: 20px; font-weight: 700; color: #1F2329">{{t.name}}</span>
+                      <sc-if value="{{t.hot}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; font-weight: 600; color: #FFFFFF; background: #E2231A; border-radius: 4px; padding: 1px 6px">热门</span></sc-if>
+                      <sc-if value="{{t.isNew}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; font-weight: 600; color: #FFFFFF; background: #FF6A00; border-radius: 4px; padding: 1px 6px">NEW</span></sc-if>
+                      <span style="{{t.typeStyle}}">{{t.type}}</span>
+                    </div>
+                    <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #4B5563">{{t.intro}}</p>
+                    <div style="display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px 12px; font-size: 13px; line-height: 1.6">
+                      <span style="color: #8A9099">特色标签</span><span style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{t.tags}}" as="tg" hint-placeholder-count="2"><span style="font-size: 12px; color: #4B5563; background: #F4F5F7; border-radius: 4px; padding: 1px 8px">#{{tg}}</span></sc-for></span>
+                      <span style="color: #8A9099">适合客户</span><span style="color: #1F2329">{{t.fit}}</span>
+                      <span style="color: #8A9099">推荐理由</span><span style="color: #1F2329">{{t.reason}}</span>
+                      <span style="color: #8A9099">微页面</span><span><span style="font-size: 12px; color: #07514A; background: #E3F2EF; border-radius: 4px; padding: 2px 8px">{{t.micro}}</span></span>
+                      <span style="color: #8A9099">特色专题</span>
+                      <span style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{t.topicLinks}}" as="tl" hint-placeholder-count="4"><button type="button" onClick="{{tl.go}}" title="在预览中打开该专题" style="font-size: 12px; color: #07514A; background: #E3F2EF; border: none; border-radius: 4px; padding: 3px 8px; cursor: pointer">{{tl.name}}</button></sc-for></span>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><sc-for list="{{t.adv}}" as="a" hint-placeholder-count="2"><span style="font-size: 12px; color: #0F7F74; background: #E6F4F1; border-radius: 6px; padding: 2px 8px">{{a.text}}</span></sc-for><span style="font-size: 13px; color: #4B5563">自带商品利润空间 <strong style="color: #E2231A">{{t.profit}}</strong></span></div>
+                    <div style="flex: 1 1 0"></div>
+                    <div style="display: flex; gap: 10px">
+                      <button type="button" onClick="{{t.preview}}" style="min-height: 38px; padding: 0 20px; border-radius: 9999px; border: 1px solid #0D9488; background: #FFFFFF; color: #0D9488; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"></rect><path d="M11 18h2"></path></svg>预览商城</button>
+                      <button type="button" onClick="{{t.use}}" style="min-height: 38px; padding: 0 22px; border-radius: 9999px; border: none; background: #0D9488; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer">用它开商城</button>
+                      <button type="button" onClick="{{t.apply}}" style="min-height: 38px; padding: 0 20px; border-radius: 9999px; border: 1px solid #9ED4CF; background: #FFFFFF; color: #0D9488; font-size: 14px; cursor: pointer">套用到已有商城</button>
+                      <button type="button" onClick="{{t.detail}}" style="min-height: 38px; padding: 0 16px; border: none; background: transparent; color: #0D9488; font-size: 14px; cursor: pointer">看详情 ›</button>
+                    </div>
+                  </div>
+                  <div style="flex: 0 0 168px; border-left: 1px solid #F0F1F3; padding-left: 18px; display: flex; flex-direction: column; gap: 14px">
+                    <span style="display: flex; flex-direction: column"><strong style="font-size: 24px; color: #1F2329">{{t.clients}}</strong><span style="font-size: 12px; color: #8A9099">家客户选择</span></span>
+                    <span style="display: flex; flex-direction: column"><strong style="font-size: 24px; color: #1F2329">{{t.views}}</strong><span style="font-size: 12px; color: #8A9099">次浏览</span></span>
+                    <span style="font-size: 12px; color: #FF6A00; background: #FFF3EA; border-radius: 4px; padding: 4px 8px; line-height: 1.5">{{t.trend}}</span>
+                    <div style="flex: 1 1 0"></div>
+                    <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; font-size: 11px; color: #8A9099"><svg width="76" height="76" viewBox="0 0 29 29" aria-hidden="true"><path fill="#1F2329" d="{{t.qr}}"></path></svg>扫码手机预览</span>
+                  </div>
+                </article>
+</sc-for></div>
       </sc-if>
 
       <sc-if value="{{bz.isMat}}" hint-placeholder-val="{{false}}">
@@ -811,7 +861,7 @@ button,input,select{font-family:inherit}
         </div>
         <div style="flex: 0 0 200px; display: flex; flex-direction: column; gap: 10px">
           <button type="button" class="btn btn-o" onClick="{{plv.listAll}}">整盘上架到商城</button>
-          <button type="button" class="btn btn-p" onClick="{{plv.orderAll}}">整盘下单 / 代发</button>
+          <button type="button" class="btn btn-p" onClick="{{plv.orderAll}}">整盘代发</button>
         </div>
       </div>
       <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
@@ -1268,7 +1318,7 @@ button,input,select{font-family:inherit}
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap; padding-top: 6px">
           <button type="button" onClick="{{dt.order}}" style="min-height: 44px; padding: 0 28px; border: none; border-radius: 8px; background: #0D9488; color: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">立即下单</button>
-          <button type="button" onClick="{{dt.importOrder}}" style="min-height: 44px; padding: 0 20px; border: 1px solid #0D9488; border-radius: 8px; background: #FFFFFF; color: #0D9488; font-size: 15px; cursor: pointer">导入名单代发</button>
+          <button type="button" onClick="{{dt.importOrder}}" style="min-height: 44px; padding: 0 20px; border: 1px solid #0D9488; border-radius: 8px; background: #FFFFFF; color: #0D9488; font-size: 15px; cursor: pointer">代发下单</button>
           <button type="button" onClick="{{dt.list}}" style="{{dt.listStyle}}">上架到商城</button>
           <button type="button" onClick="{{dt.addCart}}" style="min-height: 44px; padding: 0 18px; border: 1px solid #E5E7EB; border-radius: 8px; background: #FFFFFF; color: #1F2329; font-size: 15px; cursor: pointer">加入购物车</button>
           <sc-if value="{{dt.canInq}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{dt.inq}}" style="min-height: 44px; padding: 0 18px; border: 1px solid #FFD2B3; border-radius: 8px; background: #FFF6EF; color: #C2410C; font-size: 15px; cursor: pointer">询价</button></sc-if>
@@ -1436,7 +1486,8 @@ button,input,select{font-family:inherit}
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><span style="font-size: 13px; color: #1F2329">采购金额 <strong style="font-size: 22px; color: #0D9488; margin-left: 6px">{{ct.total}}</strong></span><span style="font-size: 11px; color: #8A9099">{{ct.totalNote}}</span></div>
         <button type="button" onClick="{{ct.inq}}" aria-disabled="{{ct.none}}" style="{{ct.ghostStyle}}">询价</button>
         <button type="button" onClick="{{ct.list}}" aria-disabled="{{ct.none}}" style="{{ct.ghostStyle}}">一键上架</button>
-        <button type="button" onClick="{{ct.order}}" aria-disabled="{{ct.none}}" style="{{ct.primStyle}}">立即下单</button>
+        <button type="button" onClick="{{ct.daifa}}" aria-disabled="{{ct.none}}" style="{{ct.ghostStyle}}" title="按名单一人一份发货">代发下单</button>
+        <button type="button" onClick="{{ct.order}}" aria-disabled="{{ct.none}}" style="{{ct.primStyle}}">提交订单</button>
       </div>
     </div>
   </sc-if>
@@ -1955,6 +2006,83 @@ button,input,select{font-family:inherit}
   </div>
   </sc-if>
 
+
+  <sc-if value="{{viewDf}}" hint-placeholder-val="{{false}}">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 16px 24px 40px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #8A9099"><button type="button" onClick="{{df.back}}" style="border: none; background: transparent; padding: 0; color: #0D9488; font-size: 13px; cursor: pointer">{{df.backLabel}}</button><span>/</span><span style="color: #1F2329">代发下单</span></div>
+    <sc-if value="{{df.done}}" hint-placeholder-val="{{false}}">
+      <section style="background: #FFFFFF; border-radius: 12px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+        <span style="width: 52px; height: 52px; border-radius: 50%; background: #E3F2EF; color: #0D9488; display: flex; align-items: center; justify-content: center; font-size: 26px">✓</span>
+        <strong style="font-size: 20px; color: #1F2329">代发已提交</strong>
+        <span style="font-size: 14px; color: #4B5563">{{df.doneText}}</span>
+        <span style="font-size: 12px; color: #8A9099">逐行校验库存与可配送，异常行不下单；进度和售后在工作台「代发订单」查看</span>
+        <div style="display: flex; gap: 10px; margin-top: 6px"><button type="button" class="btn btn-o" onClick="{{df.again}}">继续选货</button><button type="button" class="btn btn-p" onClick="{{df.goOrders}}">去看代发订单</button></div>
+      </section>
+    </sc-if>
+    <sc-if value="{{df.notDone}}" hint-placeholder-val="{{true}}">
+    <section style="background: #FFFFFF; border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
+      <div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 320px"><h1 style="margin: 0; font-size: 22px; color: #1F2329">代发下单 · 一人一份</h1><span style="font-size: 13px; color: #6B7280">按名单给每位收件人发同一份商品；从预付款账户按会员价扣款，按收件人拆单</span></div>
+      <ol style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 10px; font-size: 13px; color: #4B5563">
+        <li style="display: flex; align-items: center; gap: 6px"><b style="width: 22px; height: 22px; border-radius: 50%; background: #0D9488; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px">1</b>每人一份的商品</li><li style="color: #C9CED5">—</li>
+        <li style="display: flex; align-items: center; gap: 6px"><b style="width: 22px; height: 22px; border-radius: 50%; background: #0D9488; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px">2</b>导入收件人名单</li><li style="color: #C9CED5">—</li>
+        <li style="display: flex; align-items: center; gap: 6px"><b style="width: 22px; height: 22px; border-radius: 50%; background: #0D9488; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px">3</b>校验并提交</li>
+      </ol>
+    </section>
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 12px; align-items: start">
+      <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0">
+        <section aria-label="每人一份的商品" style="background: #FFFFFF; border-radius: 12px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; align-items: baseline; gap: 8px"><strong style="font-size: 16px; color: #1F2329">1 · 每人一份的商品</strong><span style="font-size: 13px; color: #8A9099">{{df.n}} 种 · 每人 {{df.per}}</span></div>
+          <sc-if value="{{df.empty}}" hint-placeholder-val="{{false}}"><span style="font-size: 13px; color: #8A9099; padding: 12px 0">没有商品，返回继续选货</span></sc-if>
+          <sc-for list="{{df.rows}}" as="r" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 56px minmax(0, 1fr) 96px 120px 96px 40px; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px solid #F0F1F3">
+              <span style="width: 56px; height: 56px; border-radius: 8px; background: #F6F7F9; display: flex; align-items: center; justify-content: center; overflow: hidden"><sc-if value="{{r.hasImg}}" hint-placeholder-val="{{true}}"><img src="{{r.img}}" alt="" style="width: 88%; height: 88%; object-fit: contain"></sc-if></span>
+              <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span class="clamp1" style="font-size: 14px; color: #1F2329">{{r.name}}</span><span style="font-size: 12px; color: #8A9099">{{r.store}}</span><sc-if value="{{r.hasNote}}" hint-placeholder-val="{{false}}"><span style="{{r.noteStyle}}">{{r.note}}</span></sc-if></span>
+              <span style="font-size: 13px; color: #4B5563">会员价 {{r.price}}</span>
+              <span style="display: inline-flex; align-items: center; border: 1px solid #E5E7EB; border-radius: 9999px; height: 30px; justify-self: start"><button type="button" onClick="{{r.dec}}" aria-label="减少" style="width: 30px; border: 0; background: transparent; cursor: pointer">−</button><span style="min-width: 28px; text-align: center; font-size: 13px">{{r.qty}}</span><button type="button" onClick="{{r.inc}}" aria-label="增加" style="width: 30px; border: 0; background: transparent; cursor: pointer">+</button></span>
+              <span style="font-size: 14px; font-weight: 600; color: #E2231A">{{r.sub}}</span>
+              <button type="button" onClick="{{r.del}}" aria-label="移除" style="border: 0; background: transparent; color: #A0A6AE; cursor: pointer; font-size: 13px">移除</button>
+            </div>
+          </sc-for>
+          <span style="font-size: 12px; color: #A0A6AE">数量是每人份数；名单里的每位收件人收到同样一份</span>
+        </section>
+        <section aria-label="导入收件人名单" style="background: #FFFFFF; border-radius: 12px; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; align-items: baseline; gap: 8px"><strong style="font-size: 16px; color: #1F2329">2 · 导入收件人名单</strong><span style="font-size: 13px; color: #8A9099">姓名 / 手机号 / 省市区 / 详细地址 · 单次 ≤ 5,000 行 · 兼容老 .csv</span></div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap">
+            <button type="button" onClick="{{df.dlTpl}}" style="flex: 0 0 auto; min-height: 64px; padding: 0 18px; border-radius: 10px; border: 1px solid #E5E7EB; background: #FFFFFF; font-size: 14px; cursor: pointer">下载名单模板</button>
+            <sc-if value="{{df.notImported}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{df.doImport}}" style="flex: 1 1 260px; min-height: 64px; padding: 0 16px; border-radius: 10px; border: 1px dashed #C9CED5; background: #FAFBFC; font-size: 14px; color: #1F2329; cursor: pointer; text-align: left">上传填好的名单（.xlsx）<span style="display: block; font-size: 12px; color: #8A9099; margin-top: 2px">上传后自动识别有效人数和异常行</span></button></sc-if>
+            <sc-if value="{{df.imported}}" hint-placeholder-val="{{false}}"><div style="flex: 1 1 260px; min-height: 64px; padding: 8px 16px; border-radius: 10px; border: 1px solid #0D9488; background: #F0F8F7; display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+              <span style="font-size: 14px; color: #07514A">收件人名单_年货节.xlsx</span>
+              <sc-for list="{{df.stats}}" as="st" hint-placeholder-count="3"><span style="{{st.style}}">{{st.k}} <b>{{st.v}}</b></span></sc-for>
+              <span style="flex: 1 1 0"></span>
+              <button type="button" onClick="{{df.fix}}" style="border: 0; background: transparent; color: #B91C1C; font-size: 13px; cursor: pointer">查看并修正异常行 ›</button>
+              <button type="button" onClick="{{df.reImport}}" style="border: 0; background: transparent; color: #0D9488; font-size: 13px; cursor: pointer">重新上传</button>
+            </div></sc-if>
+          </div>
+          <sc-if value="{{df.imported}}" hint-placeholder-val="{{false}}">
+          <div style="border: 1px solid #F0F1F3; border-radius: 10px; overflow: hidden">
+            <sc-for list="{{df.preview}}" as="pr" hint-placeholder-count="3"><div style="display: grid; grid-template-columns: 120px 140px minmax(0, 1fr) 120px; gap: 12px; padding: 8px 14px; font-size: 13px; border-top: 1px solid #F0F1F3"><span>{{pr.name}}</span><span style="color: #4B5563">{{pr.tel}}</span><span class="clamp1" style="color: #4B5563">{{pr.addr}}</span><span style="{{pr.stStyle}}">{{pr.st}}</span></div></sc-for>
+            <div style="padding: 8px 14px; font-size: 12px; color: #8A9099; border-top: 1px solid #F0F1F3">… 其余 29 行 · 异常行提交时跳过，修正后计入</div>
+          </div>
+          </sc-if>
+        </section>
+      </div>
+      <aside aria-label="校验并提交" style="background: #FFFFFF; border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 88px">
+        <strong style="font-size: 16px; color: #1F2329">3 · 校验并提交</strong>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: #4B5563"><span>每人金额</span><span>{{df.per}}</span></div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: #4B5563"><span>有效人数</span><span>{{df.people}} 人</span></div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: #4B5563"><span>运费</span><span>按实际计算（示例包邮）</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #F0F1F3; padding-top: 10px"><span style="font-size: 13px; color: #1F2329">预计扣款</span><strong style="font-size: 22px; color: #E2231A">{{df.total}}</strong></div>
+        <span style="font-size: 12px; color: #8A9099">预付款账户余额 {{df.bal}} · 按会员价扣款</span>
+        <sc-if value="{{df.short}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #B91C1C; background: #FEF2F2; border-radius: 8px; padding: 6px 10px">余额不足：提交后保留为待支付，充值（对公转账 / 扫码付）后自动支付</span></sc-if>
+        <span style="font-size: 12px; color: #4B5563; background: #F7F8FA; border-radius: 8px; padding: 6px 10px">{{df.split}}；逐行校验库存、可配送、起订量和会员价，异常行不下单</span>
+        <sc-if value="{{df.hasSwapNote}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #B45309">{{df.swapNote}}</span></sc-if>
+        <sc-if value="{{df.hasCardNote}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #B45309">{{df.cardNote}}</span></sc-if>
+        <button type="button" onClick="{{df.submit}}" style="{{df.submitStyle}}">{{df.submitText}}</button>
+      </aside>
+    </div>
+    </sc-if>
+  </div>
+  </sc-if>
   <sc-if value="{{hasSel}}" hint-placeholder-val="{{false}}">
     <div style="position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); width: min(1000px, calc(100% - 32px)); background: #FFFFFF; border: 1px solid #EEF0F3; border-radius: 12px; box-shadow: 0 10px 30px rgba(17,24,39,0.14); z-index: 20; padding: 10px 10px 10px 18px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; box-sizing: border-box">
       <span style="font-size: 14px; color: #1F2329">已选 <strong style="color: #0D9488; font-size: 16px">{{selCountText}}</strong> 件</span><sc-if value="{{barOverCap}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #B45309; background: #FFF7E8; border-radius: 4px; padding: 1px 6px">{{barCapText}}</span></sc-if>
@@ -1965,8 +2093,8 @@ button,input,select{font-family:inherit}
       <button type="button" onClick="{{batchInq}}" style="min-height: 38px; padding: 0 16px; border-radius: 6px; border: 1px solid #FFD2B3; background: #FFF6EF; color: #C2410C; font-size: 14px; cursor: pointer">批量询价</button>
       <button type="button" onClick="{{batchCart}}" style="min-height: 38px; padding: 0 16px; border-radius: 6px; border: 1px solid #E5E7EB; background: #FFFFFF; color: #1F2329; font-size: 14px; cursor: pointer">批量加购</button>
       <button type="button" onClick="{{batchList}}" style="min-height: 38px; padding: 0 16px; border-radius: 6px; border: 1px solid #0D9488; background: #FFFFFF; color: #0D9488; font-size: 14px; font-weight: 600; cursor: pointer">批量上架</button>
-      <button type="button" onClick="{{batchOrder}}" style="min-height: 38px; padding: 0 16px; border-radius: 6px; border: 1px solid #0D9488; background: #FFFFFF; color: #0D9488; font-size: 14px; font-weight: 600; cursor: pointer">批量下单</button>
-      <button type="button" onClick="{{batchImport}}" style="min-height: 38px; padding: 0 18px; border-radius: 6px; border: none; background: #0D9488; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer" title="导入收件人名单，按名单一人一份发货">批量代发</button>
+      <button type="button" onClick="{{batchOrder}}" title="加入购物车并选中，在购物车提交订单" style="min-height: 38px; padding: 0 16px; border-radius: 6px; border: 1px solid #0D9488; background: #FFFFFF; color: #0D9488; font-size: 14px; font-weight: 600; cursor: pointer">批量下单</button>
+      <button type="button" onClick="{{batchImport}}" style="min-height: 38px; padding: 0 18px; border-radius: 6px; border: none; background: #0D9488; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer" title="进入代发下单页：导入收件人名单，一人一份发货">批量代发</button>
     </div>
   </sc-if>
 
@@ -3419,7 +3547,7 @@ class Component extends DCLogic {
     const storeCard = (k) => { const st = STORE[k]; const tp = STYPE(k); const items = ALLP.filter((p) => SK(p) === k); return { name: st.name, logo: st.logo, logoStyle: logoCss(tp, 44), typeName: T_NAME[tp], tagStyle: typeTagCss(tp, 11), n: items.length,
       desc: tp === 'plat' ? st.ship : (tp === 'own' ? '仅你可见 · 自有商品' : st.vendor + ' · 对你专属'), thumbs: items.slice().sort((a, b) => (b.img ? 1 : 0) - (a.img ? 1 : 0)).slice(0, 3).map((p) => thumb(p)), go: () => this.openStore(k) }; };
     const SUP_KEYS = ['sup1', 'sup2', 'sup3'];
-    const BACK_LBL = { cart: '‹ 返回购物车', search: '‹ 返回搜索结果', wb: '‹ 返回工作台', home: '‹ 返回场景', res: '‹ 返回资源广场', detail: '‹ 返回商品详情', store: '‹ 返回店铺', scenes: '‹ 返回场景列表', tpls: '‹ 返回模板列表', noperm: '‹ 返回首页' };
+    const BACK_LBL = { sol: '‹ 返回方案详情', pal: '‹ 返回货盘详情', tpd: '‹ 返回模板详情', cpk: '‹ 返回卡券详情', cart: '‹ 返回购物车', search: '‹ 返回搜索结果', wb: '‹ 返回工作台', home: '‹ 返回场景', res: '‹ 返回资源广场', detail: '‹ 返回商品详情', store: '‹ 返回店铺', scenes: '‹ 返回场景列表', tpls: '‹ 返回模板列表', noperm: '‹ 返回首页' };
     const stRows = stSup ? [] : (stT === 'plat' ? [{ k: '运营方', v: stBase.note ? '飞象 · 招商品牌供货' : '飞象（平台自营）' }, { k: '付款', v: '预付款账户 · 平台收银台' }, { k: '开票', v: stBase.inv }, { k: '发货', v: stBase.ship }, { k: '售后', v: stBase.after }]
       : (stT === 'own' ? [{ k: '供货来源', v: '你自己的商品' }, { k: '结算', v: '不经平台结算，按单收订单服务费' }, { k: '开票', v: stBase.inv }, { k: '发货', v: stBase.ship }, { k: '可见范围', v: '仅本会员' }]
       : [{ k: '供应商', v: stBase.vendor }, { k: '付款', v: '货款直付供应商，平台不经手' }, { k: '开票', v: stBase.inv }, { k: '发货', v: stBase.ship }, { k: '可见范围', v: '仅你可见 · 专属价' }]));
@@ -3445,9 +3573,17 @@ class Component extends DCLogic {
       qualCanUpload: stT === 'own', qualSub: stT === 'plat' ? '飞象（平台自营）' : (stT === 'own' ? '你的企业资质，仅你可见' : (stBase ? stBase.vendor : '')), quals: qualOf(stK, stT), tabTodo: spTab.k !== 'goods', tabLabel: spTab.l, tabHint: spTab.hint || '' });
     const ADDRS = [{ id: 'a1', who: '[示例] 行政部 · 张女士 138****1024', addr: '浙江省杭州市西湖区文三路 ×× 号 3 楼' }, { id: 'a2', who: '[示例] 工会办公室 · 李先生 139****5521', addr: '浙江省杭州市滨江区网商路 ×× 号' }];
     const addCart = (ids) => { const c = Object.assign({}, this.state.cart); ids.forEach((id) => { c[id] = (c[id] || 0) + 1; }); this.setState({ cart: c }); this.flash('已加入购物车 ' + ids.length + ' 件'); };
-    const openOrder = (target, mode) => { const n = Array.isArray(target) ? target.length : (target === 'cart' ? Object.keys(this.state.cart).length : Object.keys(this.state.selected).length);
-      if (n > CAP.order) { this.flash('单次' + (mode === 'import' ? '代发' : '下单') + '最多 ' + CAP.order + ' 款，当前 ' + n.toLocaleString() + ' 款。大批量建议先上架到商城，由员工在商城里选；或按类目 / 利润率筛选后分批下单'); return; }
-      this.setState({ modal: 'order', target: target, orderMode: mode || 'direct', qty: {}, imported: false, fromCart: false }); };
+    // 直接下单 → 加入购物车并选中，在购物车确认地址后提交；代发 → 独立的代发下单页
+    const toCart = (ids, clear) => { const st = this.state; const c = Object.assign({}, st.cart); ids.forEach((id) => { if (!c[id]) c[id] = 1; }); const sel = {}; ids.forEach((id) => { sel[id] = true; });
+      this.setState({ cart: c, cartSel: sel, view: 'cart', cartBack: st.view === 'cart' ? (st.cartBack || 'home') : (st.view || 'home'), modal: null, selected: clear ? {} : st.selected });
+      setTimeout(() => window.scrollTo(0, 0), 30); this.flash('已加入购物车并选中 ' + ids.length + ' 款，确认收货地址和数量后提交订单'); };
+    const toDf = (ids, clear) => { const st = this.state;
+      this.setState({ view: 'df', dfIds: ids.slice(), dfFrom: st.view === 'df' ? (st.dfFrom || 'home') : (st.view || 'home'), dfQty: {}, dfImported: false, dfDone: false, modal: null, selected: clear ? {} : st.selected });
+      setTimeout(() => window.scrollTo(0, 0), 30); };
+    const openOrder = (target, mode) => { const ids = Array.isArray(target) ? target : (target === 'cart' ? Object.keys(this.state.cart) : Object.keys(this.state.selected)); const clear = !Array.isArray(target) && target !== 'cart';
+      if (!ids.length) return;
+      if (ids.length > CAP.order) { this.flash('单次' + (mode === 'import' ? '代发' : '下单') + '最多 ' + CAP.order + ' 款，当前 ' + ids.length.toLocaleString() + ' 款。大批量建议先上架到商城，由员工在商城里选；或按类目 / 利润率筛选后分批'); return; }
+      if (mode === 'import') toDf(ids, clear); else toCart(ids, clear); };
     const openListFor = (target, items) => { if (!items.filter((p) => !p.card).length) this.flash('卡券仅支持代发，不能上架到商城'); else this.setState({ modal: 'list', target: target }); };
     const mk = Number(s.markup) || 0;
     const baseVal = (p) => s.base === 'market' ? { v: p.market, l: '市场价 ' + money(p.market) } : (s.base === 'avg' && p.avg != null ? { v: p.avg, l: '到手价 ' + money(p.avg) } : { v: p.member, l: '会员价 ' + money(p.member) });
@@ -3629,6 +3765,36 @@ class Component extends DCLogic {
       jumpSim: () => { this.setState({ dtsTab: 'sim' }); this.jump('dt-same'); },
       hasSimLine: !!(dSimList.length || dSm), hasQuick: !!(dSb || dSwap || dSimList.length || dSm), jumpSame: () => { this.setState({ dtsTab: 'same' }); this.jump('dt-same'); }
     });
+
+    // ===== 代发下单页（一人一份）：确认商品 → 导入名单 → 校验与提交（口径见 V1.0 Spec「导入名单代发」）=====
+    const dfItems = (s.dfIds || []).map((id) => byId[id]).filter(Boolean);
+    const dfQ = (id) => Math.max(1, Number((s.dfQty || {})[id]) || 1);
+    const dfSetQ = (id, n) => this.setState({ dfQty: Object.assign({}, this.state.dfQty, { [id]: Math.max(1, n) }) });
+    const dfPer = dfItems.reduce((a, p) => a + p.member * dfQ(p.id), 0);
+    const dfN = s.dfImported ? 30 : 0; const dfTotal = dfPer * dfN; const DF_BAL = 12860;
+    const dfSrcN = new Set(dfItems.map((p) => SK(p))).size; const dfCards = dfItems.filter((p) => p.card).length; const dfSwapN = dfItems.filter((p) => swapTip(p)).length;
+    const dfOk = s.dfImported && dfItems.length > 0;
+    const df = { backLabel: BACK_LBL[s.dfFrom] || '‹ 返回', back: () => { this.setState({ view: s.dfFrom || 'home' }); window.scrollTo(0, 0); },
+      n: dfItems.length, empty: !dfItems.length,
+      rows: dfItems.map((p) => { const q = dfQ(p.id); const sw = swapTip(p); return Object.assign(thumb(p), { name: p.name, store: storeOf(p).name, price: money(p.member), qty: q, sub: money(p.member * q),
+        inc: () => dfSetQ(p.id, q + 1), dec: () => dfSetQ(p.id, q - 1), del: () => this.setState({ dfIds: (this.state.dfIds || []).filter((x) => x !== p.id) }),
+        note: p.card ? '卡券：卡密发到名单手机号，无需地址' : (sw ? '将替换为自有同品下单（' + sw + '）' : (p.stock !== '有货' ? p.stock + '：提交时逐行校验库存' : '')), hasNote: !!(p.card || sw || p.stock !== '有货'),
+        noteStyle: 'font-size: 12px; color: ' + (p.stock !== '有货' && !p.card && !sw ? '#B91C1C' : '#B45309') }); }),
+      per: money(dfPer), imported: !!s.dfImported, notImported: !s.dfImported,
+      dlTpl: () => this.flash('演示：下载「代发收件人名单模板.xlsx」（姓名 / 手机号 / 省市区 / 详细地址）'),
+      doImport: () => this.setState({ dfImported: true }), reImport: () => this.flash('演示：重新上传名单'),
+      fix: () => this.flash('演示：打开异常行修正（地址不全 1 行、不可配送 1 行），修正后计入有效人数'),
+      stats: [{ k: '识别', v: '32 位' }, { k: '有效', v: '30 位' }, { k: '异常', v: '2 行', bad: true }].map((x) => ({ k: x.k, v: x.v, style: 'font-size: 13px; color: ' + (x.bad ? '#B91C1C' : '#1F2329') })),
+      preview: [['[示例] 王**', '137****2201', '浙江省杭州市拱墅区…', '有效'], ['[示例] 陈**', '186****7730', '浙江省宁波市鄞州区…', '有效'], ['[示例] 李**', '139****5521', '（地址不全）', '异常 · 地址不全']]
+        .map((r) => ({ name: r[0], tel: r[1], addr: r[2], st: r[3], stStyle: 'font-size: 12px; color: ' + (r[3] === '有效' ? '#047857' : '#B91C1C') })),
+      people: dfN, total: money(dfTotal), bal: money(DF_BAL), short: dfOk && dfTotal > DF_BAL,
+      split: dfN ? '按收件人拆成 ' + dfN + ' 个订单' + (dfSrcN > 1 ? '，每单按 ' + dfSrcN + ' 个货源再拆子单' : '') : '导入名单后按收件人拆单',
+      cardNote: dfCards ? '含 ' + dfCards + ' 张卡券：卡密发到名单手机号' : '', hasCardNote: dfCards > 0, swapNote: dfSwapN ? '其中 ' + dfSwapN + ' 件将替换为自有同品下单' : '', hasSwapNote: dfSwapN > 0,
+      submitText: !dfItems.length ? '没有可代发的商品' : (!s.dfImported ? '先导入收件人名单' : (dfTotal > DF_BAL ? '提交代发并去充值（' + dfN + ' 人）' : '提交代发（' + dfN + ' 人）')),
+      submitStyle: 'width: 100%; min-height: 44px; border: none; border-radius: 9999px; font-size: 15px; font-weight: 600; color: #FFFFFF; cursor: ' + (dfOk ? 'pointer' : 'not-allowed') + '; background: ' + (dfOk ? '#0D9488' : '#B6DCD6'),
+      submit: () => { if (!dfOk) return; this.setState({ dfDone: true }); window.scrollTo(0, 0); this.flash('演示：已提交代发，' + dfN + ' 人 × ' + dfItems.length + ' 种商品，预计扣款 ' + money(dfTotal) + '（未生成订单）'); },
+      done: !!s.dfDone, notDone: !s.dfDone, doneText: dfN + ' 人 × ' + dfItems.length + ' 种商品 · 预计扣款 ' + money(dfTotal) + ' · ' + (dfN ? '已按收件人拆成 ' + dfN + ' 个订单' : ''),
+      goOrders: () => this.openWb('daifa'), again: () => this.setState({ view: s.dfFrom || 'home', dfDone: false }) };
     // ---------- 营销素材 ----------
     const MAT_TYPES = [{ k: 'all', l: '全部' }, { k: 'poster', l: '海报' }, { k: 'text', l: '朋友圈文案' }, { k: 'doc', l: '方案介绍' }];
     const POSTER_BG = { cny: 'linear-gradient(160deg, #C2413B 0%, #E8664F 60%, #F2A65A 100%)', emp: 'linear-gradient(160deg, #0B6E66 0%, #0D9488 60%, #5CC8B5 100%)', uni: 'linear-gradient(160deg, #1E4F9C 0%, #3B7DD8 60%, #7FB2F0 100%)', bday: 'linear-gradient(160deg, #B4235A 0%, #E0527F 60%, #F5A3B8 100%)', meal: 'linear-gradient(160deg, #B45309 0%, #EA8A1E 60%, #F7C26B 100%)', cnyCard: 'linear-gradient(160deg, #9F1D1D 0%, #D9372B 55%, #F0B44C 100%)' };
@@ -3703,6 +3869,7 @@ class Component extends DCLogic {
       inq: guard(() => { const own = cSelIds.filter((id) => byId[id].kind === 'own').length; if (own) this.flash('自营店商品不需要询价，已跳过 ' + own + ' 款'); this.setState({ modal: 'inq', target: cSelIds.filter((id) => byId[id].kind !== 'own'), inqType: 'bulk', inqQty: Object.assign({}, cMap) }); }),
       list: guard(() => openListFor(cSelIds, cSelIds.map((id) => byId[id]))),
       order: guard(() => this.setState({ modal: 'order', target: cSelIds, orderMode: 'direct', qty: Object.assign({}, cMap), imported: false, fromCart: true })),
+      daifa: guard(() => { if (cSelIds.length > CAP.order) { this.flash('单次代发最多 ' + CAP.order + ' 款'); return; } toDf(cSelIds, false); }),
       groups: cGroupKeys.map((k) => { const ids = cIds.filter((id) => SK(byId[id]) === k); const on = ids.every((id) => cSel[id]); const so = storeOf(byId[ids[0]]); return { name: STORE[k].name, ship: STORE[k].ship || '', pay: so.pay, payStyle: 'font-size: 11px; border-radius: 3px; padding: 1px 6px; ' + (so.off ? 'color: #B45309; background: #FFF1E6' : 'color: #0D9488; background: #E6F4F2'),
         on: on, aria: '选中 ' + STORE[k].name + ' 的全部商品', boxStyle: boxS(on), goStore: () => this.openStore(k),
         toggle: () => { const sl = Object.assign({}, cSel); ids.forEach((id) => { if (on) delete sl[id]; else sl[id] = true; }); this.setState({ cartSel: sl }); },
@@ -3915,7 +4082,7 @@ class Component extends DCLogic {
       minP: s.palMin || '', maxP: s.palMax || '', onMin: (e) => this.setState({ palMin: e.target.value }), onMax: (e) => this.setState({ palMax: e.target.value }),
       quick: QK.map((q) => { const on = pMin === q.a && pMax === q.b; return { label: q.l, cls: on ? 'on' : '', style: chip(on), pick: () => this.setState(on ? { palMin: '', palMax: '' } : { palMin: String(q.a || ''), palMax: String(q.b || '') }) }; }),
       items: palShown.map(decorate), shown: palShown.length, empty: !palShown.length,
-      addAll: () => addCart(palShown.map((p) => p.id)), listAll: () => openListFor(palShown.map((p) => p.id), palShown), orderAll: () => openOrder(palShown.map((p) => p.id), 'direct') };
+      addAll: () => addCart(palShown.map((p) => p.id)), listAll: () => openListFor(palShown.map((p) => p.id), palShown), orderAll: () => openOrder(palShown.map((p) => p.id), 'import') };
 
     // 卡券详情
     const cx = CPKS[s.cpkId] || CPKS.cc1; const cfi = Math.min(s.cpkFace || 0, cx.faces.length - 1); const cMall = cx.mall;
@@ -4001,7 +4168,7 @@ class Component extends DCLogic {
       cards: solO.cpks.map((k) => { const c = CPKS[k]; const f = faceRec(c); return { name: c.name, form: CARD_FORM[k] || (c.excl ? '专款专用' : '额度卡'), bg: c.img ? 'url(' + c.img + ') center / cover' : c.bg, face: faceText(c, f), faces: c.faces.map((x) => faceText(c, x)).join(' / '), buy: () => openBuy(k, c.faces.indexOf(f)), open: () => openCpk(k) }; }),
       mallCard: (() => { const k = solO.cpks[0] ? CPKS[solO.cpks[0]].mall : solO.tpls[0]; const cv = tCover(k); return Object.assign(cv, { n: (TPL_IDS[k] || []).length, pv: () => pvTpl(k), open: () => openTpd(k) }); })(),
       tpls: solO.tpls.map((k) => Object.assign(tCover(k), { n: (TPL_IDS[k] || []).length, pv: () => pvTpl(k), use: () => this.setState({ modal: 'mall', tplId: k, mallName: solO.name + ' · ' + TPL[k].name }), open: () => openTpd(k) })),
-      listGo: () => (curPlay === 'direct' ? openOrder(palIdsAll, 'direct') : this.flash('演示：导入员工名单并发放额度')), listLabel: curPlay === 'direct' ? '整盘下单 / 代发' : '导入名单发额度',
+      listGo: () => (curPlay === 'direct' ? openOrder(palIdsAll, 'import') : this.flash('演示：导入员工名单并发放额度')), listLabel: curPlay === 'direct' ? '整盘代发' : '导入名单发额度',
       cliGo: () => this.setState({ modal: 'cliCfg', cliPlay: curPlay }), matGo: () => goMat(),
       casesAll: casesAll.map((c) => ({ title: '面向' + c.who + '，用「' + PLAYS[c.play].name + '」做' + soScene.name.replace('2027 ', ''), ind: c.ind, scale: c.n.toLocaleString() + ' 人 · ' + (soScene.id === 'meal' ? '每天' : '人均') + ' ¥' + c.p, res: c.res, out: c.out.map((o) => ({ t: o })) })),
       cases: solCases.map((c) => ({ title: '面向' + c.who + '，用「' + PLAYS[c.play].name + '」做' + soScene.name.replace('2027 ', ''), ind: c.ind, scale: c.n.toLocaleString() + ' 人 · ' + (soScene.id === 'meal' ? '每天' : '人均') + ' ¥' + c.p, res: c.res, out: c.out.map((o) => ({ t: o })),
@@ -4019,7 +4186,7 @@ class Component extends DCLogic {
     const yjList = [];
     if (yjPal) { const x = PALS[yjPal]; yjList.push({ sel: 'pal', res: yjPal, short: PALS[yjPal].ids.length + ' 款 · ' + priceRange(PALS[yjPal].ids), kind: '爆品货盘', kindCls: 'yj-k pal', name: x.name, who: '客户要直接发货，或已经有商城', chips: yjChips(solO.pals, yjPal, 'yjPal', (k) => PALS[k].name),
       meta: x.ids.length + ' 款 · ' + priceRange(x.ids), adv: advPick(x.ids, SP.advKeys, true).slice(0, 2), thumbs: yjThumbs(x.ids, 8), isGoods: true, earn: '利润最高 ' + maxProfit(x.ids), detail: () => openPal(yjPal), detailLabel: '货盘详情',
-      b1: '一键上架', go1: () => openListFor(x.ids, x.ids.map((id) => PB[id])), b2: '下单 / 代发', go2: () => openOrder(x.ids, 'direct') }); }
+      b1: '一键上架', go1: () => openListFor(x.ids, x.ids.map((id) => PB[id])), b2: '代发下单', go2: () => openOrder(x.ids, 'import') }); }
     if (yjCpk) { const c = CPKS[yjCpk]; yjList.push({ sel: 'cpk', res: yjCpk, short: '面值 ' + CPKS[yjCpk].faces.map((f) => faceText(CPKS[yjCpk], f)).join(' / '), kind: '福利卡券', kindCls: 'yj-k cpk', name: c.name, who: '客户想让员工自己选', chips: yjChips(solO.cpks, yjCpk, 'yjCpk', (k) => CPKS[k].name),
       meta: (CARD_FORM[yjCpk] || '') + ' · 面值 ' + c.faces.map((f) => faceText(c, f)).join(' / '), adv: [{ label: '兑换商城', text: TPL[c.mall].name }, { label: '可兑换', text: c.ids.length + ' 款' }], isCard: true, cardBg: c.img ? 'url(' + c.img + ') center / cover' : c.bg, cardFace: faceText(c, c.faces[c.faces.length - 1]), thumbs: yjThumbs(c.ids, 3),
       earn: '利润最高 ' + maxProfit(c.ids), detail: () => openCpk(yjCpk), detailLabel: '卡券详情', b1: '买卡', go1: () => openBuy(yjCpk, 0), b2: '看兑换商城', go2: () => pvTpl(c.mall) }); }
@@ -4138,7 +4305,7 @@ class Component extends DCLogic {
         title: p.name, spec: p.spec + ' · ' + SRC[p.src], marginLabel: p.market ? '市场价利润率 ' + pct(marginOf(p.member, p.market)) : '',
         price: money(p.member), strike: p.market ? money(p.market) : '', tags: tagOf(id),
         sold: (1200 + sd2 * 3).toLocaleString(), yday: 5 + sd2 % 25, stock: p.stock === '有货' ? '库存充足' : p.stock,
-        open: d.openDetail, inq: stp(d.inqOne), list: stp(d.listOne), add: stp(d.addCart), order: stp(d.orderOne),
+        open: d.openDetail, inq: stp(d.inqOne), list: stp(d.listOne), add: stp(d.addCart), order: stp(d.orderOne), daifa: stp(() => openOrder([p.id], 'import')),
         sel: d.sel, selCls: d.sel ? 'sel' : '', ckCls: d.sel ? 'on' : '', btnAria: d.btnAria, toggle: d.toggle, ...subOf(id) }; };
     const goods = palIds;
     const cardItems = solO.cpks.filter((k) => chipOn === 'all' || chipOn === k).reduce((a, k) => { const c = CPKS[k]; return a.concat(c.faces.map((f, fi) => { const sd2 = seed(k + f);
@@ -4177,7 +4344,7 @@ class Component extends DCLogic {
       empty: (curBiz === 'pal' && !goods.length) || (curBiz === 'cpk' && !cardItems.length) || (curBiz === 'tpl' && !solO.tpls.length),
       tabs: BZ.map((t) => ({ ink: curBiz === t.k ? '#066b5f' : '#0f1418', cls: curBiz === t.k ? 'on' : '', label: t.l + (t.n ? ' ' + t.n : ''), sub: t.s, pick: () => this.setState({ biz: t.k, bzChip: 'all' }) })),
       chips: [{ v: 'all', l: curBiz === 'pal' ? '全部商品' : (curBiz === 'cpk' ? '全部卡券' : (curBiz === 'mat' ? '全部素材' : '全部模板')), t: '' }].concat(chipList).map((c) => ({ label: c.l, hasTag: !!c.t, tag: c.t, cls: chipOn === c.v ? 'on' : '', pick: () => this.setState({ bzChip: c.v }) })),
-      acts: (curBiz !== 'tpl' && chipOn !== 'all' ? [{ label: (curBiz === 'pal' ? '货盘详情' : '卡券详情') + ' ›', cls: 'btn-s', go: () => (curBiz === 'pal' ? openPal(chipOn) : openCpk(chipOn)) }] : []).concat(curBiz === 'pal' && goods.length ? [{ label: '整盘上架', cls: 'btn-o', go: () => openListFor(palIds, palIds.map((id) => PB[id])) }, { label: '整盘下单 / 代发', cls: 'btn-p', go: () => openOrder(palIds, 'direct') }] : []),
+      acts: (curBiz !== 'tpl' && chipOn !== 'all' ? [{ label: (curBiz === 'pal' ? '货盘详情' : '卡券详情') + ' ›', cls: 'btn-s', go: () => (curBiz === 'pal' ? openPal(chipOn) : openCpk(chipOn)) }] : []).concat(curBiz === 'pal' && goods.length ? [{ label: '整盘上架', cls: 'btn-o', go: () => openListFor(palIds, palIds.map((id) => PB[id])) }, { label: '整盘代发', cls: 'btn-p', go: () => openOrder(palIds, 'import') }] : []),
       goods: goods, cards: cardItems };
     if (curBiz === 'mat') bz.acts = [{ label: '打开素材库 · 合成商城二维码', cls: 'btn-p', go: () => openMatLib() }];
     sd.tplsO = sd.tplsO.filter((t, i) => curBiz !== 'tpl' || chipOn === 'all' || solO.tpls[i] === chipOn);
@@ -4225,7 +4392,7 @@ class Component extends DCLogic {
     // 货盘详情
     const fbPal = FB('pal', palX.ids);
     pl.items = fbPal.page.map((p) => Object.assign(decorate(p), subOf(p.id))); pl.sub = subSum(palX.ids, palX.name); pl.shown = fbPal.list.length; pl.empty = !fbPal.list.length; pl.f = fbPal.ui;
-    pl.listAll = () => openListFor(fbPal.list.map((p) => p.id), fbPal.list); pl.orderAll = () => openOrder(fbPal.list.map((p) => p.id), 'direct');
+    pl.listAll = () => openListFor(fbPal.list.map((p) => p.id), fbPal.list); pl.orderAll = () => openOrder(fbPal.list.map((p) => p.id), 'import');
     // 卡券详情：员工能换什么
     const fbCk = FB('cpk', cx.ids);
     ck.goods = fbCk.page.map((p) => Object.assign(thumb(p), { name: p.name, price: money(p.member), market: p.market ? money(p.market) : '—', margin: p.market ? pct(marginOf(p.member, p.market)) : '—', src: SRC[p.src], ship: p.wh === '电商仓' ? '24h 发货' : '商家发货', open: () => this.openDetail(p.id),
@@ -4302,7 +4469,7 @@ class Component extends DCLogic {
       viewCart: s.view === 'cart', ct: ct, ctAll: ctAll,
       notWb: s.view !== 'wb' && s.view !== 'cli',
       viewSearch: s.view === 'search', sr: Object.assign(sr, selAllUi(sList.map((p) => p.id))), viewWb: s.view === 'wb', wb: wb, modalWbGuide: s.modal === 'wbGuide',
-      viewRes: s.view === 'res', viewDetail: s.view === 'detail', viewNoPerm: s.view === 'noperm', res: Object.assign(res, selAllUi(resList.map((p) => p.id))), dt: dt, npName: s.npName || '', npBackLabel: '‹ 返回首页', resBackLabel: '‹ 返回首页',
+      viewRes: s.view === 'res', viewDetail: s.view === 'detail', viewDf: s.view === 'df', df: df, viewNoPerm: s.view === 'noperm', res: Object.assign(res, selAllUi(resList.map((p) => p.id))), dt: dt, npName: s.npName || '', npBackLabel: '‹ 返回首页', resBackLabel: '‹ 返回首页',
       modalMat: s.modal === 'mat', mat: mat, mpv: mpv, matCount: MATS.length, openMat: () => { this.setState({ view: 'mat', matFrom: s.view, modal: null, matPv: null, matSel: {}, matType: 'all' }); window.scrollTo(0, 0); },
       balNoPerm: () => this.noPerm('预付款账户'),
       viewTplPv: s.view === 'tplpv' && !!s.pv, pvExit: () => this.setState({ view: s.pvBack || 'home' }), pvExitLabel: ({ wb: '‹ 返回工作台', home: '‹ 返回场景', tpls: '‹ 返回模板列表', res: '‹ 返回资源广场' })[s.pvBack || 'home'] || '‹ 返回', pvT: pvT, pvP: pvP, pvHome: pvPage === 'home', pvAll: pvPage === 'all', pvTopic: pvPage === 'topic', pvDetail: pvPage === 'detail', pvCart: pvPage === 'cart', pvConfirm: pvPage === 'confirm',
@@ -4369,7 +4536,7 @@ class Component extends DCLogic {
       onPageSize: (e) => this.setState({ pageSize: Number(e.target.value), page: 1 }),
       selectPageLabel: '全选本页', selectPage: () => { const cur = { home: bz.isPal ? fbHome.page : [], sol: bz.isPal ? fbHome.page : [], pal: fbPal.page, tpd: fbTpl.page, cpk: fbCk.page, res: resList, search: sList, store: stList }[s.view] || pageList;
         const sel = Object.assign({}, this.state.selected); cur.forEach((p) => { sel[p.id] = true; }); this.setState({ selected: sel }); this.flash('已勾选本页 ' + cur.length + ' 件'); }, goodsEmpty: goodsTotal === 0,
-      hasSel: selItems.length > 0, selEmpty: selItems.length === 0, selHasCard: selCards.length > 0, selCardCount: selCards.length, selHasSwap: selSwap.length > 0, selSwapCount: selSwap.length,
+      hasSel: selItems.length > 0 && s.view !== 'df' && s.view !== 'cart', selEmpty: selItems.length === 0, selHasCard: selCards.length > 0, selCardCount: selCards.length, selHasSwap: selSwap.length > 0, selSwapCount: selSwap.length,
       selList: selItems.map((p) => ({ name: p.name, srcLabel: storeOf(p).short, memberText: money(p.member) })), listableCount: listOk.length,
       listTitle: (listable.length > 1 ? '批量上架到商城 · ' : '上架到商城 · ') + (minM ? listOk.length.toLocaleString() + ' / ' + listable.length.toLocaleString() : listable.length.toLocaleString()) + ' 件',
       listMinM: s.listMinM || '', onListMinM: (e) => this.setState({ listMinM: e.target.value }), listNone: listOk.length === 0,
@@ -4395,7 +4562,7 @@ class Component extends DCLogic {
       batchCart: () => { const n = Object.keys(s.selected).length; if (n > CAP.cart) { this.flash('一次最多加购 ' + CAP.cart + ' 款，当前 ' + n.toLocaleString() + ' 款；大批量建议直接上架到商城'); return; } addCart(Object.keys(s.selected)); }, batchList: () => openListFor(null, selItems), batchOrder: () => openOrder(null, 'direct'), batchImport: () => openOrder(null, 'import'),
       modalOrder: s.modal === 'order', orderEmpty: tItems.length === 0,
       orderTitle: ((s.target === 'cart' || s.fromCart) ? '购物车结算' : (tItems.length > 1 ? '批量下单' : '下单')) + ' · ' + tItems.length + ' 种商品',
-      orderModes: [{ k: 'direct', l: '直接下单', sub: '发到一个收货地址' }, { k: 'import', l: '导入名单代发', sub: '按名单一人一份发货' }].map((m) => ({ label: m.l, sub: m.sub, active: s.orderMode === m.k, pick: () => this.setState({ orderMode: m.k }), style: 'min-height: 52px; padding: 6px 14px; border: none; background: transparent; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1px; margin-bottom: -1px; color: ' + (s.orderMode === m.k ? '#0D9488' : '#1F2329') + '; border-bottom: 2px solid ' + (s.orderMode === m.k ? '#0D9488' : 'transparent') })),
+      orderModes: [{ k: 'direct', l: '提交订单', sub: '发到购物车选择的收货地址' }].map((m) => ({ label: m.l, sub: m.sub, active: s.orderMode === m.k, pick: () => this.setState({ orderMode: m.k }), style: 'min-height: 52px; padding: 6px 14px; border: none; background: transparent; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1px; margin-bottom: -1px; color: ' + (s.orderMode === m.k ? '#0D9488' : '#1F2329') + '; border-bottom: 2px solid ' + (s.orderMode === m.k ? '#0D9488' : 'transparent') })),
       orderLines: tItems.map((p) => { const q = qtyOf(p.id); const setQ = (n) => this.setState({ qty: Object.assign({}, this.state.qty, { [p.id]: Math.max(1, n) }) }); return { name: p.name, src: SRC[p.src], priceText: money(p.member), qty: q, subText: money(p.member * q), inc: () => setQ(q + 1), dec: () => setQ(q - 1) }; }),
       orderGroups: orderGroups, orderGroupCount: orderGroups.length, orderSplit: orderGroups.length > 1, orderHasOwn: ownVal > 0, orderOwnTotal: money(ownVal), viewStore: s.view === 'store', sp: Object.assign(sp, { items: stList.map(decorate) }, selAllUi(stList.map((p) => p.id))),
       orderHasSwap: selSwap.length > 0, orderSwapCount: selSwap.length, orderHasCard: selCards.length > 0,
