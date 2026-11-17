@@ -657,10 +657,6 @@ button,input,select{font-family:inherit}
         <div class="pb-cases"><sc-for list="{{pbk.casesAll}}" as="c" hint-placeholder-count="3"><div class="pb-case"><b style="font-size: 15px; color: #0f1418; line-height: 1.5">{{c.title}}</b><span style="font-size: 12px; color: #6B7280">{{c.ind}} · {{c.scale}}</span><span style="font-size: 13px; color: #374151">用了：{{c.res}}</span><div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{c.out}}" as="o" hint-placeholder-count="3"><span class="pb-out">{{o.t}}</span></sc-for></div></div></sc-for></div>
       </section>
 
-      <section class="pb-sec">
-        <div class="pb-h"><b>这个客户全年还能做</b></div>
-        <div class="pb-year"><sc-for list="{{pbk.annual}}" as="a" hint-placeholder-count="7"><button type="button" style="{{a.style}}" onClick="{{a.go}}"><span style="font-size: 12px; color: #929d99">{{a.m}}</span><b style="font-size: 15px; color: #0f1418">{{a.t}}</b><span style="font-size: 12px; color: #066b5f">{{a.label}}</span></button></sc-for></div>
-      </section>
 
       <div class="pb-h" style="margin-top: 4px; border-top: 1px solid #f0f1f3; padding-top: 20px"><b>挑具体的货、卡、模板</b></div>
       <div id="sol-biz" class="lbiz" role="tablist" aria-label="方案内容" style="scroll-margin-top: 90px">
