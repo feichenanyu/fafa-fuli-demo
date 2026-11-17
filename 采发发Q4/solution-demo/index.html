@@ -163,6 +163,27 @@ button,input,select{font-family:inherit}
 .ml-pv{width:min(100%, calc((100vh - 480px) * .75));margin:0 auto}
 .zt-gg{grid-template-columns:repeat(4,minmax(0,1fr))}
 
+.sbs{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#F4FBF8;border:1px solid #D5EEE6;border-radius:14px;padding:10px 14px;font-size:13px;color:#374151}
+.sbs-k{font-size:12px;color:#fff;background:#0D9488;border-radius:6px;padding:2px 8px}
+.sbs-t{font-size:12px;border-radius:4px;padding:1px 6px}
+.sbs-t.low{color:#047857;background:#E2F4EC}.sbs-t.high{color:#6B7280;background:#EEF0F2}
+.sbs-sep{width:1px;height:14px;background:#D5DDE0}
+.sbs-mode{border:1px solid #CFE3DF;background:#fff;border-radius:999px;height:32px;padding:0 14px;font-size:13px;color:#066b5f;cursor:pointer}
+.sbs-mode.off{border-color:#FFD2B3;background:#FFF6EF;color:#C2410C}
+.lz-sub{background:#E7F6EF !important;color:#047857 !important;min-width:0;flex:1 1 auto}
+.cmp-row{display:grid;grid-template-columns:64px minmax(0,1.5fr) 110px minmax(0,1.3fr) 90px 160px;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid #f0f1f3}
+.cmp-sim{display:grid;grid-template-columns:64px minmax(0,1.3fr) 110px minmax(0,1.6fr) 90px 160px;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid #f0f1f3}
+.cmp-im{width:64px;height:64px;border-radius:10px;background:#fff;border:1px solid #f0f1f3;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cmp-im img{width:86%;height:86%;object-fit:contain}
+.cmp-seg{display:inline-flex;background:#F2F3F5;border-radius:999px;padding:3px}
+.cmp-h{font-size:12px;color:#929d99;background:#FAFAFA}
+.cmp-k{display:flex;flex-direction:column;gap:6px;background:#F7F8FA;border-radius:12px;padding:12px 14px}
+.cmp-k > span:first-child{font-size:12px;color:#6B7280}
+.cmp-k b{font-size:22px;font-weight:700;color:#0f1418}
+.cmp-k small{font-size:13px;font-weight:400;color:#929d99}
+
+.cmp-v{display:flex;align-items:baseline;gap:6px}
+
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #F4F5F7; padding-bottom: 96px">
@@ -300,7 +321,7 @@ button,input,select{font-family:inherit}
                 <sc-if value="{{t.notFace}}" hint-placeholder-val="{{true}}"><span class="lz-im"><sc-if value="{{t.hasImg}}"><img src="{{t.img}}" alt=""></sc-if><sc-if value="{{t.isPh}}"><span style="font-size: 10px; color: #C3C8CF">商品图</span></sc-if><sc-if value="{{t.isCard}}"><span class="lz-face" style="background: #C2413B">{{t.cardFace}}</span></sc-if></span></sc-if>
                 <span class="mono">{{t.price}}</span></button></sc-for></div></sc-if>
               <sc-if value="{{z.isTpl}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{z.go}}" class="zph" style="border: 0; background: transparent; padding: 0; cursor: pointer; display: flex; gap: 12px; align-items: center; text-align: left"><span class="zph-f" style="background: {{z.coverBg}}"><sc-if value="{{z.hasImg}}"><img src="{{z.img}}" alt=""></sc-if><sc-if value="{{z.noImg}}"><span style="display: block; padding: 18px 6px 0; color: #fff; font-size: 11px; font-weight: 700; text-align: center">{{z.title}}</span></sc-if></span><span style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #666; min-width: 0"><span>{{z.l1}}</span><span>{{z.l2}}</span><span style="color: #066b5f">手机预览装修 ›</span></span></button></sc-if>
-              <button type="button" class="lz-go" onClick="{{z.go}}"><span style="flex: 1"></span><span style="flex: none">{{z.cta}} ›</span></button>
+              <div style="display: flex; gap: 6px"><sc-if value="{{z.isPal}}" hint-placeholder-val="{{false}}"><button type="button" class="lz-go lz-sub" onClick="{{z.subCmp}}" title="和你的专供店比价"><span class="clamp1">{{z.subLine}}</span><span style="flex: none">›</span></button></sc-if><button type="button" class="lz-go" style="flex: 1" onClick="{{z.go}}"><span style="flex: 1"></span><span style="flex: none">{{z.cta}} ›</span></button></div>
             </div>
           </sc-for>
         </div>
@@ -317,7 +338,7 @@ button,input,select{font-family:inherit}
                   <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px">
                     <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap"><b style="font-size: 16px; font-weight: 600; color: #0f1418">{{t.name}}</b><sc-if value="{{t.isNew}}" hint-placeholder-val="{{false}}"><span style="font-size: 10px; color: #fff; background: #fd6600; border-radius: 4px; padding: 0 4px">NEW</span></sc-if></div>
                     <span style="align-self: flex-start; font-size: 12px; color: #1d4ed8; background: #e8effd; border-radius: 4px; padding: 1px 6px">{{t.type}}</span>
-                    <span style="font-size: 13px; line-height: 20px; color: #666" class="clamp2">{{t.intro}}</span>
+                    <span style="font-size: 13px; line-height: 20px; color: #666" class="clamp2">{{t.intro}}</span><sc-if value="{{t.sub.has}}" hint-placeholder-val="{{false}}"><button type="button" class="lz-go lz-sub" style="align-self: flex-start; flex: none" onClick="{{t.sub.cmp}}"><span>专供店同品 {{t.sub.n}} · 低 {{t.sub.cheap}} · 高 {{t.sub.dear}}</span><span>›</span></button></sc-if>
                     <div style="flex: 1"></div>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap"><button type="button" class="btn btn-o" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{t.detail}}">模板详情</button><button type="button" class="btn btn-p" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{t.use}}">用它开商城</button></div>
                   </div>
@@ -356,6 +377,16 @@ button,input,select{font-family:inherit}
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="flex: 0 0 56px; font-size: 13px; color: #929d99">会员价</span><span style="display: inline-flex; align-items: center; gap: 4px; background: #fff; border: 1px solid #dfe7e5; border-radius: 999px; padding: 0 10px; height: 30px"><input type="number" min="0" placeholder="最低" aria-label="最低会员价" value="{{bz.f.minP}}" onChange="{{bz.f.onMin}}" style="width: 52px; border: 0; outline: 0; text-align: center; font-size: 13px">~<input type="number" min="0" placeholder="最高" aria-label="最高会员价" value="{{bz.f.maxP}}" onChange="{{bz.f.onMax}}" style="width: 52px; border: 0; outline: 0; text-align: center; font-size: 13px"></span><sc-for list="{{bz.f.quick}}" as="c" hint-placeholder-count="4"><button type="button" class="{{c.cls}}" style="height: 30px; font-size: 13px; padding: 0 12px" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="flex: 0 0 56px; font-size: 13px; color: #929d99">排序</span><sc-for list="{{bz.f.sortChips}}" as="c" hint-placeholder-count="4"><button type="button" class="{{c.cls}}" style="height: 30px; font-size: 13px; padding: 0 12px" onClick="{{c.pick}}">{{c.label}}</button></sc-for><div style="flex: 1"></div><span style="font-size: 13px; color: #666">共 <b style="color: #0f1418">{{bz.f.shown}}</b> / {{bz.f.total}} 款</span><button type="button" class="btn btn-o" style="height: 30px; font-size: 13px; padding: 0 14px" onClick="{{bz.f.reset}}">重置筛选</button></div>
       </div>
+      <sc-if value="{{bz.sub.has}}" hint-placeholder-val="{{true}}">
+      <div class="sbs">
+        <span class="sbs-k">专供店同品</span><b>{{bz.sub.n}} 款</b><span class="sbs-t low">比平台便宜 {{bz.sub.cheap}}</span><span class="sbs-t high">比平台贵 {{bz.sub.dear}}</span>
+        <sc-if value="{{bz.sub.hasAvg}}" hint-placeholder-val="{{true}}"><span>按更便宜的用，平均每件多赚 <b style="color: #047857">{{bz.sub.avg}}</b></span></sc-if>
+        <span class="sbs-sep"></span><span>相似品 <b>{{bz.sub.sim}}</b> 款</span>
+        <div style="flex: 1"></div>
+        <button type="button" class="{{bz.sub.modeCls}}" onClick="{{bz.sub.cfg}}">{{bz.sub.modeText}}</button>
+        <button type="button" class="btn btn-p" style="height: 32px; font-size: 13px; padding: 0 16px" onClick="{{bz.sub.cmp}}">同品对比 ›</button>
+      </div>
+      </sc-if>
       <sc-if value="{{bz.palEmpty}}" hint-placeholder-val="{{false}}"><div style="padding: 32px 0; text-align: center; color: #666; background: #f7f7f7; border-radius: 20px">没有符合筛选条件的商品，<button type="button" onClick="{{bz.f.reset}}" style="border: 0; background: transparent; color: #066b5f; cursor: pointer; font-size: 14px">重置筛选</button></div></sc-if>
       <div class="lpg">
         <sc-for list="{{bz.goods}}" as="p" hint-placeholder-count="10">
@@ -374,6 +405,7 @@ button,input,select{font-family:inherit}
               <div class="pc-spec">{{p.spec}}</div>
               <div class="pc-m">{{p.marginLabel}}</div>
               <div class="pc-p"><span class="mono pc-price">{{p.price}}</span><s class="mono">{{p.strike}}</s></div>
+              <sc-if value="{{p.hasSub}}" hint-placeholder-val="{{false}}"><span style="{{p.subStyle}}">{{p.subText}}</span></sc-if>
               <div class="pc-tags"><sc-for list="{{p.tags}}" as="tg" hint-placeholder-count="2"><span>{{tg}}</span></sc-for></div>
               <div class="pc-st mono">已售 {{p.sold}} · 昨日订单 {{p.yday}} · {{p.stock}}</div>
             </div>
@@ -537,6 +569,16 @@ button,input,select{font-family:inherit}
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="flex: 0 0 56px; font-size: 13px; color: #929d99">会员价</span><span style="display: inline-flex; align-items: center; gap: 4px; background: #fff; border: 1px solid #dfe7e5; border-radius: 999px; padding: 0 10px; height: 30px"><input type="number" min="0" placeholder="最低" aria-label="最低会员价" value="{{bz.f.minP}}" onChange="{{bz.f.onMin}}" style="width: 52px; border: 0; outline: 0; text-align: center; font-size: 13px">~<input type="number" min="0" placeholder="最高" aria-label="最高会员价" value="{{bz.f.maxP}}" onChange="{{bz.f.onMax}}" style="width: 52px; border: 0; outline: 0; text-align: center; font-size: 13px"></span><sc-for list="{{bz.f.quick}}" as="c" hint-placeholder-count="4"><button type="button" class="{{c.cls}}" style="height: 30px; font-size: 13px; padding: 0 12px" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="flex: 0 0 56px; font-size: 13px; color: #929d99">排序</span><sc-for list="{{bz.f.sortChips}}" as="c" hint-placeholder-count="4"><button type="button" class="{{c.cls}}" style="height: 30px; font-size: 13px; padding: 0 12px" onClick="{{c.pick}}">{{c.label}}</button></sc-for><div style="flex: 1"></div><span style="font-size: 13px; color: #666">共 <b style="color: #0f1418">{{bz.f.shown}}</b> / {{bz.f.total}} 款</span><button type="button" class="btn btn-o" style="height: 30px; font-size: 13px; padding: 0 14px" onClick="{{bz.f.reset}}">重置筛选</button></div>
       </div>
+      <sc-if value="{{bz.sub.has}}" hint-placeholder-val="{{true}}">
+      <div class="sbs">
+        <span class="sbs-k">专供店同品</span><b>{{bz.sub.n}} 款</b><span class="sbs-t low">比平台便宜 {{bz.sub.cheap}}</span><span class="sbs-t high">比平台贵 {{bz.sub.dear}}</span>
+        <sc-if value="{{bz.sub.hasAvg}}" hint-placeholder-val="{{true}}"><span>按更便宜的用，平均每件多赚 <b style="color: #047857">{{bz.sub.avg}}</b></span></sc-if>
+        <span class="sbs-sep"></span><span>相似品 <b>{{bz.sub.sim}}</b> 款</span>
+        <div style="flex: 1"></div>
+        <button type="button" class="{{bz.sub.modeCls}}" onClick="{{bz.sub.cfg}}">{{bz.sub.modeText}}</button>
+        <button type="button" class="btn btn-p" style="height: 32px; font-size: 13px; padding: 0 16px" onClick="{{bz.sub.cmp}}">同品对比 ›</button>
+      </div>
+      </sc-if>
       <sc-if value="{{bz.palEmpty}}" hint-placeholder-val="{{false}}"><div style="padding: 32px 0; text-align: center; color: #666; background: #f7f7f7; border-radius: 20px">没有符合筛选条件的商品，<button type="button" onClick="{{bz.f.reset}}" style="border: 0; background: transparent; color: #066b5f; cursor: pointer; font-size: 14px">重置筛选</button></div></sc-if>
       <div class="lpg">
         <sc-for list="{{bz.goods}}" as="p" hint-placeholder-count="10">
@@ -555,6 +597,7 @@ button,input,select{font-family:inherit}
               <div class="pc-spec">{{p.spec}}</div>
               <div class="pc-m">{{p.marginLabel}}</div>
               <div class="pc-p"><span class="mono pc-price">{{p.price}}</span><s class="mono">{{p.strike}}</s></div>
+              <sc-if value="{{p.hasSub}}" hint-placeholder-val="{{false}}"><span style="{{p.subStyle}}">{{p.subText}}</span></sc-if>
               <div class="pc-tags"><sc-for list="{{p.tags}}" as="tg" hint-placeholder-count="2"><span>{{tg}}</span></sc-for></div>
               <div class="pc-st mono">已售 {{p.sold}} · 昨日订单 {{p.yday}} · {{p.stock}}</div>
             </div>
@@ -647,6 +690,16 @@ button,input,select{font-family:inherit}
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="flex: 0 0 56px; font-size: 13px; color: #929d99">会员价</span><span style="display: inline-flex; align-items: center; gap: 4px; background: #fff; border: 1px solid #dfe7e5; border-radius: 999px; padding: 0 10px; height: 30px"><input type="number" min="0" placeholder="最低" aria-label="最低会员价" value="{{plv.f.minP}}" onChange="{{plv.f.onMin}}" style="width: 52px; border: 0; outline: 0; text-align: center; font-size: 13px">~<input type="number" min="0" placeholder="最高" aria-label="最高会员价" value="{{plv.f.maxP}}" onChange="{{plv.f.onMax}}" style="width: 52px; border: 0; outline: 0; text-align: center; font-size: 13px"></span><sc-for list="{{plv.f.quick}}" as="c" hint-placeholder-count="4"><button type="button" class="{{c.cls}}" style="height: 30px; font-size: 13px; padding: 0 12px" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="flex: 0 0 56px; font-size: 13px; color: #929d99">排序</span><sc-for list="{{plv.f.sortChips}}" as="c" hint-placeholder-count="4"><button type="button" class="{{c.cls}}" style="height: 30px; font-size: 13px; padding: 0 12px" onClick="{{c.pick}}">{{c.label}}</button></sc-for><div style="flex: 1"></div><span style="font-size: 13px; color: #666">共 <b style="color: #0f1418">{{plv.f.shown}}</b> / {{plv.f.total}} 款</span><button type="button" class="btn btn-o" style="height: 30px; font-size: 13px; padding: 0 14px" onClick="{{plv.f.reset}}">重置筛选</button></div>
       </div>
+      <sc-if value="{{plv.sub.has}}" hint-placeholder-val="{{true}}">
+      <div class="sbs">
+        <span class="sbs-k">专供店同品</span><b>{{plv.sub.n}} 款</b><span class="sbs-t low">比平台便宜 {{plv.sub.cheap}}</span><span class="sbs-t high">比平台贵 {{plv.sub.dear}}</span>
+        <sc-if value="{{plv.sub.hasAvg}}" hint-placeholder-val="{{true}}"><span>按更便宜的用，平均每件多赚 <b style="color: #047857">{{plv.sub.avg}}</b></span></sc-if>
+        <span class="sbs-sep"></span><span>相似品 <b>{{plv.sub.sim}}</b> 款</span>
+        <div style="flex: 1"></div>
+        <button type="button" class="{{plv.sub.modeCls}}" onClick="{{plv.sub.cfg}}">{{plv.sub.modeText}}</button>
+        <button type="button" class="btn btn-p" style="height: 32px; font-size: 13px; padding: 0 16px" onClick="{{plv.sub.cmp}}">同品对比 ›</button>
+      </div>
+      </sc-if>
       <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px">
         <sc-for list="{{plv.items}}" as="p" hint-placeholder-count="10">
           <article class="card" style="{{p.cardStyle}}">
@@ -668,7 +721,7 @@ button,input,select{font-family:inherit}
                 <span style="flex: 1 1 0"></span>
                 <sc-if value="{{p.isPlat}}" hint-placeholder-val="{{true}}"><span style="font-size: 12px; color: #FF6A00; background: #FFF3EA; border-radius: 4px; padding: 0 5px">利润率 {{p.marginText}}</span></sc-if>
               </div>
-              <sc-if value="{{p.showStore}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{p.openStore}}" title="进入店铺" style="{{p.storeStyle}}"><span class="clamp1" style="flex: 1 1 0; min-width: 0; text-align: left">{{p.storeName}}</span><span style="color: #A0A6AE">›</span></button></sc-if>
+              <sc-if value="{{p.hasSub}}" hint-placeholder-val="{{false}}"><span style="{{p.subStyle}}">{{p.subText}}</span></sc-if><sc-if value="{{p.showStore}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{p.openStore}}" title="进入店铺" style="{{p.storeStyle}}"><span class="clamp1" style="flex: 1 1 0; min-width: 0; text-align: left">{{p.storeName}}</span><span style="color: #A0A6AE">›</span></button></sc-if>
               <div style="display: flex; gap: 6px; margin-top: 6px">
                 <button type="button" aria-label="{{p.cartAria}}" title="{{p.cartAria}}" onClick="{{p.addCart}}" style="{{p.cartStyle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12zM6 6L5 3H2M9 20a1 1 0 100-2 1 1 0 000 2zM18 20a1 1 0 100-2 1 1 0 000 2z"></path></svg><span style="font-size: 12px">{{p.cartNum}}</span></button>
                 <sc-if value="{{p.canInq}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{p.inqOne}}" title="{{p.inqTip}}" style="flex: 0 0 auto; min-height: 32px; padding: 0 8px; border-radius: 6px; border: 1px solid #FFD2B3; background: #FFF6EF; color: #C2410C; font-size: 13px; cursor: pointer">询价</button></sc-if>
@@ -788,6 +841,16 @@ button,input,select{font-family:inherit}
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="flex: 0 0 56px; font-size: 13px; color: #929d99">会员价</span><span style="display: inline-flex; align-items: center; gap: 4px; background: #fff; border: 1px solid #dfe7e5; border-radius: 999px; padding: 0 10px; height: 30px"><input type="number" min="0" placeholder="最低" aria-label="最低会员价" value="{{tpd.f.minP}}" onChange="{{tpd.f.onMin}}" style="width: 52px; border: 0; outline: 0; text-align: center; font-size: 13px">~<input type="number" min="0" placeholder="最高" aria-label="最高会员价" value="{{tpd.f.maxP}}" onChange="{{tpd.f.onMax}}" style="width: 52px; border: 0; outline: 0; text-align: center; font-size: 13px"></span><sc-for list="{{tpd.f.quick}}" as="c" hint-placeholder-count="4"><button type="button" class="{{c.cls}}" style="height: 30px; font-size: 13px; padding: 0 12px" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="flex: 0 0 56px; font-size: 13px; color: #929d99">排序</span><sc-for list="{{tpd.f.sortChips}}" as="c" hint-placeholder-count="4"><button type="button" class="{{c.cls}}" style="height: 30px; font-size: 13px; padding: 0 12px" onClick="{{c.pick}}">{{c.label}}</button></sc-for><div style="flex: 1"></div><span style="font-size: 13px; color: #666">共 <b style="color: #0f1418">{{tpd.f.shown}}</b> / {{tpd.f.total}} 款</span><button type="button" class="btn btn-o" style="height: 30px; font-size: 13px; padding: 0 14px" onClick="{{tpd.f.reset}}">重置筛选</button></div>
       </div>
+      <sc-if value="{{tpd.sub.has}}" hint-placeholder-val="{{true}}">
+      <div class="sbs">
+        <span class="sbs-k">专供店同品</span><b>{{tpd.sub.n}} 款</b><span class="sbs-t low">比平台便宜 {{tpd.sub.cheap}}</span><span class="sbs-t high">比平台贵 {{tpd.sub.dear}}</span>
+        <sc-if value="{{tpd.sub.hasAvg}}" hint-placeholder-val="{{true}}"><span>按更便宜的用，平均每件多赚 <b style="color: #047857">{{tpd.sub.avg}}</b></span></sc-if>
+        <span class="sbs-sep"></span><span>相似品 <b>{{tpd.sub.sim}}</b> 款</span>
+        <div style="flex: 1"></div>
+        <button type="button" class="{{tpd.sub.modeCls}}" onClick="{{tpd.sub.cfg}}">{{tpd.sub.modeText}}</button>
+        <button type="button" class="btn btn-p" style="height: 32px; font-size: 13px; padding: 0 16px" onClick="{{tpd.sub.cmp}}">同品对比 ›</button>
+      </div>
+      </sc-if>
       <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px">
         <sc-for list="{{tpd.items}}" as="p" hint-placeholder-count="10">
           <article class="card" style="{{p.cardStyle}}">
@@ -809,7 +872,7 @@ button,input,select{font-family:inherit}
                 <span style="flex: 1 1 0"></span>
                 <sc-if value="{{p.isPlat}}" hint-placeholder-val="{{true}}"><span style="font-size: 12px; color: #FF6A00; background: #FFF3EA; border-radius: 4px; padding: 0 5px">利润率 {{p.marginText}}</span></sc-if>
               </div>
-              <sc-if value="{{p.showStore}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{p.openStore}}" title="进入店铺" style="{{p.storeStyle}}"><span class="clamp1" style="flex: 1 1 0; min-width: 0; text-align: left">{{p.storeName}}</span><span style="color: #A0A6AE">›</span></button></sc-if>
+              <sc-if value="{{p.hasSub}}" hint-placeholder-val="{{false}}"><span style="{{p.subStyle}}">{{p.subText}}</span></sc-if><sc-if value="{{p.showStore}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{p.openStore}}" title="进入店铺" style="{{p.storeStyle}}"><span class="clamp1" style="flex: 1 1 0; min-width: 0; text-align: left">{{p.storeName}}</span><span style="color: #A0A6AE">›</span></button></sc-if>
               <div style="display: flex; gap: 6px; margin-top: 6px">
                 <button type="button" aria-label="{{p.cartAria}}" title="{{p.cartAria}}" onClick="{{p.addCart}}" style="{{p.cartStyle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12zM6 6L5 3H2M9 20a1 1 0 100-2 1 1 0 000 2zM18 20a1 1 0 100-2 1 1 0 000 2z"></path></svg><span style="font-size: 12px">{{p.cartNum}}</span></button>
                 <sc-if value="{{p.canInq}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{p.inqOne}}" title="{{p.inqTip}}" style="flex: 0 0 auto; min-height: 32px; padding: 0 8px; border-radius: 6px; border: 1px solid #FFD2B3; background: #FFF6EF; color: #C2410C; font-size: 13px; cursor: pointer">询价</button></sc-if>
@@ -2382,6 +2445,82 @@ button,input,select{font-family:inherit}
   </div>
 </sc-if>
 
+<sc-if value="{{viewCmp}}" hint-placeholder-val="{{false}}">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 16px 24px 40px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #929d99"><button type="button" onClick="{{cmp.back}}" style="border: 0; background: transparent; padding: 0; color: #066b5f; cursor: pointer; font-size: 13px">‹ {{cmp.backLabel}}</button><span>/</span><span style="color: #0f1418">同品对比</span></div>
+    <section style="background: #fff; border-radius: 16px; padding: 20px 24px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+        <h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #0f1418">同品对比 · {{cmp.title}}</h1>
+        <div style="flex: 1"></div>
+        <button type="button" class="{{cmp.sum.modeCls}}" onClick="{{cmp.sum.cfg}}">{{cmp.sum.modeText}}</button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+        <div class="cmp-k"><span>专供店同品</span><span class="cmp-v"><b style="font-size: 24px; font-weight: 700; color: #0f1418">{{cmp.sum.n}}</b><small style="font-size: 13px; color: #929d99">/ {{cmp.total}} 款</small></span></div>
+        <div class="cmp-k"><span>比平台便宜 / 贵</span><span class="cmp-v"><b style="font-size: 24px; font-weight: 700; color: #047857">{{cmp.sum.cheap}}</b><small style="font-size: 13px; color: #929d99">/</small><b style="font-size: 24px; font-weight: 700; color: #8A9099">{{cmp.sum.dear}}</b><small style="font-size: 13px; color: #929d99">款</small></span></div>
+        <div class="cmp-k"><span>相似品（需你确认）</span><span class="cmp-v"><b style="font-size: 24px; font-weight: 700; color: #0f1418">{{cmp.sum.sim}}</b><small style="font-size: 13px; color: #929d99">款</small></span></div>
+        <div class="cmp-k" style="background: #F4FBF8"><span>按当前选择，用专供店 {{cmp.useN}} 款</span><span class="cmp-v"><small style="font-size: 13px; color: #929d99">每件合计多赚</small><b style="font-size: 24px; font-weight: 700; color: #047857">{{cmp.gain}}</b></span></div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; border-top: 1px solid #f0f1f3; padding-top: 14px">
+        <sc-for list="{{cmp.tabs}}" as="t" hint-placeholder-count="4"><button type="button" class="lchip {{t.cls}}" onClick="{{t.pick}}">{{t.label}}<span class="lchip-t">{{t.n}}</span></button></sc-for>
+        <div style="flex: 1"></div>
+        <span style="font-size: 12px; color: #929d99">已接入：<sc-for list="{{cmp.stores}}" as="st" hint-placeholder-count="2"><span style="margin-left: 6px">{{st.name}}</span></sc-for></span>
+        <button type="button" class="btn btn-o" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{cmp.allCheap}}">全部按更便宜的选</button>
+      </div>
+    </section>
+    <sc-if value="{{cmp.showSame}}" hint-placeholder-val="{{true}}">
+    <section style="background: #fff; border-radius: 16px; overflow: hidden">
+      <div style="padding: 14px 16px; display: flex; align-items: baseline; gap: 8px"><b style="font-size: 16px; color: #0f1418">同品</b><span style="font-size: 12px; color: #929d99">同一个商品，只换供货来源，商城里展示不变</span></div>
+      <div class="cmp-row cmp-h"><span></span><span>平台商品</span><span>平台会员价</span><span>专供店</span><span>差额</span><span>下单用</span></div>
+      <sc-for list="{{cmp.same}}" as="r" hint-placeholder-count="5">
+        <div class="cmp-row">
+          <button type="button" class="cmp-im" onClick="{{r.open}}" style="padding: 0; cursor: pointer"><sc-if value="{{r.hasImg}}"><img src="{{r.img}}" alt=""></sc-if><sc-if value="{{r.isPh}}"><span style="font-size: 10px; color: #C3C8CF">商品图</span></sc-if></button>
+          <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span class="clamp1" style="font-size: 14px; color: #0f1418">{{r.name}}</span><span class="clamp1" style="font-size: 12px; color: #929d99">{{r.spec}}</span></div>
+          <span class="mono" style="font-size: 15px; color: #0f1418">{{r.plat}}</span>
+          <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; gap: 6px; align-items: baseline"><span class="mono" style="font-size: 15px; color: #0f1418">{{r.sp}}</span><span style="{{r.stockStyle}}">{{r.stock}}</span></span><span class="clamp1" style="font-size: 12px; color: #929d99">{{r.store}} · {{r.how}}</span></div>
+          <span class="mono" style="{{r.diffStyle}}">{{r.diff}}</span>
+          <span class="cmp-seg"><button type="button" style="{{r.platS}}" onClick="{{r.usePlat}}">平台</button><button type="button" style="{{r.storeS}}" onClick="{{r.useSt}}">专供店</button></span>
+        </div>
+      </sc-for>
+    </section>
+    </sc-if>
+    <sc-if value="{{cmp.showSim}}" hint-placeholder-val="{{true}}">
+    <section style="background: #fff; border-radius: 16px; overflow: hidden">
+      <div style="padding: 14px 16px; display: flex; align-items: baseline; gap: 8px"><b style="font-size: 16px; color: #0f1418">相似品</b><span style="font-size: 12px; color: #929d99">换的是商品本身，确认后你的商城里也展示专供店这款，不会自动替换</span></div>
+      <div class="cmp-sim cmp-h"><span></span><span>平台商品</span><span>平台会员价</span><span>专供店相似品</span><span>差额</span><span></span></div>
+      <sc-for list="{{cmp.sim}}" as="r" hint-placeholder-count="3">
+        <div class="cmp-sim">
+          <span class="cmp-im"><sc-if value="{{r.hasImg}}"><img src="{{r.img}}" alt=""></sc-if><sc-if value="{{r.isPh}}"><span style="font-size: 10px; color: #C3C8CF">商品图</span></sc-if></span>
+          <span class="clamp2" style="font-size: 14px; color: #0f1418">{{r.name}}</span>
+          <span class="mono" style="font-size: 15px; color: #0f1418">{{r.plat}}</span>
+          <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; gap: 8px; align-items: baseline; min-width: 0"><span class="clamp1" style="font-size: 14px; color: #0f1418">{{r.simName}}</span><span class="mono" style="font-size: 14px; color: #0f1418; flex: none">{{r.sp}}</span></span><span style="display: flex; gap: 4px; flex-wrap: wrap"><sc-for list="{{r.diffs}}" as="df" hint-placeholder-count="2"><span style="font-size: 11px; color: #7C3AED; background: #F3EEFE; border-radius: 4px; padding: 0 6px">{{df.t}}</span></sc-for><span style="font-size: 11px; color: #929d99">{{r.store}}</span></span></div>
+          <span class="mono" style="{{r.diffStyle}}">{{r.diff}}</span>
+          <button type="button" class="{{r.btnCls}}" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{r.toggle}}">{{r.btn}}</button>
+        </div>
+      </sc-for>
+    </section>
+    </sc-if>
+    <div style="font-size: 12px; color: #929d99; line-height: 1.8">替换只作用于你的商城和订单，员工看到的商品不变；订单会标注实际供货的专供店。专供店的款项由你直接付给店铺，不走预付款。</div>
+  </div>
+</sc-if>
+
+<sc-if value="{{modalSubCfg}}" hint-placeholder-val="{{false}}">
+  <div style="position: fixed; inset: 0; background: rgba(17,24,39,0.5); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 40">
+    <div role="dialog" aria-modal="true" aria-label="专供店替换设置" style="background: #fff; border-radius: 16px; width: 520px; max-width: 100%; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center"><b style="font-size: 18px; color: #0f1418">专供店同品替换</b><div style="flex: 1"></div><button type="button" onClick="{{closeModal}}" aria-label="关闭" style="width: 32px; height: 32px; border: 0; background: transparent; cursor: pointer; color: #8A9099; font-size: 18px">✕</button></div>
+      <span style="font-size: 13px; color: #6B7280; line-height: 1.7">接入专供店后，平台货盘、模板里和专供店相同的商品，可以按下面的方式自动选择供货来源。员工在商城里看到的商品不变。</span>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{subCfg.modes}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.pick}}" style="{{m.style}}"><span style="{{m.dot}}"></span><span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 14px; color: #0f1418; font-weight: 600">{{m.label}}</b><span style="font-size: 12px; color: #6B7280">{{m.desc}}</span></span></button></sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #f0f1f3; padding-top: 12px">
+        <span style="font-size: 13px; color: #0f1418; font-weight: 600">参与替换的专供店</span>
+        <sc-for list="{{subCfg.stores}}" as="st" hint-placeholder-count="2"><button type="button" role="switch" aria-checked="{{st.on}}" onClick="{{st.toggle}}" style="display: flex; align-items: center; gap: 10px; border: 0; background: transparent; padding: 4px 0; cursor: pointer; font-size: 14px; color: #1F2329"><span style="{{st.sw}}"><span style="{{st.knob}}"></span></span>{{st.name}}</button></sc-for>
+      </div>
+      <span style="font-size: 12px; color: #929d99; line-height: 1.7">相似品不参与自动替换，需要你在同品对比里逐个确认。</span>
+      <button type="button" class="btn btn-p" style="height: 40px; font-size: 14px" onClick="{{subCfg.done}}">完成</button>
+    </div>
+  </div>
+</sc-if>
+
 <sc-if value="{{modalCliCfg}}" hint-placeholder-val="{{false}}">
     <div style="position: fixed; inset: 0; background: rgba(17,24,39,0.45); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 30">
       <div role="dialog" aria-modal="true" aria-label="生成甲方版" style="background: #FFFFFF; border-radius: 20px; width: 540px; max-width: 100%; display: flex; flex-direction: column">
@@ -2699,6 +2838,23 @@ const SOLS = {
     how: ['和甲方确认每人每天的餐补额度', '每月买餐补卡，按在职名单发放', '员工在餐补商城买零食饮料，下午茶也可以用零食包按周代发'],
     pals: ['pm1'], cpks: ['cm1'], tpls: ['card'] }
 };
+// ===== V3 专供店：会员接入的专供店 + 同品 / 相似品（演示数据）=====
+const STORES = { lpd: { name: '李拍档礼品专供店', short: '李拍档' }, xy: { name: '鑫源粮油专供店', short: '鑫源粮油' } };
+// 同品：平台商品 → 专供店同一商品（L1：商家维护映射 / 条码一致）
+const SUBS = {
+  p1: { st: 'xy', price: 52.8, stock: '有货', how: '条码一致' }, p7: { st: 'xy', price: 63.5, stock: '有货', how: '条码一致' }, p20: { st: 'xy', price: 112, stock: '有货', how: '条码一致' },
+  p18: { st: 'xy', price: 47.5, stock: '有货', how: '条码一致' }, p17: { st: 'xy', price: 55.5, stock: '有货', how: '商家映射' },
+  p5: { st: 'lpd', price: 36.5, stock: '有货', how: '条码一致' }, p2: { st: 'lpd', price: 102, stock: '有货', how: '商家映射' }, p9: { st: 'lpd', price: 76, stock: '有货', how: '商家映射' },
+  p10: { st: 'lpd', price: 175, stock: '有货', how: '商家映射' }, p12: { st: 'lpd', price: 268, stock: '缺货', how: '条码一致' }
+};
+// 相似品：只推荐，会员确认后才换（换的是商品本身）
+const SIMS = {
+  p3: { st: 'lpd', name: '洽洽 夏威夷果 450g', price: 34.9, diff: ['品牌不同', '450g vs 500g'], unit: '每 100g 低 ¥0.2' },
+  p4: { st: 'lpd', name: '盼盼 零食大礼包 2kg', price: 42, diff: ['品牌不同'], unit: '同规格' },
+  p8: { st: 'xy', name: '伊利 纯牛奶 250ml × 12 盒', price: 55, diff: ['品牌不同', '非有机'], unit: '同规格' },
+  p13: { st: 'lpd', name: '美的 电热水壶 1.5L', price: 109, diff: ['品牌不同', '1.5L vs 1.7L'], unit: '容量小 0.2L' }
+};
+const SUB_MODES = [{ k: 'off', l: '不替换', d: '平台和专供店分开用，只看对比' }, { k: 'cheap', l: '更便宜且有货时替换', d: '专供价低于平台会员价、且专供店有货时，自动用专供店；否则用平台' }, { k: 'always', l: '有货就用专供店', d: '只要专供店有货就用专供店，缺货时自动回到平台' }];
 
 class Component extends DCLogic {
   constructor(props) {
@@ -3505,9 +3661,23 @@ class Component extends DCLogic {
     // 专区：方案里的每一个货盘 / 卡券 / 模板
     const curBiz = s.biz || (solO.pals.length ? 'pal' : (solO.cpks.length ? 'cpk' : 'tpl'));
     const goZone = (biz, chip) => { this.setState({ view: 'sol', biz: biz, bzChip: chip }); goTop(); };
+    // ===== V3 专供店同品 / 相似品替换 =====
+    const subMode = s.subMode || 'off'; const subSt = s.subSt || { lpd: true, xy: true };
+    const r1 = (x) => Math.round(x * 10) / 10; const dS = (d) => '¥' + Math.abs(r1(d)).toString();
+    const tagS = (k) => 'align-self: flex-start; font-size: 12px; line-height: 20px; border-radius: 4px; padding: 0 6px; ' + (k === 'low' ? 'color: #047857; background: #E7F6EF' : (k === 'high' ? 'color: #6B7280; background: #F2F3F5' : 'color: #7C3AED; background: #F3EEFE'));
+    const subOf = (id) => { const p = PB[id]; const sb = SUBS[id]; const sm = SIMS[id];
+      if (sb) { const d = sb.price - p.member; return { hasSub: true, subText: '专供店同品 ' + (d < 0 ? '低 ' : '高 ') + dS(d) + (sb.stock !== '有货' ? ' · 缺货' : ''), subStyle: tagS(d < 0 ? 'low' : 'high') }; }
+      if (sm) { const d = sm.price - p.member; return { hasSub: true, subText: '相似品 ' + (d < 0 ? '低 ' : '高 ') + dS(d) + ' · ' + sm.diff[0], subStyle: tagS('sim') }; }
+      return { hasSub: false, subText: '', subStyle: '' }; };
+    const MODE_TXT = { off: '未开启替换 · 去开启', cheap: '替换：更便宜且有货时', always: '替换：有货就用专供店' };
+    const openCmp = (title, ids, tab) => { this.setState({ view: 'cmp', cmpTitle: title, cmpIds: ids, cmpTab: tab || 'all', cmpFrom: s.view === 'cmp' ? (s.cmpFrom || 'home') : s.view, modal: null }); goTop(); };
+    const subSum = (ids, title) => { const same = ids.filter((id) => SUBS[id]); const cheap = same.filter((id) => SUBS[id].price < PB[id].member); const ok = cheap.filter((id) => SUBS[id].stock === '有货');
+      const sim = ids.filter((id) => !SUBS[id] && SIMS[id]); const avg = ok.length ? ok.reduce((a, id) => a + PB[id].member - SUBS[id].price, 0) / ok.length : 0;
+      return { has: same.length + sim.length > 0, n: same.length, cheap: cheap.length, dear: same.length - cheap.length, sim: sim.length, hasAvg: ok.length > 0, avg: dS(avg), short: '同品 ' + same.length + ' · 低 ' + cheap.length + ' · 高 ' + (same.length - cheap.length) + (sim.length ? ' · 相似 ' + sim.length : ''),
+        modeText: MODE_TXT[subMode], modeCls: subMode === 'off' ? 'sbs-mode off' : 'sbs-mode', cfg: () => this.setState({ modal: 'subCfg' }), cmp: () => openCmp(title, ids) }; };
     const zs = [].concat(
       solO.pals.map((k) => { const x = PALS[k]; return { title: x.name, sub: '爆品货盘 · ' + x.ids.length + ' 款', fg: '#066b5f', bg: '#e7f4f3', rule: '运营推荐：' + x.reason, cta: '货盘详情', go: () => openPal(k), notTpl: true, isTpl: false,
-        isPal: true, thumbs: imgFirst(x.ids).slice(0, (solO.pals.length + solO.cpks.length) === 1 ? 8 : 5).map((id) => Object.assign(thumb(PB[id]), { isFace: false, notFace: true, price: '¥' + num(PB[id].member) })) }; }),
+        isPal: true, subLine: subSum(x.ids, x.name).short, subCmp: () => openCmp(x.name, x.ids), thumbs: imgFirst(x.ids).slice(0, (solO.pals.length + solO.cpks.length) === 1 ? 8 : 5).map((id) => Object.assign(thumb(PB[id]), { isFace: false, notFace: true, price: '¥' + num(PB[id].member) })) }; }),
       solO.cpks.map((k) => { const c = CPKS[k]; return { title: c.name, sub: c.excl ? '卡券 · 专款专用' : '卡券 · 员工自选', fg: '#fd6600', bg: '#fff4e8', rule: '兑换商城：' + TPL[c.mall].name + ' · 可兑换 ' + c.ids.length + ' 款', cta: '卡券详情', go: () => openCpk(k), notTpl: true, isTpl: false,
         thumbs: c.faces.slice(0, 3).map((f) => ({ isFace: true, notFace: false, bg: c.img ? 'url(' + c.img + ') center / cover' : c.bg, face: faceText(c, f), name: c.name, price: faceText(c, f) })) }; }),
       solO.tpls.map((k) => { const t = TPL[k]; const ids = TPL_IDS[k] || []; const cv = tCover(k); return { notTpl: false, isTpl: true, img: cv.img, hasImg: cv.hasImg, noImg: cv.noImg, coverBg: cv.coverBg, l1: t.type, l2: t.clients + ' 家服务商在用 · ' + t.topics.length + ' 个专题', title: t.name, sub: '商城模板' + (t.isNew ? ' · 上新' : ''), fg: '#1d4ed8', bg: '#e8effd', rule: t.reason, cta: '模板详情', go: () => openTpd(k),
@@ -3516,7 +3686,7 @@ class Component extends DCLogic {
     const zsTop = zs.filter((z) => !z.isTpl).slice(0, 3).map((z) => Object.assign(z, { cols: 'grid-template-columns: repeat(' + Math.max(3, z.thumbs.length) + ', minmax(0, 1fr))' }));
     const zsGrid = 'grid-template-columns: ' + zsTop.map((z) => (z.isPal ? 'minmax(0, 1.7fr)' : 'minmax(0, 1fr)')).join(' ');
     const zt = { has: solO.tpls.length > 0, count: solO.tpls.length, all: () => goZone('tpl', 'all'), grid: 'display: grid; grid-template-columns: repeat(' + Math.min(2, Math.max(1, solO.tpls.length)) + ', minmax(0, 1fr)); gap: 10px',
-      items: solO.tpls.slice(0, 2).map((k) => { const t = TPL[k]; const cv = tCover(k); return Object.assign(cv, { one: solO.tpls.length === 1, goods: imgFirst(TPL_IDS[k] || []).slice(0, 8).map((id) => Object.assign(thumb(PB[id]), { price: '¥' + num(PB[id].member) })), isNew: !!t.isNew, intro: t.intro, clients: t.clients, topics: t.topics.length, n: (TPL_IDS[k] || []).length, pv: () => pvTpl(k), detail: () => openTpd(k), use: () => this.setState({ modal: 'mall', tplId: k, mallName: solO.name + ' · ' + t.name }) }); }) };
+      items: solO.tpls.slice(0, 2).map((k) => { const t = TPL[k]; const cv = tCover(k); return Object.assign(cv, { sub: subSum(TPL_IDS[k] || [], t.name), one: solO.tpls.length === 1, goods: imgFirst(TPL_IDS[k] || []).slice(0, 8).map((id) => Object.assign(thumb(PB[id]), { price: '¥' + num(PB[id].member) })), isNew: !!t.isNew, intro: t.intro, clients: t.clients, topics: t.topics.length, n: (TPL_IDS[k] || []).length, pv: () => pvTpl(k), detail: () => openTpd(k), use: () => this.setState({ modal: 'mall', tplId: k, mallName: solO.name + ' · ' + t.name }) }); }) };
     // 业务栏目：爆品货盘 / 卡券 / 商城模板
     const chipOn = s.bzChip || 'all';
     const palIds = solO.pals.filter((k) => chipOn === 'all' || chipOn === k).reduce((a, k) => a.concat(PALS[k].ids.filter((id) => a.indexOf(id) < 0)), []);
@@ -3528,7 +3698,7 @@ class Component extends DCLogic {
         title: p.name, spec: p.spec + ' · ' + SRC[p.src], marginLabel: p.market ? '市场价利润率 ' + pct(marginOf(p.member, p.market)) : '',
         price: money(p.member), strike: p.market ? money(p.market) : '', tags: tagOf(id),
         sold: (1200 + sd2 * 3).toLocaleString(), yday: 5 + sd2 % 25, stock: p.stock === '有货' ? '库存充足' : p.stock,
-        open: d.openDetail, inq: d.inqOne, list: d.listOne, add: d.addCart, order: d.orderOne }; });
+        open: d.openDetail, inq: d.inqOne, list: d.listOne, add: d.addCart, order: d.orderOne, ...subOf(id) }; });
     const cardItems = solO.cpks.filter((k) => chipOn === 'all' || chipOn === k).reduce((a, k) => { const c = CPKS[k]; return a.concat(c.faces.map((f, fi) => { const sd2 = seed(k + f);
       return { delay: (a.length + fi) * 40 + 'ms', name: c.name, bg: c.img ? 'url(' + c.img + ') center / cover' : c.bg, face: faceText(c, f), title: c.name + ' · 面值 ' + faceText(c, f), spec: '电子卡 · ' + c.faces.map((x) => faceText(c, x)).join(' / ') + ' · 有效期 ' + c.valid,
         line: '卡密即发 · 员工在「' + TPL[c.mall].name + '」自助兑换', price: '¥' + f.toFixed(2), maxProfit: maxProfit(c.ids), mallName: TPL[c.mall].name,
@@ -3597,7 +3767,7 @@ class Component extends DCLogic {
     bz.isPal = curBiz === 'pal' && palIds.length > 0; bz.palEmpty = curBiz === 'pal' && palIds.length > 0 && !fbHome.list.length; bz.f = fbHome.ui;
     // 货盘详情
     const fbPal = FB('pal', palX.ids);
-    pl.items = fbPal.list.map(decorate); pl.shown = fbPal.list.length; pl.empty = !fbPal.list.length; pl.f = fbPal.ui;
+    pl.items = fbPal.list.map((p) => Object.assign(decorate(p), subOf(p.id))); pl.sub = subSum(palX.ids, palX.name); pl.shown = fbPal.list.length; pl.empty = !fbPal.list.length; pl.f = fbPal.ui;
     pl.listAll = () => openListFor(fbPal.list.map((p) => p.id), fbPal.list); pl.orderAll = () => openOrder(fbPal.list.map((p) => p.id), 'direct');
     // 卡券详情：员工能换什么
     const fbCk = FB('cpk', cx.ids);
@@ -3605,8 +3775,38 @@ class Component extends DCLogic {
     ck.f = fbCk.ui; ck.empty = !fbCk.list.length;
     // 模板详情：商城商品列表
     const fbTpl = FB('tpd', tplIdsX);
-    tpdV.items = fbTpl.list.map(decorate); tpdV.f = fbTpl.ui; tpdV.empty = !fbTpl.list.length;
+    tpdV.items = fbTpl.list.map((p) => Object.assign(decorate(p), subOf(p.id))); tpdV.sub = subSum(tplIdsX, tt.name); tpdV.f = fbTpl.ui; tpdV.empty = !fbTpl.list.length;
     tpdV.listAll = () => openListFor(fbTpl.list.map((p) => p.id), fbTpl.list);
+    bz.sub = subSum(palIds, solO.name.split(' · ')[0] + ' · 爆品货盘');
+    // ----- 同品对比页 -----
+    const zzcIds = (s.cmpIds || palIds).filter((id) => PB[id]); const zzcTab = s.cmpTab || 'all'; const zzcPick = s.cmpPick || {}; const zzsimOk = s.simOk || {};
+    const zzdefPick = (id) => { const sb = SUBS[id]; if (subMode === 'off' || !subSt[sb.st] || sb.stock !== '有货') return 'plat'; if (subMode === 'always') return 'store'; return sb.price < PB[id].member ? 'store' : 'plat'; };
+    const zzpickOf = (id) => zzcPick[id] || zzdefPick(id);
+    const zzsegS = (on, dis) => 'min-width: 64px; height: 30px; border: 0; border-radius: 999px; font-size: 13px; cursor: ' + (dis ? 'not-allowed' : 'pointer') + '; background: ' + (on ? '#0D9488' : 'transparent') + '; color: ' + (on ? '#fff' : (dis ? '#C3C8CF' : '#374151')) + '; font-weight: ' + (on ? '600' : '400');
+    const zzcSame = zzcIds.filter((id) => SUBS[id]); const zzcSim = zzcIds.filter((id) => !SUBS[id] && SIMS[id]);
+    const zzisLow = (id) => SUBS[id].price < PB[id].member;
+    const zzsameShown = zzcSame.filter((id) => zzcTab === 'all' || (zzcTab === 'low' && zzisLow(id)) || (zzcTab === 'high' && !zzisLow(id)));
+    const zzsetPick = (id, v) => { const n = Object.assign({}, this.state.cmpPick || {}); n[id] = v; this.setState({ cmpPick: n }); };
+    const zzuseStore = zzcSame.filter((id) => zzpickOf(id) === 'store');
+    const zzgain = zzuseStore.reduce((a, id) => a + PB[id].member - SUBS[id].price, 0);
+    const cs = subSum(zzcIds, s.cmpTitle || '');
+    const cmp = { title: s.cmpTitle || solO.name, sum: cs, back: () => { this.setState({ view: s.cmpFrom || 'home' }); goTop(); }, backLabel: { pal: '返回货盘详情', tpd: '返回模板详情', sol: '返回方案详情' }[s.cmpFrom] || '返回场景首页',
+      stores: Object.keys(STORES).map((k) => ({ name: STORES[k].name, on: !!subSt[k] })), noMatch: zzcIds.length - zzcSame.length - zzcSim.length, total: zzcIds.length,
+      tabs: [{ k: 'all', l: '全部', n: zzcSame.length + zzcSim.length }, { k: 'low', l: '比平台便宜', n: cs.cheap }, { k: 'high', l: '比平台贵', n: cs.dear }, { k: 'sim', l: '相似品', n: zzcSim.length }].map((t) => ({ label: t.l, n: t.n, cls: zzcTab === t.k ? 'on' : '', pick: () => this.setState({ cmpTab: t.k }) })),
+      showSame: zzcTab !== 'sim' && zzsameShown.length > 0, showSim: (zzcTab === 'all' || zzcTab === 'sim') && zzcSim.length > 0,
+      same: zzsameShown.map((id) => { const p = PB[id]; const sb = SUBS[id]; const d = sb.price - p.member; const oos = sb.stock !== '有货'; const pk = zzpickOf(id);
+        return Object.assign(thumb(p), { name: p.name, spec: p.spec + ' · ' + SRC[p.src], plat: money(p.member), store: STORES[sb.st].name, how: sb.how, sp: money(sb.price), stock: sb.stock, oos: oos, stockStyle: 'font-size: 12px; color: ' + (oos ? '#E2231A' : '#929d99'),
+          diff: (d < 0 ? '低 ' : '高 ') + dS(d), diffStyle: 'font-size: 15px; font-weight: 600; color: ' + (d < 0 ? '#047857' : '#8A9099'),
+          platS: zzsegS(pk === 'plat', false), storeS: zzsegS(pk === 'store', oos), usePlat: () => zzsetPick(id, 'plat'), useSt: () => (oos ? this.flash('专供店缺货，下单时会自动用平台') : zzsetPick(id, 'store')), open: () => this.openDetail(id) }); }),
+      sim: zzcSim.map((id) => { const p = PB[id]; const sm = SIMS[id]; const d = sm.price - p.member; const ok = !!zzsimOk[id];
+        return Object.assign(thumb(p), { name: p.name, plat: money(p.member), simName: sm.name, store: STORES[sm.st].name, sp: money(sm.price), diffs: sm.diff.concat([sm.unit]).map((x) => ({ t: x })), diff: (d < 0 ? '低 ' : '高 ') + dS(d), diffStyle: 'font-size: 15px; font-weight: 600; color: ' + (d < 0 ? '#047857' : '#8A9099'),
+          ok: ok, btn: ok ? '已换成它 · 撤销' : '换成它', btnCls: ok ? 'btn btn-o' : 'btn btn-p',
+          toggle: () => { const n = Object.assign({}, this.state.simOk || {}); if (n[id]) delete n[id]; else n[id] = true; this.setState({ simOk: n }); this.flash(n[id] ? '已确认：你的商城里改为展示「' + sm.name + '」，下单走' + STORES[sm.st].short : '已撤销，恢复平台商品'); } }); }),
+      useN: zzuseStore.length, gain: dS(zzgain), hasGain: zzgain > 0,
+      allCheap: () => { const n = Object.assign({}, this.state.cmpPick || {}); zzcSame.forEach((id) => { if (zzisLow(id) && SUBS[id].stock === '有货') n[id] = 'store'; else n[id] = 'plat'; }); this.setState({ cmpPick: n }); this.flash('已按更便宜的来源选好，缺货的继续用平台'); } };
+    const subCfg = { modes: SUB_MODES.map((m) => ({ label: m.l, desc: m.d, on: subMode === m.k, style: 'display: flex; gap: 12px; align-items: flex-start; text-align: left; padding: 12px 14px; border-radius: 12px; cursor: pointer; background: ' + (subMode === m.k ? '#F2FAF8' : '#fff') + '; border: 1px solid ' + (subMode === m.k ? '#0D9488' : '#EEF0F2'), dot: 'flex: 0 0 16px; height: 16px; margin-top: 2px; border-radius: 999px; box-sizing: border-box; border: ' + (subMode === m.k ? '5px solid #0D9488' : '1.5px solid #C9CED5'), pick: () => this.setState({ subMode: m.k, cmpPick: {} }) })),
+      stores: Object.keys(STORES).map((k) => ({ name: STORES[k].name, on: !!subSt[k], sw: 'position: relative; width: 36px; height: 20px; border-radius: 999px; flex: 0 0 auto; background: ' + (subSt[k] ? '#0D9488' : '#D1D5DB'), knob: 'position: absolute; top: 2px; left: ' + (subSt[k] ? '18px' : '2px') + '; width: 16px; height: 16px; border-radius: 999px; background: #fff', toggle: () => { const n = Object.assign({}, subSt); n[k] = !n[k]; this.setState({ subSt: n, cmpPick: {} }); } })),
+      done: () => { this.setState({ modal: null }); this.flash(subMode === 'off' ? '未开启替换，仍可随时查看同品对比' : '已开启：' + SUB_MODES.find((m) => m.k === subMode).l); } };
     // 首页卡券网格筛选：用途 / 面值 / 排序
     const cfE = s.cfE || 'all', cfR = s.cfR || 'all', cfS = s.cfS || 'def';
     const RG = { all: [0, 0], a: [0, 100], b: [100, 500], c: [500, 0] };
@@ -3621,7 +3821,7 @@ class Component extends DCLogic {
       shown: cardsF.length, total: cardItems.length, reset: () => this.setState({ cfE: 'all', cfR: 'all', cfS: 'def' }) };
     return {
       viewPal: s.view === 'pal', viewCpk: s.view === 'cpk', viewTpd: s.view === 'tpd', viewCli: s.view === 'cli',
-      modalCliCfg: s.modal === 'cliCfg', modalBuyCard: s.modal === 'buyCard', modalApplyTpl: s.modal === 'applyTpl', modalNewSol: s.modal === 'newSol', ns: ns, acct: acct, ms: ms, ml: ml, viewMat: s.view === 'mat', mpl: mpv2,
+      modalCliCfg: s.modal === 'cliCfg', modalBuyCard: s.modal === 'buyCard', modalApplyTpl: s.modal === 'applyTpl', modalNewSol: s.modal === 'newSol', ns: ns, acct: acct, ms: ms, ml: ml, viewMat: s.view === 'mat', mpl: mpv2, viewCmp: s.view === 'cmp', cmp: cmp, modalSubCfg: s.modal === 'subCfg', subCfg: subCfg,
       viewSol: s.view === 'sol', zsTop: zsTop, zsGrid: zsGrid, zt: zt, hb: hb, zs: zs, bz: bz, sh: sh, sd: sd, plv: pl, ck: ck, bc: bc, tpd: tpdV, ap: ap, cf: cf, cli: cli, sx: sx, solName: solO.name, backSol: backSol,
       daysLeft: daysLeft, promo: myPromo, bannerImgs: bannerImgs, hotWords: hotWords, selCount: selItems.length,
       sceneCount: SCENES.length, balAllowed: this.props['账户查看权限'] !== false, balDenied: this.props['账户查看权限'] === false, balShown: s.showBal, balHidden: !s.showBal,
