@@ -123,7 +123,7 @@ button,input,select{font-family:inherit}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.pc-img .ph{display:flex;flex-direction:column;align-items:center;gap:6px;color:#C3C8CF;font-size:12px}
+.pc-tl{border:0;background:transparent;padding:0;text-align:left;cursor:pointer;font-family:inherit;width:100%}.pc-tl:hover{color:var(--brand-700);text-decoration:underline;text-underline-offset:3px}.pc-acts button.dl{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)}.pc-acts button.dl:hover{background:rgba(255,255,255,.15)}.dtx{border:1px solid #EEF0F3;border-radius:10px;overflow:hidden;scroll-margin-top:96px}.dtx-hd{display:flex;align-items:center;gap:4px;padding:0 6px 0 4px;border-bottom:1px solid #F0F1F3;background:#FAFBFC}.dtx-tab{border:0;background:transparent;height:36px;padding:0 10px;font-size:13px;color:#4B5563;cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px}.dtx-tab.on{color:#07514A;font-weight:600;border-bottom-color:#0D9488}.dtx-tab i{font-style:normal;font-size:11px;color:#8A9099;margin-left:3px}.dtx-bd{padding:6px 12px 8px;display:flex;flex-direction:column}.dtx-r{display:grid;grid-template-columns:minmax(0,1.6fr) auto 64px 64px auto;gap:10px;align-items:center;font-size:13px;min-height:36px;border-top:1px dashed #F0F1F3}.dtx-r:first-child{border-top:0}.dtx-s{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 12px}.dtx-it{display:flex;align-items:center;gap:8px;min-width:0;border:0;background:transparent;padding:4px;border-radius:8px;cursor:pointer;text-align:left;font-family:inherit}.dtx-it:hover{background:#F5F7F8}.dtx-it .im{flex:0 0 40px;height:40px;border-radius:6px;background:#F6F7F9;display:flex;align-items:center;justify-content:center;overflow:hidden}.dtx-it .im img{width:88%;height:88%;object-fit:contain}.dtx-note{font-size:11px;color:#A0A6AE;line-height:16px;padding-top:4px}.dts-def{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#4B5563;background:#F0F8F7;border-radius:999px;padding:3px 10px 3px 3px}.dts-def b{font-size:11px;font-weight:600;color:#fff;background:#0D9488;border-radius:999px;padding:1px 8px}.dts-def.sim{background:#F5F0FF}.dts-def.sim b{background:#7C3AED}.dts-h{display:flex;align-items:baseline;gap:8px}.dts-h b{font-size:14px;font-weight:600;color:#1F2329}.dts-h span{font-size:12px;color:#8A9099}.dts-tb{border:1px solid #F0F1F3;border-radius:10px;overflow:hidden}.dts-r{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr) 92px 80px 92px minmax(0,1.5fr);gap:12px;align-items:center;padding:10px 14px;font-size:13px;color:#1F2329;border-top:1px solid #F0F1F3}.dts-r:first-child{border-top:0}.dts-r.hd{background:#F7F8FA;color:#8A9099;font-size:12px;padding-top:8px;padding-bottom:8px}.dts-t{font-size:11px;border-radius:4px;padding:0 6px;line-height:18px;flex:0 0 auto}.dts-seg{display:inline-flex;background:#F2F3F5;border-radius:999px;padding:2px;gap:2px}.dts-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.dts-c{border:1px solid #EEF0F3;border-radius:10px;background:#fff;padding:10px;display:flex;flex-direction:column;gap:6px;text-align:left;cursor:pointer;font-family:inherit;min-width:0;transition:border-color .15s,box-shadow .15s,transform .15s}.dts-c:hover{border-color:#9ED4CF;box-shadow:0 6px 16px rgba(17,24,39,.08);transform:translateY(-1px)}.dts-c .im{aspect-ratio:1;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}.dts-c .im img{width:86%;height:86%;object-fit:contain}.dts-why{display:flex;flex-wrap:wrap;gap:4px}.dts-why span{font-size:11px;color:#6D28D9;background:#F5F0FF;border-radius:4px;padding:0 5px;line-height:18px}.pc-img .ph{display:flex;flex-direction:column;align-items:center;gap:6px;color:#C3C8CF;font-size:12px}
 .pc-face{width:86%;aspect-ratio:1.6;border-radius:12px;color:#fff;padding:14px 16px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 18px #0f141822}
 .lz-face{width:100%;aspect-ratio:1;border-radius:10px;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .zph-f{flex:0 0 58px;height:104px;border-radius:12px;border:3px solid #1f2329;overflow:hidden;display:block;background:#fff}
@@ -514,11 +514,11 @@ button,input,select{font-family:inherit}
               <sc-if value="{{p.isCard}}"><span class="pc-face" style="background: {{p.cardBg}}"><span style="font-size: 13px">卡券</span><span style="font-size: 22px; font-weight: 700">{{p.cardFace}}</span></span></sc-if>
               <div class="pc-ov">
                 <div class="pc-bd"><sc-for list="{{p.badges}}" as="bd" hint-placeholder-count="2"><span class="pc-badge" style="background: {{bd.bg}}">{{bd.t}}</span></sc-for></div>
-                <div class="pc-acts"><button type="button" onClick="{{p.inq}}">集采询价</button><button type="button" onClick="{{p.list}}">上架到商城</button><button type="button" onClick="{{p.add}}">加入购物车</button><button type="button" class="pr" onClick="{{p.order}}">立即下单 / 代发</button></div>
+                <div class="pc-acts"><button type="button" class="dl" onClick="{{p.open}}">查看详情 · 同品 / 相似品</button><button type="button" onClick="{{p.inq}}">集采询价</button><button type="button" onClick="{{p.list}}">上架到商城</button><button type="button" onClick="{{p.add}}">加入购物车</button><button type="button" class="pr" onClick="{{p.order}}">立即下单 / 代发</button></div>
               </div>
             </div>
             <div class="pc-b">
-              <div class="pc-t">{{p.title}}</div>
+              <button type="button" class="pc-t pc-tl" onClick="{{p.open}}" title="查看商品详情">{{p.title}}</button>
               <div class="pc-spec">{{p.spec}}</div>
               <div class="pc-m">{{p.marginLabel}}</div>
               <div class="pc-p"><span class="mono pc-price">{{p.price}}</span><s class="mono">{{p.strike}}</s></div>
@@ -718,11 +718,11 @@ button,input,select{font-family:inherit}
               <sc-if value="{{p.isCard}}"><span class="pc-face" style="background: {{p.cardBg}}"><span style="font-size: 13px">卡券</span><span style="font-size: 22px; font-weight: 700">{{p.cardFace}}</span></span></sc-if>
               <div class="pc-ov">
                 <div class="pc-bd"><sc-for list="{{p.badges}}" as="bd" hint-placeholder-count="2"><span class="pc-badge" style="background: {{bd.bg}}">{{bd.t}}</span></sc-for></div>
-                <div class="pc-acts"><button type="button" onClick="{{p.inq}}">集采询价</button><button type="button" onClick="{{p.list}}">上架到商城</button><button type="button" onClick="{{p.add}}">加入购物车</button><button type="button" class="pr" onClick="{{p.order}}">立即下单 / 代发</button></div>
+                <div class="pc-acts"><button type="button" class="dl" onClick="{{p.open}}">查看详情 · 同品 / 相似品</button><button type="button" onClick="{{p.inq}}">集采询价</button><button type="button" onClick="{{p.list}}">上架到商城</button><button type="button" onClick="{{p.add}}">加入购物车</button><button type="button" class="pr" onClick="{{p.order}}">立即下单 / 代发</button></div>
               </div>
             </div>
             <div class="pc-b">
-              <div class="pc-t">{{p.title}}</div>
+              <button type="button" class="pc-t pc-tl" onClick="{{p.open}}" title="查看商品详情">{{p.title}}</button>
               <div class="pc-spec">{{p.spec}}</div>
               <div class="pc-m">{{p.marginLabel}}</div>
               <div class="pc-p"><span class="mono pc-price">{{p.price}}</span><s class="mono">{{p.strike}}</s></div>
@@ -1253,6 +1253,7 @@ button,input,select{font-family:inherit}
           </div>
           <sc-if value="{{dt.isPlat}}" hint-placeholder-val="{{true}}"><span style="font-size: 12px; color: #6B7280; padding-left: 62px">{{dt.refLine}}</span></sc-if>
           <sc-if value="{{dt.isPriv}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #6B7280; padding-left: 62px">{{dt.privNote}}</span></sc-if>
+          <sc-if value="{{dt.hasQuick}}" hint-placeholder-val="{{false}}"><span style="padding-left: 62px; display: flex; gap: 8px; flex-wrap: wrap"><sc-if value="{{dt.hasSubLine}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{dt.jumpSame}}" style="border: 0; border-radius: 4px; background: #E8EFFD; color: #1D4ED8; font-size: 12px; line-height: 20px; padding: 0 8px; cursor: pointer">{{dt.subLine}} ›</button></sc-if><sc-if value="{{dt.hasSimLine}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{dt.jumpSim}}" style="border: 0; border-radius: 4px; background: #F5F0FF; color: #6D28D9; font-size: 12px; line-height: 20px; padding: 0 8px; cursor: pointer">{{dt.simLine}} ›</button></sc-if></span></sc-if>
         </div>
         <div style="display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 12px 10px; font-size: 13px; align-items: center">
           <span style="color: #8A9099">规格</span><span><span style="display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px; border: 1.5px solid #0D9488; border-radius: 6px; color: #07514A; background: #F0F8F7">{{dt.spec}}</span></span>
@@ -1270,6 +1271,54 @@ button,input,select{font-family:inherit}
           <strong style="color: #1F2329">应用情况</strong>
           <sc-if value="{{dt.hasApplied}}" hint-placeholder-val="{{false}}"><span style="color: #6B7280">已上架到</span><sc-for list="{{dt.applied}}" as="da" hint-placeholder-count="2"><span style="font-size: 12px; color: #07514A; background: #E3F2EF; border-radius: 4px; padding: 2px 8px">{{da.name}}</span></sc-for></sc-if>
           <sc-if value="{{dt.notApplied}}" hint-placeholder-val="{{true}}"><span style="color: #8A9099">还没有上架到你的商城</span></sc-if>
+        </div>
+        <div id="dt-same" class="dtx">
+          <div class="dtx-hd" role="tablist" aria-label="同品与相似品">
+            <button type="button" role="tab" class="dtx-tab {{dt.tabSameCls}}" aria-selected="{{dt.onSame}}" onClick="{{dt.pickSame}}" title="同品：同一 SKU（条码一致 / 商家映射），只换货源，商品不变">同品<i>{{dt.sameN}}</i></button>
+            <button type="button" role="tab" class="dtx-tab {{dt.tabSimCls}}" aria-selected="{{dt.onSim}}" onClick="{{dt.pickSim}}" title="相似品：同末级类目、价格 ±30%、标签重合；换的是商品本身，需你确认">相似品<i>{{dt.simN}}</i></button>
+            <sc-if value="{{dt.oosTip}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #B91C1C; background: #FEF2F2; border-radius: 4px; padding: 0 6px; line-height: 20px; margin-left: 6px">{{dt.oosShort}}</span></sc-if>
+            <span style="flex: 1 1 0"></span>
+            <sc-if value="{{dt.hasCmp}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{dt.goCmp}}" style="border: 0; background: transparent; font-size: 12px; color: #0D9488; cursor: pointer; padding: 0 4px">同品对比 ›</button></sc-if>
+          </div>
+          <sc-if value="{{dt.onSame}}" hint-placeholder-val="{{true}}">
+          <div class="dtx-bd">
+            <sc-for list="{{dt.otherRows}}" as="sr" hint-placeholder-count="1">
+              <div class="dtx-r">
+                <span style="display: flex; align-items: center; gap: 6px; min-width: 0"><span class="clamp1">{{sr.src}}</span><span class="dts-t" style="{{sr.tagStyle}}">{{sr.tag}}</span></span>
+                <span><b style="color: #E2231A; font-weight: 600">{{sr.price}}</b></span>
+                <span style="{{sr.diffStyle}}">{{sr.diff}}</span>
+                <span style="{{sr.stockStyle}}">{{sr.stock}}</span>
+                <span>
+                  <sc-if value="{{sr.canPick}}" hint-placeholder-val="{{false}}"><span class="dts-seg"><button type="button" onClick="{{sr.usePlat}}" style="{{sr.platStyle}}">用平台</button><button type="button" onClick="{{sr.useStore}}" style="{{sr.storeStyle}}">用专供店</button></span></sc-if>
+                  <sc-if value="{{sr.isNote}}" hint-placeholder-val="{{true}}"><span style="font-size: 12px; color: #6B7280">{{sr.note}}</span></sc-if>
+                </span>
+              </div>
+            </sc-for>
+            <sc-if value="{{dt.sameEmpty}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #8A9099; line-height: 32px">{{dt.sameEmptyText}}</span></sc-if>
+            <span class="dtx-note">同品 = 同一 SKU（条码一致 / 商家映射），只换货源、商品不变；选「用专供店」后下单和上架都走专供店</span>
+          </div>
+          </sc-if>
+          <sc-if value="{{dt.onSim}}" hint-placeholder-val="{{false}}">
+          <div class="dtx-bd">
+            <div class="dtx-s">
+              <sc-if value="{{dt.hasStoreSim}}" hint-placeholder-val="{{false}}">
+                <div class="dtx-it" style="cursor: default; background: #FBF9FF">
+                  <span class="im" style="background: #EDE5FD; color: #6D28D9; font-size: 11px">专供</span>
+                  <span style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 1px"><span class="clamp1" style="font-size: 13px; color: #1F2329">{{dt.storeSim.name}}</span><span style="font-size: 12px"><b style="color: #E2231A; font-weight: 600">{{dt.storeSim.price}}</b> <span style="{{dt.storeSim.diffStyle}}">{{dt.storeSim.diff}}</span> <span style="color: #8A9099">· {{dt.storeSim.diff0}}</span></span></span>
+                  <button type="button" class="{{dt.storeSim.btnCls}}" style="height: 26px; font-size: 12px; padding: 0 10px; flex: 0 0 auto" onClick="{{dt.storeSim.toggle}}">{{dt.storeSim.btn}}</button>
+                </div>
+              </sc-if>
+              <sc-for list="{{dt.sims}}" as="sm" hint-placeholder-count="2">
+                <button type="button" class="dtx-it" onClick="{{sm.open}}" title="{{sm.whyText}}">
+                  <span class="im"><sc-if value="{{sm.hasImg}}" hint-placeholder-val="{{true}}"><img src="{{sm.img}}" alt=""></sc-if></span>
+                  <span style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 1px"><span class="clamp1" style="font-size: 13px; color: #1F2329">{{sm.name}}</span><span style="font-size: 12px"><b style="color: #E2231A; font-weight: 600">{{sm.price}}</b> <span style="{{sm.diffStyle}}">{{sm.diff}}</span> <span style="{{sm.marginStyle}}">· {{sm.margin}}</span></span></span>
+                </button>
+              </sc-for>
+            </div>
+            <sc-if value="{{dt.simEmpty}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #8A9099; line-height: 32px">{{dt.simEmptyText}}</span></sc-if>
+            <span class="dtx-note">相似品 = 同末级类目、价格 ±30%，同货盘或标签重合的排前面；只做推荐，换成专供店相似品需你确认</span>
+          </div>
+          </sc-if>
         </div>
       </div>
     </section>
@@ -3091,7 +3140,7 @@ class Component extends DCLogic {
   }
   openDetail(id) {
     const st = this.state;
-    this.setState({ sellIdx: 0, sellVar: 0, view: 'detail', detailId: id, detailBack: { view: st.view || 'home', storeKey: st.storeKey, storeBack: st.storeBack }, modal: null });
+    this.setState({ sellIdx: 0, sellVar: 0, dtsTab: null, view: 'detail', detailId: id, detailBack: st.view === 'detail' ? { view: 'detail', id: st.detailId, prev: st.detailBack } : { view: st.view || 'home', storeKey: st.storeKey, storeBack: st.storeBack }, modal: null });
     setTimeout(() => window.scrollTo(0, 0), 30);
   }
   openPv(pv) {
@@ -3494,7 +3543,60 @@ class Component extends DCLogic {
       sellNote: dPriv ? '私域商品由你一键生成，可编辑后保存。' : '平台商品的文案由平台预先生成、运营审核后上线，已过滤广告法禁用词；你可以复制后改写。',
       regen: () => this.setState({ sellVar: (s.sellVar || 0) + 1 }), sceneName: scene.name, openMat: () => { this.setState({ view: 'mat', matFrom: s.view, modal: null, matPv: null, matSel: {}, matType: 'all' }); window.scrollTo(0, 0); },
       copyText: () => this.flash('已复制卖点文案'),
-      back: () => this.setState({ view: dBack.view, storeKey: dBack.storeKey, storeBack: dBack.storeBack }), backLabel: (dBack.view === 'store' ? '‹ 返回店铺' : (BACK_LBL[dBack.view] || '‹ 返回')) });
+      back: () => { if (dBack.view === 'detail') { this.setState({ detailId: dBack.id, detailBack: dBack.prev, sellIdx: 0, sellVar: 0, dtsTab: null }); window.scrollTo(0, 0); } else this.setState({ view: dBack.view, storeKey: dBack.storeKey, storeBack: dBack.storeBack }); }, backLabel: (dBack.view === 'store' ? '‹ 返回店铺' : (BACK_LBL[dBack.view] || '‹ 返回')) });
+
+    // ===== 详情页 · 同品 / 相似品（口径见文档中心：同品按 SKU ID / 条码对应，只换货源；相似品 = 同末级类目 + 价格 ±30% + 标签重合，换的是商品）=====
+    const dSb = SUBS[dP.id]; const dSm = SIMS[dP.id]; const dSwap = swapTip(dP); const dOos = dP.stock !== '有货';
+    const dYuan = (d) => '¥' + (Math.round(Math.abs(d) * 10) / 10); const dMg = (q) => (q.market ? marginOf(q.member, q.market) : null);
+    const dPalTags = (id) => Object.keys(PALS).filter((k) => PALS[k].ids.indexOf(id) >= 0).map((k) => '同在货盘「' + PALS[k].name + '」');
+    const dTagsOf = (q) => (q.tags || []).concat(dPalTags(q.id));
+    const dMyTags = dTagsOf(dP);
+    // 末级类目（演示：按商品名推断；正式版取商品库末级类目）
+    const LEAF = [[/腰果|夏威夷果|碧根果|开心果|核桃|坚果/, '坚果'], [/贡米|大米|香米|稻/, '大米'], [/花生油|菜籽油|调和油|食用油|橄榄油/, '食用油'], [/牛奶|纯奶|酸奶/, '牛奶'], [/饼|礼包|零食|薯/, '零食礼包'], [/洗衣|洗洁|清洁|洗护/, '洗护清洁'], [/纸|湿巾/, '纸品'], [/壶|锅|炉/, '厨房小电'], [/面|挂面/, '面条']];
+    const leafOf = (q) => { if (!CAT[q.id]) return ''; const hit = LEAF.find((x) => x[0].test(q.name)); return hit ? hit[1] : CAT[q.id]; };
+    const dLeaf = leafOf(dP);
+    const dSimList = dLeaf ? ALLP.filter((q) => q.id !== dP.id && !q.card && leafOf(q) === dLeaf && Math.abs(q.member - dP.member) <= dP.member * 0.3)
+      .map((q) => ({ q: q, ov: dTagsOf(q).filter((t) => dMyTags.indexOf(t) >= 0) }))
+      .sort((a, b) => (b.ov.length - a.ov.length) || ((a.q.stock === '有货' ? 0 : 1) - (b.q.stock === '有货' ? 0 : 1)) || (Math.abs(a.q.member - dP.member) - Math.abs(b.q.member - dP.member))).slice(0, 4) : [];
+    const dSubMode = s.subMode || 'off'; const dSubSt = s.subSt || { lpd: true, xy: true };
+    const dPick = dSb ? ((s.cmpPick || {})[dP.id] || ((dSubMode === 'off' || !dSubSt[dSb.st] || dSb.stock !== '有货') ? 'plat' : (dSubMode === 'always' || dSb.price < dP.member ? 'store' : 'plat'))) : 'plat';
+    const dSetPick = (v) => { if (v === 'store' && dSb.stock !== '有货') { this.flash('专供店缺货，下单时会自动用平台'); return; } const n = Object.assign({}, this.state.cmpPick || {}); n[dP.id] = v; this.setState({ cmpPick: n }); this.flash(v === 'store' ? '下单和上架将使用「' + STORES[dSb.st].name + '」的同品' : '下单和上架使用平台货源'); };
+    const dSeg = (on, dis) => 'min-width: 56px; height: 26px; border: 0; border-radius: 999px; font-size: 12px; cursor: ' + (dis ? 'not-allowed' : 'pointer') + '; background: ' + (on ? '#0D9488' : 'transparent') + '; color: ' + (on ? '#fff' : (dis ? '#C3C8CF' : '#374151')) + '; font-weight: ' + (on ? '600' : '400');
+    const dTagCss = (c, bg) => 'color: ' + c + '; background: ' + bg;
+    const dSameRows = [{ src: dStore.name, tag: '当前', tagStyle: dTagCss('#07514A', '#E3F2EF'), price: money(dP.member), priceLabel: dP.kind === 'own' ? '成本价' : (dP.kind === 'sup' ? '专供价' : '会员价'), diff: '—', diffStyle: 'color: #A0A6AE',
+        stock: dP.stock, stockStyle: 'color: ' + (dOos ? '#E2231A' : '#4B5563'), how: '—', canPick: false, isNote: true, note: dSb ? (dPick === 'plat' ? '下单用这里' : '') : '当前查看' }]
+      .concat(dSwap ? [{ src: '你的自有' + (dP.src === 'mc' ? '天猫超市' : '天猫优品'), tag: '阿里权益', tagStyle: dTagCss('#B45309', '#FFF4E5'), price: '按自有账号价', priceLabel: '', diff: '—', diffStyle: 'color: #A0A6AE',
+        stock: '以自有账号为准', stockStyle: 'color: #4B5563', how: 'SKU ID 一致', canPick: false, isNote: true, note: '下单和上架时自动替换，企业支付宝付款' }] : [])
+      .concat(dSb ? [{ src: STORES[dSb.st].name, tag: '专供店', tagStyle: dTagCss('#1D4ED8', '#E8EFFD'), price: money(dSb.price), priceLabel: '专供价', diff: (dSb.price < dP.member ? '低 ' : (dSb.price > dP.member ? '高 ' : '')) + (dSb.price === dP.member ? '同价' : dYuan(dSb.price - dP.member)),
+        diffStyle: 'font-weight: 600; color: ' + (dSb.price < dP.member ? '#047857' : '#8A9099'), stock: dSb.stock, stockStyle: 'color: ' + (dSb.stock === '有货' ? '#4B5563' : '#E2231A'), how: dSb.how, canPick: true, isNote: false, note: '',
+        platStyle: dSeg(dPick === 'plat', false), storeStyle: dSeg(dPick === 'store', dSb.stock !== '有货'), usePlat: () => dSetPick('plat'), useStore: () => dSetPick('store') }] : []);
+    const dSimOk = !!(s.simOk || {})[dP.id];
+    const dxTab = s.dtsTab || ((dSb || dSwap) ? 'same' : ((dSimList.length || dSm) ? 'sim' : 'same'));
+    Object.assign(dt, {
+      sameRows: dSameRows, sameN: dSameRows.length - 1, sameEmpty: dSameRows.length === 1,
+      sameEmptyText: dP.kind ? '私域商品不参与跨货源同品匹配。' : '暂未匹配到其他货源的同品。同品按 SKU ID / 条码 / 商家映射对应，商品库清洗后会持续补充。',
+      oosTip: dOos, oosText: '当前商品' + dP.stock + '：可以改用下方有货的同品（商品不变）或相似品（需你确认），避免丢单',
+      hasStoreSim: !!dSm, storeSim: dSm ? { name: dSm.name, store: STORES[dSm.st].name, price: money(dSm.price), diffs: dSm.diff.concat([dSm.unit]).map((x) => ({ t: x })), diff0: dSm.diff.join(' · '),
+        diff: (dSm.price < dP.member ? '低 ' : '高 ') + dYuan(dSm.price - dP.member), diffStyle: 'font-size: 14px; font-weight: 600; color: ' + (dSm.price < dP.member ? '#047857' : '#8A9099'),
+        btn: dSimOk ? '已换成它 · 撤销' : '换成它', btnCls: dSimOk ? 'btn btn-o' : 'btn btn-p',
+        toggle: () => { const n = Object.assign({}, this.state.simOk || {}); if (n[dP.id]) delete n[dP.id]; else n[dP.id] = true; this.setState({ simOk: n }); this.flash(n[dP.id] ? '已确认：你的商城里改为展示「' + dSm.name + '」，下单走' + STORES[dSm.st].short : '已撤销，恢复平台商品'); } } : {},
+      sims: dSimList.map((x) => { const q = x.q; const d = q.member - dP.member; const m = dMg(q); const m0 = dMg(dP); const pd = Math.round((q.member - dP.member) / dP.member * 100);
+        return Object.assign(thumb(q), { name: q.name, price: money(q.member), open: () => this.openDetail(q.id),
+          diff: d === 0 ? '同价' : (d < 0 ? '便宜 ' : '贵 ') + dYuan(d), diffStyle: 'font-size: 12px; color: ' + (d < 0 ? '#047857' : '#8A9099'),
+          margin: m == null ? '利润率 —' : '利润率 ' + m.toFixed(1) + '%',
+          marginStyle: 'font-size: 12px; color: ' + (m0 != null && m != null && m > m0 ? '#FF6A00' : '#8A9099'),
+          stock: q.stock + ' · ' + (STORE[SK(q)] || {}).name, whyText: '推荐理由：同类目 · ' + dLeaf + '，价格 ' + (pd === 0 ? '相同' : (pd > 0 ? '+' : '') + pd + '%') + (x.ov.length ? '，' + x.ov[0] : '') + '；' + q.stock, why: ['同类目 · ' + dLeaf, '价格 ' + (pd === 0 ? '相同' : (pd > 0 ? '+' : '') + pd + '%')].concat(x.ov.slice(0, 1)).map((t) => ({ t: t })) }); }),
+      simN: dSimList.length + (dSm ? 1 : 0), simEmpty: !dSimList.length && !dSm,
+      simEmptyText: dLeaf ? '末级类目「' + dLeaf + '」里暂时没有价格在 ±30% 以内的其他商品；商品库补齐后会自动推荐。' : '该商品还没有类目，商品库补齐类目后会推荐相似品。',
+      hasCmp: !!(dSb || dSm), goCmp: () => { this.setState({ view: 'cmp', cmpTitle: dP.name, cmpIds: [dP.id], cmpTab: 'all', cmpFrom: 'detail', modal: null }); window.scrollTo(0, 0); },
+      subLine: dSb ? '专供店同品 ' + (dSb.price < dP.member ? '低 ' : '高 ') + dYuan(dSb.price - dP.member) + (dSb.stock !== '有货' ? ' · 缺货' : '') : (dSwap ? '有自有同品 · 下单和上架自动替换' : ''),
+      hasSubLine: !!(dSb || dSwap), simLine: (dSimList.length + (dSm ? 1 : 0)) ? '相似品 ' + (dSimList.length + (dSm ? 1 : 0)) + ' 款' : '',
+      otherRows: dSameRows.slice(1), oosShort: dP.stock + ' · 可换同品 / 相似品',
+      onSame: dxTab === 'same', onSim: dxTab === 'sim', tabSameCls: dxTab === 'same' ? 'on' : '', tabSimCls: dxTab === 'sim' ? 'on' : '',
+      pickSame: () => this.setState({ dtsTab: 'same' }), pickSim: () => this.setState({ dtsTab: 'sim' }),
+      jumpSim: () => { this.setState({ dtsTab: 'sim' }); this.jump('dt-same'); },
+      hasSimLine: !!(dSimList.length || dSm), hasQuick: !!(dSb || dSwap || dSimList.length || dSm), jumpSame: () => { this.setState({ dtsTab: 'same' }); this.jump('dt-same'); }
+    });
     // ---------- 营销素材 ----------
     const MAT_TYPES = [{ k: 'all', l: '全部' }, { k: 'poster', l: '海报' }, { k: 'text', l: '朋友圈文案' }, { k: 'doc', l: '方案介绍' }];
     const POSTER_BG = { cny: 'linear-gradient(160deg, #C2413B 0%, #E8664F 60%, #F2A65A 100%)', emp: 'linear-gradient(160deg, #0B6E66 0%, #0D9488 60%, #5CC8B5 100%)', uni: 'linear-gradient(160deg, #1E4F9C 0%, #3B7DD8 60%, #7FB2F0 100%)', bday: 'linear-gradient(160deg, #B4235A 0%, #E0527F 60%, #F5A3B8 100%)', meal: 'linear-gradient(160deg, #B45309 0%, #EA8A1E 60%, #F7C26B 100%)', cnyCard: 'linear-gradient(160deg, #9F1D1D 0%, #D9372B 55%, #F0B44C 100%)' };
@@ -3997,13 +4099,14 @@ class Component extends DCLogic {
     const palIds = solO.pals.filter((k) => chipOn === 'all' || chipOn === k).reduce((a, k) => a.concat(PALS[k].ids.filter((id) => a.indexOf(id) < 0)), []);
     const PALTAG = { pc1: '员工年货', pc2: '商务礼盒', pc3: '工会慰问', pb1: '生日礼', pm1: '下午茶' };
     const tagOf = (id) => solO.pals.filter((k) => PALS[k].ids.indexOf(id) >= 0).map((k) => PALTAG[k]).slice(0, 2);
+    const stp = (fn) => (e) => { if (e && e.stopPropagation) e.stopPropagation(); fn(); };
     const goods = palIds.map((id, i) => { const p = PB[id]; const d = decorate(p); const sd2 = seed(id);
       return { delay: (i % 10) * 30 + 'ms', img: p.img || '', hasImg: !!p.img, isPh: !p.img && !p.card, isCard: !!p.card, cardBg: p.card ? p.card.bg : '', cardFace: p.card ? p.card.face : '',
         badges: [{ t: SRC[p.src], bg: '#0d9488' }].concat(p.wh === '电商仓' ? [{ t: '24h 发货', bg: '#fd6600' }] : []),
         title: p.name, spec: p.spec + ' · ' + SRC[p.src], marginLabel: p.market ? '市场价利润率 ' + pct(marginOf(p.member, p.market)) : '',
         price: money(p.member), strike: p.market ? money(p.market) : '', tags: tagOf(id),
         sold: (1200 + sd2 * 3).toLocaleString(), yday: 5 + sd2 % 25, stock: p.stock === '有货' ? '库存充足' : p.stock,
-        open: d.openDetail, inq: d.inqOne, list: d.listOne, add: d.addCart, order: d.orderOne,
+        open: d.openDetail, inq: stp(d.inqOne), list: stp(d.listOne), add: stp(d.addCart), order: stp(d.orderOne),
         sel: d.sel, selCls: d.sel ? 'sel' : '', ckCls: d.sel ? 'on' : '', btnAria: d.btnAria, toggle: d.toggle, ...subOf(id) }; });
     const cardItems = solO.cpks.filter((k) => chipOn === 'all' || chipOn === k).reduce((a, k) => { const c = CPKS[k]; return a.concat(c.faces.map((f, fi) => { const sd2 = seed(k + f);
       return { delay: (a.length + fi) * 40 + 'ms', name: c.name, bg: c.img ? 'url(' + c.img + ') center / cover' : c.bg, face: faceText(c, f), title: c.name + ' · 面值 ' + faceText(c, f), spec: '电子卡 · ' + c.faces.map((x) => faceText(c, x)).join(' / ') + ' · 有效期 ' + c.valid,
@@ -4102,7 +4205,7 @@ class Component extends DCLogic {
     const zzuseStore = zzcSame.filter((id) => zzpickOf(id) === 'store');
     const zzgain = zzuseStore.reduce((a, id) => a + PB[id].member - SUBS[id].price, 0);
     const cs = subSum(zzcIds, s.cmpTitle || '');
-    const cmp = { title: s.cmpTitle || solO.name, sum: cs, back: () => { this.setState({ view: s.cmpFrom || 'home' }); goTop(); }, backLabel: { pal: '返回货盘详情', tpd: '返回模板详情', sol: '返回方案详情' }[s.cmpFrom] || '返回场景首页',
+    const cmp = { title: s.cmpTitle || solO.name, sum: cs, back: () => { this.setState({ view: s.cmpFrom || 'home' }); goTop(); }, backLabel: { pal: '返回货盘详情', tpd: '返回模板详情', sol: '返回方案详情', detail: '返回商品详情' }[s.cmpFrom] || '返回场景首页',
       stores: Object.keys(STORES).map((k) => ({ name: STORES[k].name, on: !!subSt[k] })), noMatch: zzcIds.length - zzcSame.length - zzcSim.length, total: zzcIds.length,
       tabs: [{ k: 'all', l: '全部', n: zzcSame.length + zzcSim.length }, { k: 'low', l: '比平台便宜', n: cs.cheap }, { k: 'high', l: '比平台贵', n: cs.dear }, { k: 'sim', l: '相似品', n: zzcSim.length }].map((t) => ({ label: t.l, n: t.n, cls: zzcTab === t.k ? 'on' : '', pick: () => this.setState({ cmpTab: t.k }) })),
       showSame: zzcTab !== 'sim' && zzsameShown.length > 0, showSim: (zzcTab === 'all' || zzcTab === 'sim') && zzcSim.length > 0,
