@@ -154,6 +154,15 @@ button,input,select{font-family:inherit}
 .lban-mp:hover{transform:translateY(-2px)}
 .lban-mt{flex:1;min-width:0;border:1px dashed #cfe3df;background:#fff;border-radius:10px;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;gap:4px;text-align:left;cursor:pointer}
 
+.zt-goods{flex:0 0 46%;min-width:0;display:flex;flex-direction:column;gap:8px;border-left:1px solid #f0f1f3;padding-left:14px}
+.zt-gg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+
+.lban-mat{margin-top:auto}
+.lban-mrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.lban-mrow .lban-mp{width:100%;height:auto;aspect-ratio:3/4}
+.ml-pv{width:min(100%, calc((100vh - 480px) * .75));margin:0 auto}
+.zt-gg{grid-template-columns:repeat(4,minmax(0,1fr))}
+
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #F4F5F7; padding-bottom: 96px">
@@ -260,7 +269,6 @@ button,input,select{font-family:inherit}
           <button type="button" class="lsc {{t.cls}}" role="tab" onClick="{{t.pick}}"><span class="lsc-ico" style="background: {{t.icoBg}}; color: {{t.icoFg}}">{{t.ico}}</span>{{t.label}}<sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{false}}"><span class="lsc-b" style="background: #fd6600; color: #fff">{{t.badge}}</span></sc-if></button>
         </sc-for>
         <div style="flex: 1"></div>
-        <span style="font-size: 12px; color: #929d99">{{sh.scene.period}} · 方案由运营持续上新</span>
         <button type="button" class="lsc lsc-all" onClick="{{ns.open}}" style="color: #fd6600">上新 {{ns.count}}</button>
         <button type="button" class="lsc lsc-all" onClick="{{goPlaza}}">资源广场<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
       </div>
@@ -275,10 +283,9 @@ button,input,select{font-family:inherit}
           </div>
           <div style="display: flex; gap: 10px; flex-wrap: wrap; position: relative; z-index: 1"><button type="button" class="btn btn-p btn-lg" onClick="{{hb.go}}">查看方案详情 ›</button></div>
           <div class="lban-mat">
-            <div style="display: flex; align-items: baseline; gap: 8px"><b style="font-size: 14px; font-weight: 600; color: #0f1418">推广素材</b><span style="font-size: 12px; color: #666">{{ms.sub}} · 随方案更新</span></div>
-            <div style="display: flex; gap: 10px; align-items: stretch">
-              <sc-for list="{{ms.posters3}}" as="mp" hint-placeholder-count="3"><button type="button" class="lban-mp" onClick="{{mp.pv}}" aria-label="预览 {{mp.name}}" title="{{mp.name}}"><span style="{{mp.posterStyle}}; font-size: 6px; height: 100%; box-sizing: border-box; padding: 12% 8%"><span style="font-size: 0.9em; opacity: 0.85">{{mp.kicker}}</span><span style="font-size: 1.9em; font-weight: 800; line-height: 1.2">{{mp.title}}</span><span style="flex: 1 1 0"></span><span style="height: 18%; background: rgba(255,255,255,0.95); border-radius: 0.6em"></span></span></button></sc-for>
-              <button type="button" class="lban-mt" onClick="{{ms.open}}"><b style="font-size: 13px; color: #0f1418; font-weight: 600">打开素材库</b><span style="font-size: 12px; color: #666; line-height: 1.5">{{ms.count}} 份海报 / 文案 / 方案介绍，一键合成你的商城二维码</span><span style="font-size: 12px; color: #066b5f">去下载 ›</span></button>
+            <div style="display: flex; align-items: baseline; gap: 8px"><b style="font-size: 14px; font-weight: 600; color: #0f1418">推广素材</b><span style="font-size: 12px; color: #929d99">{{ms.count}} 份</span><div style="flex: 1"></div><button type="button" onClick="{{ms.open}}" style="border: 0; background: transparent; padding: 0; font-size: 12px; color: #066b5f; cursor: pointer">全部素材 ›</button></div>
+            <div class="lban-mrow">
+              <sc-for list="{{ms.posters4}}" as="mp" hint-placeholder-count="3"><button type="button" class="lban-mp" onClick="{{mp.pv}}" aria-label="预览 {{mp.name}}" title="{{mp.name}}"><span style="{{mp.posterStyle}}; font-size: 6px; height: 100%; box-sizing: border-box; padding: 12% 8%"><span style="font-size: 0.9em; opacity: 0.85">{{mp.kicker}}</span><span style="font-size: 1.9em; font-weight: 800; line-height: 1.2">{{mp.title}}</span><span style="flex: 1 1 0"></span><span style="height: 18%; background: rgba(255,255,255,0.95); border-radius: 0.6em"></span></span></button></sc-for>
             </div>
           </div>
           <div class="lban-dots"><sc-for list="{{hb.dots}}" as="d" hint-placeholder-count="3"><button type="button" class="ldot {{d.cls}}" aria-label="{{d.label}}" title="{{d.label}}" onClick="{{d.pick}}"></button></sc-for></div>
@@ -293,13 +300,13 @@ button,input,select{font-family:inherit}
                 <sc-if value="{{t.notFace}}" hint-placeholder-val="{{true}}"><span class="lz-im"><sc-if value="{{t.hasImg}}"><img src="{{t.img}}" alt=""></sc-if><sc-if value="{{t.isPh}}"><span style="font-size: 10px; color: #C3C8CF">商品图</span></sc-if><sc-if value="{{t.isCard}}"><span class="lz-face" style="background: #C2413B">{{t.cardFace}}</span></sc-if></span></sc-if>
                 <span class="mono">{{t.price}}</span></button></sc-for></div></sc-if>
               <sc-if value="{{z.isTpl}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{z.go}}" class="zph" style="border: 0; background: transparent; padding: 0; cursor: pointer; display: flex; gap: 12px; align-items: center; text-align: left"><span class="zph-f" style="background: {{z.coverBg}}"><sc-if value="{{z.hasImg}}"><img src="{{z.img}}" alt=""></sc-if><sc-if value="{{z.noImg}}"><span style="display: block; padding: 18px 6px 0; color: #fff; font-size: 11px; font-weight: 700; text-align: center">{{z.title}}</span></sc-if></span><span style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #666; min-width: 0"><span>{{z.l1}}</span><span>{{z.l2}}</span><span style="color: #066b5f">手机预览装修 ›</span></span></button></sc-if>
-              <button type="button" class="lz-go" onClick="{{z.go}}"><span class="lz-rule" title="{{z.rule}}">{{z.rule}}</span><span style="flex: none">{{z.cta}} ›</span></button>
+              <button type="button" class="lz-go" onClick="{{z.go}}"><span style="flex: 1"></span><span style="flex: none">{{z.cta}} ›</span></button>
             </div>
           </sc-for>
         </div>
           <sc-if value="{{zt.has}}" hint-placeholder-val="{{true}}">
           <div class="ztpl">
-            <div style="display: flex; align-items: baseline; gap: 8px"><b style="font-size: 15px; font-weight: 600; color: #0f1418">商城模板</b><span class="lz-s" style="color: #1d4ed8; background: #e8effd">{{zt.count}} 套 · 装修好 · 一键开商城</span><div style="flex: 1"></div><button type="button" onClick="{{zt.all}}" style="border: 0; background: transparent; font-size: 12px; color: #066b5f; cursor: pointer">全部模板 ›</button></div>
+            <div style="display: flex; align-items: baseline; gap: 8px"><b style="font-size: 15px; font-weight: 600; color: #0f1418">商城模板</b><span class="lz-s" style="color: #1d4ed8; background: #e8effd">{{zt.count}} 套</span><div style="flex: 1"></div><button type="button" onClick="{{zt.all}}" style="border: 0; background: transparent; font-size: 12px; color: #066b5f; cursor: pointer">全部模板 ›</button></div>
             <div style="{{zt.grid}}">
               <sc-for list="{{zt.items}}" as="t" hint-placeholder-count="2">
                 <div class="zt-card">
@@ -311,10 +318,15 @@ button,input,select{font-family:inherit}
                     <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap"><b style="font-size: 16px; font-weight: 600; color: #0f1418">{{t.name}}</b><sc-if value="{{t.isNew}}" hint-placeholder-val="{{false}}"><span style="font-size: 10px; color: #fff; background: #fd6600; border-radius: 4px; padding: 0 4px">NEW</span></sc-if></div>
                     <span style="align-self: flex-start; font-size: 12px; color: #1d4ed8; background: #e8effd; border-radius: 4px; padding: 1px 6px">{{t.type}}</span>
                     <span style="font-size: 13px; line-height: 20px; color: #666" class="clamp2">{{t.intro}}</span>
-                    <span style="font-size: 12px; color: #929d99">{{t.clients}} 家服务商在用 · {{t.topics}} 个专题 · {{t.n}} 款商品</span>
                     <div style="flex: 1"></div>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap"><button type="button" class="btn btn-o" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{t.detail}}">模板详情</button><button type="button" class="btn btn-p" style="height: 32px; font-size: 13px; padding: 0 14px" onClick="{{t.use}}">用它开商城</button></div>
                   </div>
+                  <sc-if value="{{t.one}}" hint-placeholder-val="{{false}}">
+                  <div class="zt-goods">
+                    <div style="display: flex; align-items: baseline; gap: 6px"><b style="font-size: 13px; font-weight: 600; color: #0f1418">商城里的商品</b><span style="font-size: 12px; color: #929d99">{{t.n}} 款</span><div style="flex: 1"></div><button type="button" onClick="{{t.detail}}" style="border: 0; background: transparent; padding: 0; font-size: 12px; color: #066b5f; cursor: pointer">全部 ›</button></div>
+                    <div class="zt-gg"><sc-for list="{{t.goods}}" as="g" hint-placeholder-count="6"><button type="button" class="lz-it" onClick="{{t.detail}}" title="{{g.name}}"><span class="lz-im"><sc-if value="{{g.hasImg}}"><img src="{{g.img}}" alt=""></sc-if><sc-if value="{{g.isPh}}"><span style="font-size: 10px; color: #C3C8CF">商品图</span></sc-if></span><span class="mono">{{g.price}}</span></button></sc-for></div>
+                  </div>
+                  </sc-if>
                 </div>
               </sc-for>
             </div>
@@ -325,10 +337,9 @@ button,input,select{font-family:inherit}
 
       <div id="sol-biz" class="lbiz" role="tablist" aria-label="方案内容" style="scroll-margin-top: 90px">
         <sc-for list="{{bz.tabs}}" as="t" hint-placeholder-count="3">
-          <button type="button" class="lbt {{t.cls}}" role="tab" onClick="{{t.pick}}"><b style="font-size: 17px; font-weight: 600; color: {{t.ink}}">{{t.label}}</b><span style="font-size: 12px; color: #929d99">{{t.sub}}</span></button>
+          <button type="button" class="lbt {{t.cls}}" role="tab" onClick="{{t.pick}}"><b style="font-size: 17px; font-weight: 600; color: {{t.ink}}">{{t.label}}</b></button>
         </sc-for>
         <div style="flex: 1"></div>
-        <span style="align-self: center; font-size: 12px; color: #929d99">当前方案：<b style="color: #0f1418; font-weight: 500">{{sd.name}}</b></span>
       </div>
       <div class="lchips">
         <sc-for list="{{bz.chips}}" as="c" hint-placeholder-count="4">
@@ -471,7 +482,6 @@ button,input,select{font-family:inherit}
       <sc-if value="{{bz.empty}}" hint-placeholder-val="{{false}}">
         <div style="padding: 40px 0; text-align: center; color: #666; background: #f7f7f7; border-radius: 20px">本方案没有配置这类内容，看看方案里的其他做法</div>
       </sc-if>
-      <div style="font-size: 12px; color: #929d99; text-align: center">方案、专区与货盘由运营按规则配置（场景标签 · 商品池规则 · 库存阈值 · 置顶），优势数据由系统计算</div>
     </section>
 
 
@@ -508,10 +518,9 @@ button,input,select{font-family:inherit}
       </div>
       <div id="sol-biz" class="lbiz" role="tablist" aria-label="方案内容" style="scroll-margin-top: 90px">
         <sc-for list="{{bz.tabs}}" as="t" hint-placeholder-count="3">
-          <button type="button" class="lbt {{t.cls}}" role="tab" onClick="{{t.pick}}"><b style="font-size: 17px; font-weight: 600; color: {{t.ink}}">{{t.label}}</b><span style="font-size: 12px; color: #929d99">{{t.sub}}</span></button>
+          <button type="button" class="lbt {{t.cls}}" role="tab" onClick="{{t.pick}}"><b style="font-size: 17px; font-weight: 600; color: {{t.ink}}">{{t.label}}</b></button>
         </sc-for>
         <div style="flex: 1"></div>
-        <span style="align-self: center; font-size: 12px; color: #929d99">当前方案：<b style="color: #0f1418; font-weight: 500">{{sd.name}}</b></span>
       </div>
       <div class="lchips">
         <sc-for list="{{bz.chips}}" as="c" hint-placeholder-count="4">
@@ -603,7 +612,6 @@ button,input,select{font-family:inherit}
       <sc-if value="{{bz.empty}}" hint-placeholder-val="{{false}}">
         <div style="padding: 40px 0; text-align: center; color: #666; background: #f7f7f7; border-radius: 20px">本方案没有配置这类内容，看看方案里的其他做法</div>
       </sc-if>
-      <div style="font-size: 12px; color: #929d99; text-align: center">方案、专区与货盘由运营按规则配置（场景标签 · 商品池规则 · 库存阈值 · 置顶），优势数据由系统计算</div>
     </div>
   </div>
 </sc-if>
@@ -2310,7 +2318,71 @@ button,input,select{font-family:inherit}
     </div>
   </sc-if>
 
-  <sc-if value="{{modalCliCfg}}" hint-placeholder-val="{{false}}">
+  <sc-if value="{{viewMat}}" hint-placeholder-val="{{false}}">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 16px 24px 96px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #929d99">
+      <button type="button" onClick="{{ml.back}}" style="border: 0; background: transparent; padding: 0; color: #066b5f; cursor: pointer; font-size: 13px">‹ {{ml.backLabel}}</button><span>/</span><span>{{ml.sceneName}}</span><span>/</span><span style="color: #0f1418">营销素材</span>
+    </div>
+    <section style="background: #fff; border-radius: 16px; padding: 20px 24px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 700; color: #0f1418">营销素材</h1>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <sc-for list="{{ml.sols}}" as="so" hint-placeholder-count="3"><button type="button" class="lchip {{so.cls}}" onClick="{{so.pick}}">{{so.name}}<span class="lchip-t">{{so.n}}</span></button></sc-for>
+        </div>
+        <div style="flex: 1"></div>
+        <button type="button" role="switch" aria-checked="{{mat.qrOn}}" onClick="{{mat.toggleQr}}" style="border: none; background: transparent; padding: 0; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 14px; color: #1F2329"><span style="{{mat.switchStyle}}"><span style="{{mat.knobStyle}}"></span></span>海报合成我的商城二维码</button>
+      </div>
+      <sc-if value="{{mat.qrOn}}" hint-placeholder-val="{{false}}">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #F7F8FA; border-radius: 10px; padding: 10px 14px">
+          <span style="font-size: 13px; color: #4B5563">选择商城</span>
+          <sc-for list="{{mat.malls}}" as="mm" hint-placeholder-count="3"><button type="button" aria-pressed="{{mm.active}}" onClick="{{mm.pick}}" style="{{mm.style}}">{{mm.name}}</button></sc-for>
+          <sc-if value="{{mat.needMall}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #E2231A">先选择一个商城</span></sc-if>
+        </div>
+      </sc-if>
+      <div style="display: flex; gap: 8px; border-top: 1px solid #f0f1f3; padding-top: 14px">
+        <sc-for list="{{ml.types}}" as="ty" hint-placeholder-count="4"><button type="button" class="lchip {{ty.cls}}" onClick="{{ty.pick}}">{{ty.label}}<span class="lchip-t">{{ty.n}}</span></button></sc-for>
+      </div>
+    </section>
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 16px; align-items: start">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px">
+        <sc-for list="{{ml.items}}" as="mi" hint-placeholder-count="6">
+          <div style="{{mi.cardStyle}}">
+            <button type="button" onClick="{{mi.preview}}" aria-label="预览 {{mi.name}}" style="position: relative; aspect-ratio: 3 / 4; border: 0; padding: 0; background: #F2F3F5; display: flex; cursor: pointer; text-align: left; font-size: 11px">
+              <sc-if value="{{mi.isPoster}}" hint-placeholder-val="{{true}}"><span style="{{mi.posterStyle}}"><span style="font-size: 0.75em; opacity: 0.85">{{mi.kicker}}</span><span style="font-size: 1.5em; font-weight: 800; line-height: 1.25">{{mi.title}}</span><span class="clamp2" style="font-size: 0.8em; opacity: 0.9; line-height: 1.5">{{mi.sub}}</span><span style="flex: 1 1 0"></span><span style="display: flex; align-items: center; gap: 6%; background: rgba(255,255,255,0.95); color: #1F2329; border-radius: 0.6em; padding: 0.5em 0.6em"><sc-if value="{{mi.showQr}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 29 29" style="width: 22%; flex: 0 0 auto" aria-hidden="true"><path fill="#1F2329" d="{{mi.qr}}"></path></svg><span class="clamp1" style="font-size: 0.75em; font-weight: 600">{{mi.mallName}}</span></sc-if><sc-if value="{{mi.noQr}}" hint-placeholder-val="{{true}}"><span style="width: 22%; aspect-ratio: 1 / 1; border: 1px dashed #C9CED5; border-radius: 0.3em; flex: 0 0 auto"></span></sc-if></span></span></sc-if>
+              <sc-if value="{{mi.isText}}" hint-placeholder-val="{{false}}"><span style="flex: 1 1 0; background: #fff; padding: 36px 14px 14px; font-size: 12px; line-height: 1.8; color: #374151; overflow: hidden">{{mi.text}}</span></sc-if>
+              <sc-if value="{{mi.isFile}}" hint-placeholder-val="{{false}}"><span style="flex: 1 1 0; display: flex; align-items: center; justify-content: center; background: #fff"><span style="{{mi.extStyle}}">{{mi.ext}}</span></span></sc-if>
+            </button>
+            <button type="button" role="checkbox" aria-checked="{{mi.sel}}" aria-label="{{mi.selAria}}" onClick="{{mi.toggle}}" style="{{mi.btnStyle}}"><sc-if value="{{mi.sel}}" hint-placeholder-val="{{false}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if></button>
+            <div style="padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
+              <span class="clamp1" style="font-size: 13px; color: #1F2329; font-weight: 600">{{mi.name}}</span>
+              <span style="display: flex; gap: 6px"><button type="button" onClick="{{mi.preview}}" class="btn btn-o" style="flex: 1; height: 30px; font-size: 12px; padding: 0">预览</button><button type="button" onClick="{{mi.down}}" class="btn btn-p" style="flex: 1; height: 30px; font-size: 12px; padding: 0">{{mi.downLabel}}</button></span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <aside style="position: sticky; top: 92px; background: #fff; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div class="ml-pv" style="aspect-ratio: 3 / 4; display: flex; font-size: 18px; border-radius: 12px; overflow: hidden; background: #F7F8FA">
+          <sc-if value="{{mpl.isPoster}}" hint-placeholder-val="{{true}}"><span style="{{mpl.posterStyle}}"><span style="font-size: 0.7em; opacity: 0.85; letter-spacing: 0.1em">{{mpl.kicker}}</span><span style="font-size: 1.6em; font-weight: 800; line-height: 1.25">{{mpl.title}}</span><span class="clamp3" style="font-size: 0.72em; opacity: 0.9; line-height: 1.5">{{mpl.sub}}</span><span style="flex: 1 1 0"></span><span style="display: flex; align-items: center; gap: 6%; background: rgba(255,255,255,0.95); color: #1F2329; border-radius: 0.6em; padding: 0.5em 0.6em"><sc-if value="{{mpl.showQr}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 29 29" style="width: 22%; flex: 0 0 auto" aria-hidden="true"><path fill="#1F2329" d="{{mpl.qr}}"></path></svg><span style="display: flex; flex-direction: column; gap: 0.2em; min-width: 0"><span style="font-size: 0.72em; font-weight: 700">扫码进入商城选购</span><span class="clamp1" style="font-size: 0.6em; color: #6B7280">{{mpl.mallName}}</span></span></sc-if><sc-if value="{{mpl.noQr}}" hint-placeholder-val="{{true}}"><span style="width: 22%; aspect-ratio: 1 / 1; border: 1px dashed #C9CED5; border-radius: 0.3em; flex: 0 0 auto"></span><span style="font-size: 0.6em; color: #8A9099">打开上方开关，合成你的商城二维码</span></sc-if></span></span></sc-if>
+          <sc-if value="{{mpl.isText}}" hint-placeholder-val="{{false}}"><span style="flex: 1 1 0; background: #fff; padding: 24px 20px; font-size: 14px; line-height: 1.9; color: #374151; border: 1px solid #eef1f0; border-radius: 12px">{{mpl.text}}</span></sc-if>
+          <sc-if value="{{mpl.isFile}}" hint-placeholder-val="{{false}}"><span style="flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: #fff; border: 1px solid #eef1f0; border-radius: 12px"><span style="{{mpl.extStyle}}">{{mpl.ext}}</span><span style="font-size: 13px; color: #6B7280; padding: 0 20px; text-align: center">{{mpl.desc}}</span></span></sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 15px; color: #0f1418">{{mpl.name}}</b><span style="font-size: 12px; color: #929d99">{{mpl.meta}}</span></div>
+        <div style="display: flex; gap: 8px"><button type="button" class="btn btn-o" style="height: 38px; font-size: 13px; padding: 0 14px" onClick="{{mpl.toggleFav}}">{{mpl.favText}}</button><button type="button" class="btn btn-p" style="flex: 1; height: 38px; font-size: 14px" onClick="{{mpl.down}}">{{mpl.downLabel}}</button></div>
+      </aside>
+    </div>
+  </div>
+  <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: #fff; border-top: 1px solid #eef1f0; box-shadow: 0 -4px 16px rgba(15,20,24,.06)">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 12px; justify-content: flex-end">
+      <button type="button" class="btn btn-o" style="height: 34px; font-size: 13px; padding: 0 14px" onClick="{{ml.selAll}}">{{ml.selAllLabel}}</button>
+      <span style="flex: 1"></span>
+      <span style="font-size: 13px; color: #1F2329">已选 <strong style="color: #0D9488">{{mat.selCount}}</strong> 项</span>
+      <button type="button" onClick="{{mat.favSel}}" style="{{mat.favSelStyle}}">☆ 收藏到我的素材</button>
+      <button type="button" onClick="{{mat.packDown}}" style="{{mat.packStyle}}">打包下载</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{modalCliCfg}}" hint-placeholder-val="{{false}}">
     <div style="position: fixed; inset: 0; background: rgba(17,24,39,0.45); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 30">
       <div role="dialog" aria-modal="true" aria-label="生成甲方版" style="background: #FFFFFF; border-radius: 20px; width: 540px; max-width: 100%; display: flex; flex-direction: column">
         <div style="padding: 20px 24px 4px; font-size: 18px; font-weight: 700">生成甲方版</div>
@@ -3048,7 +3120,7 @@ class Component extends DCLogic {
       sellText: dSell[s.sellIdx || 0][(s.sellVar || 0) % dSell[s.sellIdx || 0].length],
       sellSrc: dPriv ? '基于你录入的商品信息' : '基于商品参数 + 供货方卖点',
       sellNote: dPriv ? '私域商品由你一键生成，可编辑后保存。' : '平台商品的文案由平台预先生成、运营审核后上线，已过滤广告法禁用词；你可以复制后改写。',
-      regen: () => this.setState({ sellVar: (s.sellVar || 0) + 1 }), sceneName: scene.name, openMat: () => this.setState({ modal: 'mat', matPv: null, matSel: {} }),
+      regen: () => this.setState({ sellVar: (s.sellVar || 0) + 1 }), sceneName: scene.name, openMat: () => { this.setState({ view: 'mat', matFrom: s.view, modal: null, matPv: null, matSel: {}, matType: 'all' }); window.scrollTo(0, 0); },
       copyText: () => this.flash('已复制卖点文案'),
       back: () => this.setState({ view: dBack.view, storeKey: dBack.storeKey, storeBack: dBack.storeBack }), backLabel: (dBack.view === 'store' ? '‹ 返回店铺' : (BACK_LBL[dBack.view] || '‹ 返回')) });
     // ---------- 营销素材 ----------
@@ -3400,7 +3472,7 @@ class Component extends DCLogic {
     const cnyS = SSCENES.find((x) => x.id === 'cny');
     const usedImg = []; const myPromo = cnyS.sols.map((k) => { const o = SOLS[k]; const pid = imgFirst(solIds(o)).find((id) => PB[id] && PB[id].img && usedImg.indexOf(PB[id].img) < 0) || imgFirst(solIds(o))[0]; const p = PB[pid] || {}; usedImg.push(p.img);
       return { title: o.name.split(' · ')[0], tag: o.purpose + ' · ' + (o.cust || []).slice(0, 2).join(' / '), img: p.img || '', hasImg: !!p.img, isTpl: false, isCard: false, cardBg: '', cardFace: '', go: () => { this.setState({ view: 'home', ss: 'cny', solId: k, biz: null, bzChip: 'all' }); setTimeout(() => this.jump('scene-zone'), 40); } }; })
-      .concat([{ title: '本档期上新', tag: '方案、货盘、卡券、模板持续上新', img: '', hasImg: false, isTpl: false, isCard: true, cardBg: 'linear-gradient(135deg, #fd6600, #f59e0b)', cardFace: 'NEW', go: () => this.setState({ modal: 'newSol' }) }]);
+      .concat([{ title: '本档期上新', tag: '方案 · 货盘 · 卡券 · 模板', img: '', hasImg: false, isTpl: false, isCard: true, cardBg: 'linear-gradient(135deg, #fd6600, #f59e0b)', cardFace: 'NEW', go: () => this.setState({ modal: 'newSol' }) }]);
     // 上新提醒：方案 + 模板
     const KS = (c, bg) => 'font-size: 11px; color: ' + c + '; background: ' + bg + '; border-radius: 4px; padding: 0 6px; flex: 0 0 auto';
     const nsItems = Object.keys(SOLS).filter((k) => SOLS[k].isNew).map((k) => { const o = SOLS[k]; const sc = SSCENES.find((x) => x.id === o.scene);
@@ -3424,7 +3496,7 @@ class Component extends DCLogic {
     const ARTK = { s1: ['rice', 'oil', 'milk'], s2: ['nuts', 'tea', 'honey'], s3: ['oil', 'rice', 'quilt'], s4: ['cup', 'tea', 'nuts'], s5: ['snack', 'milk', 'cup'] };
     const solIdx = ssc.sols.indexOf(curSolId);
     const hb = { bg: HERO[ssc.id].bg, fg: HERO[ssc.id].fg,
-      tag: '方案 ' + (solIdx + 1) + '/' + ssc.sols.length + ' · ' + solO.purpose + ' · 适合 ' + solO.cust.join(' / '),
+      tag: solO.purpose + ' · 适合 ' + solO.cust.join(' / '),
       title: solO.name, desc: (solO.claim || solO.sell) + (solO.combo ? ' ' + solO.combo + '。' : ''),
       stats: [{ l: '利润最高', v: maxProfit(soIds), c: '#d95e53' }].concat(advPick(soIds, null, true).slice(0, 2).map((a) => ({ l: a.sl, v: a.v, c: '#066b5f' }))),
       art: this.cover(ARTK[curSolId] || ['rice', 'nuts', 'cup'], 'transparent'),
@@ -3435,7 +3507,7 @@ class Component extends DCLogic {
     const goZone = (biz, chip) => { this.setState({ view: 'sol', biz: biz, bzChip: chip }); goTop(); };
     const zs = [].concat(
       solO.pals.map((k) => { const x = PALS[k]; return { title: x.name, sub: '爆品货盘 · ' + x.ids.length + ' 款', fg: '#066b5f', bg: '#e7f4f3', rule: '运营推荐：' + x.reason, cta: '货盘详情', go: () => openPal(k), notTpl: true, isTpl: false,
-        isPal: true, thumbs: imgFirst(x.ids).slice(0, 5).map((id) => Object.assign(thumb(PB[id]), { isFace: false, notFace: true, price: '¥' + num(PB[id].member) })) }; }),
+        isPal: true, thumbs: imgFirst(x.ids).slice(0, (solO.pals.length + solO.cpks.length) === 1 ? 8 : 5).map((id) => Object.assign(thumb(PB[id]), { isFace: false, notFace: true, price: '¥' + num(PB[id].member) })) }; }),
       solO.cpks.map((k) => { const c = CPKS[k]; return { title: c.name, sub: c.excl ? '卡券 · 专款专用' : '卡券 · 员工自选', fg: '#fd6600', bg: '#fff4e8', rule: '兑换商城：' + TPL[c.mall].name + ' · 可兑换 ' + c.ids.length + ' 款', cta: '卡券详情', go: () => openCpk(k), notTpl: true, isTpl: false,
         thumbs: c.faces.slice(0, 3).map((f) => ({ isFace: true, notFace: false, bg: c.img ? 'url(' + c.img + ') center / cover' : c.bg, face: faceText(c, f), name: c.name, price: faceText(c, f) })) }; }),
       solO.tpls.map((k) => { const t = TPL[k]; const ids = TPL_IDS[k] || []; const cv = tCover(k); return { notTpl: false, isTpl: true, img: cv.img, hasImg: cv.hasImg, noImg: cv.noImg, coverBg: cv.coverBg, l1: t.type, l2: t.clients + ' 家服务商在用 · ' + t.topics.length + ' 个专题', title: t.name, sub: '商城模板' + (t.isNew ? ' · 上新' : ''), fg: '#1d4ed8', bg: '#e8effd', rule: t.reason, cta: '模板详情', go: () => openTpd(k),
@@ -3444,7 +3516,7 @@ class Component extends DCLogic {
     const zsTop = zs.filter((z) => !z.isTpl).slice(0, 3).map((z) => Object.assign(z, { cols: 'grid-template-columns: repeat(' + Math.max(3, z.thumbs.length) + ', minmax(0, 1fr))' }));
     const zsGrid = 'grid-template-columns: ' + zsTop.map((z) => (z.isPal ? 'minmax(0, 1.7fr)' : 'minmax(0, 1fr)')).join(' ');
     const zt = { has: solO.tpls.length > 0, count: solO.tpls.length, all: () => goZone('tpl', 'all'), grid: 'display: grid; grid-template-columns: repeat(' + Math.min(2, Math.max(1, solO.tpls.length)) + ', minmax(0, 1fr)); gap: 10px',
-      items: solO.tpls.slice(0, 2).map((k) => { const t = TPL[k]; const cv = tCover(k); return Object.assign(cv, { isNew: !!t.isNew, intro: t.intro, clients: t.clients, topics: t.topics.length, n: (TPL_IDS[k] || []).length, pv: () => pvTpl(k), detail: () => openTpd(k), use: () => this.setState({ modal: 'mall', tplId: k, mallName: solO.name + ' · ' + t.name }) }); }) };
+      items: solO.tpls.slice(0, 2).map((k) => { const t = TPL[k]; const cv = tCover(k); return Object.assign(cv, { one: solO.tpls.length === 1, goods: imgFirst(TPL_IDS[k] || []).slice(0, 8).map((id) => Object.assign(thumb(PB[id]), { price: '¥' + num(PB[id].member) })), isNew: !!t.isNew, intro: t.intro, clients: t.clients, topics: t.topics.length, n: (TPL_IDS[k] || []).length, pv: () => pvTpl(k), detail: () => openTpd(k), use: () => this.setState({ modal: 'mall', tplId: k, mallName: solO.name + ' · ' + t.name }) }); }) };
     // 业务栏目：爆品货盘 / 卡券 / 商城模板
     const chipOn = s.bzChip || 'all';
     const palIds = solO.pals.filter((k) => chipOn === 'all' || chipOn === k).reduce((a, k) => a.concat(PALS[k].ids.filter((id) => a.indexOf(id) < 0)), []);
@@ -3463,12 +3535,23 @@ class Component extends DCLogic {
         tags: (c.excl ? ['专款专用'] : ['通用']).concat([ssc.name.replace('2027 ', '').replace('春节年货节', '春节')]), badges: [{ t: c.excl ? '专款专用' : '员工自选', bg: c.excl ? '#fd6600' : '#0d9488' }],
         sold: (300 + sd2 * 2).toLocaleString(), yday: 2 + sd2 % 20,
         open: () => { this.setState({ cpkFace: fi }); openCpk(k); }, pvMall: () => pvTpl(c.mall), buy: () => openBuy(k, fi) }; })); }, []);
+    // ===== 营销素材落地页 =====
+    const goMat = (pv) => { this.setState({ view: 'mat', matFrom: s.view === 'mat' ? (s.matFrom || 'home') : s.view, modal: null, matPv: pv || null, matSel: {}, matType: 'all' }); goTop(); };
+    const mlCur = s.matPv || (matItems[0] || {}).id;
+    const ml = { sceneName: _msc.name, backLabel: (s.matFrom === 'sol' ? '返回方案详情' : '返回场景首页'), back: () => { this.setState({ view: s.matFrom || 'home' }); goTop(); },
+      sols: _msc.sols.map((k) => { const o = SOLS[k]; return { name: o.name.split(' · ')[0], n: 2 + o.pals.length + o.cpks.length + o.tpls.length + 3, cls: k === _msid ? 'on' : '', pick: () => this.setState({ solId: k, matPv: null, matSel: {} }) }; }),
+      types: MAT_TYPES.map((x) => ({ label: x.l, n: x.k === 'all' ? MATS.length : MATS.filter((m) => m.type === x.k).length, cls: (s.matType || 'all') === x.k ? 'on' : '', pick: () => this.setState({ matType: x.k, matPv: null }) })),
+      items: mat.items.map((x, i) => Object.assign({}, x, { cardStyle: 'position: relative; background: #fff; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; border: 2px solid ' + (matItems[i].id === mlCur ? '#0D9488' : 'transparent') + '; box-shadow: 0 1px 3px rgba(17,24,39,0.06)' })),
+      selAllLabel: matItems.length && matItems.every((m) => (s.matSel || {})[m.id]) ? '取消全选' : '全选当前',
+      selAll: () => { const all = matItems.every((m) => (s.matSel || {})[m.id]); const n = {}; if (!all) matItems.forEach((m) => { n[m.id] = true; }); this.setState({ matSel: n }); } };
+    const mpvL = matItems.find((m) => m.id === mlCur);
+    const mpv2 = mpvL ? Object.assign(matVm(mpvL), { extStyle: extCss(mpvL.ext, true) }) : mpv;
     // ===== 营销素材透出（按当前方案生成）=====
     const MK = { poster: '海报', text: '朋友圈文案', doc: '方案介绍' };
-    const openMatLib = (pv) => this.setState({ modal: 'mat', matPv: pv || null, matSel: {} });
+    const openMatLib = (pv) => goMat(pv);
     const matCards = MATS.map((m) => Object.assign(matVm(m), { kindL: MK[m.type], pv: () => openMatLib(m.id), kind: m.type }));
     const mcount = { poster: MATS.filter((m) => m.type === 'poster').length, text: MATS.filter((m) => m.type === 'text').length, doc: MATS.filter((m) => m.type === 'doc').length };
-    const ms = { count: MATS.length, sub: '海报 ' + mcount.poster + ' · 文案 ' + mcount.text + ' · 方案介绍 ' + mcount.doc, posters: matCards.filter((m) => m.kind === 'poster').slice(0, 5), posters3: matCards.filter((m) => m.kind === 'poster').slice(0, 3), text: matCards.find((m) => m.kind === 'text'), open: () => openMatLib(), qrHint: '可一键合成你的商城二维码' };
+    const ms = { count: MATS.length, sub: '海报 ' + mcount.poster + ' · 文案 ' + mcount.text + ' · 方案介绍 ' + mcount.doc, posters: matCards.filter((m) => m.kind === 'poster').slice(0, 5), posters3: matCards.filter((m) => m.kind === 'poster').slice(0, 3), posters4: matCards.filter((m) => m.kind === 'poster').slice(0, 4), text: matCards.find((m) => m.kind === 'text'), open: () => openMatLib(), qrHint: '可一键合成你的商城二维码' };
     const BZ0 = [{ k: 'pal', l: '爆品货盘', s: '运营组货 · 一件代发', n: solO.pals.length }, { k: 'cpk', l: '卡券', s: '多档面值 · 员工自选', n: solO.cpks.length }, { k: 'tpl', l: '商城模板', s: '装修好 · 一键开商城', n: solO.tpls.length }];
     const BZ = BZ0.concat([{ k: 'mat', l: '营销素材', s: '海报 · 文案 · 方案介绍', n: MATS.length }]);
     const chipList = curBiz === 'pal' ? solO.pals.map((k) => ({ v: k, l: PALS[k].name, t: PALS[k].ids.length + ' 款' }))
@@ -3538,7 +3621,7 @@ class Component extends DCLogic {
       shown: cardsF.length, total: cardItems.length, reset: () => this.setState({ cfE: 'all', cfR: 'all', cfS: 'def' }) };
     return {
       viewPal: s.view === 'pal', viewCpk: s.view === 'cpk', viewTpd: s.view === 'tpd', viewCli: s.view === 'cli',
-      modalCliCfg: s.modal === 'cliCfg', modalBuyCard: s.modal === 'buyCard', modalApplyTpl: s.modal === 'applyTpl', modalNewSol: s.modal === 'newSol', ns: ns, acct: acct, ms: ms,
+      modalCliCfg: s.modal === 'cliCfg', modalBuyCard: s.modal === 'buyCard', modalApplyTpl: s.modal === 'applyTpl', modalNewSol: s.modal === 'newSol', ns: ns, acct: acct, ms: ms, ml: ml, viewMat: s.view === 'mat', mpl: mpv2,
       viewSol: s.view === 'sol', zsTop: zsTop, zsGrid: zsGrid, zt: zt, hb: hb, zs: zs, bz: bz, sh: sh, sd: sd, plv: pl, ck: ck, bc: bc, tpd: tpdV, ap: ap, cf: cf, cli: cli, sx: sx, solName: solO.name, backSol: backSol,
       daysLeft: daysLeft, promo: myPromo, bannerImgs: bannerImgs, hotWords: hotWords, selCount: selItems.length,
       sceneCount: SCENES.length, balAllowed: this.props['账户查看权限'] !== false, balDenied: this.props['账户查看权限'] === false, balShown: s.showBal, balHidden: !s.showBal,
@@ -3561,7 +3644,7 @@ class Component extends DCLogic {
       notWb: s.view !== 'wb' && s.view !== 'cli',
       viewSearch: s.view === 'search', sr: sr, viewWb: s.view === 'wb', wb: wb, modalWbGuide: s.modal === 'wbGuide',
       viewRes: s.view === 'res', viewDetail: s.view === 'detail', viewNoPerm: s.view === 'noperm', res: res, dt: dt, npName: s.npName || '', npBackLabel: '‹ 返回首页', resBackLabel: '‹ 返回首页',
-      modalMat: s.modal === 'mat', mat: mat, mpv: mpv, matCount: MATS.length, openMat: () => this.setState({ modal: 'mat', matPv: null, matSel: {} }),
+      modalMat: s.modal === 'mat', mat: mat, mpv: mpv, matCount: MATS.length, openMat: () => { this.setState({ view: 'mat', matFrom: s.view, modal: null, matPv: null, matSel: {}, matType: 'all' }); window.scrollTo(0, 0); },
       balNoPerm: () => this.noPerm('预付款账户'),
       viewTplPv: s.view === 'tplpv' && !!s.pv, pvExit: () => this.setState({ view: s.pvBack || 'home' }), pvExitLabel: ({ wb: '‹ 返回工作台', home: '‹ 返回场景', tpls: '‹ 返回模板列表', res: '‹ 返回资源广场' })[s.pvBack || 'home'] || '‹ 返回', pvT: pvT, pvP: pvP, pvHome: pvPage === 'home', pvAll: pvPage === 'all', pvTopic: pvPage === 'topic', pvDetail: pvPage === 'detail', pvCart: pvPage === 'cart', pvConfirm: pvPage === 'confirm',
       pvTitle: pvTitles[pvPage] || pvT.name, pvCanBack: pvPage !== 'home', modalShare: s.modal === 'share', pvShareOpen: () => this.setState({ modal: 'share' }), pvCopyLink: () => this.flash('演示：已复制分享链接'),
