@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}</style>
+<title>方案化场景首页 v4.17 · 交互流程与业务说明</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* 横向泳道：每条业务流程一行，截图卡片之间用箭头和触发动作串起来 */
+:root{
+  --bg:#F1F4F3; --panel:#FFFFFF; --ink:#16211F; --muted:#5E6B68; --line:#D5DEDB;
+  --brand:#0D8A7E; --brand-soft:#E3F2EF; --hot:#E2341D; --hot-soft:rgba(226,52,29,.10);
+  --font:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F1615;--panel:#18211F;--ink:#E7EFED;--muted:#9AABA7;--line:#2B3835;--brand:#3CC2B2;--brand-soft:#173430;--hot:#FF6A52;--hot-soft:rgba(255,106,82,.14);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1615;--panel:#18211F;--ink:#E7EFED;--muted:#9AABA7;--line:#2B3835;--brand:#3CC2B2;--brand-soft:#173430;--hot:#FF6A52;--hot-soft:rgba(255,106,82,.14);color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.6}
+.wrap{padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+.top{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between}
+.top h1{margin:0;font-size:26px;letter-spacing:.5px;text-wrap:balance}
+.top p{margin:4px 0 0;color:var(--muted);max-width:64ch}
+.legend{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:13px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.lg-hot{width:22px;height:14px;border:2px solid var(--hot);background:var(--hot-soft);border-radius:3px}
+.lg-n{width:18px;height:18px;border-radius:50%;background:var(--hot);color:#fff;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.lg-arrow{width:28px;height:2px;background:var(--brand);position:relative}.lg-arrow::after{content:"";position:absolute;right:-1px;top:-4px;border:5px solid transparent;border-left:7px solid var(--brand);border-right:0}
+.toc{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{font-size:13px;color:var(--brand);text-decoration:none;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px}
+.toc a:focus-visible,.shot:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.lane{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 0 20px;min-width:0}
+.lane-h{display:flex;gap:14px;align-items:center;padding:0 20px 14px;border-bottom:1px dashed var(--line)}
+.lk{flex:0 0 34px;height:34px;border-radius:9px;background:var(--brand);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+.lane-h h2{margin:0;font-size:18px}.lane-h p{margin:0;font-size:13px;color:var(--muted)}
+.track{display:flex;align-items:flex-start;gap:0;overflow-x:auto;padding:18px 20px 6px}
+.screen{flex:0 0 440px;margin:0;display:flex;flex-direction:column;gap:10px}
+figcaption{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.code{font-size:12px;font-weight:700;color:var(--brand);font-variant-numeric:tabular-nums}
+.name{font-weight:700;font-size:15px}
+.ver{margin-left:auto;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 6px}
+.shot{position:relative;display:block;padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:zoom-in;background:#fff;aspect-ratio:16/10;width:100%;max-width:100%}
+.shot img{display:block;width:100%;height:100%;object-fit:cover}
+.hot{position:absolute;border:2px solid var(--hot);background:var(--hot-soft);border-radius:4px;box-sizing:border-box;pointer-events:none}
+.hot b{position:absolute;left:-2px;top:-2px;width:18px;height:18px;border-radius:50%;background:var(--hot);color:#fff;font-size:11px;line-height:18px;text-align:center;box-shadow:0 0 0 2px #fff}
+.notes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.notes li{display:flex;gap:8px;align-items:flex-start}
+.notes li>b{flex:0 0 18px;height:18px;border-radius:50%;background:var(--hot);color:#fff;font-size:11px;line-height:18px;text-align:center;margin-top:2px}
+.notes strong{margin-right:6px}
+.notes span{color:var(--muted);min-width:0}.notes strong{color:var(--ink)}
+.arrow{flex:0 0 132px;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;gap:8px;padding:0 10px;margin-top:118px}
+.arrow i{display:block;width:100%;height:2px;background:var(--brand);position:relative}
+.arrow i::after{content:"";position:absolute;right:-2px;top:-5px;border:6px solid transparent;border-left:9px solid var(--brand);border-right:0}
+.via{font-size:12px;color:var(--ink);text-align:center;line-height:1.45}
+.via b{display:inline-flex;width:17px;height:17px;border-radius:50%;background:var(--hot);color:#fff;font-size:10px;align-items:center;justify-content:center;margin-right:4px;vertical-align:1px}
+.lead{flex:0 0 150px;margin-top:100px;background:var(--brand-soft);color:var(--ink);border-radius:10px;padding:12px 14px;font-size:13px;line-height:1.5}
+.lead span{display:block;font-size:11px;font-weight:700;color:var(--brand);letter-spacing:1px;margin-bottom:2px}
+.lead + .arrow{flex-basis:56px;margin-top:136px}
+.box{position:fixed;inset:0;z-index:20;background:rgba(10,18,16,.82);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.box .shot{width:min(1280px,100%);cursor:zoom-out;aspect-ratio:16/10}
+.box .hot b{width:24px;height:24px;line-height:24px;font-size:14px}
+.foot{font-size:12px;color:var(--muted)}
+@media (max-width:560px){.screen{flex-basis:300px}.arrow{flex-basis:96px;margin-top:80px}.lead{flex-basis:120px;margin-top:70px}.lead + .arrow{margin-top:100px}}
+@media (prefers-reduced-motion:no-preference){.track{scroll-behavior:smooth}}
+.back{font-size:13px;color:var(--brand);text-decoration:none;display:inline-block;margin-bottom:6px}
+
+.sum{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.sum h2{margin:0;font-size:18px}.sum p{margin:0;color:var(--muted);font-size:13px}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th,.tbl td{border-top:1px solid var(--line);padding:10px 10px;text-align:left;vertical-align:top}
+.tbl th{font-size:12px;color:var(--muted);font-weight:500;background:var(--bg);border-top:0}
+.tbl td:first-child{font-weight:700;white-space:nowrap}
+.tbl a{color:var(--brand)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--brand);background:var(--brand-soft);border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:1px}
+.tblw{overflow-x:auto}
+.biz{margin:14px 20px 0;border-radius:10px;background:var(--bg);border:1px solid var(--line);padding:14px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 24px}
+.biz h3{grid-column:1/-1;margin:0;font-size:14px;display:flex;align-items:center;gap:8px}
+.biz h3::before{content:"";width:4px;height:14px;border-radius:2px;background:var(--brand)}
+.biz div{font-size:13px;line-height:1.7}
+.biz div>b{display:block;font-size:12px;color:var(--brand);margin-bottom:2px}
+.biz div.todo>b{color:var(--hot)}
+.biz ul{margin:0;padding-left:18px}
+.biz a{color:var(--brand)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <a href="../index.html" class="back">‹ 返回文档中心</a>
+      <h1>会员端方案化场景首页 v4.17 · 交互流程与业务说明</h1>
+      <p>说明 v4.14–v4.17 的核心更新：每项一条泳道，截图之间的箭头写的是跳到下一屏的操作，泳道末尾是业务说明（为什么改、规则、待确认）。点截图可以放大。<a href="../../采发发Q4/solution-demo/" style="color:var(--brand)">打开 Demo ›</a></p>
+    </div>
+    <div class="legend"><span><i class="lg-hot"></i>交互位置</span><span><i class="lg-n">1</i>说明编号</span><span><i class="lg-arrow"></i>页面跳转 + 触发操作</span></div>
+  </div>
+  <nav class="toc" aria-label="流程目录"><a href="#sum">更新一览</a><a href="#l1">1 首页营销运营位</a><a href="#l2">2 推广素材入口</a><a href="#l3">3 多选批量操作</a><a href="#l4">4 按最低利润率上架</a><a href="#l5">5 同品 / 相似品</a><a href="#l6">6 大货盘（1 万款）</a></nav>
+<section class="sum" aria-labelledby="sum">
+  <h2 id="sum">本次更新一览</h2>
+  <p>v4.14–v4.17 共 6 项，下面每条泳道对应一项。截图来自当前 Demo，红框是交互位置，编号对应截图下方说明；每条泳道最后是业务说明。</p>
+  <div class="tblw"><table class="tbl">
+    <thead><tr><th>更新项</th><th>解决的问题</th><th>关键规则</th><th>依据</th></tr></thead>
+    <tbody>
+      <tr><td><a href="#l1">首页营销运营位</a><span class="tag">v4.14</span></td><td>营销条拆成 5 块，和场景区重复、点击分散</td><td>整条一个运营位、一个落地，运营可配置</td><td>需求方本次反馈</td></tr>
+      <tr><td><a href="#l2">推广素材入口</a><span class="tag">v4.15</span></td><td>素材区看不出能点</td><td>说明文字 + 名称 + 悬停预览 + 二维码示意；点海报直达预览</td><td>需求方本次反馈</td></tr>
+      <tr><td><a href="#l3">多选批量操作</a><span class="tag">v4.14</span></td><td>场景网格等列表只能逐个上架、下单</td><td>所有商品列表可勾选 / 全选；卡券上架自动跳过</td><td><a href="nhj-spec.html">V1.0 Spec</a></td></tr>
+      <tr><td><a href="#l4">按最低利润率上架</a><span class="tag">v4.14</span></td><td>批量上架会把低利润商品一起带进商城</td><td>会员价利润率 =（市场价 − 会员价）÷ 市场价；低于门槛跳过</td><td><a href="nhj-arch.html">定价基准</a></td></tr>
+      <tr><td><a href="#l5">商品详情 · 同品 / 相似品</a><span class="tag">v4.16</span></td><td>网格进不去详情；详情页看不到其他货源和替代品</td><td>同品换货源不换商品；相似品 = 同末级类目 + 价格 ±30% + 标签重合，只推荐</td><td><a href="nhj-spec.html">V1.0 Spec</a>、<a href="tasks.html">任务拆解</a>、<a href="scope-review.html">范围审查</a></td></tr>
+      <tr><td><a href="#l6">大货盘（1 万款）</a><span class="tag">v4.17</span></td><td>上万款商品时列表卡死、全选和批量下单不可控</td><td>分页 + 两级全选；上架不限量（超 500 转后台任务），下单 / 代发 ≤ 200 款，询价 ≤ 50 款</td><td>需求方本次要求</td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section class="lane" aria-labelledby="l1">
+  <header class="lane-h"><span class="lk">1</span><div><h2 id="l1">首页营销运营位</h2><p>顶部营销条从 5 个点击区合并成一整条运营位，点进档期场景的主推方案</p></div></header>
+  <div class="track"><figure class="screen" id="m1-slot">
+  <figcaption><span class="code">1.1</span><span class="name">首页 · 时令营销运营位</span><span class="ver">v4.14</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 首页 · 时令营销运营位"><img src="media/flow-v417/m1-slot.jpg" alt="首页 · 时令营销运营位 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:5.28%;top:9.33%;width:89.44%;height:15.56%"><b>①</b></span><span class="hot" style="left:84.38%;top:14.44%;width:8.4%;height:5.33%"><b>②</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>整条运营位</strong>标签、标题、副标题、倒计时、配图都在一个横幅里，整条只有一个点击区</span></li><li><b>②</b><span><strong>立即进入</strong>行动按钮，与点横幅任意位置效果相同</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>①</b>点运营位任意位置</span><i aria-hidden="true"></i></div><figure class="screen" id="m2-scene">
+  <figcaption><span class="code">1.2</span><span class="name">场景运营区 · 档期方案</span><span class="ver">v4.14</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 场景运营区 · 档期方案"><img src="media/flow-v417/m2-scene.jpg" alt="场景运营区 · 档期方案 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:6.67%;top:13.33%;width:86.67%;height:7.22%"><b>①</b></span><span class="hot" style="left:6.67%;top:21.44%;width:33.89%;height:59.18%"><b>②</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>自动切到档期场景</strong>场景页签切到「2027 春节年货节」</span></li><li><b>②</b><span><strong>定位主推方案</strong>方案轮播停在运营位配置的主推方案上</span></li></ol>
+</figure></div>
+  <div class="biz"><h3>业务说明</h3><div><b>为什么改</b>原营销条是「标题块 + 3 张方案卡 + 本档期上新」，共 5 个点击区，和下方场景区的方案重复，视觉分散，也没法按一个投放位统计效果。</div><div><b>规则</b><ul><li>一次只讲一个档期主题，整条只有一个落地</li><li>运营可配：标签、标题、副标题、按钮文案、配图（最多 3 张）、落地（场景 + 方案）</li><li>Demo 演示开关「时令营销条」关闭后整条不显示</li></ul></div><div class="todo"><b>待确认</b><ul><li>多个档期并行时，是轮播还是只投一个</li><li>是否按会员分群投放不同运营位</li><li>运营位点击是否纳入埋点（建议纳入）</li></ul></div></div>
+</section>
+<section class="lane" aria-labelledby="l2">
+  <header class="lane-h"><span class="lk">2</span><div><h2 id="l2">推广素材入口</h2><p>场景卡左侧的素材区原来像装饰图；改成看得出能点、点了能预览并合成商城二维码</p></div></header>
+  <div class="track"><figure class="screen" id="p1-mat">
+  <figcaption><span class="code">2.1</span><span class="name">场景卡 · 推广素材区</span><span class="ver">v4.15</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 场景卡 · 推广素材区"><img src="media/flow-v417/p1-mat.jpg" alt="场景卡 · 推广素材区 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:9.51%;top:39.56%;width:28.19%;height:3.78%"><b>①</b></span><span class="hot" style="left:16.6%;top:43.56%;width:6.94%;height:16.96%"><b>②</b></span><span class="hot" style="left:32.69%;top:39.56%;width:5.02%;height:3.78%"><b>③</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>用途说明</strong>标题旁直接写「点海报预览，可合成你的商城二维码」</span></li><li><b>②</b><span><strong>海报</strong>每张带名称；悬停上浮并出现「预览」遮罩，海报上的二维码示意说明它能带商城码分享</span></li><li><b>③</b><span><strong>素材库</strong>描边按钮，与上方主按钮「查看方案详情」区分主次</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>②</b>点任意一张海报</span><i aria-hidden="true"></i></div><figure class="screen" id="p2-lib">
+  <figcaption><span class="code">2.2</span><span class="name">营销素材库 · 海报预览</span><span class="ver">沿用</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 营销素材库 · 海报预览"><img src="media/flow-v417/p2-lib.jpg" alt="营销素材库 · 海报预览 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:78.75%;top:16.06%;width:14.31%;height:3.11%"><b>①</b></span><span class="hot" style="left:78.95%;top:85.67%;width:14.66%;height:5.11%"><b>②</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>合成商城二维码</strong>打开后选商城，海报自动合成该商城的二维码</span></li><li><b>②</b><span><strong>下载</strong>下载单张海报，也可多选后打包下载</span></li></ol>
+</figure></div>
+  <div class="biz"><h3>业务说明</h3><div><b>为什么改</b>场景卡左侧有两个点击区：「查看方案详情」（主）和推广素材（次）。素材原来没有标题、没有悬停反馈，底部白条像空按钮，会员看不出能点。</div><div><b>设计取舍</b><ul><li>主次：方案详情是主按钮，素材区是次级入口，不抢主按钮</li><li>可点提示用「说明文字 + 名称 + 悬停反馈 + 二维码示意」四重信号，而不是再加按钮</li><li>点海报直接进入素材库并预览该海报，少一步查找</li></ul></div><div><b>业务价值</b>会员拿素材发朋友圈 / 客户群，海报带自己商城的二维码，扫码回流到商城成交。</div></div>
+</section>
+<section class="lane" aria-labelledby="l3">
+  <header class="lane-h"><span class="lk">3</span><div><h2 id="l3">商品列表多选 · 批量操作</h2><p>所有商品列表都能勾选和全选，底部批量条统一处理询价、加购、上架、下单、代发</p></div></header>
+  <div class="track"><figure class="screen" id="b1-select">
+  <figcaption><span class="code">3.1</span><span class="name">场景商品网格 · 多选</span><span class="ver">v4.14</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 场景商品网格 · 多选"><img src="media/flow-v417/b1-select.jpg" alt="场景商品网格 · 多选 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:72.85%;top:12.85%;width:7.66%;height:4.22%"><b>①</b></span><span class="hot" style="left:20.19%;top:29.07%;width:2.22%;height:3.56%"><b>②</b></span><span class="hot" style="left:21.02%;top:92.83%;width:5.0%;height:3.22%"><b>③</b></span><span class="hot" style="left:63.4%;top:91.89%;width:6.81%;height:5.11%"><b>④</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>全选</strong>每个商品列表的工具栏都有；列表分页时先选本页，再可「全选全部筛选结果」（见泳道 6）</span></li><li><b>②</b><span><strong>勾选框</strong>商品卡右上角，选中后卡片描边高亮</span></li><li><b>③</b><span><strong>全选本页</strong>底部条里的快捷全选：选中当前页面正在看的这一页商品</span></li><li><b>④</b><span><strong>批量操作</strong>批量询价、批量加购、批量上架、批量下单、批量代发</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>④</b>批量下单 / 批量代发</span><i aria-hidden="true"></i></div><figure class="screen" id="b2-order">
+  <figcaption><span class="code">3.2</span><span class="name">批量下单弹窗</span><span class="ver">沿用</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 批量下单弹窗"><img src="media/flow-v417/b2-order.jpg" alt="批量下单弹窗 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:24.72%;top:18.89%;width:50.56%;height:6.67%"><b>①</b></span><span class="hot" style="left:36.25%;top:19.56%;width:6.39%;height:3.11%"><b>②</b></span><span class="hot" style="left:66.11%;top:80.0%;width:7.5%;height:5.33%"><b>③</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>下单方式</strong>直接下单（一个收货地址）或导入名单代发</span></li><li><b>②</b><span><strong>导入名单代发</strong>上传收件人名单，一人一份发货</span></li><li><b>③</b><span><strong>确认下单</strong>按会员价从预付款扣款，按店铺拆成子订单</span></li></ol>
+</figure></div>
+  <div class="biz"><h3>业务说明</h3><div><b>覆盖范围</b>首页 / 方案页爆品货盘、货盘详情、模板详情、卡券「员工能换什么」、资源广场、搜索结果、店铺页；购物车原本就有勾选。勾选状态在各列表间共享，跨页面选的商品可以一起提交。</div><div><b>规则</b><ul><li>卡券只能代发、不能上架：批量上架时自动跳过并提示件数（<a href="nhj-spec.html">V1.0 Spec</a>：卡券显示「仅支持代发 · 不可上架」）</li><li>代发按会员价从预付款扣款，同一批次按来源拆子单</li><li>开通阿里权益的会员，猫超 / 优品商品下单时按 SKU ID 换成自有同品</li></ul></div><div><b>为什么做</b>年货节服务商一次要处理几十款商品，逐个点上架、下单效率低；批量操作是"整盘上架 / 整盘代发"之外的灵活选法。</div></div>
+</section>
+<section class="lane" aria-labelledby="l4">
+  <header class="lane-h"><span class="lk">4</span><div><h2 id="l4">批量上架 · 最低利润率</h2><p>批量上架时设一个最低利润率，低于门槛的商品本次不上架</p></div></header>
+  <div class="track"><figure class="screen" id="l1-all">
+  <figcaption><span class="code">4.1</span><span class="name">全选后批量上架</span><span class="ver">v4.14</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 全选后批量上架"><img src="media/flow-v417/l1-all.jpg" alt="全选后批量上架 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:73.15%;top:47.85%;width:7.36%;height:4.22%"><b>①</b></span><span class="hot" style="left:16.32%;top:92.67%;width:5.22%;height:3.56%"><b>②</b></span><span class="hot" style="left:63.4%;top:91.89%;width:6.81%;height:5.11%"><b>③</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>全选</strong>「员工年货硬通货」12 款，一键全选</span></li><li><b>②</b><span><strong>已选件数</strong>底部条显示已选数量，含卡券时单独提示</span></li><li><b>③</b><span><strong>批量上架</strong>打开上架弹窗</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>③</b>批量上架</span><i aria-hidden="true"></i></div><figure class="screen" id="l2-modal">
+  <figcaption><span class="code">4.2</span><span class="name">上架弹窗 · 默认不限</span><span class="ver">v4.14</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 上架弹窗 · 默认不限"><img src="media/flow-v417/l2-modal.jpg" alt="上架弹窗 · 默认不限 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:28.19%;top:4.56%;width:43.61%;height:6.89%"><b>①</b></span><span class="hot" style="left:29.86%;top:32.78%;width:40.28%;height:16.33%"><b>②</b></span><span class="hot" style="left:29.86%;top:53.56%;width:5.97%;height:4.0%"><b>③</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>标题</strong>批量时显示「批量上架到商城 · 上架件数 / 已选件数」</span></li><li><b>②</b><span><strong>最低利润率</strong>不限 / ≥10% / ≥15% / ≥20% / ≥30%，或自定义</span></li><li><b>③</b><span><strong>定价方式</strong>沿用：加价规则（基准会员价 / 平均到手价 / 市场价）或定价策略</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>②</b>选 ≥30%</span><i aria-hidden="true"></i></div><figure class="screen" id="l3-margin">
+  <figcaption><span class="code">4.3</span><span class="name">上架弹窗 · 设门槛后</span><span class="ver">v4.14</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 上架弹窗 · 设门槛后"><img src="media/flow-v417/l3-margin.jpg" alt="上架弹窗 · 设门槛后 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:49.93%;top:19.0%;width:5.4%;height:4.0%"><b>①</b></span><span class="hot" style="left:30.69%;top:27.67%;width:24.96%;height:3.0%"><b>②</b></span><span class="hot" style="left:62.85%;top:72.56%;width:7.29%;height:3.0%"><b>③</b></span><span class="hot" style="left:60.93%;top:87.67%;width:9.21%;height:5.56%"><b>④</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>已选门槛</strong>选中的门槛高亮，也可在右侧输入自定义值</span></li><li><b>②</b><span><strong>汇总</strong>「X 件会员价利润率 ≥ 30%，将上架；Y 件低于门槛，本次跳过」</span></li><li><b>③</b><span><strong>跳过的商品</strong>售价预览里灰显并标「低于门槛 · 跳过」，同时显示每件利润率</span></li><li><b>④</b><span><strong>确认上架 N 件</strong>按钮写明实际上架件数；没有达标商品时按钮置灰</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>④</b>确认上架</span><i aria-hidden="true"></i></div><figure class="screen" id="l4-done">
+  <figcaption><span class="code">4.4</span><span class="name">提交结果</span><span class="ver">v4.14</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 提交结果"><img src="media/flow-v417/l4-done.jpg" alt="提交结果 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:27.15%;top:9.11%;width:45.71%;height:3.11%"><b>①</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>结果提示</strong>写明上架件数、目标商城，以及因利润率跳过的件数</span></li></ol>
+</figure></div>
+  <div class="biz"><h3>业务说明</h3><div><b>口径</b>会员价利润率 =（市场价 − 会员价）÷ 市场价，与商品卡上的「利润率」是同一个数。</div><div><b>规则</b><ul><li>门槛只决定"上不上"，售价仍按定价方式计算（<a href="nhj-arch.html">定价基准由会员自己选</a>）</li><li>没有市场价的商品算不出利润率，设了门槛就一并跳过</li><li>门槛默认「不限」，与原来的上架流程完全一致</li></ul></div><div><b>为什么做</b>服务商整盘或批量上架时，可以一次把低利润商品挡在商城外，不用上架后再逐个下架。</div><div class="todo"><b>待确认</b>低于门槛的商品，除了"跳过"，是否还要支持"自动提价到门槛后上架"。</div></div>
+</section>
+<section class="lane" aria-labelledby="l5">
+  <header class="lane-h"><span class="lk">5</span><div><h2 id="l5">商品详情 · 同品 / 相似品</h2><p>商品网格可直达详情；详情页说明这件商品还有哪些货源（同品）和可替代的商品（相似品）</p></div></header>
+  <div class="track"><figure class="screen" id="d1-entry">
+  <figcaption><span class="code">5.1</span><span class="name">场景商品网格 · 进入详情</span><span class="ver">v4.16</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 场景商品网格 · 进入详情"><img src="media/flow-v417/d1-entry.jpg" alt="场景商品网格 · 进入详情 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:25.47%;top:51.72%;width:14.22%;height:5.33%"><b>①</b></span><span class="hot" style="left:25.33%;top:30.16%;width:14.5%;height:4.22%"><b>②</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>商品名</strong>可点击，悬停显示下划线</span></li><li><b>②</b><span><strong>查看详情 · 同品 / 相似品</strong>悬停操作里新增的入口；询价、上架、加购、下单按钮不再误跳详情</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>①</b>点商品名</span><i aria-hidden="true"></i></div><figure class="screen" id="d2-same">
+  <figcaption><span class="code">5.2</span><span class="name">商品详情 · 同品页签</span><span class="ver">v4.16</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 商品详情 · 同品页签"><img src="media/flow-v417/d2-same.jpg" alt="商品详情 · 同品页签 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:45.14%;top:23.53%;width:9.1%;height:3.11%"><b>①</b></span><span class="hot" style="left:39.79%;top:66.2%;width:53.19%;height:4.89%"><b>②</b></span><span class="hot" style="left:83.12%;top:71.2%;width:9.03%;height:4.22%"><b>③</b></span><span class="hot" style="left:50.04%;top:67.14%;width:11.63%;height:2.78%"><b>④</b></span><span class="hot" style="left:87.69%;top:67.2%;width:4.88%;height:2.78%"><b>⑤</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>快捷入口</strong>价格下方「专供店同品 低 ¥x」「相似品 N 款」，点击跳到对应页签</span></li><li><b>②</b><span><strong>同品 / 相似品页签</strong>在右栏「应用情况」下方，悬停页签可看定义</span></li><li><b>③</b><span><strong>用平台 / 用专供店</strong>选择下单和上架用哪个货源；专供店缺货时不能选</span></li><li><b>④</b><span><strong>缺货提示</strong>当前商品缺货或库存紧张时提示可换同品或相似品</span></li><li><b>⑤</b><span><strong>同品对比</strong>进入逐行比价页</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>②</b>切到「相似品」</span><i aria-hidden="true"></i></div><figure class="screen" id="d3-sim">
+  <figcaption><span class="code">5.3</span><span class="name">商品详情 · 相似品页签</span><span class="ver">v4.16</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 商品详情 · 相似品页签"><img src="media/flow-v417/d3-sim.jpg" alt="商品详情 · 相似品页签 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:44.18%;top:66.42%;width:5.31%;height:4.89%"><b>①</b></span><span class="hot" style="left:40.62%;top:71.09%;width:25.62%;height:6.22%"><b>②</b></span><span class="hot" style="left:40.62%;top:76.42%;width:51.53%;height:3.11%"><b>③</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>相似品页签</strong>数量含专供店相似品和平台相似品</span></li><li><b>②</b><span><strong>相似品卡</strong>价格、比当前便宜或贵多少、利润率；悬停看推荐理由；点击进该商品详情</span></li><li><b>③</b><span><strong>口径说明</strong>底部一行说明相似品的匹配规则</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>②</b>点相似品</span><i aria-hidden="true"></i></div><figure class="screen" id="d4-simdetail">
+  <figcaption><span class="code">5.4</span><span class="name">相似品的详情页</span><span class="ver">v4.16</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 相似品的详情页"><img src="media/flow-v417/d4-simdetail.jpg" alt="相似品的详情页 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:5.28%;top:9.33%;width:6.45%;height:3.0%"><b>①</b></span><span class="hot" style="left:39.72%;top:76.09%;width:53.33%;height:14.22%"><b>②</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>返回商品详情</strong>逐级返回上一个商品，不会丢失来路</span></li><li><b>②</b><span><strong>同品 / 相似品</strong>新商品同样展示自己的同品和相似品</span></li></ol>
+</figure><div class="arrow"><span class="via">返回后点「同品对比」</span><i aria-hidden="true"></i></div><figure class="screen" id="d5-cmp">
+  <figcaption><span class="code">5.5</span><span class="name">同品对比</span><span class="ver">沿用</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 同品对比"><img src="media/flow-v417/d5-cmp.jpg" alt="同品对比 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:5.28%;top:9.33%;width:6.45%;height:3.0%"><b>①</b></span><span class="hot" style="left:5.28%;top:51.11%;width:89.44%;height:11.22%"><b>②</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>返回商品详情</strong>从详情进入时返回详情</span></li><li><b>②</b><span><strong>逐行比价</strong>平台会员价 vs 专供价、差额，选下单用哪个来源</span></li></ol>
+</figure></div>
+  <div class="biz"><h3>业务说明</h3><div><b>同品</b>同一 SKU（条码一致 / 商家映射 / SKU ID 对应），<b style="display:inline;color:inherit">换货源、商品不变</b>。<ul><li>专供店同品：会员选「用平台」或「用专供店」，专供店缺货时自动回平台</li><li>阿里权益自有同品：开通自有猫超 / 优品的会员，下单和上架按 SKU ID 自动替换，企业支付宝付款（<a href="nhj-spec.html">V1.0 Spec</a>）</li></ul></div><div><b>相似品</b>同末级类目 + 价格在当前商品 ±30% 以内 + 商品标签有重合（<a href="tasks.html">任务拆解 · AI 选品业务规则</a>），<b style="display:inline;color:inherit">换的是商品本身</b>。<ul><li>只做推荐，不自动替换；专供店相似品需会员点「换成它」确认</li><li>用途：无货替代（<a href="tasks.html">V3-8.1</a>）、找利润更高的同类商品；对应「相似品推荐组件」（<a href="scope-review.html">1.2-11</a>）</li></ul></div><div><b>Demo 与正式版差异</b><ul><li>Demo 只有一级类目，末级类目暂按商品名推断；正式版取商品库末级类目</li><li>Demo 商品标签少，「标签重合」用于排序（同货盘、同标签排前），没有作为硬性条件</li></ul></div><div class="todo"><b>待确认</b><ul><li>匹配不到自有同品时，按平台货源下单还是拦住不让下单（V1.0 Spec 待定项）</li><li>相似品是否严格要求三个条件同时满足</li><li>京东相似品 API 接入后，与平台规则推荐如何合并排序</li></ul></div></div>
+</section>
+<section class="lane" aria-labelledby="l6">
+  <header class="lane-h"><span class="lk">6</span><div><h2 id="l6">大货盘（1 万款）</h2><p>一个货盘有上万款商品时：分页浏览、两级全选、按操作设上限，上架转后台任务</p></div></header>
+  <div class="track"><figure class="screen" id="g1-big">
+  <figcaption><span class="code">6.1</span><span class="name">全品类大货盘 · 分页浏览</span><span class="ver">v4.17</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 全品类大货盘 · 分页浏览"><img src="media/flow-v417/g1-big.jpg" alt="全品类大货盘 · 分页浏览 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:25.67%;top:10.63%;width:12.99%;height:4.67%"><b>①</b></span><span class="hot" style="left:67.2%;top:31.52%;width:9.67%;height:4.22%"><b>②</b></span><span class="hot" style="left:76.87%;top:32.13%;width:9.24%;height:3.0%"><b>③</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>大货盘</strong>货盘页签显示款数（10,000 款），筛选和排序在全部商品上生效</span></li><li><b>②</b><span><strong>全选本页 20 款</strong>列表分页，每页 20 款（卡券可兑换商品每页 16 款），全选默认只选本页</span></li><li><b>③</b><span><strong>筛选结果计数</strong>「共 N / 总数 款」，先按来源、发货、会员价、关键词筛选，再全选</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>②</b>全选本页</span><i aria-hidden="true"></i></div><figure class="screen" id="g2-page">
+  <figcaption><span class="code">6.2</span><span class="name">本页选满后</span><span class="ver">v4.17</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 本页选满后"><img src="media/flow-v417/g2-page.jpg" alt="本页选满后 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:55.39%;top:31.52%;width:7.36%;height:4.22%"><b>①</b></span><span class="hot" style="left:62.75%;top:31.52%;width:14.12%;height:4.22%"><b>②</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>本页已选</strong>按钮变为「取消本页」</span></li><li><b>②</b><span><strong>全选全部筛选结果</strong>本页选满后才出现，避免误选上万款</span></li></ol>
+</figure><div class="arrow"><span class="via"><b>②</b>全选全部 10,000 款</span><i aria-hidden="true"></i></div><figure class="screen" id="g3-cap">
+  <figcaption><span class="code">6.3</span><span class="name">超过上限的批量操作</span><span class="ver">v4.17</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 超过上限的批量操作"><img src="media/flow-v417/g3-cap.jpg" alt="超过上限的批量操作 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:62.82%;top:31.52%;width:14.05%;height:4.22%"><b>①</b></span><span class="hot" style="left:24.42%;top:93.06%;width:11.48%;height:2.78%"><b>②</b></span><span class="hot" style="left:26.11%;top:9.11%;width:47.66%;height:5.33%"><b>③</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>已全选全部</strong>再点一次取消全选</span></li><li><b>②</b><span><strong>上限提示</strong>超过 200 款时，底部条提示「仅支持批量上架」</span></li><li><b>③</b><span><strong>点下单时的说明</strong>下单 / 代发单次最多 200 款，引导先上架到商城或筛选后分批</span></li></ol>
+</figure><div class="arrow"><span class="via">批量上架</span><i aria-hidden="true"></i></div><figure class="screen" id="g4-dist">
+  <figcaption><span class="code">6.4</span><span class="name">上架弹窗 · 利润率分布</span><span class="ver">v4.17</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 上架弹窗 · 利润率分布"><img src="media/flow-v417/g4-dist.jpg" alt="上架弹窗 · 利润率分布 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:29.86%;top:8.0%;width:40.28%;height:16.33%"><b>①</b></span><span class="hot" style="left:30.69%;top:20.33%;width:28.47%;height:3.0%"><b>②</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>利润率分布</strong>已选商品按 <10% / 10–20% / 20–30% / ≥30% / 无市场价 分档计数，选门槛前就知道会跳过多少</span></li><li><b>②</b><span><strong>门槛汇总</strong>选 ≥20% 后：多少件上架、多少件跳过</span></li></ol>
+</figure><div class="arrow"><span class="via">滚到底部</span><i aria-hidden="true"></i></div><figure class="screen" id="g5-task">
+  <figcaption><span class="code">6.5</span><span class="name">上架弹窗 · 后台任务</span><span class="ver">v4.17</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 上架弹窗 · 后台任务"><img src="media/flow-v417/g5-task.jpg" alt="上架弹窗 · 后台任务 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:30.69%;top:79.22%;width:37.52%;height:5.22%"><b>①</b></span><span class="hot" style="left:55.76%;top:87.67%;width:14.38%;height:5.56%"><b>②</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>后台上架任务</strong>超过 500 件时提示走后台任务、预计时长、在工作台查看结果并下载跳过明细</span></li><li><b>②</b><span><strong>创建上架任务</strong>按钮文案随之改为「创建上架任务 · N 件」</span></li></ol>
+</figure><div class="arrow"><span class="via">提交后翻页</span><i aria-hidden="true"></i></div><figure class="screen" id="g6-pager">
+  <figcaption><span class="code">6.6</span><span class="name">分页器</span><span class="ver">v4.17</span></figcaption>
+  <button class="shot" type="button" aria-label="放大查看 分页器"><img src="media/flow-v417/g6-pager.jpg" alt="分页器 截图" loading="lazy" width="1440" height="900"><span class="hot" style="left:6.67%;top:74.43%;width:86.67%;height:5.78%"><b>①</b></span></button>
+  <ol class="notes"><li><b>①</b><span><strong>分页</strong>上一页 / 页码（首尾 + 当前前后 2 页）/ 下一页，显示「第 x / y 页 · 每页 20 款」；翻页回到列表顶部</span></li></ol>
+</figure></div>
+  <div class="biz"><h3>业务说明</h3><div><b>分页与全选</b><ul><li>商品列表一律分页，前端只渲染当前页</li><li>全选分两级：先本页，本页选满后再出现「全选全部筛选结果」，防止误操作</li><li>正式版「全选全部」提交的是<b style="display:inline;color:inherit">筛选条件 + 排除项</b>，由后端按条件取数，不在前端传上万个商品 ID</li></ul></div><div><b>各操作上限</b><ul><li>批量上架：不限数量；超过 500 件转后台上架任务，完成后在工作台「上架任务」查看结果、下载跳过明细（低于利润率、卡券、商城已有）</li><li>批量下单 / 代发：单次最多 200 款（代发还要乘以名单人数，量更大）</li><li>批量加购：最多 200 款；批量询价：一张询价单最多 50 款</li></ul></div><div><b>为什么这样分</b>上万款的典型用法是"整盘铺到员工商城，让员工自己选"，所以上架放开；下单 / 代发是真实扣款和发货，单次量必须可控，大批量走上架或分批更稳。</div><div class="todo"><b>待确认</b><ul><li>200 / 50 / 500 这几个上限是演示假设，需要和交易、履约确认</li><li>大货盘是否需要类目筛选、利润率筛选（筛选后再全选）</li><li>上架任务失败重试、部分成功时的通知方式</li><li>搜索、资源广场在万级商品下改为服务端分页（Demo 未覆盖）</li></ul></div></div>
+</section>
+  <p class="foot">截图来自 Demo v4.17（2026-11-17）。演示数据，价格与商品不代表实际供货。</p>
+</div>
+<script>
+document.addEventListener('click',function(e){
+  var open=document.querySelector('.box');
+  if(open){open.remove();return;}
+  var b=e.target.closest('.screen .shot');if(!b)return;
+  var box=document.createElement('div');box.className='box';box.setAttribute('role','dialog');box.setAttribute('aria-label','放大的截图，点击任意处关闭');
+  var c=b.cloneNode(true);c.removeAttribute('aria-label');box.appendChild(c);document.body.appendChild(box);
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=document.querySelector('.box');if(o)o.remove();}});
+</script>
+</body>
+</html>
