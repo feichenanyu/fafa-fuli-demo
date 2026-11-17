@@ -281,6 +281,14 @@ button,input,select{font-family:inherit}
 .cv-fstep > span:first-child{flex:0 0 22px;height:22px;border-radius:999px;background:#0D9488;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .cv-fstep em{font-style:normal;font-size:13px;color:#374151;line-height:1.6}
 
+.yj-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.yj-tab{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;border:1.5px solid #E3EAE8;background:#fff;border-radius:14px;padding:12px 14px;cursor:pointer;min-width:0;position:relative}
+.yj-tab > b{font-size:16px;color:#0f1418;max-width:100%}
+.yj-tab:hover{border-color:#9CD5CE}
+.yj-tab.on{border-color:#0D9488;background:#F2FAF8;box-shadow:0 6px 16px rgba(13,148,136,.12)}
+.yj-tab.on::after{content:'';position:absolute;left:50%;bottom:-9px;width:14px;height:14px;background:#F2FAF8;border-right:1.5px solid #0D9488;border-bottom:1.5px solid #0D9488;transform:translateX(-50%) rotate(45deg)}
+.yj-panel{display:flex;gap:20px;align-items:center;background:#F2FAF8;border:1px solid #CFE8E3;border-radius:16px;padding:16px 20px}
+
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #F4F5F7; padding-bottom: 96px">
@@ -648,21 +656,25 @@ button,input,select{font-family:inherit}
 
       <section style="display: flex; flex-direction: column; gap: 14px">
         <div class="pb-h"><b>一键做生意</b></div>
-        <div class="yj-grid">
-          <sc-for list="{{yj.items}}" as="it" hint-placeholder-count="3">
-            <div class="{{it.cls}}" onClick="{{it.pickCard}}">
-              <div style="display: flex; align-items: center; gap: 8px"><span class="{{it.kindCls}}">{{it.kind}}</span><span style="font-size: 13px; color: #6B7280">{{it.who}}</span></div>
-              <div class="yj-name"><b>{{it.name}}</b></div>
-              <sc-if value="{{it.hasChips}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{it.chips}}" as="c" hint-placeholder-count="2"><button type="button" class="{{c.cls}}" style="height: 26px; font-size: 12px; padding: 0 10px" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div></sc-if>
-              <span style="font-size: 13px; color: #374151">{{it.meta}}</span>
-              <div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{it.adv}}" as="a" hint-placeholder-count="2"><span class="pb-adv" style="font-size: 12px; padding: 2px 10px"><em>{{a.label}}</em>{{a.text}}</span></sc-for></div>
-              <sc-if value="{{it.isCard}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 10px; align-items: center"><span class="pb-cface" style="background: {{it.cardBg}}; flex: 0 0 132px; height: 84px">{{it.cardFace}}</span><span style="font-size: 12px; color: #6B7280; line-height: 1.6">卡密发到员工手机<br>员工在兑换商城自选</span></div></sc-if>
-              <sc-if value="{{it.isTpl}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 12px; align-items: center"><button type="button" class="zt-phone" style="flex: 0 0 70px; height: 128px; border-width: 4px; border-radius: 14px; background: {{it.cover.coverBg}}" onClick="{{it.pv}}" aria-label="手机预览"><sc-if value="{{it.cover.hasImg}}"><img src="{{it.cover.img}}" alt=""></sc-if><sc-if value="{{it.cover.noImg}}"><span style="display: block; padding: 22px 4px 0; color: #fff; font-size: 10px; font-weight: 700; text-align: center">{{it.cover.name}}</span></sc-if></button><button type="button" onClick="{{it.pv}}" style="border: 0; background: transparent; padding: 0; font-size: 13px; color: #066b5f; cursor: pointer">手机预览商城 ›</button></div></sc-if>
-              <sc-if value="{{it.isMat}}" hint-placeholder-val="{{false}}"><div class="yj-posters"><sc-for list="{{it.posters}}" as="mp" hint-placeholder-count="4"><span class="yj-poster"><span style="{{mp.posterStyle}}; font-size: 7px; height: 100%; box-sizing: border-box; padding: 12% 8%"><span style="font-size: 0.9em; opacity: 0.85">{{mp.kicker}}</span><span style="font-size: 1.8em; font-weight: 800; line-height: 1.2">{{mp.title}}</span><span style="flex: 1 1 0"></span><span style="height: 16%; background: rgba(255,255,255,0.95); border-radius: 0.6em"></span></span></span></sc-for></div></sc-if>
-              <div class="yj-thumbs"><sc-for list="{{it.thumbs}}" as="g" hint-placeholder-count="6"><button type="button" class="lz-it" onClick="{{g.open}}" title="{{g.name}}"><span class="lz-im"><sc-if value="{{g.hasImg}}"><img src="{{g.img}}" alt=""></sc-if><sc-if value="{{g.isPh}}"><span style="font-size: 10px; color: #C3C8CF">商品图</span></sc-if></span><span class="mono" style="font-size: 12px">{{g.price}}</span></button></sc-for></div>
-              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 10px; border-top: 1px dashed #EEF0F2"><span style="font-size: 13px; color: #E2231A; font-weight: 600; min-height: 18px">{{it.earn}}</span><div style="display: flex; gap: 8px"><button type="button" class="btn btn-o" style="flex: 1; height: 36px; font-size: 13px; padding: 0 8px" onClick="{{it.go2}}">{{it.b2}}</button><button type="button" class="btn btn-p" style="flex: 1; height: 36px; font-size: 13px; padding: 0 8px" onClick="{{it.go1}}">{{it.b1}}</button></div></div>
-            </div>
+        <div class="yj-tabs" role="tablist">
+          <sc-for list="{{yj.items}}" as="it" hint-placeholder-count="4">
+            <button type="button" role="tab" aria-selected="{{it.on}}" class="{{it.tabCls}}" onClick="{{it.pickCard}}">
+              <span class="{{it.kindCls}}">{{it.kind}}</span>
+              <b class="clamp1">{{it.name}}</b>
+              <span class="clamp1" style="font-size: 12px; color: #929d99">{{it.short}}</span>
+            </button>
           </sc-for>
+        </div>
+        <div class="yj-panel">
+          <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap"><span style="font-size: 13px; color: #929d99">解决什么场景</span><b style="font-size: 17px; color: #0f1418">{{yj.cur.who}}</b></div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center"><span style="font-size: 13px; color: #929d99; margin-right: 2px">方案优势</span><sc-for list="{{yj.cur.adv}}" as="a" hint-placeholder-count="2"><span class="pb-adv" style="font-size: 13px; padding: 3px 12px; background: #fff"><em>{{a.label}}</em>{{a.text}}</span></sc-for><span style="font-size: 13px; color: #374151">{{yj.cur.meta}}</span></div>
+            <sc-if value="{{yj.cur.hasChips}}" hint-placeholder-val="{{false}}"><div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center"><span style="font-size: 13px; color: #929d99; margin-right: 2px">切换</span><sc-for list="{{yj.cur.chips}}" as="c" hint-placeholder-count="2"><button type="button" class="{{c.cls}}" style="height: 28px; font-size: 12px; padding: 0 12px" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div></sc-if>
+          </div>
+          <div style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 10px">
+            <span style="font-size: 14px; color: #E2231A; font-weight: 600">{{yj.cur.earn}}</span>
+            <div style="display: flex; gap: 8px"><button type="button" class="btn btn-o" style="height: 38px; font-size: 14px; padding: 0 16px" onClick="{{yj.cur.go2}}">{{yj.cur.b2}}</button><button type="button" class="btn btn-p" style="height: 38px; font-size: 14px; padding: 0 20px" onClick="{{yj.cur.go1}}">{{yj.cur.b1}}</button></div>
+          </div>
         </div>
       </section>
 
@@ -3670,7 +3682,7 @@ class Component extends DCLogic {
     const tCover = (k) => { const t = TPL[k]; return { name: t.name, type: t.type, img: t.img || '', hasImg: !!t.img, noImg: !t.img, coverSub: t.coverSub || t.intro, coverBg: t.cover ? 'linear-gradient(160deg, ' + t.cover[0] + ' 0%, ' + t.cover[1] + ' 100%)' : '#F2F3F5' }; };
     const pvTpl = (k) => this.openPv({ k: k, page: 'home', topic: TOPICS[TPL[k].topics[0]], dev: 'phone' });
     const faceText = (c, f) => '¥' + f + (c.unit || '');
-    const openSol = (id) => { this.setState({ view: 'sol', modal: null, ss: SOLS[id].scene, solId: id, biz: null, bzChip: 'all' }); goTop(); };
+    const openSol = (id) => { this.setState({ view: 'sol', modal: null, ss: SOLS[id].scene, solId: id, biz: null, bzChip: 'all', yjSel: null }); goTop(); };
     const openPal = (k) => goView({ view: 'pal', palId: k, palMin: '', palMax: '' });
     const openCpk = (k) => goView({ view: 'cpk', cpkId: k, cpkFace: 0 });
     const openTpd = (k) => goView({ view: 'tpd', tpdId: k });
@@ -3848,17 +3860,17 @@ class Component extends DCLogic {
     const yjChips = (list, cur, key, nameOf) => list.length > 1 ? list.map((k) => ({ label: nameOf(k), cls: 'lchip ' + (k === cur ? 'on' : ''), pick: () => { const u = { yjSel: YJB[key][0], biz: YJB[key][1], bzChip: k }; u[key] = k; this.setState(u); } })) : [];
     const yjThumbs = (ids, n) => imgFirst(ids).slice(0, n).map((id) => Object.assign(thumb(PB[id]), { price: money(PB[id].member), open: () => this.openDetail(id) }));
     const yjList = [];
-    if (yjPal) { const x = PALS[yjPal]; yjList.push({ sel: 'pal', res: yjPal, kind: '爆品货盘', kindCls: 'yj-k pal', name: x.name, who: '客户要直接发货，或已经有商城', chips: yjChips(solO.pals, yjPal, 'yjPal', (k) => PALS[k].name),
+    if (yjPal) { const x = PALS[yjPal]; yjList.push({ sel: 'pal', res: yjPal, short: PALS[yjPal].ids.length + ' 款 · ' + priceRange(PALS[yjPal].ids), kind: '爆品货盘', kindCls: 'yj-k pal', name: x.name, who: '客户要直接发货，或已经有商城', chips: yjChips(solO.pals, yjPal, 'yjPal', (k) => PALS[k].name),
       meta: x.ids.length + ' 款 · ' + priceRange(x.ids), adv: advPick(x.ids, SP.advKeys, true).slice(0, 2), thumbs: yjThumbs(x.ids, 8), isGoods: true, earn: '利润最高 ' + maxProfit(x.ids), detail: () => openPal(yjPal), detailLabel: '货盘详情',
       b1: '一键上架', go1: () => openListFor(x.ids, x.ids.map((id) => PB[id])), b2: '下单 / 代发', go2: () => openOrder(x.ids, 'direct') }); }
-    if (yjCpk) { const c = CPKS[yjCpk]; yjList.push({ sel: 'cpk', res: yjCpk, kind: '福利卡券', kindCls: 'yj-k cpk', name: c.name, who: '客户想让员工自己选', chips: yjChips(solO.cpks, yjCpk, 'yjCpk', (k) => CPKS[k].name),
+    if (yjCpk) { const c = CPKS[yjCpk]; yjList.push({ sel: 'cpk', res: yjCpk, short: '面值 ' + CPKS[yjCpk].faces.map((f) => faceText(CPKS[yjCpk], f)).join(' / '), kind: '福利卡券', kindCls: 'yj-k cpk', name: c.name, who: '客户想让员工自己选', chips: yjChips(solO.cpks, yjCpk, 'yjCpk', (k) => CPKS[k].name),
       meta: (CARD_FORM[yjCpk] || '') + ' · 面值 ' + c.faces.map((f) => faceText(c, f)).join(' / '), adv: [{ label: '兑换商城', text: TPL[c.mall].name }, { label: '可兑换', text: c.ids.length + ' 款' }], isCard: true, cardBg: c.img ? 'url(' + c.img + ') center / cover' : c.bg, cardFace: faceText(c, c.faces[c.faces.length - 1]), thumbs: yjThumbs(c.ids, 3),
       earn: '利润最高 ' + maxProfit(c.ids), detail: () => openCpk(yjCpk), detailLabel: '卡券详情', b1: '买卡', go1: () => openBuy(yjCpk, 0), b2: '看兑换商城', go2: () => pvTpl(c.mall) }); }
-    if (yjTpl) { const t = TPL[yjTpl]; const ids = TPL_IDS[yjTpl] || []; yjList.push({ sel: 'tpl', res: yjTpl, kind: '商城模板', kindCls: 'yj-k tpl', name: t.name, who: '客户要一个福利商城', chips: yjChips(solO.tpls, yjTpl, 'yjTpl', (k) => TPL[k].name),
+    if (yjTpl) { const t = TPL[yjTpl]; const ids = TPL_IDS[yjTpl] || []; yjList.push({ sel: 'tpl', res: yjTpl, short: (TPL_IDS[yjTpl] || []).length + ' 款商品 · ' + TPL[yjTpl].topics.length + ' 个专题', kind: '商城模板', kindCls: 'yj-k tpl', name: t.name, who: '客户要一个福利商城', chips: yjChips(solO.tpls, yjTpl, 'yjTpl', (k) => TPL[k].name),
       meta: t.type + ' · ' + ids.length + ' 款商品 · ' + t.topics.length + ' 个专题', adv: advPick(ids, TPL_ADV[yjTpl], true).slice(0, 2), isTpl: true, cover: tCover(yjTpl), pv: () => pvTpl(yjTpl), thumbs: yjThumbs(ids, 4),
       earn: '利润最高 ' + maxProfit(ids), detail: () => openTpd(yjTpl), detailLabel: '模板详情', b1: '一键建商城', go1: () => this.setState({ modal: 'mall', tplId: yjTpl, mallName: solO.name + ' · ' + t.name }), b2: '套用到已有商城', go2: () => this.setState({ modal: 'applyTpl', tpdId: yjTpl, apMall: s.apMall || MALLS[0].id }) }); }
     const yjSel = s.yjSel || (yjList[0] ? yjList[0].sel : 'pal');
-    const yjDeco = (x) => Object.assign({ isGoods: false, isCard: false, isTpl: false, isMat: false, hasChips: (x.chips || []).length > 0 }, x, { on: x.sel === yjSel, cls: 'yj-card' + (x.sel === yjSel ? ' on' : ''), pickCard: () => { if (x.sel !== yjSel) this.setState({ yjSel: x.sel, biz: x.sel, bzChip: x.res || 'all' }); } });
+    const yjDeco = (x) => Object.assign({ isGoods: false, isCard: false, isTpl: false, isMat: false, hasChips: (x.chips || []).length > 0 }, x, { on: x.sel === yjSel, cls: 'yj-card' + (x.sel === yjSel ? ' on' : ''), tabCls: 'yj-tab' + (x.sel === yjSel ? ' on' : ''), pickCard: () => { if (x.sel !== yjSel) this.setState({ yjSel: x.sel, biz: x.sel, bzChip: x.res || 'all' }); } });
     const yj = { items: yjList.map(yjDeco), deco: yjDeco, sel: yjSel, share: () => this.setState({ modal: 'cliCfg', cliPlays: s.cliPlays || [SEL2PLAY[yjSel] || 'direct'] }),
       talk: () => this.setState({ modal: 'cliCfg', cliPlay: curPlay }), mat: () => goMat(),
       pains: SP.pains.map((p) => p.t).join(' · '), win: SP.win, answer: SP.answer };
@@ -3988,7 +4000,8 @@ class Component extends DCLogic {
     const matCards = MATS.map((m) => Object.assign(matVm(m), { kindL: MK[m.type], pv: () => openMatLib(m.id), kind: m.type }));
     const mcount = { poster: MATS.filter((m) => m.type === 'poster').length, text: MATS.filter((m) => m.type === 'text').length, doc: MATS.filter((m) => m.type === 'doc').length };
     const ms = { count: MATS.length, sub: '海报 ' + mcount.poster + ' · 文案 ' + mcount.text + ' · 方案介绍 ' + mcount.doc, posters: matCards.filter((m) => m.kind === 'poster').slice(0, 5), posters3: matCards.filter((m) => m.kind === 'poster').slice(0, 3), posters4: matCards.filter((m) => m.kind === 'poster').slice(0, 4), text: matCards.find((m) => m.kind === 'text'), open: () => openMatLib(), qrHint: '可一键合成你的商城二维码' };
-    if (MATS.length) yj.items.push(yj.deco({ sel: 'mat', res: 'all', kind: '营销素材', kindCls: 'yj-k mat', name: _short + ' · 推广素材', who: '发朋友圈、发客户群', chips: [], meta: ms.sub, adv: [{ label: '二维码', text: '可合成你的商城二维码' }], isMat: true, posters: matCards.filter((m) => m.kind === 'poster').slice(0, 4), thumbs: [], earn: '', b1: '打开素材库', go1: () => openMatLib(), b2: '复制朋友圈文案', go2: ms.text ? ms.text.down : () => {} }));
+    if (MATS.length) yj.items.push(yj.deco({ sel: 'mat', res: 'all', kind: '营销素材', kindCls: 'yj-k mat', name: _short + ' · 推广素材', who: '发朋友圈、发客户群', chips: [], meta: ms.sub, adv: [{ label: '二维码', text: '可合成你的商城二维码' }], isMat: true, short: MATS.length + ' 份素材', posters: matCards.filter((m) => m.kind === 'poster').slice(0, 4), thumbs: [], earn: '', b1: '打开素材库', go1: () => openMatLib(), b2: '复制朋友圈文案', go2: ms.text ? ms.text.down : () => {} }));
+    yj.cur = yj.items.find((x) => x.on) || yj.items[0];
     yj.listTitle = { pal: '货盘里的全部商品', cpk: '卡券和可兑换商品', tpl: '模板商城里的商品', mat: '全部营销素材' }[yj.sel] || '';
     const BZ0 = [{ k: 'pal', l: '爆品货盘', s: '运营组货 · 一件代发', n: solO.pals.length }, { k: 'cpk', l: '卡券', s: '多档面值 · 员工自选', n: solO.cpks.length }, { k: 'tpl', l: '商城模板', s: '装修好 · 一键开商城', n: solO.tpls.length }];
     const BZ = BZ0.concat([{ k: 'mat', l: '营销素材', s: '海报 · 文案 · 方案介绍', n: MATS.length }]);
