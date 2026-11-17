@@ -88,4 +88,5 @@ Markdown 原文在 [`docs/`](docs/) 目录。
 | 运营管理后台 Demo v1.7（Q4 首期开放：工作台 / 场景 / 商品池 / 埋点） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/admin-demo/ |
 | 运营管理后台 PRD v1.1（Q4 节选：场景 / 商品池 / 工作台 / 埋点 / 非功能需求） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/admin-prd.html |
 | 年货节 Demo（分采通场景运营首页 v2） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/nhj-demo/ |
+| 方案化场景首页 Demo v4（与年货节版本对比） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/solution-demo/ |
 | 年货节 PRD（会员端 V1.0 年货节版 Spec） | https://feichenanyu.github.io/fafa-fuli-demo/采发发Q4/docs/nhj-prd.html |
