@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI选品助手 规则配置表 V1.0</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">C端AI选品 · 配置表 · AI选品助手 规则配置表 V1.0</span>
+<a class="btn" href="../">全部文档</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-一-规则配置">一、规则配置</a><a href="#h-二-商城配额档位">二、商城配额档位</a><a href="#h-三-调档依据">三、调档依据</a></nav>
+<article><h1 id="h-AI选品助手-规则配置表-V1-0">AI选品助手 规则配置表 V1.0</h1>
+<div class="docmeta"><span class="pill new">最新</span><span class="pill kind">配置表</span><span>最后更新 2026-11-18 11:40</span></div>
+<p>2026-11-18 · @xio</p>
+<p>本表是《AI选品助手 PRD V1.0》的配套配置清单，共三部分：规则配置（R01–R54）、商城配额档位、调档依据。「状态」列为截至最后更新时的确认状态；数值以本表为准，PRD 中的描述如有出入以本表为准。</p>
+<h2 id="h-一-规则配置">一、规则配置</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>模块</th>
+<th>配置项</th>
+<th>默认值</th>
+<th>取值范围</th>
+<th>配置层级</th>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R01</td>
+<td>开关</td>
+<td>平台总开关</td>
+<td>开</td>
+<td>开 / 关</td>
+<td>平台</td>
+<td>已确认</td>
+<td>关闭后所有商城 AI 入口隐藏，生效 ≤ 1 分钟；用于紧急关停</td>
+</tr>
+<tr>
+<td>R02</td>
+<td>开关</td>
+<td>商城 AI 开关</td>
+<td>关</td>
+<td>开 / 关</td>
+<td>商城</td>
+<td>已确认</td>
+<td>新建商城默认关闭；会员申请经平台审核后开启，或平台直接开启；关闭时「怎么买」、补充条、无结果页 AI 推荐全部隐藏</td>
+</tr>
+<tr>
+<td>R03</td>
+<td>开关</td>
+<td>定时开启 / 关闭</td>
+<td>无</td>
+<td>起止日期时间</td>
+<td>商城</td>
+<td>已确认</td>
+<td>用于活动期开放</td>
+</tr>
+<tr>
+<td>R04</td>
+<td>开关</td>
+<td>灰度白名单</td>
+<td>不启用</td>
+<td>启用后仅名单内用户可见</td>
+<td>商城</td>
+<td>已确认</td>
+<td>试点期使用</td>
+</tr>
+<tr>
+<td>R05</td>
+<td>次数</td>
+<td>计次单位</td>
+<td>每个会话计 1 次</td>
+<td>固定</td>
+<td>平台</td>
+<td>已确认</td>
+<td>会话开启与次数扣减原子化</td>
+</tr>
+<tr>
+<td>R06</td>
+<td>次数</td>
+<td>每人每日会话数</td>
+<td>3</td>
+<td>1–10</td>
+<td>平台默认，商城可覆盖</td>
+<td>待确认</td>
+<td>按「人 + 商城」计算，同一用户在不同商城分别计次</td>
+</tr>
+<tr>
+<td>R07</td>
+<td>次数</td>
+<td>会话内最大轮次</td>
+<td>10</td>
+<td>5–20</td>
+<td>平台</td>
+<td>待确认</td>
+<td>满轮后输入框置灰，引导新开会话</td>
+</tr>
+<tr>
+<td>R08</td>
+<td>次数</td>
+<td>会话超时时长</td>
+<td>30 分钟</td>
+<td>10–60 分钟</td>
+<td>平台</td>
+<td>已确认</td>
+<td>超时后可看当天历史，继续提问需新开会话</td>
+</tr>
+<tr>
+<td>R09</td>
+<td>次数</td>
+<td>剩余轮次提醒起始轮</td>
+<td>8</td>
+<td>小于最大轮次</td>
+<td>平台</td>
+<td>已确认</td>
+<td>提示「本次对话还剩 N 轮」</td>
+</tr>
+<tr>
+<td>R10</td>
+<td>次数</td>
+<td>次数重置时间</td>
+<td>每日 0 点（北京时间）</td>
+<td>固定</td>
+<td>平台</td>
+<td>已确认</td>
+<td>—</td>
+</tr>
+<tr>
+<td>R11</td>
+<td>次数</td>
+<td>首轮模型失败返还次数</td>
+<td>是</td>
+<td>是 / 否</td>
+<td>平台</td>
+<td>已确认</td>
+<td>重试 1 次仍失败时返还</td>
+</tr>
+<tr>
+<td>R12</td>
+<td>次数</td>
+<td>「换一批」是否计轮次</td>
+<td>否</td>
+<td>是 / 否</td>
+<td>平台</td>
+<td>已确认</td>
+<td>取排序结果下一批，不调用模型</td>
+</tr>
+<tr>
+<td>R13</td>
+<td>次数</td>
+<td>补充条 / 无结果页是否计次</td>
+<td>否</td>
+<td>是 / 否</td>
+<td>平台</td>
+<td>已确认</td>
+<td>首屏走规则推荐，不调用大模型</td>
+</tr>
+<tr>
+<td>R14</td>
+<td>次数</td>
+<td>拒答轮次是否计入轮数</td>
+<td>否</td>
+<td>是 / 否</td>
+<td>平台</td>
+<td>已确认</td>
+<td>如闲聊、售后、商城外商品</td>
+</tr>
+<tr>
+<td>R15</td>
+<td>配额</td>
+<td>商城配额档位</td>
+<td>按人数自动匹配</td>
+<td>S / M / L / XL</td>
+<td>商城</td>
+<td>待测算</td>
+<td>各档日 token 池见「配额档位」；平台运营可手动调档</td>
+</tr>
+<tr>
+<td>R16</td>
+<td>配额</td>
+<td>临时加额系数</td>
+<td>1.0</td>
+<td>1.0–3.0，需指定日期范围</td>
+<td>商城</td>
+<td>已确认</td>
+<td>同时作用于日 token 池与每人每日会话数（如年货节 ×2）</td>
+</tr>
+<tr>
+<td>R17</td>
+<td>配额</td>
+<td>商城日 token 池告警阈值</td>
+<td>80%</td>
+<td>50%–95%</td>
+<td>平台</td>
+<td>已确认</td>
+<td>达到后站内信通知平台运营</td>
+</tr>
+<tr>
+<td>R18</td>
+<td>配额</td>
+<td>商城日 token 池用尽</td>
+<td>新会话降级规则推荐</td>
+<td>固定</td>
+<td>平台</td>
+<td>已确认</td>
+<td>进行中会话允许完成当前轮</td>
+</tr>
+<tr>
+<td>R19</td>
+<td>配额</td>
+<td>平台月度 token 预算</td>
+<td>待定</td>
+<td>—</td>
+<td>平台</td>
+<td>待测算</td>
+<td>80% / 100% 告警负责人</td>
+</tr>
+<tr>
+<td>R20</td>
+<td>配额</td>
+<td>月度预算用尽自动降级</td>
+<td>开</td>
+<td>开 / 关</td>
+<td>平台</td>
+<td>已确认</td>
+<td>全平台改为规则推荐</td>
+</tr>
+<tr>
+<td>R21</td>
+<td>配额</td>
+<td>模型单轮超时</td>
+<td>8 秒</td>
+<td>5–15 秒</td>
+<td>平台</td>
+<td>已确认</td>
+<td>超时重试 1 次，再失败降级</td>
+</tr>
+<tr>
+<td>R22</td>
+<td>配额</td>
+<td>模型排队超时降级</td>
+<td>3 秒</td>
+<td>1–10 秒</td>
+<td>平台</td>
+<td>已确认</td>
+<td>高峰期保护</td>
+</tr>
+<tr>
+<td>R23</td>
+<td>额度</td>
+<td>三方支付</td>
+<td>—</td>
+<td>开 / 关</td>
+<td>商城（只读，来自支付配置）</td>
+<td>已确认</td>
+<td>决定是否可推荐补差商品</td>
+</tr>
+<tr>
+<td>R24</td>
+<td>额度</td>
+<td>三方支付未开启时推荐范围</td>
+<td>仅额度内商品</td>
+<td>固定</td>
+<td>平台</td>
+<td>已确认</td>
+<td>额度内 = 券后到手价 ≤ 剩余额度</td>
+</tr>
+<tr>
+<td>R25</td>
+<td>额度</td>
+<td>三方支付开启时超额上限</td>
+<td>不设上限</td>
+<td>固定</td>
+<td>平台</td>
+<td>已确认</td>
+<td>结果只排序不分组；额度内商品通过额度适配度 Q 加分优先</td>
+</tr>
+<tr>
+<td>R26</td>
+<td>额度</td>
+<td>结果展示方式</td>
+<td>只排序、不分组</td>
+<td>固定</td>
+<td>平台</td>
+<td>已确认</td>
+<td>额度内与补差商品混排，不单独限制补差商品数量；补差商品卡片标注「需补差 ¥X」（2026-11-18 确认）</td>
+</tr>
+<tr>
+<td>R27</td>
+<td>额度</td>
+<td>剩余额度为 0（未开三方支付）</td>
+<td>不开启会话、不计次</td>
+<td>固定</td>
+<td>平台</td>
+<td>已确认</td>
+<td>剩余额度低于商城最低价时同样处理</td>
+</tr>
+<tr>
+<td>R28</td>
+<td>凑满额度</td>
+<td>组合总价口径</td>
+<td>≤ 剩余额度</td>
+<td>固定</td>
+<td>平台</td>
+<td>已确认</td>
+<td>无论是否开三方支付；剩余额度不扣除购物车</td>
+</tr>
+<tr>
+<td>R29</td>
+<td>凑满额度</td>
+<td>目标额度利用率</td>
+<td>90%</td>
+<td>80%–100%</td>
+<td>平台</td>
+<td>已确认</td>
+<td>达不到时输出利用率最高的组合</td>
+</tr>
+<tr>
+<td>R30</td>
+<td>凑满额度</td>
+<td>组合套数 / 每套件数</td>
+<td>3 套 / 2–5 件</td>
+<td>2–3 套 / 1–8 件</td>
+<td>平台</td>
+<td>已确认</td>
+<td>单套内同一 SKU 不重复</td>
+</tr>
+<tr>
+<td>R31</td>
+<td>排序</td>
+<td>相关性门槛</td>
+<td>0.6</td>
+<td>0.4–0.8</td>
+<td>平台</td>
+<td>已确认</td>
+<td>低于门槛的商品不进入排序，无论利润多高</td>
+</tr>
+<tr>
+<td>R32</td>
+<td>排序</td>
+<td>w1 相关性权重</td>
+<td>0.45</td>
+<td>0–1，四项之和为 1</td>
+<td>平台</td>
+<td>已确认</td>
+<td>—</td>
+</tr>
+<tr>
+<td>R33</td>
+<td>排序</td>
+<td>w2 额度适配权重</td>
+<td>0.15</td>
+<td>0–1</td>
+<td>平台</td>
+<td>已确认</td>
+<td>—</td>
+</tr>
+<tr>
+<td>R34</td>
+<td>排序</td>
+<td>w3 利润权重</td>
+<td>0.20</td>
+<td>0–0.30</td>
+<td>平台</td>
+<td>已确认</td>
+<td>平台统一配置，会员与 C 端不可见；利润分 = 毛利率在本商城的分位数</td>
+</tr>
+<tr>
+<td>R35</td>
+<td>排序</td>
+<td>w4 口碑与转化权重</td>
+<td>0.20</td>
+<td>0–1</td>
+<td>平台</td>
+<td>已确认</td>
+<td>销量、好评率、加购率分位数平均</td>
+</tr>
+<tr>
+<td>R36</td>
+<td>排序</td>
+<td>权重之和校验</td>
+<td>1.00（= w1 + w2 + w3 + w4）</td>
+<td>必须为 1</td>
+<td>系统</td>
+<td>已确认</td>
+<td>后台保存时校验</td>
+</tr>
+<tr>
+<td>R37</td>
+<td>排序</td>
+<td>前 6 个中同品牌 / 同类目上限</td>
+<td>2</td>
+<td>1–3</td>
+<td>平台</td>
+<td>已确认</td>
+<td>多样性打散</td>
+</tr>
+<tr>
+<td>R38</td>
+<td>排序</td>
+<td>召回数量</td>
+<td>200</td>
+<td>100–500</td>
+<td>平台</td>
+<td>已确认</td>
+<td>关键词 + 向量混合检索</td>
+</tr>
+<tr>
+<td>R39</td>
+<td>排序</td>
+<td>送入大模型的候选数</td>
+<td>8</td>
+<td>5–12</td>
+<td>平台</td>
+<td>已确认</td>
+<td>只传精简字段，不传利润</td>
+</tr>
+<tr>
+<td>R40</td>
+<td>排序</td>
+<td>每轮展示商品数</td>
+<td>3–6</td>
+<td>1–8</td>
+<td>平台</td>
+<td>已确认</td>
+<td>—</td>
+</tr>
+<tr>
+<td>R41</td>
+<td>入口</td>
+<td>补充条触发的最少搜索结果数</td>
+<td>6</td>
+<td>1–20</td>
+<td>平台</td>
+<td>已确认</td>
+<td>结果太少时不展示补充条</td>
+</tr>
+<tr>
+<td>R42</td>
+<td>入口</td>
+<td>补充条展示商品数</td>
+<td>5</td>
+<td>3–8</td>
+<td>平台</td>
+<td>已确认</td>
+<td>横滑展示</td>
+</tr>
+<tr>
+<td>R43</td>
+<td>入口</td>
+<td>无结果页展示商品数</td>
+<td>6</td>
+<td>4–8</td>
+<td>平台</td>
+<td>已确认</td>
+<td>—</td>
+</tr>
+<tr>
+<td>R44</td>
+<td>缓存</td>
+<td>预设问题结果缓存</td>
+<td>开，24 小时</td>
+<td>1–72 小时</td>
+<td>平台</td>
+<td>已确认</td>
+<td>按「商城 + 额度档位」缓存，商品库变更即失效；仍计会话次数</td>
+</tr>
+<tr>
+<td>R45</td>
+<td>告警</td>
+<td>「不准」反馈率告警</td>
+<td>30%（当日回答 ≥ 50 条）</td>
+<td>10%–50%</td>
+<td>平台</td>
+<td>已确认</td>
+<td>通知商品运营检查商品数据</td>
+</tr>
+<tr>
+<td>R46</td>
+<td>告警</td>
+<td>模型调用失败率告警</td>
+<td>10%（5 分钟窗口）</td>
+<td>5%–30%</td>
+<td>平台</td>
+<td>已确认</td>
+<td>通知研发</td>
+</tr>
+<tr>
+<td>R47</td>
+<td>开通</td>
+<td>开通方式</td>
+<td>会员申请 + 平台审核；平台可直接开通</td>
+<td>固定</td>
+<td>会员 / 平台</td>
+<td>已确认</td>
+<td>入口：会员端 → 商城 → 商城扩展应用；站点运营中心不设入口；每个商城一张审核单</td>
+</tr>
+<tr>
+<td>R48</td>
+<td>开通</td>
+<td>可申请账号</td>
+<td>会员主账号及有该商城运营权限的账号</td>
+<td>固定</td>
+<td>会员</td>
+<td>已确认</td>
+<td>只列出已上线、未过期、未申请或已驳回的商城</td>
+</tr>
+<tr>
+<td>R49</td>
+<td>开通</td>
+<td>审核方式</td>
+<td>全部人工审核</td>
+<td>固定</td>
+<td>平台</td>
+<td>已确认</td>
+<td>不设自动通过（2026-11-18 确认）</td>
+</tr>
+<tr>
+<td>R50</td>
+<td>开通</td>
+<td>审核时效</td>
+<td>2 个工作日</td>
+<td>1–5 个工作日</td>
+<td>平台</td>
+<td>已确认</td>
+<td>结果通过会员端「消息」通知</td>
+</tr>
+<tr>
+<td>R51</td>
+<td>开通</td>
+<td>开通有效期</td>
+<td>与商城有效期一致</td>
+<td>固定</td>
+<td>系统</td>
+<td>已确认</td>
+<td>商城续期自动顺延；商城下线或过期同步失效</td>
+</tr>
+<tr>
+<td>R52</td>
+<td>开通</td>
+<td>平台手动关停 / 恢复</td>
+<td>—</td>
+<td>关停须填原因</td>
+<td>平台</td>
+<td>已确认</td>
+<td>立即生效并通知会员；仅平台可在有效期内恢复；操作留痕</td>
+</tr>
+<tr>
+<td>R53</td>
+<td>开通</td>
+<td>会员自行暂停 / 恢复</td>
+<td>不允许</td>
+<td>固定</td>
+<td>—</td>
+<td>已确认</td>
+<td>开通后只有平台可关停和恢复（2026-11-18 确认）</td>
+</tr>
+<tr>
+<td>R54</td>
+<td>开通</td>
+<td>预算口径</td>
+<td>填人均预算（金额或区间），必填</td>
+<td>固定</td>
+<td>会员填写</td>
+<td>已确认</td>
+<td>平台按人均 × 用户数估算总预算，用于定配额档位（2026-11-18 确认）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="h-二-商城配额档位">二、商城配额档位</h2>
+<p>建议初值，试点后按实际数据校准。审核与配置使用「建议日 token 池（取整）」。</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>档位</th>
+<th>商城用户数上限</th>
+<th>预计日活率</th>
+<th>人均日会话数</th>
+<th>单会话预估 token</th>
+<th>测算日 token 池</th>
+<th>建议日 token 池（取整）</th>
+<th>每月上限（30 天）</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td>500</td>
+<td>10%</td>
+<td>1.5</td>
+<td>15,000</td>
+<td>1,125,000</td>
+<td><strong>1,000,000</strong></td>
+<td><strong>30,000,000</strong></td>
+<td>用户数 ≤ 500</td>
+</tr>
+<tr>
+<td>M</td>
+<td>2,000</td>
+<td>10%</td>
+<td>1.5</td>
+<td>15,000</td>
+<td>4,500,000</td>
+<td><strong>5,000,000</strong></td>
+<td><strong>150,000,000</strong></td>
+<td>用户数 501–2,000</td>
+</tr>
+<tr>
+<td>L</td>
+<td>10,000</td>
+<td>8%</td>
+<td>1.5</td>
+<td>15,000</td>
+<td>18,000,000</td>
+<td><strong>20,000,000</strong></td>
+<td><strong>600,000,000</strong></td>
+<td>用户数 2,001–10,000</td>
+</tr>
+<tr>
+<td>XL</td>
+<td>50,000</td>
+<td>6%</td>
+<td>1.5</td>
+<td>15,000</td>
+<td>67,500,000</td>
+<td><strong>70,000,000</strong></td>
+<td><strong>2,100,000,000</strong></td>
+<td>用户数 10,000 以上；超过 5 万人按实际人数单独核定</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>口径：测算日 token 池 = 用户数上限 × 预计日活率 × 人均日会话数 × 单会话预估 token；单会话按平均 4 轮、每轮约 3,500 token（意图解析 + 生成）估算。每月上限 = 建议日 token 池 × 30。</p>
+<h2 id="h-三-调档依据">三、调档依据</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>触发情况</th>
+<th>判断口径</th>
+<th>动作</th>
+<th>执行人</th>
+<th>生效与通知</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>持续用满</td>
+<td>近 7 天中 ≥ 3 天池使用率 ≥ 95%，或触发了「池用尽降级」</td>
+<td>上调一档</td>
+<td>平台运营</td>
+<td>次日 0 点生效；不通知会员</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>长期低用</td>
+<td>连续 30 天日均池使用率 &lt; 30%</td>
+<td>下调一档（最低 S 档）</td>
+<td>平台运营</td>
+<td>次日 0 点生效；不影响每人每日会话数</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>用户数跨档</td>
+<td>商城用户数变化后落入另一档位区间，并持续 7 天</td>
+<td>系统提示调档，运营确认后调整</td>
+<td>系统提示 + 平台运营</td>
+<td>次日 0 点生效</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>节日 / 活动高峰</td>
+<td>年货节、中秋等发放高峰，或会员提前告知活动期</td>
+<td>临时加额 ×1.5–×2，指定起止日期，不改档位</td>
+<td>平台运营</td>
+<td>到期自动恢复</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>效果好且接近用满</td>
+<td>AI 引导成交转化率高于平台均值，且近 7 天日均池使用率 ≥ 80%</td>
+<td>可优先上调一档</td>
+<td>平台运营</td>
+<td>次日 0 点生效</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>效果差</td>
+<td>「不准」反馈率 ≥ 30% 持续 7 天</td>
+<td>暂停上调，先由商品运营补全商品数据再评估</td>
+<td>平台运营 + 商品运营</td>
+<td>—</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>平台月度预算紧张</td>
+<td>平台当月消耗 ≥ 月度预算 80%</td>
+<td>暂停所有上调与临时加额；达 100% 时全局降级为规则推荐</td>
+<td>平台负责人</td>
+<td>立即生效</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>单会话 token 校准</td>
+<td>试点或每季度复盘：实际单会话均值与预估（当前 15,000）偏差 &gt; 20%</td>
+<td>更新「配额档位」中的单会话 token，四档重新取整</td>
+<td>产品 + 研发</td>
+<td>下个自然月生效</td>
+<td>待确认</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>池使用率 = 商城当日 token 消耗 ÷ 当日 token 池（含临时加额）。每次调档一档，同一商城 7 天内不重复调档；所有调档记录操作人、时间、原因。</p><hr><p class="meta">最后更新 2026-11-18 11:40（北京时间）· 同步自 Claude 文档 2026-11-18 · Markdown 原文：<a href="ai-select-rules.md">ai-select-rules.md</a></p></article></div>
+</body></html>
