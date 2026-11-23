@@ -4,6 +4,10 @@
 
 https://feichenanyu.github.io/fafa-fuli-demo/docs/ —— 按产品版本 V1–V4 分组，标注最新 / 历史版与最后更新时间；文档原文在 `docs/q4/`，Demo 在 `采发发Q4/`。原「采发发Q4」清单页已重定向到这里。
 
+## 88buys C端兑换商城 · 五种风格原型（2026-11-23）
+
+https://feichenanyu.github.io/fafa-fuli-demo/mall-styles/ —— 淘宝 / Shopify / 拼多多 / 京东 / 天猫超市五种风格，每种 6 个页面（首页、渠道频道页、数字权益、本地生活·美食餐饮、生日礼遇、影音娱乐）。说明与修改记录见 [`mall-styles/README.md`](mall-styles/README.md)。
+
 ## 采发发 AI 融合版（当前方向）
 
 | 内容 | 链接 |

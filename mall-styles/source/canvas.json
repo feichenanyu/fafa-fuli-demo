@@ -1,0 +1,344 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Main.dc.html": {
+      "h": 3000,
+      "is_interactive": true,
+      "title": "淘宝风格 · 首页",
+      "w": 390,
+      "x": 0,
+      "y": 0
+    },
+    "cs-bday.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "天猫超市风格 · 生日礼遇",
+      "w": 390,
+      "x": 2820,
+      "y": 14920
+    },
+    "cs-cards.dc.html": {
+      "h": 2200,
+      "is_interactive": true,
+      "title": "天猫超市风格 · 数字权益",
+      "w": 390,
+      "x": 1410,
+      "y": 14920
+    },
+    "cs-channel.dc.html": {
+      "h": 1300,
+      "is_interactive": true,
+      "title": "天猫超市风格 · 渠道频道页·天猫超市",
+      "w": 390,
+      "x": 940,
+      "y": 14920
+    },
+    "cs-home.dc.html": {
+      "h": 2860,
+      "is_interactive": true,
+      "title": "天猫超市风格 · 首页",
+      "w": 390,
+      "x": 0,
+      "y": 14920
+    },
+    "cs-life.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "天猫超市风格 · 本地生活·美食餐饮",
+      "w": 390,
+      "x": 2350,
+      "y": 14920
+    },
+    "cs-movie.dc.html": {
+      "h": 1280,
+      "is_interactive": true,
+      "title": "天猫超市风格 · 影音娱乐",
+      "w": 390,
+      "x": 3290,
+      "y": 14920
+    },
+    "jd-bday.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "京东风格 · 生日礼遇",
+      "w": 390,
+      "x": 2820,
+      "y": 11160
+    },
+    "jd-cards.dc.html": {
+      "h": 2200,
+      "is_interactive": true,
+      "title": "京东风格 · 数字权益",
+      "w": 390,
+      "x": 1410,
+      "y": 11160
+    },
+    "jd-channel.dc.html": {
+      "h": 1300,
+      "is_interactive": true,
+      "title": "京东风格 · 渠道频道页·天猫超市",
+      "w": 390,
+      "x": 940,
+      "y": 11160
+    },
+    "jd-home.dc.html": {
+      "h": 3340,
+      "is_interactive": true,
+      "title": "京东风格 · 首页",
+      "w": 390,
+      "x": 0,
+      "y": 11160
+    },
+    "jd-life.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "京东风格 · 本地生活·美食餐饮",
+      "w": 390,
+      "x": 2350,
+      "y": 11160
+    },
+    "jd-movie.dc.html": {
+      "h": 1280,
+      "is_interactive": true,
+      "title": "京东风格 · 影音娱乐",
+      "w": 390,
+      "x": 3290,
+      "y": 11160
+    },
+    "pdd-bday.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "拼多多风格 · 生日礼遇",
+      "w": 390,
+      "x": 2820,
+      "y": 7740
+    },
+    "pdd-cards.dc.html": {
+      "h": 2200,
+      "is_interactive": true,
+      "title": "拼多多风格 · 数字权益",
+      "w": 390,
+      "x": 1410,
+      "y": 7740
+    },
+    "pdd-channel.dc.html": {
+      "h": 1300,
+      "is_interactive": true,
+      "title": "拼多多风格 · 渠道频道页·天猫超市",
+      "w": 390,
+      "x": 940,
+      "y": 7740
+    },
+    "pdd-home.dc.html": {
+      "h": 3000,
+      "is_interactive": true,
+      "title": "拼多多风格 · 首页",
+      "w": 390,
+      "x": 0,
+      "y": 7740
+    },
+    "pdd-life.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "拼多多风格 · 本地生活·美食餐饮",
+      "w": 390,
+      "x": 2350,
+      "y": 7740
+    },
+    "pdd-movie.dc.html": {
+      "h": 1280,
+      "is_interactive": true,
+      "title": "拼多多风格 · 影音娱乐",
+      "w": 390,
+      "x": 3290,
+      "y": 7740
+    },
+    "sp-bday.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "Shopify 风格 · 生日礼遇",
+      "w": 390,
+      "x": 2820,
+      "y": 3420
+    },
+    "sp-cards.dc.html": {
+      "h": 2200,
+      "is_interactive": true,
+      "title": "Shopify 风格 · 数字权益",
+      "w": 390,
+      "x": 1410,
+      "y": 3420
+    },
+    "sp-channel.dc.html": {
+      "h": 1300,
+      "is_interactive": true,
+      "title": "Shopify 风格 · 渠道频道页·天猫超市",
+      "w": 390,
+      "x": 940,
+      "y": 3420
+    },
+    "sp-home.dc.html": {
+      "h": 3900,
+      "is_interactive": true,
+      "title": "Shopify 风格 · 首页",
+      "w": 390,
+      "x": 0,
+      "y": 3420
+    },
+    "sp-life.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "Shopify 风格 · 本地生活·美食餐饮",
+      "w": 390,
+      "x": 2350,
+      "y": 3420
+    },
+    "sp-movie.dc.html": {
+      "h": 1280,
+      "is_interactive": true,
+      "title": "Shopify 风格 · 影音娱乐",
+      "w": 390,
+      "x": 3290,
+      "y": 3420
+    },
+    "tb-bday.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "淘宝风格 · 生日礼遇",
+      "w": 390,
+      "x": 2820,
+      "y": 0
+    },
+    "tb-cards.dc.html": {
+      "h": 2200,
+      "is_interactive": true,
+      "title": "淘宝风格 · 数字权益",
+      "w": 390,
+      "x": 1410,
+      "y": 0
+    },
+    "tb-channel.dc.html": {
+      "h": 1300,
+      "is_interactive": true,
+      "title": "淘宝风格 · 渠道频道页·天猫超市",
+      "w": 390,
+      "x": 940,
+      "y": 0
+    },
+    "tb-life.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "淘宝风格 · 本地生活·美食餐饮",
+      "w": 390,
+      "x": 2350,
+      "y": 0
+    },
+    "tb-movie.dc.html": {
+      "h": 1280,
+      "is_interactive": true,
+      "title": "淘宝风格 · 影音娱乐",
+      "w": 390,
+      "x": 3290,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-20T03:30:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "noteOrder": [
+    "title-tb",
+    "title-sp",
+    "title-pdd",
+    "title-jd",
+    "title-cs",
+    "readme"
+  ],
+  "notes": {
+    "readme": {
+      "text": "每行一种风格，从左到右：首页 / 积分额度专区 / 渠道频道页（天猫超市示例，电商精选·天猫优品·品牌优选共用此模板）/ 数字权益 / 卡券商品详情 / 本地生活·美食餐饮 / 生日礼遇 / 影音娱乐 / 实物商品详情。\n\n虚拟卡券均为独立SKU：兑换后发放卡密/激活码/券码，不做直充。\n\n¥ 后的金色「积」标 = 可用积分兑换（100积分=1元）。\n\n渠道入口为文字色块占位，上线时替换为已授权的官方Logo。",
+      "w": 380,
+      "x": -480,
+      "y": 0
+    },
+    "title-cs": {
+      "kind": "title1",
+      "maxW": 4150,
+      "text": "天猫超市风格",
+      "w": 240,
+      "x": 0,
+      "y": 14620
+    },
+    "title-jd": {
+      "kind": "title1",
+      "maxW": 4150,
+      "text": "京东风格",
+      "w": 240,
+      "x": 0,
+      "y": 10860
+    },
+    "title-pdd": {
+      "kind": "title1",
+      "maxW": 4150,
+      "text": "拼多多风格",
+      "w": 240,
+      "x": 0,
+      "y": 7440
+    },
+    "title-sp": {
+      "kind": "title1",
+      "maxW": 4150,
+      "text": "Shopify 风格",
+      "w": 240,
+      "x": 0,
+      "y": 3120
+    },
+    "title-tb": {
+      "kind": "title1",
+      "maxW": 4150,
+      "text": "淘宝风格",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "tb-channel.dc.html",
+    "tb-cards.dc.html",
+    "tb-life.dc.html",
+    "tb-bday.dc.html",
+    "tb-movie.dc.html",
+    "sp-home.dc.html",
+    "sp-channel.dc.html",
+    "sp-cards.dc.html",
+    "sp-life.dc.html",
+    "sp-bday.dc.html",
+    "sp-movie.dc.html",
+    "pdd-home.dc.html",
+    "pdd-channel.dc.html",
+    "pdd-cards.dc.html",
+    "pdd-life.dc.html",
+    "pdd-bday.dc.html",
+    "pdd-movie.dc.html",
+    "jd-home.dc.html",
+    "jd-channel.dc.html",
+    "jd-cards.dc.html",
+    "jd-life.dc.html",
+    "jd-bday.dc.html",
+    "jd-movie.dc.html",
+    "cs-home.dc.html",
+    "cs-channel.dc.html",
+    "cs-cards.dc.html",
+    "cs-life.dc.html",
+    "cs-bday.dc.html",
+    "cs-movie.dc.html"
+  ],
+  "pages": [],
+  "title": "88buys C端兑换商城 · 五种风格首页"
+}
