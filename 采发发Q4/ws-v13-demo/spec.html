@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>会员端视觉规范 · 会员端工作台精简改版 Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="dc-lite.js"></script>
+</head>
+<body>
+<template id="dc-src">
+<helmet>
+<style>
+:root{
+--text-1:#1F2329;--text-2:#646A73;--text-3:#8F959E;--line-1:#E5E8EB;--line-2:#EEF0F2;--fill-1:#F7F8FA;--fill-2:#F2F3F5;--bg-page:#F3F5F7;
+--brand:#0B7A70;--brand-a08:rgba(15,143,132,.08);--brand-a16:rgba(15,143,132,.16);--brand-a32:rgba(15,143,132,.32);
+--warn:#B54708;--warn-solid:#C2410C;--warn-a08:rgba(232,89,12,.08);--warn-a16:rgba(232,89,12,.16);--warn-a32:rgba(232,89,12,.32);
+--info:#3B4BB8;--info-a08:rgba(91,107,213,.08);--info-a16:rgba(91,107,213,.16);--info-a32:rgba(91,107,213,.32);--mask:rgba(31,35,41,.55)}
+body{margin:0;background:var(--bg-page);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--text-1)}
+.sec{background:#FFFFFF;border-radius:12px;padding:20px 24px;margin-bottom:16px}
+.h2row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.h2row h2{margin:0;font-size:16px;font-weight:600}
+.lead{margin:0 0 16px;font-size:14px;color:var(--text-2);line-height:22px}
+.ttl-ic{flex:none;width:28px;height:28px;border-radius:8px;background:var(--brand-a08);color:var(--brand);display:inline-flex;align-items:center;justify-content:center}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-size:12px;font-weight:500;color:var(--text-2);text-align:left;padding:8px 12px;background:var(--fill-1);border-bottom:1px solid var(--line-1)}
+td{padding:12px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+code{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--text-2);background:var(--fill-2);border-radius:4px;padding:1px 6px}
+.sw{display:flex;flex-direction:column;gap:6px;width:150px}
+.chip{height:56px;border-radius:8px;border:1px solid var(--line-1)}
+.lab{font-size:12px;color:var(--text-2);line-height:18px}
+.grid{display:flex;flex-wrap:wrap;gap:16px}
+.pill{font-size:12px;border-radius:4px;padding:0 6px;line-height:20px;display:inline-block}
+</style>
+</helmet>
+
+<main style="max-width: 1180px; margin: 0 auto; padding: 28px 24px 40px">
+  <header style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px">
+    <span class="ttl-ic" style="width: 36px; height: 36px; border-radius: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5z"/><path d="m3 13 9 5 9-5"/></svg></span>
+    <h1 style="margin: 0; font-size: 20px; font-weight: 600">会员端视觉规范 · V1.3 工作台起执行</h1>
+  </header>
+  <p class="lead">工作台、货盘明细、商城分析三页已按此规范改完。样式里用 CSS 变量（<code>var(--brand-a08)</code> 这类）写，研发可以直接照抄变量名。</p>
+
+  <section class="sec">
+    <div class="h2row"><span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg></span><h2>字号：6 档</h2></div>
+    <p class="lead">只用下面 6 个字号，不再出现 10、11、13、15、17、18、22 px。正文统一 14px；标签、表头、辅助说明统一 12px，不再用 10–11px。</p>
+    <table>
+      <thead><tr><th style="width: 90px">字号 / 行高</th><th style="width: 110px">字重</th><th>用途</th><th style="width: 360px">示例</th></tr></thead>
+      <tbody>
+        <tr><td>28 / 36</td><td>600 半粗</td><td>大数字：单个核心指标（额度、总量）</td><td><span style="font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums">¥224,320</span></td></tr>
+        <tr><td>24 / 32</td><td>600 半粗</td><td>指标卡数字（KPI）</td><td><span style="font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums">¥18,640.00</span></td></tr>
+        <tr><td>20 / 28</td><td>600 半粗</td><td>页面标题、Logo、统计条小数字</td><td><span style="font-size: 20px; font-weight: 600">商城分析</span></td></tr>
+        <tr><td>16 / 24</td><td>600 半粗</td><td>区块标题（待处理、平台货盘、经营数据）、弹窗标题、货盘卡片名称</td><td><span style="font-size: 16px; font-weight: 600">平台货盘</span></td></tr>
+        <tr><td>14 / 22</td><td>400 常规 · 500 / 600 用于按钮、卡片标题</td><td>正文、菜单、按钮、链接、表格内容、卡片内标题</td><td><span style="font-size: 14px">128 款 · 已上架 0 个商城</span></td></tr>
+        <tr><td>12 / 20</td><td>400 · 600 用于实底标签</td><td>辅助说明、表头、坐标轴、标签、角标</td><td><span style="font-size: 12px; color: var(--text-2)">对比上一个 7 天 · 订单实时</span></td></tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin: 12px 0 0">数字一律用等宽数字（<code>font-variant-numeric: tabular-nums</code>），上下对齐。</p>
+  </section>
+
+  <section class="sec">
+    <div class="h2row"><span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></span><h2>颜色与透明度</h2></div>
+    <p class="lead">实色只给文字、实底按钮和图表用。浅底色、描边、遮罩都用同一个颜色加透明度，不再单独挑浅色值。这样换主题色时，浅色会自动跟着变；放在灰底上也不会显脏。</p>
+
+    <div style="font-size: 14px; font-weight: 600; margin: 4px 0 10px">透明度阶梯（三种语义色共用）</div>
+    <table>
+      <thead><tr><th style="width: 90px">透明度</th><th>用途</th><th style="width: 470px">主色 · 警示 · 行为（埋点）</th></tr></thead>
+      <tbody>
+        <tr><td>100%</td><td>文字、实底按钮、实底标签（白字对比度 ≥ 4.5:1）</td><td><div class="grid" style="gap: 8px"><span class="pill" style="background: var(--brand); color: #FFFFFF">开始指引</span><span class="pill" style="background: var(--warn-solid); color: #FFFFFF">新上架</span><span class="pill" style="color: var(--info); font-weight: 600">行为</span></div></td></tr>
+        <tr><td>8%</td><td>标签底、选中态底、提示条底</td><td><div class="grid" style="gap: 8px"><span class="pill" style="background: var(--brand-a08); color: var(--brand)">改</span><span class="pill" style="background: var(--warn-a08); color: var(--warn)">流失最多</span><span class="pill" style="background: var(--info-a08); color: var(--info)">行为</span></div></td></tr>
+        <tr><td>16%</td><td>悬停底、浅描边、进度条底轨</td><td><div class="grid" style="gap: 8px"><span class="pill" style="background: var(--brand-a16); color: var(--brand)">悬停</span><span class="pill" style="background: var(--warn-a16); color: var(--warn)">悬停</span><span class="pill" style="background: var(--info-a16); color: var(--info)">悬停</span></div></td></tr>
+        <tr><td>32%</td><td>强调描边（超时格、悬停卡片、禁用的主按钮底）</td><td><div class="grid" style="gap: 8px"><span class="pill" style="border: 1px solid var(--brand-a32); color: var(--brand)">卡片悬停</span><span class="pill" style="border: 1px solid var(--warn-a32); color: var(--warn)">超时 24h</span><span class="pill" style="border: 1px solid var(--info-a32); color: var(--info)">选中</span></div></td></tr>
+        <tr><td>55%</td><td>遮罩：只用墨色 <code>rgba(31,35,41,.55)</code>，用于指引蒙层和弹窗</td><td><span style="display: inline-block; width: 120px; height: 28px; border-radius: 6px; background: var(--mask)"></span></td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size: 14px; font-weight: 600; margin: 20px 0 10px">实色</div>
+    <div class="grid">
+      <template data-sc="for" list="{{solids}}" as="c" hint-placeholder-count="12">
+        <div class="sw"><div class="chip" style="{{c.style}}"></div><div class="lab"><b style="color: var(--text-1); font-weight: 600">{{c.name}}</b><br><code>{{c.token}}</code> {{c.hex}}<br>{{c.use}}</div></div>
+      </template>
+    </div>
+    <p class="lead" style="margin: 14px 0 0">图表系列色单独一套，不和语义色混用：#0F8F84、#5B6BD5、#C2671B、#A0479E、#5E8C2E，「其他」用 #7A8089。白字压在色块上时，主色用 #0B7A70，不用图表色 #0F8F84（后者白字只有 3.98:1）。</p>
+  </section>
+
+  <section class="sec">
+    <div class="h2row"><span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></span><h2>标题图标</h2></div>
+    <p class="lead">线性图标，24 网格、1.8 描边、圆角端点，颜色跟随主色。按标题层级用三种规格，同一层级不混用。</p>
+    <table>
+      <thead><tr><th style="width: 130px">层级</th><th style="width: 230px">规格</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td>页面标题 20px</td><td>36 × 36 图标块，圆角 10，主色 8% 底，图标 20</td><td><div style="display: flex; align-items: center; gap: 10px"><span class="ttl-ic" style="width: 36px; height: 36px; border-radius: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span><span style="font-size: 20px; font-weight: 600">商城分析</span></div></td></tr>
+        <tr><td>区块标题 16px</td><td>28 × 28 图标块，圆角 8，主色 8% 底，图标 16；与标题间距 8</td><td><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
+          <span style="display: inline-flex; align-items: center; gap: 8px"><span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.5h6V4"/><path d="m9 13 2 2 4-4"/></svg></span><span style="font-size: 16px; font-weight: 600">待处理</span></span>
+          <span style="display: inline-flex; align-items: center; gap: 8px"><span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></span><span style="font-size: 16px; font-weight: 600">平台货盘</span></span>
+          <span style="display: inline-flex; align-items: center; gap: 8px"><span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V7"/><path d="M17 16v-8"/></svg></span><span style="font-size: 16px; font-weight: 600">经营数据</span></span>
+          <span style="display: inline-flex; align-items: center; gap: 8px"><span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></span><span style="font-size: 16px; font-weight: 600">货盘商品</span></span>
+        </div></td></tr>
+        <tr><td>卡片标题 14px</td><td>不加底，图标 16 主色，间距 8</td><td><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
+          <span style="display: inline-flex; align-items: center; gap: 8px; color: var(--brand)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8.5V18l-4 2v-7.5z"/></svg><span style="font-size: 14px; font-weight: 600; color: var(--text-1)">交易主链路（F4）</span></span>
+          <span style="display: inline-flex; align-items: center; gap: 8px; color: var(--brand)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M16 15h2"/></svg><span style="font-size: 14px; font-weight: 600; color: var(--text-1)">员工额度使用</span></span>
+        </div></td></tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin: 12px 0 0">图表卡片标题（商城分析里每张图）不加图标，避免一屏十几个图标抢视线。</p>
+  </section>
+</main>
+</template>
+<div id="dc-mount"></div>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const solids = [
+      ['主要文字', '--text-1', '#1F2329', '标题、正文'],
+      ['次要文字', '--text-2', '#646A73', '说明、表头'],
+      ['占位 / 禁用', '--text-3', '#8F959E', '占位符、禁用'],
+      ['主色', '--brand', '#0B7A70', '按钮、链接、选中'],
+      ['警示文字', '--warn', '#B54708', '超时、流失提示'],
+      ['警示实底', '--warn-solid', '#C2410C', '「新上架」「新」角标'],
+      ['行为（埋点）', '--info', '#3B4BB8', '「行为」标签文字'],
+      ['边框', '--line-1', '#E5E8EB', '卡片、输入框描边'],
+      ['分割线', '--line-2', '#EEF0F2', '表格行、卡内分割'],
+      ['浅填充', '--fill-1', '#F7F8FA', '表头、输入框底'],
+      ['深填充', '--fill-2', '#F2F3F5', '分段控件底、代码块'],
+      ['页面底', '--bg-page', '#F3F5F7', '页面背景']
+    ];
+    return { solids: solids.map(([name, token, hex, use]) => ({ name, token, hex, use, style: 'background: ' + hex })) };
+  }
+}
+</script>
+</body>
+</html>

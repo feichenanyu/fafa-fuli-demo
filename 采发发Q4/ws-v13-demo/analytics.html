@@ -10,6 +10,19 @@
 <template id="dc-src">
 <helmet>
 <style>
+:root{
+--fs-12:12px;--fs-14:14px;--fs-16:16px;--fs-20:20px;--fs-24:24px;--fs-28:28px;
+--text-1:#1F2329;--text-2:#646A73;--text-3:#8F959E;
+--line-1:#E5E8EB;--line-2:#EEF0F2;--fill-1:#F7F8FA;--fill-2:#F2F3F5;--bg-page:#F3F5F7;
+--brand:#0B7A70;--brand-hover:#075E56;
+--brand-a08:rgba(15,143,132,.08);--brand-a16:rgba(15,143,132,.16);--brand-a32:rgba(15,143,132,.32);
+--warn:#B54708;--warn-solid:#C2410C;--warn-a08:rgba(232,89,12,.08);--warn-a16:rgba(232,89,12,.16);--warn-a32:rgba(232,89,12,.32);
+--info:#3B4BB8;--info-a08:rgba(91,107,213,.08);--info-a16:rgba(91,107,213,.16);--info-a32:rgba(91,107,213,.32);
+--mask:rgba(31,35,41,.55);
+}
+.ttl-ic{flex:none;width:28px;height:28px;border-radius:8px;background:var(--brand-a08);color:var(--brand);display:inline-flex;align-items:center;justify-content:center}
+.ttl-ic.lg{width:36px;height:36px;border-radius:10px}
+.ttl-ic2{flex:none;color:var(--brand);display:inline-flex}
 body{margin:0;background:#F3F5F7}
 a{color:#0B7A70;text-decoration:none}a:hover{color:#075E56}
 button,select{font-family:inherit}
@@ -17,8 +30,8 @@ button,select{font-family:inherit}
 </helmet>
 <div data-prd-root="1" style="position: relative; display: flex; align-items: stretch; background: #F7F8FC">
 <div style="flex: 1 1 960px; min-width: 0; position: relative; z-index: 0; overflow: hidden">
-<div style="font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; background: #F3F5F7; min-height: 2300px; font-size: 14px">
-  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 13px">
+<div style="font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: var(--text-1); background: #F3F5F7; min-height: 2300px; font-size: 14px">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 14px">
     <span style="font-weight: 600">原型演示 · 报表视角</span>
     <div style="display: flex; gap: 4px; background: #3A3F45; border-radius: 8px; padding: 3px">
       <button onClick="{{setInternal}}" style="{{internalBtn}}">平台内部（产品 / 运营）</button>
@@ -29,71 +42,71 @@ button,select{font-family:inherit}
 
   <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 64px; padding: 0 24px; background: #FFFFFF; border-bottom: 1px solid #E5E8EB">
     <div style="display: flex; align-items: center; gap: 8px">
-      <span style="font-size: 22px; font-weight: 700; color: #0B7A70; letter-spacing: 1px">采发发</span>
+      <span style="font-size: 20px; font-weight: 700; color: var(--brand); letter-spacing: 1px">采发发</span>
       <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0B7A70; border-radius: 4px; padding: 2px 6px">{{endLabel}}</span>
     </div>
     <span style="width: 1px; height: 20px; background: #E5E8EB"></span>
-    <nav aria-label="面包屑" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #646A73">
-      <a href="workbench.html">{{crumbRoot}}</a><span aria-hidden="true">›</span><span>数据</span><span aria-hidden="true">›</span><span style="color: #1F2329">商城分析</span>
+    <nav aria-label="面包屑" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-2)">
+      <a href="workbench.html">{{crumbRoot}}</a><span aria-hidden="true">›</span><span>数据</span><span aria-hidden="true">›</span><span style="color: var(--text-1)">商城分析</span>
     </nav>
-    <span style="margin-left: auto; font-size: 12px; color: #646A73">（原型省略左侧菜单，入口在「数据 › 商城分析」和工作台「分析报表」）</span>
+    <span style="margin-left: auto; font-size: 12px; color: var(--text-2)">（原型省略左侧菜单，入口在「数据 › 商城分析」和工作台「分析报表」）</span>
   </header>
 
   <main style="max-width: 1280px; margin: 0 auto; padding: 24px 24px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
 
     <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px">
       <div style="flex: 1 1 420px; min-width: 0">
-        <h1 style="margin: 0 0 4px; font-size: 22px; font-weight: 600">商城分析</h1>
-        <p style="margin: 0; font-size: 13px; color: #646A73">员工从进入商城到支付的每一步。数据每天更新一次，当前截至 11/22 24:00。</p>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px"><span class="ttl-ic lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span><h1 style="margin: 0; font-size: 20px; font-weight: 600">商城分析</h1></div>
+        <p style="margin: 0; font-size: 14px; color: var(--text-2)">员工从进入商城到支付的每一步。数据每天更新一次，当前截至 11/22 24:00。</p>
       </div>
-      <button style="display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border: 1px solid #D0D3D6; border-radius: 8px; background: #FFFFFF; color: #1F2329; font-size: 13px; cursor: pointer">
+      <button style="display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border: 1px solid #D0D3D6; border-radius: 8px; background: #FFFFFF; color: var(--text-1); font-size: 14px; cursor: pointer">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>导出当前报表
       </button>
     </div>
 
     <div data-prd="filters" style="background: #FFFFFF; border-radius: 12px; padding: 12px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
-      <div style="display: flex; gap: 4px; background: #F2F3F5; border-radius: 8px; padding: 3px; font-size: 13px">
-        <span style="padding: 5px 10px; color: #646A73">昨天</span>
-        <span style="padding: 5px 10px; border-radius: 6px; background: #FFFFFF; color: #0B7A70; font-weight: 600">近 7 天</span>
-        <span style="padding: 5px 10px; color: #646A73">近 30 天</span>
-        <span style="padding: 5px 10px; color: #646A73">自定义</span>
+      <div style="display: flex; gap: 4px; background: var(--fill-2); border-radius: 8px; padding: 3px; font-size: 14px">
+        <span style="padding: 5px 10px; color: var(--text-2)">昨天</span>
+        <span style="padding: 5px 10px; border-radius: 6px; background: #FFFFFF; color: var(--brand); font-weight: 600">近 7 天</span>
+        <span style="padding: 5px 10px; color: var(--text-2)">近 30 天</span>
+        <span style="padding: 5px 10px; color: var(--text-2)">自定义</span>
       </div>
       <template data-sc="if" value="{{showProvider}}" hint-placeholder-val="{{ true }}">
       <div data-prd="pv" style="position: relative">
-        <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #646A73">
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">
           <span>{{pv.label}}</span>
           <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px; width: 330px; min-height: 32px; padding: 2px 6px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; box-sizing: border-box">
             <template data-sc="for" list="{{pv.chips}}" as="ch" hint-placeholder-count="0">
-              <span style="display: inline-flex; align-items: center; gap: 2px; height: 22px; padding: 0 2px 0 8px; border-radius: 11px; background: #E8F6F4; color: #0B7A70; font-size: 12px; white-space: nowrap">{{ch.name}}<button onClick="{{ch.remove}}" aria-label="{{ch.aria}}" style="width: 20px; height: 20px; border: 0; background: transparent; color: #0B7A70; cursor: pointer; font-size: 14px; line-height: 1">×</button></span>
+              <span style="display: inline-flex; align-items: center; gap: 2px; height: 22px; padding: 0 2px 0 8px; border-radius: 11px; background: var(--brand-a08); color: var(--brand); font-size: 12px; white-space: nowrap">{{ch.name}}<button onClick="{{ch.remove}}" aria-label="{{ch.aria}}" style="width: 20px; height: 20px; border: 0; background: transparent; color: var(--brand); cursor: pointer; font-size: 14px; line-height: 1">×</button></span>
             </template>
-            <input type="search" value="{{pv.query}}" onInput="{{pv.onInput}}" onFocus="{{pv.onFocus}}" placeholder="{{pv.placeholder}}" aria-label="{{pv.aria}}" style="flex: 1; min-width: 140px; height: 26px; border: 0; outline: none; background: transparent; font-size: 13px; font-family: inherit; color: #1F2329">
+            <input type="search" value="{{pv.query}}" onInput="{{pv.onInput}}" onFocus="{{pv.onFocus}}" placeholder="{{pv.placeholder}}" aria-label="{{pv.aria}}" style="flex: 1; min-width: 140px; height: 26px; border: 0; outline: none; background: transparent; font-size: 14px; font-family: inherit; color: var(--text-1)">
           </div>
-          <template data-sc="if" value="{{pv.internal}}" hint-placeholder-val="{{ false }}"><span style="font-size: 10px; color: #3B4BB8; background: #EEF2FF; border-radius: 3px; padding: 0 4px; line-height: 16px; white-space: nowrap">仅平台内部</span></template>
+          <template data-sc="if" value="{{pv.internal}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--info); background: var(--info-a08); border-radius: 3px; padding: 0 4px; line-height: 18px; white-space: nowrap">仅平台内部</span></template>
         </div>
         <template data-sc="if" value="{{pv.open}}" hint-placeholder-val="{{ false }}">
-          <div role="listbox" aria-label="{{pv.aria}}" style="position: absolute; top: calc(100% + 4px); left: 0; width: 460px; max-width: calc(100vw - 48px); z-index: 30; background: #FFFFFF; border: 1px solid #E5E8EB; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 8px; box-sizing: border-box">
-            <div style="padding: 4px 8px 8px; font-size: 12px; color: #646A73">{{pv.headText}}</div>
+          <div role="listbox" aria-label="{{pv.aria}}" style="position: absolute; top: calc(100% + 4px); left: 0; width: 460px; max-width: calc(100vw - 48px); z-index: 30; background: #FFFFFF; border: 1px solid var(--line-1); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 8px; box-sizing: border-box">
+            <div style="padding: 4px 8px 8px; font-size: 12px; color: var(--text-2)">{{pv.headText}}</div>
             <template data-sc="if" value="{{pv.hasIdHint}}" hint-placeholder-val="{{ false }}">
-              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 4px 6px; padding: 8px 10px; background: #F7F8FA; border-radius: 8px; font-size: 12px; color: #1F2329">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 4px 6px; padding: 8px 10px; background: var(--fill-1); border-radius: 8px; font-size: 12px; color: var(--text-1)">
                 <span>{{pv.idHint}}</span>
-                <template data-sc="if" value="{{pv.hasNotFound}}" hint-placeholder-val="{{ false }}"><span style="color: #B54708">{{pv.notFoundText}}</span></template>
+                <template data-sc="if" value="{{pv.hasNotFound}}" hint-placeholder-val="{{ false }}"><span style="color: var(--warn)">{{pv.notFoundText}}</span></template>
                 <button onClick="{{pv.selectAllIds}}" style="margin-left: auto; height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">全部选中</button>
               </div>
             </template>
             <div style="max-height: 260px; overflow-y: auto">
               <template data-sc="for" list="{{pv.results}}" as="r" hint-placeholder-count="5">
                 <button role="option" aria-selected="{{r.selStr}}" onClick="{{r.toggle}}" style="{{r.style}}">
-                  <span style="width: 16px; flex: none; color: #0B7A70; font-weight: 700">{{r.mark}}</span>
+                  <span style="width: 16px; flex: none; color: var(--brand); font-weight: 700">{{r.mark}}</span>
                   <span style="flex: 1; min-width: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.name}}</span>
-                  <span style="flex: none; font-size: 12px; color: #646A73; font-family: ui-monospace, Menlo, monospace">{{r.id}}</span>
-                  <span style="flex: none; width: 110px; text-align: right; font-size: 12px; color: #646A73; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.sub}}</span>
+                  <span style="flex: none; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{r.id}}</span>
+                  <span style="flex: none; width: 110px; text-align: right; font-size: 12px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.sub}}</span>
                 </button>
               </template>
-              <template data-sc="if" value="{{pv.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 16px 8px; font-size: 13px; color: #646A73; text-align: center">没有匹配的结果，换个名称或 ID 试试</div></template>
+              <template data-sc="if" value="{{pv.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 16px 8px; font-size: 14px; color: var(--text-2); text-align: center">没有匹配的结果，换个名称或 ID 试试</div></template>
             </div>
             <div style="display: flex; align-items: center; gap: 8px; padding: 8px 8px 2px; border-top: 1px solid #F0F1F2; margin-top: 6px">
-              <span style="font-size: 12px; color: #646A73">{{pv.footText}}</span>
-              <button onClick="{{pv.clear}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 12px; cursor: pointer; color: #1F2329">清空</button>
+              <span style="font-size: 12px; color: var(--text-2)">{{pv.footText}}</span>
+              <button onClick="{{pv.clear}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 12px; cursor: pointer; color: var(--text-1)">清空</button>
               <button onClick="{{pv.close}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">完成</button>
             </div>
           </div>
@@ -101,61 +114,61 @@ button,select{font-family:inherit}
       </div>
       </template>
       <div data-prd="ml" style="position: relative">
-        <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #646A73">
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">
           <span>{{ml.label}}</span>
           <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px; width: 330px; min-height: 32px; padding: 2px 6px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; box-sizing: border-box">
             <template data-sc="for" list="{{ml.chips}}" as="ch" hint-placeholder-count="0">
-              <span style="display: inline-flex; align-items: center; gap: 2px; height: 22px; padding: 0 2px 0 8px; border-radius: 11px; background: #E8F6F4; color: #0B7A70; font-size: 12px; white-space: nowrap">{{ch.name}}<button onClick="{{ch.remove}}" aria-label="{{ch.aria}}" style="width: 20px; height: 20px; border: 0; background: transparent; color: #0B7A70; cursor: pointer; font-size: 14px; line-height: 1">×</button></span>
+              <span style="display: inline-flex; align-items: center; gap: 2px; height: 22px; padding: 0 2px 0 8px; border-radius: 11px; background: var(--brand-a08); color: var(--brand); font-size: 12px; white-space: nowrap">{{ch.name}}<button onClick="{{ch.remove}}" aria-label="{{ch.aria}}" style="width: 20px; height: 20px; border: 0; background: transparent; color: var(--brand); cursor: pointer; font-size: 14px; line-height: 1">×</button></span>
             </template>
-            <input type="search" value="{{ml.query}}" onInput="{{ml.onInput}}" onFocus="{{ml.onFocus}}" placeholder="{{ml.placeholder}}" aria-label="{{ml.aria}}" style="flex: 1; min-width: 140px; height: 26px; border: 0; outline: none; background: transparent; font-size: 13px; font-family: inherit; color: #1F2329">
+            <input type="search" value="{{ml.query}}" onInput="{{ml.onInput}}" onFocus="{{ml.onFocus}}" placeholder="{{ml.placeholder}}" aria-label="{{ml.aria}}" style="flex: 1; min-width: 140px; height: 26px; border: 0; outline: none; background: transparent; font-size: 14px; font-family: inherit; color: var(--text-1)">
           </div>
-          <template data-sc="if" value="{{ml.internal}}" hint-placeholder-val="{{ false }}"><span style="font-size: 10px; color: #3B4BB8; background: #EEF2FF; border-radius: 3px; padding: 0 4px; line-height: 16px; white-space: nowrap">仅平台内部</span></template>
+          <template data-sc="if" value="{{ml.internal}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--info); background: var(--info-a08); border-radius: 3px; padding: 0 4px; line-height: 18px; white-space: nowrap">仅平台内部</span></template>
         </div>
         <template data-sc="if" value="{{ml.open}}" hint-placeholder-val="{{ false }}">
-          <div role="listbox" aria-label="{{ml.aria}}" style="position: absolute; top: calc(100% + 4px); left: 0; width: 460px; max-width: calc(100vw - 48px); z-index: 30; background: #FFFFFF; border: 1px solid #E5E8EB; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 8px; box-sizing: border-box">
-            <div style="padding: 4px 8px 8px; font-size: 12px; color: #646A73">{{ml.headText}}</div>
+          <div role="listbox" aria-label="{{ml.aria}}" style="position: absolute; top: calc(100% + 4px); left: 0; width: 460px; max-width: calc(100vw - 48px); z-index: 30; background: #FFFFFF; border: 1px solid var(--line-1); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 8px; box-sizing: border-box">
+            <div style="padding: 4px 8px 8px; font-size: 12px; color: var(--text-2)">{{ml.headText}}</div>
             <template data-sc="if" value="{{ml.hasIdHint}}" hint-placeholder-val="{{ false }}">
-              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 4px 6px; padding: 8px 10px; background: #F7F8FA; border-radius: 8px; font-size: 12px; color: #1F2329">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 4px 6px; padding: 8px 10px; background: var(--fill-1); border-radius: 8px; font-size: 12px; color: var(--text-1)">
                 <span>{{ml.idHint}}</span>
-                <template data-sc="if" value="{{ml.hasNotFound}}" hint-placeholder-val="{{ false }}"><span style="color: #B54708">{{ml.notFoundText}}</span></template>
+                <template data-sc="if" value="{{ml.hasNotFound}}" hint-placeholder-val="{{ false }}"><span style="color: var(--warn)">{{ml.notFoundText}}</span></template>
                 <button onClick="{{ml.selectAllIds}}" style="margin-left: auto; height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">全部选中</button>
               </div>
             </template>
             <div style="max-height: 260px; overflow-y: auto">
               <template data-sc="for" list="{{ml.results}}" as="r" hint-placeholder-count="5">
                 <button role="option" aria-selected="{{r.selStr}}" onClick="{{r.toggle}}" style="{{r.style}}">
-                  <span style="width: 16px; flex: none; color: #0B7A70; font-weight: 700">{{r.mark}}</span>
+                  <span style="width: 16px; flex: none; color: var(--brand); font-weight: 700">{{r.mark}}</span>
                   <span style="flex: 1; min-width: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.name}}</span>
-                  <span style="flex: none; font-size: 12px; color: #646A73; font-family: ui-monospace, Menlo, monospace">{{r.id}}</span>
-                  <span style="flex: none; width: 110px; text-align: right; font-size: 12px; color: #646A73; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.sub}}</span>
+                  <span style="flex: none; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{r.id}}</span>
+                  <span style="flex: none; width: 110px; text-align: right; font-size: 12px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.sub}}</span>
                 </button>
               </template>
-              <template data-sc="if" value="{{ml.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 16px 8px; font-size: 13px; color: #646A73; text-align: center">没有匹配的结果，换个名称或 ID 试试</div></template>
+              <template data-sc="if" value="{{ml.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 16px 8px; font-size: 14px; color: var(--text-2); text-align: center">没有匹配的结果，换个名称或 ID 试试</div></template>
             </div>
             <div style="display: flex; align-items: center; gap: 8px; padding: 8px 8px 2px; border-top: 1px solid #F0F1F2; margin-top: 6px">
-              <span style="font-size: 12px; color: #646A73">{{ml.footText}}</span>
-              <button onClick="{{ml.clear}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 12px; cursor: pointer; color: #1F2329">清空</button>
+              <span style="font-size: 12px; color: var(--text-2)">{{ml.footText}}</span>
+              <button onClick="{{ml.clear}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 12px; cursor: pointer; color: var(--text-1)">清空</button>
               <button onClick="{{ml.close}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">完成</button>
             </div>
           </div>
         </template>
       </div>
-      <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #646A73">福利项目
-        <select style="height: 32px; padding: 0 8px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 13px; color: #1F2329"><option>全部</option><option>2026 年货节发放</option><option>11 月生日礼</option></select>
+      <label style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">福利项目
+        <select style="height: 32px; padding: 0 8px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 14px; color: var(--text-1)"><option>全部</option><option>2026 年货节发放</option><option>11 月生日礼</option></select>
       </label>
-      <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #646A73">终端
-        <select style="height: 32px; padding: 0 8px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 13px; color: #1F2329"><option>全部</option><option>H5</option><option>微信小程序</option><option>支付宝小程序</option></select>
+      <label style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">终端
+        <select style="height: 32px; padding: 0 8px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 14px; color: var(--text-1)"><option>全部</option><option>H5</option><option>微信小程序</option><option>支付宝小程序</option></select>
       </label>
       
-      <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #646A73">商品渠道
-        <select style="height: 32px; padding: 0 8px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 13px; color: #1F2329"><option>全部</option><option>平台猫超</option><option>京东</option><option>优品</option><option>自营</option></select>
+      <label style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">商品渠道
+        <select style="height: 32px; padding: 0 8px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 14px; color: var(--text-1)"><option>全部</option><option>平台猫超</option><option>京东</option><option>优品</option><option>自营</option></select>
       </label>
-      <span style="font-size: 12px; color: #646A73">暂不支持按甲方企业统计，请按福利项目筛选</span>
+      <span style="font-size: 12px; color: var(--text-2)">暂不支持按甲方企业统计，请按福利项目筛选</span>
     </div>
 
     <div data-prd="tabs" role="tablist" aria-label="报表" style="display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid #E5E8EB">
       <template data-sc="for" list="{{tabs}}" as="t" hint-placeholder-count="6">
-        <button role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}<template data-sc="if" value="{{t.pending}}" hint-placeholder-val="{{ false }}"><span style="margin-left: 6px; font-size: 10px; color: #B54708; background: #FFF1E8; border-radius: 3px; padding: 0 4px; line-height: 16px">待确认开放</span></template></button>
+        <button role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}<template data-sc="if" value="{{t.pending}}" hint-placeholder-val="{{ false }}"><span style="margin-left: 6px; font-size: 12px; color: var(--warn); background: var(--warn-a08); border-radius: 3px; padding: 0 4px; line-height: 18px">待确认开放</span></template></button>
       </template>
     </div>
 
@@ -171,30 +184,30 @@ button,select{font-family:inherit}
               </template>
             </div>
           </div>
-          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 10px 0 6px; font-size: 13px; color: #646A73">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 10px 0 6px; font-size: 14px; color: var(--text-2)">
             
             <label style="display: flex; align-items: center; gap: 6px">窗口期
-              <select value="{{winValue}}" onChange="{{onWin}}" aria-label="窗口期" style="height: 30px; padding: 0 8px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 13px; color: #1F2329">
+              <select value="{{winValue}}" onChange="{{onWin}}" aria-label="窗口期" style="height: 30px; padding: 0 8px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 14px; color: var(--text-1)">
                 <template data-sc="for" list="{{winOpts}}" as="o" hint-placeholder-count="2"><option value="{{o.value}}">{{o.label}}</option></template>
               </select>
             </label>
-            <div role="group" aria-label="统计方式" style="display: flex; gap: 4px; background: #F2F3F5; border-radius: 8px; padding: 3px">
+            <div role="group" aria-label="统计方式" style="display: flex; gap: 4px; background: var(--fill-2); border-radius: 8px; padding: 3px">
               <template data-sc="for" list="{{modeOpts}}" as="o" hint-placeholder-count="2"><button onClick="{{o.pick}}" disabled="{{o.disabled}}" aria-pressed="{{o.selected}}" style="{{o.style}}">{{o.label}}</button></template>
             </div>
           </div>
-          <p style="margin: 0 0 14px; font-size: 12px; color: #646A73">{{fMeta}}</p>
+          <p style="margin: 0 0 14px; font-size: 12px; color: var(--text-2)">{{fMeta}}</p>
 
           <template data-sc="for" list="{{funnel}}" as="f" hint-placeholder-count="7">
             <div>
               <template data-sc="if" value="{{f.hasLoss}}" hint-placeholder-val="{{ false }}">
-                <div style="{{f.lossStyle}}">↓ {{f.conv}} · 流失 {{f.lost}} 人<template data-sc="if" value="{{f.worst}}" hint-placeholder-val="{{ false }}"><span style="margin-left: 8px; font-size: 11px; font-weight: 600; color: #B54708; background: #FFF1E8; border-radius: 4px; padding: 1px 6px">流失最多</span></template><template data-sc="if" value="{{f.lossLink}}" hint-placeholder-val="{{ false }}"><button onClick="{{f.goLoss}}" style="margin-left: 8px; border: 0; background: transparent; color: #0B7A70; font-size: 12px; cursor: pointer; padding: 0">看流失原因 →</button></template></div>
+                <div style="{{f.lossStyle}}">↓ {{f.conv}} · 流失 {{f.lost}} 人<template data-sc="if" value="{{f.worst}}" hint-placeholder-val="{{ false }}"><span style="margin-left: 8px; font-size: 12px; font-weight: 600; color: var(--warn); background: var(--warn-a08); border-radius: 4px; padding: 1px 6px">流失最多</span></template><template data-sc="if" value="{{f.lossLink}}" hint-placeholder-val="{{ false }}"><button onClick="{{f.goLoss}}" style="margin-left: 8px; border: 0; background: transparent; color: var(--brand); font-size: 12px; cursor: pointer; padding: 0">看流失原因 →</button></template></div>
               </template>
               <div style="display: flex; align-items: center; gap: 16px">
-                <span style="width: 150px; flex: none; font-size: 13px">{{f.label}}<span style="display: block; font-size: 11px; color: #646A73; font-family: ui-monospace, Menlo, monospace">{{f.event}}</span></span>
+                <span style="width: 150px; flex: none; font-size: 14px">{{f.label}}<span style="display: block; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{f.event}}</span></span>
                 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
                   <div style="{{f.shapeStyle}}" title="{{f.tip}}">{{f.inner}}</div>
                 </div>
-                <span style="width: 150px; flex: none; text-align: right; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums">{{f.valueText}}</span>
+                <span style="width: 150px; flex: none; text-align: right; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums">{{f.valueText}}</span>
               </div>
             </div>
           </template>
@@ -203,18 +216,18 @@ button,select{font-family:inherit}
           <template data-sc="for" list="{{shareCharts}}" as="sc" hint-placeholder-count="2">
             <section style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
               <h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 600">{{sc.title}}</h2>
-              <p style="margin: 0 0 14px; font-size: 12px; color: #646A73">{{sc.sub}}</p>
+              <p style="margin: 0 0 14px; font-size: 12px; color: var(--text-2)">{{sc.sub}}</p>
               <template data-sc="if" value="{{sc.has}}" hint-placeholder-val="{{ true }}">
                 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
                   <div role="img" aria-label="{{sc.aria}}" style="{{sc.donut}}">
                     <div style="position: absolute; inset: 30px; border-radius: 50%; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center">
                       <span style="font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums">{{sc.total}}</span>
-                      <span style="font-size: 12px; color: #646A73">{{sc.totalLabel}}</span>
+                      <span style="font-size: 12px; color: var(--text-2)">{{sc.totalLabel}}</span>
                     </div>
                   </div>
                   <div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
                     <template data-sc="for" list="{{sc.rows}}" as="r" hint-placeholder-count="4">
-                      <div style="display: flex; align-items: center; gap: 8px; font-size: 13px">
+                      <div style="display: flex; align-items: center; gap: 8px; font-size: 14px">
                         <span style="{{r.swatch}}"></span><span>{{r.label}}</span>
                         <span style="margin-left: auto; font-variant-numeric: tabular-nums; white-space: nowrap">{{r.n}} · {{r.pct}}</span>
                       </div>
@@ -222,7 +235,7 @@ button,select{font-family:inherit}
                   </div>
                 </div>
               </template>
-              <template data-sc="if" value="{{sc.none}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 40px 0; text-align: center; font-size: 13px; color: #646A73">这个漏斗不涉及商品，不看渠道占比</p></template>
+              <template data-sc="if" value="{{sc.none}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 40px 0; text-align: center; font-size: 14px; color: var(--text-2)">这个漏斗不涉及商品，不看渠道占比</p></template>
             </section>
           </template>
         </div>
@@ -230,8 +243,8 @@ button,select{font-family:inherit}
           <section data-prd="trend" style="flex: 3 1 520px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 4px">
               <h2 style="margin: 0; font-size: 16px; font-weight: 600">{{trTitle}}</h2>
-              <span style="font-size: 12px; color: #646A73">{{trSub}}</span>
-              <template data-sc="if" value="{{tr.hasRef}}" hint-placeholder-val="{{ true }}"><span style="margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: #646A73"><span style="width: 16px; border-top: 2px dashed #7A8089"></span>{{tr.refLabel}}</span></template>
+              <span style="font-size: 12px; color: var(--text-2)">{{trSub}}</span>
+              <template data-sc="if" value="{{tr.hasRef}}" hint-placeholder-val="{{ true }}"><span style="margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2)"><span style="width: 16px; border-top: 2px dashed #7A8089"></span>{{tr.refLabel}}</span></template>
             </div>
             <div role="img" aria-label="{{tr.aria}}" style="position: relative; height: 220px; margin-top: 12px">
               <div style="position: absolute; left: 0; width: 44px; top: 10px; bottom: 24px">
@@ -257,13 +270,13 @@ button,select{font-family:inherit}
           </section>
           <section data-prd="steps" style="flex: 2 1 360px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
             <h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 600">步骤转化率</h2>
-            <p style="margin: 0 0 12px; font-size: 12px; color: #646A73">每一步相对上一步，最低的一步标橙</p>
+            <p style="margin: 0 0 12px; font-size: 12px; color: var(--text-2)">每一步相对上一步，最低的一步标橙</p>
             <div role="img" aria-label="{{stepAria}}" style="position: relative; height: 220px; display: flex; align-items: flex-end; gap: 10px; padding: 18px 0 40px; box-sizing: border-box; border-bottom: 1px solid #C9CDD4">
               <template data-sc="for" list="{{stepBars}}" as="b" hint-placeholder-count="6">
                 <div title="{{b.tip}}" style="position: relative; flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center">
                   <span style="font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: 4px">{{b.pct}}</span>
                   <div style="{{b.barStyle}}"></div>
-                  <span style="position: absolute; bottom: -38px; left: 50%; transform: translateX(-50%); width: 64px; text-align: center; font-size: 11px; line-height: 1.3; color: #646A73">{{b.label}}</span>
+                  <span style="position: absolute; bottom: -38px; left: 50%; transform: translateX(-50%); width: 64px; text-align: center; font-size: 12px; line-height: 1.3; color: var(--text-2)">{{b.label}}</span>
                 </div>
               </template>
             </div>
@@ -278,19 +291,19 @@ button,select{font-family:inherit}
         <section data-prd="lossBars" style="background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
           <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 4px">
             <h2 style="margin: 0; font-size: 16px; font-weight: 600">F4 交易主链路 · 各步流失人数</h2>
-            <span style="font-size: 12px; color: #646A73">点上方环节看汇总，点柱子看单步的流失构成</span>
+            <span style="font-size: 12px; color: var(--text-2)">点上方环节看汇总，点柱子看单步的流失构成</span>
           </div>
           <div role="group" aria-label="选择流失环节" style="display: flex; gap: 16px; margin-top: 12px">
             <template data-sc="for" list="{{lossStages}}" as="g" hint-placeholder-count="4">
-              <button onClick="{{g.pick}}" aria-pressed="{{g.selected}}" style="{{g.style}}"><span>{{g.label}}</span><span style="font-variant-numeric: tabular-nums">流失 {{g.n}} 人</span><span style="margin-left: auto; font-size: 11px; font-weight: 400; color: #646A73">{{g.hint}}</span></button>
+              <button onClick="{{g.pick}}" aria-pressed="{{g.selected}}" style="{{g.style}}"><span>{{g.label}}</span><span style="font-variant-numeric: tabular-nums">流失 {{g.n}} 人</span><span style="margin-left: auto; font-size: 12px; font-weight: 400; color: var(--text-2)">{{g.hint}}</span></button>
             </template>
           </div>
           <div role="group" aria-label="选择流失步骤" style="position: relative; height: 230px; display: flex; align-items: flex-end; gap: 16px; padding: 20px 0 42px; box-sizing: border-box; border-bottom: 1px solid #C9CDD4">
             <template data-sc="for" list="{{lossBars}}" as="b" hint-placeholder-count="6">
               <button onClick="{{b.pick}}" disabled="{{b.disabled}}" aria-pressed="{{b.selected}}" aria-label="{{b.aria}}" style="{{b.btnStyle}}">
-                <span style="font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: 4px; color: #1F2329">{{b.n}}</span>
+                <span style="font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: 4px; color: var(--text-1)">{{b.n}}</span>
                 <span style="{{b.barStyle}}"></span>
-                <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 110px; text-align: center; font-size: 12px; line-height: 1.35; color: #646A73">{{b.label}}</span>
+                <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 110px; text-align: center; font-size: 12px; line-height: 1.35; color: var(--text-2)">{{b.label}}</span>
               </button>
             </template>
           </div>
@@ -298,17 +311,17 @@ button,select{font-family:inherit}
         <div style="display: flex; flex-wrap: wrap; gap: 16px">
           <section data-prd="donut" style="flex: 2 1 380px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
             <h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 600">流失构成 · {{lStepLabel}}</h2>
-            <p style="margin: 0 0 14px; font-size: 12px; color: #646A73">失败原因与主动离开合在一起看占比</p>
+            <p style="margin: 0 0 14px; font-size: 12px; color: var(--text-2)">失败原因与主动离开合在一起看占比</p>
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
               <div role="img" aria-label="{{donutAria}}" style="{{donutStyle}}">
                 <div style="position: absolute; inset: 34px; border-radius: 50%; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center">
-                  <span style="font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums">{{lTotal}}</span>
-                  <span style="font-size: 12px; color: #646A73">流失人数</span>
+                  <span style="font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums">{{lTotal}}</span>
+                  <span style="font-size: 12px; color: var(--text-2)">流失人数</span>
                 </div>
               </div>
               <div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
                 <template data-sc="for" list="{{slices}}" as="sl" hint-placeholder-count="6">
-                  <div style="display: flex; align-items: center; gap: 8px; font-size: 13px">
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 14px">
                     <span style="{{sl.swatch}}"></span>
                     <span style="min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{sl.label}}</span>
                     <span style="margin-left: auto; font-variant-numeric: tabular-nums; white-space: nowrap">{{sl.n}} · {{sl.pct}}</span>
@@ -318,11 +331,11 @@ button,select{font-family:inherit}
             </div>
             <template data-sc="if" value="{{hasSub}}" hint-placeholder-val="{{ false }}">
               <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid #F0F1F2">
-                <div style="font-size: 13px; font-weight: 600; margin-bottom: 10px">下单环节分步流失</div>
+                <div style="font-size: 14px; font-weight: 600; margin-bottom: 10px">下单环节分步流失</div>
                 <template data-sc="for" list="{{subRows}}" as="r" hint-placeholder-count="3">
                   <button onClick="{{r.pick}}" style="display: block; width: 100%; margin-bottom: 8px; padding: 6px 8px; border: 0; border-radius: 6px; background: transparent; cursor: pointer; font-family: inherit; text-align: left">
-                    <span style="display: flex; justify-content: space-between; font-size: 13px; color: #1F2329; margin-bottom: 4px"><span>{{r.label}}</span><span style="font-variant-numeric: tabular-nums">{{r.n}} 人 · {{r.pct}}</span></span>
-                    <span style="display: block; height: 8px; background: #F2F3F5; border-radius: 4px"><span style="{{r.barStyle}}; display: block"></span></span>
+                    <span style="display: flex; justify-content: space-between; font-size: 14px; color: var(--text-1); margin-bottom: 4px"><span>{{r.label}}</span><span style="font-variant-numeric: tabular-nums">{{r.n}} 人 · {{r.pct}}</span></span>
+                    <span style="display: block; height: 8px; background: var(--fill-2); border-radius: 4px"><span style="{{r.barStyle}}; display: block"></span></span>
                   </button>
                 </template>
               </div>
@@ -331,8 +344,8 @@ button,select{font-family:inherit}
           <section data-prd="lsTrend" style="flex: 3 1 520px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 4px">
               <h2 style="margin: 0; font-size: 16px; font-weight: 600">{{lsTitle}}</h2>
-              <span style="font-size: 12px; color: #646A73">{{lsSub}}</span>
-              <template data-sc="if" value="{{ls.hasRef}}" hint-placeholder-val="{{ true }}"><span style="margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: #646A73"><span style="width: 16px; border-top: 2px dashed #7A8089"></span>{{ls.refLabel}}</span></template>
+              <span style="font-size: 12px; color: var(--text-2)">{{lsSub}}</span>
+              <template data-sc="if" value="{{ls.hasRef}}" hint-placeholder-val="{{ true }}"><span style="margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2)"><span style="width: 16px; border-top: 2px dashed #7A8089"></span>{{ls.refLabel}}</span></template>
             </div>
             <div role="img" aria-label="{{ls.aria}}" style="position: relative; height: 220px; margin-top: 12px">
               <div style="position: absolute; left: 0; width: 44px; top: 10px; bottom: 24px">
@@ -360,29 +373,29 @@ button,select{font-family:inherit}
         <div style="display: flex; flex-wrap: wrap; gap: 16px">
           <section data-prd="lossDetail" aria-labelledby="lf-h" style="flex: 1 1 460px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
             <h2 id="lf-h" style="margin: 0 0 4px; font-size: 16px; font-weight: 600">失败原因 · {{lFailTotal}} 人</h2>
-            <p style="margin: 0 0 12px; font-size: 12px; color: #646A73">有失败结果事件的流失，按服务端返回的 fail_reason 归因</p>
+            <p style="margin: 0 0 12px; font-size: 12px; color: var(--text-2)">有失败结果事件的流失，按服务端返回的 fail_reason 归因</p>
             <template data-sc="if" value="{{hasFail}}" hint-placeholder-val="{{ true }}">
               <div>
                 <template data-sc="for" list="{{lFail}}" as="r" hint-placeholder-count="3">
                   <div style="display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #F0F1F2">
-                    <span style="width: 170px; flex: none; font-size: 13px">{{r.label}}<span style="display: block; font-size: 11px; color: #646A73; font-family: ui-monospace, Menlo, monospace">{{r.code}}</span></span>
-                    <div style="flex: 1; min-width: 0; height: 10px; background: #F2F3F5; border-radius: 4px"><div style="{{r.barStyle}}"></div></div>
-                    <span style="width: 48px; text-align: right; font-size: 13px; font-variant-numeric: tabular-nums">{{r.n}}</span>
+                    <span style="width: 170px; flex: none; font-size: 14px">{{r.label}}<span style="display: block; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{r.code}}</span></span>
+                    <div style="flex: 1; min-width: 0; height: 10px; background: var(--fill-2); border-radius: 4px"><div style="{{r.barStyle}}"></div></div>
+                    <span style="width: 48px; text-align: right; font-size: 14px; font-variant-numeric: tabular-nums">{{r.n}}</span>
                     <a href="{{r.href}}" style="width: 96px; flex: none; font-size: 12px; text-align: right">{{r.action}}</a>
                   </div>
                 </template>
               </div>
             </template>
-            <template data-sc="if" value="{{noFail}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 13px; color: #646A73">这一步没有失败结果事件，流失都是主动离开。</p></template>
+            <template data-sc="if" value="{{noFail}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; color: var(--text-2)">这一步没有失败结果事件，流失都是主动离开。</p></template>
           </section>
           <section aria-labelledby="ll-h" style="flex: 1 1 460px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
             <h2 id="ll-h" style="margin: 0 0 4px; font-size: 16px; font-weight: 600">主动离开 · {{lLeaveTotal}} 人</h2>
-            <p style="margin: 0 0 12px; font-size: 12px; color: #646A73">没有失败结果的流失，按离开前最后一个页面拆分</p>
+            <p style="margin: 0 0 12px; font-size: 12px; color: var(--text-2)">没有失败结果的流失，按离开前最后一个页面拆分</p>
             <template data-sc="for" list="{{lLeave}}" as="r" hint-placeholder-count="3">
               <div style="display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #F0F1F2">
-                <span style="width: 170px; flex: none; font-size: 13px">{{r.label}}<span style="display: block; font-size: 11px; color: #646A73; font-family: ui-monospace, Menlo, monospace">{{r.code}}</span></span>
-                <div style="flex: 1; min-width: 0; height: 10px; background: #F2F3F5; border-radius: 4px"><div style="{{r.barStyle}}"></div></div>
-                <span style="width: 48px; text-align: right; font-size: 13px; font-variant-numeric: tabular-nums">{{r.n}}</span>
+                <span style="width: 170px; flex: none; font-size: 14px">{{r.label}}<span style="display: block; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{r.code}}</span></span>
+                <div style="flex: 1; min-width: 0; height: 10px; background: var(--fill-2); border-radius: 4px"><div style="{{r.barStyle}}"></div></div>
+                <span style="width: 48px; text-align: right; font-size: 14px; font-variant-numeric: tabular-nums">{{r.n}}</span>
               </div>
             </template>
           </section>
@@ -394,18 +407,18 @@ button,select{font-family:inherit}
     <template data-sc="if" value="{{isSearch}}" hint-placeholder-val="{{ false }}">
       <div style="display: flex; flex-direction: column; gap: 16px">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
-          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div data-prd="skpi" style="font-size: 13px; color: #646A73">搜索次数</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">2,315</div><div style="font-size: 12px; color: #646A73">684 人搜索过</div></div>
-          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 13px; color: #646A73">搜索无结果率</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">8.6%</div><div style="font-size: 12px; color: #646A73">199 次搜索没有结果</div></div>
-          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 13px; color: #646A73">搜索点击率</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">41.2%</div><div style="font-size: 12px; color: #646A73">有点击的请求 ÷ 有结果的搜索</div></div>
-          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 13px; color: #646A73">无结果推荐点击</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">57 次</div><div style="font-size: 12px; color: #646A73">无结果页兜底推荐</div></div>
+          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div data-prd="skpi" style="font-size: 14px; color: var(--text-2)">搜索次数</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">2,315</div><div style="font-size: 12px; color: var(--text-2)">684 人搜索过</div></div>
+          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 14px; color: var(--text-2)">搜索无结果率</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">8.6%</div><div style="font-size: 12px; color: var(--text-2)">199 次搜索没有结果</div></div>
+          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 14px; color: var(--text-2)">搜索点击率</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">41.2%</div><div style="font-size: 12px; color: var(--text-2)">有点击的请求 ÷ 有结果的搜索</div></div>
+          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 14px; color: var(--text-2)">无结果推荐点击</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">57 次</div><div style="font-size: 12px; color: var(--text-2)">无结果页兜底推荐</div></div>
         </div>
         <div data-prd="words" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px">
           <template data-sc="for" list="{{wordTables}}" as="wt" hint-placeholder-count="3">
             <section style="background: #FFFFFF; border-radius: 12px; padding: 20px 22px">
               <h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 600">{{wt.title}}</h2>
-              <p style="margin: 0 0 10px; font-size: 12px; color: #646A73">{{wt.desc}}</p>
-              <table style="width: 100%; border-collapse: collapse; font-size: 13px">
-                <thead><tr style="background: #F7F8FA; color: #646A73; text-align: left"><th style="padding: 8px 10px; font-weight: 500">词</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">搜索次数</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">{{wt.col3}}</th></tr></thead>
+              <p style="margin: 0 0 10px; font-size: 12px; color: var(--text-2)">{{wt.desc}}</p>
+              <table style="width: 100%; border-collapse: collapse; font-size: 14px">
+                <thead><tr style="background: var(--fill-1); color: var(--text-2); text-align: left"><th style="padding: 8px 10px; font-weight: 500">词</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">搜索次数</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">{{wt.col3}}</th></tr></thead>
                 <tbody>
                   <template data-sc="for" list="{{wt.rows}}" as="w" hint-placeholder-count="5">
                     <tr style="border-bottom: 1px solid #F0F1F2"><td style="padding: 9px 10px">{{w.w}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{w.n}}</td><td style="padding: 9px 10px; text-align: right"><template data-sc="if" value="{{w.isLink}}" hint-placeholder-val="{{ false }}"><a href="#">{{w.c}}</a></template><template data-sc="if" value="{{w.isText}}" hint-placeholder-val="{{ true }}"><span style="font-variant-numeric: tabular-nums">{{w.c}}</span></template></td></tr>
@@ -424,8 +437,8 @@ button,select{font-family:inherit}
         <section data-prd="pg" aria-labelledby="pg-h" style="flex: 1 1 560px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
           <h2 id="pg-h" style="margin: 0 0 12px; font-size: 16px; font-weight: 600">页面</h2>
           <div style="overflow-x: auto">
-            <table style="width: 100%; min-width: 520px; border-collapse: collapse; font-size: 13px">
-              <thead><tr style="background: #F7F8FA; color: #646A73; text-align: left"><th style="padding: 8px 10px; font-weight: 500">页面</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">PV</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">UV</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">平均停留</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">跳出率</th></tr></thead>
+            <table style="width: 100%; min-width: 520px; border-collapse: collapse; font-size: 14px">
+              <thead><tr style="background: var(--fill-1); color: var(--text-2); text-align: left"><th style="padding: 8px 10px; font-weight: 500">页面</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">PV</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">UV</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">平均停留</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">跳出率</th></tr></thead>
               <tbody>
                 <template data-sc="for" list="{{pages}}" as="p" hint-placeholder-count="6">
                   <tr style="border-bottom: 1px solid #F0F1F2"><td style="padding: 9px 10px">{{p.name}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{p.pv}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{p.uv}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{p.stay}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{p.bounce}}</td></tr>
@@ -436,12 +449,12 @@ button,select{font-family:inherit}
         </section>
         <section data-prd="cp" aria-labelledby="cp-h" style="flex: 1 1 520px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
           <h2 id="cp-h" style="margin: 0 0 4px; font-size: 16px; font-weight: 600">首页装修组件与坑位</h2>
-          <p style="margin: 0 0 12px; font-size: 12px; color: #646A73">曝光口径：面积过半且停留满 500ms；点击率低的坑位可以换货盘或换图</p>
+          <p style="margin: 0 0 12px; font-size: 12px; color: var(--text-2)">曝光口径：面积过半且停留满 500ms；点击率低的坑位可以换货盘或换图</p>
           <template data-sc="for" list="{{comps}}" as="c" hint-placeholder-count="6">
             <div style="display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #F0F1F2">
-              <span style="width: 150px; flex: none; font-size: 13px">{{c.name}}</span>
-              <div style="flex: 1; min-width: 0; height: 10px; background: #F2F3F5; border-radius: 4px"><div style="{{c.barStyle}}"></div></div>
-              <span style="width: 120px; text-align: right; font-size: 12px; color: #646A73; font-variant-numeric: tabular-nums">{{c.detail}}</span>
+              <span style="width: 150px; flex: none; font-size: 14px">{{c.name}}</span>
+              <div style="flex: 1; min-width: 0; height: 10px; background: var(--fill-2); border-radius: 4px"><div style="{{c.barStyle}}"></div></div>
+              <span style="width: 120px; text-align: right; font-size: 12px; color: var(--text-2); font-variant-numeric: tabular-nums">{{c.detail}}</span>
               <span style="{{c.ctrStyle}}">{{c.ctr}}</span>
             </div>
           </template>
@@ -454,20 +467,20 @@ button,select{font-family:inherit}
       <div style="display: flex; flex-direction: column; gap: 16px">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
           <template data-sc="for" list="{{habitKpis}}" as="k" hint-placeholder-count="5">
-            <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 13px; color: #646A73">{{k.label}}</div><div style="font-size: 22px; font-weight: 600; margin-top: 6px">{{k.value}}</div><div style="font-size: 12px; color: #646A73">{{k.note}}</div></div>
+            <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 14px; color: var(--text-2)">{{k.label}}</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">{{k.value}}</div><div style="font-size: 12px; color: var(--text-2)">{{k.note}}</div></div>
           </template>
         </div>
         <section data-prd="hr" aria-labelledby="hr-h" style="background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
           <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px">
             <h2 id="hr-h" style="margin: 0; font-size: 16px; font-weight: 600">下单时段分布</h2>
-            <span style="font-size: 12px; color: #646A73">按小时统计创单成功数；高峰在午间和 20–22 点，适合安排上新和推送</span>
+            <span style="font-size: 12px; color: var(--text-2)">按小时统计创单成功数；高峰在午间和 20–22 点，适合安排上新和推送</span>
           </div>
           <div role="img" aria-label="{{hourAria}}" style="position: relative; height: 180px; display: flex; align-items: flex-end; gap: 3px; padding-bottom: 22px; border-bottom: 1px solid #C9CDD4">
             <template data-sc="for" list="{{hours}}" as="h" hint-placeholder-count="24">
               <div onMouseEnter="{{h.enter}}" onMouseLeave="{{h.leave}}" title="{{h.tip}}" style="position: relative; flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center">
                 <template data-sc="if" value="{{h.hover}}" hint-placeholder-val="{{ false }}"><div style="{{h.tipStyle}}">{{h.tip}}</div></template>
                 <div style="{{h.barStyle}}"></div>
-                <span style="position: absolute; bottom: -20px; font-size: 11px; color: #646A73">{{h.label}}</span>
+                <span style="position: absolute; bottom: -20px; font-size: 12px; color: var(--text-2)">{{h.label}}</span>
               </div>
             </template>
           </div>
@@ -478,8 +491,8 @@ button,select{font-family:inherit}
               <h2 style="margin: 0 0 12px; font-size: 16px; font-weight: 600">{{s.title}}</h2>
               <template data-sc="for" list="{{s.rows}}" as="r" hint-placeholder-count="4">
                 <div style="margin-bottom: 10px">
-                  <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px"><span>{{r.label}}</span><span style="font-variant-numeric: tabular-nums">{{r.pct}}</span></div>
-                  <div style="height: 8px; background: #F2F3F5; border-radius: 4px"><div style="{{r.barStyle}}"></div></div>
+                  <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px"><span>{{r.label}}</span><span style="font-variant-numeric: tabular-nums">{{r.pct}}</span></div>
+                  <div style="height: 8px; background: var(--fill-2); border-radius: 4px"><div style="{{r.barStyle}}"></div></div>
                 </div>
               </template>
             </section>
@@ -493,12 +506,12 @@ button,select{font-family:inherit}
       <section data-prd="pj" aria-labelledby="pj-h" style="background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 4px">
           <h2 id="pj-h" style="margin: 0; font-size: 16px; font-weight: 600">发放兑换情况</h2>
-          <span style="font-size: 11px; color: #B54708; background: #FFF1E8; border-radius: 4px; padding: 1px 6px">分母「项目发放员工数」取哪张表待确认</span>
+          <span style="font-size: 12px; color: var(--warn); background: var(--warn-a08); border-radius: 4px; padding: 1px 6px">分母「项目发放员工数」取哪张表待确认</span>
         </div>
-        <p style="margin: 0 0 14px; font-size: 13px; color: #646A73">发放兑换率 = 已下单员工数 ÷ 项目发放员工数。整体 <b style="color: #1F2329">65.6%</b>（1,339 / 2,040 人）。同样的数据也在「我的商城 › 商城详情 › 兑换情况」。<br>员工手里有两种额度：<b style="color: #1F2329">商城余额</b>按 1:1 抵现金；<b style="color: #1F2329">商城积分</b>按站点设置的比例兑换商品，所以不同站点的积分不能直接相加，合计时按各自比例折算成金额。</p>
+        <p style="margin: 0 0 14px; font-size: 14px; color: var(--text-2)">发放兑换率 = 已下单员工数 ÷ 项目发放员工数。整体 <b style="color: var(--text-1)">65.6%</b>（1,339 / 2,040 人）。同样的数据也在「我的商城 › 商城详情 › 兑换情况」。<br>员工手里有两种额度：<b style="color: var(--text-1)">商城余额</b>按 1:1 抵现金；<b style="color: var(--text-1)">商城积分</b>按站点设置的比例兑换商品，所以不同站点的积分不能直接相加，合计时按各自比例折算成金额。</p>
         <div style="overflow-x: auto">
-          <table style="width: 100%; min-width: 1100px; border-collapse: collapse; font-size: 13px">
-            <thead><tr style="background: #F7F8FA; color: #646A73; text-align: left">
+          <table style="width: 100%; min-width: 1100px; border-collapse: collapse; font-size: 14px">
+            <thead><tr style="background: var(--fill-1); color: var(--text-2); text-align: left">
               <th style="padding: 10px 12px; font-weight: 500">商城 / 福利项目</th>
               <th style="padding: 10px 12px; font-weight: 500; text-align: right">开通账号</th>
               <th style="padding: 10px 12px; font-weight: 500; text-align: right">已激活（首登）</th>
@@ -511,18 +524,18 @@ button,select{font-family:inherit}
             <tbody>
               <template data-sc="for" list="{{projects}}" as="p" hint-placeholder-count="3">
                 <tr style="border-bottom: 1px solid #F0F1F2">
-                  <td style="padding: 12px; font-weight: 500">{{p.name}}<span style="display: block; font-size: 12px; font-weight: 400; color: #646A73">{{p.proj}}</span></td>
+                  <td style="padding: 12px; font-weight: 500">{{p.name}}<span style="display: block; font-size: 12px; font-weight: 400; color: var(--text-2)">{{p.proj}}</span></td>
                   <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.people}}</td>
                   <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.active}}</td>
                   <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.done}}</td>
                   <td style="padding: 12px">
                     <div style="display: flex; align-items: center; gap: 8px">
-                      <div style="width: 120px; height: 8px; background: #F2F3F5; border-radius: 4px"><div style="{{p.barStyle}}"></div></div>
+                      <div style="width: 120px; height: 8px; background: var(--fill-2); border-radius: 4px"><div style="{{p.barStyle}}"></div></div>
                       <span style="font-variant-numeric: tabular-nums">{{p.rate}}</span>
                     </div>
                   </td>
-                  <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.bal}}<span style="display: block; font-size: 12px; color: #646A73">{{p.balRate}}</span></td>
-                  <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.pts}}<span style="display: block; font-size: 12px; color: #646A73">{{p.ptsNote}}</span></td>
+                  <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.bal}}<span style="display: block; font-size: 12px; color: var(--text-2)">{{p.balRate}}</span></td>
+                  <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.pts}}<span style="display: block; font-size: 12px; color: var(--text-2)">{{p.ptsNote}}</span></td>
                   <td style="{{p.dueStyle}}">{{p.due}}</td>
                 </tr>
               </template>
@@ -612,12 +625,12 @@ class Component extends DCLogic {
   pageVals() {
     const st = this.state;
     const fmt = (n) => n.toLocaleString('en-US');
-    const chip = (sel) => 'height: 30px; padding: 0 12px; border-radius: 15px; border: 0; cursor: pointer; font-size: 13px; ' + (sel ? 'background: #E8F6F4; color: #0B7A70; font-weight: 600' : 'background: #F2F3F5; color: #1F2329');
+    const chip = (sel) => 'height: 30px; padding: 0 12px; border-radius: 15px; border: 0; cursor: pointer; font-size: 14px; ' + (sel ? 'background: var(--brand-a08); color: var(--brand); font-weight: 600' : 'background: var(--fill-2); color: var(--text-1)');
 
     const tabs = [['funnel', '漏斗分析', true], ['loss', '流失原因', true], ['search', '搜索分析'], ['page', '页面与组件'], ['habit', '下单习惯'], ['project', '发放兑换']].map((t) => {
       const sel = st.tab === t[0];
       return { label: t[1], pending: !!t[2] && st.view === 'provider', selected: sel ? 'true' : 'false', pick: () => this.setState({ tab: t[0] }),
-        style: 'display: flex; align-items: center; height: 42px; padding: 0 16px; border: 0; background: transparent; cursor: pointer; font-size: 14px; margin-bottom: -1px; ' + (sel ? 'color: #0B7A70; font-weight: 600; border-bottom: 2px solid #0F8F84' : 'color: #646A73; border-bottom: 2px solid transparent') };
+        style: 'display: flex; align-items: center; height: 42px; padding: 0 16px; border: 0; background: transparent; cursor: pointer; font-size: 14px; margin-bottom: -1px; ' + (sel ? 'color: var(--brand); font-weight: 600; border-bottom: 2px solid #0F8F84' : 'color: var(--text-2); border-bottom: 2px solid transparent') };
     });
 
     const F = {
@@ -689,7 +702,7 @@ class Component extends DCLogic {
           const nxt = cur.steps[i + 1];
           const wn = nxt ? nxt[2] / s0 * 100 : w;
           const inset = w > 0 ? ((w - wn) / 2 / w * 100) : 0;
-          return 'margin: 0 auto; height: 42px; width: ' + w.toFixed(2) + '%; min-width: 88px; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; display: flex; align-items: center; justify-content: center; ' +
+          return 'margin: 0 auto; height: 42px; width: ' + w.toFixed(2) + '%; min-width: 88px; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; display: flex; align-items: center; justify-content: center; ' +
             'clip-path: polygon(0 0, 100% 0, ' + (100 - inset).toFixed(2) + '% 100%, ' + inset.toFixed(2) + '% 100%)';
         })(),
         hasLoss: i > 0, worst: i === worst,
@@ -753,7 +766,7 @@ class Component extends DCLogic {
         refPoints: opt.ref != null ? ('0,' + (100 - y(opt.ref)).toFixed(2) + ' 100,' + (100 - y(opt.ref)).toFixed(2)) : '',
         aria: opt.aria + '：' + series.map((v, i) => days[i] + ' ' + opt.fmt(v)).join('，'),
         ticks: ticks.map((v) => ({ label: opt.fmt(v),
-          labelStyle: 'position: absolute; right: 0; bottom: ' + y(v) + '%; transform: translateY(50%); font-size: 12px; color: #646A73; font-variant-numeric: tabular-nums; white-space: nowrap',
+          labelStyle: 'position: absolute; right: 0; bottom: ' + y(v) + '%; transform: translateY(50%); font-size: 12px; color: var(--text-2); font-variant-numeric: tabular-nums; white-space: nowrap',
           lineStyle: 'position: absolute; left: 0; right: 0; bottom: ' + y(v) + '%; border-top: 1px solid ' + (v === lo ? '#C9CDD4' : '#EEF0F2') })),
         dots: series.map((v, i) => {
           const on = hv === i;
@@ -762,7 +775,7 @@ class Component extends DCLogic {
             hitStyle: 'position: absolute; top: 0; bottom: 0; width: 36px; left: calc(' + x(i) + '% - 18px)',
             dotStyle: 'position: absolute; left: 50%; bottom: ' + y(v) + '%; width: ' + (on ? 10 : 8) + 'px; height: ' + (on ? 10 : 8) + 'px; border-radius: 50%; background: #0F8F84; box-shadow: 0 0 0 2px #FFFFFF; transform: translate(-50%, 50%)',
             tipStyle: 'position: absolute; left: 50%; bottom: calc(' + y(v) + '% + 14px); transform: translateX(-50%); background: #1F2329; color: #FFFFFF; border-radius: 6px; padding: 4px 8px; font-size: 12px; white-space: nowrap; z-index: 2; pointer-events: none',
-            xStyle: 'position: absolute; left: ' + x(i) + '%; transform: translateX(-50%); font-size: 12px; color: #646A73; white-space: nowrap' };
+            xStyle: 'position: absolute; left: ' + x(i) + '%; transform: translateX(-50%); font-size: 12px; color: var(--text-2); white-space: nowrap' };
         })
       };
     };
@@ -795,8 +808,8 @@ class Component extends DCLogic {
       const strong = st.loss === g[3];
       return { label: g[0], n: String(g[2]), hint: g[1] > 1 ? '共 ' + g[1] + ' 步 · 点击看汇总' : '',
         pick: () => this.setState({ loss: g[3], lsHover: -1 }), selected: strong ? 'true' : 'false',
-        style: 'flex: ' + g[1] + ' 1 0; min-width: 0; display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border-radius: 8px; cursor: pointer; font-family: inherit; font-size: 13px; text-align: left; ' +
-          (strong ? 'border: 1px solid #0F8F84; background: #E8F6F4; color: #0B6E66; font-weight: 600' : (on ? 'border: 1px dashed #0F8F84; background: #FFFFFF; color: #0B6E66' : 'border: 1px solid #E5E8EB; background: #F7F8FA; color: #1F2329')) };
+        style: 'flex: ' + g[1] + ' 1 0; min-width: 0; display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border-radius: 8px; cursor: pointer; font-family: inherit; font-size: 14px; text-align: left; ' +
+          (strong ? 'border: 1px solid #0F8F84; background: var(--brand-a08); color: #0B6E66; font-weight: 600' : (on ? 'border: 1px dashed #0F8F84; background: #FFFFFF; color: #0B6E66' : 'border: 1px solid var(--line-1); background: var(--fill-1); color: var(--text-1)')) };
     });
     const lossBars = LB.map((b) => {
       const sel = b[2] === st.loss || (st.loss === 'order' && ['toConfirm', 'confirm', 'create'].indexOf(b[2]) >= 0);
@@ -804,7 +817,7 @@ class Component extends DCLogic {
       return { n: String(b[1]), label: b[0], disabled: !b[2], selected: sel ? 'true' : 'false',
         aria: b[0] + ' 流失 ' + b[1] + ' 人' + (b[2] ? '' : '（暂无明细）'),
         pick: () => { if (b[2]) this.setState({ loss: b[2], lsHover: -1 }); },
-        btnStyle: 'position: relative; flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; border: 0; padding: 0; border-radius: 6px; font-family: inherit; cursor: ' + (b[2] ? 'pointer' : 'default') + '; background: ' + (sel ? '#E8F6F4' : 'transparent'),
+        btnStyle: 'position: relative; flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; border: 0; padding: 0; border-radius: 6px; font-family: inherit; cursor: ' + (b[2] ? 'pointer' : 'default') + '; background: ' + (sel ? 'var(--brand-a08)' : 'transparent'),
         barStyle: 'display: block; width: 56%; max-width: 64px; height: ' + (b[1] / 554 * 100) + '%; min-height: 2px; border-radius: 4px 4px 0 0; background: ' + color };
     });
     const PAL = ['#0F8F84', '#5B6BD5', '#C2671B', '#A0479E', '#5E8C2E'];
@@ -879,7 +892,7 @@ class Component extends DCLogic {
           this.setState(patch);
         },
         results: results.map((it) => { const on = sel.indexOf(it.id) >= 0; return { name: it.name, id: it.id, sub: it.sub, mark: on ? '✓' : '', selStr: on ? 'true' : 'false', toggle: () => toggleId(it.id),
-          style: 'display: flex; align-items: center; gap: 8px; width: 100%; min-height: 36px; padding: 0 8px; border: 0; border-radius: 6px; cursor: pointer; font-size: 13px; color: #1F2329; font-family: inherit; background: ' + (on ? '#E8F6F4' : 'transparent') }; }),
+          style: 'display: flex; align-items: center; gap: 8px; width: 100%; min-height: 36px; padding: 0 8px; border: 0; border-radius: 6px; cursor: pointer; font-size: 14px; color: var(--text-1); font-family: inherit; background: ' + (on ? 'var(--brand-a08)' : 'transparent') }; }),
         empty: results.length === 0 && !idMode,
         footText: cfg.footText
       };
@@ -897,7 +910,7 @@ class Component extends DCLogic {
       items: mallItems, idRe: /^M?\d{5,}$/i, normId: (t) => 'M' + t.replace(/^M/i, ''),
       recentText: '最近查看的商城', footText: (isProvider ? '你名下共 86 个商城' : '平台共 12,486 个商城') + '；名称搜索最多显示 20 条，可粘贴多个商城 ID'
     });
-    const viewBtn = (on) => 'height: 30px; padding: 0 12px; border: 0; border-radius: 6px; cursor: pointer; font-size: 13px; ' + (on ? 'background: #FFFFFF; color: #1F2329; font-weight: 600' : 'background: transparent; color: #C9CDD4');
+    const viewBtn = (on) => 'height: 30px; padding: 0 12px; border: 0; border-radius: 6px; cursor: pointer; font-size: 14px; ' + (on ? 'background: #FFFFFF; color: var(--text-1); font-weight: 600' : 'background: transparent; color: #C9CDD4');
     const mk = (rows, link) => rows.map((r) => ({ w: r[0], n: fmt(r[1]), c: r[2], isLink: !!link, isText: !link }));
     const wordTables = [
       { title: '热词 Top 5', desc: '员工最常搜的词', col3: '点击率', rows: mk([['坚果', 412, '52.4%'], ['大米', 236, '47.0%'], ['洗衣液', 198, '44.9%'], ['电影票', 176, '38.6%'], ['湿厕纸', 121, '35.5%']]) },
@@ -912,7 +925,7 @@ class Component extends DCLogic {
       const ctr = c[2] / c[1] * 100;
       const low = ctr < 5;
       return { name: c[0], detail: '曝光 ' + fmt(c[1]) + ' · 点击 ' + fmt(c[2]), ctr: ctr.toFixed(1) + '%',
-        ctrStyle: 'width: 52px; text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; ' + (low ? 'color: #B54708; font-weight: 600' : ''),
+        ctrStyle: 'width: 52px; text-align: right; font-size: 14px; font-variant-numeric: tabular-nums; ' + (low ? 'color: var(--warn); font-weight: 600' : ''),
         barStyle: 'height: 10px; border-radius: 4px; background: #0F8F84; width: ' + (ctr / 14 * 100) + '%' };
     });
 
@@ -946,7 +959,7 @@ class Component extends DCLogic {
         balRate: bal ? '已用 ' + (bal[0] / bal[1] * 100).toFixed(1) + '%' : '',
         pts: pts ? fmt(pts[0]) + ' / ' + fmt(pts[1]) + ' 分' : '未发放',
         ptsNote: pts ? (pts[2] + ' 分 = ¥1 · 折合 ¥' + fmt(pts[0] / pts[2]) + ' / ¥' + fmt(pts[1] / pts[2])) : '',
-        due: p[7], dueStyle: 'padding: 12px; ' + (p[8] ? 'color: #B54708' : 'color: #1F2329'),
+        due: p[7], dueStyle: 'padding: 12px; ' + (p[8] ? 'color: var(--warn)' : 'color: var(--text-1)'),
         barStyle: 'height: 8px; border-radius: 4px; background: #0F8F84; width: ' + rate + '%' };
     });
 
@@ -961,7 +974,7 @@ class Component extends DCLogic {
         const dis = m[0] === 'session' && !!base.noSession;
         const on = (sessionMode ? 'session' : 'person') === m[0];
         return { label: m[1], selected: on ? 'true' : 'false', disabled: dis, pick: () => { if (!dis) this.setState({ mode: m[0] }); },
-          style: 'height: 26px; padding: 0 10px; border: 0; border-radius: 6px; font-size: 12px; cursor: ' + (dis ? 'not-allowed' : 'pointer') + '; ' + (on ? 'background: #FFFFFF; color: #0B7A70; font-weight: 600' : 'background: transparent; color: ' + (dis ? '#A8ADB4' : '#646A73')) };
+          style: 'height: 26px; padding: 0 10px; border: 0; border-radius: 6px; font-size: 12px; cursor: ' + (dis ? 'not-allowed' : 'pointer') + '; ' + (on ? 'background: #FFFFFF; color: var(--brand); font-weight: 600' : 'background: transparent; color: ' + (dis ? '#A8ADB4' : '#646A73')) };
       }),
       pv, ml, showProvider: !isProvider,
       endLabel: isProvider ? '会员端' : '运营端', crumbRoot: isProvider ? '工作台' : '运营后台',

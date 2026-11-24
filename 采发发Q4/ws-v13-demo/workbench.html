@@ -10,12 +10,25 @@
 <template id="dc-src">
 <helmet>
 <style>
+:root{
+--fs-12:12px;--fs-14:14px;--fs-16:16px;--fs-20:20px;--fs-24:24px;--fs-28:28px;
+--text-1:#1F2329;--text-2:#646A73;--text-3:#8F959E;
+--line-1:#E5E8EB;--line-2:#EEF0F2;--fill-1:#F7F8FA;--fill-2:#F2F3F5;--bg-page:#F3F5F7;
+--brand:#0B7A70;--brand-hover:#075E56;
+--brand-a08:rgba(15,143,132,.08);--brand-a16:rgba(15,143,132,.16);--brand-a32:rgba(15,143,132,.32);
+--warn:#B54708;--warn-solid:#C2410C;--warn-a08:rgba(232,89,12,.08);--warn-a16:rgba(232,89,12,.16);--warn-a32:rgba(232,89,12,.32);
+--info:#3B4BB8;--info-a08:rgba(91,107,213,.08);--info-a16:rgba(91,107,213,.16);--info-a32:rgba(91,107,213,.32);
+--mask:rgba(31,35,41,.55);
+}
+.ttl-ic{flex:none;width:28px;height:28px;border-radius:8px;background:var(--brand-a08);color:var(--brand);display:inline-flex;align-items:center;justify-content:center}
+.ttl-ic.lg{width:36px;height:36px;border-radius:10px}
+.ttl-ic2{flex:none;color:var(--brand);display:inline-flex}
 body{margin:0;background:#F3F5F7}
 a{color:#0B7A70;text-decoration:none}a:hover{color:#075E56}
 button{font-family:inherit}
 .tap{display:inline-flex;align-items:center;min-height:28px}
 .lift{transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
-.lift:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(31,35,41,.08);border-color:#9FD3CC !important}
+.lift:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(31,35,41,.08);border-color:var(--brand-a32) !important}
 .lift:active{transform:translateY(0);box-shadow:none}
 .pcov img{transition:transform .25s ease}.lift:hover .pcov img{transform:scale(1.04)}
 a,button,input{transition:color .15s ease,background-color .15s ease}
@@ -25,58 +38,58 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
 </helmet>
 <div data-prd-root="1" style="position: relative; display: flex; align-items: stretch; background: #F7F8FC">
 <div style="flex: 1 1 960px; min-width: 0; position: relative; z-index: 0; overflow: hidden">
-<div style="position: relative; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; background: #F3F5F7; min-height: 1600px; font-size: 14px">
+<div style="position: relative; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: var(--text-1); background: #F3F5F7; min-height: 1600px; font-size: 14px">
   <template data-sc="if" value="{{tourOn}}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="position: absolute; inset: 0; z-index: 50"></div></template>
 
-  <div style="position: relative; z-index: 80; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 13px">
+  <div style="position: relative; z-index: 80; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 14px">
     <span style="font-weight: 600">原型演示 · 权益视角</span>
     <div style="display: flex; gap: 4px; background: #3A3F45; border-radius: 8px; padding: 3px">
       <button onClick="{{setTop}}" style="{{topBtnStyle}}">最高权益</button>
       <button onClick="{{setLow}}" style="{{lowBtnStyle}}">低档权益（仅猫超代发）</button>
     </div>
     <span style="color: #C9CDD4">{{menuCountText}}</span>
-    <button onClick="{{simulateLogin}}" style="margin-left: auto; height: 30px; padding: 0 12px; border: 1px solid #5FD3C6; border-radius: 6px; background: transparent; color: #5FD3C6; font-size: 13px; cursor: pointer">模拟首次登录</button>
+    <button onClick="{{simulateLogin}}" style="margin-left: auto; height: 30px; padding: 0 12px; border: 1px solid #5FD3C6; border-radius: 6px; background: transparent; color: #5FD3C6; font-size: 14px; cursor: pointer">模拟首次登录</button>
   </div>
 
   <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 64px; padding: 0 24px; background: #FFFFFF; border-bottom: 1px solid #E5E8EB">
     <div style="display: flex; align-items: center; gap: 8px">
-      <span style="font-size: 22px; font-weight: 700; color: #0B7A70; letter-spacing: 1px">采发发</span>
+      <span style="font-size: 20px; font-weight: 700; color: var(--brand); letter-spacing: 1px">采发发</span>
       <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0B7A70; border-radius: 4px; padding: 2px 6px">会员端</span>
     </div>
     <span style="width: 1px; height: 20px; background: #E5E8EB"></span>
-    <a href="#" class="tap" style="color: #646A73">返回首页</a>
+    <a href="#" class="tap" style="color: var(--text-2)">返回首页</a>
     <nav aria-label="全局操作" style="margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 4px">
       <span data-prd="guide" style="{{guideWrapStyle}}">
-        <button onClick="{{startTour}}" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border: 0; background: transparent; border-radius: 8px; color: #0B7A70; font-size: 14px; font-weight: 500; cursor: pointer">
+        <button onClick="{{startTour}}" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border: 0; background: transparent; border-radius: 8px; color: var(--brand); font-size: 14px; font-weight: 500; cursor: pointer">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m15.5 8.5-2 5-5 2 2-5z"></path></svg>更新指引
           <template data-sc="if" value="{{guideDot}}" hint-placeholder-val="{{ true }}"><span aria-label="未看完" style="width: 8px; height: 8px; border-radius: 50%; background: #D92D20"></span></template>
         </button>
         <template data-sc="if" value="{{spotGuide}}" hint-placeholder-val="{{ false }}">
-          <div role="dialog" aria-label="更新指引" style="position: absolute; top: calc(100% + 14px); right: 0; width: 320px; z-index: 70; background: #FFFFFF; border-radius: 12px; padding: 14px 18px 16px; box-sizing: border-box; box-shadow: 0 12px 32px rgba(0,0,0,0.28); text-align: left; font-weight: 400"><span aria-hidden="true" style="position: absolute; top: -6px; right: 40px; width: 12px; height: 12px; background: #FFFFFF; transform: rotate(45deg)"></span><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px"><span style="font-size: 12px; font-weight: 600; color: #0B7A70">{{tStep}}</span><button onClick="{{tClose}}" aria-label="关闭指引" style="border: 0; background: transparent; color: #8F959E; font-size: 18px; width: 28px; height: 28px; cursor: pointer">×</button></div>
-                <div style="font-size: 16px; font-weight: 600; color: #1F2329; margin-bottom: 6px">{{tTitle}}</div>
-                <div style="font-size: 13px; color: #4E5969; line-height: 1.7; white-space: normal">{{tDesc}}</div>
-                <template data-sc="if" value="{{tIsLast}}" hint-placeholder-val="{{ false }}"><a href="#" style="display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 500">查看完整新旧对照 →</a></template>
+          <div role="dialog" aria-label="更新指引" style="position: absolute; top: calc(100% + 14px); right: 0; width: 320px; z-index: 70; background: #FFFFFF; border-radius: 12px; padding: 14px 18px 16px; box-sizing: border-box; box-shadow: 0 12px 32px rgba(0,0,0,0.28); text-align: left; font-weight: 400"><span aria-hidden="true" style="position: absolute; top: -6px; right: 40px; width: 12px; height: 12px; background: #FFFFFF; transform: rotate(45deg)"></span><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px"><span style="font-size: 12px; font-weight: 600; color: var(--brand)">{{tStep}}</span><button onClick="{{tClose}}" aria-label="关闭指引" style="border: 0; background: transparent; color: var(--text-3); font-size: 20px; width: 28px; height: 28px; cursor: pointer">×</button></div>
+                <div style="font-size: 16px; font-weight: 600; color: var(--text-1); margin-bottom: 6px">{{tTitle}}</div>
+                <div style="font-size: 14px; color: #4E5969; line-height: 1.7; white-space: normal">{{tDesc}}</div>
+                <template data-sc="if" value="{{tIsLast}}" hint-placeholder-val="{{ false }}"><a href="#" style="display: inline-block; margin-top: 8px; font-size: 14px; font-weight: 500">查看完整新旧对照 →</a></template>
                 <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px">
-                  <button onClick="{{tClose}}" style="border: 0; background: transparent; color: #646A73; font-size: 13px; cursor: pointer; padding: 0">跳过</button>
+                  <button onClick="{{tClose}}" style="border: 0; background: transparent; color: var(--text-2); font-size: 14px; cursor: pointer; padding: 0">跳过</button>
                   <button onClick="{{tPrev}}" style="{{tPrevStyle}}">上一步</button>
-                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
+                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
                 </div></div>
         </template>
       </span>
-      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: #1F2329; border-radius: 8px">
+      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: var(--text-1); border-radius: 8px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>导入导出</a>
-      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: #1F2329; border-radius: 8px">
+      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: var(--text-1); border-radius: 8px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="17" rx="2"></rect><path d="m9 13 2 2 4-4"></path></svg>审批</a>
-      <a href="#" aria-label="消息，3 条未读" style="position: relative; display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: #1F2329; border-radius: 8px">
+      <a href="#" aria-label="消息，3 条未读" style="position: relative; display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: var(--text-1); border-radius: 8px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>消息
-        <span style="min-width: 18px; height: 18px; padding: 0 5px; box-sizing: border-box; border-radius: 9px; background: #D92D20; color: #FFFFFF; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center">3</span></a>
+        <span style="min-width: 18px; height: 18px; padding: 0 5px; box-sizing: border-box; border-radius: 9px; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center">3</span></a>
       <span style="width: 1px; height: 18px; background: #E5E8EB; margin: 0 6px"></span>
-      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: #1F2329; border-radius: 8px">
+      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: var(--text-1); border-radius: 8px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"></path><rect x="3" y="14" width="4" height="6" rx="1"></rect><rect x="17" y="14" width="4" height="6" rx="1"></rect></svg>咨询客服</a>
-      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: #1F2329; border-radius: 8px">
+      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: var(--text-1); border-radius: 8px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"></path></svg>企业控制台</a>
       <span style="width: 1px; height: 18px; background: #E5E8EB; margin: 0 6px"></span>
-      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: #1F2329; font-weight: 500">三院
+      <a href="#" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; color: var(--text-1); font-weight: 500">三院
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a>
     </nav>
   </header>
@@ -84,21 +97,21 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
   <div style="display: flex; flex-wrap: wrap; align-items: flex-start">
 
     <aside data-prd="menu" aria-label="主菜单" style="flex: 1 1 248px; max-width: 264px; background: #FFFFFF; border-right: 1px solid #E5E8EB; padding: 14px 12px 24px; box-sizing: border-box; align-self: stretch">
-      <label style="display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px; border: 1px solid #E5E8EB; border-radius: 8px; background: #F7F8FA; color: #646A73; margin-bottom: 8px">
+      <label style="display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px; border: 1px solid var(--line-1); border-radius: 8px; background: var(--fill-1); color: var(--text-2); margin-bottom: 8px">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
-        <input type="search" placeholder="搜索菜单，如：代发订单" aria-label="搜索菜单" style="flex: 1; min-width: 0; height: 32px; padding: 0; border: 0; outline: none; background: transparent; font-size: 13px; font-family: inherit; color: #1F2329">
+        <input type="search" placeholder="搜索菜单，如：代发订单" aria-label="搜索菜单" style="flex: 1; min-width: 0; height: 32px; padding: 0; border: 0; outline: none; background: transparent; font-size: 14px; font-family: inherit; color: var(--text-1)">
       </label>
 
       <template data-sc="for" list="{{groups}}" as="g" hint-placeholder-count="8">
         <div style="border-bottom: 1px solid #F0F1F2; padding: 4px 0">
           <template data-sc="if" value="{{g.isLink}}" hint-placeholder-val="{{ false }}">
-            <a href="#" aria-current="page" style="display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 10px; border-radius: 8px; background: #E8F6F4; color: #0B7A70; font-size: 15px; font-weight: 600">
+            <a href="#" aria-current="page" style="display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 10px; border-radius: 8px; background: var(--brand-a08); color: var(--brand); font-size: 16px; font-weight: 600">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 2 11h3v9h5v-6h4v6h5v-9h3z"></path></svg>{{g.name}}</a>
           </template>
           <template data-sc="if" value="{{g.isGroup}}" hint-placeholder-val="{{ true }}">
-            <button onClick="{{g.toggle}}" aria-expanded="{{g.open}}" style="display: flex; align-items: center; gap: 8px; width: 100%; height: 40px; padding: 0 10px; border: 0; background: transparent; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; color: #1F2329; text-align: left">
+            <button onClick="{{g.toggle}}" aria-expanded="{{g.open}}" style="display: flex; align-items: center; gap: 8px; width: 100%; height: 40px; padding: 0 10px; border: 0; background: transparent; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; color: var(--text-1); text-align: left">
               {{g.name}}
-              <template data-sc="if" value="{{g.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 500; color: #646A73; background: #F2F3F5; border-radius: 4px; padding: 1px 6px">{{g.hint}}</span></template>
+              <template data-sc="if" value="{{g.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; font-weight: 500; color: var(--text-2); background: var(--fill-2); border-radius: 4px; padding: 1px 6px">{{g.hint}}</span></template>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8F959E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{g.chevStyle}}"><path d="m6 9 6 6 6-6"></path></svg>
             </button>
             <template data-sc="if" value="{{g.open}}" hint-placeholder-val="{{ true }}">
@@ -106,22 +119,22 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
                 <template data-sc="for" list="{{g.sections}}" as="s" hint-placeholder-count="2">
                   <div style="{{s.wrapStyle}}">
                     <template data-sc="if" value="{{s.spot}}" hint-placeholder-val="{{ false }}">
-                      <div role="dialog" aria-label="更新指引" style="position: absolute; left: calc(100% + 22px); top: 0; width: 320px; z-index: 70; background: #FFFFFF; border-radius: 12px; padding: 14px 18px 16px; box-sizing: border-box; box-shadow: 0 12px 32px rgba(0,0,0,0.28); text-align: left; font-weight: 400"><span aria-hidden="true" style="position: absolute; left: -6px; top: 20px; width: 12px; height: 12px; background: #FFFFFF; transform: rotate(45deg)"></span><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px"><span style="font-size: 12px; font-weight: 600; color: #0B7A70">{{tStep}}</span><button onClick="{{tClose}}" aria-label="关闭指引" style="border: 0; background: transparent; color: #8F959E; font-size: 18px; width: 28px; height: 28px; cursor: pointer">×</button></div>
-                <div style="font-size: 16px; font-weight: 600; color: #1F2329; margin-bottom: 6px">{{tTitle}}</div>
-                <div style="font-size: 13px; color: #4E5969; line-height: 1.7; white-space: normal">{{tDesc}}</div>
-                <template data-sc="if" value="{{tIsLast}}" hint-placeholder-val="{{ false }}"><a href="#" style="display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 500">查看完整新旧对照 →</a></template>
+                      <div role="dialog" aria-label="更新指引" style="position: absolute; left: calc(100% + 22px); top: 0; width: 320px; z-index: 70; background: #FFFFFF; border-radius: 12px; padding: 14px 18px 16px; box-sizing: border-box; box-shadow: 0 12px 32px rgba(0,0,0,0.28); text-align: left; font-weight: 400"><span aria-hidden="true" style="position: absolute; left: -6px; top: 20px; width: 12px; height: 12px; background: #FFFFFF; transform: rotate(45deg)"></span><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px"><span style="font-size: 12px; font-weight: 600; color: var(--brand)">{{tStep}}</span><button onClick="{{tClose}}" aria-label="关闭指引" style="border: 0; background: transparent; color: var(--text-3); font-size: 20px; width: 28px; height: 28px; cursor: pointer">×</button></div>
+                <div style="font-size: 16px; font-weight: 600; color: var(--text-1); margin-bottom: 6px">{{tTitle}}</div>
+                <div style="font-size: 14px; color: #4E5969; line-height: 1.7; white-space: normal">{{tDesc}}</div>
+                <template data-sc="if" value="{{tIsLast}}" hint-placeholder-val="{{ false }}"><a href="#" style="display: inline-block; margin-top: 8px; font-size: 14px; font-weight: 500">查看完整新旧对照 →</a></template>
                 <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px">
-                  <button onClick="{{tClose}}" style="border: 0; background: transparent; color: #646A73; font-size: 13px; cursor: pointer; padding: 0">跳过</button>
+                  <button onClick="{{tClose}}" style="border: 0; background: transparent; color: var(--text-2); font-size: 14px; cursor: pointer; padding: 0">跳过</button>
                   <button onClick="{{tPrev}}" style="{{tPrevStyle}}">上一步</button>
-                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
+                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
                 </div></div>
                     </template>
                     <template data-sc="if" value="{{s.hasTitle}}" hint-placeholder-val="{{ true }}">
-                      <div style="padding: 8px 10px 4px; font-size: 12px; font-weight: 600; color: #646A73">{{s.title}}</div>
+                      <div style="padding: 8px 10px 4px; font-size: 12px; font-weight: 600; color: var(--text-2)">{{s.title}}</div>
                     </template>
                     <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 4px; padding: 0 2px">
                       <template data-sc="for" list="{{s.items}}" as="it" hint-placeholder-count="2">
-                        <a href="{{it.href}}" title="{{it.tip}}" style="{{it.style}}"><span style="overflow: hidden; text-overflow: ellipsis">{{it.name}}</span><template data-sc="if" value="{{it.isNew}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 10px; font-weight: 600; color: #FFFFFF; background: #C2410C; border-radius: 3px; padding: 0 4px; line-height: 16px">新</span></template><template data-sc="if" value="{{it.isRenamed}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 10px; font-weight: 600; color: #0B7A70; background: #E8F6F4; border-radius: 3px; padding: 0 4px; line-height: 16px">改</span></template></a>
+                        <a href="{{it.href}}" title="{{it.tip}}" style="{{it.style}}"><span style="overflow: hidden; text-overflow: ellipsis">{{it.name}}</span><template data-sc="if" value="{{it.isNew}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 12px; font-weight: 600; color: #FFFFFF; background: #C2410C; border-radius: 3px; padding: 0 4px; line-height: 18px">新</span></template><template data-sc="if" value="{{it.isRenamed}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 12px; font-weight: 600; color: var(--brand); background: var(--brand-a08); border-radius: 3px; padding: 0 4px; line-height: 18px">改</span></template></a>
                       </template>
                     </div>
                   </div>
@@ -136,17 +149,17 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
     <main style="flex: 999 1 560px; min-width: 0; padding: 20px 24px 40px; box-sizing: border-box">
 
       <template data-sc="if" value="{{showBanner}}" hint-placeholder-val="{{ true }}">
-        <div data-prd="banner" role="status" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 16px; background: #E8F6F4; border: 1px solid #B5E0DA; border-radius: 10px; margin-bottom: 16px">
+        <div data-prd="banner" role="status" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 16px; background: var(--brand-a08); border: 1px solid #B5E0DA; border-radius: 10px; margin-bottom: 16px">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B7A70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 12h1v4h1"></path></svg>
           <template data-sc="if" value="{{isTop}}" hint-placeholder-val="{{ true }}">
-            <div style="flex: 1 1 420px; min-width: 0; line-height: 1.6; color: #1F2329"><b>代发入口已合并：</b>「猫超代发」「其他代发」合并为「订单 › 代发」，两套历史订单都在「代发订单」查看。新增平台猫超<b>售后（含上门取件）</b>和<b>理赔</b>，在「订单 › 售后理赔」处理。</div>
+            <div style="flex: 1 1 420px; min-width: 0; line-height: 1.6; color: var(--text-1)"><b>代发入口已合并：</b>「猫超代发」「其他代发」合并为「订单 › 代发」，两套历史订单都在「代发订单」查看。新增平台猫超<b>售后（含上门取件）</b>和<b>理赔</b>，在「订单 › 售后理赔」处理。</div>
           </template>
           <template data-sc="if" value="{{isLow}}" hint-placeholder-val="{{ false }}">
-            <div style="flex: 1 1 420px; min-width: 0; line-height: 1.6; color: #1F2329"><b>菜单有调整：</b>「猫超代发」已改为「订单 › 代发」，原「下单管理」改名为「代发订单」。新增平台猫超<b>售后（含上门取件）</b>和<b>理赔</b>，在「订单 › 售后理赔」处理。</div>
+            <div style="flex: 1 1 420px; min-width: 0; line-height: 1.6; color: var(--text-1)"><b>菜单有调整：</b>「猫超代发」已改为「订单 › 代发」，原「下单管理」改名为「代发订单」。新增平台猫超<b>售后（含上门取件）</b>和<b>理赔</b>，在「订单 › 售后理赔」处理。</div>
           </template>
-          <button onClick="{{startTour}}" style="height: 32px; padding: 0 14px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">开始指引</button>
-          <a href="#" class="tap" style="font-size: 13px">完整说明</a>
-          <button onClick="{{closeBanner}}" aria-label="关闭提示" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 0; background: transparent; border-radius: 6px; cursor: pointer; color: #646A73">
+          <button onClick="{{startTour}}" style="height: 32px; padding: 0 14px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">开始指引</button>
+          <a href="#" class="tap" style="font-size: 14px">完整说明</a>
+          <button onClick="{{closeBanner}}" aria-label="关闭提示" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 0; background: transparent; border-radius: 6px; cursor: pointer; color: var(--text-2)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
           </button>
         </div>
@@ -154,29 +167,29 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
 
       <section data-prd="todo" aria-labelledby="todo-h" style="{{todoSecStyle}}">
         <template data-sc="if" value="{{spotTodo}}" hint-placeholder-val="{{ false }}">
-          <div role="dialog" aria-label="更新指引" style="position: absolute; top: calc(100% + 16px); left: 40px; width: 320px; z-index: 70; background: #FFFFFF; border-radius: 12px; padding: 14px 18px 16px; box-sizing: border-box; box-shadow: 0 12px 32px rgba(0,0,0,0.28); text-align: left; font-weight: 400"><span aria-hidden="true" style="position: absolute; top: -6px; left: 32px; width: 12px; height: 12px; background: #FFFFFF; transform: rotate(45deg)"></span><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px"><span style="font-size: 12px; font-weight: 600; color: #0B7A70">{{tStep}}</span><button onClick="{{tClose}}" aria-label="关闭指引" style="border: 0; background: transparent; color: #8F959E; font-size: 18px; width: 28px; height: 28px; cursor: pointer">×</button></div>
-                <div style="font-size: 16px; font-weight: 600; color: #1F2329; margin-bottom: 6px">{{tTitle}}</div>
-                <div style="font-size: 13px; color: #4E5969; line-height: 1.7; white-space: normal">{{tDesc}}</div>
-                <template data-sc="if" value="{{tIsLast}}" hint-placeholder-val="{{ false }}"><a href="#" style="display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 500">查看完整新旧对照 →</a></template>
+          <div role="dialog" aria-label="更新指引" style="position: absolute; top: calc(100% + 16px); left: 40px; width: 320px; z-index: 70; background: #FFFFFF; border-radius: 12px; padding: 14px 18px 16px; box-sizing: border-box; box-shadow: 0 12px 32px rgba(0,0,0,0.28); text-align: left; font-weight: 400"><span aria-hidden="true" style="position: absolute; top: -6px; left: 32px; width: 12px; height: 12px; background: #FFFFFF; transform: rotate(45deg)"></span><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px"><span style="font-size: 12px; font-weight: 600; color: var(--brand)">{{tStep}}</span><button onClick="{{tClose}}" aria-label="关闭指引" style="border: 0; background: transparent; color: var(--text-3); font-size: 20px; width: 28px; height: 28px; cursor: pointer">×</button></div>
+                <div style="font-size: 16px; font-weight: 600; color: var(--text-1); margin-bottom: 6px">{{tTitle}}</div>
+                <div style="font-size: 14px; color: #4E5969; line-height: 1.7; white-space: normal">{{tDesc}}</div>
+                <template data-sc="if" value="{{tIsLast}}" hint-placeholder-val="{{ false }}"><a href="#" style="display: inline-block; margin-top: 8px; font-size: 14px; font-weight: 500">查看完整新旧对照 →</a></template>
                 <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px">
-                  <button onClick="{{tClose}}" style="border: 0; background: transparent; color: #646A73; font-size: 13px; cursor: pointer; padding: 0">跳过</button>
+                  <button onClick="{{tClose}}" style="border: 0; background: transparent; color: var(--text-2); font-size: 14px; cursor: pointer; padding: 0">跳过</button>
                   <button onClick="{{tPrev}}" style="{{tPrevStyle}}">上一步</button>
-                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
+                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
                 </div></div>
         </template>
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px">
-          <h2 id="todo-h" style="margin: 0; font-size: 16px; font-weight: 600">待处理</h2>
-          <span style="font-size: 12px; color: #646A73">数字大于 0 才着色，点整格进入对应列表</span>
-          <a href="#" class="tap" style="margin-left: auto; font-size: 13px">全部订单 →</a>
+          <span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.5h6V4"/><path d="m9 13 2 2 4-4"/></svg></span><h2 id="todo-h" style="margin: 0; font-size: 16px; font-weight: 600">待处理</h2>
+          <span style="font-size: 12px; color: var(--text-2)">数字大于 0 才着色，点整格进入对应列表</span>
+          <a href="#" class="tap" style="margin-left: auto; font-size: 14px">全部订单 →</a>
         </div>
         <div style="{{todoGridStyle}}">
           <template data-sc="for" list="{{todos}}" as="t" hint-placeholder-count="5">
             <a href="#" class="lift" style="{{t.cardStyle}}">
-              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: #646A73">{{t.label}}<template data-sc="if" value="{{t.hasTag}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; color: #0B7A70; background: #E8F6F4; border-radius: 4px; padding: 0 5px; line-height: 18px">{{t.tag}}</span></template></div>
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">{{t.label}}<template data-sc="if" value="{{t.hasTag}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--brand); background: var(--brand-a08); border-radius: 4px; padding: 0 5px; line-height: 18px">{{t.tag}}</span></template></div>
               <div style="{{t.numStyle}}">{{t.num}}</div>
-              <div style="font-size: 12px; color: #646A73; line-height: 1.5">{{t.sub}}</div>
-              <template data-sc="if" value="{{t.hasSub2}}" hint-placeholder-val="{{ false }}"><div style="font-size: 12px; color: #646A73; line-height: 1.5">{{t.sub2}}</div></template>
-              <div style="margin-top: auto; padding-top: 10px; font-size: 13px; font-weight: 500; color: #0B7A70">去处理 →</div>
+              <div style="font-size: 12px; color: var(--text-2); line-height: 1.5">{{t.sub}}</div>
+              <template data-sc="if" value="{{t.hasSub2}}" hint-placeholder-val="{{ false }}"><div style="font-size: 12px; color: var(--text-2); line-height: 1.5">{{t.sub2}}</div></template>
+              <div style="margin-top: auto; padding-top: 10px; font-size: 14px; font-weight: 500; color: var(--brand)">去处理 →</div>
             </a>
           </template>
         </div>
@@ -184,28 +197,28 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
 
       <section data-prd="pallet" aria-labelledby="pallet-h" style="background: #FFFFFF; border-radius: 12px; padding: 18px 20px 20px; margin-bottom: 16px">
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px">
-          <h2 id="pallet-h" style="margin: 0; font-size: 16px; font-weight: 600">平台货盘</h2>
-          <span style="font-size: 12px; color: #646A73">运营精选货盘 · 点卡片进资源广场看明细，上架和代发都在明细页操作</span>
-          <a href="#" class="tap" style="margin-left: auto; font-size: 13px; font-weight: 500">去资源广场选货 →</a>
+          <span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></span><h2 id="pallet-h" style="margin: 0; font-size: 16px; font-weight: 600">平台货盘</h2>
+          <span style="font-size: 12px; color: var(--text-2)">运营精选货盘 · 点卡片进资源广场看明细，上架和代发都在明细页操作</span>
+          <a href="#" class="tap" style="margin-left: auto; font-size: 14px; font-weight: 500">去资源广场选货 →</a>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px">
           <template data-sc="for" list="{{pallets}}" as="p" hint-placeholder-count="4">
-            <a href="pallet.html" class="lift" style="border: 1px solid #E5E8EB; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; color: #1F2329; background: #FFFFFF">
+            <a href="pallet.html" class="lift" style="border: 1px solid var(--line-1); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; color: var(--text-1); background: #FFFFFF">
               <div class="pcov" style="position: relative; height: 112px; display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; background: #FFFFFF; overflow: hidden">
                 <img src="{{p.img1}}" alt="" style="grid-row: 1 / 3; width: 100%; height: 100%; object-fit: cover; display: block">
                 <img src="{{p.img2}}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block">
                 <img src="{{p.img3}}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block">
                 <div style="position: absolute; left: 10px; top: 10px; display: flex; flex-wrap: wrap; gap: 6px">
-                  <template data-sc="if" value="{{p.isNew}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 600; color: #FFFFFF; background: #C2410C; border-radius: 4px; padding: 0 6px; line-height: 20px">新上架</span></template>
-                  <template data-sc="if" value="{{p.isTopic}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 600; color: #FFFFFF; background: #1F2329; border-radius: 4px; padding: 0 6px; line-height: 20px">暖冬专题</span></template>
+                  <template data-sc="if" value="{{p.isNew}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #C2410C; border-radius: 4px; padding: 0 6px; line-height: 20px">新上架</span></template>
+                  <template data-sc="if" value="{{p.isTopic}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #1F2329; border-radius: 4px; padding: 0 6px; line-height: 20px">暖冬专题</span></template>
                 </div>
               </div>
               <div style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 4px; flex: 1">
-                <span style="align-self: flex-start; font-size: 11px; color: #646A73; background: #F3F5F7; border-radius: 4px; padding: 0 6px; line-height: 20px">{{p.source}}</span>
-                <h3 style="margin: 2px 0 0; font-size: 16px; font-weight: 600; color: #1F2329">{{p.name}}</h3>
-                <div style="font-size: 13px; color: #1F2329">{{p.meta}}</div>
-                <div style="font-size: 12px; color: #646A73">{{p.note}}</div>
-                <span style="margin-top: auto; padding-top: 10px; font-size: 13px; font-weight: 500; color: #0B7A70">查看货盘明细 →</span>
+                <span style="align-self: flex-start; font-size: 12px; color: var(--text-2); background: #F3F5F7; border-radius: 4px; padding: 0 6px; line-height: 20px">{{p.source}}</span>
+                <h3 style="margin: 2px 0 0; font-size: 16px; font-weight: 600; color: var(--text-1)">{{p.name}}</h3>
+                <div style="font-size: 14px; color: var(--text-1)">{{p.meta}}</div>
+                <div style="font-size: 12px; color: var(--text-2)">{{p.note}}</div>
+                <span style="margin-top: auto; padding-top: 10px; font-size: 14px; font-weight: 500; color: var(--brand)">查看货盘明细 →</span>
               </div>
             </a>
           </template>
@@ -214,36 +227,36 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
 
       <section data-prd="biz" aria-labelledby="biz-h" style="background: #FFFFFF; border-radius: 12px; padding: 18px 20px 20px">
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 14px">
-          <h2 id="biz-h" style="margin: 0; font-size: 16px; font-weight: 600">经营数据</h2>
-          <div role="tablist" aria-label="订单类型" style="display: flex; gap: 4px; background: #F2F3F5; border-radius: 8px; padding: 3px">
+          <span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V7"/><path d="M17 16v-8"/></svg></span><h2 id="biz-h" style="margin: 0; font-size: 16px; font-weight: 600">经营数据</h2>
+          <div role="tablist" aria-label="订单类型" style="display: flex; gap: 4px; background: var(--fill-2); border-radius: 8px; padding: 3px">
             <template data-sc="for" list="{{bizTabs}}" as="b" hint-placeholder-count="3">
               <button role="tab" aria-selected="{{b.selected}}" onClick="{{b.pick}}" style="{{b.style}}">{{b.label}}</button>
             </template>
           </div>
-          <div style="display: flex; gap: 4px; font-size: 13px">
-            <span style="padding: 4px 8px; color: #646A73">昨天</span>
-            <span style="padding: 4px 8px; color: #0B7A70; font-weight: 600; background: #E8F6F4; border-radius: 6px">近 7 天 · 11/16–11/22</span>
-            <span style="padding: 4px 8px; color: #646A73">近 30 天</span>
+          <div style="display: flex; gap: 4px; font-size: 14px">
+            <span style="padding: 4px 8px; color: var(--text-2)">昨天</span>
+            <span style="padding: 4px 8px; color: var(--brand); font-weight: 600; background: var(--brand-a08); border-radius: 6px">近 7 天 · 11/16–11/22</span>
+            <span style="padding: 4px 8px; color: var(--text-2)">近 30 天</span>
           </div>
-          <a href="analytics.html" style="margin-left: auto; flex: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid #0F8F84; border-radius: 8px; font-size: 13px; font-weight: 500">
+          <a href="analytics.html" style="margin-left: auto; flex: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid #0F8F84; border-radius: 8px; font-size: 14px; font-weight: 500">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>分析报表</a>
         </div>
-        <p style="margin: -6px 0 12px; font-size: 12px; color: #646A73">对比上一个 7 天 · 订单实时，带「行为」标的指标来自 C 端埋点，小时级更新</p>
+        <p style="margin: -6px 0 12px; font-size: 12px; color: var(--text-2)">对比上一个 7 天 · 订单实时，带「行为」标的指标来自 C 端埋点，小时级更新</p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px">
           <template data-sc="for" list="{{kpis}}" as="k" hint-placeholder-count="5">
             <div>
               <template data-sc="if" value="{{k.chartable}}" hint-placeholder-val="{{ true }}">
                 <button onClick="{{k.pick}}" aria-pressed="{{k.selectedStr}}" class="lift" style="{{k.cardStyle}}">
-                  <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #646A73">{{k.label}}<template data-sc="if" value="{{k.behav}}" hint-placeholder-val="{{ false }}"><span style="font-size: 10px; color: #3B4BB8; background: #EEF2FF; border-radius: 3px; padding: 0 4px; line-height: 16px">行为</span></template><template data-sc="if" value="{{k.selected}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; color: #0B7A70">· 图表中</span></template></span>
-                  <span style="display: block; font-size: 22px; font-weight: 600; color: #1F2329; margin: 6px 0 4px; font-variant-numeric: tabular-nums">{{k.value}}</span>
+                  <span style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">{{k.label}}<template data-sc="if" value="{{k.behav}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--info); background: var(--info-a08); border-radius: 3px; padding: 0 4px; line-height: 18px">行为</span></template><template data-sc="if" value="{{k.selected}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--brand)">· 图表中</span></template></span>
+                  <span style="display: block; font-size: 24px; font-weight: 600; color: var(--text-1); margin: 6px 0 4px; font-variant-numeric: tabular-nums">{{k.value}}</span>
                   <span style="{{k.deltaStyle}}">{{k.delta}}</span>
                 </button>
               </template>
               <template data-sc="if" value="{{k.static}}" hint-placeholder-val="{{ false }}">
                 <div style="{{k.cardStyle}}">
-                  <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #646A73">{{k.label}}<template data-sc="if" value="{{k.behav}}" hint-placeholder-val="{{ false }}"><span style="font-size: 10px; color: #3B4BB8; background: #EEF2FF; border-radius: 3px; padding: 0 4px; line-height: 16px">行为</span></template></span>
-                  <span style="display: block; font-size: 22px; font-weight: 600; color: #1F2329; margin: 6px 0 4px; font-variant-numeric: tabular-nums">{{k.value}}</span>
+                  <span style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">{{k.label}}<template data-sc="if" value="{{k.behav}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--info); background: var(--info-a08); border-radius: 3px; padding: 0 4px; line-height: 18px">行为</span></template></span>
+                  <span style="display: block; font-size: 24px; font-weight: 600; color: var(--text-1); margin: 6px 0 4px; font-variant-numeric: tabular-nums">{{k.value}}</span>
                   <span style="{{k.deltaStyle}}">{{k.delta}}</span>
                 </div>
               </template>
@@ -252,18 +265,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px">
-          <div style="flex: 2 1 480px; min-width: 0; border: 1px solid #EEF0F2; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column">
+          <div style="flex: 2 1 480px; min-width: 0; border: 1px solid var(--line-2); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column">
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px">
               <span style="font-size: 14px; font-weight: 600">{{chartTitle}}</span>
-              <span style="font-size: 12px; color: #646A73">每日 · 点上方指标卡切换</span>
-              <button onClick="{{toggleView}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; color: #1F2329; font-size: 12px; cursor: pointer">{{viewLabel}}</button>
+              <span style="font-size: 12px; color: var(--text-2)">每日 · 点上方指标卡切换</span>
+              <button onClick="{{toggleView}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; color: var(--text-1); font-size: 12px; cursor: pointer">{{viewLabel}}</button>
             </div>
 
             <template data-sc="if" value="{{chartEmpty}}" hint-placeholder-val="{{ false }}">
-              <div style="flex: 1 1 auto; min-height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #646A73; background: #F7F8FA; border-radius: 8px">
+              <div style="flex: 1 1 auto; min-height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--text-2); background: var(--fill-1); border-radius: 8px">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8F959E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"></path><path d="M7 15h2"></path><path d="M12 12h2"></path><path d="M17 9h2"></path></svg>
-                <span style="font-size: 14px; color: #1F2329">{{emptyText}}</span>
-                <a href="#" style="font-size: 13px; font-weight: 500">去资源广场选货上架 →</a>
+                <span style="font-size: 14px; color: var(--text-1)">{{emptyText}}</span>
+                <a href="#" style="font-size: 14px; font-weight: 500">去资源广场选货上架 →</a>
               </div>
             </template>
 
@@ -283,7 +296,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
                       <div onMouseEnter="{{b.enter}}" onMouseLeave="{{b.leave}}" title="{{b.tip}}" style="position: relative; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; cursor: default">
                         <template data-sc="if" value="{{b.hover}}" hint-placeholder-val="{{ false }}">
                           <div style="{{b.tipStyle}}">
-                            <span style="display: block; color: #C9CDD4; font-size: 11px">{{b.date}}</span>
+                            <span style="display: block; color: #C9CDD4; font-size: 12px">{{b.date}}</span>
                             <span style="display: block; font-weight: 600">{{b.valueText}}</span>
                           </div>
                         </template>
@@ -294,15 +307,15 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
                 </div>
                 <div style="position: absolute; left: 68px; right: 0; bottom: 0; height: 20px; display: flex; gap: 8px">
                   <template data-sc="for" list="{{bars}}" as="b" hint-placeholder-count="7">
-                    <span style="flex: 1; text-align: center; font-size: 12px; color: #646A73">{{b.date}}</span>
+                    <span style="flex: 1; text-align: center; font-size: 12px; color: var(--text-2)">{{b.date}}</span>
                   </template>
                 </div>
               </div>
             </template>
 
             <template data-sc="if" value="{{tableShow}}" hint-placeholder-val="{{ false }}">
-              <table style="width: 100%; border-collapse: collapse; font-size: 13px">
-                <thead><tr style="background: #F7F8FA; color: #646A73; text-align: left"><th style="padding: 8px 10px; font-weight: 500">日期</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">{{chartTitle}}</th></tr></thead>
+              <table style="width: 100%; border-collapse: collapse; font-size: 14px">
+                <thead><tr style="background: var(--fill-1); color: var(--text-2); text-align: left"><th style="padding: 8px 10px; font-weight: 500">日期</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">{{chartTitle}}</th></tr></thead>
                 <tbody>
                   <template data-sc="for" list="{{bars}}" as="b" hint-placeholder-count="7">
                     <tr style="border-bottom: 1px solid #F0F1F2"><td style="padding: 8px 10px">{{b.date}}</td><td style="padding: 8px 10px; text-align: right; font-variant-numeric: tabular-nums">{{b.valueText}}</td></tr>
@@ -312,40 +325,40 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
             </template>
           </div>
 
-          <div data-prd="side" style="flex: 1 1 280px; min-width: 0; border: 1px solid #EEF0F2; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 14px">
+          <div data-prd="side" style="flex: 1 1 280px; min-width: 0; border: 1px solid var(--line-2); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 14px">
             <template data-sc="if" value="{{isMallTab}}" hint-placeholder-val="{{ false }}">
               <div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px">
-                  <span style="font-size: 14px; font-weight: 600">交易主链路（F4）</span>
-                  <span style="font-size: 10px; color: #3B4BB8; background: #EEF2FF; border-radius: 3px; padding: 0 4px; line-height: 16px">行为</span>
+                  <span class="ttl-ic2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8.5V18l-4 2v-7.5z"/></svg></span><span style="font-size: 14px; font-weight: 600">交易主链路（F4）</span>
+                  <span style="font-size: 12px; color: var(--info); background: var(--info-a08); border-radius: 3px; padding: 0 4px; line-height: 18px">行为</span>
                   <a href="analytics.html" class="tap" style="margin-left: auto; font-size: 12px">完整漏斗 →</a>
                 </div>
                 <template data-sc="for" list="{{miniFunnel}}" as="f" hint-placeholder-count="5">
                   <div style="margin-bottom: 8px">
                     <div style="display: flex; align-items: baseline; gap: 6px; font-size: 12px; margin-bottom: 3px">
-                      <span style="color: #1F2329">{{f.label}}</span>
-                      <span style="margin-left: auto; font-variant-numeric: tabular-nums; color: #1F2329">{{f.value}}</span>
+                      <span style="color: var(--text-1)">{{f.label}}</span>
+                      <span style="margin-left: auto; font-variant-numeric: tabular-nums; color: var(--text-1)">{{f.value}}</span>
                       <span style="{{f.convStyle}}">{{f.conv}}</span>
                     </div>
-                    <div style="height: 8px; background: #F2F3F5; border-radius: 4px"><div style="{{f.barStyle}}"></div></div>
+                    <div style="height: 8px; background: var(--fill-2); border-radius: 4px"><div style="{{f.barStyle}}"></div></div>
                   </div>
                 </template>
-                <div style="margin-top: 10px; padding: 10px 12px; background: #FFF7F0; border-radius: 8px; font-size: 12px; line-height: 1.6; color: #1F2329">
-                  <b style="color: #B54708">流失最多：浏览商详 → 加购</b>，554 人看了没加购：加购失败 171 人（地区不可售 88、缺货 62），主动离开 383 人。<br><b style="color: #1F2329">下单环节流失 250 人</b>：加购后没进确认订单 185 人（多在购物车离开），确认订单后没提交 53 人，创单失败 12 人。
+                <div style="margin-top: 10px; padding: 10px 12px; background: var(--warn-a08); border-radius: 8px; font-size: 12px; line-height: 1.6; color: var(--text-1)">
+                  <b style="color: var(--warn)">流失最多：浏览商详 → 加购</b>，554 人看了没加购：加购失败 171 人（地区不可售 88、缺货 62），主动离开 383 人。<br><b style="color: var(--text-1)">下单环节流失 250 人</b>：加购后没进确认订单 185 人（多在购物车离开），确认订单后没提交 53 人，创单失败 12 人。
                   <a href="analytics.html" class="tap" style="margin-top: 2px">看流失原因 →</a>
                 </div>
                 <div style="margin-top: 14px">
                   <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
-                    <span style="font-size: 14px; font-weight: 600">员工额度使用</span>
+                    <span class="ttl-ic2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M16 15h2"/></svg></span><span style="font-size: 14px; font-weight: 600">员工额度使用</span>
                     <a href="analytics.html" class="tap" style="margin-left: auto; font-size: 12px">按项目看 →</a>
                   </div>
                   <div style="margin-bottom: 8px">
-                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px"><span>商城余额 <span style="color: #646A73">（1:1 抵现金）</span></span><span style="font-variant-numeric: tabular-nums">¥224,320 / ¥352,000 · 63.7%</span></div>
-                    <div style="height: 8px; background: #F2F3F5; border-radius: 4px"><div style="height: 8px; border-radius: 4px; background: #0F8F84; width: 63.7%"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px"><span>商城余额 <span style="color: var(--text-2)">（1:1 抵现金）</span></span><span style="font-variant-numeric: tabular-nums">¥224,320 / ¥352,000 · 63.7%</span></div>
+                    <div style="height: 8px; background: var(--fill-2); border-radius: 4px"><div style="height: 8px; border-radius: 4px; background: #0F8F84; width: 63.7%"></div></div>
                   </div>
                   <div>
-                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px"><span>商城积分 <span style="color: #646A73">（按站点比例折算）</span></span><span style="font-variant-numeric: tabular-nums">折合 ¥95,600 / ¥144,000 · 66.4%</span></div>
-                    <div style="height: 8px; background: #F2F3F5; border-radius: 4px"><div style="height: 8px; border-radius: 4px; background: #0F8F84; width: 66.4%"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px"><span>商城积分 <span style="color: var(--text-2)">（按站点比例折算）</span></span><span style="font-variant-numeric: tabular-nums">折合 ¥95,600 / ¥144,000 · 66.4%</span></div>
+                    <div style="height: 8px; background: var(--fill-2); border-radius: 4px"><div style="height: 8px; border-radius: 4px; background: #0F8F84; width: 66.4%"></div></div>
                   </div>
                 </div>
               </div>
@@ -360,25 +373,25 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
                       <div style="width: 44.4%; background: #0F8F84"></div>
                       <div style="width: 55.6%; background: #5B6BD5"></div>
                     </div>
-                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px">
+                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px">
                       <div style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #0F8F84"></span><span>平台猫超</span><span style="margin-left: auto; font-variant-numeric: tabular-nums">4 单 · ¥1,486.00</span></div>
                       <div style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #5B6BD5"></span><span>其他代发</span><span style="margin-left: auto; font-variant-numeric: tabular-nums">5 单 · ¥1,800.00</span></div>
                     </div>
                   </div>
                 </template>
                 <template data-sc="if" value="{{showSingleSrc}}" hint-placeholder-val="{{ false }}">
-                  <div style="margin-bottom: 16px; font-size: 13px; color: #646A73">代发订单全部来自<b style="color: #1F2329">平台猫超</b>。</div>
+                  <div style="margin-bottom: 16px; font-size: 14px; color: var(--text-2)">代发订单全部来自<b style="color: var(--text-1)">平台猫超</b>。</div>
                 </template>
                 <div style="font-size: 14px; font-weight: 600; margin-bottom: 10px">售后与理赔 · 近 7 天</div>
-                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px">
-                  <div style="display: flex; justify-content: space-between"><span style="color: #646A73">售后单（含上门取件 1）</span><span>1</span></div>
-                  <div style="display: flex; justify-content: space-between"><span style="color: #646A73">理赔单</span><span>0</span></div>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+                  <div style="display: flex; justify-content: space-between"><span style="color: var(--text-2)">售后单（含上门取件 1）</span><span>1</span></div>
+                  <div style="display: flex; justify-content: space-between"><span style="color: var(--text-2)">理赔单</span><span>0</span></div>
                   <template data-sc="if" value="{{isTop}}" hint-placeholder-val="{{ true }}">
-                    <div style="display: flex; justify-content: space-between"><span style="color: #646A73">售后代运营处理中</span><span>2</span></div>
+                    <div style="display: flex; justify-content: space-between"><span style="color: var(--text-2)">售后代运营处理中</span><span>2</span></div>
                   </template>
-                  <div style="display: flex; justify-content: space-between"><span style="color: #646A73">平均发货时长</span><span>18.5 小时</span></div>
+                  <div style="display: flex; justify-content: space-between"><span style="color: var(--text-2)">平均发货时长</span><span>18.5 小时</span></div>
                 </div>
-                <a href="#" style="display: inline-block; margin-top: 10px; font-size: 13px">去售后理赔 →</a>
+                <a href="#" style="display: inline-block; margin-top: 10px; font-size: 14px">去售后理赔 →</a>
               </div>
             </template>
 
@@ -387,11 +400,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A
                 <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px">报价进度 · 近 7 天</div>
                 <template data-sc="for" list="{{funnel}}" as="f" hint-placeholder-count="3">
                   <div style="margin-bottom: 10px">
-                    <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px"><span style="color: #646A73">{{f.label}}</span><span style="font-variant-numeric: tabular-nums">{{f.value}}</span></div>
-                    <div style="height: 10px; background: #F2F3F5; border-radius: 4px"><div style="{{f.barStyle}}"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px"><span style="color: var(--text-2)">{{f.label}}</span><span style="font-variant-numeric: tabular-nums">{{f.value}}</span></div>
+                    <div style="height: 10px; background: var(--fill-2); border-radius: 4px"><div style="{{f.barStyle}}"></div></div>
                   </div>
                 </template>
-                <p style="margin: 4px 0 0; font-size: 12px; color: #646A73">2 张报价已确认未下单，可在集采报价里跟进。</p>
+                <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-2)">2 张报价已确认未下单，可在集采报价里跟进。</p>
               </div>
             </template>
           </div>
@@ -509,7 +522,7 @@ class Component extends DCLogic {
   pageVals() {
     const isTop = this.state.tier === 'top';
     const ok = (x) => isTop || !x.top;
-    const itemBase = 'display: flex; align-items: center; gap: 4px; height: 34px; padding: 0 8px; border-radius: 6px; font-size: 13px; color: #1F2329; white-space: nowrap; overflow: hidden; min-width: 0';
+    const itemBase = 'display: flex; align-items: center; gap: 4px; height: 34px; padding: 0 8px; border-radius: 6px; font-size: 14px; color: var(--text-1); white-space: nowrap; overflow: hidden; min-width: 0';
     let total = 0;
     const tourSteps = [
       { key: 'order.代发', t: '代发合并为一套', d: isTop ? '「猫超代发」「其他代发」合并到这里：两个「批量下单」合二为一；「下单管理」「下单历史」合并为「代发订单」，两套历史订单都在里面。' : '「猫超代发」改名为「代发」，原「下单管理」改名为「代发订单」，历史订单都在里面。' },
@@ -533,7 +546,7 @@ class Component extends DCLogic {
         const key = g.id + '.' + (s.t || '');
         const spot = spotKey === key;
         return { title: s.t || '', hasTitle: !!s.t, items, spot,
-          wrapStyle: spot ? 'position: relative; z-index: 60; background: #FFFFFF; border-radius: 8px; padding: 2px 2px 6px; box-shadow: 0 0 0 3px #5FD3C6, 0 0 0 9999px rgba(31,35,41,0.55)' : '' };
+          wrapStyle: spot ? 'position: relative; z-index: 60; background: #FFFFFF; border-radius: 8px; padding: 2px 2px 6px; box-shadow: 0 0 0 3px #5FD3C6, 0 0 0 9999px var(--mask)' : '' };
       }).filter((s) => s.items.length);
       return {
         name: g.name, isLink: false, isGroup: true, open, sections,
@@ -561,7 +574,7 @@ class Component extends DCLogic {
         label: t.label, num: String(t.num), sub: t.sub, sub2: t.sub2 || '', hasSub2: !!t.sub2,
         tag: t.tag || '', hasTag: !!t.tag,
         numStyle: 'font-size: 28px; font-weight: 600; line-height: 1.2; margin: 6px 0 2px; font-variant-numeric: tabular-nums; color: ' + color,
-        cardStyle: 'display: flex; flex-direction: column; min-height: 150px; padding: 14px 16px; border-radius: 10px; color: #1F2329; box-sizing: border-box; border: 1px solid ' + (t.urgent ? '#F5C9A9' : '#E5E8EB') + '; background: ' + (t.urgent ? '#FFF7F0' : '#FFFFFF')
+        cardStyle: 'display: flex; flex-direction: column; min-height: 150px; padding: 14px 16px; border-radius: 10px; color: var(--text-1); box-sizing: border-box; border: 1px solid ' + (t.urgent ? 'var(--warn-a32)' : '#E5E8EB') + '; background: ' + (t.urgent ? 'var(--warn-a08)' : '#FFFFFF')
       };
     });
 
@@ -569,7 +582,7 @@ class Component extends DCLogic {
       { name: '货盘上新 · 东方甄选', source: '飞象自营', isNew: true, meta: '128 款 · 已上架 0 个商城', note: '最新货盘，12/1 起可代发', cover: '#FDEBD8', imgs: ['img/rice.jpg','img/wine.jpg','img/jingmi.jpg'] },
       { name: '坚果零食礼盒', source: '平台猫超', meta: '86 款 · 已上架 3 个商城', note: '近 7 天新增 6 款', cover: '#F3EEDF', imgs: ['img/cashew.png','img/macadamia.png','img/crisps.png'] },
       { name: '家清日用', source: '平台猫超', meta: '52 款 · 已上架 1 个商城', note: '员工高频复购品类', cover: '#E3F1F7', imgs: ['img/bluemoon.jpg','img/kleenex.jpg','img/muji.jpg'] },
-      { name: '暖冬关怀', source: '多渠道', isTopic: true, meta: '40 款 · 已上架 0 个商城', note: '冬季慰问场景专题', cover: '#E8F6F4', imgs: ['img/bear.jpg','img/muji.jpg','img/wine.jpg'] }
+      { name: '暖冬关怀', source: '多渠道', isTopic: true, meta: '40 款 · 已上架 0 个商城', note: '冬季慰问场景专题', cover: 'var(--brand-a08)', imgs: ['img/bear.jpg','img/muji.jpg','img/wine.jpg'] }
     ].map((p) => ({
       name: p.name, source: p.source, img1: p.imgs[0], img2: p.imgs[1], img3: p.imgs[2], isNew: !!p.isNew, isTopic: !!p.isTopic, meta: p.meta, note: p.note,
       coverStyle: 'height: 104px; padding: 12px 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; background: ' + p.cover
@@ -614,7 +627,7 @@ class Component extends DCLogic {
         pick: () => this.setState({ kpiSel: { ...(this.state.kpiSel || {}), [tab]: k.id }, hover: -1 }),
         deltaStyle: 'display: block; font-size: 12px; color: ' + (k.delta.tone === 'up' ? '#0B7A70' : '#646A73'),
         cardStyle: 'display: block; width: 100%; box-sizing: border-box; text-align: left; font-family: inherit; border-radius: 10px; padding: 12px 14px; ' +
-          (sel ? 'background: #E8F6F4; border: 1px solid #0F8F84; cursor: pointer' : (chartable ? 'background: #F7F8FA; border: 1px solid transparent; cursor: pointer' : 'background: #F7F8FA; border: 1px solid transparent'))
+          (sel ? 'background: var(--brand-a08); border: 1px solid #0F8F84; cursor: pointer' : (chartable ? 'background: var(--fill-1); border: 1px solid transparent; cursor: pointer' : 'background: var(--fill-1); border: 1px solid transparent'))
       };
     });
     const cur = set.kpis.find((k) => k.id === selId) || set.kpis[0];
@@ -634,7 +647,7 @@ class Component extends DCLogic {
       const pct = top ? (v / top * 100) : 0;
       return {
         label: cur.tick(v),
-        labelStyle: 'position: absolute; right: 0; bottom: ' + pct + '%; transform: translateY(50%); font-size: 12px; color: #646A73; font-variant-numeric: tabular-nums; white-space: nowrap',
+        labelStyle: 'position: absolute; right: 0; bottom: ' + pct + '%; transform: translateY(50%); font-size: 12px; color: var(--text-2); font-variant-numeric: tabular-nums; white-space: nowrap',
         lineStyle: 'position: absolute; left: 0; right: 0; bottom: ' + pct + '%; border-top: 1px solid ' + (v === 0 ? '#C9CDD4' : '#EEF0F2')
       };
     });
@@ -655,7 +668,7 @@ class Component extends DCLogic {
       return {
         label: b[1], selected: sel ? 'true' : 'false',
         pick: () => this.setState({ biz: b[0], hover: -1 }),
-        style: 'height: 30px; padding: 0 12px; border: 0; border-radius: 6px; cursor: pointer; font-size: 13px; ' + (sel ? 'background: #FFFFFF; color: #0B7A70; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.08)' : 'background: transparent; color: #646A73')
+        style: 'height: 30px; padding: 0 12px; border: 0; border-radius: 6px; cursor: pointer; font-size: 14px; ' + (sel ? 'background: #FFFFFF; color: var(--brand); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.08)' : 'background: transparent; color: var(--text-2)')
       };
     });
     const funnel = [['报价单', 3], ['客户已确认', 2], ['已下单', 1]].map((f) => ({
@@ -667,7 +680,7 @@ class Component extends DCLogic {
       const conv = i === 0 ? '' : (f[1] / fsteps[i - 1][1] * 100).toFixed(1) + '%';
       const worst = i === 2;
       return { label: f[0], value: f[1].toLocaleString('en-US') + ' 人', conv,
-        convStyle: 'width: 48px; text-align: right; font-size: 12px; font-variant-numeric: tabular-nums; ' + (worst ? 'color: #B54708; font-weight: 600' : 'color: #646A73'),
+        convStyle: 'width: 48px; text-align: right; font-size: 12px; font-variant-numeric: tabular-nums; ' + (worst ? 'color: var(--warn); font-weight: 600' : 'color: var(--text-2)'),
         barStyle: 'height: 8px; border-radius: 4px; background: #0F8F84; width: ' + (f[1] / 1286 * 100) + '%' };
     });
     const bizVals = {
@@ -683,7 +696,7 @@ class Component extends DCLogic {
       showMix: tab === 'drop' && isTop, showSingleSrc: tab === 'drop' && !isTop
     };
 
-    const btn = (on) => 'height: 30px; padding: 0 12px; border: 0; border-radius: 6px; cursor: pointer; font-size: 13px; ' + (on ? 'background: #FFFFFF; color: #1F2329; font-weight: 600' : 'background: transparent; color: #C9CDD4');
+    const btn = (on) => 'height: 30px; padding: 0 12px; border: 0; border-radius: 6px; cursor: pointer; font-size: 14px; ' + (on ? 'background: #FFFFFF; color: var(--text-1); font-weight: 600' : 'background: transparent; color: #C9CDD4');
 
     return {
       isTop, isLow: !isTop,
@@ -699,15 +712,15 @@ class Component extends DCLogic {
       pallets, ...bizVals,
       tourOn,
       spotTodo: spotKey === 'todo', spotGuide: spotKey === 'guide',
-      todoSecStyle: 'position: relative; background: #FFFFFF; border-radius: 12px; padding: 18px 20px 20px; margin-bottom: 16px' + (spotKey === 'todo' ? '; z-index: 60; box-shadow: 0 0 0 3px #5FD3C6, 0 0 0 9999px rgba(31,35,41,0.55)' : ''),
-      guideWrapStyle: 'position: relative; border-radius: 8px' + (spotKey === 'guide' ? '; z-index: 60; background: #FFFFFF; box-shadow: 0 0 0 3px #5FD3C6, 0 0 0 9999px rgba(31,35,41,0.55)' : ''),
+      todoSecStyle: 'position: relative; background: #FFFFFF; border-radius: 12px; padding: 18px 20px 20px; margin-bottom: 16px' + (spotKey === 'todo' ? '; z-index: 60; box-shadow: 0 0 0 3px #5FD3C6, 0 0 0 9999px var(--mask)' : ''),
+      guideWrapStyle: 'position: relative; border-radius: 8px' + (spotKey === 'guide' ? '; z-index: 60; background: #FFFFFF; box-shadow: 0 0 0 3px #5FD3C6, 0 0 0 9999px var(--mask)' : ''),
       guideDot: !this.state.tourDone,
       tStep: tourOn ? ('代发入口更新 · ' + (tourIdx + 1) + ' / ' + tourSteps.length) : '',
       tTitle: tourOn ? tourSteps[tourIdx].t : '',
       tDesc: tourOn ? tourSteps[tourIdx].d : '',
       tIsLast: tourOn && tourIdx === tourSteps.length - 1,
       tNextLabel: tourOn && tourIdx === tourSteps.length - 1 ? '我知道了' : '下一步',
-      tPrevStyle: 'height: 34px; padding: 0 14px; margin-left: auto; border-radius: 8px; border: 1px solid #D0D3D6; background: #FFFFFF; font-size: 13px; cursor: pointer; color: ' + (tourIdx > 0 ? '#1F2329' : '#A8ADB4'),
+      tPrevStyle: 'height: 34px; padding: 0 14px; margin-left: auto; border-radius: 8px; border: 1px solid #D0D3D6; background: #FFFFFF; font-size: 14px; cursor: pointer; color: ' + (tourIdx > 0 ? '#1F2329' : '#A8ADB4'),
       tPrev: () => { if (tourIdx > 0) this.setState({ tour: tourIdx - 1 }); },
       tNext: () => {
         if (tourIdx < tourSteps.length - 1) this.setState({ tour: tourIdx + 1 });

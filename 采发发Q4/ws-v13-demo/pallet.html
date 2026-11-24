@@ -10,6 +10,19 @@
 <template id="dc-src">
 <helmet>
 <style>
+:root{
+--fs-12:12px;--fs-14:14px;--fs-16:16px;--fs-20:20px;--fs-24:24px;--fs-28:28px;
+--text-1:#1F2329;--text-2:#646A73;--text-3:#8F959E;
+--line-1:#E5E8EB;--line-2:#EEF0F2;--fill-1:#F7F8FA;--fill-2:#F2F3F5;--bg-page:#F3F5F7;
+--brand:#0B7A70;--brand-hover:#075E56;
+--brand-a08:rgba(15,143,132,.08);--brand-a16:rgba(15,143,132,.16);--brand-a32:rgba(15,143,132,.32);
+--warn:#B54708;--warn-solid:#C2410C;--warn-a08:rgba(232,89,12,.08);--warn-a16:rgba(232,89,12,.16);--warn-a32:rgba(232,89,12,.32);
+--info:#3B4BB8;--info-a08:rgba(91,107,213,.08);--info-a16:rgba(91,107,213,.16);--info-a32:rgba(91,107,213,.32);
+--mask:rgba(31,35,41,.55);
+}
+.ttl-ic{flex:none;width:28px;height:28px;border-radius:8px;background:var(--brand-a08);color:var(--brand);display:inline-flex;align-items:center;justify-content:center}
+.ttl-ic.lg{width:36px;height:36px;border-radius:10px}
+.ttl-ic2{flex:none;color:var(--brand);display:inline-flex}
 body{margin:0;background:#F3F5F7}
 a{color:#0B7A70;text-decoration:none}a:hover{color:#075E56}
 button{font-family:inherit}
@@ -17,16 +30,16 @@ button{font-family:inherit}
 </helmet>
 <div data-prd-root="1" style="position: relative; display: flex; align-items: stretch; background: #F7F8FC">
 <div style="flex: 1 1 960px; min-width: 0; position: relative; z-index: 0; overflow: hidden">
-<div style="position: relative; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; background: #F3F5F7; min-height: 1180px; font-size: 14px">
+<div style="position: relative; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: var(--text-1); background: #F3F5F7; min-height: 1180px; font-size: 14px">
 
   <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 64px; padding: 0 24px; background: #FFFFFF; border-bottom: 1px solid #E5E8EB">
     <div style="display: flex; align-items: center; gap: 8px">
-      <span style="font-size: 22px; font-weight: 700; color: #0B7A70; letter-spacing: 1px">采发发</span>
+      <span style="font-size: 20px; font-weight: 700; color: var(--brand); letter-spacing: 1px">采发发</span>
       <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0B7A70; border-radius: 4px; padding: 2px 6px">会员端</span>
     </div>
     <span style="width: 1px; height: 20px; background: #E5E8EB"></span>
-    <nav aria-label="面包屑" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #646A73">
-      <a href="workbench.html">工作台</a><span aria-hidden="true">›</span><a href="#">资源广场</a><span aria-hidden="true">›</span><span style="color: #1F2329">坚果零食礼盒</span>
+    <nav aria-label="面包屑" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-2)">
+      <a href="workbench.html">工作台</a><span aria-hidden="true">›</span><a href="#">资源广场</a><span aria-hidden="true">›</span><span style="color: var(--text-1)">坚果零食礼盒</span>
     </nav>
   </header>
 
@@ -35,8 +48,8 @@ button{font-family:inherit}
     <section data-prd="head" style="background: #FFFFFF; border-radius: 12px; overflow: hidden; display: flex; flex-wrap: wrap">
       <div style="flex: 1 1 260px; max-width: 300px; min-height: 200px; background: #F3EEDF; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
         <div style="display: flex; flex-wrap: wrap; gap: 6px">
-          <span style="font-size: 11px; color: #1F2329; background: rgba(255,255,255,0.85); border-radius: 4px; padding: 0 6px; line-height: 20px">平台猫超</span>
-          <span style="font-size: 11px; color: #1F2329; background: rgba(255,255,255,0.85); border-radius: 4px; padding: 0 6px; line-height: 20px">零食坚果</span>
+          <span style="font-size: 12px; color: var(--text-1); background: rgba(255,255,255,0.85); border-radius: 4px; padding: 0 6px; line-height: 20px">平台猫超</span>
+          <span style="font-size: 12px; color: var(--text-1); background: rgba(255,255,255,0.85); border-radius: 4px; padding: 0 6px; line-height: 20px">零食坚果</span>
         </div>
         <div style="display: flex; gap: 8px">
           <img src="img/cashew.png" alt="" style="width: 72px; height: 72px; object-fit: contain; background: #FFFFFF; border-radius: 8px">
@@ -46,47 +59,47 @@ button{font-family:inherit}
       </div>
       <div style="flex: 999 1 520px; min-width: 0; padding: 20px 24px; display: flex; flex-direction: column; gap: 12px">
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
-          <h1 style="margin: 0; font-size: 24px; font-weight: 600">坚果零食礼盒</h1>
-          <span style="font-size: 12px; color: #646A73">运营精选 · 11/22 更新</span>
+          <h1 style="margin: 0; font-size: 20px; font-weight: 600">坚果零食礼盒</h1>
+          <span style="font-size: 12px; color: var(--text-2)">运营精选 · 11/22 更新</span>
         </div>
-        <p style="margin: 0; font-size: 14px; color: #646A73; line-height: 1.6">适合年节慰问、日常下午茶的坚果零食组合，均为平台猫超直发商品，可上架到员工商城，也可以直接代发。</p>
+        <p style="margin: 0; font-size: 14px; color: var(--text-2); line-height: 1.6">适合年节慰问、日常下午茶的坚果零食组合，均为平台猫超直发商品，可上架到员工商城，也可以直接代发。</p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px">
-          <div><div style="font-size: 12px; color: #646A73">商品数</div><div style="font-size: 20px; font-weight: 600">86 款</div></div>
-          <div><div style="font-size: 12px; color: #646A73">价格区间</div><div style="font-size: 20px; font-weight: 600">¥29–¥268</div></div>
-          <div><div style="font-size: 12px; color: #646A73">可代发</div><div style="font-size: 20px; font-weight: 600">84 款</div></div>
-          <div><div style="font-size: 12px; color: #646A73">已上架商城</div><div style="font-size: 20px; font-weight: 600">3 个</div></div>
+          <div><div style="font-size: 12px; color: var(--text-2)">商品数</div><div style="font-size: 20px; font-weight: 600">86 款</div></div>
+          <div><div style="font-size: 12px; color: var(--text-2)">价格区间</div><div style="font-size: 20px; font-weight: 600">¥29–¥268</div></div>
+          <div><div style="font-size: 12px; color: var(--text-2)">可代发</div><div style="font-size: 20px; font-weight: 600">84 款</div></div>
+          <div><div style="font-size: 12px; color: var(--text-2)">已上架商城</div><div style="font-size: 20px; font-weight: 600">3 个</div></div>
         </div>
-        <div data-prd="rule" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #F7F8FA; border-radius: 8px; font-size: 12px; color: #646A73">
+        <div data-prd="rule" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--fill-1); border-radius: 8px; font-size: 12px; color: var(--text-2)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
           按规则自动上下架：缺货商品自动下架，并同步到已上架的商城；补货后自动恢复
         </div>
         <div data-prd="bulk" style="display: flex; flex-wrap: wrap; gap: 10px">
           <button onClick="{{openShelfAll}}" style="height: 40px; padding: 0 20px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">整盘上架到商城</button>
-          <button onClick="{{dropAll}}" style="height: 40px; padding: 0 20px; border-radius: 8px; border: 1px solid #0F8F84; background: #FFFFFF; color: #0B7A70; font-size: 14px; font-weight: 500; cursor: pointer">整盘代发下单</button>
+          <button onClick="{{dropAll}}" style="height: 40px; padding: 0 20px; border-radius: 8px; border: 1px solid #0F8F84; background: #FFFFFF; color: var(--brand); font-size: 14px; font-weight: 500; cursor: pointer">整盘代发下单</button>
         </div>
       </div>
     </section>
 
     <section data-prd="table" aria-labelledby="goods-h" style="background: #FFFFFF; border-radius: 12px; padding: 18px 20px 8px">
       <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 12px">
-        <h2 id="goods-h" style="margin: 0; font-size: 16px; font-weight: 600">货盘商品</h2>
+        <span class="ttl-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></span><h2 id="goods-h" style="margin: 0; font-size: 16px; font-weight: 600">货盘商品</h2>
         <div style="display: flex; gap: 6px">
           <template data-sc="for" list="{{filters}}" as="f" hint-placeholder-count="3">
             <button onClick="{{f.pick}}" aria-pressed="{{f.selected}}" style="{{f.style}}">{{f.label}}</button>
           </template>
         </div>
-        <span style="font-size: 12px; color: #646A73">示意：仅展示 6 / 86 款</span>
+        <span style="font-size: 12px; color: var(--text-2)">示意：仅展示 6 / 86 款</span>
         <div style="margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-          <span style="font-size: 13px; color: #646A73">已选 <b style="color: #1F2329">{{selCount}}</b> 件</span>
+          <span style="font-size: 14px; color: var(--text-2)">已选 <b style="color: var(--text-1)">{{selCount}}</b> 件</span>
           <button onClick="{{openShelfSel}}" disabled="{{noSel}}" style="{{selBtnPrimary}}">上架所选到商城</button>
           <button onClick="{{dropSel}}" disabled="{{noSel}}" style="{{selBtnSecondary}}">所选代发下单</button>
         </div>
       </div>
 
       <div style="overflow-x: auto">
-        <table style="width: 100%; min-width: 900px; border-collapse: collapse; font-size: 13px">
+        <table style="width: 100%; min-width: 900px; border-collapse: collapse; font-size: 14px">
           <thead>
-            <tr style="background: #F7F8FA; color: #646A73; text-align: left">
+            <tr style="background: var(--fill-1); color: var(--text-2); text-align: left">
               <th style="padding: 10px 12px; width: 36px"><input type="checkbox" checked="{{allChecked}}" onChange="{{toggleAll}}" aria-label="全选可售商品"></th>
               <th style="padding: 10px 12px; font-weight: 500">商品</th>
               <th style="padding: 10px 12px; font-weight: 500">规格</th>
@@ -105,24 +118,24 @@ button{font-family:inherit}
                 <td style="padding: 12px">
                   <div style="display: flex; align-items: center; gap: 10px">
                     <template data-sc="if" value="{{r.hasImg}}" hint-placeholder-val="{{ false }}"><img src="{{r.img}}" alt="" style="width: 48px; height: 48px; object-fit: contain; border: 1px solid #F0F1F2; border-radius: 6px"></template>
-                    <template data-sc="if" value="{{r.noImg}}" hint-placeholder-val="{{ true }}"><span style="width: 48px; height: 48px; border-radius: 6px; background: #F2F3F5; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #646A73">图片</span></template>
+                    <template data-sc="if" value="{{r.noImg}}" hint-placeholder-val="{{ true }}"><span style="width: 48px; height: 48px; border-radius: 6px; background: var(--fill-2); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-2)">图片</span></template>
                     <span style="font-weight: 500">{{r.name}}</span>
                   </div>
                 </td>
-                <td style="padding: 12px; color: #646A73">{{r.spec}}</td>
+                <td style="padding: 12px; color: var(--text-2)">{{r.spec}}</td>
                 <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{r.cost}}</td>
                 <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{r.price}}</td>
-                <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums; color: #0B7A70">{{r.margin}}</td>
+                <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums; color: var(--brand)">{{r.margin}}</td>
                 <td style="padding: 12px"><span style="{{r.statusStyle}}">{{r.status}}</span></td>
-                <td style="padding: 12px; color: #646A73">{{r.shelved}}</td>
+                <td style="padding: 12px; color: var(--text-2)">{{r.shelved}}</td>
                 <td style="padding: 12px">
                   <template data-sc="if" value="{{r.canAct}}" hint-placeholder-val="{{ true }}">
                     <div style="display: flex; gap: 12px">
-                      <button onClick="{{r.shelf}}" style="border: 0; background: transparent; color: #0B7A70; font-size: 13px; cursor: pointer; padding: 6px 0">上架</button>
-                      <button onClick="{{r.drop}}" style="border: 0; background: transparent; color: #0B7A70; font-size: 13px; cursor: pointer; padding: 6px 0">代发</button>
+                      <button onClick="{{r.shelf}}" style="border: 0; background: transparent; color: var(--brand); font-size: 14px; cursor: pointer; padding: 6px 0">上架</button>
+                      <button onClick="{{r.drop}}" style="border: 0; background: transparent; color: var(--brand); font-size: 14px; cursor: pointer; padding: 6px 0">代发</button>
                     </div>
                   </template>
-                  <template data-sc="if" value="{{r.oos}}" hint-placeholder-val="{{ false }}"><span style="color: #8F959E">补货后可操作</span></template>
+                  <template data-sc="if" value="{{r.oos}}" hint-placeholder-val="{{ false }}"><span style="color: var(--text-3)">补货后可操作</span></template>
                 </td>
               </tr>
             </template>
@@ -144,22 +157,22 @@ button{font-family:inherit}
   <template data-sc="if" value="{{showModal}}" hint-placeholder-val="{{ false }}">
     <div style="position: absolute; inset: 0; background: rgba(31,35,41,0.45); display: flex; align-items: flex-start; justify-content: center; padding-top: 200px">
       <div data-prd="modal" role="dialog" aria-modal="true" aria-labelledby="shelf-h" style="width: 440px; max-width: calc(100% - 32px); background: #FFFFFF; border-radius: 12px; padding: 20px 22px; box-sizing: border-box">
-        <h2 id="shelf-h" style="margin: 0 0 4px; font-size: 17px; font-weight: 600">上架到商城</h2>
-        <p style="margin: 0 0 14px; font-size: 13px; color: #646A73">{{modalDesc}}</p>
+        <h2 id="shelf-h" style="margin: 0 0 4px; font-size: 16px; font-weight: 600">上架到商城</h2>
+        <p style="margin: 0 0 14px; font-size: 14px; color: var(--text-2)">{{modalDesc}}</p>
         <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px">
           <template data-sc="for" list="{{malls}}" as="m" hint-placeholder-count="3">
-            <label style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #E5E8EB; border-radius: 8px; cursor: pointer">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line-1); border-radius: 8px; cursor: pointer">
               <input type="checkbox" checked="{{m.checked}}" onChange="{{m.toggle}}">
               <span style="flex: 1">{{m.name}}</span>
-              <span style="font-size: 12px; color: #646A73">{{m.note}}</span>
+              <span style="font-size: 12px; color: var(--text-2)">{{m.note}}</span>
             </label>
           </template>
         </div>
-        <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #1F2329; margin-bottom: 18px">
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-1); margin-bottom: 18px">
           <input type="checkbox" checked="{{ true }}" onChange="{{noop}}">跟随货盘自动上下架（推荐）
         </label>
         <div style="display: flex; justify-content: flex-end; gap: 10px">
-          <button onClick="{{closeModal}}" style="height: 38px; padding: 0 18px; border-radius: 8px; border: 1px solid #D0D3D6; background: #FFFFFF; color: #1F2329; font-size: 14px; cursor: pointer">取消</button>
+          <button onClick="{{closeModal}}" style="height: 38px; padding: 0 18px; border-radius: 8px; border: 1px solid #D0D3D6; background: #FFFFFF; color: var(--text-1); font-size: 14px; cursor: pointer">取消</button>
           <button onClick="{{confirmShelf}}" style="height: 38px; padding: 0 18px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">确认上架</button>
         </div>
       </div>
@@ -267,7 +280,7 @@ class Component extends DCLogic {
       oos: !!g.oos, canAct: !g.oos,
       checked: !!st.sel[g.id], ariaPick: '选择 ' + g.name,
       status: g.oos ? '缺货 · 已自动下架' : '可售',
-      statusStyle: 'font-size: 12px; padding: 2px 8px; border-radius: 4px; ' + (g.oos ? 'background: #FFF1E8; color: #B54708' : 'background: #E8F6F4; color: #0B7A70'),
+      statusStyle: 'font-size: 12px; padding: 2px 8px; border-radius: 4px; ' + (g.oos ? 'background: var(--warn-a08); color: var(--warn)' : 'background: var(--brand-a08); color: var(--brand)'),
       shelved: g.shelved + ' 个商城',
       toggle: () => this.setState({ sel: { ...st.sel, [g.id]: !st.sel[g.id] } }),
       shelf: () => this.setState({ modal: { n: 1, label: g.name } }),
@@ -277,14 +290,14 @@ class Component extends DCLogic {
     const filters = [['all', '全部'], ['on', '可售'], ['oos', '缺货']].map((f) => {
       const sel = st.filter === f[0];
       return { label: f[1], selected: sel ? 'true' : 'false', pick: () => this.setState({ filter: f[0] }),
-        style: 'height: 28px; padding: 0 12px; border-radius: 14px; border: 0; cursor: pointer; font-size: 12px; ' + (sel ? 'background: #E8F6F4; color: #0B7A70; font-weight: 600' : 'background: #F2F3F5; color: #1F2329') };
+        style: 'height: 28px; padding: 0 12px; border-radius: 14px; border: 0; cursor: pointer; font-size: 12px; ' + (sel ? 'background: var(--brand-a08); color: var(--brand); font-weight: 600' : 'background: var(--fill-2); color: var(--text-1)') };
     });
     const mallList = [['a', '三院员工福利商城', '在售 · 1,280 人'], ['b', '年货节专场', '12/1 开放'], ['c', '工会福利商城', '在售 · 640 人']];
     const malls = mallList.map((m) => ({ name: m[1], note: m[2], checked: !!st.malls[m[0]],
       toggle: () => this.setState({ malls: { ...st.malls, [m[0]]: !st.malls[m[0]] } }) }));
     const mallCount = mallList.filter((m) => st.malls[m[0]]).length;
-    const btn = (primary, off) => 'height: 36px; padding: 0 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: ' + (off ? 'not-allowed' : 'pointer') + '; ' +
-      (primary ? (off ? 'border: 0; background: #C9E7E3; color: #FFFFFF' : 'border: 0; background: #0B7A70; color: #FFFFFF') : (off ? 'border: 1px solid #D0D3D6; background: #FFFFFF; color: #A8ADB4' : 'border: 1px solid #0F8F84; background: #FFFFFF; color: #0B7A70'));
+    const btn = (primary, off) => 'height: 36px; padding: 0 16px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: ' + (off ? 'not-allowed' : 'pointer') + '; ' +
+      (primary ? (off ? 'border: 0; background: var(--brand-a32); color: #FFFFFF' : 'border: 0; background: #0B7A70; color: #FFFFFF') : (off ? 'border: 1px solid #D0D3D6; background: #FFFFFF; color: #A8ADB4' : 'border: 1px solid #0F8F84; background: #FFFFFF; color: var(--brand)'));
     return {
       rows, filters, selCount: String(selCount), noSel: selCount === 0, allChecked,
       selBtnPrimary: btn(true, selCount === 0), selBtnSecondary: btn(false, selCount === 0),
