@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>商城分析（平台内部） · 采发发 Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="dc-lite.js"></script>
+</head>
+<body>
+<template id="dc-src">
+<helmet>
+<style>
+:root{
+--fs-12:12px;--fs-14:14px;--fs-16:16px;--fs-20:20px;--fs-24:24px;--fs-28:28px;
+--text-1:#1F2329;--text-2:#646A73;--text-3:#8F959E;
+--line-1:#E5E8EB;--line-2:#EEF0F2;--fill-1:#F7F8FA;--fill-2:#F2F3F5;--bg-page:#F3F5F7;
+--brand:#0B7A70;--brand-hover:#075E56;
+--brand-a08:rgba(15,143,132,.08);--brand-a16:rgba(15,143,132,.16);--brand-a32:rgba(15,143,132,.32);
+--warn:#B54708;--warn-solid:#C2410C;--warn-a08:rgba(232,89,12,.08);--warn-a16:rgba(232,89,12,.16);--warn-a32:rgba(232,89,12,.32);
+--info:#3B4BB8;--info-a08:rgba(91,107,213,.08);--info-a16:rgba(91,107,213,.16);--info-a32:rgba(91,107,213,.32);
+--mask:rgba(31,35,41,.55);
+}
+.ttl-ic{flex:none;width:28px;height:28px;border-radius:8px;background:var(--brand-a08);color:var(--brand);display:inline-flex;align-items:center;justify-content:center}
+.ttl-ic.lg{width:36px;height:36px;border-radius:10px}
+.ttl-ic2{flex:none;color:var(--brand);display:inline-flex}
+body{margin:0;background:#F3F5F7}
+a{color:#0B7A70;text-decoration:none}a:hover{color:#075E56}
+button,select{font-family:inherit}
+</style>
+</helmet>
+<div data-prd-root="1" style="position: relative; display: flex; align-items: stretch; background: #F7F8FC">
+<div style="flex: 1 1 960px; min-width: 0; position: relative; z-index: 0; overflow: hidden">
+<div style="font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: var(--text-1); background: #F3F5F7; min-height: 2300px; font-size: 14px">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 14px">
+    <span style="font-weight: 600">原型演示 · 平台内部（产品 / 运营）</span>
+    <span style="color: #C9CDD4">可按服务商、商城（名称或 ID）筛选；数据全部来自新商城埋点</span>
+  </div>
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 64px; padding: 0 24px; background: #FFFFFF; border-bottom: 1px solid #E5E8EB">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="font-size: 20px; font-weight: 700; color: var(--brand); letter-spacing: 1px">采发发</span>
+      <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0B7A70; border-radius: 4px; padding: 2px 6px">{{endLabel}}</span>
+    </div>
+    <span style="width: 1px; height: 20px; background: #E5E8EB"></span>
+    <nav aria-label="面包屑" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-2)">
+      <a href="#">{{crumbRoot}}</a><span aria-hidden="true">›</span><span>数据</span><span aria-hidden="true">›</span><span style="color: var(--text-1)">商城分析</span>
+    </nav>
+    <span style="margin-left: auto; font-size: 12px; color: var(--text-2)">（原型省略左侧菜单，入口在运营后台「数据 › 商城分析」）</span>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 24px 24px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px">
+      <div style="flex: 1 1 420px; min-width: 0">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px"><span class="ttl-ic lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span><h1 style="margin: 0; font-size: 20px; font-weight: 600">商城分析</h1></div>
+        <p style="margin: 0; font-size: 14px; color: var(--text-2)">员工从进入商城到支付的每一步。数据每天更新一次，当前截至 11/22 24:00。</p>
+      </div>
+      <button style="display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border: 1px solid #D0D3D6; border-radius: 8px; background: #FFFFFF; color: var(--text-1); font-size: 14px; cursor: pointer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>导出当前报表
+      </button>
+    </div>
+
+    <div data-prd="filters" style="background: #FFFFFF; border-radius: 12px; padding: 12px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+      <div style="display: flex; gap: 4px; background: var(--fill-2); border-radius: 8px; padding: 3px; font-size: 14px">
+        <span style="padding: 5px 10px; color: var(--text-2)">昨天</span>
+        <span style="padding: 5px 10px; border-radius: 6px; background: #FFFFFF; color: var(--brand); font-weight: 600">近 7 天</span>
+        <span style="padding: 5px 10px; color: var(--text-2)">近 30 天</span>
+        <span style="padding: 5px 10px; color: var(--text-2)">自定义</span>
+      </div>
+      <template data-sc="if" value="{{showProvider}}" hint-placeholder-val="{{ true }}">
+      <div data-prd="pv" style="position: relative">
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">
+          <span>{{pv.label}}</span>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px; width: 330px; min-height: 32px; padding: 2px 6px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; box-sizing: border-box">
+            <template data-sc="for" list="{{pv.chips}}" as="ch" hint-placeholder-count="0">
+              <span style="display: inline-flex; align-items: center; gap: 2px; height: 22px; padding: 0 2px 0 8px; border-radius: 11px; background: var(--brand-a08); color: var(--brand); font-size: 12px; white-space: nowrap">{{ch.name}}<button onClick="{{ch.remove}}" aria-label="{{ch.aria}}" style="width: 20px; height: 20px; border: 0; background: transparent; color: var(--brand); cursor: pointer; font-size: 14px; line-height: 1">×</button></span>
+            </template>
+            <input type="search" value="{{pv.query}}" onInput="{{pv.onInput}}" onFocus="{{pv.onFocus}}" placeholder="{{pv.placeholder}}" aria-label="{{pv.aria}}" style="flex: 1; min-width: 140px; height: 26px; border: 0; outline: none; background: transparent; font-size: 14px; font-family: inherit; color: var(--text-1)">
+          </div>
+          
+        </div>
+        <template data-sc="if" value="{{pv.open}}" hint-placeholder-val="{{ false }}">
+          <div role="listbox" aria-label="{{pv.aria}}" style="position: absolute; top: calc(100% + 4px); left: 0; width: 460px; max-width: calc(100vw - 48px); z-index: 30; background: #FFFFFF; border: 1px solid var(--line-1); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 8px; box-sizing: border-box">
+            <div style="padding: 4px 8px 8px; font-size: 12px; color: var(--text-2)">{{pv.headText}}</div>
+            <template data-sc="if" value="{{pv.hasIdHint}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 4px 6px; padding: 8px 10px; background: var(--fill-1); border-radius: 8px; font-size: 12px; color: var(--text-1)">
+                <span>{{pv.idHint}}</span>
+                <template data-sc="if" value="{{pv.hasNotFound}}" hint-placeholder-val="{{ false }}"><span style="color: var(--warn)">{{pv.notFoundText}}</span></template>
+                <button onClick="{{pv.selectAllIds}}" style="margin-left: auto; height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">全部选中</button>
+              </div>
+            </template>
+            <div style="max-height: 260px; overflow-y: auto">
+              <template data-sc="for" list="{{pv.results}}" as="r" hint-placeholder-count="5">
+                <button role="option" aria-selected="{{r.selStr}}" onClick="{{r.toggle}}" style="{{r.style}}">
+                  <span style="width: 16px; flex: none; color: var(--brand); font-weight: 700">{{r.mark}}</span>
+                  <span style="flex: 1; min-width: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.name}}</span>
+                  <span style="flex: none; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{r.id}}</span>
+                  <span style="flex: none; width: 110px; text-align: right; font-size: 12px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.sub}}</span>
+                </button>
+              </template>
+              <template data-sc="if" value="{{pv.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 16px 8px; font-size: 14px; color: var(--text-2); text-align: center">没有匹配的结果，换个名称或 ID 试试</div></template>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 8px 8px 2px; border-top: 1px solid #F0F1F2; margin-top: 6px">
+              <span style="font-size: 12px; color: var(--text-2)">{{pv.footText}}</span>
+              <button onClick="{{pv.clear}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 12px; cursor: pointer; color: var(--text-1)">清空</button>
+              <button onClick="{{pv.close}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">完成</button>
+            </div>
+          </div>
+        </template>
+      </div>
+      </template>
+      <div data-prd="ml" style="position: relative">
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-2)">
+          <span>{{ml.label}}</span>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px; width: 330px; min-height: 32px; padding: 2px 6px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; box-sizing: border-box">
+            <template data-sc="for" list="{{ml.chips}}" as="ch" hint-placeholder-count="0">
+              <span style="display: inline-flex; align-items: center; gap: 2px; height: 22px; padding: 0 2px 0 8px; border-radius: 11px; background: var(--brand-a08); color: var(--brand); font-size: 12px; white-space: nowrap">{{ch.name}}<button onClick="{{ch.remove}}" aria-label="{{ch.aria}}" style="width: 20px; height: 20px; border: 0; background: transparent; color: var(--brand); cursor: pointer; font-size: 14px; line-height: 1">×</button></span>
+            </template>
+            <input type="search" value="{{ml.query}}" onInput="{{ml.onInput}}" onFocus="{{ml.onFocus}}" placeholder="{{ml.placeholder}}" aria-label="{{ml.aria}}" style="flex: 1; min-width: 140px; height: 26px; border: 0; outline: none; background: transparent; font-size: 14px; font-family: inherit; color: var(--text-1)">
+          </div>
+          
+        </div>
+        <template data-sc="if" value="{{ml.open}}" hint-placeholder-val="{{ false }}">
+          <div role="listbox" aria-label="{{ml.aria}}" style="position: absolute; top: calc(100% + 4px); left: 0; width: 460px; max-width: calc(100vw - 48px); z-index: 30; background: #FFFFFF; border: 1px solid var(--line-1); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 8px; box-sizing: border-box">
+            <div style="padding: 4px 8px 8px; font-size: 12px; color: var(--text-2)">{{ml.headText}}</div>
+            <template data-sc="if" value="{{ml.hasIdHint}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 4px 6px; padding: 8px 10px; background: var(--fill-1); border-radius: 8px; font-size: 12px; color: var(--text-1)">
+                <span>{{ml.idHint}}</span>
+                <template data-sc="if" value="{{ml.hasNotFound}}" hint-placeholder-val="{{ false }}"><span style="color: var(--warn)">{{ml.notFoundText}}</span></template>
+                <button onClick="{{ml.selectAllIds}}" style="margin-left: auto; height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">全部选中</button>
+              </div>
+            </template>
+            <div style="max-height: 260px; overflow-y: auto">
+              <template data-sc="for" list="{{ml.results}}" as="r" hint-placeholder-count="5">
+                <button role="option" aria-selected="{{r.selStr}}" onClick="{{r.toggle}}" style="{{r.style}}">
+                  <span style="width: 16px; flex: none; color: var(--brand); font-weight: 700">{{r.mark}}</span>
+                  <span style="flex: 1; min-width: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.name}}</span>
+                  <span style="flex: none; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{r.id}}</span>
+                  <span style="flex: none; width: 110px; text-align: right; font-size: 12px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.sub}}</span>
+                </button>
+              </template>
+              <template data-sc="if" value="{{ml.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 16px 8px; font-size: 14px; color: var(--text-2); text-align: center">没有匹配的结果，换个名称或 ID 试试</div></template>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 8px 8px 2px; border-top: 1px solid #F0F1F2; margin-top: 6px">
+              <span style="font-size: 12px; color: var(--text-2)">{{ml.footText}}</span>
+              <button onClick="{{ml.clear}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 12px; cursor: pointer; color: var(--text-1)">清空</button>
+              <button onClick="{{ml.close}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">完成</button>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <div data-prd="tabs" role="tablist" aria-label="报表" style="display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid #E5E8EB">
+      <template data-sc="for" list="{{tabs}}" as="t" hint-placeholder-count="6">
+        <button role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}<template data-sc="if" value="{{t.pending}}" hint-placeholder-val="{{ false }}"><span style="margin-left: 6px; font-size: 12px; color: var(--warn); background: var(--warn-a08); border-radius: 3px; padding: 0 4px; line-height: 18px">待确认开放</span></template></button>
+      </template>
+    </div>
+
+    <!-- 漏斗分析 -->
+    <template data-sc="if" value="{{isFunnel}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <section data-prd="funnel" aria-labelledby="fn-h" style="background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 6px">
+            <h2 id="fn-h" style="margin: 0; font-size: 16px; font-weight: 600">{{fName}}</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <template data-sc="for" list="{{funnelChips}}" as="c" hint-placeholder-count="4">
+                <button onClick="{{c.pick}}" aria-pressed="{{c.selected}}" style="{{c.style}}">{{c.label}}</button>
+              </template>
+            </div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 10px 0 6px; font-size: 14px; color: var(--text-2)">
+            
+            <label style="display: flex; align-items: center; gap: 6px">窗口期
+              <select value="{{winValue}}" onChange="{{onWin}}" aria-label="窗口期" style="height: 30px; padding: 0 8px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 14px; color: var(--text-1)">
+                <template data-sc="for" list="{{winOpts}}" as="o" hint-placeholder-count="2"><option value="{{o.value}}">{{o.label}}</option></template>
+              </select>
+            </label>
+            <div role="group" aria-label="统计方式" style="display: flex; gap: 4px; background: var(--fill-2); border-radius: 8px; padding: 3px">
+              <template data-sc="for" list="{{modeOpts}}" as="o" hint-placeholder-count="2"><button onClick="{{o.pick}}" disabled="{{o.disabled}}" aria-pressed="{{o.selected}}" style="{{o.style}}">{{o.label}}</button></template>
+            </div>
+          </div>
+          <p style="margin: 0 0 14px; font-size: 12px; color: var(--text-2)">{{fMeta}}</p>
+
+          <template data-sc="for" list="{{funnel}}" as="f" hint-placeholder-count="7">
+            <div>
+              <template data-sc="if" value="{{f.hasLoss}}" hint-placeholder-val="{{ false }}">
+                <div style="{{f.lossStyle}}">↓ {{f.conv}} · 流失 {{f.lost}} 人<template data-sc="if" value="{{f.worst}}" hint-placeholder-val="{{ false }}"><span style="margin-left: 8px; font-size: 12px; font-weight: 600; color: var(--warn); background: var(--warn-a08); border-radius: 4px; padding: 1px 6px">流失最多</span></template><template data-sc="if" value="{{f.lossLink}}" hint-placeholder-val="{{ false }}"><button onClick="{{f.goLoss}}" style="margin-left: 8px; border: 0; background: transparent; color: var(--brand); font-size: 12px; cursor: pointer; padding: 0">看流失原因 →</button></template></div>
+              </template>
+              <div style="display: flex; align-items: center; gap: 16px">
+                <span style="width: 150px; flex: none; font-size: 14px">{{f.label}}<span style="display: block; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{f.event}}</span></span>
+                <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+                  <div style="{{f.shapeStyle}}" title="{{f.tip}}">{{f.inner}}</div>
+                </div>
+                <span style="width: 150px; flex: none; text-align: right; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums">{{f.valueText}}</span>
+              </div>
+            </div>
+          </template>
+        </section>
+        <div data-prd="share" style="display: flex; flex-wrap: wrap; gap: 16px">
+          <template data-sc="for" list="{{shareCharts}}" as="sc" hint-placeholder-count="2">
+            <section style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+              <h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 600">{{sc.title}}</h2>
+              <p style="margin: 0 0 14px; font-size: 12px; color: var(--text-2)">{{sc.sub}}</p>
+              <template data-sc="if" value="{{sc.has}}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
+                  <div role="img" aria-label="{{sc.aria}}" style="{{sc.donut}}">
+                    <div style="position: absolute; inset: 30px; border-radius: 50%; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center">
+                      <span style="font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums">{{sc.total}}</span>
+                      <span style="font-size: 12px; color: var(--text-2)">{{sc.totalLabel}}</span>
+                    </div>
+                  </div>
+                  <div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+                    <template data-sc="for" list="{{sc.rows}}" as="r" hint-placeholder-count="4">
+                      <div style="display: flex; align-items: center; gap: 8px; font-size: 14px">
+                        <span style="{{r.swatch}}"></span><span>{{r.label}}</span>
+                        <span style="margin-left: auto; font-variant-numeric: tabular-nums; white-space: nowrap">{{r.n}} · {{r.pct}}</span>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </template>
+              <template data-sc="if" value="{{sc.none}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 40px 0; text-align: center; font-size: 14px; color: var(--text-2)">这个漏斗不涉及商品，不看渠道占比</p></template>
+            </section>
+          </template>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px">
+          <section data-prd="trend" style="flex: 3 1 520px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 4px">
+              <h2 style="margin: 0; font-size: 16px; font-weight: 600">{{trTitle}}</h2>
+              <span style="font-size: 12px; color: var(--text-2)">{{trSub}}</span>
+              <template data-sc="if" value="{{tr.hasRef}}" hint-placeholder-val="{{ true }}"><span style="margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2)"><span style="width: 16px; border-top: 2px dashed #7A8089"></span>{{tr.refLabel}}</span></template>
+            </div>
+            <div role="img" aria-label="{{tr.aria}}" style="position: relative; height: 220px; margin-top: 12px">
+              <div style="position: absolute; left: 0; width: 44px; top: 10px; bottom: 24px">
+                <template data-sc="for" list="{{tr.ticks}}" as="t" hint-placeholder-count="4"><span style="{{t.labelStyle}}">{{t.label}}</span></template>
+              </div>
+              <div style="position: absolute; left: 52px; right: 12px; top: 10px; bottom: 24px">
+                <template data-sc="for" list="{{tr.ticks}}" as="t" hint-placeholder-count="4"><div style="{{t.lineStyle}}"></div></template>
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible">
+                  <template data-sc="if" value="{{tr.hasRef}}" hint-placeholder-val="{{ true }}"><polyline points="{{tr.refPoints}}" fill="none" stroke="#7A8089" stroke-width="1.5" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"></polyline></template>
+                  <polyline points="{{tr.points}}" fill="none" stroke="#0F8F84" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>
+                </svg>
+                <template data-sc="for" list="{{tr.dots}}" as="d" hint-placeholder-count="7">
+                  <div onMouseEnter="{{d.enter}}" onMouseLeave="{{d.leave}}" title="{{d.tip}}" style="{{d.hitStyle}}">
+                    <span style="{{d.dotStyle}}"></span>
+                    <template data-sc="if" value="{{d.hover}}" hint-placeholder-val="{{ false }}"><span style="{{d.tipStyle}}">{{d.tip}}</span></template>
+                  </div>
+                </template>
+              </div>
+              <div style="position: absolute; left: 52px; right: 12px; bottom: 0; height: 18px">
+                <template data-sc="for" list="{{tr.dots}}" as="d" hint-placeholder-count="7"><span style="{{d.xStyle}}">{{d.date}}</span></template>
+              </div>
+            </div>
+          </section>
+          <section data-prd="steps" style="flex: 2 1 360px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+            <h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 600">步骤转化率</h2>
+            <p style="margin: 0 0 12px; font-size: 12px; color: var(--text-2)">每一步相对上一步，最低的一步标橙</p>
+            <div role="img" aria-label="{{stepAria}}" style="position: relative; height: 220px; display: flex; align-items: flex-end; gap: 10px; padding: 18px 0 40px; box-sizing: border-box; border-bottom: 1px solid #C9CDD4">
+              <template data-sc="for" list="{{stepBars}}" as="b" hint-placeholder-count="6">
+                <div title="{{b.tip}}" style="position: relative; flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center">
+                  <span style="font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: 4px">{{b.pct}}</span>
+                  <div style="{{b.barStyle}}"></div>
+                  <span style="position: absolute; bottom: -38px; left: 50%; transform: translateX(-50%); width: 64px; text-align: center; font-size: 12px; line-height: 1.3; color: var(--text-2)">{{b.label}}</span>
+                </div>
+              </template>
+            </div>
+          </section>
+        </div>
+      </div>
+    </template>
+
+    <!-- 流失原因 -->
+    <template data-sc="if" value="{{isLoss}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <section data-prd="lossBars" style="background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 4px">
+            <h2 style="margin: 0; font-size: 16px; font-weight: 600">F4 交易主链路 · 各步流失人数</h2>
+            <span style="font-size: 12px; color: var(--text-2)">点上方环节看汇总，点柱子看单步的流失构成</span>
+          </div>
+          <div role="group" aria-label="选择流失环节" style="display: flex; gap: 16px; margin-top: 12px">
+            <template data-sc="for" list="{{lossStages}}" as="g" hint-placeholder-count="4">
+              <button onClick="{{g.pick}}" aria-pressed="{{g.selected}}" style="{{g.style}}"><span>{{g.label}}</span><span style="font-variant-numeric: tabular-nums">流失 {{g.n}} 人</span><span style="margin-left: auto; font-size: 12px; font-weight: 400; color: var(--text-2)">{{g.hint}}</span></button>
+            </template>
+          </div>
+          <div role="group" aria-label="选择流失步骤" style="position: relative; height: 230px; display: flex; align-items: flex-end; gap: 16px; padding: 20px 0 42px; box-sizing: border-box; border-bottom: 1px solid #C9CDD4">
+            <template data-sc="for" list="{{lossBars}}" as="b" hint-placeholder-count="6">
+              <button onClick="{{b.pick}}" disabled="{{b.disabled}}" aria-pressed="{{b.selected}}" aria-label="{{b.aria}}" style="{{b.btnStyle}}">
+                <span style="font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: 4px; color: var(--text-1)">{{b.n}}</span>
+                <span style="{{b.barStyle}}"></span>
+                <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 110px; text-align: center; font-size: 12px; line-height: 1.35; color: var(--text-2)">{{b.label}}</span>
+              </button>
+            </template>
+          </div>
+        </section>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px">
+          <section data-prd="donut" style="flex: 2 1 380px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+            <h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 600">流失构成 · {{lStepLabel}}</h2>
+            <p style="margin: 0 0 14px; font-size: 12px; color: var(--text-2)">失败原因与主动离开合在一起看占比</p>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
+              <div role="img" aria-label="{{donutAria}}" style="{{donutStyle}}">
+                <div style="position: absolute; inset: 34px; border-radius: 50%; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center">
+                  <span style="font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums">{{lTotal}}</span>
+                  <span style="font-size: 12px; color: var(--text-2)">流失人数</span>
+                </div>
+              </div>
+              <div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+                <template data-sc="for" list="{{slices}}" as="sl" hint-placeholder-count="6">
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 14px">
+                    <span style="{{sl.swatch}}"></span>
+                    <span style="min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{sl.label}}</span>
+                    <span style="margin-left: auto; font-variant-numeric: tabular-nums; white-space: nowrap">{{sl.n}} · {{sl.pct}}</span>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <template data-sc="if" value="{{hasSub}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid #F0F1F2">
+                <div style="font-size: 14px; font-weight: 600; margin-bottom: 10px">下单环节分步流失</div>
+                <template data-sc="for" list="{{subRows}}" as="r" hint-placeholder-count="3">
+                  <button onClick="{{r.pick}}" style="display: block; width: 100%; margin-bottom: 8px; padding: 6px 8px; border: 0; border-radius: 6px; background: transparent; cursor: pointer; font-family: inherit; text-align: left">
+                    <span style="display: flex; justify-content: space-between; font-size: 14px; color: var(--text-1); margin-bottom: 4px"><span>{{r.label}}</span><span style="font-variant-numeric: tabular-nums">{{r.n}} 人 · {{r.pct}}</span></span>
+                    <span style="display: block; height: 8px; background: var(--fill-2); border-radius: 4px"><span style="{{r.barStyle}}; display: block"></span></span>
+                  </button>
+                </template>
+              </div>
+            </template>
+          </section>
+          <section data-prd="lsTrend" style="flex: 3 1 520px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 4px">
+              <h2 style="margin: 0; font-size: 16px; font-weight: 600">{{lsTitle}}</h2>
+              <span style="font-size: 12px; color: var(--text-2)">{{lsSub}}</span>
+              <template data-sc="if" value="{{ls.hasRef}}" hint-placeholder-val="{{ true }}"><span style="margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2)"><span style="width: 16px; border-top: 2px dashed #7A8089"></span>{{ls.refLabel}}</span></template>
+            </div>
+            <div role="img" aria-label="{{ls.aria}}" style="position: relative; height: 220px; margin-top: 12px">
+              <div style="position: absolute; left: 0; width: 44px; top: 10px; bottom: 24px">
+                <template data-sc="for" list="{{ls.ticks}}" as="t" hint-placeholder-count="4"><span style="{{t.labelStyle}}">{{t.label}}</span></template>
+              </div>
+              <div style="position: absolute; left: 52px; right: 12px; top: 10px; bottom: 24px">
+                <template data-sc="for" list="{{ls.ticks}}" as="t" hint-placeholder-count="4"><div style="{{t.lineStyle}}"></div></template>
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible">
+                  <template data-sc="if" value="{{ls.hasRef}}" hint-placeholder-val="{{ true }}"><polyline points="{{ls.refPoints}}" fill="none" stroke="#7A8089" stroke-width="1.5" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"></polyline></template>
+                  <polyline points="{{ls.points}}" fill="none" stroke="#0F8F84" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>
+                </svg>
+                <template data-sc="for" list="{{ls.dots}}" as="d" hint-placeholder-count="7">
+                  <div onMouseEnter="{{d.enter}}" onMouseLeave="{{d.leave}}" title="{{d.tip}}" style="{{d.hitStyle}}">
+                    <span style="{{d.dotStyle}}"></span>
+                    <template data-sc="if" value="{{d.hover}}" hint-placeholder-val="{{ false }}"><span style="{{d.tipStyle}}">{{d.tip}}</span></template>
+                  </div>
+                </template>
+              </div>
+              <div style="position: absolute; left: 52px; right: 12px; bottom: 0; height: 18px">
+                <template data-sc="for" list="{{ls.dots}}" as="d" hint-placeholder-count="7"><span style="{{d.xStyle}}">{{d.date}}</span></template>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px">
+          <section data-prd="lossDetail" aria-labelledby="lf-h" style="flex: 1 1 460px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+            <h2 id="lf-h" style="margin: 0 0 4px; font-size: 16px; font-weight: 600">失败原因 · {{lFailTotal}} 人</h2>
+            <p style="margin: 0 0 12px; font-size: 12px; color: var(--text-2)">有失败结果事件的流失，按服务端返回的 fail_reason 归因</p>
+            <template data-sc="if" value="{{hasFail}}" hint-placeholder-val="{{ true }}">
+              <div>
+                <template data-sc="for" list="{{lFail}}" as="r" hint-placeholder-count="3">
+                  <div style="display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #F0F1F2">
+                    <span style="width: 170px; flex: none; font-size: 14px">{{r.label}}<span style="display: block; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{r.code}}</span></span>
+                    <div style="flex: 1; min-width: 0; height: 10px; background: var(--fill-2); border-radius: 4px"><div style="{{r.barStyle}}"></div></div>
+                    <span style="width: 48px; text-align: right; font-size: 14px; font-variant-numeric: tabular-nums">{{r.n}}</span>
+                    <a href="{{r.href}}" style="width: 96px; flex: none; font-size: 12px; text-align: right">{{r.action}}</a>
+                  </div>
+                </template>
+              </div>
+            </template>
+            <template data-sc="if" value="{{noFail}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; color: var(--text-2)">这一步没有失败结果事件，流失都是主动离开。</p></template>
+          </section>
+          <section aria-labelledby="ll-h" style="flex: 1 1 460px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+            <h2 id="ll-h" style="margin: 0 0 4px; font-size: 16px; font-weight: 600">主动离开 · {{lLeaveTotal}} 人</h2>
+            <p style="margin: 0 0 12px; font-size: 12px; color: var(--text-2)">没有失败结果的流失，按离开前最后一个页面拆分</p>
+            <template data-sc="for" list="{{lLeave}}" as="r" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #F0F1F2">
+                <span style="width: 170px; flex: none; font-size: 14px">{{r.label}}<span style="display: block; font-size: 12px; color: var(--text-2); font-family: ui-monospace, Menlo, monospace">{{r.code}}</span></span>
+                <div style="flex: 1; min-width: 0; height: 10px; background: var(--fill-2); border-radius: 4px"><div style="{{r.barStyle}}"></div></div>
+                <span style="width: 48px; text-align: right; font-size: 14px; font-variant-numeric: tabular-nums">{{r.n}}</span>
+              </div>
+            </template>
+          </section>
+        </div>
+      </div>
+    </template>
+
+    <!-- 搜索分析 -->
+    <template data-sc="if" value="{{isSearch}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div data-prd="skpi" style="font-size: 14px; color: var(--text-2)">搜索次数</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">2,315</div><div style="font-size: 12px; color: var(--text-2)">684 人搜索过</div></div>
+          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 14px; color: var(--text-2)">搜索无结果率</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">8.6%</div><div style="font-size: 12px; color: var(--text-2)">199 次搜索没有结果</div></div>
+          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 14px; color: var(--text-2)">搜索点击率</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">41.2%</div><div style="font-size: 12px; color: var(--text-2)">有点击的请求 ÷ 有结果的搜索</div></div>
+          <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 14px; color: var(--text-2)">无结果推荐点击</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">57 次</div><div style="font-size: 12px; color: var(--text-2)">无结果页兜底推荐</div></div>
+        </div>
+        <div data-prd="words" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px">
+          <template data-sc="for" list="{{wordTables}}" as="wt" hint-placeholder-count="3">
+            <section style="background: #FFFFFF; border-radius: 12px; padding: 20px 22px">
+              <h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 600">{{wt.title}}</h2>
+              <p style="margin: 0 0 10px; font-size: 12px; color: var(--text-2)">{{wt.desc}}</p>
+              <table style="width: 100%; border-collapse: collapse; font-size: 14px">
+                <thead><tr style="background: var(--fill-1); color: var(--text-2); text-align: left"><th style="padding: 8px 10px; font-weight: 500">词</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">搜索次数</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">{{wt.col3}}</th></tr></thead>
+                <tbody>
+                  <template data-sc="for" list="{{wt.rows}}" as="w" hint-placeholder-count="5">
+                    <tr style="border-bottom: 1px solid #F0F1F2"><td style="padding: 9px 10px">{{w.w}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{w.n}}</td><td style="padding: 9px 10px; text-align: right"><template data-sc="if" value="{{w.isLink}}" hint-placeholder-val="{{ false }}"><a href="#">{{w.c}}</a></template><template data-sc="if" value="{{w.isText}}" hint-placeholder-val="{{ true }}"><span style="font-variant-numeric: tabular-nums">{{w.c}}</span></template></td></tr>
+                  </template>
+                </tbody>
+              </table>
+            </section>
+          </template>
+        </div>
+      </div>
+    </template>
+
+    <!-- 页面与组件 -->
+    <template data-sc="if" value="{{isPage}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-wrap: wrap; gap: 16px">
+        <section data-prd="pg" aria-labelledby="pg-h" style="flex: 1 1 560px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+          <h2 id="pg-h" style="margin: 0 0 12px; font-size: 16px; font-weight: 600">页面</h2>
+          <div style="overflow-x: auto">
+            <table style="width: 100%; min-width: 520px; border-collapse: collapse; font-size: 14px">
+              <thead><tr style="background: var(--fill-1); color: var(--text-2); text-align: left"><th style="padding: 8px 10px; font-weight: 500">页面</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">PV</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">UV</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">平均停留</th><th style="padding: 8px 10px; font-weight: 500; text-align: right">跳出率</th></tr></thead>
+              <tbody>
+                <template data-sc="for" list="{{pages}}" as="p" hint-placeholder-count="6">
+                  <tr style="border-bottom: 1px solid #F0F1F2"><td style="padding: 9px 10px">{{p.name}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{p.pv}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{p.uv}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{p.stay}}</td><td style="padding: 9px 10px; text-align: right; font-variant-numeric: tabular-nums">{{p.bounce}}</td></tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section data-prd="cp" aria-labelledby="cp-h" style="flex: 1 1 520px; min-width: 0; background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+          <h2 id="cp-h" style="margin: 0 0 4px; font-size: 16px; font-weight: 600">首页装修组件与坑位</h2>
+          <p style="margin: 0 0 12px; font-size: 12px; color: var(--text-2)">曝光口径：面积过半且停留满 500ms；点击率低的坑位可以换货盘或换图</p>
+          <template data-sc="for" list="{{comps}}" as="c" hint-placeholder-count="6">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #F0F1F2">
+              <span style="width: 150px; flex: none; font-size: 14px">{{c.name}}</span>
+              <div style="flex: 1; min-width: 0; height: 10px; background: var(--fill-2); border-radius: 4px"><div style="{{c.barStyle}}"></div></div>
+              <span style="width: 120px; text-align: right; font-size: 12px; color: var(--text-2); font-variant-numeric: tabular-nums">{{c.detail}}</span>
+              <span style="{{c.ctrStyle}}">{{c.ctr}}</span>
+            </div>
+          </template>
+        </section>
+      </div>
+    </template>
+
+    <!-- 下单习惯 -->
+    <template data-sc="if" value="{{isHabit}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
+          <template data-sc="for" list="{{habitKpis}}" as="k" hint-placeholder-count="5">
+            <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px"><div style="font-size: 14px; color: var(--text-2)">{{k.label}}</div><div style="font-size: 24px; font-weight: 600; margin-top: 6px">{{k.value}}</div><div style="font-size: 12px; color: var(--text-2)">{{k.note}}</div></div>
+          </template>
+        </div>
+        <section data-prd="hr" aria-labelledby="hr-h" style="background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px">
+            <h2 id="hr-h" style="margin: 0; font-size: 16px; font-weight: 600">下单时段分布</h2>
+            <span style="font-size: 12px; color: var(--text-2)">按小时统计创单成功数；高峰在午间和 20–22 点，适合安排上新和推送</span>
+          </div>
+          <div role="img" aria-label="{{hourAria}}" style="position: relative; height: 180px; display: flex; align-items: flex-end; gap: 3px; padding-bottom: 22px; border-bottom: 1px solid #C9CDD4">
+            <template data-sc="for" list="{{hours}}" as="h" hint-placeholder-count="24">
+              <div onMouseEnter="{{h.enter}}" onMouseLeave="{{h.leave}}" title="{{h.tip}}" style="position: relative; flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center">
+                <template data-sc="if" value="{{h.hover}}" hint-placeholder-val="{{ false }}"><div style="{{h.tipStyle}}">{{h.tip}}</div></template>
+                <div style="{{h.barStyle}}"></div>
+                <span style="position: absolute; bottom: -20px; font-size: 12px; color: var(--text-2)">{{h.label}}</span>
+              </div>
+            </template>
+          </div>
+        </section>
+        <div data-prd="shares" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px">
+          <template data-sc="for" list="{{shares}}" as="s" hint-placeholder-count="3">
+            <section style="background: #FFFFFF; border-radius: 12px; padding: 20px 22px">
+              <h2 style="margin: 0 0 12px; font-size: 16px; font-weight: 600">{{s.title}}</h2>
+              <template data-sc="for" list="{{s.rows}}" as="r" hint-placeholder-count="4">
+                <div style="margin-bottom: 10px">
+                  <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px"><span>{{r.label}}</span><span style="font-variant-numeric: tabular-nums">{{r.pct}}</span></div>
+                  <div style="height: 8px; background: var(--fill-2); border-radius: 4px"><div style="{{r.barStyle}}"></div></div>
+                </div>
+              </template>
+            </section>
+          </template>
+        </div>
+      </div>
+    </template>
+
+    <!-- 发放兑换 -->
+    <template data-sc="if" value="{{isProject}}" hint-placeholder-val="{{ false }}">
+      <section data-prd="pj" aria-labelledby="pj-h" style="background: #FFFFFF; border-radius: 12px; padding: 20px 24px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 4px">
+          <h2 id="pj-h" style="margin: 0; font-size: 16px; font-weight: 600">发放兑换情况</h2>
+          <span style="font-size: 12px; color: var(--warn); background: var(--warn-a08); border-radius: 4px; padding: 1px 6px">分母「项目发放员工数」取哪张表待确认</span>
+        </div>
+        <p style="margin: 0 0 14px; font-size: 14px; color: var(--text-2)">发放兑换率 = 已下单员工数 ÷ 项目发放员工数。整体 <b style="color: var(--text-1)">65.6%</b>（1,339 / 2,040 人）。同样的数据也在「我的商城 › 商城详情 › 兑换情况」。<br>员工手里有两种额度：<b style="color: var(--text-1)">商城余额</b>按 1:1 抵现金；<b style="color: var(--text-1)">商城积分</b>按站点设置的比例兑换商品，所以不同站点的积分不能直接相加，合计时按各自比例折算成金额。</p>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; min-width: 1100px; border-collapse: collapse; font-size: 14px">
+            <thead><tr style="background: var(--fill-1); color: var(--text-2); text-align: left">
+              <th style="padding: 10px 12px; font-weight: 500">商城 / 福利项目</th>
+              <th style="padding: 10px 12px; font-weight: 500; text-align: right">开通账号</th>
+              <th style="padding: 10px 12px; font-weight: 500; text-align: right">已激活（首登）</th>
+              <th style="padding: 10px 12px; font-weight: 500; text-align: right">已下单员工</th>
+              <th style="padding: 10px 12px; font-weight: 500">发放兑换率</th>
+              <th style="padding: 10px 12px; font-weight: 500; text-align: right">商城余额 已用 / 发放</th>
+              <th style="padding: 10px 12px; font-weight: 500; text-align: right">商城积分 已用 / 发放</th>
+              <th style="padding: 10px 12px; font-weight: 500">到期</th>
+            </tr></thead>
+            <tbody>
+              <template data-sc="for" list="{{projects}}" as="p" hint-placeholder-count="3">
+                <tr style="border-bottom: 1px solid #F0F1F2">
+                  <td style="padding: 12px; font-weight: 500">{{p.name}}<span style="display: block; font-size: 12px; font-weight: 400; color: var(--text-2)">{{p.proj}}</span></td>
+                  <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.people}}</td>
+                  <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.active}}</td>
+                  <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.done}}</td>
+                  <td style="padding: 12px">
+                    <div style="display: flex; align-items: center; gap: 8px">
+                      <div style="width: 120px; height: 8px; background: var(--fill-2); border-radius: 4px"><div style="{{p.barStyle}}"></div></div>
+                      <span style="font-variant-numeric: tabular-nums">{{p.rate}}</span>
+                    </div>
+                  </td>
+                  <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.bal}}<span style="display: block; font-size: 12px; color: var(--text-2)">{{p.balRate}}</span></td>
+                  <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{p.pts}}<span style="display: block; font-size: 12px; color: var(--text-2)">{{p.ptsNote}}</span></td>
+                  <td style="{{p.dueStyle}}">{{p.due}}</td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </template>
+
+  </main>
+</div>
+</div>
+<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 520px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
+  <div style="padding: 16px 18px 14px; border-bottom: 1px solid #E3E6F5">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="font-size: 11px; font-weight: 700; color: #FFFFFF; background: #5B6BD5; border-radius: 4px; padding: 2px 6px; letter-spacing: 0.5px">PRD</span>
+      <span style="font-size: 15px; font-weight: 600">{{prdTitle}}</span>
+      <button onClick="{{prdToggleLines}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #C9CEF0; border-radius: 6px; background: #FFFFFF; color: #3B4BB8; font-size: 12px; cursor: pointer">{{prdLinesLabel}}</button>
+    </div>
+    <div style="margin-top: 8px; font-size: 12px; color: #646A73; line-height: 1.7">{{prdIntro}}</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; font-size: 11px">
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #EEF2FF; color: #3B4BB8">交互</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E8F6F4; color: #0B6E66">数据</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F2F3F5; color: #1F2329">规则</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F5EDF7; color: #7A2E78">埋点</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #FFF1E8; color: #B54708">待确认</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E9F0FB; color: #1F4E9A">字段</span>
+      <span style="color: #646A73; line-height: 18px">· 鼠标停在卡片上高亮对应区域</span>
+    </div>
+  </div>
+  <div data-prd-cards="1" style="position: relative; height: {{prdPanelH}}px">
+    <template data-sc="for" list="{{prdCardList}}" as="c" hint-placeholder-count="4">
+      <div data-prd-card="{{c.k}}" onMouseEnter="{{c.enter}}" onMouseLeave="{{c.leave}}" style="{{c.style}}">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: #5B6BD5; color: #FFFFFF; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{c.no}}</span>
+          <span style="font-size: 14px; font-weight: 600">{{c.title}}</span>
+        </div>
+        <template data-sc="if" value="{{c.unanchored}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 4px; font-size: 11px; color: #8F959E">{{c.hint}}</div></template>
+        <template data-sc="for" list="{{c.secs}}" as="x" hint-placeholder-count="2">
+          <div>
+            <template data-sc="if" value="{{x.isText}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; gap: 8px; margin-top: 8px">
+                <span style="{{x.tagStyle}}">{{x.label}}</span>
+                <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+              </div>
+            </template>
+            <template data-sc="if" value="{{x.isTable}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 10px">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+                  <span style="{{x.tagStyle}}">{{x.label}}</span>
+                  <span style="font-size: 12px; color: #646A73">{{x.caption}}</span>
+                </div>
+                <div role="table" style="border: 1px solid #E3E6F5; border-radius: 8px; overflow: hidden">
+                  <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 6px 10px; background: #F4F6FD; font-size: 11px; font-weight: 600; color: #3B4BB8">
+                    <span role="columnheader">字段</span><span role="columnheader">口径</span><span role="columnheader">来源</span>
+                  </div>
+                  <template data-sc="for" list="{{x.rows}}" as="r" hint-placeholder-count="3">
+                    <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 7px 10px; border-top: 1px solid #EEF0F6; font-size: 12px; line-height: 1.6">
+                      <span role="cell" style="font-weight: 600; color: #1F2329">{{r.f}}</span>
+                      <span role="cell" style="color: #33373D">{{r.d}}</span>
+                      <span role="cell" style="color: #646A73; overflow-wrap: anywhere">{{r.s}}</span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+</aside>
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 90">
+  <template data-sc="for" list="{{prdLineList}}" as="ln" hint-placeholder-count="0">
+    <div style="display: contents"><div style="{{ln.box}}"></div><div style="{{ln.s1}}"></div><div style="{{ln.s2}}"></div><div style="{{ln.s3}}"></div><div style="{{ln.dot}}"></div></div>
+  </template>
+</div>
+</div>
+</template>
+<div id="dc-mount"></div>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'funnel', funnel: 'F4', compare: false, loss: 'cart', hour: -1, trHover: -1, lsHover: -1, view: 'internal', dim: 0, win: 0, mode: 'person', pvQ: '', mlQ: '', combo: '', pvSel: [], mlSel: [] };
+  }
+  pageVals() {
+    const st = this.state;
+    const fmt = (n) => n.toLocaleString('en-US');
+    const chip = (sel) => 'height: 30px; padding: 0 12px; border-radius: 15px; border: 0; cursor: pointer; font-size: 14px; ' + (sel ? 'background: var(--brand-a08); color: var(--brand); font-weight: 600' : 'background: var(--fill-2); color: var(--text-1)');
+
+    const tabs = [['funnel', '漏斗分析', true], ['loss', '流失原因', true], ['search', '搜索分析'], ['page', '页面与组件'], ['habit', '下单习惯'], ['project', '发放兑换']].map((t) => {
+      const sel = st.tab === t[0];
+      return { label: t[1], pending: !!t[2] && st.view === 'provider', selected: sel ? 'true' : 'false', pick: () => this.setState({ tab: t[0] }),
+        style: 'display: flex; align-items: center; height: 42px; padding: 0 16px; border: 0; background: transparent; cursor: pointer; font-size: 14px; margin-bottom: -1px; ' + (sel ? 'color: var(--brand); font-weight: 600; border-bottom: 2px solid #0F8F84' : 'color: var(--text-2); border-bottom: 2px solid transparent') };
+    });
+
+    const F = {
+      F4: { name: 'F4 交易主链路', meta: '', unit: '人',
+        steps: [['进入商城（已登录）', 'mall_enter', 1286], ['浏览商详', 'item_detail_view', 1040], ['加购成功或立即购买', 'add_cart_result / buy_now_click', 486], ['进入确认订单', 'order_confirm_view', 301], ['提交订单', 'order_submit_click', 248], ['创单成功', 'order_create_result', 236], ['支付成功', 'pay_result', 198]] },
+      F5: { name: 'F5 搜索找货', meta: '', unit: '人',
+        steps: [['发起搜索', 'search_submit', 684], ['有结果', 'search_result', 641], ['点击结果', 'search_result_click', 352], ['加购或立即购买', 'add_cart_result / buy_now_click', 168], ['创单成功', 'order_create_result', 89]] },
+      F6: { name: 'F6 购物车', meta: '', unit: '人',
+        steps: [['加购成功', 'add_cart_result', 412], ['查看购物车', 'cart_view', 380], ['点击结算', 'cart_checkout_click', 251], ['创单成功', 'order_create_result', 214], ['支付成功', 'pay_result', 186]] },
+      F1: { name: 'F1 注册', platform: true, meta: '首次登录一步的窗口为 7 天', unit: '人',
+        steps: [['进入注册页', 'page_view(register)', 412], ['验证码发送成功', 'register_sms_result', 389], ['提交注册', 'register_submit', 352], ['注册成功', 'register_result', 331], ['首次登录成功', 'login_result · is_first_login', 318]] },
+      F2: { name: 'F2 登录', platform: true, meta: '「验证码获取成功」只适用于短信等需要验证码的方式，合计漏斗不含这一步，按登录方式拆分可见', unit: '人',
+        steps: [['进入登录页', 'page_view(login)', 1520], ['提交登录', 'login_submit', 1402], ['登录成功', 'login_result', 1318]] },
+      F3: { name: 'F3 游客转化', platform: true, meta: '', unit: '人',
+        steps: [['游客进入', 'guest_enter', 524], ['浏览商详', 'item_detail_view', 341], ['弹出登录引导', 'login_guide_show', 198], ['登录成功', 'login_result', 126], ['创单成功', 'order_create_result', 41]] },
+      F1b: { name: 'F1b 导入账号激活', meta: '', unit: '个账号', noSession: true, winDir: -1,
+        steps: [['账号开通', 'account_create_result', 2040], ['首次登录成功', 'login_result · is_first_login', 1512], ['首次下单成功', 'order_create_result', 1339]] }
+    };
+    const WINS = { F4: ['同一自然日', '7 天'], F5: ['同一会话', '同一自然日'], F6: ['7 天', '30 天'], F1: ['30 分钟', '1 天'], F1b: ['30 天', '7 天'], F2: ['30 分钟', '1 天'], F3: ['同一自然日', '7 天'] };
+    const base = F[st.funnel];
+    const wins = WINS[st.funnel];
+    const wi = Math.min(st.win, wins.length - 1);
+    const sessionMode = st.mode === 'session' && !base.noSession;
+    let counts = base.steps.map((x) => x[2]);
+    if (sessionMode) counts = counts.map((v, i) => Math.round(v * 1.55 * Math.pow(0.9, i)));
+    if (wi > 0) {
+      const dir = base.winDir || 1;
+      counts = counts.map((v, i) => i === 0 ? v : Math.round(v * (1 + dir * 0.06 * i)));
+      for (let i = 1; i < counts.length; i++) counts[i] = Math.min(counts[i], counts[i - 1]);
+    }
+    const cur = { name: base.name, unit: sessionMode ? '次会话' : base.unit, steps: base.steps.map((x, i) => [x[0], x[1], counts[i]]) };
+    const fMetaText = '窗口：' + wins[wi] + ' · ' + (sessionMode ? '按会话（session_id）计' : (base.noSession ? '按账号计' : '按人去重')) + (base.meta ? ' · ' + base.meta : '') + ' · 每层宽度与人数成正比，层间是步骤转化率' + (base.platform && st.view === 'provider' ? ' · 平台级漏斗，是否对服务商开放待确认' : '');
+    const SH_PAL = ['#0F8F84', '#5B6BD5', '#C2671B', '#A0479E', '#5E8C2E'];
+    const donutOf = (rows) => {
+      const tot = rows.reduce((x, r) => x + r[1], 0);
+      let acc2 = 0; const sg = [];
+      const out = rows.map((r, i) => {
+        const col = SH_PAL[i % SH_PAL.length];
+        const a0 = acc2 / tot * 360, a1 = (acc2 + r[1]) / tot * 360; acc2 += r[1];
+        const gap = Math.min(1.2, (a1 - a0) / 3);
+        sg.push(col + ' ' + a0.toFixed(2) + 'deg ' + (a1 - gap).toFixed(2) + 'deg', '#FFFFFF ' + (a1 - gap).toFixed(2) + 'deg ' + a1.toFixed(2) + 'deg');
+        return { label: r[0], n: fmt(r[1]), pct: (r[1] / tot * 100).toFixed(1) + '%', swatch: 'flex: none; width: 10px; height: 10px; border-radius: 2px; background: ' + col };
+      });
+      return { rows: out, total: fmt(tot), donut: 'position: relative; flex: none; width: 160px; height: 160px; border-radius: 50%; background: conic-gradient(' + sg.join(', ') + ')',
+        aria: out.map((r) => r.label + ' ' + r.pct).join('，') };
+    };
+    const first = counts[0], last = counts[counts.length - 1];
+    const termRows = [['微信小程序', Math.round(first * 0.58)], ['H5', Math.round(first * 0.34)], ['支付宝小程序', first - Math.round(first * 0.58) - Math.round(first * 0.34)]];
+    const goodsFunnel = ['F4', 'F5', 'F6'].indexOf(st.funnel) >= 0;
+    const chRows = [['平台猫超', Math.round(last * 0.46)], ['京东', Math.round(last * 0.31)], ['优品', Math.round(last * 0.15)]];
+    chRows.push(['自营', last - chRows.reduce((x, r) => x + r[1], 0)]);
+    const tD = donutOf(termRows), cD = donutOf(chRows);
+    const shareCharts = [
+      Object.assign({ title: '终端占比', sub: '按「' + cur.steps[0][0] + '」的' + (sessionMode ? '会话' : '人数') + '统计（platform 字段）', has: true, none: false, totalLabel: cur.unit }, tD),
+      Object.assign({ title: '商品渠道占比', sub: goodsFunnel ? '按「' + cur.steps[cur.steps.length - 1][0] + '」的' + (sessionMode ? '会话' : '人数') + '统计（goods_channel 字段）' : '', has: goodsFunnel, none: !goodsFunnel, totalLabel: cur.unit }, cD)
+    ];
+    const s0 = cur.steps[0][2];
+    let worst = 1, wc = 2;
+    cur.steps.forEach((s, i) => { if (i > 0) { const c = s[2] / cur.steps[i - 1][2]; if (c < wc) { wc = c; worst = i; } } });
+    const funnel = cur.steps.map((s, i) => {
+      const prev = i > 0 ? cur.steps[i - 1] : null;
+      return {
+        label: s[0], event: s[1],
+        valueText: '占首步 ' + (s[2] / s0 * 100).toFixed(1) + '%',
+        inner: fmt(s[2]) + ' ' + cur.unit,
+        tip: s[0] + '：' + fmt(s[2]) + ' ' + cur.unit + '，占首步 ' + (s[2] / s0 * 100).toFixed(1) + '%',
+        shapeStyle: (() => {
+          const w = s[2] / s0 * 100;
+          const nxt = cur.steps[i + 1];
+          const wn = nxt ? nxt[2] / s0 * 100 : w;
+          const inset = w > 0 ? ((w - wn) / 2 / w * 100) : 0;
+          return 'margin: 0 auto; height: 42px; width: ' + w.toFixed(2) + '%; min-width: 88px; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; display: flex; align-items: center; justify-content: center; ' +
+            'clip-path: polygon(0 0, 100% 0, ' + (100 - inset).toFixed(2) + '% 100%, ' + inset.toFixed(2) + '% 100%)';
+        })(),
+        hasLoss: i > 0, worst: i === worst,
+        lossLink: st.funnel === 'F4' && i > 0,
+        goLoss: () => this.setState({ tab: 'loss', loss: ['', 'view', 'cart', 'toConfirm', 'confirm', 'create', 'pay'][i] || 'cart' }),
+        conv: prev ? (s[2] / prev[2] * 100).toFixed(1) + '%' : '',
+        lost: prev ? fmt(prev[2] - s[2]) : '',
+        lossStyle: 'padding: 6px 166px; text-align: center; font-size: 12px; font-variant-numeric: tabular-nums; color: ' + (i === worst ? '#B54708' : '#646A73'),
+        barStyle: 'height: 30px; border-radius: 6px; background: #0F8F84; width: ' + (s[2] / s0 * 100) + '%',
+      };
+    });
+    const funnelChips = [['F4', 'F4 交易主链路'], ['F5', 'F5 搜索找货'], ['F6', 'F6 购物车'], ['F1', 'F1 注册'], ['F1b', 'F1b 导入账号激活'], ['F2', 'F2 登录'], ['F3', 'F3 游客转化']].map((c) => ({
+      label: c[1], selected: st.funnel === c[0] ? 'true' : 'false', style: chip(st.funnel === c[0]),
+      pick: () => this.setState({ funnel: c[0], win: 0, trHover: -1 })
+    }));
+
+    const CREATE_FAIL = [['商城积分不足', 'points_insufficient', 4, '', '#'], ['收货地区不可售', 'not_saleable_area', 3, '换可售商品', '#'], ['商品缺货', 'out_of_stock', 2, '去资源广场补货', '#'], ['上游下单失败', 'channel_error', 2, '', '#'], ['价格变动', 'price_changed', 1, '', '#']];
+    const L = {
+      view: { label: '进入 → 浏览商详', fail: [],
+        leave: [['首页', 'home', 132], ['搜索结果页', 'search_result', 58], ['分类页', 'category', 41], ['其他页面', 'other', 15]] },
+      cart: { label: '浏览商详 → 加购', fail: [['收货地区不可售', 'not_saleable_area', 88, '换可售商品', '#'], ['商品缺货', 'out_of_stock', 62, '去资源广场补货', '#'], ['超出限购', 'limit_exceeded', 21, '', '#']],
+        leave: [['商品详情', 'item_detail', 301], ['搜索结果页', 'search_result', 52], ['其他页面', 'other', 30]] },
+      toConfirm: { label: '加购 → 进入确认订单', fail: [],
+        leave: [['购物车', 'cart', 96], ['商品详情', 'item_detail', 52], ['搜索结果页', 'search_result', 21], ['其他页面', 'other', 16]] },
+      confirm: { label: '确认订单 → 提交', fail: [],
+        leave: [['确认订单', 'order_confirm', 41], ['新增/切换地址后离开', 'order_confirm · address_edit', 12]] },
+      create: { label: '提交 → 创单成功', fail: CREATE_FAIL, leave: [] },
+      pay: { label: '创单 → 支付成功', fail: [['用户取消支付', 'user_cancel', 21, '', '#'], ['支付超时', 'timeout', 12, '', '#'], ['商城余额不足', 'balance_insufficient', 5, '', '#']], leave: [] },
+      order: { label: '下单环节汇总（加购 → 创单成功）', fail: CREATE_FAIL,
+        leave: [['购物车', 'cart', 96], ['商品详情', 'item_detail', 52], ['确认订单', 'order_confirm', 41], ['搜索结果页', 'search_result', 21], ['其他页面', 'other', 16], ['新增/切换地址后离开', 'order_confirm · address_edit', 12]],
+        donut: [['主动离开 · 购物车', 96], ['主动离开 · 商品详情', 52], ['主动离开 · 确认订单', 41], ['创单失败（5 类原因）', 12], ['主动离开 · 地址编辑后', 12], ['主动离开 · 其他页面', 37]],
+        sub: [['加购 → 进入确认订单', 185, 'toConfirm'], ['确认订单 → 提交', 53, 'confirm'], ['提交 → 创单成功', 12, 'create']] }
+    };
+    const lc = L[st.loss];
+    const failMax = Math.max.apply(null, lc.fail.map((f) => f[2]).concat([1]));
+    const leaveMax = Math.max.apply(null, lc.leave.map((f) => f[2]).concat([1]));
+    const lFail = lc.fail.map((f) => ({ label: f[0], code: f[1], n: String(f[2]), action: f[3], href: f[4],
+      barStyle: 'height: 10px; border-radius: 4px; background: #0F8F84; width: ' + (f[2] / failMax * 100) + '%' }));
+    const lLeave = lc.leave.length ? lc.leave.map((f) => ({ label: f[0], code: f[1], n: String(f[2]),
+      barStyle: 'height: 10px; border-radius: 4px; background: #0F8F84; width: ' + (f[2] / leaveMax * 100) + '%' }))
+      : [{ label: '（无）', code: '这一步的流失都有失败结果', n: '0', barStyle: 'height: 10px; width: 0' }];
+    const lossChips = Object.keys(L).map((k) => ({ label: L[k].label, selected: st.loss === k ? 'true' : 'false', style: chip(st.loss === k), pick: () => this.setState({ loss: k }) }));
+
+
+    const days = ['11/16', '11/17', '11/18', '11/19', '11/20', '11/21', '11/22'];
+    const makeLine = (series, opt, hoverKey) => {
+      const all = series.concat(opt.ref != null ? [opt.ref] : []);
+      let lo = Math.min.apply(null, all), hi = Math.max.apply(null, all);
+      const step = opt.step;
+      lo = Math.floor(lo / step) * step - (opt.padLo ? step : 0); if (lo < 0) lo = 0;
+      hi = Math.ceil(hi / step) * step; if (hi === lo) hi = lo + step;
+      const ticks = [];
+      for (let v = lo; v <= hi + 1e-9; v += step) ticks.push(v);
+      const y = (v) => (v - lo) / (hi - lo) * 100;
+      const n = series.length;
+      const x = (i) => n > 1 ? i / (n - 1) * 100 : 50;
+      const hv = st[hoverKey];
+      return {
+        points: series.map((v, i) => x(i).toFixed(2) + ',' + (100 - y(v)).toFixed(2)).join(' '),
+        hasRef: opt.ref != null, refLabel: opt.refLabel || '',
+        refPoints: opt.ref != null ? ('0,' + (100 - y(opt.ref)).toFixed(2) + ' 100,' + (100 - y(opt.ref)).toFixed(2)) : '',
+        aria: opt.aria + '：' + series.map((v, i) => days[i] + ' ' + opt.fmt(v)).join('，'),
+        ticks: ticks.map((v) => ({ label: opt.fmt(v),
+          labelStyle: 'position: absolute; right: 0; bottom: ' + y(v) + '%; transform: translateY(50%); font-size: 12px; color: var(--text-2); font-variant-numeric: tabular-nums; white-space: nowrap',
+          lineStyle: 'position: absolute; left: 0; right: 0; bottom: ' + y(v) + '%; border-top: 1px solid ' + (v === lo ? '#C9CDD4' : '#EEF0F2') })),
+        dots: series.map((v, i) => {
+          const on = hv === i;
+          return { date: days[i], tip: days[i] + ' · ' + opt.fmt(v), hover: on,
+            enter: () => this.setState({ [hoverKey]: i }), leave: () => this.setState({ [hoverKey]: -1 }),
+            hitStyle: 'position: absolute; top: 0; bottom: 0; width: 36px; left: calc(' + x(i) + '% - 18px)',
+            dotStyle: 'position: absolute; left: 50%; bottom: ' + y(v) + '%; width: ' + (on ? 10 : 8) + 'px; height: ' + (on ? 10 : 8) + 'px; border-radius: 50%; background: #0F8F84; box-shadow: 0 0 0 2px #FFFFFF; transform: translate(-50%, 50%)',
+            tipStyle: 'position: absolute; left: 50%; bottom: calc(' + y(v) + '% + 14px); transform: translateX(-50%); background: #1F2329; color: #FFFFFF; border-radius: 6px; padding: 4px 8px; font-size: 12px; white-space: nowrap; z-index: 2; pointer-events: none',
+            xStyle: 'position: absolute; left: ' + x(i) + '%; transform: translateX(-50%); font-size: 12px; color: var(--text-2); white-space: nowrap' };
+        })
+      };
+    };
+    const pctFmt = (v) => v.toFixed(1) + '%';
+    const TR = {
+      F4: { title: '兑换转化率 · 每日', sub: '支付成功人数 ÷ 已登录访问人数', s: [15.5, 15.4, 15.2, 15.6, 15.3, 15.9, 14.7], ref: 16.0, refLabel: '上周均值 16.0%', step: 0.5 },
+      F5: { title: '搜索到创单转化率 · 每日', sub: '创单成功人数 ÷ 发起搜索人数', s: [12.1, 13.4, 12.8, 13.9, 12.5, 13.6, 12.7], ref: 12.4, refLabel: '上周均值 12.4%', step: 1 },
+      F6: { title: '加购到支付转化率 · 每日', sub: '支付成功人数 ÷ 加购成功人数（7 天窗口）', s: [44.0, 46.2, 45.5, 43.8, 45.9, 46.1, 44.3], ref: 44.8, refLabel: '上周均值 44.8%', step: 1 },
+      F1: { title: '注册成功率 · 每日', sub: '注册成功人数 ÷ 提交注册人数', s: [92.1, 93.4, 94.0, 91.8, 93.9, 94.5, 94.2], ref: 93.0, refLabel: '上周均值 93.0%', step: 1 },
+      F2: { title: '登录成功率 · 每日', sub: '登录成功次数 ÷ 提交登录次数', s: [93.2, 94.1, 93.8, 92.6, 94.4, 94.0, 93.5], ref: 93.0, refLabel: '上周均值 93.0%', step: 1 },
+      F3: { title: '游客转登录率 · 每日', sub: '当日登录成功的游客 ÷ 游客人数', s: [23.1, 24.8, 25.6, 22.9, 24.2, 26.0, 24.5], ref: 23.5, refLabel: '上周均值 23.5%', step: 1 },
+      F1b: { title: '首次下单率 · 累计', sub: '已首次下单账号 ÷ 开通账号，按天累计', s: [58.2, 59.6, 61.0, 62.4, 63.5, 64.8, 65.6], ref: null, step: 2 }
+    };
+    const trc = TR[st.funnel];
+    const tr = makeLine(trc.s, { ref: trc.ref, refLabel: trc.refLabel, step: trc.step, padLo: true, fmt: pctFmt, aria: trc.title }, 'trHover');
+    let minI = 1, minC = 2;
+    cur.steps.forEach((s2, i) => { if (i > 0) { const c = s2[2] / cur.steps[i - 1][2]; if (c < minC) { minC = c; minI = i; } } });
+    const stepBars = cur.steps.slice(1).map((s2, j) => {
+      const i = j + 1;
+      const c = s2[2] / cur.steps[i - 1][2] * 100;
+      return { pct: c.toFixed(1) + '%', label: s2[0], tip: cur.steps[i - 1][0] + ' → ' + s2[0] + '：' + c.toFixed(1) + '%',
+        barStyle: 'width: 70%; max-width: 44px; height: ' + c + '%; border-radius: 4px 4px 0 0; background: ' + (i === minI ? '#C2671B' : '#0F8F84') };
+    });
+
+    const LB = [['进入 → 浏览商详', 246, 'view'], ['浏览商详 → 加购', 554, 'cart'], ['加购 → 进入确认订单', 185, 'toConfirm'], ['确认订单 → 提交', 53, 'confirm'], ['提交 → 创单成功', 12, 'create'], ['创单 → 支付成功', 38, 'pay']];
+    const STAGES = [['浏览环节', 1, 246, 'view'], ['加购环节', 1, 554, 'cart'], ['下单环节', 3, 250, 'order'], ['支付环节', 1, 38, 'pay']];
+    const lossStages = STAGES.map((g) => {
+      const keys = g[3] === 'order' ? ['order', 'toConfirm', 'confirm', 'create'] : [g[3]];
+      const on = keys.indexOf(st.loss) >= 0;
+      const strong = st.loss === g[3];
+      return { label: g[0], n: String(g[2]), hint: g[1] > 1 ? '共 ' + g[1] + ' 步 · 点击看汇总' : '',
+        pick: () => this.setState({ loss: g[3], lsHover: -1 }), selected: strong ? 'true' : 'false',
+        style: 'flex: ' + g[1] + ' 1 0; min-width: 0; display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border-radius: 8px; cursor: pointer; font-family: inherit; font-size: 14px; text-align: left; ' +
+          (strong ? 'border: 1px solid #0F8F84; background: var(--brand-a08); color: #0B6E66; font-weight: 600' : (on ? 'border: 1px dashed #0F8F84; background: #FFFFFF; color: #0B6E66' : 'border: 1px solid var(--line-1); background: var(--fill-1); color: var(--text-1)')) };
+    });
+    const lossBars = LB.map((b) => {
+      const sel = b[2] === st.loss || (st.loss === 'order' && ['toConfirm', 'confirm', 'create'].indexOf(b[2]) >= 0);
+      const color = b[2] ? (sel ? '#0B6E66' : '#0F8F84') : '#C9CDD4';
+      return { n: String(b[1]), label: b[0], disabled: !b[2], selected: sel ? 'true' : 'false',
+        aria: b[0] + ' 流失 ' + b[1] + ' 人' + (b[2] ? '' : '（暂无明细）'),
+        pick: () => { if (b[2]) this.setState({ loss: b[2], lsHover: -1 }); },
+        btnStyle: 'position: relative; flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; border: 0; padding: 0; border-radius: 6px; font-family: inherit; cursor: ' + (b[2] ? 'pointer' : 'default') + '; background: ' + (sel ? 'var(--brand-a08)' : 'transparent'),
+        barStyle: 'display: block; width: 56%; max-width: 64px; height: ' + (b[1] / 554 * 100) + '%; min-height: 2px; border-radius: 4px 4px 0 0; background: ' + color };
+    });
+    const PAL = ['#0F8F84', '#5B6BD5', '#C2671B', '#A0479E', '#5E8C2E'];
+    const sliceRaw = lc.donut || lc.fail.map((f) => [f[0], f[2]]).concat(lc.leave.map((f) => ['主动离开 · ' + f[0], f[2]]));
+    const total = sliceRaw.reduce((a2, f) => a2 + f[1], 0);
+    let acc = 0;
+    const segs = [];
+    const slices = sliceRaw.map((f, i) => {
+      const color = /其他/.test(f[0]) ? '#7A8089' : PAL[i % PAL.length];
+      const a0 = acc / total * 360, a1 = (acc + f[1]) / total * 360;
+      acc += f[1];
+      const gap = sliceRaw.length > 1 ? Math.min(1.2, (a1 - a0) / 3) : 0;
+      segs.push(color + ' ' + a0.toFixed(2) + 'deg ' + (a1 - gap).toFixed(2) + 'deg', '#FFFFFF ' + (a1 - gap).toFixed(2) + 'deg ' + a1.toFixed(2) + 'deg');
+      return { label: f[0], n: String(f[1]), pct: (f[1] / total * 100).toFixed(1) + '%',
+        swatch: 'flex: none; width: 10px; height: 10px; border-radius: 2px; background: ' + color };
+    });
+    const LS = { view: [32, 36, 33, 39, 34, 40, 32], cart: [72, 80, 74, 86, 76, 90, 76], toConfirm: [24, 27, 25, 29, 25, 30, 25], confirm: [7, 8, 6, 9, 7, 9, 7], create: [2, 1, 2, 3, 1, 2, 1], pay: [5, 6, 4, 7, 5, 6, 5], order: [33, 36, 33, 41, 33, 41, 33] };
+    const lsSeries = LS[st.loss];
+    const lsAvgPrev = { view: 33, cart: 70, toConfirm: 25, confirm: 8, create: 2, pay: 5, order: 34 }[st.loss];
+    const lsMax = Math.max.apply(null, lsSeries.concat([lsAvgPrev]));
+    const ls = makeLine(lsSeries, { ref: lsAvgPrev, refLabel: '上周日均 ' + lsAvgPrev + ' 人', step: lsMax > 40 ? 20 : (lsMax > 8 ? 2 : 1), padLo: false, fmt: (v) => Math.round(v) + ' 人', aria: '每日流失人数' }, 'lsHover');
+
+    const PROVIDERS = [['E20001', '飞象企服集团', '直营'], ['E20018', '三院福利服务中心', '会员'], ['E20107', '华东礼品供应链', '会员'], ['E20233', '北方福利科技', '会员'], ['E20356', '星辰企业服务', '会员'], ['E20412', '南岭工会服务社', '会员']];
+    const MALLS = [['M10023481', '三院员工福利商城', 'E20018'], ['M10023502', '工会福利商城', 'E20018'], ['M10031877', '生日礼遇商城', 'E20018'], ['M10045210', '年货节专场', 'E20018'], ['M10045233', '年货节专场 · 二分院', 'E20018'], ['M10060345', '新员工入职礼', 'E20018'], ['M10052001', '中秋福利专场', 'E20018'],
+      ['M20011003', '华东员工关怀商城', 'E20107'], ['M20011045', '华东工会商城', 'E20107'], ['M30020018', '北方年货节商城', 'E20233'], ['M30020102', '北方生日礼商城', 'E20233'], ['M40000517', '星辰福利商城', 'E20356'], ['M10000088', '飞象员工商城', 'E20001']];
+    const isProvider = st.view === 'provider';
+    const myProvider = 'E20018';
+    const pName = (id) => (PROVIDERS.find((p2) => p2[0] === id) || [id, id])[1];
+    const pvScope = isProvider ? [myProvider] : st.pvSel;
+    const makeCombo = (key, cfg) => {
+      const qKey = key + 'Q', selKey = key + 'Sel';
+      const q = st[qKey];
+      const sel = st[selKey];
+      const tokens = q.split(/[\s,，;；、]+/).filter(Boolean);
+      const idTokens = tokens.filter((t) => cfg.idRe.test(t)).map(cfg.normId);
+      const idMode = tokens.length > 0 && idTokens.length === tokens.length;
+      let results, idHint = '', notFound = [];
+      if (idMode) {
+        const found = idTokens.map((id) => cfg.items.find((it) => it.id === id)).filter(Boolean);
+        notFound = idTokens.filter((id) => !cfg.items.find((it) => it.id === id));
+        results = found;
+        idHint = '识别到 ' + idTokens.length + ' 个 ID，匹配到 ' + found.length + ' 个';
+      } else if (q) {
+        const lq = q.toLowerCase();
+        results = cfg.items.filter((it) => it.name.toLowerCase().indexOf(lq) >= 0 || it.id.toLowerCase().indexOf(lq) >= 0).slice(0, 20);
+      } else {
+        results = cfg.items.slice(0, 6);
+      }
+      const toggleId = (id) => {
+        const cur2 = this.state[selKey];
+        const next = cur2.indexOf(id) >= 0 ? cur2.filter((x) => x !== id) : cur2.concat([id]);
+        const patch = { [selKey]: next };
+        if (cfg.onChange) Object.assign(patch, cfg.onChange(next));
+        this.setState(patch);
+      };
+      return {
+        label: cfg.label, aria: cfg.aria, internal: !!cfg.internal, query: q,
+        placeholder: sel.length ? '继续输入名称或 ID' : cfg.placeholder,
+        open: st.combo === key,
+        onInput: (e) => this.setState({ [qKey]: e.target.value, combo: key }),
+        onFocus: () => this.setState({ combo: key }),
+        close: () => this.setState({ combo: '' }),
+        clear: () => { const patch = { [selKey]: [], [qKey]: '' }; if (cfg.onChange) Object.assign(patch, cfg.onChange([])); this.setState(patch); },
+        chips: sel.map((id) => { const it = cfg.items.find((x) => x.id === id) || { id, name: id }; return { name: it.name, aria: '移除 ' + it.name, remove: () => toggleId(id) }; }),
+        headText: idMode ? '按 ID 精确匹配' : (q ? '名称或 ID 包含「' + q + '」' : cfg.recentText),
+        hasIdHint: idMode, idHint, hasNotFound: notFound.length > 0, notFoundText: notFound.length ? '未找到：' + notFound.join('、') : '',
+        selectAllIds: () => {
+          const ids = results.map((r) => r.id);
+          const next = Array.from(new Set(this.state[selKey].concat(ids)));
+          const patch = { [selKey]: next, [qKey]: '' };
+          if (cfg.onChange) Object.assign(patch, cfg.onChange(next));
+          this.setState(patch);
+        },
+        results: results.map((it) => { const on = sel.indexOf(it.id) >= 0; return { name: it.name, id: it.id, sub: it.sub, mark: on ? '✓' : '', selStr: on ? 'true' : 'false', toggle: () => toggleId(it.id),
+          style: 'display: flex; align-items: center; gap: 8px; width: 100%; min-height: 36px; padding: 0 8px; border: 0; border-radius: 6px; cursor: pointer; font-size: 14px; color: var(--text-1); font-family: inherit; background: ' + (on ? 'var(--brand-a08)' : 'transparent') }; }),
+        empty: results.length === 0 && !idMode,
+        footText: cfg.footText
+      };
+    };
+    const pv = makeCombo('pv', {
+      label: '服务商', aria: '搜索服务商', internal: true, placeholder: '全部服务商 · 输入名称或企业 ID',
+      items: PROVIDERS.map((p2) => ({ id: p2[0], name: p2[1], sub: p2[2] })),
+      idRe: /^E?\d{4,}$/i, normId: (t) => 'E' + t.replace(/^E/i, ''),
+      recentText: '最近查看的服务商', footText: '共 1,342 个服务商；可粘贴多个企业 ID，用逗号或空格分隔',
+      onChange: (next) => ({ mlSel: this.state.mlSel.filter((m) => { const mm = MALLS.find((x) => x[0] === m); return !next.length || (mm && next.indexOf(mm[2]) >= 0); }) })
+    });
+    const mallItems = MALLS.filter((m) => !pvScope.length || pvScope.indexOf(m[2]) >= 0).map((m) => ({ id: m[0], name: m[1], sub: isProvider ? '' : pName(m[2]) }));
+    const ml = makeCombo('ml', {
+      label: '商城', aria: '搜索商城', placeholder: (isProvider ? '全部商城（86）' : (st.pvSel.length ? '所选服务商的全部商城' : '全部商城（12,486）')) + ' · 输入名称或 ID',
+      items: mallItems, idRe: /^M?\d{5,}$/i, normId: (t) => 'M' + t.replace(/^M/i, ''),
+      recentText: '最近查看的商城', footText: (isProvider ? '你名下共 86 个商城' : '平台共 12,486 个商城') + '；名称搜索最多显示 20 条，可粘贴多个商城 ID'
+    });
+    const viewBtn = (on) => 'height: 30px; padding: 0 12px; border: 0; border-radius: 6px; cursor: pointer; font-size: 14px; ' + (on ? 'background: #FFFFFF; color: var(--text-1); font-weight: 600' : 'background: transparent; color: #C9CDD4');
+    const mk = (rows, link) => rows.map((r) => ({ w: r[0], n: fmt(r[1]), c: r[2], isLink: !!link, isText: !link }));
+    const wordTables = [
+      { title: '热词 Top 5', desc: '员工最常搜的词', col3: '点击率', rows: mk([['坚果', 412, '52.4%'], ['大米', 236, '47.0%'], ['洗衣液', 198, '44.9%'], ['电影票', 176, '38.6%'], ['湿厕纸', 121, '35.5%']]) },
+      { title: '无结果词 Top 5', desc: '员工想要但商城没有的货', col3: '操作', rows: mk([['茅台', 64, '去资源广场找货'], ['戴森', 41, '去资源广场找货'], ['话费充值', 38, '去资源广场找货'], ['星巴克', 29, '去资源广场找货'], ['iPhone', 27, '去资源广场找货']], true) },
+      { title: '有结果但没点击 Top 5', desc: '搜到了但员工不想要，可能是货不对或价格不合适', col3: '结果数', rows: mk([['礼盒', 96, '214'], ['零食', 74, '186'], ['被子', 33, '12'], ['保温杯', 28, '9'], ['牛奶', 25, '7']]) }
+    ];
+
+    const pages = [['首页', 3860, 1286, '38 秒', '22.4%'], ['商品详情', 4920, 1040, '52 秒', '31.5%'], ['搜索结果页', 2150, 684, '24 秒', '18.2%'], ['分类页', 1730, 612, '29 秒', '26.0%'], ['购物车', 1104, 380, '41 秒', '12.6%'], ['确认订单', 512, 301, '33 秒', '17.6%']]
+      .map((p) => ({ name: p[0], pv: fmt(p[1]), uv: fmt(p[2]), stay: p[3], bounce: p[4] }));
+    const compRaw = [['推荐商品流', 5620, 498], ['Banner · 坑位 1', 3410, 312], ['金刚区 · 坚果零食', 3120, 402], ['Banner · 坑位 2', 2980, 141], ['楼层 · 年货礼盒', 2240, 186], ['楼层 · 家清日用', 1860, 71]];
+    const comps = compRaw.map((c) => {
+      const ctr = c[2] / c[1] * 100;
+      const low = ctr < 5;
+      return { name: c[0], detail: '曝光 ' + fmt(c[1]) + ' · 点击 ' + fmt(c[2]), ctr: ctr.toFixed(1) + '%',
+        ctrStyle: 'width: 52px; text-align: right; font-size: 14px; font-variant-numeric: tabular-nums; ' + (low ? 'color: var(--warn); font-weight: 600' : ''),
+        barStyle: 'height: 10px; border-radius: 4px; background: #0F8F84; width: ' + (ctr / 14 * 100) + '%' };
+    });
+
+    const hc = [0,0,0,0,0,0,1,3,6,12,18,16,17,11,9,8,10,9,7,12,23,28,16,6];
+    const hmax = 28;
+    const hours = hc.map((v, i) => ({
+      label: i % 3 === 0 ? String(i) : '', tip: i + ':00–' + (i + 1) + ':00 · ' + v + ' 单', hover: st.hour === i,
+      enter: () => this.setState({ hour: i }), leave: () => this.setState({ hour: -1 }),
+      barStyle: 'width: 100%; max-width: 22px; height: ' + (v / hmax * 100) + '%; min-height: ' + (v ? 2 : 0) + 'px; border-radius: 3px 3px 0 0; background: ' + (st.hour === i ? '#0B6E66' : '#0F8F84'),
+      tipStyle: 'position: absolute; bottom: calc(' + (v / hmax * 100) + '% + 6px); left: 50%; transform: translateX(-50%); background: #1F2329; color: #FFFFFF; border-radius: 6px; padding: 4px 8px; font-size: 12px; white-space: nowrap; z-index: 2; pointer-events: none'
+    }));
+    const habitKpis = [['人均订单金额', '¥94.14', '余额 + 积分折算 + 现金'], ['现金补差订单占比', '11.0%', '余额和积分都不够、补了现金'], ['浏览到下单', '6 分钟', '中位数'], ['加购到下单', '2.3 小时', '中位数'], ['复购率', '9.6%', '同一发放周期下单 ≥ 2 次']]
+      .map((k) => ({ label: k[0], value: k[1], note: k[2] }));
+    const shr = (rows) => rows.map((r) => ({ label: r[0], pct: r[1] + '%', barStyle: 'height: 8px; border-radius: 4px; background: #0F8F84; width: ' + r[1] + '%' }));
+    const shares = [
+      { title: '创单来源', rows: shr([['商详加购后结算', 38], ['立即购买', 34], ['列表加购后结算', 19], ['再来一单', 9]]) },
+      { title: '支付方式（订单数）', rows: shr([['纯商城积分', 38], ['纯商城余额', 21], ['积分 + 余额', 16], ['余额或积分 + 现金补差', 11], ['0 元兑换 / 兑换卡', 9], ['纯现金', 5]]) },
+      { title: '抵扣构成（订单金额）', rows: shr([['商城余额抵扣', 52], ['商城积分抵扣（按站点比例折算）', 37], ['现金', 11]]) },
+      { title: '商品渠道（订单数）', rows: shr([['平台猫超', 46], ['京东', 31], ['优品', 15], ['自营', 8]]) }
+    ];
+
+    const projects = [
+      ['三院员工福利商城', '2026 年货节发放', 1280, 1006, 902, [171520, 256000], [8240000, 12000000, 100], '12/31（38 天后）', true],
+      ['工会福利商城', '工会季度福利', 640, 418, 371, [52800, 96000], null, '2027/1/15', false],
+      ['生日礼遇商城', '11 月生日礼', 120, 88, 66, null, [132000, 240000, 10], '长期', false]
+    ].map((p) => {
+      const rate = p[4] / p[2] * 100;
+      const bal = p[5], pts = p[6];
+      return { name: p[0], proj: p[1], people: fmt(p[2]), active: fmt(p[3]), done: fmt(p[4]), rate: rate.toFixed(1) + '%',
+        bal: bal ? '¥' + fmt(bal[0]) + ' / ¥' + fmt(bal[1]) : '未发放',
+        balRate: bal ? '已用 ' + (bal[0] / bal[1] * 100).toFixed(1) + '%' : '',
+        pts: pts ? fmt(pts[0]) + ' / ' + fmt(pts[1]) + ' 分' : '未发放',
+        ptsNote: pts ? (pts[2] + ' 分 = ¥1 · 折合 ¥' + fmt(pts[0] / pts[2]) + ' / ¥' + fmt(pts[1] / pts[2])) : '',
+        due: p[7], dueStyle: 'padding: 12px; ' + (p[8] ? 'color: var(--warn)' : 'color: var(--text-1)'),
+        barStyle: 'height: 8px; border-radius: 4px; background: #0F8F84; width: ' + rate + '%' };
+    });
+
+    return {
+      tabs,
+      isFunnel: st.tab === 'funnel', isLoss: st.tab === 'loss', isSearch: st.tab === 'search', isPage: st.tab === 'page', isHabit: st.tab === 'habit', isProject: st.tab === 'project',
+      fName: cur.name, fMeta: fMetaText, funnel, funnelChips,
+      winValue: String(wi), shareCharts,
+      winOpts: wins.map((w, i) => ({ value: String(i), label: w })),
+      onWin: (e) => this.setState({ win: Number(e.target.value) }),
+      modeOpts: [['person', '按人'], ['session', '按会话']].map((m) => {
+        const dis = m[0] === 'session' && !!base.noSession;
+        const on = (sessionMode ? 'session' : 'person') === m[0];
+        return { label: m[1], selected: on ? 'true' : 'false', disabled: dis, pick: () => { if (!dis) this.setState({ mode: m[0] }); },
+          style: 'height: 26px; padding: 0 10px; border: 0; border-radius: 6px; font-size: 12px; cursor: ' + (dis ? 'not-allowed' : 'pointer') + '; ' + (on ? 'background: #FFFFFF; color: var(--brand); font-weight: 600' : 'background: transparent; color: ' + (dis ? '#A8ADB4' : '#646A73')) };
+      }),
+      pv, ml, showProvider: !isProvider,
+      endLabel: isProvider ? '会员端' : '运营端', crumbRoot: isProvider ? '工作台' : '运营后台',
+      setInternal: () => this.setState({ view: 'internal', combo: '' }),
+      setProvider: () => this.setState({ view: 'provider', combo: '', pvSel: [], mlSel: this.state.mlSel.filter((m) => { const mm = MALLS.find((x) => x[0] === m); return mm && mm[2] === myProvider; }) }),
+      internalBtn: viewBtn(!isProvider), providerBtn: viewBtn(isProvider),
+      viewNote: isProvider ? '服务商视角：隐藏「服务商」筛选，商城只能搜到自己名下的；漏斗、流失原因标「待确认开放」' : '平台内部视角：可按服务商、商城（名称或 ID）搜索',
+      lossChips, lFail, lLeave, hasFail: lc.fail.length > 0, noFail: lc.fail.length === 0,
+      lFailTotal: String(lc.fail.reduce((a, f) => a + f[2], 0)), lLeaveTotal: String(lc.leave.reduce((a, f) => a + f[2], 0)),
+      tr, trTitle: trc.title, trSub: trc.sub, stepBars, stepAria: '步骤转化率：' + stepBars.map((b) => b.tip).join('，'),
+      lossBars, slices, lTotal: String(total), lStepLabel: L[st.loss].label, lossStages,
+      hasSub: !!lc.sub, subRows: (lc.sub || []).map((x2) => ({ label: x2[0], n: String(x2[1]), pct: (x2[1] / total * 100).toFixed(1) + '%',
+        pick: () => this.setState({ loss: x2[2], lsHover: -1 }),
+        barStyle: 'height: 8px; border-radius: 4px; background: #0F8F84; width: ' + (x2[1] / total * 100) + '%' })),
+      donutStyle: 'position: relative; flex: none; width: 180px; height: 180px; border-radius: 50%; background: conic-gradient(' + segs.join(', ') + ')',
+      donutAria: '流失构成：' + slices.map((x2) => x2.label + ' ' + x2.n + ' 人 ' + x2.pct).join('，'),
+      ls, lsTitle: '每日流失人数 · ' + L[st.loss].label, lsSub: '近 7 天',
+      wordTables, pages, comps, hours, habitKpis, shares, projects,
+      hourAria: '下单时段分布：' + hc.map((v, i) => i + '点 ' + v + ' 单').join('，')
+    };
+  }
+
+  prdMeasure() {
+    const root = document.querySelector('[data-prd-root]');
+    const box = document.querySelector('[data-prd-cards]');
+    if (!root || !box) return;
+    const rb = root.getBoundingClientRect();
+    const sc = root.offsetWidth ? rb.width / root.offsetWidth : 1;
+    const bb = box.getBoundingClientRect();
+    const A = {};
+    document.querySelectorAll('[data-prd]').forEach((el) => {
+      const b = el.getBoundingClientRect();
+      if (b.width < 2 || b.height < 2) return;
+      A[el.getAttribute('data-prd')] = { x: (b.left - rb.left) / sc, y: (b.top - rb.top) / sc, w: b.width / sc, h: b.height / sc };
+    });
+    const H = {};
+    document.querySelectorAll('[data-prd-card]').forEach((el) => { H[el.getAttribute('data-prd-card')] = el.offsetHeight; });
+    const PX = (bb.left - rb.left) / sc, CY = (bb.top - rb.top) / sc;
+    const key = JSON.stringify([A, H, Math.round(PX), Math.round(CY)]);
+    if (key !== this._prdKey) { this._prdKey = key; this.setState({ prdA: A, prdH: H, prdPX: PX, prdCY: CY }); }
+  }
+  componentDidMount() { this.prdMeasure(); this._prdT = setInterval(() => this.prdMeasure(), 500); }
+  componentWillUnmount() { clearInterval(this._prdT); }
+  renderVals() { return Object.assign(this.pageVals(), this.prdVals()); }
+  prdVals() {
+    const st = this.state;
+    const A = st.prdA || {}, H = st.prdH || {};
+    const PX = st.prdPX || 0, CY = st.prdCY || 0;
+    const focus = st.prdFocus || '';
+    const cards = this.prdCards();
+    const withA = cards.filter((c) => A[c.k]).sort((a, b) => A[a.k].y - A[b.k].y);
+    const noA = cards.filter((c) => !A[c.k]);
+    const order = withA.concat(noA);
+    let y = 0; const pos = {};
+    order.forEach((c) => {
+      const want = A[c.k] ? Math.max(0, A[c.k].y - CY - 4) : y;
+      const top = Math.max(want, y);
+      pos[c.k] = top; y = top + (H[c.k] || 150) + 12;
+    });
+    const C1 = '#5B6BD5';
+    const showLines = st.prdLines !== false;
+    const prdLineList = !showLines ? [] : withA.map((c) => {
+      const a = A[c.k];
+      const op = focus ? (focus === c.k ? 1 : 0.15) : 0.6;
+      const w = focus === c.k ? 2 : 1.5;
+      const dash = w + 'px dashed ' + C1;
+      const ax = a.x + a.w + 4, ay = a.y + Math.min(a.h / 2, 24);
+      const gx = PX - 16, cy = CY + pos[c.k] + 20;
+      return {
+        box: 'position: absolute; left: ' + (a.x - 4) + 'px; top: ' + (a.y - 4) + 'px; width: ' + (a.w + 8) + 'px; height: ' + (a.h + 8) + 'px; border: ' + dash + '; border-radius: 8px; box-sizing: border-box; opacity: ' + op,
+        s1: 'position: absolute; left: ' + Math.min(ax, gx) + 'px; top: ' + ay + 'px; width: ' + Math.abs(gx - ax) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        s2: 'position: absolute; left: ' + gx + 'px; top: ' + Math.min(ay, cy) + 'px; height: ' + Math.abs(cy - ay) + 'px; border-left: ' + dash + '; opacity: ' + op,
+        s3: 'position: absolute; left: ' + gx + 'px; top: ' + cy + 'px; width: ' + (PX - gx) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        dot: 'position: absolute; left: ' + (ax - 4) + 'px; top: ' + (ay - 4) + 'px; width: 8px; height: 8px; border-radius: 50%; background: ' + C1 + '; opacity: ' + op
+      };
+    });
+    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'], '字段': ['#E9F0FB', '#1F4E9A'] };
+    const nums = {}; order.forEach((c, i) => { nums[c.k] = i + 1; });
+    return {
+      prdTitle: this.prdTitle(), prdIntro: this.prdIntro(),
+      prdCardList: order.map((c) => {
+        const on = focus === c.k;
+        return {
+          k: c.k, no: String(nums[c.k]), title: c.title,
+          unanchored: !A[c.k], hint: c.hide || '当前界面未显示这个区域',
+          secs: c.secs.map((x) => {
+            const isT = !Array.isArray(x);
+            const lab = isT ? (x.label || '字段') : x[0];
+            const tg = TAG[lab] || TAG['规则'];
+            return { isText: !isT, isTable: isT, label: lab, text: isT ? '' : x[1], caption: isT ? (x.caption || '') : '',
+              rows: isT ? x.rows.map((r) => ({ f: r[0], d: r[1], s: r[2] || '' })) : [],
+              tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + tg[0] + '; color: ' + tg[1] };
+          }),
+          enter: () => this.setState({ prdFocus: c.k }), leave: () => this.setState({ prdFocus: '' }),
+          style: 'position: absolute; left: 16px; right: 16px; top: ' + pos[c.k] + 'px; background: #FFFFFF; border-radius: 10px; padding: 12px 14px; box-sizing: border-box; border: 1px solid ' + (on ? C1 : '#E3E6F5') + '; box-shadow: ' + (on ? '0 4px 14px rgba(91,107,213,0.18)' : 'none')
+        };
+      }),
+      prdLineList, prdPanelH: String(Math.max(y + 24, 400)),
+      prdToggleLines: () => this.setState({ prdLines: st.prdLines === false }),
+      prdLinesLabel: showLines ? '隐藏连线' : '显示连线'
+    };
+  }
+
+  prdTitle() { return "数据 › 商城分析"; }
+  prdIntro() { return "口径以《C端商城用户行为埋点与漏斗分析需求 V1.0》为准，数据全部来自新商城埋点。右侧卡片随页签切换。 字段表的「来源」列：埋点 = C 端新商城埋点事件（需求 V1.0）；业务库 = 交易系统数据，具体表名待研发确认；运营后台 = 运营配置；页面计算 = 由前几项算出。"; }
+  prdBaseCards() {
+    const common = [{"k": "filters", "title": "筛选条", "secs": [["规则", "本版只做平台内部（产品 / 运营）使用，筛选只保留日期、服务商、商城；需求 6.2 里的福利项目、终端、商品渠道筛选本版不做。所有数据来自新商城埋点，旧前端不做埋点、不计入。"], ["数据", "报表 T+1 更新，数据截至前一天 24:00。"]]}, {"k": "pv", "title": "服务商搜索", "secs": [["规则", "按服务商筛选，不选即全平台。"], ["交互", "按名称或企业 ID 搜索；可粘贴多个 ID（逗号、空格、换行分隔），提示匹配到几个、哪些没找到，「全部选中」一次加入。选了服务商后，商城搜索只在这些服务商名下找。"]], "hide": "按会员企业筛选"}, {"k": "ml", "title": "商城搜索", "secs": [["交互", "按商城名称或商城 ID 搜索：名称模糊匹配，最多显示 20 条；ID 精确匹配，支持一次粘贴多个。选中的商城以标签显示，可逐个移除，「清空」恢复为全部。"], ["规则", "平台约 1.2 万个商城，不用下拉列表。"]]}, {"k": "tabs", "title": "报表页签", "secs": [["规则", "对应需求 6.3：漏斗分析、流失原因、搜索分析、页面与组件、下单习惯；另加「发放兑换」（V2.3 会员端任务）。核心看板放在工作台的经营数据里。"], ["规则", "本版只给平台内部使用，暂不开放给服务商。"]]}, {"k": "caliber", "title": "通用统计口径（仅产品 / 研发）", "hide": "全局规则，页面上不展示给服务商", "secs": [["规则", "默认按人去重：登录前用 device_id，登录后用 user_id 合并为同一人。漏斗有序：先完成上一步，在窗口期内完成下一步才计入。成功类步骤取服务端结果事件且 is_success = true。"]]}];
+    const byTab = {"funnel": [{"k": "funnel", "title": "漏斗图", "secs": [["数据", "支持需求 5.2 全部 7 个漏斗：F4 交易主链路、F5 搜索找货、F6 购物车、F1 注册、F1b 导入账号激活、F2 登录、F3 游客转化；每步下方显示对应事件名。"], ["规则", "每层宽度与人数成正比；层间显示步骤转化率和流失人数，转化最低的一步标橙，可直接跳到流失原因。"], ["交互", "窗口期按漏斗切换（如 F4：同一自然日 / 7 天）；统计方式按人 / 按会话（F1b 按账号统计，不支持按会话）。"]]}, {"k": "share", "title": "终端与商品渠道占比", "secs": [["数据", "终端取 platform 字段（微信小程序 / H5 / 支付宝小程序），按漏斗第一步统计；商品渠道取 goods_channel，按漏斗最后一步统计，只在 F4 / F5 / F6 显示。"], ["规则", "这两个维度只做占比分析，不再拆分成多个漏斗。"]]}, {"k": "trend", "title": "每日转化率折线", "secs": [["数据", "跟随所选漏斗显示对应指标的每日值（F4 兑换转化率、F2 登录成功率、F1b 累计首次下单率等），虚线是上周均值。"], ["交互", "悬停显示当天数值。"]]}, {"k": "steps", "title": "步骤转化率柱状图", "secs": [["数据", "每一步相对上一步的转化率，最低的一步标橙。"]]}], "loss": [{"k": "lossBars", "title": "各环节、各步流失人数", "secs": [["数据", "F4 每一步的流失人数 = 上一步人数 − 本步人数。6 步归为 4 个环节：浏览（进入 → 浏览商详）、加购（浏览商详 → 加购）、下单（加购 → 进入确认订单 → 提交 → 创单成功，共 3 步）、支付（创单 → 支付成功）。"], ["交互", "点上方环节按钮看该环节汇总（下单环节合并 3 步）；点柱子看单步。选中下单环节时，3 根柱子一起高亮。漏斗分析页每一步的「看流失原因」都直接跳到对应步骤。"]]}, {"k": "donut", "title": "流失构成", "secs": [["数据", "有失败结果事件的流失按 fail_reason（需求 6.4）归因；没有的记为「主动离开」，按离开前最后一个页面拆分；两类合在一起看占比。"]]}, {"k": "lsTrend", "title": "每日流失人数", "secs": [["数据", "所选步骤近 7 天每天的流失人数，虚线是上周日均。"]]}, {"k": "lossDetail", "title": "失败原因明细", "secs": [["交互", "能处理的原因后面带入口，如「换可售商品」「去资源广场补货」。"], ["待确认", "fail_reason 枚举是否完整；other 占比超过 5% 时需要补充枚举。"]]}], "search": [{"k": "skpi", "title": "搜索核心指标", "secs": [["数据", "搜索无结果率 = 无结果的搜索次数 ÷ 搜索总次数；搜索点击率 = 有点击的搜索请求（list_request_id）÷ 有结果的搜索次数。"]]}, {"k": "words", "title": "搜索词表", "secs": [["数据", "热词、无结果词、有结果但没点击的词；需求要求各取 Top 50，原型示意 Top 5。"], ["交互", "无结果词可以一键去资源广场找货。"]]}], "page": [{"k": "pg", "title": "页面", "secs": [["数据", "各页面的 PV、UV、平均停留时长（取 page_leave 的 duration_ms）、跳出率。"]]}, {"k": "cp", "title": "首页装修组件与坑位", "secs": [["数据", "曝光口径：元素面积一半以上进入可视区且停留满 500ms，同一页面生命周期内只报一次；点击率 = 点击 ÷ 曝光，低于 5% 标橙。"]]}], "habit": [{"k": "hr", "title": "下单时段分布", "secs": [["数据", "按小时统计创单成功数（取 server_time）。"], ["交互", "悬停显示该时段单数。"]]}, {"k": "shares", "title": "来源与支付方式", "secs": [["数据", "创单来源（order_source）、支付方式、抵扣构成、商品渠道。"], ["规则", "商城余额 1:1 抵现金；商城积分按站点比例折算成金额。"], ["待确认", "需求 4.6 的支付方式枚举（pay_method）缺余额相关取值，结果事件需新增余额抵扣金额字段（balance_amount）。"]]}], "project": [{"k": "pj", "title": "发放兑换", "secs": [["数据", "发放兑换率 = 已下单员工数 ÷ 项目发放员工数；「已激活」= 首次登录成功（对应 F1b）；额度分商城余额、商城积分两列，积分显示站点比例和折合金额。"], ["待确认", "分母「项目发放员工数」取哪张业务表（需求 7.3）。"]]}]};
+    return common.slice(0, 4).concat(byTab[this.state.tab] || []).concat(common.slice(4));
+  }
+
+  prdCards() {
+    const F = {"filters": [{"label": "字段", "caption": "筛选项和埋点字段的对应关系", "rows": [["日期", "按事件 server_time 的北京时间自然日筛选；报表 T+1，数据截至前一天 24:00", "埋点公共字段 server_time"], ["商城", "mall_id", "埋点公共字段 mall_id"], ["服务商", "member_enterprise_id", "埋点公共字段 member_enterprise_id"]]}], "pv": [{"label": "字段", "caption": "", "rows": [["企业 ID / 名称", "会员企业的主键和名称，ID 以 E 开头", "业务库·会员企业"]]}], "ml": [{"label": "字段", "caption": "", "rows": [["商城 ID / 名称", "商城的主键和名称，ID 以 M 开头；「所属服务商」取商城的 member_enterprise_id", "业务库·商城"]]}], "funnel": [{"label": "字段", "caption": "漏斗图上的每个数字", "rows": [["步骤人数", "在窗口期内按顺序完成到这一步的去重人数；按会话时为会话数，F1b 为账号数", "对应步骤事件（见每步下方）"], ["占首步", "本步人数 ÷ 第一步人数", "页面计算"], ["步骤转化率", "本步人数 ÷ 上一步人数", "页面计算"], ["流失人数", "上一步人数 − 本步人数", "页面计算"], ["窗口期", "从第一步发生时开始算。F4 同一自然日 / 7 天；F5 同一会话 / 同一自然日；F6 7 / 30 天；F1、F2 30 分钟 / 1 天；F1b 30 / 7 天；F3 同一自然日 / 7 天", "需求 5.2"], ["按会话", "按 session_id 去重：30 分钟无操作或跨自然日即为新会话", "埋点公共字段 session_id"]]}], "share": [{"label": "字段", "caption": "两个环形图", "rows": [["终端占比", "漏斗第一步的人数（或会话数）按 platform 分组的占比", "埋点公共字段 platform"], ["商品渠道占比", "漏斗最后一步按商品渠道分组的占比；一单含多个渠道时按 goods_channel_list 分别计入（规则待确认）", "埋点 goods_channel / goods_channel_list"]]}], "trend": [{"label": "字段", "caption": "每个漏斗对应的折线指标", "rows": [["F4 兑换转化率", "每日：支付成功人数 ÷ 已登录访问人数", "mall_enter、pay_result"], ["F5 搜索到创单转化率", "每日：创单成功人数 ÷ 发起搜索人数", "search_submit、order_create_result"], ["F6 加购到支付转化率", "每日：支付成功人数 ÷ 加购成功人数（7 天窗口）", "add_cart_result、pay_result"], ["F1 注册成功率", "每日：注册成功人数 ÷ 提交注册人数", "register_submit、register_result"], ["F1b 首次下单率", "累计：已首次下单账号数 ÷ 开通账号数", "account_create_result、order_create_result"], ["F2 登录成功率", "每日：登录成功次数 ÷ 提交登录次数", "login_submit、login_result"], ["F3 游客转登录率", "每日：当日登录成功的游客数 ÷ 游客人数", "guest_enter、login_result"], ["虚线", "上一个 7 天的日均值", "同上"]]}], "steps": [{"label": "字段", "caption": "", "rows": [["柱高 / 柱顶数字", "本步人数 ÷ 上一步人数（%）", "页面计算"]]}], "lossBars": [{"label": "字段", "caption": "", "rows": [["各步流失人数", "F4 每一步：上一步人数 − 本步人数，统计期内合计", "埋点 F4"], ["环节流失人数", "该环节内各步流失人数之和；下单环节 = 加购 → 确认订单 + 确认订单 → 提交 + 提交 → 创单成功", "埋点 F4"], ["下单环节分步占比", "单步流失人数 ÷ 下单环节流失人数", "页面计算"]]}], "donut": [{"label": "字段", "caption": "", "rows": [["失败原因", "有失败结果事件的流失，按服务端返回的 fail_reason 计人数；一人多次失败取最后一次", "对应 *_result 事件的 fail_reason"], ["主动离开 · 页面", "没有失败结果的流失，按离开前最后一个 page_id 分组", "埋点 page_leave（page_id）"], ["占比", "该原因人数 ÷ 这一步的流失总人数", "页面计算"]]}], "lsTrend": [{"label": "字段", "caption": "", "rows": [["每日流失人数", "所选步骤每天的流失人数，按第一步发生的日期归属", "埋点 F4"], ["虚线", "上一个 7 天的日均流失人数", "同上"]]}], "lossDetail": [{"label": "字段", "caption": "", "rows": [["fail_reason", "研发按接口错误码映射到需求 6.4 的枚举；对不上的记 other，原始错误码放 error_code", "*_result 事件"], ["离开前页面", "流失用户在窗口期内最后一次 page_leave 的 page_id", "埋点 page_leave"]]}], "skpi": [{"label": "字段", "caption": "搜索核心指标", "rows": [["搜索次数", "search_submit 事件数", "埋点 search_submit"], ["搜索人数", "search_submit 的去重人数", "埋点 search_submit"], ["搜索无结果率", "is_empty = true 的搜索次数 ÷ 搜索总次数", "埋点 search_result"], ["搜索点击率", "有点击的 list_request_id 数 ÷ 有结果的搜索次数", "search_result、search_result_click"], ["无结果推荐点击", "无结果页推荐商品的点击次数", "埋点 empty_recommend_click"]]}], "words": [{"label": "字段", "caption": "三张词表的每一列", "rows": [["词", "keyword，去掉首尾空格、统一大小写后合并", "search_submit.keyword"], ["搜索次数", "该词的 search_submit 次数", "search_submit"], ["点击率", "该词有点击的请求数 ÷ 该词有结果的请求数", "search_result、search_result_click"], ["结果数", "该词最近一次搜索的 result_count", "search_result.result_count"]]}], "pg": [{"label": "字段", "caption": "", "rows": [["PV", "page_view 事件数", "埋点 page_view"], ["UV", "page_view 的去重人数", "埋点 page_view"], ["平均停留", "page_leave.duration_ms 之和 ÷ page_leave 次数", "埋点 page_leave"], ["跳出率", "以该页为落地页、且会话内没有再进入其他页面的会话数 ÷ 以该页为落地页的会话数", "page_view、session_id"]]}], "cp": [{"label": "字段", "caption": "", "rows": [["曝光", "element_exposure 次数：面积 ≥ 50% 且停留 ≥ 500ms，同一页面生命周期内同一元素只计一次", "埋点 element_exposure"], ["点击", "element_click 次数，按 module_id + position 对应到坑位", "埋点 element_click"], ["点击率", "点击 ÷ 曝光；低于 5% 标橙", "页面计算"]]}], "hr": [{"label": "字段", "caption": "", "rows": [["每小时单数", "按创单成功时间（server_time，北京时间）所在的小时统计订单数", "order_create_result"]]}], "shares": [{"label": "字段", "caption": "本页所有指标", "rows": [["人均订单金额", "支付成功订单金额 ÷ 支付成功人数；金额 = 余额 + 积分折算 + 现金", "pay_result、业务库·商城订单"], ["现金补差订单占比", "用了余额或积分、且 cash_amount > 0 的订单 ÷ 支付成功订单", "pay_result"], ["浏览到下单", "首次 item_detail_view 到 order_create_result 的时长中位数", "埋点 client_time"], ["加购到下单", "同一 SKU 从 add_cart_result 到创单的时长中位数", "埋点 client_time、sku_id"], ["复购率", "同一发放周期内下单 ≥ 2 次的人数 ÷ 下单人数", "order_create_result、project_id"], ["创单来源", "order_source：商详加购后结算 / 列表加购后结算 / 再来一单 / 立即购买", "order_create_result.order_source"], ["支付方式", "按订单使用的额度组合分类：纯积分、纯余额、积分 + 余额、补现金、0 元、纯现金", "pay_result（需补 balance_amount）"], ["抵扣构成", "余额抵扣金额、积分折算金额、现金金额各自 ÷ 订单金额合计", "pay_result"], ["商品渠道", "按订单商品的 goods_channel 统计订单数占比", "order_create_result.goods_channel_list"]]}], "pj": [{"label": "字段", "caption": "表格每一列", "rows": [["开通账号", "项目发放的员工账号数（发放兑换率的分母）", "业务库·发放记录"], ["已激活（首登）", "其中已首次登录成功的账号数", "埋点 login_result（is_first_login）"], ["已下单员工", "其中至少有一笔支付成功订单的员工数", "业务库·商城订单"], ["发放兑换率", "已下单员工 ÷ 开通账号", "页面计算"], ["商城余额 已用 / 发放", "余额抵扣金额（扣除退款退回）/ 项目发放的余额，1:1 金额", "业务库·余额账户流水"], ["商城积分 已用 / 发放", "积分分数；下方按本站点的积分比例折合成金额", "业务库·积分账户流水、站点积分比例"], ["到期", "项目额度的失效日期；30 天内到期标橙", "业务库·福利项目"]]}]};
+    const FD = {};
+    const t = this.state.biz || 'mall';
+    return this.prdBaseCards().map((c) => {
+      const add = (F[c.k] || []).concat(FD[c.k] ? (FD[c.k][t] || []) : []);
+      return add.length ? Object.assign({}, c, { secs: c.secs.concat(add) }) : c;
+    });
+  }
+}
+</script>
+</body>
+</html>
