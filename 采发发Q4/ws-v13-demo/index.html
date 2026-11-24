@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>会员端工作台精简改版 Demo · V1.3</title>
+<style>
+body{margin:0;background:#F3F5F7;color:#1F2329;font-family:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;font-size:14px}
+main{max-width:960px;margin:0 auto;padding:40px 24px 64px}
+h1{margin:0 0 8px;font-size:26px;font-weight:600}
+.lead{margin:0 0 6px;color:#646A73;line-height:1.7}
+.back{display:inline-block;margin-bottom:18px;color:#0B7A70;text-decoration:none;font-size:13px}
+.list{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+a.card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;background:#fff;border:1px solid #E5E8EB;border-radius:12px;padding:18px 20px;color:inherit;text-decoration:none}
+a.card:hover{border-color:#0F8F84}
+.t{font-size:16px;font-weight:600;margin-bottom:4px}
+.d{font-size:13px;color:#646A73;line-height:1.7}
+.pill{font-size:12px;padding:2px 8px;border-radius:10px;background:#E8F6F4;color:#0B6E66;white-space:nowrap}
+.pill.gray{background:#F2F3F5;color:#646A73}
+.notes{margin-top:28px;background:#fff;border-radius:12px;padding:18px 20px;line-height:1.8;color:#33373D;font-size:13px}
+.notes b{color:#1F2329}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="../../docs/">← 返回文档中心</a>
+  <h1>会员端工作台精简改版 Demo（V1.3）</h1>
+  <p class="lead">对应 Q4 规划 V1.3「工作台精简与代发售后整合」，以及 V2.3 埋点数据在会员端的展示。每个页面右侧是 PRD 栏（交互 / 数据 / 规则 / 埋点 / 待确认），用虚线连到页面上对应的区域。</p>
+  <p class="lead">建议用宽度 1600px 以上的屏幕打开；页面里的数字均为示意数据。</p>
+  <div class="list">
+    <a class="card" href="workbench.html">
+      <div><div class="t">会员工作台（改版后）</div><div class="d">六大模块菜单、按权益显示、代发迁移分步指引、待处理、平台货盘入口、经营数据（商城 / 代发 / 集采）与 F4 交易主链路。顶部黑条可切换最高权益 / 低档权益，「模拟首次登录」可重放指引。</div></div>
+      <span class="pill">可交互</span>
+    </a>
+    <a class="card" href="pallet.html">
+      <div><div class="t">货盘明细</div><div class="d">单个货盘的商品明细、自动上下架规则、整盘或勾选上架到商城、代发下单。</div></div>
+      <span class="pill">可交互</span>
+    </a>
+    <a class="card" href="analytics.html">
+      <div><div class="t">数据 › 商城分析</div><div class="d">口径按《C端商城用户行为埋点与漏斗分析需求 V1.0》：7 个漏斗、流失原因、搜索分析、页面与组件、下单习惯、发放兑换；商城 / 服务商按名称或 ID 搜索；顶部可切换平台内部 / 服务商视角。</div></div>
+      <span class="pill">可交互</span>
+    </a>
+    <a class="card" href="before.html">
+      <div><div class="t">会员工作台（改版前 · 现状对照）</div><div class="d">线上最高权益账号的工作台，红色序号标出 9 个问题。</div></div>
+      <span class="pill gray">现状</span>
+    </a>
+  </div>
+  <div class="notes">
+    <b>怎么看 PRD 栏：</b>卡片按页面从上到下编号；鼠标停在卡片上，只高亮这张卡片对应的区域和连线；PRD 栏顶部「隐藏连线」可以关掉连线，方便纯演示。商城分析的卡片随页签切换。<br>
+    <b>说明：</b>资源广场、代发迁移完整说明两页本次未放入 Demo，页面里指向它们的链接不跳转。
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>货盘明细 · 会员端工作台精简改版 Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="dc-lite.js"></script>
+</head>
+<body>
+<template id="dc-src">
+<helmet>
+<style>
+body{margin:0;background:#F3F5F7}
+a{color:#0B7A70;text-decoration:none}a:hover{color:#075E56}
+button{font-family:inherit}
+</style>
+</helmet>
+<div data-prd-root="1" style="position: relative; display: flex; align-items: stretch; background: #F7F8FC">
+<div style="flex: 1 1 960px; min-width: 0; position: relative; z-index: 0; overflow: hidden">
+<div style="position: relative; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; background: #F3F5F7; min-height: 1180px; font-size: 14px">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 64px; padding: 0 24px; background: #FFFFFF; border-bottom: 1px solid #E5E8EB">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="font-size: 22px; font-weight: 700; color: #0B7A70; letter-spacing: 1px">采发发</span>
+      <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0F8F84; border-radius: 4px; padding: 2px 6px">会员端</span>
+    </div>
+    <span style="width: 1px; height: 20px; background: #E5E8EB"></span>
+    <nav aria-label="面包屑" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #646A73">
+      <a href="workbench.html">工作台</a><span aria-hidden="true">›</span><a href="#">资源广场</a><span aria-hidden="true">›</span><span style="color: #1F2329">坚果零食礼盒</span>
+    </nav>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 24px 24px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+
+    <section data-prd="head" style="background: #FFFFFF; border-radius: 12px; overflow: hidden; display: flex; flex-wrap: wrap">
+      <div style="flex: 1 1 260px; max-width: 300px; min-height: 200px; background: #F3EEDF; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+        <div style="display: flex; flex-wrap: wrap; gap: 6px">
+          <span style="font-size: 11px; color: #1F2329; background: rgba(255,255,255,0.85); border-radius: 4px; padding: 0 6px; line-height: 20px">平台猫超</span>
+          <span style="font-size: 11px; color: #1F2329; background: rgba(255,255,255,0.85); border-radius: 4px; padding: 0 6px; line-height: 20px">零食坚果</span>
+        </div>
+        <div style="display: flex; gap: 8px">
+          <img src="img/cashew.png" alt="" style="width: 72px; height: 72px; object-fit: contain; background: #FFFFFF; border-radius: 8px">
+          <img src="img/macadamia.png" alt="" style="width: 72px; height: 72px; object-fit: contain; background: #FFFFFF; border-radius: 8px">
+          <img src="img/crisps.png" alt="" style="width: 72px; height: 72px; object-fit: contain; background: #FFFFFF; border-radius: 8px">
+        </div>
+      </div>
+      <div style="flex: 999 1 520px; min-width: 0; padding: 20px 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+          <h1 style="margin: 0; font-size: 24px; font-weight: 600">坚果零食礼盒</h1>
+          <span style="font-size: 12px; color: #646A73">运营精选 · 11/22 更新</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; color: #646A73; line-height: 1.6">适合年节慰问、日常下午茶的坚果零食组合，均为平台猫超直发商品，可上架到员工商城，也可以直接代发。</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px">
+          <div><div style="font-size: 12px; color: #646A73">商品数</div><div style="font-size: 20px; font-weight: 600">86 款</div></div>
+          <div><div style="font-size: 12px; color: #646A73">价格区间</div><div style="font-size: 20px; font-weight: 600">¥29–¥268</div></div>
+          <div><div style="font-size: 12px; color: #646A73">可代发</div><div style="font-size: 20px; font-weight: 600">84 款</div></div>
+          <div><div style="font-size: 12px; color: #646A73">已上架商城</div><div style="font-size: 20px; font-weight: 600">3 个</div></div>
+        </div>
+        <div data-prd="rule" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #F7F8FA; border-radius: 8px; font-size: 12px; color: #646A73">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+          按规则自动上下架：缺货商品自动下架，并同步到已上架的商城；补货后自动恢复
+        </div>
+        <div data-prd="bulk" style="display: flex; flex-wrap: wrap; gap: 10px">
+          <button onClick="{{openShelfAll}}" style="height: 40px; padding: 0 20px; border-radius: 8px; border: 0; background: #0F8F84; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">整盘上架到商城</button>
+          <button onClick="{{dropAll}}" style="height: 40px; padding: 0 20px; border-radius: 8px; border: 1px solid #0F8F84; background: #FFFFFF; color: #0B7A70; font-size: 14px; font-weight: 500; cursor: pointer">整盘代发下单</button>
+        </div>
+      </div>
+    </section>
+
+    <section data-prd="table" aria-labelledby="goods-h" style="background: #FFFFFF; border-radius: 12px; padding: 18px 20px 8px">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 12px">
+        <h2 id="goods-h" style="margin: 0; font-size: 16px; font-weight: 600">货盘商品</h2>
+        <div style="display: flex; gap: 6px">
+          <template data-sc="for" list="{{filters}}" as="f" hint-placeholder-count="3">
+            <button onClick="{{f.pick}}" aria-pressed="{{f.selected}}" style="{{f.style}}">{{f.label}}</button>
+          </template>
+        </div>
+        <span style="font-size: 12px; color: #646A73">示意：仅展示 6 / 86 款</span>
+        <div style="margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+          <span style="font-size: 13px; color: #646A73">已选 <b style="color: #1F2329">{{selCount}}</b> 件</span>
+          <button onClick="{{openShelfSel}}" disabled="{{noSel}}" style="{{selBtnPrimary}}">上架所选到商城</button>
+          <button onClick="{{dropSel}}" disabled="{{noSel}}" style="{{selBtnSecondary}}">所选代发下单</button>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 900px; border-collapse: collapse; font-size: 13px">
+          <thead>
+            <tr style="background: #F7F8FA; color: #646A73; text-align: left">
+              <th style="padding: 10px 12px; width: 36px"><input type="checkbox" checked="{{allChecked}}" onChange="{{toggleAll}}" aria-label="全选可售商品"></th>
+              <th style="padding: 10px 12px; font-weight: 500">商品</th>
+              <th style="padding: 10px 12px; font-weight: 500">规格</th>
+              <th style="padding: 10px 12px; font-weight: 500; text-align: right">供货价</th>
+              <th style="padding: 10px 12px; font-weight: 500; text-align: right">建议售价</th>
+              <th style="padding: 10px 12px; font-weight: 500; text-align: right">毛利空间</th>
+              <th style="padding: 10px 12px; font-weight: 500">状态</th>
+              <th style="padding: 10px 12px; font-weight: 500">已上架</th>
+              <th style="padding: 10px 12px; font-weight: 500">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template data-sc="for" list="{{rows}}" as="r" hint-placeholder-count="6">
+              <tr style="border-bottom: 1px solid #F0F1F2">
+                <td style="padding: 12px"><input type="checkbox" checked="{{r.checked}}" disabled="{{r.oos}}" onChange="{{r.toggle}}" aria-label="{{r.ariaPick}}"></td>
+                <td style="padding: 12px">
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <template data-sc="if" value="{{r.hasImg}}" hint-placeholder-val="{{ false }}"><img src="{{r.img}}" alt="" style="width: 48px; height: 48px; object-fit: contain; border: 1px solid #F0F1F2; border-radius: 6px"></template>
+                    <template data-sc="if" value="{{r.noImg}}" hint-placeholder-val="{{ true }}"><span style="width: 48px; height: 48px; border-radius: 6px; background: #F2F3F5; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #646A73">图片</span></template>
+                    <span style="font-weight: 500">{{r.name}}</span>
+                  </div>
+                </td>
+                <td style="padding: 12px; color: #646A73">{{r.spec}}</td>
+                <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{r.cost}}</td>
+                <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums">{{r.price}}</td>
+                <td style="padding: 12px; text-align: right; font-variant-numeric: tabular-nums; color: #0B7A70">{{r.margin}}</td>
+                <td style="padding: 12px"><span style="{{r.statusStyle}}">{{r.status}}</span></td>
+                <td style="padding: 12px; color: #646A73">{{r.shelved}}</td>
+                <td style="padding: 12px">
+                  <template data-sc="if" value="{{r.canAct}}" hint-placeholder-val="{{ true }}">
+                    <div style="display: flex; gap: 12px">
+                      <button onClick="{{r.shelf}}" style="border: 0; background: transparent; color: #0B7A70; font-size: 13px; cursor: pointer; padding: 6px 0">上架</button>
+                      <button onClick="{{r.drop}}" style="border: 0; background: transparent; color: #0B7A70; font-size: 13px; cursor: pointer; padding: 6px 0">代发</button>
+                    </div>
+                  </template>
+                  <template data-sc="if" value="{{r.oos}}" hint-placeholder-val="{{ false }}"><span style="color: #8F959E">补货后可操作</span></template>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <template data-sc="if" value="{{showToast}}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position: absolute; left: 50%; top: 84px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: #1F2329; color: #FFFFFF; border-radius: 10px; font-size: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.18)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5FD3C6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <span>{{toast}}</span>
+      <a href="#" style="color: #5FD3C6">{{toastLink}}</a>
+      <button onClick="{{closeToast}}" aria-label="关闭" style="border: 0; background: transparent; color: #C9CDD4; cursor: pointer; font-size: 16px; width: 28px; height: 28px">×</button>
+    </div>
+  </template>
+
+  <template data-sc="if" value="{{showModal}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 0; background: rgba(31,35,41,0.45); display: flex; align-items: flex-start; justify-content: center; padding-top: 200px">
+      <div data-prd="modal" role="dialog" aria-modal="true" aria-labelledby="shelf-h" style="width: 440px; max-width: calc(100% - 32px); background: #FFFFFF; border-radius: 12px; padding: 20px 22px; box-sizing: border-box">
+        <h2 id="shelf-h" style="margin: 0 0 4px; font-size: 17px; font-weight: 600">上架到商城</h2>
+        <p style="margin: 0 0 14px; font-size: 13px; color: #646A73">{{modalDesc}}</p>
+        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px">
+          <template data-sc="for" list="{{malls}}" as="m" hint-placeholder-count="3">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #E5E8EB; border-radius: 8px; cursor: pointer">
+              <input type="checkbox" checked="{{m.checked}}" onChange="{{m.toggle}}">
+              <span style="flex: 1">{{m.name}}</span>
+              <span style="font-size: 12px; color: #646A73">{{m.note}}</span>
+            </label>
+          </template>
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #1F2329; margin-bottom: 18px">
+          <input type="checkbox" checked="{{ true }}" onChange="{{noop}}">跟随货盘自动上下架（推荐）
+        </label>
+        <div style="display: flex; justify-content: flex-end; gap: 10px">
+          <button onClick="{{closeModal}}" style="height: 38px; padding: 0 18px; border-radius: 8px; border: 1px solid #D0D3D6; background: #FFFFFF; color: #1F2329; font-size: 14px; cursor: pointer">取消</button>
+          <button onClick="{{confirmShelf}}" style="height: 38px; padding: 0 18px; border-radius: 8px; border: 0; background: #0F8F84; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">确认上架</button>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
+</div>
+<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 440px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
+  <div style="padding: 16px 18px 14px; border-bottom: 1px solid #E3E6F5">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="font-size: 11px; font-weight: 700; color: #FFFFFF; background: #5B6BD5; border-radius: 4px; padding: 2px 6px; letter-spacing: 0.5px">PRD</span>
+      <span style="font-size: 15px; font-weight: 600">{{prdTitle}}</span>
+      <button onClick="{{prdToggleLines}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #C9CEF0; border-radius: 6px; background: #FFFFFF; color: #3B4BB8; font-size: 12px; cursor: pointer">{{prdLinesLabel}}</button>
+    </div>
+    <div style="margin-top: 8px; font-size: 12px; color: #646A73; line-height: 1.7">{{prdIntro}}</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; font-size: 11px">
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #EEF2FF; color: #3B4BB8">交互</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E8F6F4; color: #0B6E66">数据</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F2F3F5; color: #1F2329">规则</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F5EDF7; color: #7A2E78">埋点</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #FFF1E8; color: #B54708">待确认</span>
+      <span style="color: #646A73; line-height: 18px">· 鼠标停在卡片上高亮对应区域</span>
+    </div>
+  </div>
+  <div data-prd-cards="1" style="position: relative; height: {{prdPanelH}}px">
+    <template data-sc="for" list="{{prdCardList}}" as="c" hint-placeholder-count="4">
+      <div data-prd-card="{{c.k}}" onMouseEnter="{{c.enter}}" onMouseLeave="{{c.leave}}" style="{{c.style}}">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: #5B6BD5; color: #FFFFFF; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{c.no}}</span>
+          <span style="font-size: 14px; font-weight: 600">{{c.title}}</span>
+        </div>
+        <template data-sc="if" value="{{c.unanchored}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 4px; font-size: 11px; color: #8F959E">{{c.hint}}</div></template>
+        <template data-sc="for" list="{{c.secs}}" as="x" hint-placeholder-count="2">
+          <div style="display: flex; gap: 8px; margin-top: 8px">
+            <span style="{{x.tagStyle}}">{{x.label}}</span>
+            <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+</aside>
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 90">
+  <template data-sc="for" list="{{prdLineList}}" as="ln" hint-placeholder-count="0">
+    <div style="display: contents"><div style="{{ln.box}}"></div><div style="{{ln.s1}}"></div><div style="{{ln.s2}}"></div><div style="{{ln.s3}}"></div><div style="{{ln.dot}}"></div></div>
+  </template>
+</div>
+</div>
+</template>
+<div id="dc-mount"></div>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sel: {}, filter: 'all', modal: null, malls: { a: true, b: false, c: false }, toast: null };
+  }
+  goods() {
+    return [
+      { id: 1, name: '三只松鼠炭烧腰果', img: 'img/cashew.png', spec: '185g × 2 袋', cost: 39.9, price: 59, shelved: 3 },
+      { id: 2, name: '百草味奶油味夏威夷果', img: 'img/macadamia.png', spec: '200g × 2 袋', cost: 36.5, price: 55, shelved: 2 },
+      { id: 3, name: '良品铺子酥脆薄饼', img: 'img/crisps.png', spec: '400g 礼盒', cost: 28.8, price: 45, shelved: 3 },
+      { id: 4, name: '每日坚果礼盒（示例）', spec: '25g × 30 包', cost: 89, price: 139, shelved: 1 },
+      { id: 5, name: '坚果大礼包（示例）', spec: '1.8kg 礼盒', cost: 128, price: 199, shelved: 1, oos: true },
+      { id: 6, name: '年货零食组合（示例）', spec: '2.1kg 礼盒', cost: 168, price: 268, shelved: 0 }
+    ];
+  }
+  pageVals() {
+    const st = this.state;
+    const money = (v) => '¥' + v.toFixed(2);
+    const all = this.goods();
+    const sellable = all.filter((g) => !g.oos);
+    const visible = all.filter((g) => st.filter === 'all' || (st.filter === 'on' ? !g.oos : g.oos));
+    const selIds = Object.keys(st.sel).filter((k) => st.sel[k]);
+    const selCount = selIds.length;
+    const toast = (msg, link) => this.setState({ toast: { msg, link } });
+    const rows = visible.map((g) => ({
+      name: g.name, spec: g.spec, cost: money(g.cost), price: money(g.price),
+      margin: Math.round((g.price - g.cost) / g.price * 100) + '%',
+      img: g.img || '', hasImg: !!g.img, noImg: !g.img,
+      oos: !!g.oos, canAct: !g.oos,
+      checked: !!st.sel[g.id], ariaPick: '选择 ' + g.name,
+      status: g.oos ? '缺货 · 已自动下架' : '可售',
+      statusStyle: 'font-size: 12px; padding: 2px 8px; border-radius: 4px; ' + (g.oos ? 'background: #FFF1E8; color: #B54708' : 'background: #E8F6F4; color: #0B7A70'),
+      shelved: g.shelved + ' 个商城',
+      toggle: () => this.setState({ sel: { ...st.sel, [g.id]: !st.sel[g.id] } }),
+      shelf: () => this.setState({ modal: { n: 1, label: g.name } }),
+      drop: () => toast('已带入代发批量下单：' + g.name, '去批量下单 →')
+    }));
+    const allChecked = sellable.length > 0 && sellable.every((g) => st.sel[g.id]);
+    const filters = [['all', '全部'], ['on', '可售'], ['oos', '缺货']].map((f) => {
+      const sel = st.filter === f[0];
+      return { label: f[1], selected: sel ? 'true' : 'false', pick: () => this.setState({ filter: f[0] }),
+        style: 'height: 28px; padding: 0 12px; border-radius: 14px; border: 0; cursor: pointer; font-size: 12px; ' + (sel ? 'background: #E8F6F4; color: #0B7A70; font-weight: 600' : 'background: #F2F3F5; color: #1F2329') };
+    });
+    const mallList = [['a', '三院员工福利商城', '在售 · 1,280 人'], ['b', '年货节专场', '12/1 开放'], ['c', '工会福利商城', '在售 · 640 人']];
+    const malls = mallList.map((m) => ({ name: m[1], note: m[2], checked: !!st.malls[m[0]],
+      toggle: () => this.setState({ malls: { ...st.malls, [m[0]]: !st.malls[m[0]] } }) }));
+    const mallCount = mallList.filter((m) => st.malls[m[0]]).length;
+    const btn = (primary, off) => 'height: 36px; padding: 0 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: ' + (off ? 'not-allowed' : 'pointer') + '; ' +
+      (primary ? (off ? 'border: 0; background: #C9E7E3; color: #FFFFFF' : 'border: 0; background: #0F8F84; color: #FFFFFF') : (off ? 'border: 1px solid #D0D3D6; background: #FFFFFF; color: #A8ADB4' : 'border: 1px solid #0F8F84; background: #FFFFFF; color: #0B7A70'));
+    return {
+      rows, filters, selCount: String(selCount), noSel: selCount === 0, allChecked,
+      selBtnPrimary: btn(true, selCount === 0), selBtnSecondary: btn(false, selCount === 0),
+      toggleAll: () => {
+        const next = {};
+        if (!allChecked) sellable.forEach((g) => { next[g.id] = true; });
+        this.setState({ sel: next });
+      },
+      openShelfAll: () => this.setState({ modal: { n: 84, label: '整盘可售商品' } }),
+      openShelfSel: () => { if (selCount) this.setState({ modal: { n: selCount, label: '所选商品' } }); },
+      dropAll: () => toast('已把整盘 84 款可售商品带入代发批量下单', '去批量下单 →'),
+      dropSel: () => { if (selCount) toast('已把所选 ' + selCount + ' 件带入代发批量下单', '去批量下单 →'); },
+      showModal: !!st.modal,
+      modalDesc: st.modal ? ('将上架「' + st.modal.label + '」' + (st.modal.n > 1 ? '共 ' + st.modal.n + ' 件' : '') + '，选择要上架的商城：') : '',
+      malls,
+      noop: () => {},
+      closeModal: () => this.setState({ modal: null }),
+      confirmShelf: () => this.setState({ modal: null, toast: { msg: '已上架到 ' + mallCount + ' 个商城，缺货时会自动下架', link: '查看商城 →' } }),
+      showToast: !!st.toast,
+      toast: st.toast ? st.toast.msg : '',
+      toastLink: st.toast ? st.toast.link : '',
+      closeToast: () => this.setState({ toast: null })
+    };
+  }
+
+  prdMeasure() {
+    const root = document.querySelector('[data-prd-root]');
+    const box = document.querySelector('[data-prd-cards]');
+    if (!root || !box) return;
+    const rb = root.getBoundingClientRect();
+    const sc = root.offsetWidth ? rb.width / root.offsetWidth : 1;
+    const bb = box.getBoundingClientRect();
+    const A = {};
+    document.querySelectorAll('[data-prd]').forEach((el) => {
+      const b = el.getBoundingClientRect();
+      if (b.width < 2 || b.height < 2) return;
+      A[el.getAttribute('data-prd')] = { x: (b.left - rb.left) / sc, y: (b.top - rb.top) / sc, w: b.width / sc, h: b.height / sc };
+    });
+    const H = {};
+    document.querySelectorAll('[data-prd-card]').forEach((el) => { H[el.getAttribute('data-prd-card')] = el.offsetHeight; });
+    const PX = (bb.left - rb.left) / sc, CY = (bb.top - rb.top) / sc;
+    const key = JSON.stringify([A, H, Math.round(PX), Math.round(CY)]);
+    if (key !== this._prdKey) { this._prdKey = key; this.setState({ prdA: A, prdH: H, prdPX: PX, prdCY: CY }); }
+  }
+  componentDidMount() { this.prdMeasure(); this._prdT = setInterval(() => this.prdMeasure(), 500); }
+  componentWillUnmount() { clearInterval(this._prdT); }
+  renderVals() { return Object.assign(this.pageVals(), this.prdVals()); }
+  prdVals() {
+    const st = this.state;
+    const A = st.prdA || {}, H = st.prdH || {};
+    const PX = st.prdPX || 0, CY = st.prdCY || 0;
+    const focus = st.prdFocus || '';
+    const cards = this.prdCards();
+    const withA = cards.filter((c) => A[c.k]).sort((a, b) => A[a.k].y - A[b.k].y);
+    const noA = cards.filter((c) => !A[c.k]);
+    const order = withA.concat(noA);
+    let y = 0; const pos = {};
+    order.forEach((c) => {
+      const want = A[c.k] ? Math.max(0, A[c.k].y - CY - 4) : y;
+      const top = Math.max(want, y);
+      pos[c.k] = top; y = top + (H[c.k] || 150) + 12;
+    });
+    const C1 = '#5B6BD5';
+    const showLines = st.prdLines !== false;
+    const prdLineList = !showLines ? [] : withA.map((c) => {
+      const a = A[c.k];
+      const op = focus ? (focus === c.k ? 1 : 0.15) : 0.6;
+      const w = focus === c.k ? 2 : 1.5;
+      const dash = w + 'px dashed ' + C1;
+      const ax = a.x + a.w + 4, ay = a.y + Math.min(a.h / 2, 24);
+      const gx = PX - 16, cy = CY + pos[c.k] + 20;
+      return {
+        box: 'position: absolute; left: ' + (a.x - 4) + 'px; top: ' + (a.y - 4) + 'px; width: ' + (a.w + 8) + 'px; height: ' + (a.h + 8) + 'px; border: ' + dash + '; border-radius: 8px; box-sizing: border-box; opacity: ' + op,
+        s1: 'position: absolute; left: ' + Math.min(ax, gx) + 'px; top: ' + ay + 'px; width: ' + Math.abs(gx - ax) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        s2: 'position: absolute; left: ' + gx + 'px; top: ' + Math.min(ay, cy) + 'px; height: ' + Math.abs(cy - ay) + 'px; border-left: ' + dash + '; opacity: ' + op,
+        s3: 'position: absolute; left: ' + gx + 'px; top: ' + cy + 'px; width: ' + (PX - gx) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        dot: 'position: absolute; left: ' + (ax - 4) + 'px; top: ' + (ay - 4) + 'px; width: 8px; height: 8px; border-radius: 50%; background: ' + C1 + '; opacity: ' + op
+      };
+    });
+    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'] };
+    const nums = {}; order.forEach((c, i) => { nums[c.k] = i + 1; });
+    return {
+      prdTitle: this.prdTitle(), prdIntro: this.prdIntro(),
+      prdCardList: order.map((c) => {
+        const on = focus === c.k;
+        return {
+          k: c.k, no: String(nums[c.k]), title: c.title,
+          unanchored: !A[c.k], hint: c.hide || '当前界面未显示这个区域',
+          secs: c.secs.map((x) => ({ label: x[0], text: x[1], tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + (TAG[x[0]] || TAG['规则'])[0] + '; color: ' + (TAG[x[0]] || TAG['规则'])[1] })),
+          enter: () => this.setState({ prdFocus: c.k }), leave: () => this.setState({ prdFocus: '' }),
+          style: 'position: absolute; left: 16px; right: 16px; top: ' + pos[c.k] + 'px; background: #FFFFFF; border-radius: 10px; padding: 12px 14px; box-sizing: border-box; border: 1px solid ' + (on ? C1 : '#E3E6F5') + '; box-shadow: ' + (on ? '0 4px 14px rgba(91,107,213,0.18)' : 'none')
+        };
+      }),
+      prdLineList, prdPanelH: String(Math.max(y + 24, 400)),
+      prdToggleLines: () => this.setState({ prdLines: st.prdLines === false }),
+      prdLinesLabel: showLines ? '隐藏连线' : '显示连线'
+    };
+  }
+
+  prdTitle() { return "货盘明细"; }
+  prdIntro() { return "单个货盘的商品明细和操作页。上架、代发都在这里完成。"; }
+  prdCards() { return [{"k": "head", "title": "货盘信息", "secs": [["数据", "名称、渠道、场景、描述、商品数、价格区间、可代发数（排除不支持代发的商品）、已上架商城数、更新时间。"]]}, {"k": "rule", "title": "自动上下架规则", "secs": [["规则", "缺货商品自动下架，并同步到已上架该货盘的商城；补货后自动恢复。"], ["待确认", "上下架阈值和由谁设定（V1 上线门槛里写的是「具体阈值待定」）。"]]}, {"k": "bulk", "title": "整盘操作", "secs": [["交互", "「整盘上架到商城」打开商城选择弹窗，只上架可售商品；「整盘代发下单」把可售商品带进代发批量下单页。"], ["规则", "按钮按权益显示：没有代发权益不显示「代发」类按钮。"]]}, {"k": "table", "title": "货盘商品列表", "secs": [["数据", "供货价、建议售价、毛利空间 =（建议售价 − 供货价）÷ 建议售价；状态：可售 / 缺货 · 已自动下架；已上架商城数。"], ["交互", "勾选后可批量上架、批量代发；缺货商品不能勾选；可按全部 / 可售 / 缺货筛选；单个商品行内也能上架、代发。"]]}, {"k": "modal", "title": "上架到商城弹窗", "secs": [["交互", "多选要上架的商城，默认勾选「跟随货盘自动上下架」。"], ["数据", "商城列表显示状态和员工人数。"], ["规则", "会员有多个商城时必须手动选择，不默认上架到全部商城。"]], "hide": "点任意「上架」按钮后出现"}]; }
+}
+</script>
+</body>
+</html>

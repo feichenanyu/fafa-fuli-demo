@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>会员工作台（改版前 · 现状对照） · 会员端工作台精简改版 Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="dc-lite.js"></script>
+</head>
+<body>
+<template id="dc-src">
+<helmet>
+<style>
+body{margin:0;background:#F3F5F7}
+a{color:#333;text-decoration:none}a:hover{color:#0B7A70}
+</style>
+</helmet>
+<div style="font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; background: #F3F5F7; min-height: 1560px; font-size: 14px">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 64px; padding: 0 24px; background: #FFFFFF">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="font-size: 22px; font-weight: 700; color: #0B7A70; letter-spacing: 1px">采发发</span>
+      <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0F8F84; border-radius: 4px; padding: 2px 6px">会员端</span>
+    </div>
+    <span style="width: 1px; height: 20px; background: #E5E8EB"></span>
+    <a href="#" style="color: #8F959E">返回首页</a>
+    <div style="margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 24px; color: #1F2329">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 700">8</span>
+      <span>导入导出</span><span>审批</span><span>消息</span>
+      <span style="width: 1px; height: 18px; background: #E5E8EB"></span>
+      <span>弹窗广告</span>
+      <span style="width: 1px; height: 18px; background: #E5E8EB"></span>
+      <span>咨询客服</span>
+      <span style="width: 1px; height: 18px; background: #E5E8EB"></span>
+      <span>企业控制台</span>
+      <span style="width: 1px; height: 18px; background: #E5E8EB"></span>
+      <span>三院 ▾</span>
+    </div>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px; padding: 20px">
+
+    <aside aria-label="主菜单（改版前）" style="flex: 1 1 320px; max-width: 340px; background: #FFFFFF; border-radius: 8px; box-sizing: border-box; position: relative">
+      <div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #FEF3F2; border-bottom: 1px solid #FBD5D1; border-radius: 8px 8px 0 0; font-size: 12px; color: #B42318">
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 700; flex: none">7</span>
+        <span>10 组 85 项全部展开，此处框内滚动约 4 屏</span>
+      </div>
+      <div style="height: 1380px; overflow-y: auto; padding: 8px 20px 24px; box-sizing: border-box">
+        <template data-sc="for" list="{{groups}}" as="g" hint-placeholder-count="10">
+          <div style="border-bottom: 1px solid #EEF0F2; padding: 10px 0 14px">
+            <div style="display: flex; align-items: center; gap: 12px; height: 44px; font-size: 18px; font-weight: 700; color: {{g.color}}">
+              <span style="width: 16px; height: 16px; border-radius: 3px; background: #D9DCE0"></span>{{g.name}}
+              <template data-sc="if" value="{{g.hasMark}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 700">{{g.mark}}</span></template>
+              <template data-sc="if" value="{{g.hasChev}}" hint-placeholder-val="{{ true }}"><span style="margin-left: auto; color: #B0B5BC; font-size: 14px">︿</span></template>
+            </div>
+            <template data-sc="for" list="{{g.sections}}" as="s" hint-placeholder-count="2">
+              <div>
+                <template data-sc="if" value="{{s.hasTitle}}" hint-placeholder-val="{{ true }}">
+                  <div style="text-align: center; padding: 12px 0 6px; font-size: 13px; color: #A8ADB4">{{s.title}}</div>
+                </template>
+                <div style="display: flex; flex-wrap: wrap; column-gap: 46px; row-gap: 4px; padding-left: 8px">
+                  <template data-sc="for" list="{{s.items}}" as="it" hint-placeholder-count="2">
+                    <span style="{{it.style}}">{{it.name}}</span>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </aside>
+
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+      <section style="background: #FFFFFF; border-radius: 8px; padding: 24px 32px 32px; position: relative">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 28px">
+          <span style="width: 4px; height: 18px; background: #0F8F84"></span>
+          <h2 style="margin: 0; font-size: 20px; font-weight: 500">订单数据</h2>
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 700">2</span>
+          <span style="margin-left: auto; font-size: 16px">查看全部 ›</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+          <template data-sc="for" list="{{orderStats}}" as="o" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 24px">
+              <span style="width: 76px; height: 76px; border-radius: 50%; background: #EEF5F4; display: flex; align-items: center; justify-content: center; color: #5B6470">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M16 12h2"/></svg>
+              </span>
+              <div>
+                <div style="font-size: 34px; font-weight: 700; line-height: 1.2">{{o.num}}</div>
+                <div style="font-size: 18px; color: #1F2329; margin-top: 6px">{{o.label}}</div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <section style="background: #FFFFFF; border-radius: 8px; padding: 24px 32px 32px">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px">
+          <span style="width: 4px; height: 18px; background: #0F8F84"></span>
+          <h2 style="margin: 0; font-size: 20px; font-weight: 500">经营数据</h2>
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 700">1</span>
+          <span style="font-size: 12px; color: #B42318">首屏到此为止，下面的业务数据被挤出首屏</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px; padding-left: 40px; margin-bottom: 24px">
+          <span style="padding: 10px 6px; background: #E8F2FF; color: #4F6EF7; font-weight: 600; font-size: 18px; border-bottom: 3px solid #4F6EF7">商城订单</span>
+          <span style="font-size: 18px; color: #333">集采订单</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 700">3</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 22px; padding-left: 40px; margin-bottom: 32px; font-size: 18px; color: #646A73">
+          <span>日期</span><span>昨天</span>
+          <span style="color: #4F6EF7; font-weight: 600; border-bottom: 2px solid #4F6EF7">最近7天</span>
+          <span>最近30天</span>
+          <span style="border: 1px solid #D0D3D6; border-radius: 4px; padding: 4px 20px; font-size: 15px; color: #1F2329">2026-11-16 &#160;→&#160; 2026-11-22</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px; padding-left: 40px; position: relative">
+          <template data-sc="for" list="{{kpis}}" as="k" hint-placeholder-count="7">
+            <div style="{{k.cardStyle}}">
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 16px; color: #333">
+                <span style="width: 9px; height: 9px; border-radius: 50%; background: {{k.dot}}"></span>{{k.label}}
+                <span style="margin-left: auto; color: #B0B5BC">↕</span>
+              </div>
+              <div style="font-size: 30px; font-weight: 700; margin: 16px 0 10px">{{k.value}}</div>
+              <div style="{{k.deltaStyle}}">{{k.delta}}</div>
+            </div>
+          </template>
+        </div>
+        <div style="display: flex; gap: 8px; padding: 10px 0 0 40px">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 700">4</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 700">5</span>
+          <span style="font-size: 12px; color: #B42318">彩色圆点无含义 · ↕ 看不懂 · -100% 标红；上方「待发货 8」，这里订单总数却是 0</span>
+        </div>
+        <div style="position: relative; margin: 24px 0 0 40px; height: 440px">
+          <svg width="100%" height="440" viewBox="0 0 1000 440" preserveAspectRatio="none" role="img" aria-label="空数据折线图，所有日期为 0">
+            <g stroke="#EEF0F2" stroke-width="1">
+              <line x1="40" y1="20" x2="1000" y2="20"/><line x1="40" y1="100" x2="1000" y2="100"/><line x1="40" y1="180" x2="1000" y2="180"/>
+              <line x1="40" y1="260" x2="1000" y2="260"/><line x1="40" y1="340" x2="1000" y2="340"/><line x1="40" y1="400" x2="1000" y2="400"/>
+            </g>
+            <polyline points="110,400 250,400 390,400 530,400 670,400 810,400 950,400" fill="none" stroke="#4F6EF7" stroke-width="3"/>
+          </svg>
+          <div style="position: absolute; left: 0; top: 0; height: 410px; display: flex; flex-direction: column; justify-content: space-between; font-size: 13px; color: #8F959E">
+            <span>1</span><span>0.8</span><span>0.6</span><span>0.4</span><span>0.2</span><span>0</span>
+          </div>
+          <div style="position: absolute; left: 6%; right: 2%; bottom: 0; display: flex; justify-content: space-between; font-size: 13px; color: #8F959E">
+            <span>20261116</span><span>20261117</span><span>20261118</span><span>20261119</span><span>20261120</span><span>20261121</span><span>20261122</span>
+          </div>
+          <span style="position: absolute; left: 50%; top: 160px; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D92D20; color: #FFFFFF; font-size: 12px; font-weight: 700">6</span>
+        </div>
+      </section>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px">
+        <section style="flex: 1 1 320px; background: #FFFFFF; border-radius: 8px; padding: 24px 32px; min-height: 140px">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <span style="width: 4px; height: 18px; background: #0F8F84"></span>
+            <h2 style="margin: 0; font-size: 20px; font-weight: 500">业务数据</h2>
+            <span style="margin-left: auto">查看全部 ›</span>
+          </div>
+          <div style="display: flex; margin-top: 20px"><span style="border: 1px solid #0F8F84; color: #0B7A70; padding: 6px 40px; border-radius: 6px 0 0 0">方案</span><span style="border: 1px solid #D0D3D6; padding: 6px 40px; border-radius: 0 6px 0 0">报价单</span></div>
+        </section>
+        <section style="flex: 1 1 320px; background: #FFFFFF; border-radius: 8px; padding: 24px 32px; min-height: 140px">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <span style="width: 4px; height: 18px; background: #0F8F84"></span>
+            <h2 style="margin: 0; font-size: 20px; font-weight: 500">关注客户</h2>
+            <span style="margin-left: auto">查看全部 ›</span>
+          </div>
+          <div style="margin-top: 20px; color: #333">暂无数据</div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+</div>
+</template>
+<div id="dc-mount"></div>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dupNames = { '批量下单': 1, '下单管理': 1 };
+    const G = [
+      ['常用', null, [[null, ['我的商城', '我的礼包']]]],
+      ['工作台', null, [], '#0B7A70'],
+      ['商城', null, [['商城管理', ['我的商城', '我的礼包']], ['商城扩展应用', ['互动营销', '预算分发', '促销增购', '用户权益', '销售渠道', '个性配置']]]],
+      ['商品', '9', [['商品管理', ['商品库', '商品发布', '商品导入']], ['供应商商品', ['挑选商品', '商品变更审核', '商品替换日志']], ['本地资源场景', ['特惠电影', '快速电影', '点餐服务', '美团外卖', '高德打车', '鲜花蛋糕', '淘宝闪购', '大润发', '小象超市']]]],
+      ['订单', '9', [['商城订单', ['订单管理', '订单导出', '服务订单', '下单提醒']], ['猫超代发', ['批量下单', '下单管理']], ['其他代发', ['代发选品', '已选商品', '批量下单', '下单历史', '商品变更通知', '退货地址设置', '代售后查询']], ['猫超集采', ['集采报价', '下单管理']]]],
+      ['企业码', null, [['服务企业', ['企业管理', '员工管理', '费控管理', '额度发放']], ['订单中心', ['消费记录', '发票管理', '发票汇总']]]],
+      ['数据', null, [[null, ['订单分析', '用户分析', '经营概览', '订单明细']]]],
+      ['营销', null, [['名片营销', ['我的名片', '数据监测', '名片设置']], ['卡券营销', ['卡券兑换', '卡券推广', '卡券营销']], ['企微营销', ['群群发', '客户群发', '销售话术']]]],
+      ['客户', null, [['线索公海', ['企业线索', '联系人线索']], ['客户关系', ['企业客户', '联系人', '企微好友', '企微客户群', '客户流失']], ['销售管理', ['销售报价', '客户跟进', '商机管理', '客户合同']]]],
+      ['供应商', null, [['自有供应商', ['供应商管理', '供应商新增', '供应商导入', '供应商登录']]]],
+      ['财务', null, [['平台财务', ['账户管理', '发票管理', '集采财务', '营业额申报']], ['商城财务', ['短信管理', '额度管理', '额度明细', '开票审核', '微信支付配置']], ['交易明细', ['服务交易明细', '猫超交易明细', '商品交易明细']]]]
+    ];
+    const groups = G.map((g) => ({
+      name: g[0], mark: g[1] || '', hasMark: !!g[1], hasChev: g[2].length > 0, color: g[3] || '#1F2329',
+      sections: g[2].map((s) => ({
+        title: s[0] || '', hasTitle: !!s[0],
+        items: s[1].map((n) => ({
+          name: n,
+          style: 'display: inline-block; height: 44px; line-height: 44px; font-size: 16px; color: #1F2329; white-space: nowrap' +
+            (g[0] === '订单' && dupNames[n] ? '; text-decoration: underline wavy #D92D20; text-underline-offset: 6px' : '')
+        }))
+      }))
+    }));
+    const kpis = [
+      ['总GMV(到手价)', '¥0.00', '', '#6366F1', true, 0],
+      ['毛利额', '¥0.00', '较上期 --', '#22C55E', false, 0],
+      ['毛利率', '--', '较上期 --', '#22C55E', false, 0],
+      ['订单总数', '0', '较上期  -100.00%', '#3B82F6', false, 1],
+      ['动销商品数', '0', '较上期  -100.00%', '#A855F7', false, 1],
+      ['客单价', '¥0.00', '较上期  -100.00%', '#F97316', false, 1],
+      ['售后率', '0.00%', '较上期 --', '#6B7280', false, 0]
+    ].map((k) => ({
+      label: k[0], value: k[1], delta: k[2], dot: k[3],
+      cardStyle: 'border: 1px solid #EEF0F2; border-radius: 6px; padding: 18px 16px; min-width: 0; overflow: hidden; ' + (k[4] ? 'background: #F5F7FF; border-left: 4px solid #4F6EF7' : 'background: #FFFFFF'),
+      deltaStyle: 'font-size: 14px; white-space: nowrap; color: ' + (k[5] ? '#D92D20' : '#A8ADB4')
+    }));
+    return {
+      groups, kpis,
+      orderStats: [ { num: '1', label: '待付款' }, { num: '8', label: '待发货' }, { num: '1', label: '售后中' } ]
+    };
+  }
+}
+</script>
+</body>
+</html>
