@@ -1,0 +1,1387 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C端商城用户行为埋点与漏斗分析需求 V1.0</title><style>
+:root{--brand:#0d9488;--brand-700:#066b5f;--brand-soft:#eaf8f5;--ink:#0f1418;--text-2:#4b5563;--text-3:#6b7280;--border:#dfe7e5;--bg:#f7f8f8;--surface:#fff;--code:#f3f5f5;--warm:#b45309;--warm-soft:#fff6e8;--mute-soft:#f1f3f4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--brand:#36c7aa;--brand-700:#5fd6bd;--brand-soft:#123a35;--ink:#e8eceb;--text-2:#b8c2c0;--text-3:#8d9896;--border:#2a3533;--bg:#121615;--surface:#181d1c;--code:#1f2625;--warm:#fbbf24;--warm-soft:#3a2b14;--mute-soft:#22292a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand-700)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--brand-700);text-decoration:none;white-space:nowrap}
+.crumb{color:var(--text-3);font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:600;line-height:20px;border-radius:999px;padding:0 9px;white-space:nowrap}
+.pill.new{background:var(--brand-soft);color:var(--brand-700)}
+.pill.old{background:var(--mute-soft);color:var(--text-3)}
+.pill.kind{background:var(--warm-soft);color:var(--warm)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 80px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px}
+.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+.toc b{display:block;color:var(--text-3);font-size:12px;font-weight:600;margin-bottom:8px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;color:var(--text-2);text-decoration:none;line-height:1.45}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-700)}
+article{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 48px;min-width:0}
+article h1{font-size:30px;line-height:1.3;margin:0 0 8px}
+article h2{font-size:22px;margin:40px 0 12px;padding-top:12px;border-top:1px solid var(--border)}
+article h3{font-size:18px;margin:28px 0 8px}
+article h4{font-size:16px;margin:20px 0 6px}
+article li p{margin:0}
+article img{max-width:100%;height:auto!important;border:1px solid var(--border);border-radius:10px;background:#fff}
+article blockquote{margin:16px 0;padding:10px 16px;border-radius:10px;background:var(--brand-soft);color:var(--text-2)}
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto}
+input[type=checkbox]{margin-right:6px}
+.docmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 20px;font-size:14px;color:var(--text-3)}
+.oldnote{margin:0 0 24px;padding:10px 14px;border-radius:10px;background:var(--mute-soft);color:var(--text-2);font-size:14px}
+.meta{color:var(--text-3);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.toc{display:none}article{padding:24px 18px;border-radius:12px}article h1{font-size:24px}}
+</style></head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../">采发发 · 文档中心</a><span class="crumb">V2 · 埋点需求 · C端商城用户行为埋点与漏斗分析需求 V1.0</span>
+<a class="btn" href="../">全部文档</a></div></header>
+<div class="wrap"><nav class="toc" aria-label="目录"><b>目录</b><a href="#h-一-背景与目标">一、背景与目标</a><a href="#h-二-核心链路总览">二、核心链路总览</a><a href="#h-三-埋点通用规范">三、埋点通用规范</a><a href="#h-四-事件字典">四、事件字典</a><a href="#h-五-漏斗定义">五、漏斗定义</a><a href="#h-六-数据统计需求">六、数据统计需求</a><a href="#h-七-验收标准-排期与待确认事项">七、验收标准、排期与待确认事项</a></nav>
+<article><h1 id="h-top">C端商城用户行为埋点与漏斗分析需求 V1.0</h1>
+<div class="docmeta"><span class="pill new">最新</span><span class="pill kind">V2 · 埋点需求</span><span>最后更新 2026-11-24 10:25</span></div><p>Nov 23, 2026 · @xio</p>
+<h2 id="h-一-背景与目标">一、背景与目标</h2>
+<p>本需求把钉钉表《C端用户行为与漏斗分析》已列出的注册、登录、浏览三段，补全为「进入 → 登录 → 找货 → 加购 → 下单 → 支付 → 订单售后」整条链路，作为 Q4 规划 V2.3「全流程埋点与报表」的开发依据（评审 11/23，提测 11/30，测试完成 12/8）。</p>
+<p><strong>要回答的业务问题</strong>（前四条来自原表，后三条为本次补充）：</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>分析目标</th>
+<th>关键漏斗</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>用户注册链路成功率</td>
+<td>注册</td>
+<td>原表</td>
+</tr>
+<tr>
+<td>2</td>
+<td>游客浏览核心事件、游客转登录</td>
+<td>游客转化</td>
+<td>原表</td>
+</tr>
+<tr>
+<td>3</td>
+<td>用户登录成功率（分登录方式）</td>
+<td>登录</td>
+<td>原表</td>
+</tr>
+<tr>
+<td>4</td>
+<td>用户下单成功率、下单习惯</td>
+<td>交易主链路</td>
+<td>原表</td>
+</tr>
+<tr>
+<td>5</td>
+<td>员工能否找到货：搜索无结果率、搜索点击率</td>
+<td>找货</td>
+<td>补充</td>
+</tr>
+<tr>
+<td>6</td>
+<td>加购后为什么没下单、下单后为什么没支付</td>
+<td>购物车、交易</td>
+<td>补充</td>
+</tr>
+<tr>
+<td>7</td>
+<td>履约与售后：签收、售后申请率、售后归因分析</td>
+<td>订单售后</td>
+<td>补充</td>
+</tr>
+</tbody>
+</table>
+<p><strong>范围</strong>：员工商城 H5 与小程序，覆盖新旧两套前端（V1-7.5 已要求带新旧前端标记）。会员端、运营端以及 C 端 AI 功能不在本需求内。</p>
+<p><strong>原表需要修正的地方</strong>：</p>
+<ul>
+<li>「加购」「下单」两段在行为事件表里是空的，本文第四节补齐。</li>
+<li>每个事件都重复记录「进入页面时间、浏览时长、上页页面ID」，改为统一的页面事件和公共字段，业务事件不再重复带。</li>
+<li>「成功/失败」只记结果，没有失败原因，无法做流失分析；改为结果事件一律带 fail_reason 枚举，且以服务端返回为准。</li>
+<li>手机号、工号、账号、微信 openid 列在每个页面的属性里。改为只上报 user_id，个人信息通过用户维表关联，日志里不出现明文。</li>
+<li>漏斗表「用户登录」中「登录状态」出现两次，实为图形验证码登录和短信验证码登录两种方式，按 login_type 区分即可。</li>
+</ul>
+<h2 id="h-二-核心链路总览">二、核心链路总览</h2>
+<p>用户从进入商城到售后共 10 步，每一步都有至少一个 P0 事件；F4 覆盖进入到支付的整段，其余漏斗放大其中一段看卡点。</p>
+<p><img loading="lazy" alt="C端商城核心链路 · 10 步主链路与 6 个漏斗覆盖范围" src="media/track/chain.png" /></p>
+<p>右侧每条竖线是一个漏斗覆盖的步骤范围：F1 注册与导入账号激活、F2 登录、F3 游客转化、F4 交易主链路、F5 搜索找货、F6 购物车。各步的精确定义见第五节。</p>
+<h2 id="h-三-埋点通用规范">三、埋点通用规范</h2>
+<p>所有事件共用一套命名、公共字段和上报规则；业务事件只带自己的私有属性。本节即 V2-5.1「事件字典：命名、公共字段、曝光口径、上报方式」的内容。</p>
+<h3 id="h-3.1-命名与事件类型">3.1 命名与事件类型</h3>
+<ul>
+<li>事件名：小写英文 + 下划线，格式为「对象_动作」，如 login_submit、order_create_result。属性名同样规则。</li>
+<li>事件分五类：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>事件</th>
+<th>上报端</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>页面进入</td>
+<td>page_view</td>
+<td>前端</td>
+<td>每次进入页面报一次；底部 Tab 切换、页内 Tab 切换也算一次，记录切换后的当前页</td>
+</tr>
+<tr>
+<td>页面离开</td>
+<td>page_leave</td>
+<td>前端</td>
+<td>离开、切后台、关闭时报，带 duration_ms（即原表「浏览时长」）</td>
+</tr>
+<tr>
+<td>曝光</td>
+<td>element_exposure</td>
+<td>前端</td>
+<td>商品卡、Banner、装修组件等可见即报，口径见 3.4</td>
+</tr>
+<tr>
+<td>点击</td>
+<td>element_click 及业务点击事件</td>
+<td>前端</td>
+<td>用户点了什么</td>
+</tr>
+<tr>
+<td>业务结果</td>
+<td>*_result</td>
+<td>服务端</td>
+<td>注册、登录、加购、创单、支付是否成功，以接口返回为准，带 fail_reason</td>
+</tr>
+</tbody>
+</table>
+<p>结果事件必须由服务端上报：前端可能在接口返回前被关闭，用前端结果算成功率会失真。前端的「提交」事件和服务端的「结果」事件用同一个 request_id 关联。</p>
+<h3 id="h-3.2-公共字段-每条事件都带-由-SDK-自动填充">3.2 公共字段（每条事件都带，由 SDK 自动填充）</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>示例 / 取值</th>
+<th>必填</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_id</td>
+<td>事件唯一 ID，用于去重</td>
+<td>UUID</td>
+<td>是</td>
+</tr>
+<tr>
+<td>event_name</td>
+<td>事件名</td>
+<td>login_submit</td>
+<td>是</td>
+</tr>
+<tr>
+<td>client_time / server_time</td>
+<td>客户端发生时间 / 服务端接收时间（毫秒）</td>
+<td>1764000000000</td>
+<td>是</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>商城用户 ID；未登录为空</td>
+<td>—</td>
+<td>登录后必填</td>
+</tr>
+<tr>
+<td>device_id</td>
+<td>设备/匿名 ID，游客与登录前行为靠它串联</td>
+<td>—</td>
+<td>是</td>
+</tr>
+<tr>
+<td>session_id</td>
+<td>会话 ID；30 分钟无操作或跨自然日即新会话</td>
+<td>—</td>
+<td>是</td>
+</tr>
+<tr>
+<td>is_guest</td>
+<td>是否游客身份（即原表「是否登录」）</td>
+<td>true / false</td>
+<td>是</td>
+</tr>
+<tr>
+<td>login_type</td>
+<td>本次登录方式</td>
+<td>见 4.2 枚举</td>
+<td>登录后必填</td>
+</tr>
+<tr>
+<td>site_id</td>
+<td>站点 ID</td>
+<td>—</td>
+<td>是</td>
+</tr>
+<tr>
+<td>mall_id</td>
+<td>商城 ID</td>
+<td>—</td>
+<td>是</td>
+</tr>
+<tr>
+<td>member_enterprise_id</td>
+<td>会员企业 ID。系统内的企业 ID 即服务商本身，用于按服务商统计</td>
+<td>—</td>
+<td>是</td>
+</tr>
+<tr>
+<td>client_enterprise_id</td>
+<td>项目对应的甲方企业 ID。系统暂无记录，本期预留字段、不上报</td>
+<td>—</td>
+<td>否（预留）</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>福利项目/发放批次 ID（有则填）</td>
+<td>—</td>
+<td>否</td>
+</tr>
+<tr>
+<td>platform</td>
+<td>终端</td>
+<td>h5 / wx_mini / alipay_mini</td>
+<td>是</td>
+</tr>
+<tr>
+<td>fe_version</td>
+<td>新旧前端标记</td>
+<td>new / old</td>
+<td>是</td>
+</tr>
+<tr>
+<td>app_version</td>
+<td>前端发版号</td>
+<td>2.3.0</td>
+<td>是</td>
+</tr>
+<tr>
+<td>page_id / page_name</td>
+<td>当前页面，取值见 3.3</td>
+<td>item_detail / 商品详情</td>
+<td>是</td>
+</tr>
+<tr>
+<td>referrer_page_id</td>
+<td>上一页面 ID（原表「上页页面ID」）</td>
+<td>home</td>
+<td>是</td>
+</tr>
+<tr>
+<td>entry_source</td>
+<td>本次会话入口</td>
+<td>site_link / qrcode / redeem_card / wx_menu / share / alipay</td>
+<td>是</td>
+</tr>
+<tr>
+<td>utm_source / utm_campaign</td>
+<td>投放/活动来源参数</td>
+<td>—</td>
+<td>否</td>
+</tr>
+<tr>
+<td>os / network / screen</td>
+<td>设备环境</td>
+<td>iOS / 4g / 390x844</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><strong>个人信息</strong>：手机号、工号、账号、卡号、openid 不进行为日志明文。需要分析时，用 user_id 关联用户维表；登录前必须上报的，用脱敏或哈希值（如手机号后 4 位、卡号哈希）。</p>
+<p><strong>ID 打通</strong>：用户登录成功时上报 device_id 与 user_id 的绑定关系，数仓据此把登录前的游客行为归到该用户。</p>
+<h3 id="h-3.3-页面清单-page_id">3.3 页面清单（page_id）</h3>
+<table>
+<thead>
+<tr>
+<th>page_id</th>
+<th>页面</th>
+<th>page_id</th>
+<th>页面</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>register</td>
+<td>注册页</td>
+<td>cart</td>
+<td>购物车</td>
+</tr>
+<tr>
+<td>login</td>
+<td>登录页（含各登录方式）</td>
+<td>order_confirm</td>
+<td>确认订单</td>
+</tr>
+<tr>
+<td>home</td>
+<td>首页</td>
+<td>pay</td>
+<td>支付页/收银台</td>
+</tr>
+<tr>
+<td>decorate</td>
+<td>装修页/活动页（带 decorate_page_id）</td>
+<td>pay_result</td>
+<td>支付结果页</td>
+</tr>
+<tr>
+<td>category</td>
+<td>分类页</td>
+<td>order_list</td>
+<td>订单列表</td>
+</tr>
+<tr>
+<td>search</td>
+<td>搜索前页</td>
+<td>order_detail</td>
+<td>订单详情</td>
+</tr>
+<tr>
+<td>search_result</td>
+<td>搜索结果页</td>
+<td>after_sale</td>
+<td>售后申请/详情</td>
+</tr>
+<tr>
+<td>item_list</td>
+<td>商品列表/频道页</td>
+<td>profile</td>
+<td>个人中心</td>
+</tr>
+<tr>
+<td>item_detail</td>
+<td>商品详情</td>
+<td>other</td>
+<td>其他（带 page_name）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-3.4-曝光-点击与上报规则">3.4 曝光、点击与上报规则</h3>
+<ul>
+<li><strong>曝光</strong>：元素面积 50% 以上进入可视区，且停留满 500ms 才算；同一页面生命周期内，同一元素只报一次。可批量合并上报。</li>
+<li><strong>点击</strong>：必带 module_id（所在模块）、element_name（按钮/入口名称）、position（从 1 开始的位置）、target_route（跳转页面路由）。</li>
+<li><strong>商品类事件</strong>：统一带 item_id、sku_id（有则填）、goods_channel（jd / tmall_cs / youpin / self 等）、category_id、price、point_price。</li>
+<li><strong>搜索/推荐结果</strong>：每次请求生成 list_request_id，该次结果的曝光、点击都带上，用来算点击率。</li>
+<li><strong>上报</strong>：前端实时上报，失败本地缓存后重试；离开页面用 sendBeacon。服务端结果事件在业务事务完成后异步写入，不阻塞主流程。</li>
+<li><strong>去重</strong>：数仓按 event_id 去重。</li>
+</ul>
+<h2 id="h-四-事件字典">四、事件字典</h2>
+<p>共 7 段 50 个事件，其中 P0 为漏斗和成功率计算必需的事件，验收要求 100% 覆盖。下表只列私有属性，公共字段见 3.2；「原表对应」列标出是哪一行需求在这里落地。</p>
+<h3 id="h-4.1-进入与注册">4.1 进入与注册</h3>
+<table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>中文名</th>
+<th>触发时机</th>
+<th>上报端</th>
+<th>私有属性</th>
+<th>优先级</th>
+<th>原表对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mall_enter</td>
+<td>进入商城</td>
+<td>每个会话首次打开商城</td>
+<td>前端</td>
+<td>entry_source、landing_page_id</td>
+<td>P0</td>
+<td>新增</td>
+</tr>
+<tr>
+<td>account_create_result</td>
+<td>账号开通</td>
+<td>站点创建/导入开通生成员工账号</td>
+<td>服务端</td>
+<td>create_source（import / site_create / invite）、batch_id</td>
+<td>P0</td>
+<td>注册-站点创建/导入开通</td>
+</tr>
+<tr>
+<td>register_sms_send</td>
+<td>获取注册验证码</td>
+<td>点击获取验证码</td>
+<td>前端</td>
+<td>request_id</td>
+<td>P0</td>
+<td>获取验证码状态-获取时间</td>
+</tr>
+<tr>
+<td>register_sms_result</td>
+<td>验证码发送结果</td>
+<td>短信接口返回</td>
+<td>服务端</td>
+<td>request_id、is_success、fail_reason</td>
+<td>P0</td>
+<td>获取验证码状态-成功/失败</td>
+</tr>
+<tr>
+<td>register_submit</td>
+<td>提交注册</td>
+<td>点击注册/授权</td>
+<td>前端</td>
+<td>register_type（phone / wechat）、request_id</td>
+<td>P0</td>
+<td>注册状态</td>
+</tr>
+<tr>
+<td>register_result</td>
+<td>注册结果</td>
+<td>注册接口返回</td>
+<td>服务端</td>
+<td>register_type、request_id、is_success、fail_reason、user_id</td>
+<td>P0</td>
+<td>注册状态-成功/失败、注册时间</td>
+</tr>
+</tbody>
+</table>
+<p>导入开通的账号没有「注册」动作，以「首次登录成功」作为激活（见 login_result 的 is_first_login）。</p>
+<h3 id="h-4.2-登录">4.2 登录</h3>
+<p>login_type 枚举：account_pwd（账号密码）、employee_no（工号）、phone_sms（手机短信）、redeem_card（兑换卡）、wechat（微信授权）、sso（企业免登）、guest（游客）。</p>
+<table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>中文名</th>
+<th>触发时机</th>
+<th>上报端</th>
+<th>私有属性</th>
+<th>优先级</th>
+<th>原表对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>captcha_request</td>
+<td>获取图形验证码</td>
+<td>图形验证码加载/刷新</td>
+<td>前端</td>
+<td>is_success、fail_reason</td>
+<td>P1</td>
+<td>获取图形验证码状态</td>
+</tr>
+<tr>
+<td>login_sms_send</td>
+<td>获取登录短信</td>
+<td>点击获取验证码</td>
+<td>前端</td>
+<td>request_id</td>
+<td>P0</td>
+<td>获取短信验证码状态-获取时间</td>
+</tr>
+<tr>
+<td>login_sms_result</td>
+<td>短信发送结果</td>
+<td>短信接口返回</td>
+<td>服务端</td>
+<td>request_id、is_success、fail_reason</td>
+<td>P0</td>
+<td>获取短信验证码状态-成功/失败</td>
+</tr>
+<tr>
+<td>login_submit</td>
+<td>提交登录</td>
+<td>点击登录/授权/确认卡号</td>
+<td>前端</td>
+<td>login_type、request_id、trigger（见下）</td>
+<td>P0</td>
+<td>登录状态</td>
+</tr>
+<tr>
+<td>login_result</td>
+<td>登录结果</td>
+<td>登录接口返回</td>
+<td>服务端</td>
+<td>login_type、request_id、is_success、fail_reason、user_id、is_first_login、card_no_hash（兑换卡）</td>
+<td>P0</td>
+<td>登录状态-成功/失败、登录时间</td>
+</tr>
+<tr>
+<td>guest_enter</td>
+<td>游客进入</td>
+<td>以游客身份打开商城</td>
+<td>前端</td>
+<td>device_id</td>
+<td>P0</td>
+<td>游客登录-设备ID、登录时间</td>
+</tr>
+<tr>
+<td>login_guide_show</td>
+<td>登录引导弹出</td>
+<td>游客做需登录操作时弹出登录</td>
+<td>前端</td>
+<td>trigger</td>
+<td>P0</td>
+<td>游客登录-是否登录</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>退出登录</td>
+<td>确认退出</td>
+<td>前端</td>
+<td>—</td>
+<td>P2</td>
+<td>新增</td>
+</tr>
+</tbody>
+</table>
+<p>trigger 枚举（谁把用户引到了登录页）：active（主动进入）、add_cart、buy_now、view_price、profile、order、token_expired。</p>
+<h3 id="h-4.3-浏览-首页-装修页-分类页-商详页">4.3 浏览（首页、装修页、分类页、商详页）</h3>
+<table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>中文名</th>
+<th>触发时机</th>
+<th>上报端</th>
+<th>私有属性</th>
+<th>优先级</th>
+<th>原表对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page_view</td>
+<td>页面浏览</td>
+<td>进入任一页面</td>
+<td>前端</td>
+<td>is_home、decorate_page_id（装修页）、load_ms</td>
+<td>P0</td>
+<td>各页「上页页面ID、页面名称、是否首页、进入页面时间」</td>
+</tr>
+<tr>
+<td>page_leave</td>
+<td>页面离开</td>
+<td>离开/切后台/关闭</td>
+<td>前端</td>
+<td>duration_ms、max_scroll_depth</td>
+<td>P0</td>
+<td>各页「浏览时长」</td>
+</tr>
+<tr>
+<td>element_exposure</td>
+<td>组件/商品曝光</td>
+<td>满足 3.4 曝光口径</td>
+<td>前端</td>
+<td>module_id、component_type（banner / nav / floor / goods_card / coupon）、position、item_id（商品卡）、list_request_id</td>
+<td>P1</td>
+<td>新增</td>
+</tr>
+<tr>
+<td>element_click</td>
+<td>组件/按钮点击</td>
+<td>点击任一入口或按钮</td>
+<td>前端</td>
+<td>module_id、component_type、element_name、position、target_route、item_id</td>
+<td>P0</td>
+<td>「点击事件：点击时间、按钮名称、跳转页面路由」</td>
+</tr>
+<tr>
+<td>tab_switch</td>
+<td>Tab 切换</td>
+<td>底部 Tab 或页内 Tab 切换</td>
+<td>前端</td>
+<td>tab_name、from_tab</td>
+<td>P1</td>
+<td>「tab切换则记录当前页」</td>
+</tr>
+<tr>
+<td>category_click</td>
+<td>点击分类</td>
+<td>点击一级/二级分类</td>
+<td>前端</td>
+<td>category_level、category_id、category_name</td>
+<td>P1</td>
+<td>分类页浏览</td>
+</tr>
+<tr>
+<td>item_detail_view</td>
+<td>商品详情浏览</td>
+<td>商详页数据加载完成</td>
+<td>前端</td>
+<td>item_id、goods_channel、price、point_price、stock_status、is_saleable（当前地址是否可售）、from_module</td>
+<td>P0</td>
+<td>商详页浏览</td>
+</tr>
+<tr>
+<td>item_favorite</td>
+<td>收藏/取消收藏</td>
+<td>点击收藏</td>
+<td>前端</td>
+<td>item_id、action（add / remove）</td>
+<td>P2</td>
+<td>新增</td>
+</tr>
+<tr>
+<td>sku_panel_open</td>
+<td>打开规格面板</td>
+<td>商详弹出规格选择</td>
+<td>前端</td>
+<td>item_id、trigger（add_cart / buy_now）</td>
+<td>P1</td>
+<td>新增</td>
+</tr>
+</tbody>
+</table>
+<p>原表「装修页浏览-用户基础信息」不再作为事件属性，改由 user_id 关联用户维表。</p>
+<h3 id="h-4.4-找货-搜索">4.4 找货（搜索）</h3>
+<table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>中文名</th>
+<th>触发时机</th>
+<th>上报端</th>
+<th>私有属性</th>
+<th>优先级</th>
+<th>原表对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search_submit</td>
+<td>发起搜索</td>
+<td>回车、点热词/历史/联想词</td>
+<td>前端</td>
+<td>keyword、keyword_source（hot / manual / history / suggest / placeholder）、list_request_id</td>
+<td>P0</td>
+<td>搜索词、搜索词来源（热门搜索/手动输入）</td>
+</tr>
+<tr>
+<td>search_result</td>
+<td>搜索结果返回</td>
+<td>搜索接口返回</td>
+<td>服务端</td>
+<td>keyword、list_request_id、result_count、is_empty、sort_type、filters、category_constraint</td>
+<td>P0</td>
+<td>新增</td>
+</tr>
+<tr>
+<td>search_result_click</td>
+<td>点击搜索结果</td>
+<td>点击结果里的商品</td>
+<td>前端</td>
+<td>keyword、list_request_id、item_id、position</td>
+<td>P0</td>
+<td>新增</td>
+</tr>
+<tr>
+<td>search_filter_change</td>
+<td>筛选/排序</td>
+<td>改筛选或排序</td>
+<td>前端</td>
+<td>sort_type、filters</td>
+<td>P2</td>
+<td>新增</td>
+</tr>
+<tr>
+<td>empty_recommend_click</td>
+<td>无结果推荐点击</td>
+<td>无结果页点推荐商品</td>
+<td>前端</td>
+<td>keyword、item_id、position</td>
+<td>P1</td>
+<td>新增（对应 V2-2.3 无结果兜底）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-4.5-加购与购物车">4.5 加购与购物车</h3>
+<table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>中文名</th>
+<th>触发时机</th>
+<th>上报端</th>
+<th>私有属性</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add_cart_click</td>
+<td>点击加购</td>
+<td>点击加入购物车（商详、列表快捷加购、订单里再来一单）</td>
+<td>前端</td>
+<td>item_id、sku_id、quantity、add_source（detail / list / rebuy / recommend）、request_id</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>add_cart_result</td>
+<td>加购结果</td>
+<td>加购接口返回</td>
+<td>服务端</td>
+<td>request_id、item_id、sku_id、quantity、is_success、fail_reason</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>cart_view</td>
+<td>查看购物车</td>
+<td>进入购物车并加载完成</td>
+<td>前端</td>
+<td>cart_sku_count、invalid_sku_count、cart_amount</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>cart_item_change</td>
+<td>改数量/删除</td>
+<td>步进器、删除、移入收藏</td>
+<td>前端</td>
+<td>item_id、sku_id、action（qty_change / delete / to_favorite）、quantity</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>cart_checkout_click</td>
+<td>点击结算</td>
+<td>购物车点结算</td>
+<td>前端</td>
+<td>selected_sku_count、amount、point_amount</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>buy_now_click</td>
+<td>点击立即购买/立即兑换</td>
+<td>商详点立即购买（卡券、本地生活等只能走此路径）</td>
+<td>前端</td>
+<td>item_id、sku_id、quantity</td>
+<td>P0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-4.6-下单与支付">4.6 下单与支付</h3>
+<table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>中文名</th>
+<th>触发时机</th>
+<th>上报端</th>
+<th>私有属性</th>
+<th>优先级</th>
+<th>原表对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>order_confirm_view</td>
+<td>进入确认订单</td>
+<td>确认订单页加载完成</td>
+<td>前端</td>
+<td>order_source、sku_count、amount、point_amount、has_address、available_points</td>
+<td>P0</td>
+<td>新增</td>
+</tr>
+<tr>
+<td>order_submit_click</td>
+<td>点击提交订单</td>
+<td>点击提交</td>
+<td>前端</td>
+<td>order_source、request_id、pay_method_selected</td>
+<td>P0</td>
+<td>点击创单时间</td>
+</tr>
+<tr>
+<td>order_create_result</td>
+<td>创单结果</td>
+<td>创单接口返回</td>
+<td>服务端</td>
+<td>request_id、order_id、parent_order_id、order_source、is_success、fail_reason、sku_count、total_amount、point_amount、cash_amount、goods_channel_list</td>
+<td>P0</td>
+<td>实际创单时间（空=创单失败）、创单来源</td>
+</tr>
+<tr>
+<td>pay_submit</td>
+<td>发起支付</td>
+<td>收银台点确认支付</td>
+<td>前端</td>
+<td>order_id、pay_method、pay_channel</td>
+<td>P0</td>
+<td>支付方式</td>
+</tr>
+<tr>
+<td>pay_result</td>
+<td>支付结果</td>
+<td>支付回调到达</td>
+<td>服务端</td>
+<td>order_id、pay_method、pay_channel、is_success、fail_reason、point_amount、cash_amount</td>
+<td>P0</td>
+<td>支付时间</td>
+</tr>
+<tr>
+<td>order_cancel</td>
+<td>订单取消</td>
+<td>用户取消或超时取消</td>
+<td>服务端</td>
+<td>order_id、cancel_by（user / timeout / system）、cancel_reason</td>
+<td>P0</td>
+<td>新增</td>
+</tr>
+<tr>
+<td>address_edit</td>
+<td>新增/切换地址</td>
+<td>确认订单页改地址</td>
+<td>前端</td>
+<td>action（add / switch）、is_saleable_after</td>
+<td>P1</td>
+<td>新增</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>order_source 枚举（原表「创单来源」）：detail_add_cart（商详加购后结算）、list_add_cart（列表加购后结算）、rebuy（再来一单）、buy_now（商详立即购买）。购物车里的商品来源按每个 SKU 最近一次 add_source 归因。</li>
+<li>pay_method 枚举：points（纯积分）、points_cash（积分+现金）、cash（纯现金）、zero（0 元兑换/兑换卡全额）；pay_channel：wechat / alipay / enterprise_code / balance。</li>
+</ul>
+<h3 id="h-4.7-订单与售后">4.7 订单与售后</h3>
+<table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>中文名</th>
+<th>触发时机</th>
+<th>上报端</th>
+<th>私有属性</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>order_detail_view</td>
+<td>查看订单详情</td>
+<td>进入订单详情</td>
+<td>前端</td>
+<td>order_id、order_status</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>logistics_view</td>
+<td>查看物流</td>
+<td>点查看物流</td>
+<td>前端</td>
+<td>order_id、package_count</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>order_ship</td>
+<td>订单发货</td>
+<td>第一个包裹发货</td>
+<td>服务端</td>
+<td>order_id、package_count、goods_channel</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>order_receive</td>
+<td>确认收货</td>
+<td>用户确认或自动签收</td>
+<td>服务端</td>
+<td>order_id、receive_by（user / auto）</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>coupon_code_view</td>
+<td>查看卡券码</td>
+<td>虚拟卡券订单查看券码</td>
+<td>前端</td>
+<td>order_id、item_id</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>after_sale_apply</td>
+<td>申请售后</td>
+<td>提交售后申请</td>
+<td>服务端</td>
+<td>order_id、after_sale_id、type（refund / return / exchange）、reason</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>after_sale_result</td>
+<td>售后结果</td>
+<td>售后完结</td>
+<td>服务端</td>
+<td>after_sale_id、result（approved / rejected / cancelled）、duration_hours</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>rebuy_click</td>
+<td>再来一单</td>
+<td>订单里点再来一单</td>
+<td>前端</td>
+<td>order_id、sku_count</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>service_click</td>
+<td>联系客服</td>
+<td>点客服入口</td>
+<td>前端</td>
+<td>from_page、order_id、item_id</td>
+<td>P2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h-五-漏斗定义">五、漏斗定义</h2>
+<p>共 7 个漏斗，F4 交易主链路是看「兑换转化率」的主漏斗，其余 6 个用来定位卡在哪一步。每一步都用第四节的事件计算，成功类步骤取服务端结果事件且 is_success = true。</p>
+<h3 id="h-5.1-统一口径">5.1 统一口径</h3>
+<ul>
+<li><strong>统计主体</strong>：默认按人去重。已登录用 user_id；登录前用 device_id，登录后按 3.2 的 ID 打通合并为同一人。另提供按会话（session_id）计算的版本。</li>
+<li><strong>有序</strong>：用户必须先完成上一步，再在窗口期内完成下一步，才计入下一步。</li>
+<li><strong>窗口期</strong>：从第一步发生时算起，各漏斗窗口见下表；报表允许切换。</li>
+<li><strong>转化率</strong>：步骤转化率 = 本步人数 ÷ 上一步人数；整体转化率 = 最后一步人数 ÷ 第一步人数。</li>
+<li><strong>流失</strong>：完成上一步但窗口期内未完成本步的人。有失败结果事件的，按 fail_reason 归因；没有的，记为「主动离开」，并记录离开前最后一个 page_id。</li>
+</ul>
+<h3 id="h-5.2-漏斗清单">5.2 漏斗清单</h3>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>漏斗</th>
+<th>步骤与对应事件</th>
+<th>窗口期</th>
+<th>重点拆分维度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>注册</td>
+<td>① 进入注册页 page_view(register) → ② 验证码发送成功 register_sms_result → ③ 提交注册 register_submit → ④ 注册成功 register_result → ⑤ 首次登录成功 login_result(is_first_login)</td>
+<td>30 分钟（⑤ 为 7 天）</td>
+<td>register_type、站点、终端</td>
+</tr>
+<tr>
+<td>F1b</td>
+<td>导入账号激活</td>
+<td>① 账号开通 account_create_result → ② 首次登录成功 → ③ 首次下单成功</td>
+<td>自然周期（按发放批次看 7 / 30 天）</td>
+<td>服务商、项目、导入批次</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>登录</td>
+<td>① 进入登录页 page_view(login) → ② 验证码获取成功（仅需验证码的方式） → ③ 提交登录 login_submit → ④ 登录成功 login_result</td>
+<td>30 分钟</td>
+<td>login_type、trigger、fail_reason</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>游客转化</td>
+<td>① 游客进入 guest_enter → ② 浏览商详 item_detail_view → ③ 弹出登录引导 login_guide_show → ④ 登录成功 login_result → ⑤ 创单成功 order_create_result</td>
+<td>同一自然日</td>
+<td>trigger、入口来源</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>交易主链路</td>
+<td>① 进入商城 mall_enter（已登录） → ② 浏览商详 item_detail_view → ③ 加购成功或立即购买 add_cart_result / buy_now_click → ④ 进入确认订单 order_confirm_view → ⑤ 提交订单 order_submit_click → ⑥ 创单成功 order_create_result → ⑦ 支付成功 pay_result</td>
+<td>同一自然日；另出 7 天版</td>
+<td>服务商、站点、商品渠道、品类、新旧前端</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>搜索找货</td>
+<td>① 发起搜索 search_submit → ② 有结果 search_result(is_empty = false) → ③ 点击结果 search_result_click → ④ 加购或立即购买 → ⑤ 创单成功</td>
+<td>同一会话</td>
+<td>keyword_source、关键词、排序方式</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>购物车</td>
+<td>① 加购成功 add_cart_result → ② 查看购物车 cart_view → ③ 点击结算 cart_checkout_click → ④ 创单成功 → ⑤ 支付成功</td>
+<td>7 天</td>
+<td>add_source、商品渠道</td>
+</tr>
+</tbody>
+</table>
+<p>F4 中「创单成功 → 支付成功」一步，纯积分和 0 元订单在创单时即完成支付，服务端也需补报一条 pay_result，否则该步转化率会偏低。</p>
+<h3 id="h-5.3-下单习惯分析">5.3 下单习惯分析</h3>
+<p>用 order_create_result 与 pay_result 的属性直接统计：</p>
+<table>
+<thead>
+<tr>
+<th>分析项</th>
+<th>口径</th>
+<th>所用字段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>下单时段分布</td>
+<td>按小时、星期几统计创单成功数</td>
+<td>server_time</td>
+</tr>
+<tr>
+<td>创单来源占比</td>
+<td>各 order_source 的订单数占比</td>
+<td>order_source</td>
+</tr>
+<tr>
+<td>支付方式占比</td>
+<td>纯积分/积分+现金/纯现金的订单数和金额占比</td>
+<td>pay_method、pay_channel</td>
+</tr>
+<tr>
+<td>客单价与现金补差</td>
+<td>人均实付、现金补差订单占比</td>
+<td>total_amount、cash_amount</td>
+</tr>
+<tr>
+<td>从浏览到下单的时长</td>
+<td>首次 item_detail_view 到 order_create_result 的中位数</td>
+<td>client_time</td>
+</tr>
+<tr>
+<td>加购到下单的时长</td>
+<td>同一 SKU 从 add_cart_result 到创单的中位数</td>
+<td>sku_id、client_time</td>
+</tr>
+<tr>
+<td>复购</td>
+<td>同一发放周期内下单 ≥ 2 次的人数占比、再来一单占比</td>
+<td>user_id、order_source</td>
+</tr>
+<tr>
+<td>品类与渠道偏好</td>
+<td>各品类、各商品渠道的订单数与金额</td>
+<td>category_id、goods_channel_list</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h-六-数据统计需求">六、数据统计需求</h2>
+<p>交付 6 张内部报表（对应 V2-5.10 漏斗报表、V2-5.11 流失统计），所有指标都能按同一套维度筛选，数据 T+1 更新，核心看板小时级更新。</p>
+<h3 id="h-6.1-核心指标">6.1 核心指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>定义 / 公式</th>
+<th>数据来源</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>访问人数 UV</td>
+<td>当日有 mall_enter 的去重人数</td>
+<td>mall_enter</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>人均浏览时长</td>
+<td>page_leave.duration_ms 之和 ÷ UV</td>
+<td>page_leave</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>注册成功率</td>
+<td>register_result 成功人数 ÷ register_submit 人数</td>
+<td>F1</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>导入账号激活率</td>
+<td>首次登录成功账号数 ÷ 开通账号数</td>
+<td>F1b</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>登录成功率</td>
+<td>login_result 成功次数 ÷ login_submit 次数，按 login_type 拆</td>
+<td>F2</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>验证码到达率</td>
+<td>*_sms_result 成功数 ÷ *_sms_send 数</td>
+<td>F1、F2</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>游客转登录率</td>
+<td>游客中当日登录成功的人数 ÷ 游客人数</td>
+<td>F3</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>搜索无结果率</td>
+<td>is_empty = true 的搜索次数 ÷ 搜索总次数</td>
+<td>search_result</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>搜索点击率</td>
+<td>有点击的 list_request_id 数 ÷ 有结果的搜索次数</td>
+<td>F5</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>商详转加购率</td>
+<td>加购或立即购买人数 ÷ 浏览商详人数</td>
+<td>F4</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>加购失败率</td>
+<td>add_cart_result 失败次数 ÷ add_cart_click 次数</td>
+<td>add_cart_result</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>购物车结算率</td>
+<td>点击结算人数 ÷ 查看购物车人数</td>
+<td>F6</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>创单成功率</td>
+<td>order_create_result 成功次数 ÷ order_submit_click 次数</td>
+<td>F4</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>支付成功率</td>
+<td>支付成功订单数 ÷ 创单成功订单数</td>
+<td>F4</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>兑换转化率</td>
+<td>支付成功人数 ÷ 访问人数（已登录）</td>
+<td>F4</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>发放兑换率</td>
+<td>已下单员工数 ÷ 项目发放员工数</td>
+<td>F1b + 业务库</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>售后申请率</td>
+<td>申请售后订单数 ÷ 支付成功订单数</td>
+<td>after_sale_apply</td>
+<td>P1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-6.2-通用筛选维度">6.2 通用筛选维度</h3>
+<p>日期（日/周/月/自定义）、服务商（即会员企业）、站点、商城、终端（platform）、新旧前端（fe_version）、入口来源（entry_source）、登录方式（login_type）、商品渠道（goods_channel）、品类。</p>
+<p>项目对应的甲方企业系统内暂无记录，本期不支持按甲方企业统计；需要看某个甲方时，先按福利项目筛选。</p>
+<h3 id="h-6.3-报表清单">6.3 报表清单</h3>
+<table>
+<thead>
+<tr>
+<th>报表</th>
+<th>内容</th>
+<th>主要使用者</th>
+<th>更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心看板</td>
+<td>6.1 中 P0 指标的当日值、较昨日、较上周同期，带趋势线</td>
+<td>产品、运营、服务商</td>
+<td>小时</td>
+</tr>
+<tr>
+<td>漏斗分析</td>
+<td>选择 F1–F6 任一漏斗 + 维度，展示每步人数、步骤转化率、流失人数；支持两个维度值对比（如新旧前端、两个站点）</td>
+<td>产品</td>
+<td>T+1</td>
+</tr>
+<tr>
+<td>流失原因</td>
+<td>每个漏斗步骤的流失按 fail_reason 与「离开前最后页面」拆分，可下钻到站点</td>
+<td>产品、研发、客服</td>
+<td>T+1</td>
+</tr>
+<tr>
+<td>搜索分析</td>
+<td>搜索次数、无结果率、点击率；热词 Top 50、无结果词 Top 50、有结果但无点击词 Top 50</td>
+<td>产品、商品运营、服务商</td>
+<td>T+1</td>
+</tr>
+<tr>
+<td>页面与组件</td>
+<td>各页面 PV/UV/平均停留/跳出率；装修页各组件与坑位的曝光、点击、点击率</td>
+<td>运营、服务商</td>
+<td>T+1</td>
+</tr>
+<tr>
+<td>下单习惯</td>
+<td>5.3 各分析项</td>
+<td>运营、服务商</td>
+<td>T+1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-6.4-失败原因枚举-fail_reason">6.4 失败原因枚举（fail_reason）</h3>
+<p>研发按接口真实错误码映射到下列枚举；对不上的记 other，并把原始错误码放在 error_code 字段。other 占比超过 5% 时补充枚举。</p>
+<table>
+<thead>
+<tr>
+<th>环节</th>
+<th>枚举值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>验证码</td>
+<td>sms_rate_limit（频次限制）、phone_invalid、channel_error、captcha_wrong</td>
+</tr>
+<tr>
+<td>注册</td>
+<td>code_wrong、code_expired、phone_registered、not_in_whitelist（不在站点员工名单）、wechat_auth_denied</td>
+</tr>
+<tr>
+<td>登录</td>
+<td>pwd_wrong、account_not_found、account_frozen、code_wrong、code_expired、card_invalid、card_used、card_expired、site_expired（站点已到期）、wechat_auth_denied</td>
+</tr>
+<tr>
+<td>加购</td>
+<td>out_of_stock、not_saleable_area、limit_exceeded、item_offline、virtual_not_cartable、not_logged_in</td>
+</tr>
+<tr>
+<td>创单</td>
+<td>address_missing、not_saleable_area、out_of_stock、price_changed、points_insufficient、limit_exceeded、risk_blocked、channel_error（上游下单失败）</td>
+</tr>
+<tr>
+<td>支付</td>
+<td>user_cancel、timeout、balance_insufficient、channel_error、points_frozen</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h-七-验收标准-排期与待确认事项">七、验收标准、排期与待确认事项</h2>
+<h3 id="h-7.1-验收标准-V2-5.9">7.1 验收标准（V2-5.9）</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>标准</th>
+<th>验收方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0 事件覆盖</td>
+<td>第四节全部 P0 事件 100% 可触发、可查到</td>
+<td>测试按事件字典逐条操作，在埋点调试工具中核对</td>
+</tr>
+<tr>
+<td>公共字段完整率</td>
+<td>必填公共字段非空率 ≥ 99%</td>
+<td>灰度期按字段统计空值率</td>
+</tr>
+<tr>
+<td>与业务库对账</td>
+<td>创单成功数、支付成功数、注册成功数与业务库差异 ≤ 0.5%</td>
+<td>连续 3 天按站点对账</td>
+</tr>
+<tr>
+<td>前后端关联</td>
+<td>提交类事件与结果事件通过 request_id 关联率 ≥ 98%</td>
+<td>抽取 1 天数据统计</td>
+</tr>
+<tr>
+<td>重复与丢失</td>
+<td>同 event_id 重复率 ≤ 0.1%；弱网/切后台场景 page_leave 不丢</td>
+<td>弱网模拟、切后台、杀进程</td>
+</tr>
+<tr>
+<td>新旧前端可对比</td>
+<td>同一事件在新旧前端事件名、属性口径一致，仅 fe_version 不同</td>
+<td>同一操作在新旧站点各走一遍，比对字段</td>
+</tr>
+<tr>
+<td>隐私</td>
+<td>行为日志中无明文手机号、工号、卡号、openid</td>
+<td>对日志做正则扫描</td>
+</tr>
+<tr>
+<td>报表</td>
+<td>6.3 的 6 张报表可用，核心指标与手工 SQL 结果一致</td>
+<td>产品抽查 3 个站点</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-7.2-排期-摘自-Q4-规划-V2.3">7.2 排期（摘自 Q4 规划 V2.3）</h3>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>编号</th>
+<th>开发</th>
+<th>提测</th>
+<th>测试</th>
+<th>测试完成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事件字典（本文第三、四节定稿）</td>
+<td>V2-5.1</td>
+<td>金洋</td>
+<td>11/30</td>
+<td>子清</td>
+<td>12/8</td>
+</tr>
+<tr>
+<td>C 端四段埋点（进入与浏览、找货、交易、订单与个人中心；AI 不在本次范围）</td>
+<td>V2-5.4–5.8</td>
+<td>巴韶</td>
+<td>11/30</td>
+<td>子清</td>
+<td>12/8</td>
+</tr>
+<tr>
+<td>埋点验收</td>
+<td>V2-5.9</td>
+<td>巴韶</td>
+<td>11/30</td>
+<td>子清</td>
+<td>12/8</td>
+</tr>
+<tr>
+<td>漏斗、流失统计报表</td>
+<td>V2-5.10、5.11</td>
+<td>金洋</td>
+<td>11/30</td>
+<td>子清</td>
+<td>12/8</td>
+</tr>
+</tbody>
+</table>
+<p>服务端事件（所有 <code>_result</code> 结尾的事件，以及 account_create_result、order_cancel、order_ship、order_receive、after_sale_apply、after_sale_result）在排期表里没有单独的后端负责人，需在评审上确定。</p>
+<h3 id="h-7.3-待确认事项">7.3 待确认事项</h3>
+<ul>
+<li><input type="checkbox" disabled> 报表由谁看、多久看一次（Q4 规划 V2.3 评审要点）；服务商是否能看到自己站点的报表。</li>
+<li><input type="checkbox" disabled> 失败原因枚举（6.4）是否完整，需研发对照现有错误码确认。</li>
+<li><input type="checkbox" disabled> 埋点平台选型：统一埋点框架（V1-7.5）用自建还是第三方，决定漏斗报表是平台自带还是自己开发。</li>
+<li><input type="checkbox" disabled> 游客模式下哪些操作会触发登录引导（决定 trigger 枚举是否完整）。</li>
+<li><input type="checkbox" disabled> 「发放兑换率」的分母（项目发放员工数）从哪张业务表取。</li>
+</ul>
+<hr><p class="meta">最后更新 2026-11-24 10:25（北京时间）· 同步自 Claude 文档 2026-11-23 · Markdown 原文：<a href="track-funnel.md">track-funnel.md</a></p></article></div>
+</body></html>
