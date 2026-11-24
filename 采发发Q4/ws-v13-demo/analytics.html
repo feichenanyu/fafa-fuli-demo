@@ -529,7 +529,7 @@ button,select{font-family:inherit}
   </main>
 </div>
 </div>
-<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 440px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
+<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 520px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
   <div style="padding: 16px 18px 14px; border-bottom: 1px solid #E3E6F5">
     <div style="display: flex; align-items: center; gap: 8px">
       <span style="font-size: 11px; font-weight: 700; color: #FFFFFF; background: #5B6BD5; border-radius: 4px; padding: 2px 6px; letter-spacing: 0.5px">PRD</span>
@@ -543,6 +543,7 @@ button,select{font-family:inherit}
       <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F2F3F5; color: #1F2329">规则</span>
       <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F5EDF7; color: #7A2E78">埋点</span>
       <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #FFF1E8; color: #B54708">待确认</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E9F0FB; color: #1F4E9A">字段</span>
       <span style="color: #646A73; line-height: 18px">· 鼠标停在卡片上高亮对应区域</span>
     </div>
   </div>
@@ -555,9 +556,33 @@ button,select{font-family:inherit}
         </div>
         <template data-sc="if" value="{{c.unanchored}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 4px; font-size: 11px; color: #8F959E">{{c.hint}}</div></template>
         <template data-sc="for" list="{{c.secs}}" as="x" hint-placeholder-count="2">
-          <div style="display: flex; gap: 8px; margin-top: 8px">
-            <span style="{{x.tagStyle}}">{{x.label}}</span>
-            <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+          <div>
+            <template data-sc="if" value="{{x.isText}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; gap: 8px; margin-top: 8px">
+                <span style="{{x.tagStyle}}">{{x.label}}</span>
+                <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+              </div>
+            </template>
+            <template data-sc="if" value="{{x.isTable}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 10px">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+                  <span style="{{x.tagStyle}}">{{x.label}}</span>
+                  <span style="font-size: 12px; color: #646A73">{{x.caption}}</span>
+                </div>
+                <div role="table" style="border: 1px solid #E3E6F5; border-radius: 8px; overflow: hidden">
+                  <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 6px 10px; background: #F4F6FD; font-size: 11px; font-weight: 600; color: #3B4BB8">
+                    <span role="columnheader">字段</span><span role="columnheader">口径</span><span role="columnheader">来源</span>
+                  </div>
+                  <template data-sc="for" list="{{x.rows}}" as="r" hint-placeholder-count="3">
+                    <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 7px 10px; border-top: 1px solid #EEF0F6; font-size: 12px; line-height: 1.6">
+                      <span role="cell" style="font-weight: 600; color: #1F2329">{{r.f}}</span>
+                      <span role="cell" style="color: #33373D">{{r.d}}</span>
+                      <span role="cell" style="color: #646A73; overflow-wrap: anywhere">{{r.s}}</span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
           </div>
         </template>
       </div>
@@ -985,7 +1010,7 @@ class Component extends DCLogic {
         dot: 'position: absolute; left: ' + (ax - 4) + 'px; top: ' + (ay - 4) + 'px; width: 8px; height: 8px; border-radius: 50%; background: ' + C1 + '; opacity: ' + op
       };
     });
-    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'] };
+    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'], '字段': ['#E9F0FB', '#1F4E9A'] };
     const nums = {}; order.forEach((c, i) => { nums[c.k] = i + 1; });
     return {
       prdTitle: this.prdTitle(), prdIntro: this.prdIntro(),
@@ -994,7 +1019,14 @@ class Component extends DCLogic {
         return {
           k: c.k, no: String(nums[c.k]), title: c.title,
           unanchored: !A[c.k], hint: c.hide || '当前界面未显示这个区域',
-          secs: c.secs.map((x) => ({ label: x[0], text: x[1], tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + (TAG[x[0]] || TAG['规则'])[0] + '; color: ' + (TAG[x[0]] || TAG['规则'])[1] })),
+          secs: c.secs.map((x) => {
+            const isT = !Array.isArray(x);
+            const lab = isT ? (x.label || '字段') : x[0];
+            const tg = TAG[lab] || TAG['规则'];
+            return { isText: !isT, isTable: isT, label: lab, text: isT ? '' : x[1], caption: isT ? (x.caption || '') : '',
+              rows: isT ? x.rows.map((r) => ({ f: r[0], d: r[1], s: r[2] || '' })) : [],
+              tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + tg[0] + '; color: ' + tg[1] };
+          }),
           enter: () => this.setState({ prdFocus: c.k }), leave: () => this.setState({ prdFocus: '' }),
           style: 'position: absolute; left: 16px; right: 16px; top: ' + pos[c.k] + 'px; background: #FFFFFF; border-radius: 10px; padding: 12px 14px; box-sizing: border-box; border: 1px solid ' + (on ? C1 : '#E3E6F5') + '; box-shadow: ' + (on ? '0 4px 14px rgba(91,107,213,0.18)' : 'none')
         };
@@ -1006,11 +1038,21 @@ class Component extends DCLogic {
   }
 
   prdTitle() { return "数据 › 商城分析"; }
-  prdIntro() { return "口径以《C端商城用户行为埋点与漏斗分析需求 V1.0》为准，数据全部来自新商城埋点。右侧卡片随页签切换。"; }
-  prdCards() {
+  prdIntro() { return "口径以《C端商城用户行为埋点与漏斗分析需求 V1.0》为准，数据全部来自新商城埋点。右侧卡片随页签切换。 字段表的「来源」列：埋点 = C 端新商城埋点事件（需求 V1.0）；业务库 = 交易系统数据，具体表名待研发确认；运营后台 = 运营配置；页面计算 = 由前几项算出。"; }
+  prdBaseCards() {
     const common = [{"k": "filters", "title": "筛选条", "secs": [["规则", "维度按需求 6.2：日期、商城、福利项目、终端、商品渠道（平台内部另有服务商）。所有数据来自新商城埋点，旧前端不做埋点、不计入。暂不支持按甲方企业统计，用福利项目代替。"], ["数据", "报表 T+1 更新，数据截至前一天 24:00。"]]}, {"k": "pv", "title": "服务商搜索（仅平台内部）", "secs": [["规则", "只在平台内部（产品 / 运营）视角显示；开放给服务商后隐藏，服务商只能看自己（member_enterprise_id 固定为当前会员企业）。"], ["交互", "按名称或企业 ID 搜索；可粘贴多个 ID（逗号、空格、换行分隔），提示匹配到几个、哪些没找到，「全部选中」一次加入。选了服务商后，商城搜索只在这些服务商名下找。"]], "hide": "服务商视角下隐藏这个筛选"}, {"k": "ml", "title": "商城搜索", "secs": [["交互", "按商城名称或商城 ID 搜索：名称模糊匹配，最多显示 20 条；ID 精确匹配，支持一次粘贴多个。选中的商城以标签显示，可逐个移除，「清空」恢复为全部。"], ["规则", "平台约 1.2 万个商城，不用下拉列表。服务商视角只搜得到自己名下的商城。"]]}, {"k": "tabs", "title": "报表页签", "secs": [["规则", "对应需求 6.3：漏斗分析、流失原因、搜索分析、页面与组件、下单习惯；另加「发放兑换」（V2.3 会员端任务）。核心看板放在工作台的经营数据里。"], ["待确认", "漏斗分析、流失原因是否对服务商开放（需求 7.3），服务商视角下页签标「待确认开放」。"]]}, {"k": "caliber", "title": "数据口径说明", "secs": [["规则", "默认按人去重：登录前用 device_id，登录后用 user_id 合并为同一人。漏斗有序：先完成上一步，在窗口期内完成下一步才计入。成功类步骤取服务端结果事件且 is_success = true。"]]}];
     const byTab = {"funnel": [{"k": "funnel", "title": "漏斗图", "secs": [["数据", "支持需求 5.2 全部 7 个漏斗：F4 交易主链路、F5 搜索找货、F6 购物车、F1 注册、F1b 导入账号激活、F2 登录、F3 游客转化；每步下方显示对应事件名。"], ["规则", "每层宽度与人数成正比；层间显示步骤转化率和流失人数，转化最低的一步标橙，可直接跳到流失原因。"], ["交互", "窗口期按漏斗切换（如 F4：同一自然日 / 7 天）；统计方式按人 / 按会话（F1b 按账号统计，不支持按会话）。"]]}, {"k": "share", "title": "终端与商品渠道占比", "secs": [["数据", "终端取 platform 字段（微信小程序 / H5 / 支付宝小程序），按漏斗第一步统计；商品渠道取 goods_channel，按漏斗最后一步统计，只在 F4 / F5 / F6 显示。"], ["规则", "这两个维度只做占比分析，不再拆分成多个漏斗。"]]}, {"k": "trend", "title": "每日转化率折线", "secs": [["数据", "跟随所选漏斗显示对应指标的每日值（F4 兑换转化率、F2 登录成功率、F1b 累计首次下单率等），虚线是上周均值。"], ["交互", "悬停显示当天数值。"]]}, {"k": "steps", "title": "步骤转化率柱状图", "secs": [["数据", "每一步相对上一步的转化率，最低的一步标橙。"]]}], "loss": [{"k": "lossBars", "title": "各步流失人数", "secs": [["数据", "F4 每一步的流失人数 = 上一步人数 − 本步人数。"], ["交互", "点柱子切换下方的流失构成和趋势；还没有原因明细的步骤显示为灰色，不能点。"]]}, {"k": "donut", "title": "流失构成", "secs": [["数据", "有失败结果事件的流失按 fail_reason（需求 6.4）归因；没有的记为「主动离开」，按离开前最后一个页面拆分；两类合在一起看占比。"]]}, {"k": "lsTrend", "title": "每日流失人数", "secs": [["数据", "所选步骤近 7 天每天的流失人数，虚线是上周日均。"]]}, {"k": "lossDetail", "title": "失败原因明细", "secs": [["交互", "能处理的原因后面带入口，如「换可售商品」「去资源广场补货」。"], ["待确认", "fail_reason 枚举是否完整；other 占比超过 5% 时需要补充枚举。"]]}], "search": [{"k": "skpi", "title": "搜索核心指标", "secs": [["数据", "搜索无结果率 = 无结果的搜索次数 ÷ 搜索总次数；搜索点击率 = 有点击的搜索请求（list_request_id）÷ 有结果的搜索次数。"]]}, {"k": "words", "title": "搜索词表", "secs": [["数据", "热词、无结果词、有结果但没点击的词；需求要求各取 Top 50，原型示意 Top 5。"], ["交互", "无结果词可以一键去资源广场找货。"]]}], "page": [{"k": "pg", "title": "页面", "secs": [["数据", "各页面的 PV、UV、平均停留时长（取 page_leave 的 duration_ms）、跳出率。"]]}, {"k": "cp", "title": "首页装修组件与坑位", "secs": [["数据", "曝光口径：元素面积一半以上进入可视区且停留满 500ms，同一页面生命周期内只报一次；点击率 = 点击 ÷ 曝光，低于 5% 标橙。"]]}], "habit": [{"k": "hr", "title": "下单时段分布", "secs": [["数据", "按小时统计创单成功数（取 server_time）。"], ["交互", "悬停显示该时段单数。"]]}, {"k": "shares", "title": "来源与支付方式", "secs": [["数据", "创单来源（order_source）、支付方式、抵扣构成、商品渠道。"], ["规则", "商城余额 1:1 抵现金；商城积分按站点比例折算成金额。"], ["待确认", "需求 4.6 的支付方式枚举（pay_method）缺余额相关取值，结果事件需新增余额抵扣金额字段（balance_amount）。"]]}], "project": [{"k": "pj", "title": "发放兑换", "secs": [["数据", "发放兑换率 = 已下单员工数 ÷ 项目发放员工数；「已激活」= 首次登录成功（对应 F1b）；额度分商城余额、商城积分两列，积分显示站点比例和折合金额。"], ["待确认", "分母「项目发放员工数」取哪张业务表（需求 7.3）。"]]}]};
     return common.slice(0, 4).concat(byTab[this.state.tab] || []).concat(common.slice(4));
+  }
+
+  prdCards() {
+    const F = {"filters": [{"label": "字段", "caption": "筛选项和埋点字段的对应关系", "rows": [["日期", "按事件 server_time 的北京时间自然日筛选；报表 T+1，数据截至前一天 24:00", "埋点公共字段 server_time"], ["商城", "mall_id", "埋点公共字段 mall_id"], ["福利项目", "project_id；没有项目的事件不参与项目筛选", "埋点公共字段 project_id"], ["终端", "platform：h5 / wx_mini / alipay_mini", "埋点公共字段 platform"], ["商品渠道", "goods_channel：jd / tmall_cs / youpin / self 等；只对带商品的事件生效", "埋点商品字段 goods_channel"], ["服务商（仅内部）", "member_enterprise_id；服务商视角下固定为当前会员企业", "埋点公共字段 member_enterprise_id"]]}], "pv": [{"label": "字段", "caption": "", "rows": [["企业 ID / 名称", "会员企业的主键和名称，ID 以 E 开头", "业务库·会员企业"]]}], "ml": [{"label": "字段", "caption": "", "rows": [["商城 ID / 名称", "商城的主键和名称，ID 以 M 开头；「所属服务商」取商城的 member_enterprise_id", "业务库·商城"]]}], "funnel": [{"label": "字段", "caption": "漏斗图上的每个数字", "rows": [["步骤人数", "在窗口期内按顺序完成到这一步的去重人数；按会话时为会话数，F1b 为账号数", "对应步骤事件（见每步下方）"], ["占首步", "本步人数 ÷ 第一步人数", "页面计算"], ["步骤转化率", "本步人数 ÷ 上一步人数", "页面计算"], ["流失人数", "上一步人数 − 本步人数", "页面计算"], ["窗口期", "从第一步发生时开始算。F4 同一自然日 / 7 天；F5 同一会话 / 同一自然日；F6 7 / 30 天；F1、F2 30 分钟 / 1 天；F1b 30 / 7 天；F3 同一自然日 / 7 天", "需求 5.2"], ["按会话", "按 session_id 去重：30 分钟无操作或跨自然日即为新会话", "埋点公共字段 session_id"]]}], "share": [{"label": "字段", "caption": "两个环形图", "rows": [["终端占比", "漏斗第一步的人数（或会话数）按 platform 分组的占比", "埋点公共字段 platform"], ["商品渠道占比", "漏斗最后一步按商品渠道分组的占比；一单含多个渠道时按 goods_channel_list 分别计入（规则待确认）", "埋点 goods_channel / goods_channel_list"]]}], "trend": [{"label": "字段", "caption": "每个漏斗对应的折线指标", "rows": [["F4 兑换转化率", "每日：支付成功人数 ÷ 已登录访问人数", "mall_enter、pay_result"], ["F5 搜索到创单转化率", "每日：创单成功人数 ÷ 发起搜索人数", "search_submit、order_create_result"], ["F6 加购到支付转化率", "每日：支付成功人数 ÷ 加购成功人数（7 天窗口）", "add_cart_result、pay_result"], ["F1 注册成功率", "每日：注册成功人数 ÷ 提交注册人数", "register_submit、register_result"], ["F1b 首次下单率", "累计：已首次下单账号数 ÷ 开通账号数", "account_create_result、order_create_result"], ["F2 登录成功率", "每日：登录成功次数 ÷ 提交登录次数", "login_submit、login_result"], ["F3 游客转登录率", "每日：当日登录成功的游客数 ÷ 游客人数", "guest_enter、login_result"], ["虚线", "上一个 7 天的日均值", "同上"]]}], "steps": [{"label": "字段", "caption": "", "rows": [["柱高 / 柱顶数字", "本步人数 ÷ 上一步人数（%）", "页面计算"]]}], "lossBars": [{"label": "字段", "caption": "", "rows": [["各步流失人数", "F4 每一步：上一步人数 − 本步人数，统计期内合计", "埋点 F4"], ["可点的柱子", "有失败结果事件、或已采集离开页面的步骤", "—"]]}], "donut": [{"label": "字段", "caption": "", "rows": [["失败原因", "有失败结果事件的流失，按服务端返回的 fail_reason 计人数；一人多次失败取最后一次", "对应 *_result 事件的 fail_reason"], ["主动离开 · 页面", "没有失败结果的流失，按离开前最后一个 page_id 分组", "埋点 page_leave（page_id）"], ["占比", "该原因人数 ÷ 这一步的流失总人数", "页面计算"]]}], "lsTrend": [{"label": "字段", "caption": "", "rows": [["每日流失人数", "所选步骤每天的流失人数，按第一步发生的日期归属", "埋点 F4"], ["虚线", "上一个 7 天的日均流失人数", "同上"]]}], "lossDetail": [{"label": "字段", "caption": "", "rows": [["fail_reason", "研发按接口错误码映射到需求 6.4 的枚举；对不上的记 other，原始错误码放 error_code", "*_result 事件"], ["离开前页面", "流失用户在窗口期内最后一次 page_leave 的 page_id", "埋点 page_leave"]]}], "skpi": [{"label": "字段", "caption": "搜索核心指标", "rows": [["搜索次数", "search_submit 事件数", "埋点 search_submit"], ["搜索人数", "search_submit 的去重人数", "埋点 search_submit"], ["搜索无结果率", "is_empty = true 的搜索次数 ÷ 搜索总次数", "埋点 search_result"], ["搜索点击率", "有点击的 list_request_id 数 ÷ 有结果的搜索次数", "search_result、search_result_click"], ["无结果推荐点击", "无结果页推荐商品的点击次数", "埋点 empty_recommend_click"]]}], "words": [{"label": "字段", "caption": "三张词表的每一列", "rows": [["词", "keyword，去掉首尾空格、统一大小写后合并", "search_submit.keyword"], ["搜索次数", "该词的 search_submit 次数", "search_submit"], ["点击率", "该词有点击的请求数 ÷ 该词有结果的请求数", "search_result、search_result_click"], ["结果数", "该词最近一次搜索的 result_count", "search_result.result_count"]]}], "pg": [{"label": "字段", "caption": "", "rows": [["PV", "page_view 事件数", "埋点 page_view"], ["UV", "page_view 的去重人数", "埋点 page_view"], ["平均停留", "page_leave.duration_ms 之和 ÷ page_leave 次数", "埋点 page_leave"], ["跳出率", "以该页为落地页、且会话内没有再进入其他页面的会话数 ÷ 以该页为落地页的会话数", "page_view、session_id"]]}], "cp": [{"label": "字段", "caption": "", "rows": [["曝光", "element_exposure 次数：面积 ≥ 50% 且停留 ≥ 500ms，同一页面生命周期内同一元素只计一次", "埋点 element_exposure"], ["点击", "element_click 次数，按 module_id + position 对应到坑位", "埋点 element_click"], ["点击率", "点击 ÷ 曝光；低于 5% 标橙", "页面计算"]]}], "hr": [{"label": "字段", "caption": "", "rows": [["每小时单数", "按创单成功时间（server_time，北京时间）所在的小时统计订单数", "order_create_result"]]}], "shares": [{"label": "字段", "caption": "本页所有指标", "rows": [["人均订单金额", "支付成功订单金额 ÷ 支付成功人数；金额 = 余额 + 积分折算 + 现金", "pay_result、业务库·商城订单"], ["现金补差订单占比", "用了余额或积分、且 cash_amount > 0 的订单 ÷ 支付成功订单", "pay_result"], ["浏览到下单", "首次 item_detail_view 到 order_create_result 的时长中位数", "埋点 client_time"], ["加购到下单", "同一 SKU 从 add_cart_result 到创单的时长中位数", "埋点 client_time、sku_id"], ["复购率", "同一发放周期内下单 ≥ 2 次的人数 ÷ 下单人数", "order_create_result、project_id"], ["创单来源", "order_source：商详加购后结算 / 列表加购后结算 / 再来一单 / 立即购买", "order_create_result.order_source"], ["支付方式", "按订单使用的额度组合分类：纯积分、纯余额、积分 + 余额、补现金、0 元、纯现金", "pay_result（需补 balance_amount）"], ["抵扣构成", "余额抵扣金额、积分折算金额、现金金额各自 ÷ 订单金额合计", "pay_result"], ["商品渠道", "按订单商品的 goods_channel 统计订单数占比", "order_create_result.goods_channel_list"]]}], "pj": [{"label": "字段", "caption": "表格每一列", "rows": [["开通账号", "项目发放的员工账号数（发放兑换率的分母）", "业务库·发放记录"], ["已激活（首登）", "其中已首次登录成功的账号数", "埋点 login_result（is_first_login）"], ["已下单员工", "其中至少有一笔支付成功订单的员工数", "业务库·商城订单"], ["发放兑换率", "已下单员工 ÷ 开通账号", "页面计算"], ["商城余额 已用 / 发放", "余额抵扣金额（扣除退款退回）/ 项目发放的余额，1:1 金额", "业务库·余额账户流水"], ["商城积分 已用 / 发放", "积分分数；下方按本站点的积分比例折合成金额", "业务库·积分账户流水、站点积分比例"], ["到期", "项目额度的失效日期；30 天内到期标橙", "业务库·福利项目"]]}]};
+    const FD = {};
+    const t = this.state.biz || 'mall';
+    return this.prdBaseCards().map((c) => {
+      const add = (F[c.k] || []).concat(FD[c.k] ? (FD[c.k][t] || []) : []);
+      return add.length ? Object.assign({}, c, { secs: c.secs.concat(add) }) : c;
+    });
   }
 }
 </script>

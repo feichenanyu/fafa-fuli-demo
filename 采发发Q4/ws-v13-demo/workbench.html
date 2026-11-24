@@ -391,7 +391,7 @@ button{font-family:inherit}
   </div>
 </div>
 </div>
-<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 440px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
+<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 520px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
   <div style="padding: 16px 18px 14px; border-bottom: 1px solid #E3E6F5">
     <div style="display: flex; align-items: center; gap: 8px">
       <span style="font-size: 11px; font-weight: 700; color: #FFFFFF; background: #5B6BD5; border-radius: 4px; padding: 2px 6px; letter-spacing: 0.5px">PRD</span>
@@ -405,6 +405,7 @@ button{font-family:inherit}
       <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F2F3F5; color: #1F2329">规则</span>
       <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F5EDF7; color: #7A2E78">埋点</span>
       <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #FFF1E8; color: #B54708">待确认</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E9F0FB; color: #1F4E9A">字段</span>
       <span style="color: #646A73; line-height: 18px">· 鼠标停在卡片上高亮对应区域</span>
     </div>
   </div>
@@ -417,9 +418,33 @@ button{font-family:inherit}
         </div>
         <template data-sc="if" value="{{c.unanchored}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 4px; font-size: 11px; color: #8F959E">{{c.hint}}</div></template>
         <template data-sc="for" list="{{c.secs}}" as="x" hint-placeholder-count="2">
-          <div style="display: flex; gap: 8px; margin-top: 8px">
-            <span style="{{x.tagStyle}}">{{x.label}}</span>
-            <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+          <div>
+            <template data-sc="if" value="{{x.isText}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; gap: 8px; margin-top: 8px">
+                <span style="{{x.tagStyle}}">{{x.label}}</span>
+                <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+              </div>
+            </template>
+            <template data-sc="if" value="{{x.isTable}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 10px">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+                  <span style="{{x.tagStyle}}">{{x.label}}</span>
+                  <span style="font-size: 12px; color: #646A73">{{x.caption}}</span>
+                </div>
+                <div role="table" style="border: 1px solid #E3E6F5; border-radius: 8px; overflow: hidden">
+                  <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 6px 10px; background: #F4F6FD; font-size: 11px; font-weight: 600; color: #3B4BB8">
+                    <span role="columnheader">字段</span><span role="columnheader">口径</span><span role="columnheader">来源</span>
+                  </div>
+                  <template data-sc="for" list="{{x.rows}}" as="r" hint-placeholder-count="3">
+                    <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 7px 10px; border-top: 1px solid #EEF0F6; font-size: 12px; line-height: 1.6">
+                      <span role="cell" style="font-weight: 600; color: #1F2329">{{r.f}}</span>
+                      <span role="cell" style="color: #33373D">{{r.d}}</span>
+                      <span role="cell" style="color: #646A73; overflow-wrap: anywhere">{{r.s}}</span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
           </div>
         </template>
       </div>
@@ -737,7 +762,7 @@ class Component extends DCLogic {
         dot: 'position: absolute; left: ' + (ax - 4) + 'px; top: ' + (ay - 4) + 'px; width: 8px; height: 8px; border-radius: 50%; background: ' + C1 + '; opacity: ' + op
       };
     });
-    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'] };
+    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'], '字段': ['#E9F0FB', '#1F4E9A'] };
     const nums = {}; order.forEach((c, i) => { nums[c.k] = i + 1; });
     return {
       prdTitle: this.prdTitle(), prdIntro: this.prdIntro(),
@@ -746,7 +771,14 @@ class Component extends DCLogic {
         return {
           k: c.k, no: String(nums[c.k]), title: c.title,
           unanchored: !A[c.k], hint: c.hide || '当前界面未显示这个区域',
-          secs: c.secs.map((x) => ({ label: x[0], text: x[1], tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + (TAG[x[0]] || TAG['规则'])[0] + '; color: ' + (TAG[x[0]] || TAG['规则'])[1] })),
+          secs: c.secs.map((x) => {
+            const isT = !Array.isArray(x);
+            const lab = isT ? (x.label || '字段') : x[0];
+            const tg = TAG[lab] || TAG['规则'];
+            return { isText: !isT, isTable: isT, label: lab, text: isT ? '' : x[1], caption: isT ? (x.caption || '') : '',
+              rows: isT ? x.rows.map((r) => ({ f: r[0], d: r[1], s: r[2] || '' })) : [],
+              tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + tg[0] + '; color: ' + tg[1] };
+          }),
           enter: () => this.setState({ prdFocus: c.k }), leave: () => this.setState({ prdFocus: '' }),
           style: 'position: absolute; left: 16px; right: 16px; top: ' + pos[c.k] + 'px; background: #FFFFFF; border-radius: 10px; padding: 12px 14px; box-sizing: border-box; border: 1px solid ' + (on ? C1 : '#E3E6F5') + '; box-shadow: ' + (on ? '0 4px 14px rgba(91,107,213,0.18)' : 'none')
         };
@@ -758,8 +790,18 @@ class Component extends DCLogic {
   }
 
   prdTitle() { return "工作台（改版后）"; }
-  prdIntro() { return "V1.3 工作台精简与代发售后整合。服务商在一个工作台里完成选货盘、代发下单和售后理赔；顶部黑条可切换权益视角。"; }
-  prdCards() { return [{"k": "guide", "title": "顶栏「更新指引」", "secs": [["交互", "点击后从第 1 步重新开始代发迁移指引；指引没看完时按钮带红点。"], ["规则", "按账号记录指引状态：未开始 / 中途关闭 / 已看完。看完后红点消失，入口保留到过渡期结束。"], ["埋点", "会员端事件（不在 C 端埋点需求内，另行定义）：guide_start、guide_step_view(step)、guide_skip(step)、guide_finish。"]]}, {"k": "menu", "title": "左侧菜单", "secs": [["规则", "按六大模块组织：商品（含供应商）、商城（含卡券营销）、订单、企业码、财务、数据。名片营销、企微营销、客户整组隐藏。"], ["规则", "菜单按会员权益过滤：分组取各权益的并集，组内菜单项再按渠道权限过滤，不出现点进去为空的入口。"], ["交互", "默认展开常用 / 商品 / 商城 / 订单，其余折叠；顶部可搜索菜单；「新」「改」角标悬停显示原位置。\n旧菜单路径保留一个过渡期，访问时跳到新位置并提示一次。"], ["待确认", "过渡期时长；「常用」的默认预置项。"]]}, {"k": "banner", "title": "迁移指引条与分步指引", "secs": [["规则", "只对原来有「猫超代发」或「其他代发」菜单的账号显示。上线后首次登录工作台自动开始 5 步指引：代发 → 售后理赔 → 选货 → 待处理 → 更新指引入口。"], ["交互", "「开始指引」从第 1 步开始；「完整说明」进入迁移说明页；× 只关闭指引条，顶栏入口保留。指引中页面变暗，当前讲解区域挖亮并弹出说明卡片，可跳过、上一步、下一步。"], ["数据", "步骤文案按权益变化：低档权益不出现「其他代发」「售后代运营」。"]], "hide": "指引条已关闭，点顶栏「模拟首次登录」可恢复"}, {"k": "todo", "title": "待处理", "secs": [["数据", "待付款、待发货：商城订单。\n代发待处理：原猫超代发 + 原其他代发合并统计。\n售后·理赔：只计会员自己处理的单；已委托售后代运营的不计入，单列「另有 N 单由平台代处理」。\n商品变更待确认：变更审核 + 代发商品变更通知。"], ["规则", "按权益显示 4–5 格，格数自适应铺满一行；数字大于 0 才着色，超时类（如待发货超 24 小时）标橙。"], ["交互", "整格可点，跳到对应列表并带上筛选条件。"], ["待确认", "超时阈值；售后代运营是否覆盖平台猫超代发。"]]}, {"k": "pallet", "title": "平台货盘", "secs": [["数据", "取运营后台配置的货盘，按运营排序取前 4 个。卡片字段：名称、来源、标签（新上架 / 运营专题）、商品数、已上架商城数、说明。"], ["交互", "点卡片进入该货盘明细；「去资源广场选货」进入资源广场货盘列表。上架和代发只在明细页操作，工作台只做曝光入口。"], ["规则", "所有权益都展示，保证曝光覆盖面。"], ["埋点", "会员端事件（另行定义）：货盘卡片曝光、点击，用于看运营货盘的曝光与转化。"]]}, {"k": "biz", "title": "经营数据", "secs": [["数据", "三个页签：商城订单 / 代发订单 / 集采订单，对比上一个同长度周期。\n商城页签：商城 GMV、支付订单数、访问人数 UV、兑换转化率（支付成功人数 ÷ 已登录访问人数）、发放兑换率（已下单员工数 ÷ 项目发放员工数）。"], ["规则", "带「行为」标的指标来自 C 端新商城埋点，小时级更新；订单类指标实时。比率类指标只显示数值，不画趋势图。"], ["交互", "点指标卡切换下方每日柱状图；悬停显示当天数值；可切换成数据表；无数据时显示空状态并引导去资源广场。右上「分析报表」进入数据 › 商城分析。"]]}, {"k": "side", "title": "右侧：交易主链路与额度使用", "secs": [["数据", "F4 交易主链路 7 步，标出转化最低的一步；流失按 fail_reason 和「主动离开」拆分。"], ["数据", "员工额度分两种：商城余额 1:1 抵现金；商城积分按站点设置的比例兑换商品。跨站点汇总积分时，先按各站点比例折算成金额再相加。"], ["交互", "「完整漏斗」「看流失原因」「按项目看」进入商城分析对应页签。代发、集采页签下这里分别换成渠道构成 / 售后理赔、报价进度。"]]}]; }
+  prdIntro() { return "V1.3 工作台精简与代发售后整合。服务商在一个工作台里完成选货盘、代发下单和售后理赔；顶部黑条可切换权益视角。 字段表的「来源」列：埋点 = C 端新商城埋点事件（需求 V1.0）；业务库 = 交易系统数据，具体表名待研发确认；运营后台 = 运营配置；页面计算 = 由前几项算出。"; }
+  prdBaseCards() { return [{"k": "guide", "title": "顶栏「更新指引」", "secs": [["交互", "点击后从第 1 步重新开始代发迁移指引；指引没看完时按钮带红点。"], ["规则", "按账号记录指引状态：未开始 / 中途关闭 / 已看完。看完后红点消失，入口保留到过渡期结束。"], ["埋点", "会员端事件（不在 C 端埋点需求内，另行定义）：guide_start、guide_step_view(step)、guide_skip(step)、guide_finish。"]]}, {"k": "menu", "title": "左侧菜单", "secs": [["规则", "按六大模块组织：商品（含供应商）、商城（含卡券营销）、订单、企业码、财务、数据。名片营销、企微营销、客户整组隐藏。"], ["规则", "菜单按会员权益过滤：分组取各权益的并集，组内菜单项再按渠道权限过滤，不出现点进去为空的入口。"], ["交互", "默认展开常用 / 商品 / 商城 / 订单，其余折叠；顶部可搜索菜单；「新」「改」角标悬停显示原位置。\n旧菜单路径保留一个过渡期，访问时跳到新位置并提示一次。"], ["待确认", "过渡期时长；「常用」的默认预置项。"]]}, {"k": "banner", "title": "迁移指引条与分步指引", "secs": [["规则", "只对原来有「猫超代发」或「其他代发」菜单的账号显示。上线后首次登录工作台自动开始 5 步指引：代发 → 售后理赔 → 选货 → 待处理 → 更新指引入口。"], ["交互", "「开始指引」从第 1 步开始；「完整说明」进入迁移说明页；× 只关闭指引条，顶栏入口保留。指引中页面变暗，当前讲解区域挖亮并弹出说明卡片，可跳过、上一步、下一步。"], ["数据", "步骤文案按权益变化：低档权益不出现「其他代发」「售后代运营」。"]], "hide": "指引条已关闭，点顶栏「模拟首次登录」可恢复"}, {"k": "todo", "title": "待处理", "secs": [["数据", "待付款、待发货：商城订单。\n代发待处理：原猫超代发 + 原其他代发合并统计。\n售后·理赔：只计会员自己处理的单；已委托售后代运营的不计入，单列「另有 N 单由平台代处理」。\n商品变更待确认：变更审核 + 代发商品变更通知。"], ["规则", "按权益显示 4–5 格，格数自适应铺满一行；数字大于 0 才着色，超时类（如待发货超 24 小时）标橙。"], ["交互", "整格可点，跳到对应列表并带上筛选条件。"], ["待确认", "超时阈值；售后代运营是否覆盖平台猫超代发。"]]}, {"k": "pallet", "title": "平台货盘", "secs": [["数据", "取运营后台配置的货盘，按运营排序取前 4 个。卡片字段：名称、来源、标签（新上架 / 运营专题）、商品数、已上架商城数、说明。"], ["交互", "点卡片进入该货盘明细；「去资源广场选货」进入资源广场货盘列表。上架和代发只在明细页操作，工作台只做曝光入口。"], ["规则", "所有权益都展示，保证曝光覆盖面。"], ["埋点", "会员端事件（另行定义）：货盘卡片曝光、点击，用于看运营货盘的曝光与转化。"]]}, {"k": "biz", "title": "经营数据", "secs": [["数据", "三个页签：商城订单 / 代发订单 / 集采订单，对比上一个同长度周期。\n商城页签：商城 GMV、支付订单数、访问人数 UV、兑换转化率（支付成功人数 ÷ 已登录访问人数）、发放兑换率（已下单员工数 ÷ 项目发放员工数）。"], ["规则", "带「行为」标的指标来自 C 端新商城埋点，小时级更新；订单类指标实时。比率类指标只显示数值，不画趋势图。"], ["交互", "点指标卡切换下方每日柱状图；悬停显示当天数值；可切换成数据表；无数据时显示空状态并引导去资源广场。右上「分析报表」进入数据 › 商城分析。"]]}, {"k": "side", "title": "右侧：交易主链路与额度使用", "secs": [["数据", "F4 交易主链路 7 步，标出转化最低的一步；流失按 fail_reason 和「主动离开」拆分。"], ["数据", "员工额度分两种：商城余额 1:1 抵现金；商城积分按站点设置的比例兑换商品。跨站点汇总积分时，先按各站点比例折算成金额再相加。"], ["交互", "「完整漏斗」「看流失原因」「按项目看」进入商城分析对应页签。代发、集采页签下这里分别换成渠道构成 / 售后理赔、报价进度。"]]}]; }
+
+  prdCards() {
+    const F = {"guide": [{"label": "字段", "caption": "", "rows": [["红点", "该账号的指引状态不是「已看完」时显示", "业务库·账号指引状态（新增）"]]}], "todo": [{"label": "字段", "caption": "当前时点的数量，打开页面时实时查询，不受日期筛选影响", "rows": [["待付款", "状态为「待付款」的商城订单数", "业务库·商城订单"], ["待发货", "已支付、未发货的商城订单数；其中超过 24 小时未发货的单独计数，标橙提示", "业务库·商城订单（支付时间、发货时间）"], ["代发待处理", "原猫超代发 + 原其他代发中，状态为「待确认」或「下单失败」的代发订单数；副标题按原渠道拆分", "业务库·代发订单（合并后）"], ["售后", "会员自己处理、未完结的平台猫超代发售后单数；括号内是其中需要上门取件的单数", "业务库·售后单"], ["理赔", "状态为「待补材料」或「处理中」的理赔单数", "业务库·理赔单"], ["另有 N 单由平台代处理", "已委托售后代运营、未完结的售后单数，不计入上面的售后数", "业务库·售后单（处理方 = 平台）"], ["商品变更待确认", "待审核的供应商商品变更数 + 未读的代发商品下架 / 换品通知数", "业务库·商品变更记录、变更通知"]]}], "pallet": [{"label": "字段", "caption": "每张货盘卡片", "rows": [["名称、来源、说明", "运营后台配置的货盘基本信息", "运营后台·货盘配置"], ["新上架", "货盘首次上架起 7 天内显示（天数待确认）", "运营后台·货盘上架时间"], ["运营专题", "运营把货盘标记为专题时显示", "运营后台·货盘标签"], ["N 款", "货盘内状态为可售或缺货的商品数，不含已下架", "商品池"], ["已上架 N 个商城", "当前会员名下，上架了该货盘任意商品的商城数", "业务库·商城商品"], ["顺序与数量", "按运营后台排序取前 4 个", "运营后台·货盘排序"]]}]};
+    const FD = {"biz": {"mall": [{"label": "字段", "caption": "商城订单页签 · 默认近 7 天，对比上一个 7 天", "rows": [["商城 GMV", "统计期内支付成功的商城订单金额合计（到手价 = 商城余额 + 商城积分折算金额 + 现金），不扣退款", "业务库·商城订单（支付成功）"], ["支付订单数", "统计期内支付成功的商城订单数；纯积分、纯余额、积分 + 余额和 0 元订单在创单时即算支付成功", "业务库·商城订单"], ["访问人数（行为）", "统计期内触发 mall_enter 的去重人数；登录前按 device_id、登录后按 user_id 合并为同一人", "埋点 mall_enter"], ["兑换转化率（行为）", "支付成功人数 ÷ 已登录访问人数；分子取 pay_result 且 is_success = true 的去重 user_id", "埋点 mall_enter、pay_result"], ["发放兑换率", "已下单员工数 ÷ 项目发放员工数；只统计统计期内仍有效的福利项目", "业务库·发放记录、商城订单"], ["较上期", "和上一个同长度周期比：金额、人数类显示增减百分比，比率类显示增减个百分点；上期为 0 时显示「--」或上期值", "页面计算"], ["每日柱状图", "所选指标按自然日（北京时间 0–24 点）汇总，横轴是统计期内每一天", "同所选指标"]]}], "drop": [{"label": "字段", "caption": "代发订单页签 · 默认近 7 天", "rows": [["代发金额", "统计期内创建成功的代发订单金额合计（会员支付给平台的供货价金额），两套代发合并", "业务库·代发订单"], ["代发订单数", "统计期内创建成功的代发订单数", "业务库·代发订单"], ["毛利额", "Σ（对外售价 − 代发供货价）× 数量；对外售价取会员在商城或批量下单里填的售价（取值口径待确认）", "业务库·代发订单明细"], ["毛利率", "毛利额 ÷ 对外销售额", "业务库·代发订单明细"], ["售后率", "统计期内发起过售后的代发订单数 ÷ 代发订单数", "业务库·代发订单、售后单"], ["较上期 / 每日柱状图", "口径同商城订单页签", "页面计算"]]}], "bulk": [{"label": "字段", "caption": "集采订单页签 · 默认近 7 天", "rows": [["集采金额", "统计期内下单成功的猫超集采订单金额合计", "业务库·集采订单"], ["集采订单数", "统计期内下单成功的集采订单数", "业务库·集采订单"], ["报价单", "统计期内新建的集采报价单数", "业务库·集采报价单"], ["报价转化率", "统计期内新建、且已经下单的报价单数 ÷ 报价单数", "业务库·集采报价单"]]}]}, "side": {"mall": [{"label": "字段", "caption": "右侧面板 · 商城订单页签", "rows": [["交易主链路 7 步", "进入商城（已登录）→ 浏览商详 → 加购成功或立即购买 → 进入确认订单 → 提交订单 → 创单成功 → 支付成功；按人去重，窗口为同一自然日", "埋点 F4（事件见商城分析）"], ["步骤转化率", "本步人数 ÷ 上一步人数；最低的一步标橙", "页面计算"], ["加购失败 / 主动离开", "流失人数按 add_cart_result 的 fail_reason 归因；没有失败结果的记为主动离开", "埋点 add_cart_result、page_leave"], ["商城余额 已用 / 发放", "已用 = 支付成功订单的余额抵扣金额，扣除退款退回；发放 = 统计范围内各福利项目发放的余额合计；按 1:1 金额显示", "业务库·余额账户流水"], ["商城积分 已用 / 发放", "各站点的积分分数按本站点设置的比例折算成金额后再相加，显示折合金额", "业务库·积分账户流水、站点积分比例"]]}], "drop": [{"label": "字段", "caption": "右侧面板 · 代发订单页签", "rows": [["渠道构成", "按代发订单的原渠道（平台猫超 / 其他代发）统计订单数和代发金额", "业务库·代发订单（原渠道字段）"], ["售后单", "统计期内新建的代发售后单数，括号内是上门取件单数", "业务库·售后单"], ["理赔单", "统计期内新建的理赔单数", "业务库·理赔单"], ["售后代运营处理中", "已委托平台代处理、未完结的售后单数；只对开通了该服务的会员显示", "业务库·售后单（处理方 = 平台）"], ["平均发货时长", "统计期内已发货的代发订单，从创单到第一个包裹发货的平均小时数", "业务库·代发订单（创单、发货时间）"]]}], "bulk": [{"label": "字段", "caption": "右侧面板 · 集采订单页签", "rows": [["报价单", "统计期内新建的报价单数", "业务库·集采报价单"], ["客户已确认", "其中客户已确认报价的单数", "业务库·集采报价单（状态）"], ["已下单", "其中已转成集采订单的单数", "业务库·集采报价单、集采订单"]]}]}};
+    const t = this.state.biz || 'mall';
+    return this.prdBaseCards().map((c) => {
+      const add = (F[c.k] || []).concat(FD[c.k] ? (FD[c.k][t] || []) : []);
+      return add.length ? Object.assign({}, c, { secs: c.secs.concat(add) }) : c;
+    });
+  }
 }
 </script>
 </body>

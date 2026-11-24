@@ -167,7 +167,7 @@ button{font-family:inherit}
   </template>
 </div>
 </div>
-<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 440px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
+<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 520px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
   <div style="padding: 16px 18px 14px; border-bottom: 1px solid #E3E6F5">
     <div style="display: flex; align-items: center; gap: 8px">
       <span style="font-size: 11px; font-weight: 700; color: #FFFFFF; background: #5B6BD5; border-radius: 4px; padding: 2px 6px; letter-spacing: 0.5px">PRD</span>
@@ -181,6 +181,7 @@ button{font-family:inherit}
       <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F2F3F5; color: #1F2329">规则</span>
       <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F5EDF7; color: #7A2E78">埋点</span>
       <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #FFF1E8; color: #B54708">待确认</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E9F0FB; color: #1F4E9A">字段</span>
       <span style="color: #646A73; line-height: 18px">· 鼠标停在卡片上高亮对应区域</span>
     </div>
   </div>
@@ -193,9 +194,33 @@ button{font-family:inherit}
         </div>
         <template data-sc="if" value="{{c.unanchored}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 4px; font-size: 11px; color: #8F959E">{{c.hint}}</div></template>
         <template data-sc="for" list="{{c.secs}}" as="x" hint-placeholder-count="2">
-          <div style="display: flex; gap: 8px; margin-top: 8px">
-            <span style="{{x.tagStyle}}">{{x.label}}</span>
-            <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+          <div>
+            <template data-sc="if" value="{{x.isText}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; gap: 8px; margin-top: 8px">
+                <span style="{{x.tagStyle}}">{{x.label}}</span>
+                <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+              </div>
+            </template>
+            <template data-sc="if" value="{{x.isTable}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 10px">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+                  <span style="{{x.tagStyle}}">{{x.label}}</span>
+                  <span style="font-size: 12px; color: #646A73">{{x.caption}}</span>
+                </div>
+                <div role="table" style="border: 1px solid #E3E6F5; border-radius: 8px; overflow: hidden">
+                  <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 6px 10px; background: #F4F6FD; font-size: 11px; font-weight: 600; color: #3B4BB8">
+                    <span role="columnheader">字段</span><span role="columnheader">口径</span><span role="columnheader">来源</span>
+                  </div>
+                  <template data-sc="for" list="{{x.rows}}" as="r" hint-placeholder-count="3">
+                    <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 7px 10px; border-top: 1px solid #EEF0F6; font-size: 12px; line-height: 1.6">
+                      <span role="cell" style="font-weight: 600; color: #1F2329">{{r.f}}</span>
+                      <span role="cell" style="color: #33373D">{{r.d}}</span>
+                      <span role="cell" style="color: #646A73; overflow-wrap: anywhere">{{r.s}}</span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
           </div>
         </template>
       </div>
@@ -339,7 +364,7 @@ class Component extends DCLogic {
         dot: 'position: absolute; left: ' + (ax - 4) + 'px; top: ' + (ay - 4) + 'px; width: 8px; height: 8px; border-radius: 50%; background: ' + C1 + '; opacity: ' + op
       };
     });
-    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'] };
+    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'], '字段': ['#E9F0FB', '#1F4E9A'] };
     const nums = {}; order.forEach((c, i) => { nums[c.k] = i + 1; });
     return {
       prdTitle: this.prdTitle(), prdIntro: this.prdIntro(),
@@ -348,7 +373,14 @@ class Component extends DCLogic {
         return {
           k: c.k, no: String(nums[c.k]), title: c.title,
           unanchored: !A[c.k], hint: c.hide || '当前界面未显示这个区域',
-          secs: c.secs.map((x) => ({ label: x[0], text: x[1], tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + (TAG[x[0]] || TAG['规则'])[0] + '; color: ' + (TAG[x[0]] || TAG['规则'])[1] })),
+          secs: c.secs.map((x) => {
+            const isT = !Array.isArray(x);
+            const lab = isT ? (x.label || '字段') : x[0];
+            const tg = TAG[lab] || TAG['规则'];
+            return { isText: !isT, isTable: isT, label: lab, text: isT ? '' : x[1], caption: isT ? (x.caption || '') : '',
+              rows: isT ? x.rows.map((r) => ({ f: r[0], d: r[1], s: r[2] || '' })) : [],
+              tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + tg[0] + '; color: ' + tg[1] };
+          }),
           enter: () => this.setState({ prdFocus: c.k }), leave: () => this.setState({ prdFocus: '' }),
           style: 'position: absolute; left: 16px; right: 16px; top: ' + pos[c.k] + 'px; background: #FFFFFF; border-radius: 10px; padding: 12px 14px; box-sizing: border-box; border: 1px solid ' + (on ? C1 : '#E3E6F5') + '; box-shadow: ' + (on ? '0 4px 14px rgba(91,107,213,0.18)' : 'none')
         };
@@ -360,8 +392,18 @@ class Component extends DCLogic {
   }
 
   prdTitle() { return "货盘明细"; }
-  prdIntro() { return "单个货盘的商品明细和操作页。上架、代发都在这里完成。"; }
-  prdCards() { return [{"k": "head", "title": "货盘信息", "secs": [["数据", "名称、渠道、场景、描述、商品数、价格区间、可代发数（排除不支持代发的商品）、已上架商城数、更新时间。"]]}, {"k": "rule", "title": "自动上下架规则", "secs": [["规则", "缺货商品自动下架，并同步到已上架该货盘的商城；补货后自动恢复。"], ["待确认", "上下架阈值和由谁设定（V1 上线门槛里写的是「具体阈值待定」）。"]]}, {"k": "bulk", "title": "整盘操作", "secs": [["交互", "「整盘上架到商城」打开商城选择弹窗，只上架可售商品；「整盘代发下单」把可售商品带进代发批量下单页。"], ["规则", "按钮按权益显示：没有代发权益不显示「代发」类按钮。"]]}, {"k": "table", "title": "货盘商品列表", "secs": [["数据", "供货价、建议售价、毛利空间 =（建议售价 − 供货价）÷ 建议售价；状态：可售 / 缺货 · 已自动下架；已上架商城数。"], ["交互", "勾选后可批量上架、批量代发；缺货商品不能勾选；可按全部 / 可售 / 缺货筛选；单个商品行内也能上架、代发。"]]}, {"k": "modal", "title": "上架到商城弹窗", "secs": [["交互", "多选要上架的商城，默认勾选「跟随货盘自动上下架」。"], ["数据", "商城列表显示状态和员工人数。"], ["规则", "会员有多个商城时必须手动选择，不默认上架到全部商城。"]], "hide": "点任意「上架」按钮后出现"}]; }
+  prdIntro() { return "单个货盘的商品明细和操作页。上架、代发都在这里完成。 字段表的「来源」列：埋点 = C 端新商城埋点事件（需求 V1.0）；业务库 = 交易系统数据，具体表名待研发确认；运营后台 = 运营配置；页面计算 = 由前几项算出。"; }
+  prdBaseCards() { return [{"k": "head", "title": "货盘信息", "secs": [["数据", "名称、渠道、场景、描述、商品数、价格区间、可代发数（排除不支持代发的商品）、已上架商城数、更新时间。"]]}, {"k": "rule", "title": "自动上下架规则", "secs": [["规则", "缺货商品自动下架，并同步到已上架该货盘的商城；补货后自动恢复。"], ["待确认", "上下架阈值和由谁设定（V1 上线门槛里写的是「具体阈值待定」）。"]]}, {"k": "bulk", "title": "整盘操作", "secs": [["交互", "「整盘上架到商城」打开商城选择弹窗，只上架可售商品；「整盘代发下单」把可售商品带进代发批量下单页。"], ["规则", "按钮按权益显示：没有代发权益不显示「代发」类按钮。"]]}, {"k": "table", "title": "货盘商品列表", "secs": [["数据", "供货价、建议售价、毛利空间 =（建议售价 − 供货价）÷ 建议售价；状态：可售 / 缺货 · 已自动下架；已上架商城数。"], ["交互", "勾选后可批量上架、批量代发；缺货商品不能勾选；可按全部 / 可售 / 缺货筛选；单个商品行内也能上架、代发。"]]}, {"k": "modal", "title": "上架到商城弹窗", "secs": [["交互", "多选要上架的商城，默认勾选「跟随货盘自动上下架」。"], ["数据", "商城列表显示状态和员工人数。"], ["规则", "会员有多个商城时必须手动选择，不默认上架到全部商城。"]], "hide": "点任意「上架」按钮后出现"}]; }
+
+  prdCards() {
+    const F = {"head": [{"label": "字段", "caption": "货盘头部", "rows": [["商品数", "货盘内可售 + 缺货的商品数，不含已下架", "商品池"], ["价格区间", "货盘内商品建议售价的最低值 – 最高值", "商品池·建议售价"], ["可代发", "货盘内支持代发、且当前可售的商品数", "商品池·代发标识、库存"], ["已上架商城", "当前会员名下上架了该货盘任意商品的商城数", "业务库·商城商品"], ["更新时间", "货盘商品或规则最近一次变更的时间", "运营后台·货盘"]]}], "table": [{"label": "字段", "caption": "商品列表每一列", "rows": [["供货价", "平台给会员的结算价，代发和上架共用", "商品池"], ["建议售价", "运营给出的员工端建议售价，上架时可修改", "商品池"], ["毛利空间", "（建议售价 − 供货价）÷ 建议售价，四舍五入到整数百分比", "页面计算"], ["状态", "可售：有库存且未下架；缺货 · 已自动下架：库存为 0，按货盘规则下架", "商品池·库存、上下架状态"], ["已上架", "当前会员名下上架了这个商品的商城数", "业务库·商城商品"]]}], "modal": [{"label": "字段", "caption": "弹窗", "rows": [["商城列表", "当前会员名下状态为在售或待开放的商城", "业务库·商城"], ["员工数 / 开放时间", "在售商城显示已开通的员工账号数；待开放商城显示开放日期", "业务库·商城、员工账号"]]}]};
+    const FD = {};
+    const t = this.state.biz || 'mall';
+    return this.prdBaseCards().map((c) => {
+      const add = (F[c.k] || []).concat(FD[c.k] ? (FD[c.k][t] || []) : []);
+      return add.length ? Object.assign({}, c, { secs: c.secs.concat(add) }) : c;
+    });
+  }
 }
 </script>
 </body>
