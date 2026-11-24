@@ -22,7 +22,7 @@ button{font-family:inherit}
   <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 64px; padding: 0 24px; background: #FFFFFF; border-bottom: 1px solid #E5E8EB">
     <div style="display: flex; align-items: center; gap: 8px">
       <span style="font-size: 22px; font-weight: 700; color: #0B7A70; letter-spacing: 1px">采发发</span>
-      <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0F8F84; border-radius: 4px; padding: 2px 6px">会员端</span>
+      <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0B7A70; border-radius: 4px; padding: 2px 6px">会员端</span>
     </div>
     <span style="width: 1px; height: 20px; background: #E5E8EB"></span>
     <nav aria-label="面包屑" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #646A73">
@@ -61,7 +61,7 @@ button{font-family:inherit}
           按规则自动上下架：缺货商品自动下架，并同步到已上架的商城；补货后自动恢复
         </div>
         <div data-prd="bulk" style="display: flex; flex-wrap: wrap; gap: 10px">
-          <button onClick="{{openShelfAll}}" style="height: 40px; padding: 0 20px; border-radius: 8px; border: 0; background: #0F8F84; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">整盘上架到商城</button>
+          <button onClick="{{openShelfAll}}" style="height: 40px; padding: 0 20px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">整盘上架到商城</button>
           <button onClick="{{dropAll}}" style="height: 40px; padding: 0 20px; border-radius: 8px; border: 1px solid #0F8F84; background: #FFFFFF; color: #0B7A70; font-size: 14px; font-weight: 500; cursor: pointer">整盘代发下单</button>
         </div>
       </div>
@@ -160,7 +160,7 @@ button{font-family:inherit}
         </label>
         <div style="display: flex; justify-content: flex-end; gap: 10px">
           <button onClick="{{closeModal}}" style="height: 38px; padding: 0 18px; border-radius: 8px; border: 1px solid #D0D3D6; background: #FFFFFF; color: #1F2329; font-size: 14px; cursor: pointer">取消</button>
-          <button onClick="{{confirmShelf}}" style="height: 38px; padding: 0 18px; border-radius: 8px; border: 0; background: #0F8F84; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">确认上架</button>
+          <button onClick="{{confirmShelf}}" style="height: 38px; padding: 0 18px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer">确认上架</button>
         </div>
       </div>
     </div>
@@ -284,7 +284,7 @@ class Component extends DCLogic {
       toggle: () => this.setState({ malls: { ...st.malls, [m[0]]: !st.malls[m[0]] } }) }));
     const mallCount = mallList.filter((m) => st.malls[m[0]]).length;
     const btn = (primary, off) => 'height: 36px; padding: 0 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: ' + (off ? 'not-allowed' : 'pointer') + '; ' +
-      (primary ? (off ? 'border: 0; background: #C9E7E3; color: #FFFFFF' : 'border: 0; background: #0F8F84; color: #FFFFFF') : (off ? 'border: 1px solid #D0D3D6; background: #FFFFFF; color: #A8ADB4' : 'border: 1px solid #0F8F84; background: #FFFFFF; color: #0B7A70'));
+      (primary ? (off ? 'border: 0; background: #C9E7E3; color: #FFFFFF' : 'border: 0; background: #0B7A70; color: #FFFFFF') : (off ? 'border: 1px solid #D0D3D6; background: #FFFFFF; color: #A8ADB4' : 'border: 1px solid #0F8F84; background: #FFFFFF; color: #0B7A70'));
     return {
       rows, filters, selCount: String(selCount), noSel: selCount === 0, allChecked,
       selBtnPrimary: btn(true, selCount === 0), selBtnSecondary: btn(false, selCount === 0),

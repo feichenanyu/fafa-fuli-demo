@@ -13,6 +13,14 @@
 body{margin:0;background:#F3F5F7}
 a{color:#0B7A70;text-decoration:none}a:hover{color:#075E56}
 button{font-family:inherit}
+.tap{display:inline-flex;align-items:center;min-height:28px}
+.lift{transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.lift:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(31,35,41,.08);border-color:#9FD3CC !important}
+.lift:active{transform:translateY(0);box-shadow:none}
+.pcov img{transition:transform .25s ease}.lift:hover .pcov img{transform:scale(1.04)}
+a,button,input{transition:color .15s ease,background-color .15s ease}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0B7A70;outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}.lift:hover,.lift:hover .pcov img{transform:none}}
 </style>
 </helmet>
 <div data-prd-root="1" style="position: relative; display: flex; align-items: stretch; background: #F7F8FC">
@@ -33,10 +41,10 @@ button{font-family:inherit}
   <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 64px; padding: 0 24px; background: #FFFFFF; border-bottom: 1px solid #E5E8EB">
     <div style="display: flex; align-items: center; gap: 8px">
       <span style="font-size: 22px; font-weight: 700; color: #0B7A70; letter-spacing: 1px">采发发</span>
-      <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0F8F84; border-radius: 4px; padding: 2px 6px">会员端</span>
+      <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0B7A70; border-radius: 4px; padding: 2px 6px">会员端</span>
     </div>
     <span style="width: 1px; height: 20px; background: #E5E8EB"></span>
-    <a href="#" style="color: #646A73">返回首页</a>
+    <a href="#" class="tap" style="color: #646A73">返回首页</a>
     <nav aria-label="全局操作" style="margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 4px">
       <span data-prd="guide" style="{{guideWrapStyle}}">
         <button onClick="{{startTour}}" style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border: 0; background: transparent; border-radius: 8px; color: #0B7A70; font-size: 14px; font-weight: 500; cursor: pointer">
@@ -51,7 +59,7 @@ button{font-family:inherit}
                 <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px">
                   <button onClick="{{tClose}}" style="border: 0; background: transparent; color: #646A73; font-size: 13px; cursor: pointer; padding: 0">跳过</button>
                   <button onClick="{{tPrev}}" style="{{tPrevStyle}}">上一步</button>
-                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0F8F84; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
+                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
                 </div></div>
         </template>
       </span>
@@ -78,7 +86,7 @@ button{font-family:inherit}
     <aside data-prd="menu" aria-label="主菜单" style="flex: 1 1 248px; max-width: 264px; background: #FFFFFF; border-right: 1px solid #E5E8EB; padding: 14px 12px 24px; box-sizing: border-box; align-self: stretch">
       <label style="display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px; border: 1px solid #E5E8EB; border-radius: 8px; background: #F7F8FA; color: #646A73; margin-bottom: 8px">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
-        <input type="search" placeholder="搜索菜单，如：代发订单" aria-label="搜索菜单" style="flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font-size: 13px; font-family: inherit; color: #1F2329">
+        <input type="search" placeholder="搜索菜单，如：代发订单" aria-label="搜索菜单" style="flex: 1; min-width: 0; height: 32px; padding: 0; border: 0; outline: none; background: transparent; font-size: 13px; font-family: inherit; color: #1F2329">
       </label>
 
       <template data-sc="for" list="{{groups}}" as="g" hint-placeholder-count="8">
@@ -105,7 +113,7 @@ button{font-family:inherit}
                 <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px">
                   <button onClick="{{tClose}}" style="border: 0; background: transparent; color: #646A73; font-size: 13px; cursor: pointer; padding: 0">跳过</button>
                   <button onClick="{{tPrev}}" style="{{tPrevStyle}}">上一步</button>
-                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0F8F84; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
+                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
                 </div></div>
                     </template>
                     <template data-sc="if" value="{{s.hasTitle}}" hint-placeholder-val="{{ true }}">
@@ -113,7 +121,7 @@ button{font-family:inherit}
                     </template>
                     <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 4px; padding: 0 2px">
                       <template data-sc="for" list="{{s.items}}" as="it" hint-placeholder-count="2">
-                        <a href="{{it.href}}" title="{{it.tip}}" style="{{it.style}}"><span style="overflow: hidden; text-overflow: ellipsis">{{it.name}}</span><template data-sc="if" value="{{it.isNew}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 10px; font-weight: 600; color: #FFFFFF; background: #E8590C; border-radius: 3px; padding: 0 4px; line-height: 16px">新</span></template><template data-sc="if" value="{{it.isRenamed}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 10px; font-weight: 600; color: #0B7A70; background: #E8F6F4; border-radius: 3px; padding: 0 4px; line-height: 16px">改</span></template></a>
+                        <a href="{{it.href}}" title="{{it.tip}}" style="{{it.style}}"><span style="overflow: hidden; text-overflow: ellipsis">{{it.name}}</span><template data-sc="if" value="{{it.isNew}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 10px; font-weight: 600; color: #FFFFFF; background: #C2410C; border-radius: 3px; padding: 0 4px; line-height: 16px">新</span></template><template data-sc="if" value="{{it.isRenamed}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 10px; font-weight: 600; color: #0B7A70; background: #E8F6F4; border-radius: 3px; padding: 0 4px; line-height: 16px">改</span></template></a>
                       </template>
                     </div>
                   </div>
@@ -136,8 +144,8 @@ button{font-family:inherit}
           <template data-sc="if" value="{{isLow}}" hint-placeholder-val="{{ false }}">
             <div style="flex: 1 1 420px; min-width: 0; line-height: 1.6; color: #1F2329"><b>菜单有调整：</b>「猫超代发」已改为「订单 › 代发」，原「下单管理」改名为「代发订单」。新增平台猫超<b>售后（含上门取件）</b>和<b>理赔</b>，在「订单 › 售后理赔」处理。</div>
           </template>
-          <button onClick="{{startTour}}" style="height: 32px; padding: 0 14px; border-radius: 8px; border: 0; background: #0F8F84; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">开始指引</button>
-          <a href="#" style="font-size: 13px">完整说明</a>
+          <button onClick="{{startTour}}" style="height: 32px; padding: 0 14px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">开始指引</button>
+          <a href="#" class="tap" style="font-size: 13px">完整说明</a>
           <button onClick="{{closeBanner}}" aria-label="关闭提示" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 0; background: transparent; border-radius: 6px; cursor: pointer; color: #646A73">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
           </button>
@@ -153,17 +161,17 @@ button{font-family:inherit}
                 <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px">
                   <button onClick="{{tClose}}" style="border: 0; background: transparent; color: #646A73; font-size: 13px; cursor: pointer; padding: 0">跳过</button>
                   <button onClick="{{tPrev}}" style="{{tPrevStyle}}">上一步</button>
-                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0F8F84; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
+                  <button onClick="{{tNext}}" style="height: 34px; padding: 0 16px; border-radius: 8px; border: 0; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 500; cursor: pointer">{{tNextLabel}}</button>
                 </div></div>
         </template>
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px">
           <h2 id="todo-h" style="margin: 0; font-size: 16px; font-weight: 600">待处理</h2>
           <span style="font-size: 12px; color: #646A73">数字大于 0 才着色，点整格进入对应列表</span>
-          <a href="#" style="margin-left: auto; font-size: 13px">全部订单 →</a>
+          <a href="#" class="tap" style="margin-left: auto; font-size: 13px">全部订单 →</a>
         </div>
         <div style="{{todoGridStyle}}">
           <template data-sc="for" list="{{todos}}" as="t" hint-placeholder-count="5">
-            <a href="#" style="{{t.cardStyle}}">
+            <a href="#" class="lift" style="{{t.cardStyle}}">
               <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: #646A73">{{t.label}}<template data-sc="if" value="{{t.hasTag}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; color: #0B7A70; background: #E8F6F4; border-radius: 4px; padding: 0 5px; line-height: 18px">{{t.tag}}</span></template></div>
               <div style="{{t.numStyle}}">{{t.num}}</div>
               <div style="font-size: 12px; color: #646A73; line-height: 1.5">{{t.sub}}</div>
@@ -178,20 +186,23 @@ button{font-family:inherit}
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px">
           <h2 id="pallet-h" style="margin: 0; font-size: 16px; font-weight: 600">平台货盘</h2>
           <span style="font-size: 12px; color: #646A73">运营精选货盘 · 点卡片进资源广场看明细，上架和代发都在明细页操作</span>
-          <a href="#" style="margin-left: auto; font-size: 13px; font-weight: 500">去资源广场选货 →</a>
+          <a href="#" class="tap" style="margin-left: auto; font-size: 13px; font-weight: 500">去资源广场选货 →</a>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px">
           <template data-sc="for" list="{{pallets}}" as="p" hint-placeholder-count="4">
-            <a href="pallet.html" style="border: 1px solid #E5E8EB; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; color: #1F2329">
-              <div style="{{p.coverStyle}}">
-                <div style="display: flex; flex-wrap: wrap; gap: 6px">
-                  <template data-sc="if" value="{{p.isNew}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 600; color: #FFFFFF; background: #E8590C; border-radius: 4px; padding: 0 6px; line-height: 20px">新上架</span></template>
+            <a href="pallet.html" class="lift" style="border: 1px solid #E5E8EB; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; color: #1F2329; background: #FFFFFF">
+              <div class="pcov" style="position: relative; height: 112px; display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; background: #FFFFFF; overflow: hidden">
+                <img src="{{p.img1}}" alt="" style="grid-row: 1 / 3; width: 100%; height: 100%; object-fit: cover; display: block">
+                <img src="{{p.img2}}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block">
+                <img src="{{p.img3}}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block">
+                <div style="position: absolute; left: 10px; top: 10px; display: flex; flex-wrap: wrap; gap: 6px">
+                  <template data-sc="if" value="{{p.isNew}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 600; color: #FFFFFF; background: #C2410C; border-radius: 4px; padding: 0 6px; line-height: 20px">新上架</span></template>
                   <template data-sc="if" value="{{p.isTopic}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 600; color: #FFFFFF; background: #1F2329; border-radius: 4px; padding: 0 6px; line-height: 20px">暖冬专题</span></template>
-                  <span style="font-size: 11px; color: #1F2329; background: rgba(255,255,255,0.85); border-radius: 4px; padding: 0 6px; line-height: 20px">{{p.source}}</span>
                 </div>
-                <h3 style="margin: 0; font-size: 18px; font-weight: 600; color: #1F2329">{{p.name}}</h3>
               </div>
               <div style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 4px; flex: 1">
+                <span style="align-self: flex-start; font-size: 11px; color: #646A73; background: #F3F5F7; border-radius: 4px; padding: 0 6px; line-height: 20px">{{p.source}}</span>
+                <h3 style="margin: 2px 0 0; font-size: 16px; font-weight: 600; color: #1F2329">{{p.name}}</h3>
                 <div style="font-size: 13px; color: #1F2329">{{p.meta}}</div>
                 <div style="font-size: 12px; color: #646A73">{{p.note}}</div>
                 <span style="margin-top: auto; padding-top: 10px; font-size: 13px; font-weight: 500; color: #0B7A70">查看货盘明细 →</span>
@@ -214,16 +225,16 @@ button{font-family:inherit}
             <span style="padding: 4px 8px; color: #0B7A70; font-weight: 600; background: #E8F6F4; border-radius: 6px">近 7 天 · 11/16–11/22</span>
             <span style="padding: 4px 8px; color: #646A73">近 30 天</span>
           </div>
-          <span style="font-size: 12px; color: #646A73">对比上一个 7 天 · 订单实时，带「行为」标的指标来自 C 端埋点，小时级更新</span>
-          <a href="analytics.html" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid #0F8F84; border-radius: 8px; font-size: 13px; font-weight: 500">
+          <a href="analytics.html" style="margin-left: auto; flex: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid #0F8F84; border-radius: 8px; font-size: 13px; font-weight: 500">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>分析报表</a>
         </div>
+        <p style="margin: -6px 0 12px; font-size: 12px; color: #646A73">对比上一个 7 天 · 订单实时，带「行为」标的指标来自 C 端埋点，小时级更新</p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px">
           <template data-sc="for" list="{{kpis}}" as="k" hint-placeholder-count="5">
             <div>
               <template data-sc="if" value="{{k.chartable}}" hint-placeholder-val="{{ true }}">
-                <button onClick="{{k.pick}}" aria-pressed="{{k.selectedStr}}" style="{{k.cardStyle}}">
+                <button onClick="{{k.pick}}" aria-pressed="{{k.selectedStr}}" class="lift" style="{{k.cardStyle}}">
                   <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #646A73">{{k.label}}<template data-sc="if" value="{{k.behav}}" hint-placeholder-val="{{ false }}"><span style="font-size: 10px; color: #3B4BB8; background: #EEF2FF; border-radius: 3px; padding: 0 4px; line-height: 16px">行为</span></template><template data-sc="if" value="{{k.selected}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; color: #0B7A70">· 图表中</span></template></span>
                   <span style="display: block; font-size: 22px; font-weight: 600; color: #1F2329; margin: 6px 0 4px; font-variant-numeric: tabular-nums">{{k.value}}</span>
                   <span style="{{k.deltaStyle}}">{{k.delta}}</span>
@@ -241,7 +252,7 @@ button{font-family:inherit}
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px">
-          <div style="flex: 2 1 480px; min-width: 0; border: 1px solid #EEF0F2; border-radius: 10px; padding: 14px 16px">
+          <div style="flex: 2 1 480px; min-width: 0; border: 1px solid #EEF0F2; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column">
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px">
               <span style="font-size: 14px; font-weight: 600">{{chartTitle}}</span>
               <span style="font-size: 12px; color: #646A73">每日 · 点上方指标卡切换</span>
@@ -249,7 +260,7 @@ button{font-family:inherit}
             </div>
 
             <template data-sc="if" value="{{chartEmpty}}" hint-placeholder-val="{{ false }}">
-              <div style="height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #646A73; background: #F7F8FA; border-radius: 8px">
+              <div style="flex: 1 1 auto; min-height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #646A73; background: #F7F8FA; border-radius: 8px">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8F959E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"></path><path d="M7 15h2"></path><path d="M12 12h2"></path><path d="M17 9h2"></path></svg>
                 <span style="font-size: 14px; color: #1F2329">{{emptyText}}</span>
                 <a href="#" style="font-size: 13px; font-weight: 500">去资源广场选货上架 →</a>
@@ -257,7 +268,7 @@ button{font-family:inherit}
             </template>
 
             <template data-sc="if" value="{{chartShow}}" hint-placeholder-val="{{ true }}">
-              <div role="img" aria-label="{{chartAria}}" style="position: relative; height: 240px">
+              <div role="img" aria-label="{{chartAria}}" style="position: relative; flex: 1 1 auto; height: auto; min-height: 240px">
                 <div style="position: absolute; left: 0; width: 60px; top: 8px; bottom: 26px">
                   <template data-sc="for" list="{{ticks}}" as="t" hint-placeholder-count="5">
                     <span style="{{t.labelStyle}}">{{t.label}}</span>
@@ -307,7 +318,7 @@ button{font-family:inherit}
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px">
                   <span style="font-size: 14px; font-weight: 600">交易主链路（F4）</span>
                   <span style="font-size: 10px; color: #3B4BB8; background: #EEF2FF; border-radius: 3px; padding: 0 4px; line-height: 16px">行为</span>
-                  <a href="analytics.html" style="margin-left: auto; font-size: 12px">完整漏斗 →</a>
+                  <a href="analytics.html" class="tap" style="margin-left: auto; font-size: 12px">完整漏斗 →</a>
                 </div>
                 <template data-sc="for" list="{{miniFunnel}}" as="f" hint-placeholder-count="5">
                   <div style="margin-bottom: 8px">
@@ -321,12 +332,12 @@ button{font-family:inherit}
                 </template>
                 <div style="margin-top: 10px; padding: 10px 12px; background: #FFF7F0; border-radius: 8px; font-size: 12px; line-height: 1.6; color: #1F2329">
                   <b style="color: #B54708">流失最多：浏览商详 → 加购</b>，554 人看了没加购：加购失败 171 人（地区不可售 88、缺货 62），主动离开 383 人。<br><b style="color: #1F2329">下单环节流失 250 人</b>：加购后没进确认订单 185 人（多在购物车离开），确认订单后没提交 53 人，创单失败 12 人。
-                  <a href="analytics.html" style="display: inline-block; margin-top: 2px">看流失原因 →</a>
+                  <a href="analytics.html" class="tap" style="margin-top: 2px">看流失原因 →</a>
                 </div>
                 <div style="margin-top: 14px">
                   <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
                     <span style="font-size: 14px; font-weight: 600">员工额度使用</span>
-                    <a href="analytics.html" style="margin-left: auto; font-size: 12px">按项目看 →</a>
+                    <a href="analytics.html" class="tap" style="margin-left: auto; font-size: 12px">按项目看 →</a>
                   </div>
                   <div style="margin-bottom: 8px">
                     <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px"><span>商城余额 <span style="color: #646A73">（1:1 抵现金）</span></span><span style="font-variant-numeric: tabular-nums">¥224,320 / ¥352,000 · 63.7%</span></div>
@@ -555,12 +566,12 @@ class Component extends DCLogic {
     });
 
     const pallets = [
-      { name: '货盘上新 · 东方甄选', source: '飞象自营', isNew: true, meta: '128 款 · 已上架 0 个商城', note: '最新货盘，12/1 起可代发', cover: '#FDEBD8' },
-      { name: '坚果零食礼盒', source: '平台猫超', meta: '86 款 · 已上架 3 个商城', note: '近 7 天新增 6 款', cover: '#F3EEDF' },
-      { name: '家清日用', source: '平台猫超', meta: '52 款 · 已上架 1 个商城', note: '员工高频复购品类', cover: '#E3F1F7' },
-      { name: '暖冬关怀', source: '多渠道', isTopic: true, meta: '40 款 · 已上架 0 个商城', note: '冬季慰问场景专题', cover: '#E8F6F4' }
+      { name: '货盘上新 · 东方甄选', source: '飞象自营', isNew: true, meta: '128 款 · 已上架 0 个商城', note: '最新货盘，12/1 起可代发', cover: '#FDEBD8', imgs: ['img/rice.jpg','img/wine.jpg','img/jingmi.jpg'] },
+      { name: '坚果零食礼盒', source: '平台猫超', meta: '86 款 · 已上架 3 个商城', note: '近 7 天新增 6 款', cover: '#F3EEDF', imgs: ['img/cashew.png','img/macadamia.png','img/crisps.png'] },
+      { name: '家清日用', source: '平台猫超', meta: '52 款 · 已上架 1 个商城', note: '员工高频复购品类', cover: '#E3F1F7', imgs: ['img/bluemoon.jpg','img/kleenex.jpg','img/muji.jpg'] },
+      { name: '暖冬关怀', source: '多渠道', isTopic: true, meta: '40 款 · 已上架 0 个商城', note: '冬季慰问场景专题', cover: '#E8F6F4', imgs: ['img/bear.jpg','img/muji.jpg','img/wine.jpg'] }
     ].map((p) => ({
-      name: p.name, source: p.source, isNew: !!p.isNew, isTopic: !!p.isTopic, meta: p.meta, note: p.note,
+      name: p.name, source: p.source, img1: p.imgs[0], img2: p.imgs[1], img3: p.imgs[2], isNew: !!p.isNew, isTopic: !!p.isTopic, meta: p.meta, note: p.note,
       coverStyle: 'height: 104px; padding: 12px 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; background: ' + p.cover
     }));
 

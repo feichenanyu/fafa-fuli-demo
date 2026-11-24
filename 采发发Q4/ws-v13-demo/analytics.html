@@ -30,7 +30,7 @@ button,select{font-family:inherit}
   <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; min-height: 64px; padding: 0 24px; background: #FFFFFF; border-bottom: 1px solid #E5E8EB">
     <div style="display: flex; align-items: center; gap: 8px">
       <span style="font-size: 22px; font-weight: 700; color: #0B7A70; letter-spacing: 1px">采发发</span>
-      <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0F8F84; border-radius: 4px; padding: 2px 6px">{{endLabel}}</span>
+      <span style="font-size: 12px; font-weight: 600; color: #FFFFFF; background: #0B7A70; border-radius: 4px; padding: 2px 6px">{{endLabel}}</span>
     </div>
     <span style="width: 1px; height: 20px; background: #E5E8EB"></span>
     <nav aria-label="面包屑" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #646A73">
@@ -77,7 +77,7 @@ button,select{font-family:inherit}
               <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 4px 6px; padding: 8px 10px; background: #F7F8FA; border-radius: 8px; font-size: 12px; color: #1F2329">
                 <span>{{pv.idHint}}</span>
                 <template data-sc="if" value="{{pv.hasNotFound}}" hint-placeholder-val="{{ false }}"><span style="color: #B54708">{{pv.notFoundText}}</span></template>
-                <button onClick="{{pv.selectAllIds}}" style="margin-left: auto; height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: #0F8F84; color: #FFFFFF; font-size: 12px; cursor: pointer">全部选中</button>
+                <button onClick="{{pv.selectAllIds}}" style="margin-left: auto; height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">全部选中</button>
               </div>
             </template>
             <div style="max-height: 260px; overflow-y: auto">
@@ -94,7 +94,7 @@ button,select{font-family:inherit}
             <div style="display: flex; align-items: center; gap: 8px; padding: 8px 8px 2px; border-top: 1px solid #F0F1F2; margin-top: 6px">
               <span style="font-size: 12px; color: #646A73">{{pv.footText}}</span>
               <button onClick="{{pv.clear}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 12px; cursor: pointer; color: #1F2329">清空</button>
-              <button onClick="{{pv.close}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: #0F8F84; color: #FFFFFF; font-size: 12px; cursor: pointer">完成</button>
+              <button onClick="{{pv.close}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">完成</button>
             </div>
           </div>
         </template>
@@ -118,7 +118,7 @@ button,select{font-family:inherit}
               <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 4px 6px; padding: 8px 10px; background: #F7F8FA; border-radius: 8px; font-size: 12px; color: #1F2329">
                 <span>{{ml.idHint}}</span>
                 <template data-sc="if" value="{{ml.hasNotFound}}" hint-placeholder-val="{{ false }}"><span style="color: #B54708">{{ml.notFoundText}}</span></template>
-                <button onClick="{{ml.selectAllIds}}" style="margin-left: auto; height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: #0F8F84; color: #FFFFFF; font-size: 12px; cursor: pointer">全部选中</button>
+                <button onClick="{{ml.selectAllIds}}" style="margin-left: auto; height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">全部选中</button>
               </div>
             </template>
             <div style="max-height: 260px; overflow-y: auto">
@@ -135,7 +135,7 @@ button,select{font-family:inherit}
             <div style="display: flex; align-items: center; gap: 8px; padding: 8px 8px 2px; border-top: 1px solid #F0F1F2; margin-top: 6px">
               <span style="font-size: 12px; color: #646A73">{{ml.footText}}</span>
               <button onClick="{{ml.clear}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #D0D3D6; border-radius: 6px; background: #FFFFFF; font-size: 12px; cursor: pointer; color: #1F2329">清空</button>
-              <button onClick="{{ml.close}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: #0F8F84; color: #FFFFFF; font-size: 12px; cursor: pointer">完成</button>
+              <button onClick="{{ml.close}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: #0B7A70; color: #FFFFFF; font-size: 12px; cursor: pointer">完成</button>
             </div>
           </div>
         </template>
@@ -689,7 +689,7 @@ class Component extends DCLogic {
           const nxt = cur.steps[i + 1];
           const wn = nxt ? nxt[2] / s0 * 100 : w;
           const inset = w > 0 ? ((w - wn) / 2 / w * 100) : 0;
-          return 'margin: 0 auto; height: 42px; width: ' + w.toFixed(2) + '%; min-width: 88px; background: #0F8F84; color: #FFFFFF; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; display: flex; align-items: center; justify-content: center; ' +
+          return 'margin: 0 auto; height: 42px; width: ' + w.toFixed(2) + '%; min-width: 88px; background: #0B7A70; color: #FFFFFF; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; display: flex; align-items: center; justify-content: center; ' +
             'clip-path: polygon(0 0, 100% 0, ' + (100 - inset).toFixed(2) + '% 100%, ' + inset.toFixed(2) + '% 100%)';
         })(),
         hasLoss: i > 0, worst: i === worst,
