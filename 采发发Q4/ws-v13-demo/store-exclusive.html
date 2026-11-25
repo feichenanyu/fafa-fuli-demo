@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>专供店铺 · 会员端 · 会员端工作台精简改版 Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="dc-lite.js"></script>
+</head>
+<body>
+<template id="dc-src">
+<helmet>
+<style>
+.ai{--bg:#F4F7F7;--card:rgba(255,255,255,.76);--solid:#FFFFFF;--bd:rgba(15,23,42,.07);--tx1:#0F172A;--tx2:#566074;--tx3:#8A94A6;--brand:#0B7A70;--accent:#0B7A70;--info:#3B4BB8;--infobg:rgba(91,107,213,.12);
+ --g1:rgba(15,143,132,.20);--g2:rgba(63,196,181,.14);--g3:rgba(15,143,132,.10);--chip:rgba(15,23,42,.045);--chip2:rgba(15,23,42,.08);
+ --shadow:0 1px 2px rgba(15,23,42,.04),0 10px 30px rgba(15,23,42,.06);--grad:linear-gradient(120deg,#0B7A70 0%,#0F8F84 50%,#4CC1B3 100%);--gradText:linear-gradient(120deg,#075E56 0%,#0B7A70 55%,#0F8F84 100%);--gradBtn:linear-gradient(120deg,#075E56 0%,#0B7A70 100%);
+ --warn:#C2410C;--warnbg:rgba(234,88,12,.10);--up:#0B7A70;--grid:rgba(15,23,42,.045);--tip:#0F172A;--tiptx:#FFFFFF;--stopA:#0B7A70;--stopB:#0F8F84;--stopC:#4CC1B3;--rail:rgba(255,255,255,.62);--glow:rgba(15,143,132,.22)}
+.ai.dark{--bg:#0A0F11;--card:rgba(255,255,255,.045);--solid:#121A1C;--bd:rgba(255,255,255,.08);--tx1:#E8EEEF;--tx2:#9AA7AA;--tx3:#66757A;--brand:#3FC4B5;--accent:#3FC4B5;--info:#9AA8F5;--infobg:rgba(154,168,245,.14);
+ --g1:rgba(15,143,132,.24);--g2:rgba(63,196,181,.12);--g3:rgba(15,143,132,.14);--chip:rgba(255,255,255,.06);--chip2:rgba(255,255,255,.1);
+ --shadow:0 0 0 1px rgba(255,255,255,.015),0 16px 40px rgba(0,0,0,.4);--grad:linear-gradient(120deg,#0F8F84 0%,#3FC4B5 55%,#8EE3D8 100%);--gradText:linear-gradient(120deg,#3FC4B5 0%,#8EE3D8 100%);--gradBtn:linear-gradient(120deg,#075E56 0%,#0B7A70 100%);
+ --warn:#FDBA74;--warnbg:rgba(251,146,60,.14);--up:#5FD3C6;--grid:rgba(255,255,255,.05);--tip:#E8EEEF;--tiptx:#121A1C;--stopA:#0F8F84;--stopB:#3FC4B5;--stopC:#8EE3D8;--rail:rgba(255,255,255,.03);--glow:rgba(63,196,181,.25)}
+.ai *{box-sizing:border-box}
+.ai a{color:var(--brand);text-decoration:none}
+.card{background:var(--card);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border:1px solid var(--bd);border-radius:18px;box-shadow:var(--shadow)}
+.gtext{background:var(--gradText);-webkit-background-clip:text;background-clip:text;color:transparent}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--chip);border-radius:999px;padding:0 10px;line-height:24px;font-size:12px;color:var(--tx2);white-space:nowrap}
+.btn-ai{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border:0;border-radius:10px;background:var(--gradBtn);color:#FFFFFF;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;box-shadow:0 6px 18px var(--glow);white-space:nowrap}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:0;border-radius:10px;background:var(--chip);color:var(--tx1);font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;white-space:nowrap}
+.btn-ghost:hover{background:var(--chip2)}
+.lift{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.lift:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(15,23,42,.04),0 18px 40px rgba(15,143,132,.12);border-color:rgba(15,143,132,.28)}
+.rb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:56px;border:0;border-radius:12px;background:transparent;color:var(--tx2);font-size:12px;font-family:inherit;cursor:pointer;transition:background-color .15s ease,color .15s ease}
+.rb:hover{background:var(--chip);color:var(--tx1)}
+.rb.on{background:var(--chip2);color:var(--tx1);font-weight:600}
+.rb.on .ric{color:var(--brand)}
+.pi{display:flex;align-items:center;gap:6px;height:36px;padding:0 10px;border-radius:10px;font-size:14px;color:var(--tx1) !important;white-space:nowrap;transition:background-color .15s ease}
+.pi:hover{background:var(--chip)}
+.tag{flex:none;font-size:12px;line-height:18px;border-radius:4px;padding:0 5px}
+.cmd{padding:1.5px;border-radius:999px;background:var(--grad);box-shadow:0 8px 30px rgba(15,143,132,.18)}
+.cmd-in{display:flex;align-items:center;gap:10px;height:42px;padding:0 8px 0 16px;border-radius:999px;background:var(--solid)}
+.orb{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#FFFFFF 0%,rgba(255,255,255,0) 38%),var(--grad);box-shadow:0 0 18px rgba(15,143,132,.45);flex:none;animation:orb 4s ease-in-out infinite}
+@keyframes orb{0%,100%{transform:scale(1);box-shadow:0 0 14px rgba(15,143,132,.35)}50%{transform:scale(1.06);box-shadow:0 0 24px rgba(15,143,132,.5)}}
+.ins{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--chip)}
+.ic{flex:none;width:34px;height:34px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center}
+.num{font-family:'DIN Alternate','Bahnschrift','SF Pro Display','Helvetica Neue',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.ai :focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
+.tabp{height:30px;padding:0 14px;border:0;border-radius:999px;font-size:14px;font-family:inherit;cursor:pointer;background:transparent;color:var(--tx2)}
+.tabp.on{background:var(--solid);color:var(--tx1);font-weight:600;box-shadow:0 1px 3px rgba(15,23,42,.12)}
+.kpi{display:flex;flex-direction:column;align-items:stretch;text-align:left;gap:2px;padding:14px 16px 10px;border-radius:14px;border:1px solid transparent;background:var(--chip);font-family:inherit;cursor:pointer;color:var(--tx1);transition:border-color .15s ease,background-color .15s ease}
+.kpi:hover{background:var(--chip2)}
+.kpi.on{background:var(--solid);border-color:rgba(15,143,132,.35);box-shadow:0 8px 24px rgba(15,143,132,.12)}
+.col{position:relative;flex:1;display:flex;justify-content:center}
+.toast{position:absolute;z-index:40;padding:10px 14px;border-radius:12px;background:var(--tip);color:var(--tiptx);font-size:12px;line-height:1.6;box-shadow:0 12px 32px rgba(0,0,0,.2);white-space:nowrap}
+@media (prefers-reduced-motion: reduce){.orb{animation:none}.lift,.lift:hover{transition:none;transform:none}}
+
+.pjrow{transition:background-color .15s ease}
+.pjrow:hover{background:var(--chip) !important}
+</style>
+</helmet>
+<div data-prd-root="1" style="position: relative; display: flex; align-items: stretch; background: #F7F8FC">
+<div style="flex: 1 1 960px; min-width: 0; position: relative; z-index: 0; overflow: hidden">
+
+<div class="{{rootClass}}" style="position: relative; min-height: 1940px; background: var(--bg); color: var(--tx1); font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; font-size: 14px; overflow: hidden">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true"><defs>
+    <linearGradient id="ai-line" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color: var(--stopA)"/><stop offset=".55" style="stop-color: var(--stopB)"/><stop offset="1" style="stop-color: var(--stopC)"/></linearGradient>
+    <linearGradient id="ai-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color: var(--stopB); stop-opacity: .28"/><stop offset="1" style="stop-color: var(--stopB); stop-opacity: 0"/></linearGradient>
+  </defs></svg>
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none">
+    <div style="position: absolute; left: -160px; top: -220px; width: 720px; height: 620px; border-radius: 50%; background: var(--g1); filter: blur(90px)"></div>
+    <div style="position: absolute; right: -120px; top: -180px; width: 760px; height: 560px; border-radius: 50%; background: var(--g2); filter: blur(100px)"></div>
+    <div style="position: absolute; left: 38%; top: 520px; width: 680px; height: 480px; border-radius: 50%; background: var(--g3); filter: blur(110px)"></div>
+    <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 46%); mask-image: linear-gradient(180deg, #000 0%, transparent 46%)"></div>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 14px">
+    <span style="font-weight: 600">原型演示 · 店铺 › 专供店铺（会员端）</span>
+    <span style="color: #9BA5B9">逻辑对齐卖家侧专供店：供应商给你配专供代发价 → 你审核价格和主图 → 通过后进资源广场；可点「审核」试一下；数据为示意</span>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: stretch; min-height: 1900px">
+    <div onMouseLeave="{{railLeave}}" style="position: relative; display: flex; flex: none; z-index: 40">
+    <nav aria-label="模块" style="width: 76px; flex: none; display: flex; flex-direction: column; gap: 4px; padding: 14px 8px; background: var(--rail); border-right: 1px solid var(--bd); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px)">
+      <div style="display: flex; justify-content: center; margin-bottom: 10px">
+        <div style="width: 40px; height: 40px; border-radius: 12px; background: var(--gradBtn); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 18px; font-weight: 700; box-shadow: 0 8px 20px rgba(15,143,132,.3)">采</div>
+      </div>
+      <template data-sc="for" list="{{rail}}" as="r" hint-placeholder-count="8">
+        <button onClick="{{r.pick}}" onMouseEnter="{{r.enter}}" aria-pressed="{{r.onStr}}" title="{{r.tip}}" class="{{r.cls}}">
+          <span class="ric" style="position: relative; display: inline-flex">
+            <template data-sc="if" value="{{r.ic_fav}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></template><template data-sc="if" value="{{r.ic_home}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z"/></svg></template><template data-sc="if" value="{{r.ic_goods}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></template><template data-sc="if" value="{{r.ic_store}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12v8h13v-8"/><path d="M10 20v-4h4v4"/></svg></template><template data-sc="if" value="{{r.ic_mall}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></template><template data-sc="if" value="{{r.ic_mkt}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10z"/><path d="M16.5 9a4 4 0 0 1 0 6"/><path d="M19 6.5a7.5 7.5 0 0 1 0 11"/></svg></template><template data-sc="if" value="{{r.ic_order}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6"/><path d="M9 12h6"/><path d="M9 15.5h3.5"/></svg></template><template data-sc="if" value="{{r.ic_qym}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2.5v2.5H14z"/><path d="M20 14v6h-6"/></svg></template><template data-sc="if" value="{{r.ic_fin}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></template><template data-sc="if" value="{{r.ic_data}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V7"/><path d="M17 16v-8"/></svg></template>
+            <template data-sc="if" value="{{r.dot}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; right: -3px; top: -2px; width: 7px; height: 7px; border-radius: 50%; background: #E5484D; box-shadow: 0 0 0 2px var(--solid)"></span></template>
+          </span>
+          <span>{{r.name}}</span>
+        </button>
+      </template>
+      <button onClick="{{askAi}}" class="rb" style="margin-top: 12px; height: 64px" title="AI 助手（即将上线）">
+        <span class="orb"></span><span class="gtext" style="font-weight: 600">AI 助手</span>
+      </button>
+    </nav>
+
+    <template data-sc="if" value="{{panelShow}}" hint-placeholder-val="{{ true }}">
+    <aside data-prd="menu" aria-label="二级菜单" style="{{asideStyle}}">
+      <div style="display: flex; align-items: center; gap: 6px; padding: 0 8px 12px">
+        <span style="font-size: 16px; font-weight: 600">{{panelTitle}}</span>
+        <template data-sc="if" value="{{panelHasHint}}" hint-placeholder-val="{{ false }}"><span class="chip">{{panelHint}}</span></template>
+        <button onClick="{{togglePin}}" title="{{pinLabel}}" aria-label="{{pinLabel}}" style="margin-left: auto; width: 28px; height: 28px; border: 0; border-radius: 8px; background: {{pinBg}}; color: {{pinColor}}; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M9.5 4v16"/></svg></button>
+      </div>
+      <template data-sc="for" list="{{panelSections}}" as="s" hint-placeholder-count="2">
+        <div style="{{s.wrapStyle}}">
+          <template data-sc="if" value="{{s.spot}}" hint-placeholder-val="{{ false }}"><div role="dialog" aria-label="更新指引" style="left: calc(100% + 22px); top: 0; position: absolute; width: 320px; z-index: 70; background: var(--solid); color: var(--tx1); border-radius: 14px; padding: 14px 18px 16px; box-shadow: 0 16px 40px rgba(0,0,0,.28); text-align: left; font-weight: 400; white-space: normal">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px"><span style="font-size: 12px; font-weight: 600; color: var(--brand)">{{tStep}}</span><button onClick="{{tClose}}" aria-label="关闭指引" style="margin-left: auto; width: 24px; height: 24px; border: 0; background: transparent; color: var(--tx3); cursor: pointer; font-size: 16px">×</button></div>
+                  <div style="font-size: 16px; font-weight: 600; margin-bottom: 6px">{{tTitle}}</div>
+                  <div style="font-size: 14px; color: var(--tx2); line-height: 1.7">{{tDesc}}</div>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px">
+                    <button onClick="{{tClose}}" style="border: 0; background: transparent; color: var(--tx2); font-size: 14px; font-family: inherit; cursor: pointer; padding: 0">跳过</button>
+                    <button onClick="{{tPrev}}" class="btn-ghost" style="{{tPrevStyle}}">上一步</button>
+                    <button onClick="{{tNext}}" class="btn-ai" style="margin-left: 0">{{tNextLabel}}</button>
+                  </div>
+                </div></template>
+          <template data-sc="if" value="{{s.hasTitle}}" hint-placeholder-val="{{ true }}"><div style="padding: 8px 10px 4px; font-size: 12px; color: var(--tx3)">{{s.title}}</div></template>
+          <template data-sc="for" list="{{s.items}}" as="it" hint-placeholder-count="3">
+            <a href="{{it.href}}" title="{{it.tip}}" class="pi"><span style="overflow: hidden; text-overflow: ellipsis">{{it.name}}</span><template data-sc="if" value="{{it.isNew}}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: #C2410C; color: #FFFFFF; font-weight: 600">新</span></template><template data-sc="if" value="{{it.isRenamed}}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: var(--chip2); color: var(--tx2)">改</span></template><template data-sc="if" value="{{it.isSoon}}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: var(--chip); color: var(--tx3)">即将开放</span></template></a>
+          </template>
+        </div>
+      </template>
+    </aside>
+    </template>
+    </div>
+
+    <main style="flex: 1; min-width: 0; padding: 18px 28px 48px; position: relative">
+      <template data-sc="if" value="{{isList}}" hint-placeholder-val="{{ true }}">
+      <div>
+        <header style="display: flex; align-items: flex-end; gap: 16px; margin-bottom: 16px">
+          <div>
+            <div style="font-size: 12px; color: var(--tx3)">店铺 › 专供店铺</div>
+            <h1 style="margin: 2px 0 0; font-size: 20px; font-weight: 600">专供店铺</h1>
+            <div style="font-size: 12px; color: var(--tx2); margin-top: 4px">供应商为你开的专供店。商品经你审核通过后，才会出现在你的资源广场里供选品</div>
+          </div>
+          <div style="margin-left: auto; position: relative">
+            <button onClick="{{soonInvite}}" class="btn-ai">邀请供应商开店</button>
+            <template data-sc="if" value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div role="status" class="toast" style="right: 0; top: 44px">{{toastText}}</div></template>
+          </div>
+        </header>
+        <section data-prd="sum" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px">
+          <template data-sc="for" list="{{sums}}" as="k" hint-placeholder-count="4">
+            <div class="card" style="padding: 14px 16px; border-radius: 14px">
+              <div style="font-size: 12px; color: var(--tx2)">{{k.label}}</div>
+              <div class="num" style="{{k.numStyle}}">{{k.value}}</div>
+              <div style="font-size: 12px; color: var(--tx3)">{{k.sub}}</div>
+            </div>
+          </template>
+        </section>
+        <section data-prd="stores" aria-label="专供店铺列表" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+          <template data-sc="for" list="{{stores}}" as="s" hint-placeholder-count="4">
+            <button onClick="{{s.open}}" class="card lift" style="display: flex; flex-direction: column; gap: 12px; padding: 18px; text-align: left; font-family: inherit; color: var(--tx1); cursor: pointer">
+              <span style="display: flex; align-items: center; gap: 12px; width: 100%">
+                <span style="{{s.logo}}">{{s.ini}}</span>
+                <span style="flex: 1; min-width: 0">
+                  <span style="display: flex; align-items: center; gap: 8px"><b style="font-size: 16px">{{s.name}}</b><span style="{{s.statusStyle}}">{{s.status}}</span></span>
+                  <span style="display: block; font-size: 12px; color: var(--tx2); margin-top: 3px">{{s.corp}} · {{s.cert}}</span>
+                </span>
+                <template data-sc="if" value="{{s.hasPending}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 12px; font-weight: 600; color: var(--warn); background: var(--warnbg); border-radius: 999px; padding: 0 10px; line-height: 24px">{{s.pending}} 件待审核</span></template>
+              </span>
+              <span style="display: block; font-size: 12px; color: var(--tx2); line-height: 1.6">主营 {{s.cats}} · {{s.since}}</span>
+              <span style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%">
+                <template data-sc="for" list="{{s.kpis}}" as="m" hint-placeholder-count="4">
+                  <span style="display: block; border-radius: 10px; background: var(--chip); padding: 8px 10px"><span style="display: block; font-size: 12px; color: var(--tx3)">{{m.l}}</span><b class="num" style="display: block; font-size: 16px; margin-top: 2px">{{m.v}}</b></span>
+                </template>
+              </span>
+            </button>
+          </template>
+        </section>
+      </div>
+      </template>
+
+      <template data-sc="if" value="{{isDetail}}" hint-placeholder-val="{{ false }}">
+      <div>
+        <button onClick="{{back}}" style="border: 0; background: transparent; color: var(--brand); font-size: 14px; font-family: inherit; cursor: pointer; padding: 0; margin-bottom: 10px">← 专供店铺</button>
+        <section data-prd="info" class="card" style="padding: 18px 20px; margin-bottom: 16px; display: flex; gap: 16px; align-items: flex-start">
+          <span style="{{cur.logoLg}}">{{cur.ini}}</span>
+          <div style="flex: 1; min-width: 0">
+            <div style="display: flex; align-items: center; gap: 8px"><h1 style="margin: 0; font-size: 20px; font-weight: 600">{{cur.name}}</h1><span style="{{cur.statusStyle}}">{{cur.status}}</span><span class="chip">专供店</span></div>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 24px; margin-top: 10px; font-size: 12px; color: var(--tx2)">
+              <span>企业主体：<b style="color: var(--tx1); font-weight: 500">{{cur.corp}}</b></span>
+              <span>认证：<b style="color: var(--tx1); font-weight: 500">{{cur.cert}}</b></span>
+              <span>合作开始：<b style="color: var(--tx1); font-weight: 500">{{cur.sinceDate}}</b></span>
+              <span>联系人：<b style="color: var(--tx1); font-weight: 500">{{cur.contact}}</b></span>
+              <span>主营类目：<b style="color: var(--tx1); font-weight: 500">{{cur.cats}}</b></span>
+              <span>供货方式：<b style="color: var(--tx1); font-weight: 500">一件代发 · 含税</b></span>
+            </div>
+            <div style="font-size: 12px; color: var(--tx3); margin-top: 8px">供货说明：{{cur.note}}</div>
+          </div>
+        </section>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px">
+          <div role="tablist" style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--chip)">
+            <template data-sc="for" list="{{tabs}}" as="t" hint-placeholder-count="2"><button role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" class="{{t.cls}}">{{t.label}}</button></template>
+          </div>
+          <template data-sc="if" value="{{isGoods}}" hint-placeholder-val="{{ true }}"><div style="display: flex; gap: 6px">
+            <template data-sc="for" list="{{filters}}" as="f" hint-placeholder-count="4"><button onClick="{{f.pick}}" style="{{f.style}}">{{f.label}}</button></template>
+          </div></template>
+          <span style="margin-left: auto; font-size: 12px; color: var(--tx3)">新报价审核通过前，仍按当前有效价供货</span>
+        </div>
+
+        <template data-sc="if" value="{{isGoods}}" hint-placeholder-val="{{ true }}">
+        <section data-prd="goods" class="card" style="padding: 6px 14px 10px">
+          <div style="display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.4fr) minmax(0, .8fr) minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, .7fr) minmax(0, .9fr); gap: 12px; padding: 10px 8px; font-size: 12px; color: var(--tx3); border-bottom: 1px solid var(--bd)">
+            <span>商品</span><span>专供代发价（含税）</span><span style="text-align: right">市场价</span><span>审核状态</span><span>已铺商城</span><span style="text-align: right">近 30 天订单</span><span style="text-align: right">操作</span>
+          </div>
+          <template data-sc="for" list="{{goods}}" as="g" hint-placeholder-count="6">
+            <div style="display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.4fr) minmax(0, .8fr) minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, .7fr) minmax(0, .9fr); gap: 12px; align-items: center; padding: 12px 8px; border-bottom: 1px solid var(--bd)">
+              <span style="display: flex; align-items: center; gap: 10px; min-width: 0">
+                <img src="{{g.img}}" alt="{{g.name}}" style="width: 48px; height: 48px; flex: none; border-radius: 8px; object-fit: cover; border: 1px solid var(--bd)">
+                <span style="min-width: 0"><b style="display: block; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{g.name}}</b><span style="display: block; font-size: 12px; color: var(--tx3); margin-top: 2px">{{g.spec}} · {{g.stock}}</span></span>
+              </span>
+              <span>
+                <b class="num" style="font-size: 14px">{{g.priceNow}}</b>
+                <template data-sc="if" value="{{g.hasNew}}" hint-placeholder-val="{{ false }}"><span style="display: block; font-size: 12px; margin-top: 2px"><span style="color: var(--tx3)">新报价 {{g.ver}}</span> <b class="num" style="color: var(--warn)">{{g.priceNew}}</b> <span style="color: var(--warn)">{{g.chg}}</span></span></template>
+                <template data-sc="if" value="{{g.noNew}}" hint-placeholder-val="{{ true }}"><span style="display: block; font-size: 12px; color: var(--tx3); margin-top: 2px">{{g.verText}}</span></template>
+              </span>
+              <span class="num" style="text-align: right; color: var(--tx2)">{{g.market}}</span>
+              <span><span style="{{g.statusStyle}}">{{g.status}}</span><template data-sc="if" value="{{g.hasWarn}}" hint-placeholder-val="{{ false }}"><span style="display: block; font-size: 12px; color: var(--warn); margin-top: 4px">{{g.warn}}</span></template></span>
+              <span style="display: flex; flex-wrap: wrap; gap: 4px; min-width: 0">
+                <template data-sc="for" list="{{g.malls}}" as="m" hint-placeholder-count="2"><span class="chip" style="line-height: 22px; max-width: 100%; overflow: hidden; text-overflow: ellipsis">{{m}}</span></template>
+                <template data-sc="if" value="{{g.noMall}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--tx3)">{{g.noMallText}}</span></template>
+              </span>
+              <span class="num" style="text-align: right; font-weight: 600">{{g.orders}}</span>
+              <span style="text-align: right"><button onClick="{{g.review}}" class="{{g.btnCls}}" style="height: 30px; font-size: 12px">{{g.btn}}</button></span>
+            </div>
+          </template>
+          <template data-sc="if" value="{{noGoods}}" hint-placeholder-val="{{ false }}"><div style="padding: 32px; text-align: center; color: var(--tx3); font-size: 14px">{{emptyText}}</div></template>
+        </section>
+        </template>
+
+        <template data-sc="if" value="{{isStats}}" hint-placeholder-val="{{ false }}">
+        <section data-prd="stats">
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px">
+            <template data-sc="for" list="{{statKpis}}" as="k" hint-placeholder-count="4">
+              <div class="card" style="padding: 14px 16px; border-radius: 14px"><div style="font-size: 12px; color: var(--tx2)">{{k.l}}</div><div class="num" style="font-size: 24px; font-weight: 700; margin-top: 2px">{{k.v}}</div><div style="font-size: 12px; color: var(--tx3)">{{k.s}}</div></div>
+            </template>
+          </div>
+          <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 14px">
+            <div class="card" style="padding: 16px 18px">
+              <div style="font-weight: 600; margin-bottom: 10px">按商品 · 近 30 天</div>
+              <div style="display: grid; grid-template-columns: minmax(0, 2fr) .8fr .8fr 1fr; gap: 10px; font-size: 12px; color: var(--tx3); padding-bottom: 6px; border-bottom: 1px solid var(--bd)"><span>商品</span><span style="text-align: right">已铺商城</span><span style="text-align: right">订单</span><span style="text-align: right">销售额</span></div>
+              <template data-sc="for" list="{{statGoods}}" as="r" hint-placeholder-count="4">
+                <div style="display: grid; grid-template-columns: minmax(0, 2fr) .8fr .8fr 1fr; gap: 10px; align-items: center; font-size: 14px; padding: 9px 0; border-bottom: 1px solid var(--bd)"><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.n}}</span><span class="num" style="text-align: right">{{r.m}}</span><span class="num" style="text-align: right">{{r.o}}</span><span class="num" style="text-align: right; font-weight: 600">{{r.g}}</span></div>
+              </template>
+            </div>
+            <div class="card" style="padding: 16px 18px">
+              <div style="font-weight: 600; margin-bottom: 10px">按商城 · 订单占比</div>
+              <template data-sc="for" list="{{statMalls}}" as="r" hint-placeholder-count="3">
+                <div style="margin-bottom: 10px">
+                  <div style="display: flex; font-size: 12px; margin-bottom: 4px"><span>{{r.n}}</span><span class="num" style="margin-left: auto; color: var(--tx2)">{{r.v}}</span></div>
+                  <div style="height: 6px; border-radius: 999px; background: var(--chip2)"><div style="{{r.bar}}"></div></div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </section>
+        </template>
+      </div>
+      </template>
+
+      <template data-sc="if" value="{{drawerOn}}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{closeDrawer}}" style="position: absolute; inset: 0; z-index: 60; background: rgba(15,23,42,.35)"></div>
+      <aside data-prd="review" role="dialog" aria-label="商品审核" style="position: absolute; top: 0; right: 0; z-index: 61; width: 560px; min-height: 100%; background: var(--solid); box-shadow: -16px 0 40px rgba(15,23,42,.16); padding: 20px 22px 24px; box-sizing: border-box">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px"><b style="font-size: 16px">商品审核</b><span style="{{rv.typeStyle}}">{{rv.type}}</span><button onClick="{{closeDrawer}}" aria-label="关闭" style="margin-left: auto; width: 30px; height: 30px; border: 0; border-radius: 8px; background: var(--chip); cursor: pointer; font-size: 16px; color: var(--tx2)">×</button></div>
+        <div style="display: flex; gap: 14px; margin-bottom: 16px">
+          <img src="{{rv.img}}" alt="{{rv.name}}" style="width: 180px; height: 180px; flex: none; border-radius: 12px; object-fit: cover; border: 1px solid var(--bd)">
+          <div style="min-width: 0">
+            <b style="display: block; font-size: 16px; line-height: 1.5">{{rv.name}}</b>
+            <div style="font-size: 12px; color: var(--tx2); margin-top: 4px">{{rv.spec}} · {{rv.stock}} · {{rv.lead}}</div>
+            <div style="font-size: 12px; color: var(--tx2); margin-top: 2px">{{rv.cat}} · 品牌 {{rv.brand}}</div>
+            <div style="font-weight: 600; margin: 14px 0 6px">主图检查</div>
+            <template data-sc="for" list="{{rv.imgChecks}}" as="c" hint-placeholder-count="4"><div style="display: flex; gap: 6px; font-size: 12px; margin-bottom: 4px"><span style="{{c.dot}}">{{c.mark}}</span><span style="color: var(--tx2)">{{c.t}}</span></div></template>
+          </div>
+        </div>
+        <div style="border-radius: 14px; background: var(--chip); padding: 14px 16px; margin-bottom: 14px">
+          <div style="font-weight: 600; margin-bottom: 10px">价格审核</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+            <template data-sc="for" list="{{rv.prices}}" as="p" hint-placeholder-count="4"><div style="border-radius: 10px; background: var(--solid); padding: 10px 12px"><div style="font-size: 12px; color: var(--tx3)">{{p.l}}</div><div class="num" style="{{p.style}}">{{p.v}}</div><div style="font-size: 12px; color: var(--tx3)">{{p.s}}</div></div></template>
+          </div>
+          <template data-sc="for" list="{{rv.priceWarns}}" as="w" hint-placeholder-count="1"><div style="display: flex; gap: 6px; margin-top: 10px; font-size: 12px; color: var(--warn); line-height: 1.6"><span>!</span><span>{{w}}</span></div></template>
+        </div>
+        <div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin-bottom: 14px">售后：{{rv.after}} · 发票：{{rv.invoice}}</div>
+        <template data-sc="if" value="{{rv.pending}}" hint-placeholder-val="{{ true }}"><div>
+          <div style="font-weight: 600; margin-bottom: 8px">驳回原因（驳回时必选）</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px">
+            <template data-sc="for" list="{{reasons}}" as="r" hint-placeholder-count="5"><button onClick="{{r.pick}}" style="{{r.style}}">{{r.label}}</button></template>
+          </div>
+          <div style="display: flex; gap: 8px">
+            <button onClick="{{approve}}" class="btn-ai" style="flex: 1; justify-content: center; height: 40px">审核通过 · 进入资源广场</button>
+            <button onClick="{{reject}}" class="btn-ghost" style="height: 40px; padding: 0 18px">驳回</button>
+          </div>
+          <div style="font-size: 12px; color: var(--tx3); margin-top: 8px">{{rv.passNote}}</div>
+          <template data-sc="if" value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div role="status" style="margin-top: 10px; padding: 8px 12px; border-radius: 10px; background: var(--warnbg); color: var(--warn); font-size: 12px; font-weight: 600">{{toastText}}</div></template>
+        </div></template>
+        <template data-sc="if" value="{{rv.done}}" hint-placeholder-val="{{ false }}"><div style="border-radius: 12px; background: var(--chip); padding: 12px 14px; font-size: 14px">{{rv.doneText}}</div></template>
+      </aside>
+      </template>
+    </main>
+  </div>
+</div>
+</div>
+<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 520px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
+  <div style="padding: 16px 18px 14px; border-bottom: 1px solid #E3E6F5">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="font-size: 11px; font-weight: 700; color: #FFFFFF; background: #5B6BD5; border-radius: 4px; padding: 2px 6px; letter-spacing: 0.5px">PRD</span>
+      <span style="font-size: 15px; font-weight: 600">{{prdTitle}}</span>
+      <button onClick="{{prdToggleLines}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #C9CEF0; border-radius: 6px; background: #FFFFFF; color: #3B4BB8; font-size: 12px; cursor: pointer">{{prdLinesLabel}}</button>
+    </div>
+    <div style="margin-top: 8px; font-size: 12px; color: #646A73; line-height: 1.7">{{prdIntro}}</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; font-size: 11px">
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #EEF2FF; color: #3B4BB8">交互</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E8F6F4; color: #0B6E66">数据</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F2F3F5; color: #1F2329">规则</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F5EDF7; color: #7A2E78">埋点</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #FFF1E8; color: #B54708">待确认</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E9F0FB; color: #1F4E9A">字段</span>
+      <span style="color: #646A73; line-height: 18px">· 鼠标停在卡片上高亮对应区域</span>
+    </div>
+  </div>
+  <div data-prd-cards="1" style="position: relative; height: {{prdPanelH}}px">
+    <template data-sc="for" list="{{prdCardList}}" as="c" hint-placeholder-count="4">
+      <div data-prd-card="{{c.k}}" onMouseEnter="{{c.enter}}" onMouseLeave="{{c.leave}}" style="{{c.style}}">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: #5B6BD5; color: #FFFFFF; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{c.no}}</span>
+          <span style="font-size: 14px; font-weight: 600">{{c.title}}</span>
+        </div>
+        <template data-sc="if" value="{{c.unanchored}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 4px; font-size: 11px; color: #8F959E">{{c.hint}}</div></template>
+        <template data-sc="for" list="{{c.secs}}" as="x" hint-placeholder-count="2">
+          <div>
+            <template data-sc="if" value="{{x.isText}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; gap: 8px; margin-top: 8px">
+                <span style="{{x.tagStyle}}">{{x.label}}</span>
+                <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+              </div>
+            </template>
+            <template data-sc="if" value="{{x.isTable}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 10px">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+                  <span style="{{x.tagStyle}}">{{x.label}}</span>
+                  <span style="font-size: 12px; color: #646A73">{{x.caption}}</span>
+                </div>
+                <div role="table" style="border: 1px solid #E3E6F5; border-radius: 8px; overflow: hidden">
+                  <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 6px 10px; background: #F4F6FD; font-size: 11px; font-weight: 600; color: #3B4BB8">
+                    <span role="columnheader">字段</span><span role="columnheader">口径</span><span role="columnheader">来源</span>
+                  </div>
+                  <template data-sc="for" list="{{x.rows}}" as="r" hint-placeholder-count="3">
+                    <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 7px 10px; border-top: 1px solid #EEF0F6; font-size: 12px; line-height: 1.6">
+                      <span role="cell" style="font-weight: 600; color: #1F2329">{{r.f}}</span>
+                      <span role="cell" style="color: #33373D">{{r.d}}</span>
+                      <span role="cell" style="color: #646A73; overflow-wrap: anywhere">{{r.s}}</span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+</aside>
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 90">
+  <template data-sc="for" list="{{prdLineList}}" as="ln" hint-placeholder-count="0">
+    <div style="display: contents"><div style="{{ln.box}}"></div><div style="{{ln.s1}}"></div><div style="{{ln.s2}}"></div><div style="{{ln.s3}}"></div><div style="{{ln.dot}}"></div></div>
+  </template>
+</div>
+</div>
+</template>
+<div id="dc-mount"></div>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1960,"height":2000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { mod: 'store', store: '', tab: 'goods', filter: 'all', drawer: '', reason: '', reviews: {}, toast: '', pinned: false, hoverMod: '' };
+  }
+
+  menuData() {
+    return [
+      { id: 'fav', name: '常用', hint: '可自定义', sections: [
+        { items: [ { n: '资源广场', href: '#' }, { n: '代发订单' }, { n: '售后管理', isNew: true }, { n: '我的商城' } ] } ] },
+      { id: 'home', name: '工作台', link: true },
+      { id: 'goods', name: '商品', hint: '平台选货', sections: [
+        { t: '选货', items: [ { n: '资源广场', href: '#', renamed: true, tip: '平台货盘在这里看明细、上架、代发；原入口只在首页' }, { n: '挑选商品', top: true }, { n: '本地生活', top: true, renamed: true, tip: '原「本地资源场景」9 项合为一个入口' } ] },
+        { t: '变更通知', top: true, items: [ { n: '商品变更', renamed: true, tip: '合并：商品变更审核、商品替换日志、代发商品变更通知' } ] } ] },
+      { id: 'store', name: '店铺', hint: '我的 · 专供', top: true, sections: [
+        { t: '店铺', items: [ { n: '我的店铺', isNew: true, href: 'store-mine.html', tip: '会员自营店：上传和管理自有商品，与卖家侧同一套商品管理；原「商品库、商品发布、商品导入」' }, { n: '专供店铺', isNew: true, href: 'store-exclusive.html', tip: '供应商为你开的专供店：看店铺信息、审核供货商品、看铺货和订单；替代原「供应商管理」' } ] } ] },
+      { id: 'mall', name: '商城', sections: [
+        { t: '商城管理', items: [ { n: '我的商城' }, { n: '我的礼包' }, { n: '扩展应用', top: true, renamed: true, tip: '原「商城扩展应用」6 项合为一个入口，弹窗广告也挪到这里' } ] } ] },
+      { id: 'mkt', name: '营销', sections: [
+        { t: '名片营销', items: [ { n: '我的名片' }, { n: '数据监测' }, { n: '名片设置' } ] },
+        { t: '卡券营销', items: [ { n: '卡券兑换' }, { n: '卡券推广' }, { n: '卡券营销' } ] } ] },
+      { id: 'order', name: '订单', sections: [
+        { t: '商城订单', items: [ { n: '订单管理' }, { n: '服务订单' }, { n: '下单提醒' } ] },
+        { t: '代发', items: [ { n: '批量下单', renamed: true, tip: '原「猫超代发」「其他代发」各一个批量下单，已合并；原「代发选品」已取消，所有代发直接在这里下单' }, { n: '代发订单', renamed: true, tip: '合并：猫超代发 › 下单管理 + 其他代发 › 下单历史' } ] },
+        { t: '售后理赔', items: [ { n: '售后管理', isNew: true, tip: '含平台猫超售后、上门取件' }, { n: '理赔管理', isNew: true }, { n: '退货地址设置', top: true }, { n: '售后代运营', top: true, renamed: true, tip: '原「代售后查询」；平台代处理售后的服务，开通才显示' } ] },
+        { t: '猫超集采', items: [ { n: '集采报价' }, { n: '集采订单', renamed: true, tip: '原「下单管理」，改名去掉重名' } ] } ] },
+      { id: 'qym', name: '企业码', sections: [
+        { t: '服务企业', items: [ { n: '企业管理' }, { n: '员工管理' }, { n: '费控管理' }, { n: '额度发放' } ] },
+        { t: '订单中心', items: [ { n: '消费记录' }, { n: '企业码发票', renamed: true, tip: '原「发票管理」，与财务里的同名菜单区分' }, { n: '发票汇总' } ] } ] },
+      { id: 'fin', name: '财务', sections: [
+        { t: '平台财务', items: [ { n: '账户管理' }, { n: '发票管理' }, { n: '集采财务' }, { n: '营业额申报', top: true } ] },
+        { t: '商城财务', items: [ { n: '短信管理' }, { n: '额度管理' }, { n: '额度明细' }, { n: '开票审核' }, { n: '微信支付配置' } ] },
+        { t: '交易明细', items: [ { n: '服务交易明细' }, { n: '代发交易明细', renamed: true, tip: '原「猫超交易明细」，是否改名待确认' }, { n: '商品交易明细', top: true } ] } ] },
+      { id: 'data', name: '数据', sections: [
+        { items: [ { n: '经营分析', isNew: true, href: 'biz.html', tip: '按商城项目看经营情况，为下一单做准备' }, { n: '订单分析' }, { n: '用户分析' }, { n: '订单明细' } ] } ] }
+    ];
+  }
+
+
+  flash(t) {
+    clearTimeout(this._t);
+    this.setState({ toast: t });
+    this._t = setTimeout(() => this.setState({ toast: '' }), 2600);
+  }
+
+  railVals(pinned, floatMod) {
+    return { panelShow: pinned || !!floatMod,
+      railLeave: () => { if (this.state.hoverMod) this.setState({ hoverMod: '' }); },
+      togglePin: () => this.setState({ pinned: !this.state.pinned, hoverMod: '', mod: this.state.hoverMod || this.state.mod }),
+      pinLabel: pinned ? '收起菜单' : '固定展开', pinBg: pinned ? 'var(--chip)' : 'rgba(15,143,132,.12)', pinColor: pinned ? 'var(--tx2)' : 'var(--brand)' };
+  }
+
+  pageVals() {
+    const st = this.state;
+    // ---- shell: rail + secondary panel (数据 module active) ----
+    const modIds = ['fav', 'home', 'goods', 'store', 'mall', 'mkt', 'order', 'qym', 'fin', 'data'];
+    const MD = this.menuData();
+    const pinned = st.pinned;
+    const floatMod = !pinned && st.hoverMod ? st.hoverMod : '';
+    const curMod = floatMod || st.mod;
+    const rail = MD.map((g) => {
+      const on = g.id === st.mod;
+      const r = { name: g.id === 'fav' ? '常用' : g.name, tip: g.hint ? g.name + '（' + g.hint + '）' : g.name, onStr: on ? 'true' : 'false',
+        cls: on ? 'rb on' : 'rb', dot: g.id !== 'fav' && (g.sections || []).some((s) => s.items.some((it) => it.isNew)),
+        pick: () => this.setState({ mod: g.id, pinned: true, hoverMod: '' }), enter: () => { if (!this.state.pinned) this.setState({ hoverMod: g.id }); } };
+      modIds.forEach((k) => { r['ic_' + k] = k === g.id; });
+      return r;
+    });
+    const mk = (arr) => arr.map((it) => ({ name: it.n, href: it.href || '#', tip: it.tip || it.n, isNew: !!it.isNew, isRenamed: !!it.renamed, isSoon: !!it.soon }));
+    const curG = MD.find((g) => g.id === curMod) || MD[1];
+    const plain = 'margin-bottom: 8px';
+    const panelSections = curG.link
+      ? [{ title: '常用', hasTitle: true, items: mk(MD[0].sections[0].items), spot: false, wrapStyle: plain }]
+      : curG.sections.map((s) => ({ title: s.t || '', hasTitle: !!s.t, items: mk(s.items), spot: false, wrapStyle: plain }));
+
+    const IMG = { rice: 'img/rice.jpg', cashew: 'img/cashew.png', mac: 'img/macadamia.png', crisps: 'img/crisps.png', blue: 'img/bluemoon.jpg', kleenex: 'img/kleenex.jpg', wine: 'img/wine.jpg', jingmi: 'img/jingmi.jpg', muji: 'img/muji.jpg' };
+    // review: new = 首次供货；price = 新报价版本；status: pending / approved / rejected
+    const STORES = [
+      { id: 'nl', name: '暖礼优选礼赠店', ini: '暖', hue: '15,143,132', corp: '杭州暖礼商贸有限公司', cert: '企业已认证', status: '合作中', since: '2026-10-12', contact: '王经理 · 138****2061', cats: '粮油、零食、家清',
+        note: '运费按实际收货地址核算，包装费用按具体要求确认；现货 3 天内出货',
+        goods: [
+          { id: 'rice', img: IMG.rice, name: '柴火大院 香稻贡米 5kg', spec: '5kg · 1 个规格', stock: '可供 860 袋', lead: '现货 2 天内出货', cat: '粮油米面 / 大米', brand: '柴火大院', now: 52.8, market: 79.9, ref: 54.9, ver: 'V1', review: 'approved', malls: ['杭州银行 · 年货节', '浙江电信 · 中秋国庆', '网易 · 生日'], orders: 186, gmv: 13207 },
+          { id: 'cashew', img: IMG.cashew, name: '三只松鼠 炭烧腰果 500g', spec: '500g · 1 个规格', stock: '可供 420 袋', lead: '现货 3 天内出货', cat: '休闲零食 / 坚果', brand: '三只松鼠', now: 38.5, market: 59.9, ref: 41.2, ver: 'V1', review: 'approved', malls: ['杭州银行 · 年货节', '吉利 · 双十一'], orders: 94, gmv: 4982 },
+          { id: 'blue', img: IMG.blue, name: '蓝月亮 深层洁净洗衣液 3kg+1kg', spec: '套装 · 1 个规格', stock: '可供 300 套', lead: '现货 3 天内出货', cat: '家清日用 / 洗衣液', brand: '蓝月亮', now: 56.43, market: 79, ref: 57.9, ver: 'V1', review: 'approved', malls: ['浙江电信 · 中秋国庆', '吉利 · 双十一'], orders: 77, gmv: 5390 },
+          { id: 'mac', img: IMG.mac, name: '百草味 奶油味夏威夷果 500g', spec: '500g · 1 个规格', stock: '可供 380 袋', lead: '现货 3 天内出货', cat: '休闲零食 / 坚果', brand: '百草味', now: 49.12, next: 54.8, market: 69, ref: 52.6, ver: 'V2', type: 'price', review: 'pending', malls: ['杭州银行 · 年货节', '吉利 · 双十一'], orders: 63, gmv: 3870,
+            checks: [1, 1, 1, 1] },
+          { id: 'crisps', img: IMG.crisps, name: '良品铺子 酥脆薄饼礼盒 800g', spec: '800g · 1 个规格', stock: '可供 260 盒', lead: '现货 3 天内出货', cat: '休闲零食 / 饼干', brand: '良品铺子', now: 42.85, market: 59, ref: 44.5, ver: 'V1', type: 'new', review: 'pending', malls: [], orders: 0, gmv: 0,
+            checks: [1, 1, 0, 1], imgWarn: '主图含促销文字「买二送一」，与专供价不一致' },
+          { id: 'kleenex', img: IMG.kleenex, name: '舒洁 湿厕纸家庭装 80 抽 × 6 包', spec: '6 包 · 1 个规格', stock: '可供 500 提', lead: '现货次日发', cat: '家清日用 / 纸品', brand: '舒洁', now: 36.9, market: 45, ref: 33.44, ver: 'V1', type: 'new', review: 'pending', malls: [], orders: 0, gmv: 0,
+            checks: [1, 1, 1, 1] }
+        ] },
+      { id: 'pd', name: '拍档福利专供店', ini: '拍', hue: '91,107,213', corp: '宁波拍档贸易有限公司', cert: '企业已认证', status: '合作中', since: '2026-08-03', contact: '李总 · 139****8820', cats: '酒水、生鲜卡券',
+        note: '酒水类不支持七天无理由；卡券类发码后不退',
+        goods: [
+          { id: 'wine', img: IMG.wine, name: '窖藏五年 浓香型白酒礼盒 500ml×2', spec: '礼盒 · 1 个规格', stock: '可供 120 盒', lead: '现货 3 天内出货', cat: '酒水饮料 / 白酒', brand: '拍档精选', now: 268, market: 399, ref: 0, ver: 'V3', review: 'approved', malls: ['吉利 · 双十一', '杭州银行 · 年货节', '阿里巴巴 · 端午'], orders: 212, gmv: 81408 },
+          { id: 'jingmi', img: IMG.jingmi, name: '京觅 全球优采生鲜礼品卡 300 元', spec: '电子卡 · 1 个规格', stock: '可供 1,000 张', lead: '发码即时', cat: '卡券 / 生鲜卡', brand: '京觅', now: 276, market: 300, ref: 279, ver: 'V1', type: 'new', review: 'rejected', reason: '主图不合规', malls: [], orders: 0, gmv: 0, checks: [1, 0, 1, 1] }
+        ] },
+      { id: 'zj', name: '织锦家纺专供店', ini: '织', hue: '194,103,27', corp: '绍兴织锦家纺有限公司', cert: '企业已认证', status: '合作中', since: '2026-11-02', contact: '陈店长 · 136****5172', cats: '家纺床品',
+        note: '大件默认德邦配送，偏远地区另计运费',
+        goods: [
+          { id: 'muji', img: IMG.muji, name: '天然大豆纤维 冬被 200×230cm', spec: '200×230cm · 2 个规格', stock: '可供 90 床', lead: '现货 4 天内出货', cat: '家纺 / 被子', brand: '织锦', now: 189, next: 199, market: 359, ref: 0, ver: 'V2', type: 'price', review: 'pending', malls: ['杭州银行 · 年货节'], orders: 18, gmv: 5022, checks: [1, 1, 1, 1] }
+        ] },
+      { id: 'xg', name: '鲜果时令专供店', ini: '鲜', hue: '94,140,46', corp: '嘉兴鲜果供应链有限公司', cert: '认证中', status: '待开店', since: '', contact: '周经理 · 137****0934', cats: '水果生鲜', note: '供应商已接受邀请，完成企业认证后开店供货', goods: [] }
+    ];
+    const ov = st.reviews || {};
+    STORES.forEach((s) => s.goods.forEach((g) => { if (ov[g.id]) { g.review = ov[g.id].r; g.reason = ov[g.id].reason; if (g.review === 'approved' && g.next) { g.now = g.next; g.next = null; } } }));
+    const money = (v) => '¥' + Number(v).toFixed(2);
+    const wan = (v) => v >= 10000 ? '¥' + (v / 10000).toFixed(1) + ' 万' : '¥' + Math.round(v).toLocaleString('en-US');
+    const pill = (bg, c) => 'flex: none; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 0 9px; line-height: 22px; white-space: nowrap; background: ' + bg + '; color: ' + c;
+    const RS = { pending: ['待审核', pill('var(--warnbg)', 'var(--warn)')], approved: ['已通过', pill('rgba(15,143,132,.12)', 'var(--brand)')], rejected: ['已驳回', pill('var(--chip2)', 'var(--tx2)')] };
+    const SS = { '合作中': pill('rgba(15,143,132,.12)', 'var(--brand)'), '待开店': pill('var(--infobg)', 'var(--info)') };
+    const allGoods = [].concat.apply([], STORES.map((s) => s.goods));
+    const pendingAll = allGoods.filter((g) => g.review === 'pending').length;
+    const sums = [
+      { label: '合作中的专供店', value: STORES.filter((s) => s.status === '合作中').length + ' 家', sub: '另有 1 家待开店（认证中）' },
+      { label: '待我审核的商品', value: pendingAll + ' 件', sub: '新品与改价都需审核', warn: pendingAll > 0 },
+      { label: '已通过 · 可在资源广场选', value: allGoods.filter((g) => g.review === 'approved').length + ' 件', sub: '只对你可见' },
+      { label: '专供商品 · 近 30 天订单', value: allGoods.reduce((a, g) => a + g.orders, 0) + ' 单', sub: '销售额 ' + wan(allGoods.reduce((a, g) => a + g.gmv, 0)) }
+    ].map((k) => ({ ...k, numStyle: 'font-size: 24px; font-weight: 700; margin: 2px 0; color: ' + (k.warn ? 'var(--warn)' : 'var(--tx1)') }));
+    const logo = (s, n) => 'width: ' + n + 'px; height: ' + n + 'px; flex: none; border-radius: ' + (n > 44 ? 14 : 12) + 'px; background: rgba(' + s.hue + ',.14); color: rgb(' + s.hue + '); font-size: ' + (n > 44 ? 22 : 18) + 'px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center';
+    const stores = STORES.map((s) => {
+      const p = s.goods.filter((g) => g.review === 'pending').length;
+      const mallSet = new Set([].concat.apply([], s.goods.map((g) => g.malls)));
+      return { name: s.name, ini: s.ini, corp: s.corp, cert: s.cert, status: s.status, statusStyle: SS[s.status], cats: s.cats,
+        since: s.since ? '合作开始 ' + s.since : '供应商已接受邀请，认证通过后开店', logo: logo(s, 44), hasPending: p > 0, pending: p,
+        kpis: [{ l: '供货商品', v: s.goods.length }, { l: '已通过', v: s.goods.filter((g) => g.review === 'approved').length }, { l: '已铺商城', v: mallSet.size }, { l: '近 30 天订单', v: s.goods.reduce((a, g) => a + g.orders, 0) }],
+        open: () => this.setState({ store: s.id, tab: 'goods', filter: 'all', drawer: '' }) };
+    });
+    const cs = STORES.find((s) => s.id === st.store) || STORES[0];
+    const fmap = { all: () => true, pending: (g) => g.review === 'pending', approved: (g) => g.review === 'approved', rejected: (g) => g.review === 'rejected' };
+    const shown = cs.goods.filter(fmap[st.filter] || fmap.all);
+    const goods = shown.map((g) => {
+      const warns = [];
+      if (g.review === 'pending' && g.ref && (g.next || g.now) > g.ref) warns.push('高于平台同款');
+      if (g.review === 'pending' && g.imgWarn) warns.push('主图待确认');
+      if (g.review === 'rejected') warns.push('原因：' + (g.reason || '其他'));
+      return { img: g.img, name: g.name, spec: g.spec, stock: g.stock, priceNow: money(g.now), hasNew: !!g.next, noNew: !g.next, ver: g.ver, priceNew: g.next ? money(g.next) : '',
+        chg: g.next ? '↑ ' + ((g.next / g.now - 1) * 100).toFixed(1) + '%' : '', verText: '当前有效版 ' + g.ver,
+        market: money(g.market), status: RS[g.review][0] + (g.review === 'pending' ? (g.type === 'price' ? ' · 改价' : ' · 新品') : ''), statusStyle: RS[g.review][1],
+        hasWarn: warns.length > 0, warn: warns.join('、'), malls: g.malls.slice(0, 2).concat(g.malls.length > 2 ? ['+' + (g.malls.length - 2)] : []), noMall: g.malls.length === 0,
+        noMallText: g.review === 'approved' ? '还未上架到商城' : '审核通过后可上架', orders: g.orders,
+        btn: g.review === 'pending' ? '审核' : '查看', btnCls: g.review === 'pending' ? 'btn-ai' : 'btn-ghost', review: () => this.setState({ drawer: g.id, reason: '' }) };
+    });
+    const cnt = (k) => cs.goods.filter(fmap[k]).length;
+    const filters = [['all', '全部'], ['pending', '待审核'], ['approved', '已通过'], ['rejected', '已驳回']].map((f) => {
+      const on = (st.filter || 'all') === f[0];
+      return { label: f[1] + ' ' + cnt(f[0]), pick: () => this.setState({ filter: f[0] }),
+        style: 'height: 28px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-family: inherit; cursor: pointer; border: 1px solid ' + (on ? 'rgba(15,143,132,.4)' : 'var(--bd)') + '; background: ' + (on ? 'rgba(15,143,132,.1)' : 'var(--solid)') + '; color: ' + (on ? 'var(--brand)' : 'var(--tx2)') + '; font-weight: ' + (on ? 600 : 400) };
+    });
+    const tabs = [['goods', '供货商品'], ['stats', '数据统计']].map((t) => ({ label: t[1], sel: st.tab === t[0] ? 'true' : 'false', cls: st.tab === t[0] ? 'tabp on' : 'tabp', pick: () => this.setState({ tab: t[0] }) }));
+    // stats
+    const mallCount = {};
+    cs.goods.forEach((g) => g.malls.forEach((m, i) => { mallCount[m] = (mallCount[m] || 0) + Math.round(g.orders / g.malls.length); }));
+    const mallTotal = Object.values(mallCount).reduce((a, b) => a + b, 0) || 1;
+    const statMalls = Object.keys(mallCount).sort((a, b) => mallCount[b] - mallCount[a]).map((m) => ({ n: m, v: mallCount[m] + ' 单 · ' + Math.round(mallCount[m] / mallTotal * 100) + '%', bar: 'height: 6px; border-radius: 999px; background: var(--grad); width: ' + (mallCount[m] / mallTotal * 100) + '%' }));
+    const statKpis = [
+      { l: '已通过商品', v: cs.goods.filter((g) => g.review === 'approved').length + ' 件', s: '共供货 ' + cs.goods.length + ' 件' },
+      { l: '已铺商城', v: Object.keys(mallCount).length + ' 个', s: '上架过本店商品的商城' },
+      { l: '近 30 天订单', v: cs.goods.reduce((a, g) => a + g.orders, 0) + ' 单', s: '商城订单 + 代发订单' },
+      { l: '近 30 天销售额', v: wan(cs.goods.reduce((a, g) => a + g.gmv, 0)), s: '按商城售价计' }
+    ];
+    const statGoods = cs.goods.filter((g) => g.orders > 0 || g.malls.length).map((g) => ({ n: g.name, m: g.malls.length, o: g.orders, g: wan(g.gmv) }));
+    // drawer
+    const rg = cs.goods.find((g) => g.id === st.drawer);
+    let rv = {};
+    if (rg) {
+      const price = rg.next || rg.now;
+      const ck = rg.checks || [1, 1, 1, 1];
+      const ckT = ['尺寸 ≥ 800 × 800，清晰无拉伸', '无水印、二维码和联系方式', rg.imgWarn || '主图文字与专供价一致，无促销误导', '与商品名称、规格一致'];
+      const pw = [];
+      if (rg.next) pw.push('新报价比当前有效价上涨 ' + ((rg.next / rg.now - 1) * 100).toFixed(1) + '%；已上架的 ' + rg.malls.length + ' 个商城在新价生效后毛利会下降。');
+      if (rg.ref && price > rg.ref) pw.push('高于平台同款参考价 ' + money(rg.ref) + '（' + ((price / rg.ref - 1) * 100).toFixed(1) + '%），可要求供应商调整。');
+      rv = { name: rg.name, img: rg.img, spec: rg.spec, stock: rg.stock, lead: rg.lead, cat: rg.cat, brand: rg.brand,
+        type: rg.review === 'pending' ? (rg.type === 'price' ? '改价 · ' + rg.ver : '新品 · 首次供货') : RS[rg.review][0], typeStyle: RS[rg.review][1],
+        imgChecks: ck.map((ok, i) => ({ t: ckT[i], mark: ok ? '✓' : '!', dot: 'width: 16px; flex: none; font-weight: 700; color: ' + (ok ? 'var(--brand)' : 'var(--warn)') })),
+        prices: [
+          { l: rg.next ? '新报价（' + rg.ver + '，含税）' : '专供代发价（含税）', v: money(price), s: '一件代发 · 起订 1 件', hl: true },
+          { l: rg.next ? '当前有效价' : '市场价', v: rg.next ? money(rg.now) : money(rg.market), s: rg.next ? '审核通过前仍按此价供货' : '供应商填写' },
+          { l: '平台同款参考价', v: rg.ref ? money(rg.ref) : '—', s: rg.ref ? '同品关联：猫超 / 京东同款' : '无可匹配同款' },
+          { l: '建议零售价 · 毛利空间', v: money(rg.market), s: '按市场价售卖毛利 ' + ((1 - price / rg.market) * 100).toFixed(1) + '%' }
+        ].map((p) => ({ ...p, style: 'font-size: 20px; font-weight: 700; margin: 2px 0; color: ' + (p.hl ? 'var(--brand)' : 'var(--tx1)') })),
+        priceWarns: pw, after: rg.cat.indexOf('卡券') === 0 ? '发码后不退' : '支持七天无理由退换货', invoice: '供应商开具商品增值税专票',
+        pending: rg.review === 'pending', done: rg.review !== 'pending',
+        doneText: rg.review === 'approved' ? '已通过：在资源广场「专供」来源里可选，可上架商城或代发下单。' : '已驳回（' + (rg.reason || '其他') + '），已通知供应商修改后重新提交。',
+        passNote: rg.type === 'price' ? '通过后新价立即生效；驳回则继续按当前有效价 ' + money(rg.now) + ' 供货。' : '通过后进入资源广场，只对你可见；驳回原因会同步给供应商。' };
+    }
+    const reasons = ['价格偏高', '主图不合规', '信息不完整', '类目 / 品牌不符', '其他'].map((r) => {
+      const on = st.reason === r;
+      return { label: r, pick: () => this.setState({ reason: r }), style: 'height: 30px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-family: inherit; cursor: pointer; border: 1px solid ' + (on ? 'var(--warn)' : 'var(--bd)') + '; background: ' + (on ? 'var(--warnbg)' : 'var(--solid)') + '; color: ' + (on ? 'var(--warn)' : 'var(--tx2)') };
+    });
+    const setRev = (r) => { const m = Object.assign({}, this.state.reviews || {}); m[rg.id] = { r, reason: this.state.reason }; this.setState({ reviews: m, drawer: '' }); };
+    const pageV = {
+      isList: !st.store, isDetail: !!st.store, back: () => this.setState({ store: '', drawer: '' }),
+      sums, stores, cur: { ...cs, statusStyle: SS[cs.status], logoLg: logo(cs, 56), sinceDate: cs.since || '待开店' },
+      tabs, filters, isGoods: st.tab !== 'stats', isStats: st.tab === 'stats', goods, noGoods: goods.length === 0,
+      emptyText: cs.goods.length ? '这个筛选下没有商品' : '供应商还没有开店供货',
+      statKpis, statGoods, statMalls,
+      drawerOn: !!rg, rv, reasons, closeDrawer: () => this.setState({ drawer: '' }),
+      approve: () => setRev('approved'),
+      reject: () => { if (!this.state.reason) { this.flash('请先选择驳回原因'); return; } setRev('rejected'); },
+      toastOn: !!st.toast, toastText: st.toast,
+      soonInvite: () => this.flash('邀请供应商开店（V3.2）：生成邀请链接或二维码，供应商认证后开专供店')
+    };
+    return {
+      rootClass: 'ai', rail, panelSections, panelTitle: curG.link ? '工作台' : curG.name, panelHint: curG.hint || '', panelHasHint: !!curG.hint && !curG.link,
+      asideStyle: pinned ? 'width: 212px; flex: none; padding: 18px 12px; border-right: 1px solid var(--bd); background: var(--rail); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px)' : 'position: absolute; left: 76px; top: 10px; z-index: 45; width: 220px; padding: 14px 10px 8px; border-radius: 16px; background: var(--solid); border: 1px solid var(--bd); box-shadow: 0 20px 48px rgba(15,23,42,.16)',
+      ...this.railVals(pinned, floatMod),
+      askAi: () => this.flash('AI 助手即将上线'),
+      ...pageV
+    };
+  }
+
+  prdMeasure() {
+    const root = document.querySelector('[data-prd-root]');
+    const box = document.querySelector('[data-prd-cards]');
+    if (!root || !box) return;
+    const rb = root.getBoundingClientRect();
+    const sc = root.offsetWidth ? rb.width / root.offsetWidth : 1;
+    const bb = box.getBoundingClientRect();
+    const A = {};
+    document.querySelectorAll('[data-prd]').forEach((el) => {
+      const b = el.getBoundingClientRect();
+      if (b.width < 2 || b.height < 2) return;
+      A[el.getAttribute('data-prd')] = { x: (b.left - rb.left) / sc, y: (b.top - rb.top) / sc, w: b.width / sc, h: b.height / sc };
+    });
+    const H = {};
+    document.querySelectorAll('[data-prd-card]').forEach((el) => { H[el.getAttribute('data-prd-card')] = el.offsetHeight; });
+    const PX = (bb.left - rb.left) / sc, CY = (bb.top - rb.top) / sc;
+    const key = JSON.stringify([A, H, Math.round(PX), Math.round(CY)]);
+    if (key !== this._prdKey) { this._prdKey = key; this.setState({ prdA: A, prdH: H, prdPX: PX, prdCY: CY }); }
+  }
+  componentDidMount() { this.prdMeasure(); this._prdT = setInterval(() => this.prdMeasure(), 500); }
+  componentWillUnmount() { clearInterval(this._prdT); }
+  renderVals() { return Object.assign(this.pageVals(), this.prdVals()); }
+  prdVals() {
+    const st = this.state;
+    const A = st.prdA || {}, H = st.prdH || {};
+    const PX = st.prdPX || 0, CY = st.prdCY || 0;
+    const focus = st.prdFocus || '';
+    const cards = this.prdCards();
+    const withA = cards.filter((c) => A[c.k]).sort((a, b) => A[a.k].y - A[b.k].y);
+    const noA = cards.filter((c) => !A[c.k]);
+    const order = withA.concat(noA);
+    let y = 0; const pos = {};
+    order.forEach((c) => {
+      const want = A[c.k] ? Math.max(0, A[c.k].y - CY - 4) : y;
+      const top = Math.max(want, y);
+      pos[c.k] = top; y = top + (H[c.k] || 150) + 12;
+    });
+    const C1 = '#5B6BD5';
+    const showLines = st.prdLines !== false;
+    const prdLineList = !showLines ? [] : withA.map((c) => {
+      const a = A[c.k];
+      const op = focus ? (focus === c.k ? 1 : 0.15) : 0.6;
+      const w = focus === c.k ? 2 : 1.5;
+      const dash = w + 'px dashed ' + C1;
+      const ax = a.x + a.w + 4, ay = a.y + Math.min(a.h / 2, 24);
+      const gx = PX - 16, cy = CY + pos[c.k] + 20;
+      return {
+        box: 'position: absolute; left: ' + (a.x - 4) + 'px; top: ' + (a.y - 4) + 'px; width: ' + (a.w + 8) + 'px; height: ' + (a.h + 8) + 'px; border: ' + dash + '; border-radius: 8px; box-sizing: border-box; opacity: ' + op,
+        s1: 'position: absolute; left: ' + Math.min(ax, gx) + 'px; top: ' + ay + 'px; width: ' + Math.abs(gx - ax) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        s2: 'position: absolute; left: ' + gx + 'px; top: ' + Math.min(ay, cy) + 'px; height: ' + Math.abs(cy - ay) + 'px; border-left: ' + dash + '; opacity: ' + op,
+        s3: 'position: absolute; left: ' + gx + 'px; top: ' + cy + 'px; width: ' + (PX - gx) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        dot: 'position: absolute; left: ' + (ax - 4) + 'px; top: ' + (ay - 4) + 'px; width: 8px; height: 8px; border-radius: 50%; background: ' + C1 + '; opacity: ' + op
+      };
+    });
+    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'], '字段': ['#E9F0FB', '#1F4E9A'] };
+    const nums = {}; order.forEach((c, i) => { nums[c.k] = i + 1; });
+    return {
+      prdTitle: this.prdTitle(), prdIntro: this.prdIntro(),
+      prdCardList: order.map((c) => {
+        const on = focus === c.k;
+        return {
+          k: c.k, no: String(nums[c.k]), title: c.title,
+          unanchored: !A[c.k], hint: c.hide || '当前界面未显示这个区域',
+          secs: c.secs.map((x) => {
+            const isT = !Array.isArray(x);
+            const lab = isT ? (x.label || '字段') : x[0];
+            const tg = TAG[lab] || TAG['规则'];
+            return { isText: !isT, isTable: isT, label: lab, text: isT ? '' : x[1], caption: isT ? (x.caption || '') : '',
+              rows: isT ? x.rows.map((r) => ({ f: r[0], d: r[1], s: r[2] || '' })) : [],
+              tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + tg[0] + '; color: ' + tg[1] };
+          }),
+          enter: () => this.setState({ prdFocus: c.k }), leave: () => this.setState({ prdFocus: '' }),
+          style: 'position: absolute; left: 16px; right: 16px; top: ' + pos[c.k] + 'px; background: #FFFFFF; border-radius: 10px; padding: 12px 14px; box-sizing: border-box; border: 1px solid ' + (on ? C1 : '#E3E6F5') + '; box-shadow: ' + (on ? '0 4px 14px rgba(91,107,213,0.18)' : 'none')
+        };
+      }),
+      prdLineList, prdPanelH: String(Math.max(y + 24, 400)),
+      prdToggleLines: () => this.setState({ prdLines: st.prdLines === false }),
+      prdLinesLabel: showLines ? '隐藏连线' : '显示连线'
+    };
+  }
+
+  prdTitle() { return "会员端 · 专供店铺"; }
+  prdIntro() { return "逻辑对齐卖家侧专供店 PRD（prd.88buys.com · 商家版 · 专供店）：供应商在「客户关系 › 供货配置」给会员配专供代发价，每个报价版本需会员确认；会员侧的「审核」就是这一步。审核通过的商品才进入会员的资源广场。"; }
+  prdBaseCards() { return [{"k": "sum", "title": "专供店铺 · 概览", "secs": [["规则", "只展示供应商为当前会员开的专供店（卖家侧「客户关系」里与本会员合作中或已发邀请的店铺）。会员看不到这些店铺给其他会员的商品和价格。"], ["数据", "合作中的专供店数、待我审核的商品数、已通过商品数、专供商品近 30 天订单与销售额。"]]}, {"k": "stores", "title": "店铺列表", "secs": [["交互", "以店铺卡片展示：店铺名、企业主体、认证状态、合作状态（合作中 / 待开店）、主营类目、合作开始时间，以及供货商品、已通过、已铺商城、近 30 天订单四个数；有待审核商品时右上角标「N 件待审核」。点卡片进入店铺详情。"], ["规则", "合作状态取卖家侧：供应商接受邀请但未完成企业认证 → 待开店；认证通过开店 → 合作中；任一方终止合作 → 已终止（列表置底，商品自动从资源广场下架）。"], ["交互", "「邀请供应商开店」对应 V3.2：生成邀请链接或二维码，本版只预留入口。"], ["待确认", "已终止合作后，已上架到商城的专供商品怎么处理（立即下架 / 卖完下架）；原「供应商管理」里的存量供应商账号迁移节奏。"]]}, {"k": "info", "title": "店铺基本信息", "secs": [["数据", "店铺名、企业主体、认证状态、合作开始时间、联系人、主营类目、供货方式（一件代发 · 含税），以及供应商填写的供货说明（运费、包装等）。"]]}, {"k": "goods", "title": "供货商品 · 审核", "secs": [["规则", "供应商在卖家侧给本会员配置「专供代发价」后，每个新报价版本都要会员审核（对应卖家侧「待对方确认」）：\n· 新品：供应商首次给本会员供货的商品；\n· 改价：已供货商品提交了新报价版本（V2、V3…）。\n审核通过前，改价商品仍按当前有效价供货；新品不出现在资源广场。"], ["规则", "只有「已通过」的商品才进入会员的资源广场（来源标「专供 · 店铺名」，只对本会员可见），会员选品时才能选它上架商城或代发下单。"], ["交互", "按审核状态筛选：全部 / 待审核 / 已通过 / 已驳回。每行显示专供代发价（改价时并列新报价和涨幅）、市场价、审核状态和提醒（高于平台同款、主图待确认）、已铺商城、近 30 天订单；待审核商品点「审核」，其他点「查看」。"], {"label": "字段", "caption": "列表字段", "rows": [["专供代发价（含税）", "供应商给本会员的当前有效供价，一件代发、含税", "卖家侧·客户供货配置（当前有效版）"], ["新报价", "待审核的报价版本及较当前有效价的涨跌幅", "卖家侧·报价与版本"], ["市场价", "供应商填写的市场价", "卖家侧·商品库"], ["已铺商城", "已上架该商品的本会员商城（最多显示 2 个，其余 +N）", "业务库·商城商品"], ["近 30 天订单", "近 30 天含该商品的商城订单 + 代发订单数", "业务库·商城订单、代发订单"]]}]}, {"k": "review", "title": "审核抽屉", "secs": [["数据", "左侧大图 + 主图检查；下方价格审核：新报价 / 专供代发价、当前有效价或市场价、平台同款参考价、按市场价售卖的毛利空间；再下方售后与发票说明。"], ["规则", "主图检查由系统自动预检、会员人工确认：尺寸 ≥ 800 × 800、无水印 / 二维码 / 联系方式、主图文字与供价一致（无促销误导）、与名称规格一致。未通过的项标橙。"], ["规则", "价格提醒：改价时提示涨幅以及已上架商城毛利会下降；高于平台同款参考价（通过同品关联匹配猫超 / 京东同款）时提示差额。提醒不拦截，最终由会员决定。"], ["交互", "「审核通过 · 进入资源广场」：新品进入资源广场，改价则新价立即生效；「驳回」必须选原因（价格偏高、主图不合规、信息不完整、类目 / 品牌不符、其他），原因同步给供应商，卖家侧可修改后重新提交。"], ["待确认", "审核时效：供应商提交后多少天未审核是否提醒或自动处理；改价被驳回后供应商能否终止该商品供货；是否支持批量审核。"]]}, {"k": "stats", "title": "数据统计", "secs": [["数据", "按店铺统计：已通过商品数、已铺商城数、近 30 天订单和销售额；按商品看已铺商城数、订单、销售额；按商城看订单占比。"], {"label": "字段", "caption": "", "rows": [["已铺商城", "上架过该店任一商品的本会员商城数", "业务库·商城商品"], ["订单", "近 30 天含该店商品的商城订单 + 代发订单（一单多商品按商品分别计入）", "业务库·商城订单、代发订单"], ["销售额", "按商城售价 × 数量，扣除退款", "业务库·商城订单明细"]]}]}]; }
+  prdCards() { return this.prdBaseCards(); }
+}
+</script>
+</body>
+</html>
