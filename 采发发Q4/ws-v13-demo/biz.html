@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>经营分析 · 会员端 · 会员端工作台精简改版 Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="dc-lite.js"></script>
+</head>
+<body>
+<template id="dc-src">
+<helmet>
+<style>
+.ai{--bg:#F4F7F7;--card:rgba(255,255,255,.76);--solid:#FFFFFF;--bd:rgba(15,23,42,.07);--tx1:#0F172A;--tx2:#566074;--tx3:#8A94A6;--brand:#0B7A70;--accent:#0B7A70;--info:#3B4BB8;--infobg:rgba(91,107,213,.12);
+ --g1:rgba(15,143,132,.20);--g2:rgba(63,196,181,.14);--g3:rgba(15,143,132,.10);--chip:rgba(15,23,42,.045);--chip2:rgba(15,23,42,.08);
+ --shadow:0 1px 2px rgba(15,23,42,.04),0 10px 30px rgba(15,23,42,.06);--grad:linear-gradient(120deg,#0B7A70 0%,#0F8F84 50%,#4CC1B3 100%);--gradText:linear-gradient(120deg,#075E56 0%,#0B7A70 55%,#0F8F84 100%);--gradBtn:linear-gradient(120deg,#075E56 0%,#0B7A70 100%);
+ --warn:#C2410C;--warnbg:rgba(234,88,12,.10);--up:#0B7A70;--grid:rgba(15,23,42,.045);--tip:#0F172A;--tiptx:#FFFFFF;--stopA:#0B7A70;--stopB:#0F8F84;--stopC:#4CC1B3;--rail:rgba(255,255,255,.62);--glow:rgba(15,143,132,.22)}
+.ai.dark{--bg:#0A0F11;--card:rgba(255,255,255,.045);--solid:#121A1C;--bd:rgba(255,255,255,.08);--tx1:#E8EEEF;--tx2:#9AA7AA;--tx3:#66757A;--brand:#3FC4B5;--accent:#3FC4B5;--info:#9AA8F5;--infobg:rgba(154,168,245,.14);
+ --g1:rgba(15,143,132,.24);--g2:rgba(63,196,181,.12);--g3:rgba(15,143,132,.14);--chip:rgba(255,255,255,.06);--chip2:rgba(255,255,255,.1);
+ --shadow:0 0 0 1px rgba(255,255,255,.015),0 16px 40px rgba(0,0,0,.4);--grad:linear-gradient(120deg,#0F8F84 0%,#3FC4B5 55%,#8EE3D8 100%);--gradText:linear-gradient(120deg,#3FC4B5 0%,#8EE3D8 100%);--gradBtn:linear-gradient(120deg,#075E56 0%,#0B7A70 100%);
+ --warn:#FDBA74;--warnbg:rgba(251,146,60,.14);--up:#5FD3C6;--grid:rgba(255,255,255,.05);--tip:#E8EEEF;--tiptx:#121A1C;--stopA:#0F8F84;--stopB:#3FC4B5;--stopC:#8EE3D8;--rail:rgba(255,255,255,.03);--glow:rgba(63,196,181,.25)}
+.ai *{box-sizing:border-box}
+.ai a{color:var(--brand);text-decoration:none}
+.card{background:var(--card);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border:1px solid var(--bd);border-radius:18px;box-shadow:var(--shadow)}
+.gtext{background:var(--gradText);-webkit-background-clip:text;background-clip:text;color:transparent}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--chip);border-radius:999px;padding:0 10px;line-height:24px;font-size:12px;color:var(--tx2);white-space:nowrap}
+.btn-ai{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border:0;border-radius:10px;background:var(--gradBtn);color:#FFFFFF;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;box-shadow:0 6px 18px var(--glow);white-space:nowrap}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:0;border-radius:10px;background:var(--chip);color:var(--tx1);font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;white-space:nowrap}
+.btn-ghost:hover{background:var(--chip2)}
+.lift{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.lift:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(15,23,42,.04),0 18px 40px rgba(15,143,132,.12);border-color:rgba(15,143,132,.28)}
+.rb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:56px;border:0;border-radius:12px;background:transparent;color:var(--tx2);font-size:12px;font-family:inherit;cursor:pointer;transition:background-color .15s ease,color .15s ease}
+.rb:hover{background:var(--chip);color:var(--tx1)}
+.rb.on{background:var(--chip2);color:var(--tx1);font-weight:600}
+.rb.on .ric{color:var(--brand)}
+.pi{display:flex;align-items:center;gap:6px;height:36px;padding:0 10px;border-radius:10px;font-size:14px;color:var(--tx1) !important;white-space:nowrap;transition:background-color .15s ease}
+.pi:hover{background:var(--chip)}
+.tag{flex:none;font-size:12px;line-height:18px;border-radius:4px;padding:0 5px}
+.cmd{padding:1.5px;border-radius:999px;background:var(--grad);box-shadow:0 8px 30px rgba(15,143,132,.18)}
+.cmd-in{display:flex;align-items:center;gap:10px;height:42px;padding:0 8px 0 16px;border-radius:999px;background:var(--solid)}
+.orb{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#FFFFFF 0%,rgba(255,255,255,0) 38%),var(--grad);box-shadow:0 0 18px rgba(15,143,132,.45);flex:none;animation:orb 4s ease-in-out infinite}
+@keyframes orb{0%,100%{transform:scale(1);box-shadow:0 0 14px rgba(15,143,132,.35)}50%{transform:scale(1.06);box-shadow:0 0 24px rgba(15,143,132,.5)}}
+.ins{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--chip)}
+.ic{flex:none;width:34px;height:34px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center}
+.num{font-family:'DIN Alternate','Bahnschrift','SF Pro Display','Helvetica Neue',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.ai :focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
+.tabp{height:30px;padding:0 14px;border:0;border-radius:999px;font-size:14px;font-family:inherit;cursor:pointer;background:transparent;color:var(--tx2)}
+.tabp.on{background:var(--solid);color:var(--tx1);font-weight:600;box-shadow:0 1px 3px rgba(15,23,42,.12)}
+.kpi{display:flex;flex-direction:column;align-items:stretch;text-align:left;gap:2px;padding:14px 16px 10px;border-radius:14px;border:1px solid transparent;background:var(--chip);font-family:inherit;cursor:pointer;color:var(--tx1);transition:border-color .15s ease,background-color .15s ease}
+.kpi:hover{background:var(--chip2)}
+.kpi.on{background:var(--solid);border-color:rgba(15,143,132,.35);box-shadow:0 8px 24px rgba(15,143,132,.12)}
+.col{position:relative;flex:1;display:flex;justify-content:center}
+.toast{position:absolute;z-index:40;padding:10px 14px;border-radius:12px;background:var(--tip);color:var(--tiptx);font-size:12px;line-height:1.6;box-shadow:0 12px 32px rgba(0,0,0,.2);white-space:nowrap}
+@media (prefers-reduced-motion: reduce){.orb{animation:none}.lift,.lift:hover{transition:none;transform:none}}
+
+.pjrow{transition:background-color .15s ease}
+.pjrow:hover{background:var(--chip) !important}
+</style>
+</helmet>
+<div data-prd-root="1" style="position: relative; display: flex; align-items: stretch; background: #F7F8FC">
+<div style="flex: 1 1 960px; min-width: 0; position: relative; z-index: 0; overflow: hidden">
+
+<div class="{{rootClass}}" style="position: relative; min-height: 1940px; background: var(--bg); color: var(--tx1); font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; font-size: 14px; overflow: hidden">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true"><defs>
+    <linearGradient id="ai-line" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color: var(--stopA)"/><stop offset=".55" style="stop-color: var(--stopB)"/><stop offset="1" style="stop-color: var(--stopC)"/></linearGradient>
+    <linearGradient id="ai-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color: var(--stopB); stop-opacity: .28"/><stop offset="1" style="stop-color: var(--stopB); stop-opacity: 0"/></linearGradient>
+  </defs></svg>
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none">
+    <div style="position: absolute; left: -160px; top: -220px; width: 720px; height: 620px; border-radius: 50%; background: var(--g1); filter: blur(90px)"></div>
+    <div style="position: absolute; right: -120px; top: -180px; width: 760px; height: 560px; border-radius: 50%; background: var(--g2); filter: blur(100px)"></div>
+    <div style="position: absolute; left: 38%; top: 520px; width: 680px; height: 480px; border-radius: 50%; background: var(--g3); filter: blur(110px)"></div>
+    <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 46%); mask-image: linear-gradient(180deg, #000 0%, transparent 46%)"></div>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 14px">
+    <span style="font-weight: 600">原型演示 · 经营分析（会员端）</span>
+    <span style="color: #9BA5B9">一个商城 = 一个项目；全部为规则统计，V1 可上线；带 ✦ 的为 AI 版能力，点击提示即将上线；数据为示意</span>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: stretch; min-height: 1900px">
+    <nav aria-label="模块" style="width: 76px; flex: none; display: flex; flex-direction: column; gap: 4px; padding: 14px 8px; background: var(--rail); border-right: 1px solid var(--bd); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px)">
+      <div style="display: flex; justify-content: center; margin-bottom: 10px">
+        <div style="width: 40px; height: 40px; border-radius: 12px; background: var(--gradBtn); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 18px; font-weight: 700; box-shadow: 0 8px 20px rgba(15,143,132,.3)">采</div>
+      </div>
+      <template data-sc="for" list="{{rail}}" as="r" hint-placeholder-count="8">
+        <button onClick="{{r.pick}}" aria-pressed="{{r.onStr}}" title="{{r.tip}}" class="{{r.cls}}">
+          <span class="ric" style="position: relative; display: inline-flex">
+            <template data-sc="if" value="{{r.ic_fav}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></template><template data-sc="if" value="{{r.ic_home}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z"/></svg></template><template data-sc="if" value="{{r.ic_goods}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></template><template data-sc="if" value="{{r.ic_store}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12v8h13v-8"/><path d="M10 20v-4h4v4"/></svg></template><template data-sc="if" value="{{r.ic_mall}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></template><template data-sc="if" value="{{r.ic_mkt}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10z"/><path d="M16.5 9a4 4 0 0 1 0 6"/><path d="M19 6.5a7.5 7.5 0 0 1 0 11"/></svg></template><template data-sc="if" value="{{r.ic_order}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6"/><path d="M9 12h6"/><path d="M9 15.5h3.5"/></svg></template><template data-sc="if" value="{{r.ic_qym}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2.5v2.5H14z"/><path d="M20 14v6h-6"/></svg></template><template data-sc="if" value="{{r.ic_fin}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></template><template data-sc="if" value="{{r.ic_data}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V7"/><path d="M17 16v-8"/></svg></template>
+            <template data-sc="if" value="{{r.dot}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; right: -3px; top: -2px; width: 7px; height: 7px; border-radius: 50%; background: #E5484D; box-shadow: 0 0 0 2px var(--solid)"></span></template>
+          </span>
+          <span>{{r.name}}</span>
+        </button>
+      </template>
+      <button onClick="{{askAi}}" class="rb" style="margin-top: 12px; height: 64px" title="AI 助手（即将上线）">
+        <span class="orb"></span><span class="gtext" style="font-weight: 600">AI 助手</span>
+      </button>
+    </nav>
+
+    <aside data-prd="menu" aria-label="二级菜单" style="{{asideStyle}}">
+      <div style="display: flex; align-items: center; gap: 6px; padding: 0 8px 12px">
+        <span style="font-size: 16px; font-weight: 600">{{panelTitle}}</span>
+        <template data-sc="if" value="{{panelHasHint}}" hint-placeholder-val="{{ false }}"><span class="chip">{{panelHint}}</span></template>
+      </div>
+      <template data-sc="for" list="{{panelSections}}" as="s" hint-placeholder-count="2">
+        <div style="{{s.wrapStyle}}">
+          <template data-sc="if" value="{{s.spot}}" hint-placeholder-val="{{ false }}"><div role="dialog" aria-label="更新指引" style="left: calc(100% + 22px); top: 0; position: absolute; width: 320px; z-index: 70; background: var(--solid); color: var(--tx1); border-radius: 14px; padding: 14px 18px 16px; box-shadow: 0 16px 40px rgba(0,0,0,.28); text-align: left; font-weight: 400; white-space: normal">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px"><span style="font-size: 12px; font-weight: 600; color: var(--brand)">{{tStep}}</span><button onClick="{{tClose}}" aria-label="关闭指引" style="margin-left: auto; width: 24px; height: 24px; border: 0; background: transparent; color: var(--tx3); cursor: pointer; font-size: 16px">×</button></div>
+                  <div style="font-size: 16px; font-weight: 600; margin-bottom: 6px">{{tTitle}}</div>
+                  <div style="font-size: 14px; color: var(--tx2); line-height: 1.7">{{tDesc}}</div>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px">
+                    <button onClick="{{tClose}}" style="border: 0; background: transparent; color: var(--tx2); font-size: 14px; font-family: inherit; cursor: pointer; padding: 0">跳过</button>
+                    <button onClick="{{tPrev}}" class="btn-ghost" style="{{tPrevStyle}}">上一步</button>
+                    <button onClick="{{tNext}}" class="btn-ai" style="margin-left: 0">{{tNextLabel}}</button>
+                  </div>
+                </div></template>
+          <template data-sc="if" value="{{s.hasTitle}}" hint-placeholder-val="{{ true }}"><div style="padding: 8px 10px 4px; font-size: 12px; color: var(--tx3)">{{s.title}}</div></template>
+          <template data-sc="for" list="{{s.items}}" as="it" hint-placeholder-count="3">
+            <a href="{{it.href}}" title="{{it.tip}}" class="pi"><span style="overflow: hidden; text-overflow: ellipsis">{{it.name}}</span><template data-sc="if" value="{{it.isNew}}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: #C2410C; color: #FFFFFF; font-weight: 600">新</span></template><template data-sc="if" value="{{it.isRenamed}}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: var(--chip2); color: var(--tx2)">改</span></template><template data-sc="if" value="{{it.isSoon}}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: var(--chip); color: var(--tx3)">即将开放</span></template></a>
+          </template>
+        </div>
+      </template>
+      <div class="card" style="margin-top: 14px; padding: 10px 12px; border-radius: 12px; display: flex; align-items: center; gap: 8px">
+        <span class="gtext" style="font-weight: 700">◆</span>
+        <span style="font-size: 12px; color: var(--tx2)">当前权益</span>
+        <b style="margin-left: auto; font-size: 14px">阿里权益</b>
+      </div>
+    </aside>
+
+    <main style="flex: 1; min-width: 0; padding: 18px 28px 48px">
+      <header style="display: flex; align-items: flex-end; gap: 16px; margin-bottom: 16px">
+        <div style="min-width: 0">
+          <div style="font-size: 12px; color: var(--tx3)">数据 › 经营分析</div>
+          <h1 style="margin: 2px 0 0; font-size: 20px; font-weight: 600">经营分析</h1>
+        </div>
+        <div style="margin-left: auto; display: flex; align-items: center; gap: 10px; position: relative">
+          <div role="tablist" aria-label="统计范围" style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--chip)">
+            <template data-sc="for" list="{{scopes}}" as="sc" hint-placeholder-count="2"><button role="tab" aria-selected="{{sc.sel}}" onClick="{{sc.pick}}" class="{{sc.cls}}">{{sc.label}}</button></template>
+          </div>
+          <span class="chip">数据截至 11/24 14:00</span>
+          <button onClick="{{soonExport}}" class="btn-ghost">导出</button>
+          <button onClick="{{soonAi}}" class="btn-ghost" title="AI 版能力，即将上线"><span class="gtext" style="font-weight: 700">✦</span> AI 经营复盘</button>
+          <template data-sc="if" value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div role="status" class="toast" style="right: 0; top: 44px">{{toastText}}</div></template>
+        </div>
+      </header>
+
+      <section data-prd="overall" class="card" aria-labelledby="ov-h" style="padding: 18px 20px 20px; margin-bottom: 16px">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px">
+          <h2 id="ov-h" style="margin: 0; font-size: 16px; font-weight: 600">整体经营</h2>
+          <span class="chip">{{scopeNote}}</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px">
+          <template data-sc="for" list="{{ovKpis}}" as="k" hint-placeholder-count="5">
+            <div class="kpi" style="cursor: default; background: var(--solid); border: 1px solid var(--bd)">
+              <span style="font-size: 12px; color: var(--tx2)">{{k.label}}</span>
+              <span class="num" style="font-size: 24px; font-weight: 700">{{k.value}}</span>
+              <span style="font-size: 12px; color: var(--tx2)">{{k.sub}}</span>
+              <template data-sc="if" value="{{k.hasMeter}}" hint-placeholder-val="{{ false }}"><div style="height: 6px; margin-top: 8px; border-radius: 999px; background: var(--chip2)"><div style="{{k.meter}}"></div></div></template>
+            </div>
+          </template>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 14px">
+          <div data-prd="trend" style="border-radius: 14px; background: var(--chip); padding: 14px 16px 12px">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px">
+              <span style="font-weight: 600">月度 GMV · 今年 vs 去年</span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--tx2)"><span style="width: 14px; height: 3px; border-radius: 2px; background: var(--stopB)"></span>2026</span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--tx2)"><span style="width: 14px; height: 0; border-top: 2px dashed #9AA3AE"></span>2025</span>
+              <span style="margin-left: auto; font-size: 12px; color: var(--tx3)">单位：万元 · 悬停看数值</span>
+            </div>
+            <div style="position: relative; height: 220px">
+              <template data-sc="for" list="{{mTicks}}" as="g" hint-placeholder-count="5"><div style="{{g.line}}"></div><span style="{{g.label}}">{{g.text}}</span></template>
+              <div style="position: absolute; left: 40px; right: 8px; top: 0; bottom: 0">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%" aria-hidden="true">
+                  <path d="{{mLast}}" fill="none" stroke="#9AA3AE" stroke-width="2" stroke-dasharray="5 4" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="{{mArea}}" fill="url(#ai-area)"/>
+                  <path d="{{mThis}}" fill="none" stroke="url(#ai-line)" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div style="position: absolute; inset: 0; display: flex">
+                  <template data-sc="for" list="{{mCols}}" as="c" hint-placeholder-count="12">
+                    <div class="col" onMouseEnter="{{c.enter}}" onMouseLeave="{{c.leave}}">
+                      <div style="{{c.guide}}"></div>
+                      <template data-sc="if" value="{{c.hasThis}}" hint-placeholder-val="{{ true }}"><div style="{{c.dot}}"></div></template>
+                      <template data-sc="if" value="{{c.peak}}" hint-placeholder-val="{{ false }}"><span style="{{c.peakStyle}}">{{c.peakText}}</span></template>
+                      <template data-sc="if" value="{{c.on}}" hint-placeholder-val="{{ false }}"><div class="toast" style="{{c.tipPos}}"><b>{{c.m}}</b>　2026：{{c.vThis}}　2025：{{c.vLast}}</div></template>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; margin-left: 40px; margin-right: 8px; font-size: 12px; color: var(--tx3)">
+              <template data-sc="for" list="{{mCols}}" as="c" hint-placeholder-count="12"><span style="flex: 1; text-align: center">{{c.m}}</span></template>
+            </div>
+          </div>
+          <div data-prd="mix" style="border-radius: 14px; background: var(--chip); padding: 14px 16px">
+            <div style="font-weight: 600; margin-bottom: 4px">业务构成 · 本月</div>
+            <div style="font-size: 12px; color: var(--tx3); margin-bottom: 12px">GMV 合计 ¥61.2 万</div>
+            <div role="img" aria-label="商城 95.6%，代发 2.3%，集采 2.1%" style="display: flex; gap: 2px; height: 12px; border-radius: 999px; overflow: hidden; margin-bottom: 12px">
+              <div style="width: 95.6%; background: var(--stopB)"></div><div style="width: 2.3%; background: var(--stopC)"></div><div style="width: 2.1%; background: #9AA3AE"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+              <div style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: var(--stopB)"></span>商城（4 个项目）<span class="num" style="margin-left: auto">¥58.5 万 · 95.6%</span></div>
+              <div style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: var(--stopC)"></span>代发<span class="num" style="margin-left: auto">¥1.4 万 · 2.3%</span></div>
+              <div style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #9AA3AE"></span>集采<span class="num" style="margin-left: auto">¥1.3 万 · 2.1%</span></div>
+            </div>
+            <div style="margin-top: 14px; padding: 10px 12px; border-radius: 12px; background: var(--solid); font-size: 12px; line-height: 1.7; color: var(--tx2)">11 月 GMV 是去年同期的 <b style="color: var(--tx1)">4.1 倍</b>，其中「吉利汽车 · 双十一」和「杭州银行 · 年货节」两个新项目贡献 ¥52.6 万。</div>
+          </div>
+        </div>
+      </section>
+
+      <section data-prd="projects" class="card" aria-labelledby="pj-h" style="padding: 18px 20px 12px; margin-bottom: 16px">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px">
+          <h2 id="pj-h" style="margin: 0; font-size: 16px; font-weight: 600">项目经营</h2>
+          <span class="chip">一个商城 = 一个项目 · 按风险排序</span>
+          <span style="margin-left: auto; display: inline-flex; align-items: center; gap: 12px; font-size: 12px; color: var(--tx2)">
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 4px; border-radius: 2px; background: #C9CFD6"></span>时间进度</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 4px; border-radius: 2px; background: var(--stopB)"></span>额度核销进度</span>
+          </span>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.9fr) minmax(0, .9fr) minmax(0, .7fr) minmax(0, .7fr) minmax(0, 1.1fr) minmax(0, .9fr); gap: 12px; padding: 8px 12px; font-size: 12px; color: var(--tx3); border-bottom: 1px solid var(--bd)">
+          <span>项目（商城）</span><span>进度 · 时间 vs 额度核销</span><span style="text-align: right">GMV</span><span style="text-align: right">毛利率</span><span style="text-align: right">参与率</span><span style="text-align: right">剩余额度 · 天数</span><span>状态</span>
+        </div>
+        <template data-sc="for" list="{{projects}}" as="p" hint-placeholder-count="5">
+          <div style="border-bottom: 1px solid var(--bd)">
+            <button onClick="{{p.toggle}}" aria-expanded="{{p.openStr}}" class="pjrow" style="{{p.rowStyle}}">
+              <span style="min-width: 0; text-align: left"><span style="display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.name}}</span><span style="display: block; font-size: 12px; color: var(--tx3); margin-top: 2px">{{p.periodText}}</span></span>
+              <span style="min-width: 0">
+                <template data-sc="if" value="{{p.hasPeriod}}" hint-placeholder-val="{{ true }}"><span style="display: block">
+                  <span style="display: flex; align-items: center; gap: 8px; font-size: 12px"><span style="flex: 1; height: 5px; border-radius: 999px; background: var(--chip2)"><span style="{{p.timeBar}}"></span></span><span class="num" style="width: 34px; text-align: right; color: var(--tx2)">{{p.tpText}}</span></span>
+                  <span style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-top: 5px"><span style="flex: 1; height: 5px; border-radius: 999px; background: var(--chip2)"><span style="{{p.useBar}}"></span></span><span class="num" style="{{p.cpStyle}}">{{p.cpText}}</span></span>
+                </span></template>
+                <template data-sc="if" value="{{p.noPeriod}}" hint-placeholder-val="{{ false }}"><span style="display: block">
+                  <span style="display: flex; align-items: center; gap: 8px; font-size: 12px"><span style="flex: 1; height: 5px; border-radius: 999px; background: var(--chip2)"><span style="{{p.useBar}}"></span></span><span class="num" style="{{p.cpStyle}}">{{p.cpText}}</span></span>
+                  <span style="display: block; font-size: 12px; color: var(--tx3); margin-top: 4px">未设置兑换期，无法对比时间进度</span>
+                </span></template>
+              </span>
+              <span class="num" style="text-align: right; font-weight: 600">{{p.gmvText}}</span>
+              <span class="num" style="text-align: right">{{p.gpText}}</span>
+              <span class="num" style="text-align: right">{{p.joinText}}</span>
+              <span class="num" style="text-align: right; font-size: 12px; color: var(--tx2)"><b style="font-size: 14px; color: var(--tx1)">{{p.leftText}}</b><br>{{p.daysText}}</span>
+              <span style="display: flex; align-items: center; gap: 6px"><span style="{{p.statusStyle}}">{{p.status}}</span><span style="{{p.chev}}">⌄</span></span>
+            </button>
+            <template data-sc="if" value="{{p.open}}" hint-placeholder-val="{{ false }}">
+              <div data-prd="detail" style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 12px; padding: 4px 12px 16px">
+                <div style="border-radius: 14px; background: var(--solid); border: 1px solid var(--bd); padding: 14px">
+                  <div style="font-weight: 600; margin-bottom: 8px">核销预测</div>
+                  <template data-sc="if" value="{{p.hasPeriod}}" hint-placeholder-val="{{ true }}"><div>
+                    <div style="font-size: 12px; color: var(--tx2); line-height: 1.7">按近 14 天日均核销 <b class="num" style="color: var(--tx1)">{{p.dailyText}}</b> 推算，到 {{p.endShort}} 预计核销</div>
+                    <div class="num" style="{{p.fcStyle}}">{{p.fcText}}</div>
+                    <div style="font-size: 12px; color: var(--tx2); margin-bottom: 10px">{{p.fcNote}}</div>
+                  </div></template>
+                  <template data-sc="if" value="{{p.noPeriod}}" hint-placeholder-val="{{ false }}"><div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin-bottom: 10px">这个商城还没有设置兑换期，无法预测到期核销。设置后会按兑换期计算时间进度和预测。</div></template>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                    <template data-sc="for" list="{{p.actions}}" as="a" hint-placeholder-count="2"><button onClick="{{a.act}}" class="{{a.cls}}" style="height: 30px; font-size: 12px">{{a.label}}</button></template>
+                  </div>
+                </div>
+                <div style="border-radius: 14px; background: var(--solid); border: 1px solid var(--bd); padding: 14px">
+                  <div style="font-weight: 600; margin-bottom: 10px">每周 GMV · 近 8 周</div>
+                  <div style="display: flex; align-items: flex-end; gap: 6px; height: 96px">
+                    <template data-sc="for" list="{{p.weeks}}" as="w" hint-placeholder-count="8"><div title="{{w.tip}}" style="{{w.bar}}"></div></template>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--tx3); margin-top: 6px"><span>8 周前</span><span>本周</span></div>
+                </div>
+                <div style="border-radius: 14px; background: var(--solid); border: 1px solid var(--bd); padding: 14px">
+                  <div style="font-weight: 600; margin-bottom: 10px">品类排行 · GMV 占比</div>
+                  <template data-sc="for" list="{{p.cats}}" as="c" hint-placeholder-count="5">
+                    <div style="margin-bottom: 7px">
+                      <div style="display: flex; font-size: 12px; margin-bottom: 3px"><span>{{c.n}}</span><span class="num" style="margin-left: auto; color: var(--tx2)">{{c.pct}}</span></div>
+                      <div style="height: 5px; border-radius: 999px; background: var(--chip2)"><div style="{{c.bar}}"></div></div>
+                    </div>
+                  </template>
+                </div>
+                <div style="border-radius: 14px; background: var(--solid); border: 1px solid var(--bd); padding: 14px">
+                  <div style="font-weight: 600; margin-bottom: 10px">员工购买分布</div>
+                  <div role="img" aria-label="{{p.distAria}}" style="display: flex; gap: 2px; height: 12px; border-radius: 999px; overflow: hidden; margin-bottom: 10px">
+                    <template data-sc="for" list="{{p.dist}}" as="d" hint-placeholder-count="4"><div style="{{d.seg}}"></div></template>
+                  </div>
+                  <template data-sc="for" list="{{p.dist}}" as="d" hint-placeholder-count="4">
+                    <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px"><span style="{{d.dot}}"></span>{{d.n}}<span class="num" style="margin-left: auto; color: var(--tx2)">{{d.v}}</span></div>
+                  </template>
+                  <div style="font-size: 12px; color: var(--tx2); margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--bd)">访问 → 支付转化 <b class="num" style="color: var(--tx1)">{{p.cvr}}</b>（C 端埋点）</div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </section>
+
+      <section data-prd="future" class="card" aria-labelledby="fu-h" style="padding: 18px 20px 20px">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px">
+          <h2 id="fu-h" style="margin: 0; font-size: 16px; font-weight: 600">为下一单做准备</h2>
+          <span class="chip">基于历史数据的规则统计</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+          <div data-prd="expire" style="border-radius: 14px; background: var(--chip); padding: 14px 16px">
+            <div style="font-weight: 600; margin-bottom: 2px">即将到期 · 30 天内</div>
+            <div style="font-size: 12px; color: var(--tx3); margin-bottom: 10px">按到期时的核销情况给出下一步</div>
+            <template data-sc="for" list="{{expiring}}" as="e" hint-placeholder-count="2">
+              <div style="border-radius: 12px; background: var(--solid); padding: 12px; margin-bottom: 8px">
+                <div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{e.name}}</b><span style="{{e.badge}}">{{e.days}}</span></div>
+                <div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin: 6px 0 8px">{{e.desc}}</div>
+                <div style="display: flex; gap: 6px"><template data-sc="for" list="{{e.actions}}" as="a" hint-placeholder-count="2"><button onClick="{{a.act}}" class="{{a.cls}}" style="height: 28px; font-size: 12px">{{a.label}}</button></template></div>
+              </div>
+            </template>
+          </div>
+          <div data-prd="festival" style="border-radius: 14px; background: var(--chip); padding: 14px 16px">
+            <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px"><span style="font-weight: 600">下一个节点 · 春节</span><span class="num gtext" style="margin-left: auto; font-size: 20px; font-weight: 700">74 天</span></div>
+            <div style="font-size: 12px; color: var(--tx3); margin-bottom: 10px">2027-02-06 · 参考去年春节档（2026 年 1–2 月）</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px">
+              <div style="border-radius: 10px; background: var(--solid); padding: 8px 10px"><div style="font-size: 12px; color: var(--tx3)">GMV</div><div class="num" style="font-weight: 700">¥113 万</div></div>
+              <div style="border-radius: 10px; background: var(--solid); padding: 8px 10px"><div style="font-size: 12px; color: var(--tx3)">人均消费</div><div class="num" style="font-weight: 700">¥286</div></div>
+              <div style="border-radius: 10px; background: var(--solid); padding: 8px 10px"><div style="font-size: 12px; color: var(--tx3)">主力价格带</div><div class="num" style="font-weight: 700">¥100–200</div></div>
+            </div>
+            <div style="font-size: 12px; color: var(--tx2); margin-bottom: 6px">去年春节档品类占比</div>
+            <template data-sc="for" list="{{festCats}}" as="c" hint-placeholder-count="4">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px"><span style="width: 64px">{{c.n}}</span><span style="flex: 1; height: 5px; border-radius: 999px; background: var(--solid)"><span style="{{c.bar}}"></span></span><span class="num" style="width: 34px; text-align: right; color: var(--tx2)">{{c.pct}}</span></div>
+            </template>
+            <div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin: 10px 0">去年年货节商城平均提前 <b style="color: var(--tx1)">38 天</b>开通，建议 <b style="color: var(--tx1)">12 月 30 日前</b>和客户确认年货节方案。</div>
+            <div style="display: flex; gap: 6px"><a href="#" class="btn-ai" style="height: 28px; font-size: 12px; text-decoration: none; color: #FFFFFF">看粮油、坚果货盘</a><button onClick="{{soonPlan}}" class="btn-ghost" style="height: 28px; font-size: 12px; background: var(--solid)">导出备货参考</button></div>
+          </div>
+          <div data-prd="clients" style="border-radius: 14px; background: var(--chip); padding: 14px 16px">
+            <div style="font-weight: 600; margin-bottom: 2px">客户画像 · 用来做提案</div>
+            <div style="font-size: 12px; color: var(--tx3); margin-bottom: 10px">按甲方企业汇总全部项目</div>
+            <template data-sc="for" list="{{clients}}" as="c" hint-placeholder-count="5">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; background: var(--solid); margin-bottom: 6px">
+                <span style="width: 30px; height: 30px; flex: none; border-radius: 9px; background: rgba(15,143,132,.12); color: var(--brand); font-weight: 700; display: inline-flex; align-items: center; justify-content: center">{{c.ini}}</span>
+                <span style="min-width: 0; flex: 1"><b style="display: block; font-size: 14px">{{c.n}}</b><span style="display: block; font-size: 12px; color: var(--tx2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.meta}}</span></span>
+                <span style="text-align: right; font-size: 12px; color: var(--tx2)"><b class="num" style="display: block; font-size: 14px; color: var(--tx1)">{{c.per}}</b>人均消费</span>
+              </div>
+            </template>
+            <button onClick="{{soonPitch}}" class="btn-ghost" style="height: 28px; font-size: 12px; background: var(--solid); margin-top: 4px">导出客户画像</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</div>
+<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 520px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
+  <div style="padding: 16px 18px 14px; border-bottom: 1px solid #E3E6F5">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="font-size: 11px; font-weight: 700; color: #FFFFFF; background: #5B6BD5; border-radius: 4px; padding: 2px 6px; letter-spacing: 0.5px">PRD</span>
+      <span style="font-size: 15px; font-weight: 600">{{prdTitle}}</span>
+      <button onClick="{{prdToggleLines}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #C9CEF0; border-radius: 6px; background: #FFFFFF; color: #3B4BB8; font-size: 12px; cursor: pointer">{{prdLinesLabel}}</button>
+    </div>
+    <div style="margin-top: 8px; font-size: 12px; color: #646A73; line-height: 1.7">{{prdIntro}}</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; font-size: 11px">
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #EEF2FF; color: #3B4BB8">交互</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E8F6F4; color: #0B6E66">数据</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F2F3F5; color: #1F2329">规则</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F5EDF7; color: #7A2E78">埋点</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #FFF1E8; color: #B54708">待确认</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E9F0FB; color: #1F4E9A">字段</span>
+      <span style="color: #646A73; line-height: 18px">· 鼠标停在卡片上高亮对应区域</span>
+    </div>
+  </div>
+  <div data-prd-cards="1" style="position: relative; height: {{prdPanelH}}px">
+    <template data-sc="for" list="{{prdCardList}}" as="c" hint-placeholder-count="4">
+      <div data-prd-card="{{c.k}}" onMouseEnter="{{c.enter}}" onMouseLeave="{{c.leave}}" style="{{c.style}}">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: #5B6BD5; color: #FFFFFF; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{c.no}}</span>
+          <span style="font-size: 14px; font-weight: 600">{{c.title}}</span>
+        </div>
+        <template data-sc="if" value="{{c.unanchored}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 4px; font-size: 11px; color: #8F959E">{{c.hint}}</div></template>
+        <template data-sc="for" list="{{c.secs}}" as="x" hint-placeholder-count="2">
+          <div>
+            <template data-sc="if" value="{{x.isText}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; gap: 8px; margin-top: 8px">
+                <span style="{{x.tagStyle}}">{{x.label}}</span>
+                <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+              </div>
+            </template>
+            <template data-sc="if" value="{{x.isTable}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 10px">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+                  <span style="{{x.tagStyle}}">{{x.label}}</span>
+                  <span style="font-size: 12px; color: #646A73">{{x.caption}}</span>
+                </div>
+                <div role="table" style="border: 1px solid #E3E6F5; border-radius: 8px; overflow: hidden">
+                  <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 6px 10px; background: #F4F6FD; font-size: 11px; font-weight: 600; color: #3B4BB8">
+                    <span role="columnheader">字段</span><span role="columnheader">口径</span><span role="columnheader">来源</span>
+                  </div>
+                  <template data-sc="for" list="{{x.rows}}" as="r" hint-placeholder-count="3">
+                    <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 7px 10px; border-top: 1px solid #EEF0F6; font-size: 12px; line-height: 1.6">
+                      <span role="cell" style="font-weight: 600; color: #1F2329">{{r.f}}</span>
+                      <span role="cell" style="color: #33373D">{{r.d}}</span>
+                      <span role="cell" style="color: #646A73; overflow-wrap: anywhere">{{r.s}}</span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+</aside>
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 90">
+  <template data-sc="for" list="{{prdLineList}}" as="ln" hint-placeholder-count="0">
+    <div style="display: contents"><div style="{{ln.box}}"></div><div style="{{ln.s1}}"></div><div style="{{ln.s2}}"></div><div style="{{ln.s3}}"></div><div style="{{ln.dot}}"></div></div>
+  </template>
+</div>
+</div>
+</template>
+<div id="dc-mount"></div>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1960,"height":2200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { mod: 'data', scope: 'active', open: 'zjdx', hm: -1, toast: '' };
+  }
+
+  menuData() {
+    return [
+      { id: 'fav', name: '常用', hint: '可自定义', sections: [
+        { items: [ { n: '资源广场', href: '#' }, { n: '代发订单' }, { n: '售后管理', isNew: true }, { n: '我的商城' } ] } ] },
+      { id: 'home', name: '工作台', link: true },
+      { id: 'goods', name: '商品', hint: '平台选货', sections: [
+        { t: '选货', items: [ { n: '资源广场', href: '#', renamed: true, tip: '平台货盘在这里看明细、上架、代发；原入口只在首页' }, { n: '挑选商品', top: true }, { n: '代发选品', top: true, tip: '原「其他代发 › 代发选品」，已选商品作为选品购物车' }, { n: '本地生活', top: true, renamed: true, tip: '原「本地资源场景」9 项合为一个入口' } ] },
+        { t: '变更通知', top: true, items: [ { n: '商品变更', renamed: true, tip: '合并：商品变更审核、商品替换日志、代发商品变更通知' } ] } ] },
+      { id: 'store', name: '店铺', hint: '自有 · 专供', top: true, sections: [
+        { t: '店铺', items: [ { n: '自有店铺', soon: true, tip: '即将开放：管理会员自己的店铺' }, { n: '专供店铺', soon: true, tip: '即将开放：管理为指定企业专供的店铺' } ] },
+        { t: '商品管理', items: [ { n: '商品库', renamed: true, tip: '原「商品 › 商品管理」；只含会员自建和导入的商品，平台货盘在「商品 › 资源广场」' }, { n: '商品发布' }, { n: '商品导入' } ] },
+        { t: '供应商', items: [ { n: '供应商管理', renamed: true, tip: '原「商品 › 供应商」，整组移到店铺' }, { n: '供应商新增' }, { n: '供应商导入' }, { n: '供应商登录' } ] } ] },
+      { id: 'mall', name: '商城', sections: [
+        { t: '商城管理', items: [ { n: '我的商城' }, { n: '我的礼包' }, { n: '扩展应用', top: true, renamed: true, tip: '原「商城扩展应用」6 项合为一个入口，弹窗广告也挪到这里' } ] } ] },
+      { id: 'mkt', name: '营销', sections: [
+        { t: '名片营销', items: [ { n: '我的名片' }, { n: '数据监测' }, { n: '名片设置' } ] },
+        { t: '卡券营销', items: [ { n: '卡券兑换' }, { n: '卡券推广' }, { n: '卡券营销' } ] } ] },
+      { id: 'order', name: '订单', sections: [
+        { t: '商城订单', items: [ { n: '订单管理' }, { n: '服务订单' }, { n: '下单提醒' } ] },
+        { t: '代发', items: [ { n: '批量下单', renamed: true, tip: '原「猫超代发」「其他代发」各一个批量下单，已合并' }, { n: '代发订单', renamed: true, tip: '合并：猫超代发 › 下单管理 + 其他代发 › 下单历史' } ] },
+        { t: '售后理赔', items: [ { n: '售后管理', isNew: true, tip: '含平台猫超售后、上门取件' }, { n: '理赔管理', isNew: true }, { n: '退货地址设置', top: true }, { n: '售后代运营', top: true, renamed: true, tip: '原「代售后查询」；平台代处理售后的服务，开通才显示' } ] },
+        { t: '猫超集采', items: [ { n: '集采报价' }, { n: '集采订单', renamed: true, tip: '原「下单管理」，改名去掉重名' } ] } ] },
+      { id: 'qym', name: '企业码', sections: [
+        { t: '服务企业', items: [ { n: '企业管理' }, { n: '员工管理' }, { n: '费控管理' }, { n: '额度发放' } ] },
+        { t: '订单中心', items: [ { n: '消费记录' }, { n: '企业码发票', renamed: true, tip: '原「发票管理」，与财务里的同名菜单区分' }, { n: '发票汇总' } ] } ] },
+      { id: 'fin', name: '财务', sections: [
+        { t: '平台财务', items: [ { n: '账户管理' }, { n: '发票管理' }, { n: '集采财务' }, { n: '营业额申报', top: true } ] },
+        { t: '商城财务', items: [ { n: '短信管理' }, { n: '额度管理' }, { n: '额度明细' }, { n: '开票审核' }, { n: '微信支付配置' } ] },
+        { t: '交易明细', items: [ { n: '服务交易明细' }, { n: '代发交易明细', renamed: true, tip: '原「猫超交易明细」，是否改名待确认' }, { n: '商品交易明细', top: true } ] } ] },
+      { id: 'data', name: '数据', sections: [
+        { items: [ { n: '经营分析', isNew: true, href: 'biz.html', tip: '按商城项目看经营情况，为下一单做准备' }, { n: '订单分析' }, { n: '用户分析' }, { n: '订单明细' } ] } ] }
+    ];
+  }
+
+
+  flash(t) {
+    clearTimeout(this._t);
+    this.setState({ toast: t });
+    this._t = setTimeout(() => this.setState({ toast: '' }), 2600);
+  }
+
+  pageVals() {
+    const st = this.state;
+    // ---- shell: rail + secondary panel (数据 module active) ----
+    const modIds = ['fav', 'home', 'goods', 'store', 'mall', 'mkt', 'order', 'qym', 'fin', 'data'];
+    const MD = this.menuData();
+    const curMod = st.mod;
+    const rail = MD.map((g) => {
+      const on = g.id === curMod;
+      const r = { name: g.id === 'fav' ? '常用' : g.name, tip: g.hint ? g.name + '（' + g.hint + '）' : g.name, onStr: on ? 'true' : 'false',
+        cls: on ? 'rb on' : 'rb', dot: g.id !== 'fav' && (g.sections || []).some((s) => s.items.some((it) => it.isNew)),
+        pick: () => this.setState({ mod: g.id }) };
+      modIds.forEach((k) => { r['ic_' + k] = k === g.id; });
+      return r;
+    });
+    const mk = (arr) => arr.map((it) => ({ name: it.n, href: it.href || '#', tip: it.tip || it.n, isNew: !!it.isNew, isRenamed: !!it.renamed, isSoon: !!it.soon }));
+    const curG = MD.find((g) => g.id === curMod) || MD[1];
+    const plain = 'margin-bottom: 8px';
+    const panelSections = curG.link
+      ? [{ title: '常用', hasTitle: true, items: mk(MD[0].sections[0].items), spot: false, wrapStyle: plain }]
+      : curG.sections.map((s) => ({ title: s.t || '', hasTitle: !!s.t, items: mk(s.items), spot: false, wrapStyle: plain }));
+
+    // ---- projects ----
+    const TODAY = new Date(2026, 10, 24);
+    const D = (s) => { const a = s.split('-').map(Number); return new Date(a[0], a[1] - 1, a[2]); };
+    const days = (a, b) => Math.round((b - a) / 86400000);
+    const wan = (v) => '¥' + (v / 10000).toFixed(1) + ' 万';
+    const yuan = (v) => '¥' + Math.round(v).toLocaleString('en-US');
+    const pct = (v) => (v * 100).toFixed(1).replace('.0', '') + '%';
+    const RAW = [
+      { id: 'zjdx', name: '浙江电信 · 中秋国庆福利商城', client: '浙江电信', start: '2026-09-01', end: '2026-12-15', issued: 640000, used: 262400, gmv: 270000, gp: 40500, staff: 1600, buyers: 928, daily: 2100, cvr: '12.8%',
+        weeks: [42, 38, 30, 26, 22, 18, 14, 12], cats: [['家清日用', 31], ['粮油米面', 24], ['坚果零食', 18], ['个护', 12], ['其他', 15]], dist: [672, 486, 322, 120] },
+      { id: 'jl', name: '吉利汽车 · 双十一员工福利商城', client: '吉利汽车', start: '2026-11-01', end: '2026-11-30', issued: 300000, used: 261000, gmv: 279000, gp: 36300, staff: 750, buyers: 705, daily: 5200, cvr: '22.4%',
+        weeks: [0, 0, 0, 0, 96, 82, 64, 37], cats: [['数码家电', 36], ['酒水饮料', 21], ['粮油米面', 17], ['坚果零食', 14], ['其他', 12]], dist: [45, 268, 301, 136] },
+      { id: 'wy', name: '网易 · 员工生日福利商城', client: '网易', start: '', end: '', issued: 180000, used: 151200, gmv: 168300, gp: 28600, staff: 2200, buyers: 2002, daily: 480, cvr: '31.6%',
+        weeks: [14, 12, 15, 13, 16, 14, 12, 13], cats: [['蛋糕卡券', 44], ['坚果零食', 23], ['个护', 12], ['家清日用', 9], ['其他', 12]], dist: [198, 1580, 380, 42] },
+      { id: 'hzb', name: '杭州银行 · 2027 年货节福利商城', client: '杭州银行', start: '2026-11-01', end: '2027-01-31', issued: 1200000, used: 228000, gmv: 246500, gp: 32800, staff: 3000, buyers: 1050, daily: 9800, cvr: '16.1%',
+        weeks: [0, 0, 0, 0, 48, 62, 71, 66], cats: [['粮油米面', 34], ['坚果零食', 26], ['酒水饮料', 14], ['家清日用', 10], ['其他', 16]], dist: [1950, 640, 330, 80] },
+      { id: 'al', name: '阿里巴巴 · 端午福利商城', client: '阿里巴巴', start: '2026-05-20', end: '2026-07-20', issued: 500000, used: 472000, gmv: 496000, gp: 69400, staff: 1250, buyers: 1200, daily: 0, cvr: '27.9%',
+        weeks: [0, 0, 0, 0, 0, 0, 0, 0], cats: [['粮油米面', 29], ['酒水饮料', 22], ['坚果零食', 19], ['生鲜', 16], ['其他', 14]], dist: [50, 512, 498, 190] }
+    ];
+    const RANK = { '核销偏慢': 0, '即将结束': 1, '未设置兑换期': 2, '健康': 3, '已结束': 4 };
+    const tone = {
+      '核销偏慢': 'background: var(--warnbg); color: var(--warn)',
+      '即将结束': 'background: var(--infobg); color: var(--info)',
+      '未设置兑换期': 'background: var(--chip2); color: var(--tx2)',
+      '健康': 'background: rgba(15,143,132,.12); color: var(--brand)',
+      '已结束': 'background: var(--chip); color: var(--tx3)'
+    };
+    const calc = RAW.map((p) => {
+      const hasPeriod = !!(p.start && p.end);
+      const cp = p.used / p.issued;
+      let tp = 0, left = 0, total = 0, status;
+      if (hasPeriod) {
+        total = days(D(p.start), D(p.end)) + 1;
+        const el = Math.min(total, Math.max(0, days(D(p.start), TODAY) + 1));
+        tp = el / total; left = Math.max(0, days(TODAY, D(p.end)));
+        if (TODAY > D(p.end)) status = '已结束';
+        else if (tp >= 0.5 && tp - cp >= 0.25) status = '核销偏慢';
+        else if (left <= 30) status = '即将结束';
+        else status = '健康';
+      } else status = '未设置兑换期';
+      const fcUsed = hasPeriod && status !== '已结束' ? Math.min(p.issued, p.used + p.daily * left) : p.used;
+      return Object.assign({}, p, { hasPeriod, cp, tp, left, total, status, fcUsed, fcRate: fcUsed / p.issued });
+    });
+    const scopeAll = st.scope === 'all';
+    const inScope = calc.filter((p) => scopeAll || p.status !== '已结束');
+    const sorted = inScope.slice().sort((a, b) => RANK[a.status] - RANK[b.status]);
+    const projects = sorted.map((p) => {
+      const open = st.open === p.id;
+      const slow = p.status === '核销偏慢';
+      const md = (s) => { const d = D(s); return (d.getMonth() + 1) + '/' + d.getDate(); };
+      const unspent = p.issued - p.fcUsed;
+      const actions = slow ? [{ label: '发起促活活动', cls: 'btn-ai', act: () => this.flash('活动配置即将上线：可给未下单员工推送提醒和限时券') }, { label: '申请延期', cls: 'btn-ghost', act: () => this.flash('延期申请即将上线：提交后由客户在企业端确认') }]
+        : p.status === '即将结束' ? [{ label: '导出项目复盘', cls: 'btn-ai', act: () => this.flash('项目复盘导出即将上线') }, { label: '准备续约提案', cls: 'btn-ghost', act: () => this.flash('续约提案素材即将上线') }]
+        : p.status === '未设置兑换期' ? [{ label: '去设置兑换期', cls: 'btn-ai', act: () => this.flash('「商城设置 › 兑换期」为本次新增功能') }]
+        : [{ label: '查看商城', cls: 'btn-ghost', act: () => this.flash('跳转到该商城的管理页') }];
+      const wmax = Math.max.apply(null, p.weeks) || 1;
+      const distN = ['未下单', '下单 1 次', '下单 2–3 次', '下单 4 次以上'];
+      const distC = ['#C9CFD6', 'rgba(15,143,132,.45)', 'var(--stopB)', 'var(--stopA)'];
+      const dsum = p.dist.reduce((a, b) => a + b, 0);
+      return {
+        id: p.id, name: p.name, open, openStr: open ? 'true' : 'false', hasPeriod: p.hasPeriod, noPeriod: !p.hasPeriod,
+        toggle: () => this.setState({ open: open ? '' : p.id }),
+        rowStyle: 'display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.9fr) minmax(0, .9fr) minmax(0, .7fr) minmax(0, .7fr) minmax(0, 1.1fr) minmax(0, .9fr); gap: 12px; align-items: center; width: 100%; padding: 12px; border: 0; border-radius: 12px; background: ' + (open ? 'var(--chip)' : 'transparent') + '; color: var(--tx1); font-family: inherit; font-size: 14px; cursor: pointer; text-align: left',
+        periodText: p.hasPeriod ? p.client + ' · 兑换期 ' + p.start.replace(/-/g, '/') + ' – ' + p.end.replace(/-/g, '/') : p.client + ' · 兑换期未设置',
+        tpText: pct(p.tp).replace(/\.\d%/, '%'), cpText: pct(p.cp).replace(/\.\d%/, '%'),
+        cpStyle: 'width: 34px; text-align: right; font-weight: 600; color: ' + (slow ? 'var(--warn)' : 'var(--tx1)'),
+        timeBar: 'display: block; height: 5px; border-radius: 999px; background: #C9CFD6; width: ' + (p.tp * 100) + '%',
+        useBar: 'display: block; height: 5px; border-radius: 999px; background: ' + (slow ? 'var(--warn)' : 'var(--grad)') + '; width: ' + (p.cp * 100) + '%',
+        gmvText: wan(p.gmv), gpText: pct(p.gp / p.gmv), joinText: pct(p.buyers / p.staff).replace(/\.\d%/, '%'),
+        leftText: wan(p.issued - p.used), daysText: p.hasPeriod ? (p.status === '已结束' ? '已结束' : '剩 ' + p.left + ' 天') : '常年',
+        status: p.status, statusStyle: 'font-size: 12px; font-weight: 600; border-radius: 999px; padding: 0 9px; line-height: 22px; white-space: nowrap; ' + tone[p.status],
+        chev: 'margin-left: auto; color: var(--tx3); transition: transform .15s ease; transform: rotate(' + (open ? 180 : 0) + 'deg)',
+        dailyText: yuan(p.daily) + ' / 天', endShort: p.hasPeriod ? md(p.end) : '',
+        fcText: pct(p.fcRate), fcStyle: 'font-size: 28px; font-weight: 700; margin: 4px 0 2px; color: ' + (p.fcRate < 0.7 ? 'var(--warn)' : 'var(--brand)'),
+        fcNote: p.status === '已结束' ? '项目已结束，最终核销 ' + pct(p.cp) : (unspent > 0 ? '约 ' + wan(unspent) + ' 额度可能到期未核销' : '预计额度全部核销'),
+        actions,
+        weeks: p.weeks.map((v, i) => ({ tip: '第 ' + (i + 1) + ' 周 ¥' + v + ' 千', bar: 'flex: 1; border-radius: 4px 4px 0 0; min-height: 2px; height: ' + (v / wmax * 100) + '%; background: ' + (i === 7 ? 'var(--stopB)' : 'rgba(15,143,132,.35)') })),
+        cats: p.cats.map((c) => ({ n: c[0], pct: c[1] + '%', bar: 'height: 5px; border-radius: 999px; background: var(--grad); width: ' + c[1] / p.cats[0][1] * 100 + '%' })),
+        dist: p.dist.map((v, i) => ({ n: distN[i], v: v.toLocaleString('en-US') + ' 人 · ' + (v / dsum * 100).toFixed(0) + '%', seg: 'width: ' + (v / dsum * 100) + '%; background: ' + distC[i], dot: 'width: 10px; height: 10px; border-radius: 3px; flex: none; background: ' + distC[i] })),
+        distAria: p.dist.map((v, i) => distN[i] + ' ' + v + ' 人').join('，'),
+        cvr: p.cvr
+      };
+    });
+    // ---- overall ----
+    const sum = (k) => inScope.reduce((a, p) => a + p[k], 0);
+    const gmv = sum('gmv'), gp = sum('gp'), issued = sum('issued'), used = sum('used'), staff = sum('staff'), buyers = sum('buyers');
+    const risky = inScope.filter((p) => p.status === '核销偏慢').length;
+    const active = calc.filter((p) => p.status !== '已结束').length;
+    const meter = (r) => 'height: 6px; border-radius: 999px; background: var(--grad); width: ' + Math.min(100, r * 100) + '%';
+    const ovKpis = [
+      { label: '项目 GMV', value: wan(gmv), sub: '含员工额度支付和现金支付' },
+      { label: '毛利额 · 毛利率', value: wan(gp), sub: '毛利率 ' + pct(gp / gmv) },
+      { label: '额度核销率', value: pct(used / issued), sub: '已核销 ' + wan(used) + ' / 已发放 ' + wan(issued), hasMeter: true, meter: meter(used / issued) },
+      { label: '员工参与率', value: pct(buyers / staff), sub: buyers.toLocaleString('en-US') + ' / ' + staff.toLocaleString('en-US') + ' 人下过单', hasMeter: true, meter: meter(buyers / staff) },
+      { label: '项目', value: (scopeAll ? calc.length : active) + ' 个', sub: '进行中 ' + active + ' · 核销偏慢 ' + risky }
+    ];
+    // ---- monthly chart ----
+    const MONTHS = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+    const LAST = [68, 22, 9, 6, 18, 41, 8, 12, 52, 30, 15, 24];
+    const THIS = [82, 31, 12, 9, 26, 55, 11, 16, 71, 38, 61.2];
+    const top = 100;
+    const xs = (i) => (i + 0.5) / 12 * 100;
+    const ys = (v) => 100 - v / top * 92;
+    const smooth = (pts) => pts.map((p, i) => {
+      if (!i) return 'M' + p[0].toFixed(2) + ' ' + p[1].toFixed(2);
+      const a = pts[i - 1], cx = (a[0] + p[0]) / 2;
+      return 'C' + cx.toFixed(2) + ' ' + a[1].toFixed(2) + ' ' + cx.toFixed(2) + ' ' + p[1].toFixed(2) + ' ' + p[0].toFixed(2) + ' ' + p[1].toFixed(2);
+    }).join(' ');
+    const ptsT = THIS.map((v, i) => [xs(i), ys(v)]);
+    const mThis = smooth(ptsT);
+    const mArea = mThis + ' L' + ptsT[ptsT.length - 1][0].toFixed(2) + ' 100 L' + ptsT[0][0].toFixed(2) + ' 100 Z';
+    const mLast = smooth(LAST.map((v, i) => [xs(i), ys(v)]));
+    const mTicks = [0, .25, .5, .75, 1].map((f) => ({ text: String(top * f),
+      line: 'position: absolute; left: 40px; right: 8px; bottom: ' + f * 92 + '%; border-top: 1px ' + (f ? 'dashed' : 'solid') + ' var(--chip2)',
+      label: 'position: absolute; left: 0; width: 32px; text-align: right; bottom: ' + f * 92 + '%; transform: translateY(50%); font-size: 12px; color: var(--tx3)' }));
+    const peaks = { 0: '春节', 5: '端午', 8: '中秋' };
+    const mCols = MONTHS.map((m, i) => {
+      const on = st.hm === i;
+      const hasThis = i < THIS.length;
+      const y = hasThis ? THIS[i] / top * 92 : LAST[i] / top * 92;
+      return { m, on, hasThis, vThis: hasThis ? '¥' + THIS[i] + ' 万' + (i === 10 ? '（至 11/24）' : '') : '—', vLast: '¥' + LAST[i] + ' 万',
+        enter: () => this.setState({ hm: i }), leave: () => this.setState({ hm: -1 }),
+        guide: on ? 'position: absolute; top: 0; bottom: 0; left: 50%; border-left: 1px dashed var(--brand); opacity: .5' : 'display: none',
+        dot: 'position: absolute; left: 50%; bottom: ' + y + '%; width: ' + (on ? 12 : 8) + 'px; height: ' + (on ? 12 : 8) + 'px; transform: translate(-50%, 50%); border-radius: 50%; background: var(--solid); border: 2px solid var(--stopB)',
+        peak: !!peaks[i], peakText: peaks[i] || '', peakStyle: 'position: absolute; left: 50%; bottom: calc(' + y + '% + 10px); transform: translateX(-50%); font-size: 12px; color: var(--tx2); white-space: nowrap',
+        tipPos: 'left: 50%; bottom: calc(' + Math.max(y, LAST[i] / top * 92) + '% + 30px); transform: translateX(-50%)' };
+    });
+    // ---- future ----
+    const exp = calc.filter((p) => p.hasPeriod && p.status !== '已结束' && p.left <= 30).sort((a, b) => a.left - b.left);
+    const expiring = exp.map((p) => {
+      const good = p.cp >= 0.7;
+      return { name: p.name, days: '剩 ' + p.left + ' 天',
+        badge: 'margin-left: auto; flex: none; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 0 8px; line-height: 22px; ' + (good ? 'background: rgba(15,143,132,.12); color: var(--brand)' : 'background: var(--warnbg); color: var(--warn)'),
+        desc: good ? '已核销 ' + pct(p.cp) + '、参与率 ' + pct(p.buyers / p.staff).replace(/\.\d%/, '%') + '，客户满意度高，适合准备续约。' : '已核销 ' + pct(p.cp) + '，预计约 ' + wan(p.issued - p.fcUsed) + ' 到期未核销，建议给未下单员工促活或申请延期。',
+        actions: good ? [{ label: '准备续约提案', cls: 'btn-ai', act: () => this.flash('续约提案素材即将上线') }] : [{ label: '发起促活活动', cls: 'btn-ai', act: () => this.flash('活动配置即将上线') }, { label: '申请延期', cls: 'btn-ghost', act: () => this.flash('延期申请即将上线') }] };
+    });
+    const festCats = [['粮油米面', 34], ['坚果零食', 22], ['酒水饮料', 15], ['家清日用', 11]].map((c) => ({ n: c[0], pct: c[1] + '%', bar: 'display: block; height: 5px; border-radius: 999px; background: var(--grad); width: ' + c[1] / 34 * 100 + '%' }));
+    const clients = [
+      ['阿', '阿里巴巴', '1,250 人 · 人均额度 ¥400 · 合作 4 次 · 偏好粮油、酒水', '¥413'],
+      ['吉', '吉利汽车', '750 人 · 人均额度 ¥400 · 合作 1 次 · 偏好数码家电', '¥396'],
+      ['浙', '浙江电信', '1,600 人 · 人均额度 ¥400 · 合作 2 次 · 偏好家清、粮油', '¥291'],
+      ['杭', '杭州银行', '3,000 人 · 人均额度 ¥400 · 合作 3 次 · 偏好粮油、坚果', '¥235'],
+      ['网', '网易', '2,200 人 · 生日福利常年 · 偏好蛋糕卡券', '¥84']
+    ].map((c) => ({ ini: c[0], n: c[1], meta: c[2], per: c[3] }));
+    const scopes = [['active', '进行中项目'], ['all', '全部项目']].map((s) => ({ label: s[1], sel: st.scope === s[0] ? 'true' : 'false', cls: st.scope === s[0] ? 'tabp on' : 'tabp', pick: () => this.setState({ scope: s[0] }) }));
+    return {
+      rootClass: 'ai', rail, panelSections, panelTitle: curG.link ? '工作台' : curG.name, panelHint: curG.hint || '', panelHasHint: !!curG.hint && !curG.link,
+      asideStyle: 'width: 212px; flex: none; padding: 18px 12px; border-right: 1px solid var(--bd); background: var(--rail); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px)',
+      askAi: () => this.flash('AI 助手即将上线'),
+      scopes, scopeNote: scopeAll ? '全部 ' + calc.length + ' 个项目，含已结束' : '进行中 ' + active + ' 个项目',
+      ovKpis, mThis, mArea, mLast, mTicks, mCols, projects, expiring, festCats, clients,
+      toastOn: !!st.toast, toastText: st.toast,
+      soonExport: () => this.flash('导出即将上线：按当前范围导出项目清单和整体数据'),
+      soonAi: () => this.flash('AI 经营复盘为 AI 版能力，即将上线'),
+      soonPlan: () => this.flash('备货参考导出即将上线'),
+      soonPitch: () => this.flash('客户画像导出即将上线')
+    };
+  }
+
+  prdMeasure() {
+    const root = document.querySelector('[data-prd-root]');
+    const box = document.querySelector('[data-prd-cards]');
+    if (!root || !box) return;
+    const rb = root.getBoundingClientRect();
+    const sc = root.offsetWidth ? rb.width / root.offsetWidth : 1;
+    const bb = box.getBoundingClientRect();
+    const A = {};
+    document.querySelectorAll('[data-prd]').forEach((el) => {
+      const b = el.getBoundingClientRect();
+      if (b.width < 2 || b.height < 2) return;
+      A[el.getAttribute('data-prd')] = { x: (b.left - rb.left) / sc, y: (b.top - rb.top) / sc, w: b.width / sc, h: b.height / sc };
+    });
+    const H = {};
+    document.querySelectorAll('[data-prd-card]').forEach((el) => { H[el.getAttribute('data-prd-card')] = el.offsetHeight; });
+    const PX = (bb.left - rb.left) / sc, CY = (bb.top - rb.top) / sc;
+    const key = JSON.stringify([A, H, Math.round(PX), Math.round(CY)]);
+    if (key !== this._prdKey) { this._prdKey = key; this.setState({ prdA: A, prdH: H, prdPX: PX, prdCY: CY }); }
+  }
+  componentDidMount() { this.prdMeasure(); this._prdT = setInterval(() => this.prdMeasure(), 500); }
+  componentWillUnmount() { clearInterval(this._prdT); }
+  renderVals() { return Object.assign(this.pageVals(), this.prdVals()); }
+  prdVals() {
+    const st = this.state;
+    const A = st.prdA || {}, H = st.prdH || {};
+    const PX = st.prdPX || 0, CY = st.prdCY || 0;
+    const focus = st.prdFocus || '';
+    const cards = this.prdCards();
+    const withA = cards.filter((c) => A[c.k]).sort((a, b) => A[a.k].y - A[b.k].y);
+    const noA = cards.filter((c) => !A[c.k]);
+    const order = withA.concat(noA);
+    let y = 0; const pos = {};
+    order.forEach((c) => {
+      const want = A[c.k] ? Math.max(0, A[c.k].y - CY - 4) : y;
+      const top = Math.max(want, y);
+      pos[c.k] = top; y = top + (H[c.k] || 150) + 12;
+    });
+    const C1 = '#5B6BD5';
+    const showLines = st.prdLines !== false;
+    const prdLineList = !showLines ? [] : withA.map((c) => {
+      const a = A[c.k];
+      const op = focus ? (focus === c.k ? 1 : 0.15) : 0.6;
+      const w = focus === c.k ? 2 : 1.5;
+      const dash = w + 'px dashed ' + C1;
+      const ax = a.x + a.w + 4, ay = a.y + Math.min(a.h / 2, 24);
+      const gx = PX - 16, cy = CY + pos[c.k] + 20;
+      return {
+        box: 'position: absolute; left: ' + (a.x - 4) + 'px; top: ' + (a.y - 4) + 'px; width: ' + (a.w + 8) + 'px; height: ' + (a.h + 8) + 'px; border: ' + dash + '; border-radius: 8px; box-sizing: border-box; opacity: ' + op,
+        s1: 'position: absolute; left: ' + Math.min(ax, gx) + 'px; top: ' + ay + 'px; width: ' + Math.abs(gx - ax) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        s2: 'position: absolute; left: ' + gx + 'px; top: ' + Math.min(ay, cy) + 'px; height: ' + Math.abs(cy - ay) + 'px; border-left: ' + dash + '; opacity: ' + op,
+        s3: 'position: absolute; left: ' + gx + 'px; top: ' + cy + 'px; width: ' + (PX - gx) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        dot: 'position: absolute; left: ' + (ax - 4) + 'px; top: ' + (ay - 4) + 'px; width: 8px; height: 8px; border-radius: 50%; background: ' + C1 + '; opacity: ' + op
+      };
+    });
+    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'], '字段': ['#E9F0FB', '#1F4E9A'] };
+    const nums = {}; order.forEach((c, i) => { nums[c.k] = i + 1; });
+    return {
+      prdTitle: this.prdTitle(), prdIntro: this.prdIntro(),
+      prdCardList: order.map((c) => {
+        const on = focus === c.k;
+        return {
+          k: c.k, no: String(nums[c.k]), title: c.title,
+          unanchored: !A[c.k], hint: c.hide || '当前界面未显示这个区域',
+          secs: c.secs.map((x) => {
+            const isT = !Array.isArray(x);
+            const lab = isT ? (x.label || '字段') : x[0];
+            const tg = TAG[lab] || TAG['规则'];
+            return { isText: !isT, isTable: isT, label: lab, text: isT ? '' : x[1], caption: isT ? (x.caption || '') : '',
+              rows: isT ? x.rows.map((r) => ({ f: r[0], d: r[1], s: r[2] || '' })) : [],
+              tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + tg[0] + '; color: ' + tg[1] };
+          }),
+          enter: () => this.setState({ prdFocus: c.k }), leave: () => this.setState({ prdFocus: '' }),
+          style: 'position: absolute; left: 16px; right: 16px; top: ' + pos[c.k] + 'px; background: #FFFFFF; border-radius: 10px; padding: 12px 14px; box-sizing: border-box; border: 1px solid ' + (on ? C1 : '#E3E6F5') + '; box-shadow: ' + (on ? '0 4px 14px rgba(91,107,213,0.18)' : 'none')
+        };
+      }),
+      prdLineList, prdPanelH: String(Math.max(y + 24, 400)),
+      prdToggleLines: () => this.setState({ prdLines: st.prdLines === false }),
+      prdLinesLabel: showLines ? '隐藏连线' : '显示连线'
+    };
+  }
+
+  prdTitle() { return "会员端 · 经营分析"; }
+  prdIntro() { return "面向会员：一个商城 = 一个项目。看每个项目和整体的经营情况，并用历史数据为下一单做准备。全部为规则统计，V1 可上线；带 ✦ 的是 AI 版能力，本版只预留入口。"; }
+  prdBaseCards() { return [{"k": "overall", "title": "整体经营", "secs": [["规则", "面向会员（服务商）。一个商城 = 一个项目。默认统计「进行中项目」（兑换期未结束或未设置兑换期的商城），可切到「全部项目」含已结束。"], ["数据", "五个指标：项目 GMV、毛利额与毛利率、额度核销率、员工参与率、项目数（进行中 / 核销偏慢）。"], ["交互", "指标卡只展示，不切换下方图表；比率类指标带进度条。右上「导出」「AI 经营复盘」本版只预留入口。"], {"label": "字段", "caption": "统计范围内所有项目合计", "rows": [["项目 GMV", "统计范围内各商城支付成功订单的商城售价合计（员工额度支付 + 现金支付），扣除已退款金额", "业务库·商城订单、退款单"], ["毛利额", "Σ（商城售价 − 会员结算价）× 数量，扣除退款对应的毛利。会员结算价：该商品有会员专供价取专供价，否则取会员价；商城售价是各商城单独定的价", "业务库·商城订单明细、商品会员价 / 会员专供价"], ["毛利率", "毛利额 ÷ 项目 GMV", "页面计算"], ["已发放额度", "统计范围内各商城给员工发放的商城余额 + 商城积分（积分按站点比例折算成金额）", "业务库·发放记录"], ["已核销额度", "员工用商城余额和商城积分实际支付的金额（积分同样折算成金额），扣除退回额度", "业务库·商城订单支付明细"], ["额度核销率", "已核销额度 ÷ 已发放额度", "页面计算"], ["员工参与率", "至少有 1 笔支付成功订单的员工数 ÷ 获得过额度的员工数", "业务库·发放记录、商城订单"], ["核销偏慢", "状态为「核销偏慢」的项目数，规则见「项目经营」", "页面计算"]]}]}, {"k": "trend", "title": "月度 GMV · 今年 vs 去年", "secs": [["数据", "按月汇总会员全部业务的 GMV（商城 + 代发 + 集采），今年实线、去年虚线；当月统计到今天。"], ["规则", "福利业务受节日影响大，用去年同月对比，不做环比。图上标出春节、端午、中秋三个节点所在月份。"], ["交互", "悬停显示当月今年 / 去年两个值。"]]}, {"k": "mix", "title": "业务构成 · 本月", "secs": [["数据", "本月 GMV 按业务拆分：商城（各项目合计）、代发、集采；下方一句话说明本月最主要的变化来源（规则：同比增量最大的前 2 个项目）。"]]}, {"k": "projects", "title": "项目经营", "secs": [["规则", "每行一个商城项目，按风险排序：核销偏慢 → 即将结束 → 未设置兑换期 → 健康 → 已结束。"], ["规则", "状态判断（按顺序命中第一条）：\n· 未设置兑换期：商城没有兑换期；\n· 已结束：今天晚于兑换期结束日；\n· 核销偏慢：时间进度 ≥ 50%，且时间进度 − 额度核销进度 ≥ 25 个百分点；\n· 即将结束：剩余天数 ≤ 30；\n· 其他为健康。"], ["交互", "点一行展开项目详情，再点收起；同一时间只展开一个。"], ["待确认", "【新需求】目前商城没有维护兑换期的地方：需在「商城 › 我的商城 › 商城设置」新增「兑换期」（开始日期、结束日期，可不填表示常年）；历史商城默认为空，按「未设置兑换期」展示。核销偏慢的两个阈值（50%、25 个百分点）需业务确认。"], {"label": "字段", "caption": "每个项目", "rows": [["时间进度", "（今天 − 兑换期开始日 + 1）÷ 兑换期总天数，上限 100%", "商城设置·兑换期（新增）"], ["额度核销进度", "该商城已核销额度 ÷ 已发放额度", "业务库·发放记录、商城订单支付明细"], ["GMV、毛利率", "口径同「整体经营」，只取该商城", "业务库·商城订单明细"], ["参与率", "该商城下过单的员工 ÷ 该商城获得额度的员工", "业务库·发放记录、商城订单"], ["剩余额度", "已发放额度 − 已核销额度", "页面计算"], ["剩余天数", "兑换期结束日 − 今天；未设置兑换期显示「常年」", "商城设置·兑换期（新增）"]]}]}, {"k": "detail", "title": "项目详情（展开）", "secs": [["数据", "四块：核销预测、近 8 周 GMV、品类排行（GMV 占比前 4 + 其他）、员工购买分布（未下单 / 1 次 / 2–3 次 / 4 次以上），底部附 C 端访问 → 支付转化率。"], ["规则", "核销预测（线性推算，V1 不用 AI）：预计核销 = 已核销 + 近 14 天日均核销 × 剩余天数，不超过已发放额度。预计核销率 < 70% 标橙。未设置兑换期的项目不预测，提示去设置。"], ["交互", "按状态给动作：核销偏慢 →「发起促活活动」「申请延期」；即将结束 →「导出项目复盘」「准备续约提案」；未设置兑换期 →「去设置兑换期」。本版除「去设置兑换期」外都只预留入口。"], {"label": "字段", "caption": "", "rows": [["近 14 天日均核销", "最近 14 个自然日的已核销额度 ÷ 14", "业务库·商城订单支付明细"], ["品类", "按商品一级类目汇总该商城 GMV", "业务库·商城订单明细、商品类目"], ["员工购买分布", "按获得额度的员工，统计其在该商城的支付成功订单数分段", "业务库·发放记录、商城订单"], ["访问 → 支付转化", "支付成功人数 ÷ 已登录访问人数（该商城）", "埋点 mall_enter、pay_result"]]}]}, {"k": "future", "title": "为下一单做准备", "secs": [["规则", "三块都是规则统计，V1 可上线；AI 版在此基础上加原因解释和提案生成。"]]}, {"k": "expire", "title": "即将到期 · 30 天内", "secs": [["规则", "取兑换期在 30 天内结束的进行中项目，按剩余天数排序。按预计核销率给建议：≥ 70% 提示准备续约；< 70% 提示促活或延期，并给出预计到期未核销的额度。"]]}, {"k": "festival", "title": "下一个节点", "secs": [["数据", "取福利节点日历里最近的下一个节点（春节、端午、中秋等），显示日期和剩余天数；参考去年同一节点档期（节点前两个月）的 GMV、人均消费、主力价格带、品类占比。"], ["规则", "建议确认方案的日期 = 节点日期 − 去年同节点商城平均提前开通天数。「看货盘」按去年占比最高的两个品类跳到资源广场对应货盘。"], ["待确认", "节点日历由运营后台维护还是写死；会员没有去年同期数据时，是否用平台同规模会员的均值代替。"], {"label": "字段", "caption": "", "rows": [["人均消费", "去年档期 GMV ÷ 去年档期下过单的员工数", "业务库·商城订单"], ["主力价格带", "按订单商品单价分段（¥0–50 / 50–100 / 100–200 / 200+），取 GMV 占比最高的一段", "业务库·商城订单明细"], ["平均提前开通天数", "去年该节点相关商城的首个可兑换日到节点日期的平均天数", "商城设置·兑换期（新增）"]]}]}, {"k": "clients", "title": "客户画像", "secs": [["数据", "按甲方企业汇总全部项目：员工数、人均额度、合作次数（项目数）、偏好品类（GMV 前 2）、人均消费；按人均消费排序。"], ["规则", "只展示会员自己项目里的数据，不出现其他会员的客户。"], ["交互", "「导出客户画像」本版只预留入口，后续用于生成提案素材。"], ["待确认", "甲方企业的员工数取发放名单人数还是企业端登记人数。"]]}]; }
+  prdCards() { return this.prdBaseCards(); }
+}
+</script>
+</body>
+</html>
