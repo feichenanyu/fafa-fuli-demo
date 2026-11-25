@@ -75,7 +75,11 @@
       
     </div>
     <span style="color: #9BA5B9">AI 能力（问 AI、简报、推荐理由）均为预留，点击提示即将上线；数据为示意</span>
-    <button onClick="{{replay}}" style="margin-left: auto; height: 28px; padding: 0 12px; border: 1px solid #5FD3C6; border-radius: 6px; background: transparent; color: #5FD3C6; font-size: 12px; font-family: inherit; cursor: pointer">模拟首次登录</button>
+    <span style="margin-left: auto; color: #C9CDD4; font-size: 12px">待办</span>
+    <div style="display: flex; gap: 4px; background: rgba(255,255,255,.08); border-radius: 8px; padding: 3px">
+      <template data-sc="for" list="{{todoModes}}" as="m" hint-placeholder-count="3"><button onClick="{{m.pick}}" aria-pressed="{{m.onStr}}" style="{{m.style}}">{{m.label}}</button></template>
+    </div>
+    <button onClick="{{replay}}" style=" height: 28px; padding: 0 12px; border: 1px solid #5FD3C6; border-radius: 6px; background: transparent; color: #5FD3C6; font-size: 12px; font-family: inherit; cursor: pointer">模拟首次登录</button>
   </div>
 
   <div style="position: relative; display: flex; align-items: stretch; min-height: 1900px">
@@ -120,10 +124,10 @@
           </template>
         </div>
       </template>
-      <div class="card" style="margin-top: 14px; padding: 14px; border-radius: 14px">
-        <div style="display: flex; align-items: center; gap: 6px; font-weight: 600"><span class="gtext">◆</span>最高权益</div>
-        <div style="font-size: 12px; color: var(--tx2); margin: 4px 0 8px; line-height: 18px">全部渠道可用 · 2027-06-30 到期</div>
-        <a href="#" style="font-size: 12px; font-weight: 600">查看权益 →</a>
+      <div class="card" style="margin-top: 14px; padding: 10px 12px; border-radius: 12px; display: flex; align-items: center; gap: 8px">
+        <span class="gtext" style="font-weight: 700">◆</span>
+        <span style="font-size: 12px; color: var(--tx2)">当前权益</span>
+        <b style="margin-left: auto; font-size: 14px">最高权益</b>
       </div>
     </aside>
 
@@ -174,7 +178,7 @@
         <section data-prd="brief" class="card" aria-labelledby="brief-h" style="padding: 20px 22px">
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px">
             <span class="orb"></span>
-            <h2 id="brief-h" style="margin: 0; font-size: 20px; font-weight: 600">下午好，今天有 <span class="gtext">3 件事</span> 值得先看</h2>
+            <h2 id="brief-h" style="margin: 0; font-size: 20px; font-weight: 600">下午好，今天有 <span class="gtext">{{briefCount}} 件事</span> 值得先看</h2>
           </div>
           <p style="margin: 0 0 14px 38px; font-size: 12px; color: var(--tx3)">AI 简报 · 基于订单、货盘和 C 端埋点生成 · 11/24 14:00 更新</p>
           <div style="display: flex; flex-direction: column; gap: 8px">
@@ -232,17 +236,20 @@
                     <button onClick="{{tNext}}" class="btn-ai" style="margin-left: 0">{{tNextLabel}}</button>
                   </div>
                 </div></template>
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px">
+        <div style="display: flex; align-items: center; gap: 10px">
           <h2 id="todo-h" style="margin: 0; font-size: 16px; font-weight: 600">待处理</h2>
-          <span class="chip">共 <b class="num" style="color: var(--tx1)">18</b> 项</span>
+          <template data-sc="if" value="{{todoHasAny}}" hint-placeholder-val="{{ true }}"><span class="chip">共 <b class="num" style="color: var(--tx1)">{{todoTotal}}</b> 项</span></template>
+          <template data-sc="if" value="{{todoAllClear}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--tx2)"><span style="width: 20px; height: 20px; border-radius: 50%; background: rgba(15,143,132,.14); color: var(--brand); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">✓</span>已全部清空 · 今天已处理 <b class="num" style="color: var(--tx1)">12</b> 单 · 14:00 更新</span></template>
           <a href="#" style="margin-left: auto; font-size: 14px; font-weight: 500">全部订单 →</a>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px">
+        <template data-sc="if" value="{{todoHasAny}}" hint-placeholder-val="{{ true }}">
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 14px">
           <template data-sc="for" list="{{todos}}" as="t" hint-placeholder-count="5">
             <a href="#" class="lift" style="{{t.style}}">
               <div style="display: flex; align-items: center; gap: 8px">
                 <span class="ic" style="{{t.icStyle}}"><template data-sc="if" value="{{t.t_pay}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></template><template data-sc="if" value="{{t.t_ship}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></template><template data-sc="if" value="{{t.t_drop}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="m16 3 4 4-4 4"/><path d="M20 17H4"/><path d="m8 13-4 4 4 4"/></svg></template><template data-sc="if" value="{{t.t_after}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 7.8 8 9 4.6-1.2 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></template><template data-sc="if" value="{{t.t_change}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M4.2 7.5l2.6 1.5"/><path d="M17.2 15l2.6 1.5"/><path d="M4.2 16.5 6.8 15"/><path d="M17.2 9l2.6-1.5"/><circle cx="12" cy="12" r="3.5"/></svg></template></span>
                 <template data-sc="if" value="{{t.urgent}}" hint-placeholder-val="{{ false }}"><span class="chip" style="margin-left: auto; background: var(--warnbg); color: var(--warn); font-weight: 600">{{t.flag}}</span></template>
+                <template data-sc="if" value="{{t.zero}}" hint-placeholder-val="{{ false }}"><span class="chip" style="margin-left: auto">已清空 ✓</span></template>
               </div>
               <div class="num" style="{{t.numStyle}}">{{t.num}}</div>
               <div style="font-weight: 600; color: var(--tx1)">{{t.label}}</div>
@@ -250,6 +257,7 @@
             </a>
           </template>
         </div>
+        </template>
       </section>
 
       <section data-prd="pallet" class="card" aria-labelledby="pallet-h" style="padding: 18px 20px 20px; margin-bottom: 16px">
@@ -465,7 +473,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { dark: false, mod: 'home', tab: 'mall', kpi: 'gmv', hover: -1, toast: '', tour: 0, tourDone: false, banner: true };
+    this.state = { dark: false, mod: 'home', tab: 'mall', kpi: 'gmv', hover: -1, toast: '', tour: 0, tourDone: false, banner: true, todoMode: 'full' };
   }
 
   menuData() {
@@ -577,18 +585,35 @@ class Component extends DCLogic {
       { k: 'ship', tone: 'orange', title: '8 单待发货，其中 3 单已超过 24 小时', desc: '超时订单集中在「年货节福利商城」，建议先处理', cta: '去处理', primary: true, act: () => {} },
       { k: 'loss', tone: 'violet', title: '浏览商详 → 加购 流失 554 人，是转化最低的一步', desc: '加购失败 171 人：地区不可售 88、缺货 62', cta: '看原因', act: () => this.flash('soon') },
       { k: 'pallet', tone: 'teal', title: '新货盘「东方甄选」128 款上架，你还没有上架到任何商城', desc: '同规模服务商上架率 62%，适合年货节福利', cta: '一键上架', act: () => this.flash('brief') }
-    ].map((n) => ({ ...n, icStyle: tone[n.tone], btnCls: n.primary ? 'btn-ai' : 'btn-ghost', ['i_' + n.k]: true }));
+    ].filter((n) => !(n.k === 'ship' && st.todoMode !== 'full')).map((n) => ({ ...n, icStyle: tone[n.tone], btnCls: n.primary ? 'btn-ai' : 'btn-ghost', ['i_' + n.k]: true }));
 
-    const todoRaw = [
+    const mode = st.todoMode;
+    const todoRaw = (mode === 'partial' ? [
+      { k: 'pay', label: '待付款', num: 0, sub: '商城订单', tone: 'blue' },
+      { k: 'ship', label: '待发货', num: 2, sub: '商城订单', tone: 'orange' },
+      { k: 'drop', label: '代发待处理', num: 0, sub: '原猫超代发 · 其他代发', tone: 'teal' },
+      { k: 'after', label: '售后 · 理赔', num: 1, sub: '平台猫超 · 含上门取件', tone: 'violet' },
+      { k: 'change', label: '商品变更待确认', num: 0, sub: '代发商品下架 / 换品', tone: 'orange' }
+    ] : mode === 'clear' ? [] : [
       { k: 'pay', label: '待付款', num: 1, sub: '商城订单', tone: 'blue' },
       { k: 'ship', label: '待发货', num: 8, sub: '商城订单', tone: 'orange', urgent: true, flag: '3 单超 24h' },
       { k: 'drop', label: '代发待处理', num: 5, sub: '原猫超代发 2 · 其他代发 3', tone: 'teal' },
       { k: 'after', label: '售后 · 理赔', num: 1, sub: '平台猫超 · 含上门取件', tone: 'violet' },
       { k: 'change', label: '商品变更待确认', num: 3, sub: '代发商品下架 / 换品', tone: 'orange', urgent: true, flag: '影响代发' }
-    ];
-    const todos = todoRaw.map((t) => ({ ...t, num: String(t.num), urgent: !!t.urgent, ['t_' + t.k]: true, icStyle: tone[t.tone],
-      style: 'display: flex; flex-direction: column; gap: 2px; padding: 14px; border-radius: 14px; background: var(--solid); border: 1px solid var(--bd); color: var(--tx1)',
-      numStyle: 'font-size: 30px; font-weight: 700; line-height: 1.15; margin-top: 10px; color: ' + (t.urgent ? 'var(--warn)' : 'var(--tx1)') }));
+    ]);
+    const todos = todoRaw.map((t) => {
+      const zero = t.num === 0;
+      return { ...t, num: String(t.num), urgent: !!t.urgent && !zero, zero, ['t_' + t.k]: true,
+        icStyle: zero ? 'background: var(--chip); color: var(--tx3)' : tone[t.tone],
+        style: 'display: flex; flex-direction: column; gap: 2px; padding: 14px; border-radius: 14px; color: var(--tx1); ' + (zero ? 'background: transparent; border: 1px dashed var(--chip2)' : 'background: var(--solid); border: 1px solid var(--bd)'),
+        numStyle: 'font-size: 30px; font-weight: 700; line-height: 1.15; margin-top: 10px; color: ' + (zero ? 'var(--tx3)' : (t.urgent ? 'var(--warn)' : 'var(--tx1)')) };
+    });
+    const todoTotal = todoRaw.reduce((a, t) => a + t.num, 0);
+    const todoModes = [['full', '有待办'], ['partial', '部分为空'], ['clear', '全部清空']].map((m) => {
+      const on = mode === m[0];
+      return { label: m[1], onStr: on ? 'true' : 'false', pick: () => this.setState({ todoMode: m[0] }),
+        style: 'height: 26px; padding: 0 10px; border: 0; border-radius: 6px; cursor: pointer; font-size: 12px; font-family: inherit; ' + (on ? 'background: #FFFFFF; color: #1F2329; font-weight: 600' : 'background: transparent; color: #C9CDD4') };
+    });
 
     const pallets = [
       { name: '货盘上新 · 东方甄选', source: '飞象自营', count: 128, malls: 0, img: 'img/rice.jpg', alt: '柴火大院香稻贡米', tag: '新上架', tagBg: '#C2410C', reason: '同规模服务商上架率 62%，年货节福利热门' },
@@ -683,7 +708,7 @@ class Component extends DCLogic {
       briefToast: '一键上架即将上线：AI 会按你的商城和员工偏好推荐上架范围',
       showSoon: () => this.flash('soon'),
       insights, prompts: ['上周哪个商城转化最低？', '生成本月经营周报', '把东方甄选上架到 3 个商城'],
-      todos, pallets, days,
+      todos, pallets, days, todoModes, todoTotal: String(todoTotal), todoHasAny: todoRaw.length > 0, todoAllClear: todoRaw.length === 0, briefCount: String(insights.length),
       heroLine, heroArea: heroLine + ' L100 100 L0 100 Z',
       heroDot: 'position: absolute; right: 0; top: ' + last[1] + '%; width: 10px; height: 10px; transform: translate(50%, -50%); border-radius: 50%; background: var(--solid); border: 2px solid var(--stopC); box-shadow: 0 0 0 6px rgba(15,143,132,.18)',
       tabs: [['mall', '商城订单'], ['drop', '代发订单'], ['bulk', '集采订单']].map((b) => ({ label: b[1], sel: st.tab === b[0] ? 'true' : 'false', cls: st.tab === b[0] ? 'tabp on' : 'tabp', pick: () => this.setState({ tab: b[0], kpi: 'gmv', hover: -1 }) })),
@@ -776,7 +801,7 @@ class Component extends DCLogic {
 
   prdTitle() { return "会员工作台 · AI 工作台"; }
   prdIntro() { return "采发发主题色不变，用玻璃质感卡片与青绿光晕做 AI 工作台的视觉；AI 能力本版只预留入口。卡片随页面从上到下编号，「字段」表写每个数的口径和来源。"; }
-  prdBaseCards() { return [{"k": "guide", "title": "顶栏「更新指引」", "secs": [["交互", "点击后从第 1 步重新开始代发迁移指引；指引没看完时按钮带红点。"], ["规则", "按账号记录指引状态：未开始 / 中途关闭 / 已看完。看完后红点消失，入口保留到过渡期结束。"], ["埋点", "会员端事件（不在 C 端埋点需求内，另行定义）：guide_start、guide_step_view(step)、guide_skip(step)、guide_finish。"]]}, {"k": "ask", "title": "「问 AI」命令栏", "secs": [["规则", "本版只预留入口：输入框回车、⌘K、「发送」、左下「AI 助手」和简报下的「试试问」，点击后都提示「AI 助手即将上线」，不调用模型。"], ["交互", "上线后：⌘K 在任意页面唤起；回答优先给可点的结果（数据卡片、跳转链接、批量操作确认）；凡是写操作（如批量上架）一律先让用户确认再执行。"], ["规则", "只能问当前会员企业自己的数据；低档权益只能问已开通渠道的数据。"], ["埋点", "会员端事件（另行定义）：ai_entry_click(source = cmd / chip / rail)、ai_prompt_submit(text_len)。"], ["待确认", "首批能力范围（暂定：问数、生成经营周报、批量上架）；是否按权益限次。"]]}, {"k": "menu", "title": "左侧菜单 · 图标栏 + 二级栏", "secs": [["规则", "左侧 76px 图标栏放 10 个一级入口：常用、工作台、商品（平台选货）、店铺（自有 / 专供店铺、商品库、供应商）、商城、营销（名片营销、卡券营销）、订单、企业码、财务、数据；底部是「AI 助手」入口。右侧 212px 二级栏只显示当前模块的菜单，按小标题分组、单列排列。企微营销、客户整组隐藏；名片营销仍有人用，恢复。"], ["规则", "按会员权益过滤，不出现点进去为空的入口；店铺只对有自建商品和供应商权限的权益显示。模块里有新增菜单时图标带红点；改名或移动的菜单标「改」，新增的标「新」；「数据 › 商城分析」本版只预留入口，标「即将开放」。"], ["交互", "点图标切换二级栏，当前模块图标高亮。在工作台时二级栏显示「常用」和「最近访问」。指引进行中自动切到对应模块。二级栏底部固定权益卡：当前权益、可用渠道、到期日。"], ["规则", "「店铺」是会员的供货侧，「商城」是员工兑换的 C 端；二级栏标题旁注明「自有 · 专供」以免混淆。"], ["待确认", "旧菜单过渡期时长；「常用」默认预置项；「最近访问」保留几条（暂定 4 条）；名片营销是否按权益显示。"]]}, {"k": "banner", "title": "迁移指引条与分步指引", "secs": [["规则", "只对原来有「猫超代发」或「其他代发」菜单的账号显示。上线后首次登录工作台自动开始分步指引：代发 → 售后理赔 → 选货 → 店铺（仅有店铺权限的权益）→ 待处理 → 更新指引入口。"], ["交互", "「开始指引」从第 1 步开始；「完整说明」进入迁移说明页；× 只关闭指引条，顶栏入口保留。指引中页面变暗，当前讲解区域挖亮并弹出说明卡片，可跳过、上一步、下一步。"], ["数据", "步骤文案按权益变化：低档权益不出现「其他代发」「售后代运营」。"]], "hide": "指引条已关闭，点顶栏「模拟首次登录」可恢复"}, {"k": "brief", "title": "AI 今日简报", "secs": [["数据", "每天最多 3 条，按优先级取：① 超时待办（待发货超 24 小时、影响代发的商品变更）；② 商城转化最低的一步（C 端埋点 F4）；③ 新上架、本会员还没上架的货盘。没命中的类型跳过，不凑数。"], ["规则", "本版用规则模板生成文案，不调用大模型；每条只带一个动作。「去处理」直达对应列表并带筛选；「看原因」依赖商城分析、「一键上架」依赖 AI 能力，本版都提示即将上线。"], ["交互", "标题里的数字跟条数走（今天有 N 件事值得先看）；「试试问」点击提示 AI 助手即将上线。"], ["待确认", "刷新频率（暂定每天 8:00、14:00）；一条处理完是否当天隐藏。"], {"label": "字段", "caption": "每条简报用到的数", "rows": [["超时待发货", "已支付、超过 24 小时未发货的商城订单数；文案里的商城取超时单最多的那个", "业务库·商城订单（支付时间、发货时间）"], ["转化最低一步", "近 7 天 F4 交易主链路中步骤转化率最低的一步；流失人数 = 上一步人数 − 本步人数", "埋点 F4（mall_enter … pay_result）"], ["加购失败拆分", "add_cart_result 失败按 fail_reason 计数，如地区不可售、缺货", "埋点 add_cart_result"], ["新货盘未上架", "运营后台 7 天内新上架、本会员已上架商城数为 0 的货盘", "运营后台·货盘配置、业务库·商城商品"], ["同规模服务商上架率", "同权益档、商城数相近的会员里，已上架该货盘的占比（口径待确认）", "业务库·商城商品"]]}]}, {"k": "gmv", "title": "本周商城 GMV", "secs": [["数据", "首屏摘要：近 7 天商城 GMV 和较上期；小字为支付订单数、访问人数、兑换转化率；折线为每日 GMV。"], ["规则", "口径与下方「经营数据 › 商城订单」完全一致，只是摘要；日期跟随经营数据的时间范围。"], {"label": "字段", "caption": "", "rows": [["本周商城 GMV", "同「经营数据 › 商城 GMV」", "业务库·商城订单（支付成功）"], ["较上期", "（本期 − 上期）÷ 上期", "页面计算"], ["每日折线", "按支付日期分组的商城 GMV", "业务库·商城订单"]]}]}, {"k": "todo", "title": "待处理", "secs": [["数据", "待付款、待发货：商城订单。\n代发待处理：原猫超代发 + 原其他代发合并统计。\n售后·理赔：只计会员自己处理的单；已委托售后代运营的不计入，单列「另有 N 单由平台代处理」。\n商品变更待确认：变更审核 + 代发商品变更通知。"], ["规则", "按权益显示 4–5 格，格数自适应铺满一行；数字大于 0 才着色，超时类（如待发货超 24 小时）标橙。"], ["交互", "整格可点，跳到对应列表并带上筛选条件。"], ["待确认", "超时阈值；售后代运营是否覆盖平台猫超代发。"]]}, {"k": "pallet", "title": "平台货盘", "secs": [["数据", "取运营后台配置的货盘，按运营排序取前 4 个。卡片字段：名称、来源、标签（新上架 / 运营专题）、商品数、已上架商城数、说明。"], ["交互", "点卡片进入该货盘明细；「去资源广场选货」进入资源广场货盘列表。上架和代发只在明细页操作，工作台只做曝光入口。"], ["规则", "所有权益都展示，保证曝光覆盖面。"], ["埋点", "会员端事件（另行定义）：货盘卡片曝光、点击，用于看运营货盘的曝光与转化。"], ["规则", "卡片封面用运营上传的一张主图，不做拼图；来源标签压在图片右下角。"], ["规则", "「✦ AI 推荐理由」本版由规则生成：同规模服务商上架率、本会员员工的品类复购率、季节场景；没有可用理由时不显示这一行。「AI 已按你的商城排序」本版仍以运营排序为准，只把本会员没上架过的新货盘提前。"], ["待确认", "推荐理由的计算口径与最小样本量。"]]}, {"k": "biz", "title": "经营数据", "secs": [["数据", "三个页签：商城订单 / 代发订单 / 集采订单，对比上一个同长度周期。\n商城页签：商城 GMV、支付订单数、访问人数 UV、兑换转化率（支付成功人数 ÷ 已登录访问人数）、发放兑换率（已下单员工数 ÷ 项目发放员工数）。"], ["规则", "带「行为」标的指标来自 C 端新商城埋点，小时级更新；订单类指标实时。比率类指标（兑换转化率、发放兑换率、毛利率、售后率、报价转化率）不画趋势，用进度条显示数值。"], ["交互", "点金额 / 数量类指标卡切换下方每日面积图，悬停显示当天数值；卡片里的迷你走势为近 7 天。右上「分析报表」本版只预留入口，标「即将开放」，点击提示，不跳转；商城分析报表先在运营后台给平台内部使用。"]]}, {"k": "side", "title": "右侧：随页签切换", "secs": [["数据", "商城订单：F4 交易主链路 7 步，标出转化最低的一步，下面一条 AI 提示说明流失原因；再下面是员工额度使用（商城余额 1:1 抵现金，商城积分按站点比例折算成金额后汇总）。\n代发订单：按渠道构成、售后与理赔。\n集采订单：报价进度。"], ["交互", "「完整漏斗」「按项目看」本版只预留入口，点击提示即将开放。"]]}]; }
+  prdBaseCards() { return [{"k": "guide", "title": "顶栏「更新指引」", "secs": [["交互", "点击后从第 1 步重新开始代发迁移指引；指引没看完时按钮带红点。"], ["规则", "按账号记录指引状态：未开始 / 中途关闭 / 已看完。看完后红点消失，入口保留到过渡期结束。"], ["埋点", "会员端事件（不在 C 端埋点需求内，另行定义）：guide_start、guide_step_view(step)、guide_skip(step)、guide_finish。"]]}, {"k": "ask", "title": "「问 AI」命令栏", "secs": [["规则", "本版只预留入口：输入框回车、⌘K、「发送」、左下「AI 助手」和简报下的「试试问」，点击后都提示「AI 助手即将上线」，不调用模型。"], ["交互", "上线后：⌘K 在任意页面唤起；回答优先给可点的结果（数据卡片、跳转链接、批量操作确认）；凡是写操作（如批量上架）一律先让用户确认再执行。"], ["规则", "只能问当前会员企业自己的数据；低档权益只能问已开通渠道的数据。"], ["埋点", "会员端事件（另行定义）：ai_entry_click(source = cmd / chip / rail)、ai_prompt_submit(text_len)。"], ["待确认", "首批能力范围（暂定：问数、生成经营周报、批量上架）；是否按权益限次。"]]}, {"k": "menu", "title": "左侧菜单 · 图标栏 + 二级栏", "secs": [["规则", "左侧 76px 图标栏放 10 个一级入口：常用、工作台、商品（平台选货）、店铺（自有 / 专供店铺、商品库、供应商）、商城、营销（名片营销、卡券营销）、订单、企业码、财务、数据；底部是「AI 助手」入口。右侧 212px 二级栏只显示当前模块的菜单，按小标题分组、单列排列。企微营销、客户整组隐藏；名片营销仍有人用，恢复。"], ["规则", "按会员权益过滤，不出现点进去为空的入口；店铺只对有自建商品和供应商权限的权益显示。模块里有新增菜单时图标带红点；改名或移动的菜单标「改」，新增的标「新」；「数据 › 商城分析」本版只预留入口，标「即将开放」。"], ["交互", "点图标切换二级栏，当前模块图标高亮。在工作台时二级栏显示「常用」和「最近访问」。指引进行中自动切到对应模块。二级栏底部只显示当前权益名称（如「最高权益」），不放渠道、到期日和跳转。"], ["规则", "「店铺」是会员的供货侧，「商城」是员工兑换的 C 端；二级栏标题旁注明「自有 · 专供」以免混淆。"], ["待确认", "旧菜单过渡期时长；「常用」默认预置项；「最近访问」保留几条（暂定 4 条）；名片营销是否按权益显示。"]]}, {"k": "banner", "title": "迁移指引条与分步指引", "secs": [["规则", "只对原来有「猫超代发」或「其他代发」菜单的账号显示。上线后首次登录工作台自动开始分步指引：代发 → 售后理赔 → 选货 → 店铺（仅有店铺权限的权益）→ 待处理 → 更新指引入口。"], ["交互", "「开始指引」从第 1 步开始；「完整说明」进入迁移说明页；× 只关闭指引条，顶栏入口保留。指引中页面变暗，当前讲解区域挖亮并弹出说明卡片，可跳过、上一步、下一步。"], ["数据", "步骤文案按权益变化：低档权益不出现「其他代发」「售后代运营」。"]], "hide": "指引条已关闭，点顶栏「模拟首次登录」可恢复"}, {"k": "brief", "title": "AI 今日简报", "secs": [["数据", "每天最多 3 条，按优先级取：① 超时待办（待发货超 24 小时、影响代发的商品变更）；② 商城转化最低的一步（C 端埋点 F4）；③ 新上架、本会员还没上架的货盘。没命中的类型跳过，不凑数。"], ["规则", "本版用规则模板生成文案，不调用大模型；每条只带一个动作。「去处理」直达对应列表并带筛选；「看原因」依赖商城分析、「一键上架」依赖 AI 能力，本版都提示即将上线。"], ["交互", "标题里的数字跟条数走（今天有 N 件事值得先看）；「试试问」点击提示 AI 助手即将上线。"], ["待确认", "刷新频率（暂定每天 8:00、14:00）；一条处理完是否当天隐藏。"], {"label": "字段", "caption": "每条简报用到的数", "rows": [["超时待发货", "已支付、超过 24 小时未发货的商城订单数；文案里的商城取超时单最多的那个", "业务库·商城订单（支付时间、发货时间）"], ["转化最低一步", "近 7 天 F4 交易主链路中步骤转化率最低的一步；流失人数 = 上一步人数 − 本步人数", "埋点 F4（mall_enter … pay_result）"], ["加购失败拆分", "add_cart_result 失败按 fail_reason 计数，如地区不可售、缺货", "埋点 add_cart_result"], ["新货盘未上架", "运营后台 7 天内新上架、本会员已上架商城数为 0 的货盘", "运营后台·货盘配置、业务库·商城商品"], ["同规模服务商上架率", "同权益档、商城数相近的会员里，已上架该货盘的占比（口径待确认）", "业务库·商城商品"]]}]}, {"k": "gmv", "title": "本周商城 GMV", "secs": [["数据", "首屏摘要：近 7 天商城 GMV 和较上期；小字为支付订单数、访问人数、兑换转化率；折线为每日 GMV。"], ["规则", "口径与下方「经营数据 › 商城订单」完全一致，只是摘要；日期跟随经营数据的时间范围。"], {"label": "字段", "caption": "", "rows": [["本周商城 GMV", "同「经营数据 › 商城 GMV」", "业务库·商城订单（支付成功）"], ["较上期", "（本期 − 上期）÷ 上期", "页面计算"], ["每日折线", "按支付日期分组的商城 GMV", "业务库·商城订单"]]}]}, {"k": "todo", "title": "待处理", "secs": [["数据", "待付款、待发货：商城订单。\n代发待处理：原猫超代发 + 原其他代发合并统计。\n售后·理赔：只计会员自己处理的单；已委托售后代运营的不计入，单列「另有 N 单由平台代处理」。\n商品变更待确认：变更审核 + 代发商品变更通知。"], ["规则", "按权益显示 4–5 格，格数自适应铺满一行；数字大于 0 才着色，超时类（如待发货超 24 小时）标橙。"], ["待确认", "超时阈值；售后代运营是否覆盖平台猫超代发。"], ["规则", "空状态分两种：\n· 部分为 0：格子位置不变、不隐藏、不重排；数字变灰，右上标「已清空 ✓」，仍可点进列表看历史。\n· 全部为 0：整块收成一行「✓ 已全部清空 · 今天已处理 N 单 · 更新时间」，下方格子不再显示，平台货盘上移；AI 简报里的超时待办同步消失。"], ["交互", "有数的格子整格可点，跳到对应列表并带上筛选条件。"], ["规则", "加载中每格显示灰色骨架，不显示 0；单格加载失败显示「— 加载失败 · 重试」，不影响其他格；超过 999 显示「999+」。"], ["待确认", "「今天已处理 N 单」的口径（暂定：今天内状态从待处理变为已处理的商城订单 + 代发订单 + 售后理赔单）。"]]}, {"k": "pallet", "title": "平台货盘", "secs": [["数据", "取运营后台配置的货盘，按运营排序取前 4 个。卡片字段：名称、来源、标签（新上架 / 运营专题）、商品数、已上架商城数、说明。"], ["交互", "点卡片进入该货盘明细；「去资源广场选货」进入资源广场货盘列表。上架和代发只在明细页操作，工作台只做曝光入口。"], ["规则", "所有权益都展示，保证曝光覆盖面。"], ["埋点", "会员端事件（另行定义）：货盘卡片曝光、点击，用于看运营货盘的曝光与转化。"], ["规则", "卡片封面用运营上传的一张主图，不做拼图；来源标签压在图片右下角。"], ["规则", "「✦ AI 推荐理由」本版由规则生成：同规模服务商上架率、本会员员工的品类复购率、季节场景；没有可用理由时不显示这一行。「AI 已按你的商城排序」本版仍以运营排序为准，只把本会员没上架过的新货盘提前。"], ["待确认", "推荐理由的计算口径与最小样本量。"]]}, {"k": "biz", "title": "经营数据", "secs": [["数据", "三个页签：商城订单 / 代发订单 / 集采订单，对比上一个同长度周期。\n商城页签：商城 GMV、支付订单数、访问人数 UV、兑换转化率（支付成功人数 ÷ 已登录访问人数）、发放兑换率（已下单员工数 ÷ 项目发放员工数）。"], ["规则", "带「行为」标的指标来自 C 端新商城埋点，小时级更新；订单类指标实时。比率类指标（兑换转化率、发放兑换率、毛利率、售后率、报价转化率）不画趋势，用进度条显示数值。"], ["交互", "点金额 / 数量类指标卡切换下方每日面积图，悬停显示当天数值；卡片里的迷你走势为近 7 天。右上「分析报表」本版只预留入口，标「即将开放」，点击提示，不跳转；商城分析报表先在运营后台给平台内部使用。"]]}, {"k": "side", "title": "右侧：随页签切换", "secs": [["数据", "商城订单：F4 交易主链路 7 步，标出转化最低的一步，下面一条 AI 提示说明流失原因；再下面是员工额度使用（商城余额 1:1 抵现金，商城积分按站点比例折算成金额后汇总）。\n代发订单：按渠道构成、售后与理赔。\n集采订单：报价进度。"], ["交互", "「完整漏斗」「按项目看」本版只预留入口，点击提示即将开放。"]]}]; }
   prdCards() {
     const F = {"guide": [{"label": "字段", "caption": "", "rows": [["红点", "该账号的指引状态不是「已看完」时显示", "业务库·账号指引状态（新增）"]]}], "todo": [{"label": "字段", "caption": "当前时点的数量，打开页面时实时查询，不受日期筛选影响", "rows": [["待付款", "状态为「待付款」的商城订单数", "业务库·商城订单"], ["待发货", "已支付、未发货的商城订单数；其中超过 24 小时未发货的单独计数，标橙提示", "业务库·商城订单（支付时间、发货时间）"], ["代发待处理", "原猫超代发 + 原其他代发中，状态为「待确认」或「下单失败」的代发订单数；副标题按原渠道拆分", "业务库·代发订单（合并后）"], ["售后", "会员自己处理、未完结的平台猫超代发售后单数；括号内是其中需要上门取件的单数", "业务库·售后单"], ["理赔", "状态为「待补材料」或「处理中」的理赔单数", "业务库·理赔单"], ["另有 N 单由平台代处理", "已委托售后代运营、未完结的售后单数，不计入上面的售后数", "业务库·售后单（处理方 = 平台）"], ["商品变更待确认", "待审核的供应商商品变更数 + 未读的代发商品下架 / 换品通知数", "业务库·商品变更记录、变更通知"]]}], "pallet": [{"label": "字段", "caption": "每张货盘卡片", "rows": [["名称、来源、说明", "运营后台配置的货盘基本信息", "运营后台·货盘配置"], ["新上架", "货盘首次上架起 7 天内显示（天数待确认）", "运营后台·货盘上架时间"], ["运营专题", "运营把货盘标记为专题时显示", "运营后台·货盘标签"], ["N 款", "货盘内状态为可售或缺货的商品数，不含已下架", "商品池"], ["已上架 N 个商城", "当前会员名下，上架了该货盘任意商品的商城数", "业务库·商城商品"], ["顺序与数量", "按运营后台排序取前 4 个", "运营后台·货盘排序"]]}]};
     const FD = {"biz": {"mall": [{"label": "字段", "caption": "商城订单页签 · 默认近 7 天，对比上一个 7 天", "rows": [["商城 GMV", "统计期内支付成功的商城订单金额合计（到手价 = 商城余额 + 商城积分折算金额 + 现金），不扣退款", "业务库·商城订单（支付成功）"], ["支付订单数", "统计期内支付成功的商城订单数；纯积分、纯余额、积分 + 余额和 0 元订单在创单时即算支付成功", "业务库·商城订单"], ["访问人数（行为）", "统计期内触发 mall_enter 的去重人数；登录前按 device_id、登录后按 user_id 合并为同一人", "埋点 mall_enter"], ["兑换转化率（行为）", "支付成功人数 ÷ 已登录访问人数；分子取 pay_result 且 is_success = true 的去重 user_id", "埋点 mall_enter、pay_result"], ["发放兑换率", "已下单员工数 ÷ 项目发放员工数；只统计统计期内仍有效的福利项目", "业务库·发放记录、商城订单"], ["较上期", "和上一个同长度周期比：金额、人数类显示增减百分比，比率类显示增减个百分点；上期为 0 时显示「--」或上期值", "页面计算"], ["每日柱状图", "所选指标按自然日（北京时间 0–24 点）汇总，横轴是统计期内每一天", "同所选指标"]]}], "drop": [{"label": "字段", "caption": "代发订单页签 · 默认近 7 天", "rows": [["代发金额", "统计期内创建成功的代发订单金额合计（会员支付给平台的供货价金额），两套代发合并", "业务库·代发订单"], ["代发订单数", "统计期内创建成功的代发订单数", "业务库·代发订单"], ["毛利额", "Σ（对外售价 − 代发供货价）× 数量；对外售价取会员在商城或批量下单里填的售价（取值口径待确认）", "业务库·代发订单明细"], ["毛利率", "毛利额 ÷ 对外销售额", "业务库·代发订单明细"], ["售后率", "统计期内发起过售后的代发订单数 ÷ 代发订单数", "业务库·代发订单、售后单"], ["较上期 / 每日柱状图", "口径同商城订单页签", "页面计算"]]}], "bulk": [{"label": "字段", "caption": "集采订单页签 · 默认近 7 天", "rows": [["集采金额", "统计期内下单成功的猫超集采订单金额合计", "业务库·集采订单"], ["集采订单数", "统计期内下单成功的集采订单数", "业务库·集采订单"], ["报价单", "统计期内新建的集采报价单数", "业务库·集采报价单"], ["报价转化率", "统计期内新建、且已经下单的报价单数 ÷ 报价单数", "业务库·集采报价单"]]}]}, "side": {"mall": [{"label": "字段", "caption": "右侧面板 · 商城订单页签", "rows": [["交易主链路 7 步", "进入商城（已登录）→ 浏览商详 → 加购成功或立即购买 → 进入确认订单 → 提交订单 → 创单成功 → 支付成功；按人去重，窗口为同一自然日", "埋点 F4（事件见商城分析）"], ["步骤转化率", "本步人数 ÷ 上一步人数；最低的一步标橙", "页面计算"], ["加购失败 / 主动离开", "流失人数按 add_cart_result 的 fail_reason 归因；没有失败结果的记为主动离开", "埋点 add_cart_result、page_leave"], ["下单环节流失", "加购 → 进入确认订单 + 确认订单 → 提交 + 提交 → 创单成功三步流失人数之和；创单失败按 order_create_result 的 fail_reason 归因，其余按离开前最后页面", "埋点 F4、order_create_result、page_leave"], ["商城余额 已用 / 发放", "已用 = 支付成功订单的余额抵扣金额，扣除退款退回；发放 = 统计范围内各福利项目发放的余额合计；按 1:1 金额显示", "业务库·余额账户流水"], ["商城积分 已用 / 发放", "各站点的积分分数按本站点设置的比例折算成金额后再相加，显示折合金额", "业务库·积分账户流水、站点积分比例"]]}], "drop": [{"label": "字段", "caption": "右侧面板 · 代发订单页签", "rows": [["渠道构成", "按代发订单的原渠道（平台猫超 / 其他代发）统计订单数和代发金额", "业务库·代发订单（原渠道字段）"], ["售后单", "统计期内新建的代发售后单数，括号内是上门取件单数", "业务库·售后单"], ["理赔单", "统计期内新建的理赔单数", "业务库·理赔单"], ["售后代运营处理中", "已委托平台代处理、未完结的售后单数；只对开通了该服务的会员显示", "业务库·售后单（处理方 = 平台）"], ["平均发货时长", "统计期内已发货的代发订单，从创单到第一个包裹发货的平均小时数", "业务库·代发订单（创单、发货时间）"]]}], "bulk": [{"label": "字段", "caption": "右侧面板 · 集采订单页签", "rows": [["报价单", "统计期内新建的报价单数", "业务库·集采报价单"], ["客户已确认", "其中客户已确认报价的单数", "业务库·集采报价单（状态）"], ["已下单", "其中已转成集采订单的单数", "业务库·集采报价单、集采订单"]]}]}};
