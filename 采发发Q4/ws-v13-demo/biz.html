@@ -77,12 +77,13 @@
   </div>
 
   <div style="position: relative; display: flex; align-items: stretch; min-height: 1900px">
+    <div onMouseLeave="{{railLeave}}" style="position: relative; display: flex; flex: none; z-index: 40">
     <nav aria-label="模块" style="width: 76px; flex: none; display: flex; flex-direction: column; gap: 4px; padding: 14px 8px; background: var(--rail); border-right: 1px solid var(--bd); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px)">
       <div style="display: flex; justify-content: center; margin-bottom: 10px">
         <div style="width: 40px; height: 40px; border-radius: 12px; background: var(--gradBtn); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 18px; font-weight: 700; box-shadow: 0 8px 20px rgba(15,143,132,.3)">采</div>
       </div>
       <template data-sc="for" list="{{rail}}" as="r" hint-placeholder-count="8">
-        <button onClick="{{r.pick}}" aria-pressed="{{r.onStr}}" title="{{r.tip}}" class="{{r.cls}}">
+        <button onClick="{{r.pick}}" onMouseEnter="{{r.enter}}" aria-pressed="{{r.onStr}}" title="{{r.tip}}" class="{{r.cls}}">
           <span class="ric" style="position: relative; display: inline-flex">
             <template data-sc="if" value="{{r.ic_fav}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></template><template data-sc="if" value="{{r.ic_home}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z"/></svg></template><template data-sc="if" value="{{r.ic_goods}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></template><template data-sc="if" value="{{r.ic_store}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12v8h13v-8"/><path d="M10 20v-4h4v4"/></svg></template><template data-sc="if" value="{{r.ic_mall}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></template><template data-sc="if" value="{{r.ic_mkt}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10z"/><path d="M16.5 9a4 4 0 0 1 0 6"/><path d="M19 6.5a7.5 7.5 0 0 1 0 11"/></svg></template><template data-sc="if" value="{{r.ic_order}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6"/><path d="M9 12h6"/><path d="M9 15.5h3.5"/></svg></template><template data-sc="if" value="{{r.ic_qym}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2.5v2.5H14z"/><path d="M20 14v6h-6"/></svg></template><template data-sc="if" value="{{r.ic_fin}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></template><template data-sc="if" value="{{r.ic_data}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V7"/><path d="M17 16v-8"/></svg></template>
             <template data-sc="if" value="{{r.dot}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; right: -3px; top: -2px; width: 7px; height: 7px; border-radius: 50%; background: #E5484D; box-shadow: 0 0 0 2px var(--solid)"></span></template>
@@ -95,10 +96,12 @@
       </button>
     </nav>
 
+    <template data-sc="if" value="{{panelShow}}" hint-placeholder-val="{{ true }}">
     <aside data-prd="menu" aria-label="二级菜单" style="{{asideStyle}}">
       <div style="display: flex; align-items: center; gap: 6px; padding: 0 8px 12px">
         <span style="font-size: 16px; font-weight: 600">{{panelTitle}}</span>
         <template data-sc="if" value="{{panelHasHint}}" hint-placeholder-val="{{ false }}"><span class="chip">{{panelHint}}</span></template>
+        <button onClick="{{togglePin}}" title="{{pinLabel}}" aria-label="{{pinLabel}}" style="margin-left: auto; width: 28px; height: 28px; border: 0; border-radius: 8px; background: {{pinBg}}; color: {{pinColor}}; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M9.5 4v16"/></svg></button>
       </div>
       <template data-sc="for" list="{{panelSections}}" as="s" hint-placeholder-count="2">
         <div style="{{s.wrapStyle}}">
@@ -119,6 +122,8 @@
         </div>
       </template>
     </aside>
+    </template>
+    </div>
 
     <main style="flex: 1; min-width: 0; padding: 18px 28px 48px">
       <header style="display: flex; align-items: flex-end; gap: 16px; margin-bottom: 16px">
@@ -352,7 +357,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { mod: 'data', scope: 'active', open: 'zjdx', hm: -1, toast: '' };
+    this.state = { mod: 'data', scope: 'active', open: 'zjdx', hm: -1, toast: '', pinned: false, hoverMod: '' };
   }
 
   menuData() {
@@ -396,17 +401,26 @@ class Component extends DCLogic {
     this._t = setTimeout(() => this.setState({ toast: '' }), 2600);
   }
 
+  railVals(pinned, floatMod) {
+    return { panelShow: pinned || !!floatMod,
+      railLeave: () => { if (this.state.hoverMod) this.setState({ hoverMod: '' }); },
+      togglePin: () => this.setState({ pinned: !this.state.pinned, hoverMod: '', mod: this.state.hoverMod || this.state.mod }),
+      pinLabel: pinned ? '收起菜单' : '固定展开', pinBg: pinned ? 'var(--chip)' : 'rgba(15,143,132,.12)', pinColor: pinned ? 'var(--tx2)' : 'var(--brand)' };
+  }
+
   pageVals() {
     const st = this.state;
     // ---- shell: rail + secondary panel (数据 module active) ----
     const modIds = ['fav', 'home', 'goods', 'store', 'mall', 'mkt', 'order', 'qym', 'fin', 'data'];
     const MD = this.menuData();
-    const curMod = st.mod;
+    const pinned = st.pinned;
+    const floatMod = !pinned && st.hoverMod ? st.hoverMod : '';
+    const curMod = floatMod || st.mod;
     const rail = MD.map((g) => {
-      const on = g.id === curMod;
+      const on = g.id === st.mod;
       const r = { name: g.id === 'fav' ? '常用' : g.name, tip: g.hint ? g.name + '（' + g.hint + '）' : g.name, onStr: on ? 'true' : 'false',
         cls: on ? 'rb on' : 'rb', dot: g.id !== 'fav' && (g.sections || []).some((s) => s.items.some((it) => it.isNew)),
-        pick: () => this.setState({ mod: g.id }) };
+        pick: () => this.setState({ mod: g.id, pinned: true, hoverMod: '' }), enter: () => { if (!this.state.pinned) this.setState({ hoverMod: g.id }); } };
       modIds.forEach((k) => { r['ic_' + k] = k === g.id; });
       return r;
     });
@@ -565,7 +579,8 @@ class Component extends DCLogic {
     const scopes = [['active', '进行中项目'], ['all', '全部项目']].map((s) => ({ label: s[1], sel: st.scope === s[0] ? 'true' : 'false', cls: st.scope === s[0] ? 'tabp on' : 'tabp', pick: () => this.setState({ scope: s[0] }) }));
     return {
       rootClass: 'ai', rail, panelSections, panelTitle: curG.link ? '工作台' : curG.name, panelHint: curG.hint || '', panelHasHint: !!curG.hint && !curG.link,
-      asideStyle: 'width: 212px; flex: none; padding: 18px 12px; border-right: 1px solid var(--bd); background: var(--rail); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px)',
+      asideStyle: pinned ? 'width: 212px; flex: none; padding: 18px 12px; border-right: 1px solid var(--bd); background: var(--rail); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px)' : 'position: absolute; left: 76px; top: 10px; z-index: 45; width: 220px; padding: 14px 10px 8px; border-radius: 16px; background: var(--solid); border: 1px solid var(--bd); box-shadow: 0 20px 48px rgba(15,23,42,.16)',
+      ...this.railVals(pinned, floatMod),
       askAi: () => this.flash('AI 助手即将上线'),
       scopes, scopeNote: scopeAll ? '全部 ' + calc.length + ' 个项目，含已结束' : '进行中 ' + active + ' 个项目',
       ovKpis, mThis, mArea, mLast, mTicks, mCols, projects, expiring, festCats, clients,
