@@ -414,7 +414,7 @@ class Component extends DCLogic {
         { items: [ { n: '资源广场', href: '#' }, { n: '代发订单' }, { n: '售后管理', isNew: true }, { n: '我的商城' } ] } ] },
       { id: 'home', name: '工作台', link: true },
       { id: 'goods', name: '商品', hint: '平台选货', sections: [
-        { t: '选货', items: [ { n: '资源广场', href: '#', renamed: true, tip: '平台货盘在这里看明细、上架、代发；原入口只在首页' }, { n: '挑选商品', top: true }, { n: '代发选品', top: true, tip: '原「其他代发 › 代发选品」，已选商品作为选品购物车' }, { n: '本地生活', top: true, renamed: true, tip: '原「本地资源场景」9 项合为一个入口' } ] },
+        { t: '选货', items: [ { n: '资源广场', href: '#', renamed: true, tip: '平台货盘在这里看明细、上架、代发；原入口只在首页' }, { n: '挑选商品', top: true }, { n: '本地生活', top: true, renamed: true, tip: '原「本地资源场景」9 项合为一个入口' } ] },
         { t: '变更通知', top: true, items: [ { n: '商品变更', renamed: true, tip: '合并：商品变更审核、商品替换日志、代发商品变更通知' } ] } ] },
       { id: 'store', name: '店铺', hint: '自有 · 专供', top: true, sections: [
         { t: '店铺', items: [ { n: '自有店铺', soon: true, tip: '即将开放：管理会员自己的店铺' }, { n: '专供店铺', soon: true, tip: '即将开放：管理为指定企业专供的店铺' } ] },
@@ -427,7 +427,7 @@ class Component extends DCLogic {
         { t: '卡券营销', items: [ { n: '卡券兑换' }, { n: '卡券推广' }, { n: '卡券营销' } ] } ] },
       { id: 'order', name: '订单', sections: [
         { t: '商城订单', items: [ { n: '订单管理' }, { n: '服务订单' }, { n: '下单提醒' } ] },
-        { t: '代发', items: [ { n: '批量下单', renamed: true, tip: '原「猫超代发」「其他代发」各一个批量下单，已合并' }, { n: '代发订单', renamed: true, tip: '合并：猫超代发 › 下单管理 + 其他代发 › 下单历史' } ] },
+        { t: '代发', items: [ { n: '批量下单', renamed: true, tip: '原「猫超代发」「其他代发」各一个批量下单，已合并；原「代发选品」已取消，所有代发直接在这里下单' }, { n: '代发订单', renamed: true, tip: '合并：猫超代发 › 下单管理 + 其他代发 › 下单历史' } ] },
         { t: '售后理赔', items: [ { n: '售后管理', isNew: true, tip: '含平台猫超售后、上门取件' }, { n: '理赔管理', isNew: true }, { n: '退货地址设置', top: true }, { n: '售后代运营', top: true, renamed: true, tip: '原「代售后查询」；平台代处理售后的服务，开通才显示' } ] },
         { t: '猫超集采', items: [ { n: '集采报价' }, { n: '集采订单', renamed: true, tip: '原「下单管理」，改名去掉重名' } ] } ] },
       { id: 'qym', name: '企业码', sections: [
