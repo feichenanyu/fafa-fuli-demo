@@ -73,7 +73,7 @@
 
   <div style="position: relative; display: flex; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 14px">
     <span style="font-weight: 600">原型演示 · 经营分析（会员端）</span>
-    <span style="color: #9BA5B9">一个商城 = 一个项目；全部为规则统计，V1 可上线；带 ✦ 的为 AI 版能力，点击提示即将上线；数据为示意</span>
+    <span style="color: #9BA5B9">一个商城 = 一个项目；V1 只做基于现有数据的统计；带 ✦ 的为 AI 版能力，点击提示即将上线；数据为示意</span>
   </div>
 
   <div style="position: relative; display: flex; align-items: stretch; min-height: 1900px">
@@ -200,7 +200,7 @@
         </div>
       </section>
 
-      <section data-prd="projects" class="card" aria-labelledby="pj-h" style="padding: 18px 20px 12px; margin-bottom: 16px">
+      <section data-prd="projects" class="card" aria-labelledby="pj-h" style="padding: 18px 20px 12px">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px">
           <h2 id="pj-h" style="margin: 0; font-size: 16px; font-weight: 600">项目经营</h2>
           <span class="chip">一个商城 = 一个项目 · 按风险排序</span>
@@ -235,13 +235,14 @@
             <template data-sc="if" value="{{p.open}}" hint-placeholder-val="{{ false }}">
               <div data-prd="detail" style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 12px; padding: 4px 12px 16px">
                 <div style="border-radius: 14px; background: var(--solid); border: 1px solid var(--bd); padding: 14px">
-                  <div style="font-weight: 600; margin-bottom: 8px">核销预测</div>
-                  <template data-sc="if" value="{{p.hasPeriod}}" hint-placeholder-val="{{ true }}"><div>
-                    <div style="font-size: 12px; color: var(--tx2); line-height: 1.7">按近 14 天日均核销 <b class="num" style="color: var(--tx1)">{{p.dailyText}}</b> 推算，到 {{p.endShort}} 预计核销</div>
-                    <div class="num" style="{{p.fcStyle}}">{{p.fcText}}</div>
-                    <div style="font-size: 12px; color: var(--tx2); margin-bottom: 10px">{{p.fcNote}}</div>
-                  </div></template>
-                  <template data-sc="if" value="{{p.noPeriod}}" hint-placeholder-val="{{ false }}"><div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin-bottom: 10px">这个商城还没有设置兑换期，无法预测到期核销；设置兑换期后按兑换期计算时间进度和预测。</div></template>
+                  <div style="font-weight: 600; margin-bottom: 8px">额度核销</div>
+                  <div class="num" style="font-size: 28px; font-weight: 700; margin: 2px 0 8px; color: var(--brand)">{{p.cpFull}}</div>
+                  <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12px">
+                    <div style="display: flex; justify-content: space-between"><span style="color: var(--tx2)">已发放额度</span><span class="num">{{p.issuedText}}</span></div>
+                    <div style="display: flex; justify-content: space-between"><span style="color: var(--tx2)">已核销额度</span><span class="num">{{p.usedText}}</span></div>
+                    <div style="display: flex; justify-content: space-between"><span style="color: var(--tx2)">剩余额度</span><span class="num">{{p.leftText}}</span></div>
+                    <div style="display: flex; justify-content: space-between"><span style="color: var(--tx2)">近 14 天日均核销</span><span class="num">{{p.dailyText}}</span></div>
+                  </div>
                 </div>
                 <div style="border-radius: 14px; background: var(--solid); border: 1px solid var(--bd); padding: 14px">
                   <div style="font-weight: 600; margin-bottom: 10px">每周 GMV · 近 8 周</div>
@@ -275,51 +276,6 @@
         </template>
       </section>
 
-      <section data-prd="future" class="card" aria-labelledby="fu-h" style="padding: 18px 20px 20px">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px">
-          <h2 id="fu-h" style="margin: 0; font-size: 16px; font-weight: 600">为下一单做准备</h2>
-          <span class="chip">基于历史数据的规则统计</span>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
-          <div data-prd="expire" style="border-radius: 14px; background: var(--chip); padding: 14px 16px">
-            <div style="font-weight: 600; margin-bottom: 2px">即将到期 · 30 天内</div>
-            <div style="font-size: 12px; color: var(--tx3); margin-bottom: 10px">到期时的预计核销情况</div>
-            <template data-sc="for" list="{{expiring}}" as="e" hint-placeholder-count="2">
-              <div style="border-radius: 12px; background: var(--solid); padding: 12px; margin-bottom: 8px">
-                <div style="display: flex; align-items: center; gap: 8px"><b style="font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{e.name}}</b><span style="{{e.badge}}">{{e.days}}</span></div>
-                <div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin-top: 6px">{{e.desc}}</div>
-              </div>
-            </template>
-          </div>
-          <div data-prd="festival" style="border-radius: 14px; background: var(--chip); padding: 14px 16px">
-            <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px"><span style="font-weight: 600">下一个节点 · 春节</span><span class="num gtext" style="margin-left: auto; font-size: 20px; font-weight: 700">74 天</span></div>
-            <div style="font-size: 12px; color: var(--tx3); margin-bottom: 10px">2027-02-06 · 参考去年春节档（2026 年 1–2 月）</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px">
-              <div style="border-radius: 10px; background: var(--solid); padding: 8px 10px"><div style="font-size: 12px; color: var(--tx3)">GMV</div><div class="num" style="font-weight: 700">¥113 万</div></div>
-              <div style="border-radius: 10px; background: var(--solid); padding: 8px 10px"><div style="font-size: 12px; color: var(--tx3)">人均消费</div><div class="num" style="font-weight: 700">¥286</div></div>
-              <div style="border-radius: 10px; background: var(--solid); padding: 8px 10px"><div style="font-size: 12px; color: var(--tx3)">主力价格带</div><div class="num" style="font-weight: 700">¥100–200</div></div>
-            </div>
-            <div style="font-size: 12px; color: var(--tx2); margin-bottom: 6px">去年春节档品类占比</div>
-            <template data-sc="for" list="{{festCats}}" as="c" hint-placeholder-count="4">
-              <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 5px"><span style="width: 64px">{{c.n}}</span><span style="flex: 1; height: 5px; border-radius: 999px; background: var(--solid)"><span style="{{c.bar}}"></span></span><span class="num" style="width: 34px; text-align: right; color: var(--tx2)">{{c.pct}}</span></div>
-            </template>
-            <div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin: 10px 0">去年年货节商城平均在节前 <b style="color: var(--tx1)">38 天</b>开通。</div>
-            <div style="display: flex; gap: 6px"><button onClick="{{soonPlan}}" class="btn-ghost" style="height: 28px; font-size: 12px; background: var(--solid)">导出备货参考</button></div>
-          </div>
-          <div data-prd="clients" style="border-radius: 14px; background: var(--chip); padding: 14px 16px">
-            <div style="font-weight: 600; margin-bottom: 2px">客户画像 · 用来做提案</div>
-            <div style="font-size: 12px; color: var(--tx3); margin-bottom: 10px">按甲方企业汇总全部项目</div>
-            <template data-sc="for" list="{{clients}}" as="c" hint-placeholder-count="5">
-              <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; background: var(--solid); margin-bottom: 6px">
-                <span style="width: 30px; height: 30px; flex: none; border-radius: 9px; background: rgba(15,143,132,.12); color: var(--brand); font-weight: 700; display: inline-flex; align-items: center; justify-content: center">{{c.ini}}</span>
-                <span style="min-width: 0; flex: 1"><b style="display: block; font-size: 14px">{{c.n}}</b><span style="display: block; font-size: 12px; color: var(--tx2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.meta}}</span></span>
-                <span style="text-align: right; font-size: 12px; color: var(--tx2)"><b class="num" style="display: block; font-size: 14px; color: var(--tx1)">{{c.per}}</b>人均消费</span>
-              </div>
-            </template>
-            <button onClick="{{soonPitch}}" class="btn-ghost" style="height: 28px; font-size: 12px; background: var(--solid); margin-top: 4px">导出客户画像</button>
-          </div>
-        </div>
-      </section>
     </main>
   </div>
 </div>
@@ -533,6 +489,7 @@ class Component extends DCLogic {
         leftText: wan(p.issued - p.used), daysText: p.hasPeriod ? (p.status === '已结束' ? '已结束' : '剩 ' + p.left + ' 天') : '常年',
         status: p.status, statusStyle: 'font-size: 12px; font-weight: 600; border-radius: 999px; padding: 0 9px; line-height: 22px; white-space: nowrap; ' + tone[p.status],
         chev: 'margin-left: auto; color: var(--tx3); transition: transform .15s ease; transform: rotate(' + (open ? 180 : 0) + 'deg)',
+        cpFull: pct(p.cp), issuedText: yuan(p.issued), usedText: yuan(p.used),
         dailyText: yuan(p.daily) + ' / 天', endShort: p.hasPeriod ? md(p.end) : '',
         fcText: pct(p.fcRate), fcStyle: 'font-size: 28px; font-weight: 700; margin: 4px 0 2px; color: ' + (p.fcRate < 0.7 ? 'var(--warn)' : 'var(--brand)'),
         fcNote: p.status === '已结束' ? '项目已结束，最终核销 ' + pct(p.cp) : (unspent > 0 ? '约 ' + wan(unspent) + ' 额度可能到期未核销' : '预计额度全部核销'),
@@ -702,8 +659,8 @@ class Component extends DCLogic {
   }
 
   prdTitle() { return "会员端 · 经营分析"; }
-  prdIntro() { return "面向会员：一个商城 = 一个项目。看每个项目和整体的经营情况，并用历史数据为下一单做准备。全部为规则统计，V1 可上线；带 ✦ 的是 AI 版能力，本版只预留入口。"; }
-  prdBaseCards() { return [{"k": "overall", "title": "整体经营", "secs": [["规则", "面向会员（服务商）。一个商城 = 一个项目。默认统计「进行中项目」（兑换期未结束或未设置兑换期的商城），可切到「全部项目」含已结束。"], ["数据", "五个指标：项目 GMV、毛利额与毛利率、额度核销率、员工参与率、项目数（进行中 / 核销偏慢）。"], ["交互", "指标卡只展示，不切换下方图表；比率类指标带进度条。右上「导出」「AI 经营复盘」本版只预留入口。"], {"label": "字段", "caption": "统计范围内所有项目合计", "rows": [["项目 GMV", "统计范围内各商城支付成功订单的商城售价合计（员工额度支付 + 现金支付），扣除已退款金额", "业务库·商城订单、退款单"], ["毛利额", "Σ（商城售价 − 会员结算价）× 数量，扣除退款对应的毛利。会员结算价：该商品有会员专供价取专供价，否则取会员价；商城售价是各商城单独定的价", "业务库·商城订单明细、商品会员价 / 会员专供价"], ["毛利率", "毛利额 ÷ 项目 GMV", "页面计算"], ["已发放额度", "统计范围内各商城给员工发放的商城余额 + 商城积分（积分按站点比例折算成金额）", "业务库·发放记录"], ["已核销额度", "员工用商城余额和商城积分实际支付的金额（积分同样折算成金额），扣除退回额度", "业务库·商城订单支付明细"], ["额度核销率", "已核销额度 ÷ 已发放额度", "页面计算"], ["员工参与率", "至少有 1 笔支付成功订单的员工数 ÷ 获得过额度的员工数", "业务库·发放记录、商城订单"], ["核销偏慢", "状态为「核销偏慢」的项目数，规则见「项目经营」", "页面计算"]]}]}, {"k": "trend", "title": "月度 GMV · 今年 vs 去年", "secs": [["数据", "按月汇总会员全部业务的 GMV（商城 + 代发 + 集采），今年实线、去年虚线；当月统计到今天。"], ["规则", "福利业务受节日影响大，用去年同月对比，不做环比。图上标出春节、端午、中秋三个节点所在月份。"], ["交互", "悬停显示当月今年 / 去年两个值。"]]}, {"k": "mix", "title": "业务构成 · 本月", "secs": [["数据", "本月 GMV 按业务拆分：商城（各项目合计）、代发、集采；下方一句话说明本月最主要的变化来源（规则：同比增量最大的前 2 个项目）。"]]}, {"k": "projects", "title": "项目经营", "secs": [["规则", "每行一个商城项目，按风险排序：核销偏慢 → 即将结束 → 未设置兑换期 → 健康 → 已结束。"], ["规则", "状态判断（按顺序命中第一条）：\n· 未设置兑换期：商城没有兑换期；\n· 已结束：今天晚于兑换期结束日；\n· 核销偏慢：时间进度 ≥ 50%，且时间进度 − 额度核销进度 ≥ 25 个百分点；\n· 即将结束：剩余天数 ≤ 30；\n· 其他为健康。"], ["交互", "点一行展开项目详情，再点收起；同一时间只展开一个。"], ["待确认", "【新需求】目前商城没有维护兑换期的地方：需在「商城 › 我的商城 › 商城设置」新增「兑换期」（开始日期、结束日期，可不填表示常年）；历史商城默认为空，按「未设置兑换期」展示。核销偏慢的两个阈值（50%、25 个百分点）需业务确认。"], {"label": "字段", "caption": "每个项目", "rows": [["时间进度", "（今天 − 兑换期开始日 + 1）÷ 兑换期总天数，上限 100%", "商城设置·兑换期（新增）"], ["额度核销进度", "该商城已核销额度 ÷ 已发放额度", "业务库·发放记录、商城订单支付明细"], ["GMV、毛利率", "口径同「整体经营」，只取该商城", "业务库·商城订单明细"], ["参与率", "该商城下过单的员工 ÷ 该商城获得额度的员工", "业务库·发放记录、商城订单"], ["剩余额度", "已发放额度 − 已核销额度", "页面计算"], ["剩余天数", "兑换期结束日 − 今天；未设置兑换期显示「常年」", "商城设置·兑换期（新增）"]]}]}, {"k": "detail", "title": "项目详情（展开）", "secs": [["数据", "四块：核销预测、近 8 周 GMV、品类排行（GMV 占比前 4 + 其他）、员工购买分布（未下单 / 1 次 / 2–3 次 / 4 次以上），底部附 C 端访问 → 支付转化率。"], ["规则", "核销预测（线性推算，V1 不用 AI）：预计核销 = 已核销 + 近 14 天日均核销 × 剩余天数，不超过已发放额度。预计核销率 < 70% 标橙。未设置兑换期的项目不预测，提示去设置。"], ["规则", "本版只展示数据，不给下一步操作指引（不放促活、延期、续约等按钮）。"], {"label": "字段", "caption": "", "rows": [["近 14 天日均核销", "最近 14 个自然日的已核销额度 ÷ 14", "业务库·商城订单支付明细"], ["品类", "按商品一级类目汇总该商城 GMV", "业务库·商城订单明细、商品类目"], ["员工购买分布", "按获得额度的员工，统计其在该商城的支付成功订单数分段", "业务库·发放记录、商城订单"], ["访问 → 支付转化", "支付成功人数 ÷ 已登录访问人数（该商城）", "埋点 mall_enter、pay_result"]]}]}, {"k": "future", "title": "为下一单做准备", "secs": [["规则", "三块都是规则统计，只展示数据和参考，本版不做下一步操作指引；AI 版再加原因解释和提案生成。"]]}, {"k": "expire", "title": "即将到期 · 30 天内", "secs": [["规则", "取兑换期在 30 天内结束的进行中项目，按剩余天数排序；展示已核销率、参与率、预计到期核销率和预计未核销额度。预计核销率 ≥ 70% 标青、< 70% 标橙。本版不给操作建议。"]]}, {"k": "festival", "title": "下一个节点", "secs": [["数据", "取福利节点日历里最近的下一个节点（春节、端午、中秋等），显示日期和剩余天数；参考去年同一节点档期（节点前两个月）的 GMV、人均消费、主力价格带、品类占比。"], ["规则", "展示去年同节点商城的平均提前开通天数，只做参考，不给建议日期和跳转。"], ["待确认", "节点日历由运营后台维护还是写死；会员没有去年同期数据时，是否用平台同规模会员的均值代替。"], {"label": "字段", "caption": "", "rows": [["人均消费", "去年档期 GMV ÷ 去年档期下过单的员工数", "业务库·商城订单"], ["主力价格带", "按订单商品单价分段（¥0–50 / 50–100 / 100–200 / 200+），取 GMV 占比最高的一段", "业务库·商城订单明细"], ["平均提前开通天数", "去年该节点相关商城的首个可兑换日到节点日期的平均天数", "商城设置·兑换期（新增）"]]}]}, {"k": "clients", "title": "客户画像", "secs": [["数据", "按甲方企业汇总全部项目：员工数、人均额度、合作次数（项目数）、偏好品类（GMV 前 2）、人均消费；按人均消费排序。"], ["规则", "只展示会员自己项目里的数据，不出现其他会员的客户。"], ["交互", "「导出客户画像」本版只预留入口，后续用于生成提案素材。"], ["待确认", "甲方企业的员工数取发放名单人数还是企业端登记人数。"]]}]; }
+  prdIntro() { return "面向会员：一个商城 = 一个项目。看每个项目和整体的经营情况。V1 只做基于现有数据的统计；带 ✦ 的是 AI 版能力，本版只预留入口。"; }
+  prdBaseCards() { return [{"k": "overall", "title": "整体经营", "secs": [["规则", "面向会员（服务商）。一个商城 = 一个项目。默认统计「进行中项目」（兑换期未结束或未设置兑换期的商城），可切到「全部项目」含已结束。"], ["数据", "五个指标：项目 GMV、毛利额与毛利率、额度核销率、员工参与率、项目数（进行中 / 核销偏慢）。"], ["交互", "指标卡只展示，不切换下方图表；比率类指标带进度条。右上「导出」「AI 经营复盘」本版只预留入口。"], {"label": "字段", "caption": "统计范围内所有项目合计", "rows": [["项目 GMV", "统计范围内各商城支付成功订单的商城售价合计（员工额度支付 + 现金支付），扣除已退款金额", "业务库·商城订单、退款单"], ["毛利额", "Σ（商城售价 − 会员结算价）× 数量，扣除退款对应的毛利。会员结算价：该商品有会员专供价取专供价，否则取会员价；商城售价是各商城单独定的价", "业务库·商城订单明细、商品会员价 / 会员专供价"], ["毛利率", "毛利额 ÷ 项目 GMV", "页面计算"], ["已发放额度", "统计范围内各商城给员工发放的商城余额 + 商城积分（积分按站点比例折算成金额）", "业务库·发放记录"], ["已核销额度", "员工用商城余额和商城积分实际支付的金额（积分同样折算成金额），扣除退回额度", "业务库·商城订单支付明细"], ["额度核销率", "已核销额度 ÷ 已发放额度", "页面计算"], ["员工参与率", "至少有 1 笔支付成功订单的员工数 ÷ 获得过额度的员工数", "业务库·发放记录、商城订单"], ["核销偏慢", "状态为「核销偏慢」的项目数，规则见「项目经营」", "页面计算"]]}]}, {"k": "trend", "title": "月度 GMV · 今年 vs 去年", "secs": [["数据", "按月汇总会员全部业务的 GMV（商城 + 代发 + 集采），今年实线、去年虚线；当月统计到今天。"], ["规则", "福利业务受节日影响大，用去年同月对比，不做环比。图上标出春节、端午、中秋三个节点所在月份。"], ["交互", "悬停显示当月今年 / 去年两个值。"]]}, {"k": "mix", "title": "业务构成 · 本月", "secs": [["数据", "本月 GMV 按业务拆分：商城（各项目合计）、代发、集采；下方一句话说明本月最主要的变化来源（规则：同比增量最大的前 2 个项目）。"]]}, {"k": "projects", "title": "项目经营", "secs": [["规则", "每行一个商城项目，按风险排序：核销偏慢 → 即将结束 → 未设置兑换期 → 健康 → 已结束。"], ["规则", "状态判断（按顺序命中第一条）：\n· 未设置兑换期：商城没有兑换期；\n· 已结束：今天晚于兑换期结束日；\n· 核销偏慢：时间进度 ≥ 50%，且时间进度 − 额度核销进度 ≥ 25 个百分点；\n· 即将结束：剩余天数 ≤ 30；\n· 其他为健康。"], ["交互", "点一行展开项目详情，再点收起；同一时间只展开一个。"], ["待确认", "【新需求】目前商城没有维护兑换期的地方：需在「商城 › 我的商城 › 商城设置」新增「兑换期」（开始日期、结束日期，可不填表示常年）；历史商城默认为空，按「未设置兑换期」展示。核销偏慢的两个阈值（50%、25 个百分点）需业务确认。"], {"label": "字段", "caption": "每个项目", "rows": [["时间进度", "（今天 − 兑换期开始日 + 1）÷ 兑换期总天数，上限 100%", "商城设置·兑换期（新增）"], ["额度核销进度", "该商城已核销额度 ÷ 已发放额度", "业务库·发放记录、商城订单支付明细"], ["GMV、毛利率", "口径同「整体经营」，只取该商城", "业务库·商城订单明细"], ["参与率", "该商城下过单的员工 ÷ 该商城获得额度的员工", "业务库·发放记录、商城订单"], ["剩余额度", "已发放额度 − 已核销额度", "页面计算"], ["剩余天数", "兑换期结束日 − 今天；未设置兑换期显示「常年」", "商城设置·兑换期（新增）"]]}]}, {"k": "detail", "title": "项目详情（展开）", "secs": [["数据", "四块：额度核销（已发放、已核销、剩余、近 14 天日均核销）、近 8 周 GMV、品类排行（GMV 占比前 4 + 其他）、员工购买分布（未下单 / 1 次 / 2–3 次 / 4 次以上），底部附 C 端访问 → 支付转化率。"], ["规则", "V1 只做基于现有数据的统计：不做核销预测、不做「为下一单做准备」（到期提醒、节日备货参考、客户画像），也不给下一步操作指引。"], {"label": "字段", "caption": "", "rows": [["品类", "按商品一级类目汇总该商城 GMV", "业务库·商城订单明细、商品类目"], ["员工购买分布", "按获得额度的员工，统计其在该商城的支付成功订单数分段", "业务库·发放记录、商城订单"], ["访问 → 支付转化", "支付成功人数 ÷ 已登录访问人数（该商城）", "埋点 mall_enter、pay_result"], ["近 14 天日均核销", "最近 14 个自然日的已核销额度 ÷ 14", "业务库·商城订单支付明细"]]}]}]; }
   prdCards() { return this.prdBaseCards(); }
 }
 </script>
