@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>受邀会员账号 · 未认证无权益 · 会员端工作台精简改版 Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="dc-lite.js"></script>
+</head>
+<body>
+<template id="dc-src">
+<helmet>
+<style>
+.ai{--bg:#F4F7F7;--card:rgba(255,255,255,.76);--solid:#FFFFFF;--bd:rgba(15,23,42,.07);--tx1:#0F172A;--tx2:#566074;--tx3:#8A94A6;--brand:#0B7A70;--accent:#0B7A70;--info:#3B4BB8;--infobg:rgba(91,107,213,.12);
+ --g1:rgba(15,143,132,.20);--g2:rgba(63,196,181,.14);--g3:rgba(15,143,132,.10);--chip:rgba(15,23,42,.045);--chip2:rgba(15,23,42,.08);
+ --shadow:0 1px 2px rgba(15,23,42,.04),0 10px 30px rgba(15,23,42,.06);--grad:linear-gradient(120deg,#0B7A70 0%,#0F8F84 50%,#4CC1B3 100%);--gradText:linear-gradient(120deg,#075E56 0%,#0B7A70 55%,#0F8F84 100%);--gradBtn:linear-gradient(120deg,#075E56 0%,#0B7A70 100%);
+ --warn:#C2410C;--warnbg:rgba(234,88,12,.10);--up:#0B7A70;--grid:rgba(15,23,42,.045);--tip:#0F172A;--tiptx:#FFFFFF;--stopA:#0B7A70;--stopB:#0F8F84;--stopC:#4CC1B3;--rail:rgba(255,255,255,.62);--glow:rgba(15,143,132,.22)}
+.ai.dark{--bg:#0A0F11;--card:rgba(255,255,255,.045);--solid:#121A1C;--bd:rgba(255,255,255,.08);--tx1:#E8EEEF;--tx2:#9AA7AA;--tx3:#66757A;--brand:#3FC4B5;--accent:#3FC4B5;--info:#9AA8F5;--infobg:rgba(154,168,245,.14);
+ --g1:rgba(15,143,132,.24);--g2:rgba(63,196,181,.12);--g3:rgba(15,143,132,.14);--chip:rgba(255,255,255,.06);--chip2:rgba(255,255,255,.1);
+ --shadow:0 0 0 1px rgba(255,255,255,.015),0 16px 40px rgba(0,0,0,.4);--grad:linear-gradient(120deg,#0F8F84 0%,#3FC4B5 55%,#8EE3D8 100%);--gradText:linear-gradient(120deg,#3FC4B5 0%,#8EE3D8 100%);--gradBtn:linear-gradient(120deg,#075E56 0%,#0B7A70 100%);
+ --warn:#FDBA74;--warnbg:rgba(251,146,60,.14);--up:#5FD3C6;--grid:rgba(255,255,255,.05);--tip:#E8EEEF;--tiptx:#121A1C;--stopA:#0F8F84;--stopB:#3FC4B5;--stopC:#8EE3D8;--rail:rgba(255,255,255,.03);--glow:rgba(63,196,181,.25)}
+.ai *{box-sizing:border-box}
+.ai a{color:var(--brand);text-decoration:none}
+.card{background:var(--card);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border:1px solid var(--bd);border-radius:18px;box-shadow:var(--shadow)}
+.gtext{background:var(--gradText);-webkit-background-clip:text;background-clip:text;color:transparent}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--chip);border-radius:999px;padding:0 10px;line-height:24px;font-size:12px;color:var(--tx2);white-space:nowrap}
+.btn-ai{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border:0;border-radius:10px;background:var(--gradBtn);color:#FFFFFF;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;box-shadow:0 6px 18px var(--glow);white-space:nowrap}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:0;border-radius:10px;background:var(--chip);color:var(--tx1);font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;white-space:nowrap}
+.btn-ghost:hover{background:var(--chip2)}
+.lift{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.lift:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(15,23,42,.04),0 18px 40px rgba(15,143,132,.12);border-color:rgba(15,143,132,.28)}
+.rb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:56px;border:0;border-radius:12px;background:transparent;color:var(--tx2);font-size:12px;font-family:inherit;cursor:pointer;transition:background-color .15s ease,color .15s ease}
+.rb:hover{background:var(--chip);color:var(--tx1)}
+.rb.on{background:var(--chip2);color:var(--tx1);font-weight:600}
+.rb.on .ric{color:var(--brand)}
+.pi{display:flex;align-items:center;gap:6px;height:36px;padding:0 10px;border-radius:10px;font-size:14px;color:var(--tx1) !important;white-space:nowrap;transition:background-color .15s ease}
+.pi:hover{background:var(--chip)}
+.tag{flex:none;font-size:12px;line-height:18px;border-radius:4px;padding:0 5px}
+.cmd{padding:1.5px;border-radius:999px;background:var(--grad);box-shadow:0 8px 30px rgba(15,143,132,.18)}
+.cmd-in{display:flex;align-items:center;gap:10px;height:42px;padding:0 8px 0 16px;border-radius:999px;background:var(--solid)}
+.orb{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#FFFFFF 0%,rgba(255,255,255,0) 38%),var(--grad);box-shadow:0 0 18px rgba(15,143,132,.45);flex:none;animation:orb 4s ease-in-out infinite}
+@keyframes orb{0%,100%{transform:scale(1);box-shadow:0 0 14px rgba(15,143,132,.35)}50%{transform:scale(1.06);box-shadow:0 0 24px rgba(15,143,132,.5)}}
+.ins{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--chip)}
+.ic{flex:none;width:34px;height:34px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center}
+.num{font-family:'DIN Alternate','Bahnschrift','SF Pro Display','Helvetica Neue',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.ai :focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
+.tabp{height:30px;padding:0 14px;border:0;border-radius:999px;font-size:14px;font-family:inherit;cursor:pointer;background:transparent;color:var(--tx2)}
+.tabp.on{background:var(--solid);color:var(--tx1);font-weight:600;box-shadow:0 1px 3px rgba(15,23,42,.12)}
+.kpi{display:flex;flex-direction:column;align-items:stretch;text-align:left;gap:2px;padding:14px 16px 10px;border-radius:14px;border:1px solid transparent;background:var(--chip);font-family:inherit;cursor:pointer;color:var(--tx1);transition:border-color .15s ease,background-color .15s ease}
+.kpi:hover{background:var(--chip2)}
+.kpi.on{background:var(--solid);border-color:rgba(15,143,132,.35);box-shadow:0 8px 24px rgba(15,143,132,.12)}
+.col{position:relative;flex:1;display:flex;justify-content:center}
+.toast{position:absolute;z-index:40;padding:10px 14px;border-radius:12px;background:var(--tip);color:var(--tiptx);font-size:12px;line-height:1.6;box-shadow:0 12px 32px rgba(0,0,0,.2);white-space:nowrap}
+@media (prefers-reduced-motion: reduce){.orb{animation:none}.lift,.lift:hover{transition:none;transform:none}}
+
+.pjrow{transition:background-color .15s ease}
+.pjrow:hover{background:var(--chip) !important}
+</style>
+</helmet>
+<div data-prd-root="1" style="position: relative; display: flex; align-items: stretch; background: #F7F8FC">
+<div style="flex: 1 1 960px; min-width: 0; position: relative; z-index: 0; overflow: hidden">
+
+<div class="{{rootClass}}" style="position: relative; min-height: 1940px; background: var(--bg); color: var(--tx1); font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; font-size: 14px; overflow: hidden">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true"><defs>
+    <linearGradient id="ai-line" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color: var(--stopA)"/><stop offset=".55" style="stop-color: var(--stopB)"/><stop offset="1" style="stop-color: var(--stopC)"/></linearGradient>
+    <linearGradient id="ai-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color: var(--stopB); stop-opacity: .28"/><stop offset="1" style="stop-color: var(--stopB); stop-opacity: 0"/></linearGradient>
+  </defs></svg>
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none">
+    <div style="position: absolute; left: -160px; top: -220px; width: 720px; height: 620px; border-radius: 50%; background: var(--g1); filter: blur(90px)"></div>
+    <div style="position: absolute; right: -120px; top: -180px; width: 760px; height: 560px; border-radius: 50%; background: var(--g2); filter: blur(100px)"></div>
+    <div style="position: absolute; left: 38%; top: 520px; width: 680px; height: 480px; border-radius: 50%; background: var(--g3); filter: blur(110px)"></div>
+    <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 46%); mask-image: linear-gradient(180deg, #000 0%, transparent 46%)"></div>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 14px">
+    <span style="font-weight: 600">原型演示 · 受邀会员账号（未认证 · 无权益）</span>
+    <span style="color: #9BA5B9">供应商邀请客户单位、该单位还不是会员时，只开会员账号：能登录浏览，会员价不开放，创建类功能锁定；点任一创建按钮看提示；数据为示意</span>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: stretch; min-height: 1900px">
+    <div onMouseLeave="{{railLeave}}" style="position: relative; display: flex; flex: none; z-index: 40">
+    <nav aria-label="模块" style="width: 76px; flex: none; display: flex; flex-direction: column; gap: 4px; padding: 14px 8px; background: var(--rail); border-right: 1px solid var(--bd); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px)">
+      <div style="display: flex; justify-content: center; margin-bottom: 10px">
+        <div style="width: 40px; height: 40px; border-radius: 12px; background: var(--gradBtn); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 18px; font-weight: 700; box-shadow: 0 8px 20px rgba(15,143,132,.3)">采</div>
+      </div>
+      <template data-sc="for" list="{{rail}}" as="r" hint-placeholder-count="8">
+        <button onClick="{{r.pick}}" onMouseEnter="{{r.enter}}" aria-pressed="{{r.onStr}}" title="{{r.tip}}" class="{{r.cls}}">
+          <span class="ric" style="position: relative; display: inline-flex">
+            <template data-sc="if" value="{{r.ic_fav}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></template><template data-sc="if" value="{{r.ic_home}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z"/></svg></template><template data-sc="if" value="{{r.ic_goods}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></template><template data-sc="if" value="{{r.ic_store}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12v8h13v-8"/><path d="M10 20v-4h4v4"/></svg></template><template data-sc="if" value="{{r.ic_mall}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></template><template data-sc="if" value="{{r.ic_mkt}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10z"/><path d="M16.5 9a4 4 0 0 1 0 6"/><path d="M19 6.5a7.5 7.5 0 0 1 0 11"/></svg></template><template data-sc="if" value="{{r.ic_order}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6"/><path d="M9 12h6"/><path d="M9 15.5h3.5"/></svg></template><template data-sc="if" value="{{r.ic_qym}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2.5v2.5H14z"/><path d="M20 14v6h-6"/></svg></template><template data-sc="if" value="{{r.ic_fin}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></template><template data-sc="if" value="{{r.ic_data}}" hint-placeholder-val="{{ false }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V7"/><path d="M17 16v-8"/></svg></template>
+            <template data-sc="if" value="{{r.dot}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; right: -3px; top: -2px; width: 7px; height: 7px; border-radius: 50%; background: #E5484D; box-shadow: 0 0 0 2px var(--solid)"></span></template>
+          </span>
+          <span>{{r.name}}</span>
+        </button>
+      </template>
+      <button onClick="{{askAi}}" class="rb" style="margin-top: 12px; height: 64px" title="AI 助手（即将上线）">
+        <span class="orb"></span><span class="gtext" style="font-weight: 600">AI 助手</span>
+      </button>
+    </nav>
+
+    <template data-sc="if" value="{{panelShow}}" hint-placeholder-val="{{ true }}">
+    <aside data-prd="menu" aria-label="二级菜单" style="{{asideStyle}}">
+      <div style="display: flex; align-items: center; gap: 6px; padding: 0 8px 12px">
+        <span style="font-size: 16px; font-weight: 600">{{panelTitle}}</span>
+        <template data-sc="if" value="{{panelHasHint}}" hint-placeholder-val="{{ false }}"><span class="chip">{{panelHint}}</span></template>
+        <button onClick="{{togglePin}}" title="{{pinLabel}}" aria-label="{{pinLabel}}" style="margin-left: auto; width: 28px; height: 28px; border: 0; border-radius: 8px; background: {{pinBg}}; color: {{pinColor}}; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M9.5 4v16"/></svg></button>
+      </div>
+      <template data-sc="for" list="{{panelSections}}" as="s" hint-placeholder-count="2">
+        <div style="{{s.wrapStyle}}">
+          <template data-sc="if" value="{{s.spot}}" hint-placeholder-val="{{ false }}"><div role="dialog" aria-label="更新指引" style="left: calc(100% + 22px); top: 0; position: absolute; width: 320px; z-index: 70; background: var(--solid); color: var(--tx1); border-radius: 14px; padding: 14px 18px 16px; box-shadow: 0 16px 40px rgba(0,0,0,.28); text-align: left; font-weight: 400; white-space: normal">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px"><span style="font-size: 12px; font-weight: 600; color: var(--brand)">{{tStep}}</span><button onClick="{{tClose}}" aria-label="关闭指引" style="margin-left: auto; width: 24px; height: 24px; border: 0; background: transparent; color: var(--tx3); cursor: pointer; font-size: 16px">×</button></div>
+                  <div style="font-size: 16px; font-weight: 600; margin-bottom: 6px">{{tTitle}}</div>
+                  <div style="font-size: 14px; color: var(--tx2); line-height: 1.7">{{tDesc}}</div>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px">
+                    <button onClick="{{tClose}}" style="border: 0; background: transparent; color: var(--tx2); font-size: 14px; font-family: inherit; cursor: pointer; padding: 0">跳过</button>
+                    <button onClick="{{tPrev}}" class="btn-ghost" style="{{tPrevStyle}}">上一步</button>
+                    <button onClick="{{tNext}}" class="btn-ai" style="margin-left: 0">{{tNextLabel}}</button>
+                  </div>
+                </div></template>
+          <template data-sc="if" value="{{s.hasTitle}}" hint-placeholder-val="{{ true }}"><div style="padding: 8px 10px 4px; font-size: 12px; color: var(--tx3)">{{s.title}}</div></template>
+          <template data-sc="for" list="{{s.items}}" as="it" hint-placeholder-count="3">
+            <a href="{{it.href}}" title="{{it.tip}}" class="pi"><span style="overflow: hidden; text-overflow: ellipsis">{{it.name}}</span><template data-sc="if" value="{{it.isNew}}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: #C2410C; color: #FFFFFF; font-weight: 600">新</span></template><template data-sc="if" value="{{it.isRenamed}}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: var(--chip2); color: var(--tx2)">改</span></template><template data-sc="if" value="{{it.isSoon}}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: var(--chip); color: var(--tx3)">即将开放</span></template></a>
+          </template>
+        </div>
+      </template>
+    </aside>
+    </template>
+    </div>
+
+    <main style="flex: 1; min-width: 0; padding: 18px 28px 48px; position: relative">
+      <header style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px">
+        <span style="width: 48px; height: 48px; flex: none; border-radius: 14px; background: var(--chip2); color: var(--tx2); font-size: 20px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">鸿</span>
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px"><span style="font-size: 20px; font-weight: 600">绍兴柯桥鸿运纺织有限公司</span><span title="当前权益" style="flex: none; font-size: 12px; font-weight: 600; color: var(--tx2); background: var(--chip2); border-radius: 999px; padding: 0 9px; line-height: 22px">◇ 未认证 · 无权益</span></div>
+          <div style="font-size: 12px; color: var(--tx3); margin-top: 2px">由供应商「绍兴织锦家纺有限公司」邀请开通 · 2026-11-20</div>
+        </div>
+        <button onClick="{{openContact}}" class="btn-ai" style="margin-left: auto">联系客户运营开通权益</button>
+      </header>
+
+      <div data-prd="lock" class="card" role="status" style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; margin-bottom: 16px; border-radius: 14px; border: 1px solid rgba(194,65,12,.28); background: var(--warnbg)">
+        <span style="flex: none; width: 28px; height: 28px; border-radius: 8px; background: rgba(194,65,12,.12); color: var(--warn); display: inline-flex; align-items: center; justify-content: center; font-weight: 700">!</span>
+        <div style="flex: 1; min-width: 0; font-size: 14px; line-height: 1.7; color: var(--tx1)"><b>你的账号还没有会员权益。</b>可以登录浏览系统，但<b>会员价不对你开放</b>，工作台里的<b>创建功能暂不可用</b>。如需使用，请联系客户运营开通更高级的会员权益（开通前需完成企业认证）。</div>
+        <button onClick="{{openContact}}" class="btn-ghost" style="flex: none; background: var(--solid)">联系客户运营</button>
+      </div>
+
+      <section data-prd="create" class="card" aria-labelledby="cr-h" style="padding: 16px 18px; margin-bottom: 16px">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px"><h2 id="cr-h" style="margin: 0; font-size: 16px; font-weight: 600">快捷创建</h2><span style="font-size: 12px; color: var(--tx3)">开通会员权益后可用</span></div>
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px">
+          <template data-sc="for" list="{{creates}}" as="c" hint-placeholder-count="5">
+            <button onClick="{{c.pick}}" aria-disabled="true" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px; border-radius: 14px; border: 1px dashed var(--bd); background: var(--chip); color: var(--tx3); font-family: inherit; text-align: left; cursor: not-allowed">
+              <span style="display: flex; width: 100%; align-items: center"><b style="font-size: 15px; color: var(--tx2)">{{c.t}}</b><span aria-hidden="true" style="margin-left: auto; font-size: 12px">🔒</span></span>
+              <span style="font-size: 12px; line-height: 1.5">{{c.d}}</span>
+            </button>
+          </template>
+        </div>
+        <template data-sc="if" value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div role="status" style="margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: var(--warnbg); color: var(--warn); font-size: 14px">{{toastText}}</div></template>
+      </section>
+
+      <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 16px">
+        <section data-prd="price" class="card" aria-labelledby="pz-h" style="padding: 16px 18px">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px"><h2 id="pz-h" style="margin: 0; font-size: 16px; font-weight: 600">资源广场</h2><span style="font-size: 12px; color: var(--tx3)">可浏览商品，会员价开通权益后可见</span></div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+            <template data-sc="for" list="{{goods}}" as="g" hint-placeholder-count="4">
+              <div style="border-radius: 14px; border: 1px solid var(--bd); background: var(--solid); overflow: hidden">
+                <img src="{{g.img}}" alt="{{g.name}}" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover">
+                <div style="padding: 10px 12px 12px">
+                  <div style="font-size: 14px; font-weight: 600; line-height: 1.4; height: 40px; overflow: hidden">{{g.name}}</div>
+                  <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 6px"><span style="font-size: 12px; color: var(--tx3)">会员价</span><span style="font-size: 14px; font-weight: 600; color: var(--tx3); letter-spacing: 2px">¥ ••••</span></div>
+                  <div style="font-size: 12px; color: var(--tx3); margin-top: 2px">市场价 <span class="num">{{g.market}}</span></div>
+                  <button onClick="{{g.pick}}" class="btn-ghost" style="width: 100%; justify-content: center; height: 30px; font-size: 12px; margin-top: 8px">🔒 开通后可上架 / 代发</button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </section>
+        <section data-prd="rel" class="card" aria-labelledby="rel-h" style="padding: 16px 18px">
+          <h2 id="rel-h" style="margin: 0 0 12px; font-size: 16px; font-weight: 600">我的专供关系</h2>
+          <div style="display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 14px; background: var(--chip)">
+            <span style="width: 44px; height: 44px; flex: none; border-radius: 12px; background: rgba(194,103,27,.14); color: rgb(194,103,27); font-size: 18px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">织</span>
+            <div style="min-width: 0"><div style="display: flex; gap: 6px; align-items: center"><b>织锦家纺专供店</b><span style="font-size: 12px; font-weight: 600; color: var(--info); background: var(--infobg); border-radius: 999px; padding: 0 8px; line-height: 20px">供应商邀请</span></div><div style="font-size: 12px; color: var(--tx2); margin-top: 2px">绍兴织锦家纺有限公司 · 11-20 建立</div></div>
+          </div>
+          <div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin-top: 10px">邀请开通时已和这家店建立专供关系。它供给你的 <b class="num" style="color: var(--tx1)">3</b> 件商品，开通会员权益后才能审核、选品和下单。</div>
+          <div style="border-top: 1px solid var(--bd); margin-top: 14px; padding-top: 12px">
+            <div style="font-weight: 600; font-size: 14px; margin-bottom: 8px">开通后可以</div>
+            <template data-sc="for" list="{{unlocks}}" as="u" hint-placeholder-count="4"><div style="display: flex; gap: 8px; font-size: 12px; color: var(--tx2); line-height: 1.9"><span style="color: var(--brand); font-weight: 700">✓</span><span>{{u}}</span></div></template>
+          </div>
+        </section>
+      </div>
+
+      <template data-sc="if" value="{{contactOn}}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{closeContact}}" style="position: absolute; inset: 0; z-index: 60; background: rgba(15,23,42,.35)"></div>
+      <div data-prd="contact" role="dialog" aria-label="联系客户运营" style="position: absolute; left: 50%; top: 140px; transform: translateX(-50%); z-index: 61; width: 460px; background: var(--solid); border-radius: 18px; box-shadow: 0 24px 60px rgba(15,23,42,.24); padding: 20px 22px 22px; box-sizing: border-box">
+        <div style="display: flex; align-items: center; margin-bottom: 8px"><b style="font-size: 18px">{{contactTitle}}</b><button onClick="{{closeContact}}" aria-label="关闭" style="margin-left: auto; width: 30px; height: 30px; border: 0; border-radius: 8px; background: var(--chip); cursor: pointer; font-size: 16px; color: var(--tx2)">×</button></div>
+        <div style="font-size: 14px; color: var(--tx2); line-height: 1.7">{{contactText}}</div>
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; margin-top: 14px; padding: 14px; border-radius: 12px; background: var(--chip); font-size: 14px">
+          <span style="color: var(--tx3)">客户运营</span><b>周晴</b>
+          <span style="color: var(--tx3)">电话</span><b class="num">0571-8888 6600</b>
+          <span style="color: var(--tx3)">服务时间</span><span>工作日 9:00–18:00</span>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px"><button onClick="{{closeContact}}" class="btn-ghost" style="height: 38px">知道了</button><button onClick="{{requestCall}}" class="btn-ai" style="height: 38px">请客户运营联系我</button></div>
+      </div>
+      </template>
+    </main>
+  </div>
+</div>
+</div>
+<aside data-prd-panel="1" aria-label="PRD 说明" style="flex: 0 0 520px; position: relative; background: #F7F8FC; border-left: 1px dashed #A9B1E6; font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; color: #1F2329; font-size: 13px">
+  <div style="padding: 16px 18px 14px; border-bottom: 1px solid #E3E6F5">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="font-size: 11px; font-weight: 700; color: #FFFFFF; background: #5B6BD5; border-radius: 4px; padding: 2px 6px; letter-spacing: 0.5px">PRD</span>
+      <span style="font-size: 15px; font-weight: 600">{{prdTitle}}</span>
+      <button onClick="{{prdToggleLines}}" style="margin-left: auto; height: 28px; padding: 0 10px; border: 1px solid #C9CEF0; border-radius: 6px; background: #FFFFFF; color: #3B4BB8; font-size: 12px; cursor: pointer">{{prdLinesLabel}}</button>
+    </div>
+    <div style="margin-top: 8px; font-size: 12px; color: #646A73; line-height: 1.7">{{prdIntro}}</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; font-size: 11px">
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #EEF2FF; color: #3B4BB8">交互</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E8F6F4; color: #0B6E66">数据</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F2F3F5; color: #1F2329">规则</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #F5EDF7; color: #7A2E78">埋点</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #FFF1E8; color: #B54708">待确认</span>
+      <span style="padding: 0 6px; line-height: 18px; border-radius: 4px; background: #E9F0FB; color: #1F4E9A">字段</span>
+      <span style="color: #646A73; line-height: 18px">· 鼠标停在卡片上高亮对应区域</span>
+    </div>
+  </div>
+  <div data-prd-cards="1" style="position: relative; height: {{prdPanelH}}px">
+    <template data-sc="for" list="{{prdCardList}}" as="c" hint-placeholder-count="4">
+      <div data-prd-card="{{c.k}}" onMouseEnter="{{c.enter}}" onMouseLeave="{{c.leave}}" style="{{c.style}}">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: #5B6BD5; color: #FFFFFF; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{c.no}}</span>
+          <span style="font-size: 14px; font-weight: 600">{{c.title}}</span>
+        </div>
+        <template data-sc="if" value="{{c.unanchored}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 4px; font-size: 11px; color: #8F959E">{{c.hint}}</div></template>
+        <template data-sc="for" list="{{c.secs}}" as="x" hint-placeholder-count="2">
+          <div>
+            <template data-sc="if" value="{{x.isText}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; gap: 8px; margin-top: 8px">
+                <span style="{{x.tagStyle}}">{{x.label}}</span>
+                <span style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.7; color: #33373D; white-space: pre-line">{{x.text}}</span>
+              </div>
+            </template>
+            <template data-sc="if" value="{{x.isTable}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 10px">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+                  <span style="{{x.tagStyle}}">{{x.label}}</span>
+                  <span style="font-size: 12px; color: #646A73">{{x.caption}}</span>
+                </div>
+                <div role="table" style="border: 1px solid #E3E6F5; border-radius: 8px; overflow: hidden">
+                  <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 6px 10px; background: #F4F6FD; font-size: 11px; font-weight: 600; color: #3B4BB8">
+                    <span role="columnheader">字段</span><span role="columnheader">口径</span><span role="columnheader">来源</span>
+                  </div>
+                  <template data-sc="for" list="{{x.rows}}" as="r" hint-placeholder-count="3">
+                    <div role="row" style="display: grid; grid-template-columns: 104px minmax(0, 1fr) 118px; gap: 8px; padding: 7px 10px; border-top: 1px solid #EEF0F6; font-size: 12px; line-height: 1.6">
+                      <span role="cell" style="font-weight: 600; color: #1F2329">{{r.f}}</span>
+                      <span role="cell" style="color: #33373D">{{r.d}}</span>
+                      <span role="cell" style="color: #646A73; overflow-wrap: anywhere">{{r.s}}</span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+</aside>
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 90">
+  <template data-sc="for" list="{{prdLineList}}" as="ln" hint-placeholder-count="0">
+    <div style="display: contents"><div style="{{ln.box}}"></div><div style="{{ln.s1}}"></div><div style="{{ln.s2}}"></div><div style="{{ln.s3}}"></div><div style="{{ln.dot}}"></div></div>
+  </template>
+</div>
+</div>
+</template>
+<div id="dc-mount"></div>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1960,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { mod: 'home', contact: '', toast: '', pinned: false, hoverMod: '' };
+  }
+
+  menuData() {
+    return [
+      { id: 'fav', name: '常用', hint: '可自定义', sections: [
+        { items: [ { n: '资源广场', href: '#' }, { n: '代发订单' }, { n: '售后管理', isNew: true }, { n: '我的商城' } ] } ] },
+      { id: 'home', name: '工作台', link: true },
+      { id: 'goods', name: '商品', hint: '平台选货', sections: [
+        { t: '选货', items: [ { n: '资源广场', href: '#', renamed: true, tip: '平台货盘在这里看明细、上架、代发；原入口只在首页' }, { n: '挑选商品', top: true }, { n: '本地生活', top: true, renamed: true, tip: '原「本地资源场景」9 项合为一个入口' } ] },
+        { t: '变更通知', top: true, items: [ { n: '商品变更', renamed: true, tip: '合并：商品变更审核、商品替换日志、代发商品变更通知' } ] } ] },
+      { id: 'store', name: '店铺', hint: '我的 · 专供', top: true, sections: [
+        { t: '店铺', items: [ { n: '我的店铺', isNew: true, href: 'store-mine.html', tip: '会员自营店：上传和管理自有商品，与卖家侧同一套商品管理；原「商品库、商品发布、商品导入」' }, { n: '专供店铺', isNew: true, href: 'store-exclusive.html', tip: '专供店：输入手机号邀请供应商开店，看店铺信息、审核供货商品（含信息变更）、看铺货和订单；替代原「供应商管理」' } ] } ] },
+      { id: 'mall', name: '商城', sections: [
+        { t: '商城管理', items: [ { n: '我的商城' }, { n: '我的礼包' }, { n: '扩展应用', top: true, renamed: true, tip: '原「商城扩展应用」6 项合为一个入口，弹窗广告也挪到这里' } ] } ] },
+      { id: 'mkt', name: '营销', sections: [
+        { t: '名片营销', items: [ { n: '我的名片' }, { n: '数据监测' }, { n: '名片设置' } ] },
+        { t: '卡券营销', items: [ { n: '卡券兑换' }, { n: '卡券推广' }, { n: '卡券营销' } ] } ] },
+      { id: 'order', name: '订单', sections: [
+        { t: '商城订单', items: [ { n: '订单管理' }, { n: '服务订单' }, { n: '下单提醒' } ] },
+        { t: '代发', items: [ { n: '批量下单', renamed: true, tip: '原「猫超代发」「其他代发」各一个批量下单，已合并；原「代发选品」已取消，所有代发直接在这里下单' }, { n: '代发订单', renamed: true, tip: '合并：猫超代发 › 下单管理 + 其他代发 › 下单历史' } ] },
+        { t: '售后理赔', items: [ { n: '售后管理', isNew: true, tip: '含平台猫超售后、上门取件' }, { n: '理赔管理', isNew: true }, { n: '退货地址设置', top: true }, { n: '售后代运营', top: true, renamed: true, tip: '原「代售后查询」；平台代处理售后的服务，开通才显示' } ] },
+        { t: '猫超集采', items: [ { n: '集采报价' }, { n: '集采订单', renamed: true, tip: '原「下单管理」，改名去掉重名' } ] } ] },
+      { id: 'qym', name: '企业码', sections: [
+        { t: '服务企业', items: [ { n: '企业管理' }, { n: '员工管理' }, { n: '费控管理' }, { n: '额度发放' } ] },
+        { t: '订单中心', items: [ { n: '消费记录' }, { n: '企业码发票', renamed: true, tip: '原「发票管理」，与财务里的同名菜单区分' }, { n: '发票汇总' } ] } ] },
+      { id: 'fin', name: '财务', sections: [
+        { t: '平台财务', items: [ { n: '账户管理' }, { n: '发票管理' }, { n: '集采财务' }, { n: '营业额申报', top: true } ] },
+        { t: '商城财务', items: [ { n: '短信管理' }, { n: '额度管理' }, { n: '额度明细' }, { n: '开票审核' }, { n: '微信支付配置' } ] },
+        { t: '交易明细', items: [ { n: '服务交易明细' }, { n: '代发交易明细', renamed: true, tip: '原「猫超交易明细」，是否改名待确认' }, { n: '商品交易明细', top: true } ] } ] },
+      { id: 'data', name: '数据', sections: [
+        { items: [ { n: '经营分析', isNew: true, href: 'biz.html', tip: '按商城项目看整体和每个项目的经营情况' }, { n: '订单分析' }, { n: '用户分析' }, { n: '订单明细' } ] } ] }
+    ];
+  }
+
+
+  flash(t) {
+    clearTimeout(this._t);
+    this.setState({ toast: t });
+    this._t = setTimeout(() => this.setState({ toast: '' }), 2600);
+  }
+
+  railVals(pinned, floatMod) {
+    return { panelShow: pinned || !!floatMod,
+      railLeave: () => { if (this.state.hoverMod) this.setState({ hoverMod: '' }); },
+      togglePin: () => this.setState({ pinned: !this.state.pinned, hoverMod: '', mod: this.state.hoverMod || this.state.mod }),
+      pinLabel: pinned ? '收起菜单' : '固定展开', pinBg: pinned ? 'var(--chip)' : 'rgba(15,143,132,.12)', pinColor: pinned ? 'var(--tx2)' : 'var(--brand)' };
+  }
+
+  pageVals() {
+    const st = this.state;
+    // ---- shell: rail + secondary panel (数据 module active) ----
+    const modIds = ['fav', 'home', 'goods', 'store', 'mall', 'mkt', 'order', 'qym', 'fin', 'data'];
+    const MD = this.menuData();
+    const pinned = st.pinned;
+    const floatMod = !pinned && st.hoverMod ? st.hoverMod : '';
+    const curMod = floatMod || st.mod;
+    const rail = MD.map((g) => {
+      const on = g.id === st.mod;
+      const r = { name: g.id === 'fav' ? '常用' : g.name, tip: g.hint ? g.name + '（' + g.hint + '）' : g.name, onStr: on ? 'true' : 'false',
+        cls: on ? 'rb on' : 'rb', dot: g.id !== 'fav' && (g.sections || []).some((s) => s.items.some((it) => it.isNew)),
+        pick: () => this.setState({ mod: g.id, pinned: true, hoverMod: '' }), enter: () => { if (!this.state.pinned) this.setState({ hoverMod: g.id }); } };
+      modIds.forEach((k) => { r['ic_' + k] = k === g.id; });
+      return r;
+    });
+    const mk = (arr) => arr.map((it) => ({ name: it.n, href: it.href || '#', tip: it.tip || it.n, isNew: !!it.isNew, isRenamed: !!it.renamed, isSoon: !!it.soon }));
+    const curG = MD.find((g) => g.id === curMod) || MD[1];
+    const plain = 'margin-bottom: 8px';
+    const panelSections = curG.link
+      ? [{ title: '常用', hasTitle: true, items: mk(MD[0].sections[0].items), spot: false, wrapStyle: plain }]
+      : curG.sections.map((s) => ({ title: s.t || '', hasTitle: !!s.t, items: mk(s.items), spot: false, wrapStyle: plain }));
+
+    const IMGS = ['img/rice.jpg', 'img/cashew.png', 'img/bluemoon.jpg', 'img/kleenex.jpg'];
+    const lockMsg = (t) => () => this.setState({ contact: t });
+    const creates = [
+      ['创建商城', '新建员工福利商城项目'], ['创建礼包', '组合商品做礼包'], ['批量下单', '代发下单'], ['添加商品', '我的店铺上传自有商品'], ['邀请供应商', '建立专供关系']
+    ].map((c) => ({ t: c[0], d: c[1], pick: lockMsg(c[0]) }));
+    const goods = [
+      ['柴火大院 香稻贡米 5kg', '¥79.90'], ['三只松鼠 炭烧腰果 500g', '¥59.90'], ['蓝月亮 深层洁净洗衣液 3kg+1kg', '¥79.00'], ['舒洁 湿厕纸家庭装 80 抽 × 6 包', '¥45.00']
+    ].map((g, i) => ({ img: IMGS[i], name: g[0], market: g[1], pick: lockMsg('上架 / 代发') }));
+    const pageV = {
+      creates, goods,
+      unlocks: ['查看平台会员价和专供价', '创建商城、礼包，上架和代发下单', '审核专供商品，进资源广场选品', '邀请更多供应商开专供店'],
+      contactOn: !!st.contact, openContact: () => this.setState({ contact: '开通权益' }), closeContact: () => this.setState({ contact: '' }),
+      contactTitle: st.contact && st.contact !== '开通权益' ? '「' + st.contact + '」需要开通会员权益' : '联系客户运营开通会员权益',
+      contactText: st.contact && st.contact !== '开通权益' ? '你的账号是供应商邀请开通的，还没有会员权益，工作台里的创建功能暂不可用。请联系客户运营开通更高级的会员权益后再使用。' : '开通会员权益前需要完成企业认证。客户运营会和你确认需要的权益（如标准权益、阿里权益）并协助开通。',
+      requestCall: () => { this.setState({ contact: '' }); this.flash('已提交，客户运营会在 1 个工作日内联系你'); },
+      toastOn: !!st.toast, toastText: st.toast
+    };
+    return {
+      rootClass: 'ai', rail, panelSections, panelTitle: curG.link ? '工作台' : curG.name, panelHint: curG.hint || '', panelHasHint: !!curG.hint && !curG.link,
+      asideStyle: pinned ? 'width: 212px; flex: none; padding: 18px 12px; border-right: 1px solid var(--bd); background: var(--rail); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px)' : 'position: absolute; left: 76px; top: 10px; z-index: 45; width: 220px; padding: 14px 10px 8px; border-radius: 16px; background: var(--solid); border: 1px solid var(--bd); box-shadow: 0 20px 48px rgba(15,23,42,.16)',
+      ...this.railVals(pinned, floatMod),
+      askAi: () => this.flash('AI 助手即将上线'),
+      ...pageV
+    };
+  }
+
+  prdMeasure() {
+    const root = document.querySelector('[data-prd-root]');
+    const box = document.querySelector('[data-prd-cards]');
+    if (!root || !box) return;
+    const rb = root.getBoundingClientRect();
+    const sc = root.offsetWidth ? rb.width / root.offsetWidth : 1;
+    const bb = box.getBoundingClientRect();
+    const A = {};
+    document.querySelectorAll('[data-prd]').forEach((el) => {
+      const b = el.getBoundingClientRect();
+      if (b.width < 2 || b.height < 2) return;
+      A[el.getAttribute('data-prd')] = { x: (b.left - rb.left) / sc, y: (b.top - rb.top) / sc, w: b.width / sc, h: b.height / sc };
+    });
+    const H = {};
+    document.querySelectorAll('[data-prd-card]').forEach((el) => { H[el.getAttribute('data-prd-card')] = el.offsetHeight; });
+    const PX = (bb.left - rb.left) / sc, CY = (bb.top - rb.top) / sc;
+    const key = JSON.stringify([A, H, Math.round(PX), Math.round(CY)]);
+    if (key !== this._prdKey) { this._prdKey = key; this.setState({ prdA: A, prdH: H, prdPX: PX, prdCY: CY }); }
+  }
+  componentDidMount() { this.prdMeasure(); this._prdT = setInterval(() => this.prdMeasure(), 500); }
+  componentWillUnmount() { clearInterval(this._prdT); }
+  renderVals() { return Object.assign(this.pageVals(), this.prdVals()); }
+  prdVals() {
+    const st = this.state;
+    const A = st.prdA || {}, H = st.prdH || {};
+    const PX = st.prdPX || 0, CY = st.prdCY || 0;
+    const focus = st.prdFocus || '';
+    const cards = this.prdCards();
+    const withA = cards.filter((c) => A[c.k]).sort((a, b) => A[a.k].y - A[b.k].y);
+    const noA = cards.filter((c) => !A[c.k]);
+    const order = withA.concat(noA);
+    let y = 0; const pos = {};
+    order.forEach((c) => {
+      const want = A[c.k] ? Math.max(0, A[c.k].y - CY - 4) : y;
+      const top = Math.max(want, y);
+      pos[c.k] = top; y = top + (H[c.k] || 150) + 12;
+    });
+    const C1 = '#5B6BD5';
+    const showLines = st.prdLines !== false;
+    const prdLineList = !showLines ? [] : withA.map((c) => {
+      const a = A[c.k];
+      const op = focus ? (focus === c.k ? 1 : 0.15) : 0.6;
+      const w = focus === c.k ? 2 : 1.5;
+      const dash = w + 'px dashed ' + C1;
+      const ax = a.x + a.w + 4, ay = a.y + Math.min(a.h / 2, 24);
+      const gx = PX - 16, cy = CY + pos[c.k] + 20;
+      return {
+        box: 'position: absolute; left: ' + (a.x - 4) + 'px; top: ' + (a.y - 4) + 'px; width: ' + (a.w + 8) + 'px; height: ' + (a.h + 8) + 'px; border: ' + dash + '; border-radius: 8px; box-sizing: border-box; opacity: ' + op,
+        s1: 'position: absolute; left: ' + Math.min(ax, gx) + 'px; top: ' + ay + 'px; width: ' + Math.abs(gx - ax) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        s2: 'position: absolute; left: ' + gx + 'px; top: ' + Math.min(ay, cy) + 'px; height: ' + Math.abs(cy - ay) + 'px; border-left: ' + dash + '; opacity: ' + op,
+        s3: 'position: absolute; left: ' + gx + 'px; top: ' + cy + 'px; width: ' + (PX - gx) + 'px; border-top: ' + dash + '; opacity: ' + op,
+        dot: 'position: absolute; left: ' + (ax - 4) + 'px; top: ' + (ay - 4) + 'px; width: 8px; height: 8px; border-radius: 50%; background: ' + C1 + '; opacity: ' + op
+      };
+    });
+    const TAG = { '交互': ['#EEF2FF', '#3B4BB8'], '数据': ['#E8F6F4', '#0B6E66'], '规则': ['#F2F3F5', '#1F2329'], '埋点': ['#F5EDF7', '#7A2E78'], '待确认': ['#FFF1E8', '#B54708'], '字段': ['#E9F0FB', '#1F4E9A'] };
+    const nums = {}; order.forEach((c, i) => { nums[c.k] = i + 1; });
+    return {
+      prdTitle: this.prdTitle(), prdIntro: this.prdIntro(),
+      prdCardList: order.map((c) => {
+        const on = focus === c.k;
+        return {
+          k: c.k, no: String(nums[c.k]), title: c.title,
+          unanchored: !A[c.k], hint: c.hide || '当前界面未显示这个区域',
+          secs: c.secs.map((x) => {
+            const isT = !Array.isArray(x);
+            const lab = isT ? (x.label || '字段') : x[0];
+            const tg = TAG[lab] || TAG['规则'];
+            return { isText: !isT, isTable: isT, label: lab, text: isT ? '' : x[1], caption: isT ? (x.caption || '') : '',
+              rows: isT ? x.rows.map((r) => ({ f: r[0], d: r[1], s: r[2] || '' })) : [],
+              tagStyle: 'flex: none; height: 20px; padding: 0 6px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 20px; background: ' + tg[0] + '; color: ' + tg[1] };
+          }),
+          enter: () => this.setState({ prdFocus: c.k }), leave: () => this.setState({ prdFocus: '' }),
+          style: 'position: absolute; left: 16px; right: 16px; top: ' + pos[c.k] + 'px; background: #FFFFFF; border-radius: 10px; padding: 12px 14px; box-sizing: border-box; border: 1px solid ' + (on ? C1 : '#E3E6F5') + '; box-shadow: ' + (on ? '0 4px 14px rgba(91,107,213,0.18)' : 'none')
+        };
+      }),
+      prdLineList, prdPanelH: String(Math.max(y + 24, 400)),
+      prdToggleLines: () => this.setState({ prdLines: st.prdLines === false }),
+      prdLinesLabel: showLines ? '隐藏连线' : '显示连线'
+    };
+  }
+
+  prdTitle() { return "会员端 · 受邀会员账号"; }
+  prdIntro() { return "卖家侧可以邀请自己的客户单位成为平台会员：会员已存在则自动建立专供关系；不存在则只开会员账号（未认证、无权益），能登录查看，但会员价不开放、创建功能不可用，提示联系客户运营开通更高级的会员权益。"; }
+  prdBaseCards() { return [{"k": "lock", "title": "受邀会员账号 · 未认证无权益", "secs": [["规则", "供应商在卖家侧邀请客户单位：手机号对应的会员已存在时自动建立专供关系（见专供店铺画板）；不存在时只开会员账号，状态「未认证 · 无权益」，同时和邀请方建立专供关系。"], ["规则", "可以登录会员系统浏览：工作台、资源广场、专供店铺等页面都能打开。会员价（含专供代发价）一律不展示；所有创建类功能锁定。"], ["交互", "顶部常驻提示，不可关闭；组织名旁的权益标签显示「◇ 未认证 · 无权益」。"], ["待确认", "受邀账号能否看到邀请方给的专供代发价（原型按不展示）；受邀账号是否计入会员数、是否收费；多久未开通权益要回收账号。"]]}, {"k": "create", "title": "创建类功能锁定", "secs": [["规则", "锁定范围：创建商城、创建礼包、上架到商城、批量下单（代发）、添加自营商品、邀请供应商、发起集采报价等所有会产生商城、商品或订单的入口。"], ["交互", "入口保留、置灰带锁；点击弹窗「需要开通会员权益」，给出客户运营联系方式，可一键「请客户运营联系我」（生成运营后台待办）。"]]}, {"k": "price", "title": "会员价不开放", "secs": [["规则", "资源广场、货盘、商品详情里的会员价显示为「¥ ••••」，只展示市场价；接口层面不返回会员价，避免前端绕过。"]]}, {"k": "rel", "title": "专供关系", "secs": [["数据", "邀请方店铺、关系来源「供应商邀请」、建立时间、对本账号供货的商品数。"], ["规则", "关系在开账号时就建立；专供商品的审核、选品、下单在开通权益后才能用。"]]}, {"k": "contact", "title": "联系客户运营", "secs": [["数据", "客户运营姓名、电话、服务时间（按会员归属的客户运营取）。"], ["交互", "「请客户运营联系我」提交后在运营后台生成待办，客户运营协助完成企业认证并开通权益；开通后账号解锁，无需重新登录。"]]}]; }
+  prdCards() { return this.prdBaseCards(); }
+}
+</script>
+</body>
+</html>

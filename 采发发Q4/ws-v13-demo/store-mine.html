@@ -73,7 +73,7 @@
 
   <div style="position: relative; display: flex; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 14px">
     <span style="font-weight: 600">原型演示 · 店铺 › 我的店铺（会员端）</span>
-    <span style="color: #9BA5B9">会员自营店，商品管理与卖家侧同一套；可点「+ 添加商品」看四种发品方式；数据为示意</span>
+    <span style="color: #9BA5B9">会员自营店，商品管理与卖家侧同一套；可点「+ 添加商品」看三种发品方式；数据为示意</span>
   </div>
 
   <div style="position: relative; display: flex; align-items: stretch; min-height: 1900px">
@@ -184,8 +184,8 @@
       <div data-prd="add" role="dialog" aria-label="添加商品" style="position: absolute; left: 50%; top: 120px; transform: translateX(-50%); z-index: 61; width: 720px; background: var(--solid); border-radius: 18px; box-shadow: 0 24px 60px rgba(15,23,42,.24); padding: 22px 24px">
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px"><b style="font-size: 18px">添加商品</b><button onClick="{{closeAdd}}" aria-label="关闭" style="margin-left: auto; width: 30px; height: 30px; border: 0; border-radius: 8px; background: var(--chip); cursor: pointer; font-size: 16px; color: var(--tx2)">×</button></div>
         <div style="font-size: 12px; color: var(--tx2); margin-bottom: 16px">和卖家侧是同一套商品管理：商品资料两店共用，以后一键供给其他会员时不用重新录入</div>
-        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
-          <template data-sc="for" list="{{methods}}" as="m" hint-placeholder-count="4">
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+          <template data-sc="for" list="{{methods}}" as="m" hint-placeholder-count="3">
             <button onClick="{{m.pick}}" class="lift" style="display: flex; gap: 12px; align-items: flex-start; text-align: left; padding: 16px; border-radius: 14px; border: 1px solid var(--bd); background: var(--solid); font-family: inherit; color: var(--tx1); cursor: pointer">
               <span style="width: 40px; height: 40px; flex: none; border-radius: 12px; background: rgba(15,143,132,.12); color: var(--brand); display: inline-flex; align-items: center; justify-content: center; font-size: 18px">{{m.icon}}</span>
               <span><b style="display: block; font-size: 15px">{{m.t}}</b><span style="display: block; font-size: 12px; color: var(--tx2); line-height: 1.6; margin-top: 4px">{{m.d}}</span><span style="display: block; font-size: 12px; color: var(--brand); margin-top: 6px">{{m.fit}}</span></span>
@@ -283,7 +283,7 @@ class Component extends DCLogic {
         { t: '选货', items: [ { n: '资源广场', href: '#', renamed: true, tip: '平台货盘在这里看明细、上架、代发；原入口只在首页' }, { n: '挑选商品', top: true }, { n: '本地生活', top: true, renamed: true, tip: '原「本地资源场景」9 项合为一个入口' } ] },
         { t: '变更通知', top: true, items: [ { n: '商品变更', renamed: true, tip: '合并：商品变更审核、商品替换日志、代发商品变更通知' } ] } ] },
       { id: 'store', name: '店铺', hint: '我的 · 专供', top: true, sections: [
-        { t: '店铺', items: [ { n: '我的店铺', isNew: true, href: 'store-mine.html', tip: '会员自营店：上传和管理自有商品，与卖家侧同一套商品管理；原「商品库、商品发布、商品导入」' }, { n: '专供店铺', isNew: true, href: 'store-exclusive.html', tip: '供应商为你开的专供店：看店铺信息、审核供货商品、看铺货和订单；替代原「供应商管理」' } ] } ] },
+        { t: '店铺', items: [ { n: '我的店铺', isNew: true, href: 'store-mine.html', tip: '会员自营店：上传和管理自有商品，与卖家侧同一套商品管理；原「商品库、商品发布、商品导入」' }, { n: '专供店铺', isNew: true, href: 'store-exclusive.html', tip: '专供店：输入手机号邀请供应商开店，看店铺信息、审核供货商品（含信息变更）、看铺货和订单；替代原「供应商管理」' } ] } ] },
       { id: 'mall', name: '商城', sections: [
         { t: '商城管理', items: [ { n: '我的商城' }, { n: '我的礼包' }, { n: '扩展应用', top: true, renamed: true, tip: '原「商城扩展应用」6 项合为一个入口，弹窗广告也挪到这里' } ] } ] },
       { id: 'mkt', name: '营销', sections: [
@@ -302,7 +302,7 @@ class Component extends DCLogic {
         { t: '商城财务', items: [ { n: '短信管理' }, { n: '额度管理' }, { n: '额度明细' }, { n: '开票审核' }, { n: '微信支付配置' } ] },
         { t: '交易明细', items: [ { n: '服务交易明细' }, { n: '代发交易明细', renamed: true, tip: '原「猫超交易明细」，是否改名待确认' }, { n: '商品交易明细', top: true } ] } ] },
       { id: 'data', name: '数据', sections: [
-        { items: [ { n: '经营分析', isNew: true, href: 'biz.html', tip: '按商城项目看经营情况，为下一单做准备' }, { n: '订单分析' }, { n: '用户分析' }, { n: '订单明细' } ] } ] }
+        { items: [ { n: '经营分析', isNew: true, href: 'biz.html', tip: '按商城项目看整体和每个项目的经营情况' }, { n: '订单分析' }, { n: '用户分析' }, { n: '订单明细' } ] } ] }
     ];
   }
 
@@ -344,7 +344,7 @@ class Component extends DCLogic {
       : curG.sections.map((s) => ({ title: s.t || '', hasTitle: !!s.t, items: mk(s.items), spot: false, wrapStyle: plain }));
 
     const P = [
-      { tab: 'on', img: 'img/bear.jpg', name: '小熊 多功能电煮锅 1.6L', code: 'FX-BEAR-01', specs: '2 个规格', cost: 89, market: 169, sale: 139, stock: '可用 120 个', lead: '现货 3 天内出货', malls: ['吉利 · 双十一', '杭州银行 · 年货节'], orders: 64, src: '采集发品 · 天猫链接' },
+      { tab: 'on', img: 'img/bear.jpg', name: '小熊 多功能电煮锅 1.6L', code: 'FX-BEAR-01', specs: '2 个规格', cost: 89, market: 169, sale: 139, stock: '可用 120 个', lead: '现货 3 天内出货', malls: ['吉利 · 双十一', '杭州银行 · 年货节'], orders: 64, src: '手工录入' },
       { tab: 'on', img: 'img/muji.jpg', name: '大豆纤维四件套 1.8m', code: 'FX-BED-02', specs: '3 个规格', cost: 146, market: 329, sale: 259, stock: '可用 80 套', lead: '订货 7 天内出货', malls: ['杭州银行 · 年货节'], orders: 23, src: '表格发品' },
       { tab: 'on', img: 'img/wine.jpg', name: '企业定制 酱香型白酒礼盒 500ml', code: 'FX-WINE-01', specs: '1 个规格', cost: 210, market: 468, sale: 398, stock: '可用 60 盒', lead: '现货 2 天内出货', malls: ['阿里巴巴 · 端午', '浙江电信 · 中秋国庆', '吉利 · 双十一'], orders: 118, src: '' },
       { tab: 'on', img: 'img/jingmi.jpg', name: '生鲜提货卡 200 元（兑换码核销）', code: 'FX-CARD-200', specs: '1 个规格', cost: 172, market: 200, sale: 198, stock: '可用 1,000 张', lead: '发码即时', malls: ['网易 · 生日'], orders: 33, src: '手工录入' },
@@ -360,7 +360,6 @@ class Component extends DCLogic {
     const ptabs = [['on', '已上架'], ['off', '已下架'], ['draft', '草稿']].map((t) => ({ label: t[1] + ' ' + cnt(t[0]), sel: tab === t[0] ? 'true' : 'false', cls: tab === t[0] ? 'tabp on' : 'tabp', pick: () => this.setState({ ptab: t[0] }) }));
     const methods = [
       ['⌕', '找同款发品', '上传一张商品图，从平台商品库找到同款，自动带出名称、类目、品牌、参数和详情。', '适合：标品、平台上已有同款'],
-      ['⇩', '采集发品', '粘贴天猫、京东、1688 等商品链接，自动采集主图、规格和详情，补上成本价即可。', '适合：手里有电商链接的商品'],
       ['▦', '表格发品', '下载模板批量填写，一次导入多个商品；导入后逐条校验并给出失败明细。', '适合：存量自有商品一次性搬上来'],
       ['✎', '手工录入', '按图片/视频、基础信息、规格/供价、履约/售后、详情说明五步填写，有智能录入助手。', '适合：定制品、非标品']
     ].map((m) => ({ icon: m[0], t: m[1], d: m[2], fit: m[3], pick: () => { this.setState({ add: false }); this.flash('进入「' + m[1] + '」（复用卖家侧新建商品页面）'); } }));
@@ -463,7 +462,7 @@ class Component extends DCLogic {
 
   prdTitle() { return "会员端 · 我的店铺"; }
   prdIntro() { return "会员自营店：卖家侧的商品管理（发品方式、商品表单、批量工具）通用到会员端，方便会员上传自有商品。"; }
-  prdBaseCards() { return [{"k": "shop", "title": "我的店铺 · 店铺信息", "secs": [["规则", "会员自营店：会员的自有商品自己给自己供货，只供自己的商城和代发使用。成为会员即可使用，不需要额外认证；店铺名默认取会员组织名，可修改。"], ["规则", "上架的商品直接进入会员资源广场的「自营」来源，不需要审核。"], ["数据", "在售商品、草稿、已铺商城、近 30 天订单。"], ["待确认", "自营店是否收费、是否收订单服务费（Q4 规划 V3.4 评审点）；阿里权益（自有猫超、优品）商品是否也归入自营店。"]]}, {"k": "plist", "title": "商品管理", "secs": [["规则", "与卖家侧专供店共用同一套商品管理（商品模型、表单、批量工具），会员侧只是换了入口；原「商品库、商品发布、商品导入」合并到这里。"], ["交互", "已上架 / 已下架 / 草稿三个页签；可搜索名称、货号、SKU 编码；支持批量改价、批量上下架、批量上架到商城。每行可「上架到商城」。"], ["规则", "字段映射：卖家侧「成本价 / 市场价 / 代发价（含税）」在自营店里为「成本价（采购成本）/ 市场价 / 建议售价」。成本价只自己可见，经营分析里自营商品的毛利 = 商城售价 − 成本价。"], {"label": "字段", "caption": "列表字段", "rows": [["成本价", "会员录入的采购成本（含税），仅自己可见", "商品库·成本价"], ["建议售价", "上架到商城时默认带出的售价，可在商城里改", "商品库·建议售价"], ["已铺商城", "已上架该商品的本会员商城", "业务库·商城商品"], ["近 30 天订单", "近 30 天含该商品的商城订单 + 代发订单数", "业务库·商城订单、代发订单"]]}]}, {"k": "add", "title": "添加商品 · 四种方式", "secs": [["交互", "复用卖家侧「新建商品」：找同款发品（上传图片从平台商品库找同款，自动带出信息）、采集发品（粘贴电商链接采集）、表格发品（模板批量导入，带失败明细）、手工录入（五步表单 + 智能录入助手）。"], ["规则", "必填：主图、商品名称、三级分类、品牌、规格与成本价、市场价、库存、交付方式；资料不全的保存为草稿。"], ["交互", "「供给其他会员」对应 V3.4：把自营店商品一键导入专供店供给其他会员，需要企业认证，本版只预留入口。"]]}]; }
+  prdBaseCards() { return [{"k": "shop", "title": "我的店铺 · 店铺信息", "secs": [["规则", "会员自营店：会员的自有商品自己给自己供货，只供自己的商城和代发使用。成为会员即可使用，不需要额外认证；店铺名默认取会员组织名，可修改。"], ["规则", "上架的商品直接进入会员资源广场的「自营」来源，不需要审核。"], ["数据", "在售商品、草稿、已铺商城、近 30 天订单。"], ["待确认", "自营店是否收费、是否收订单服务费（Q4 规划 V3.4 评审点）；阿里权益（自有猫超、优品）商品是否也归入自营店。"]]}, {"k": "plist", "title": "商品管理", "secs": [["规则", "与卖家侧专供店共用同一套商品管理（商品模型、表单、批量工具），会员侧只是换了入口；原「商品库、商品发布、商品导入」合并到这里。"], ["交互", "已上架 / 已下架 / 草稿三个页签；可搜索名称、货号、SKU 编码；支持批量改价、批量上下架、批量上架到商城。每行可「上架到商城」。"], ["规则", "字段映射：卖家侧「成本价 / 市场价 / 代发价（含税）」在自营店里为「成本价（采购成本）/ 市场价 / 建议售价」。成本价只自己可见，经营分析里自营商品的毛利 = 商城售价 − 成本价。"], {"label": "字段", "caption": "列表字段", "rows": [["成本价", "会员录入的采购成本（含税），仅自己可见", "商品库·成本价"], ["建议售价", "上架到商城时默认带出的售价，可在商城里改", "商品库·建议售价"], ["已铺商城", "已上架该商品的本会员商城", "业务库·商城商品"], ["近 30 天订单", "近 30 天含该商品的商城订单 + 代发订单数", "业务库·商城订单、代发订单"]]}]}, {"k": "add", "title": "添加商品 · 三种方式", "secs": [["交互", "复用卖家侧「新建商品」的三种方式：找同款发品（上传图片从平台商品库找同款，自动带出信息）、表格发品（模板批量导入，带失败明细）、手工录入（五步表单 + 智能录入助手）。不做「采集发品」：会员自有商品没有采集场景，卖家侧也已删除该功能。"], ["规则", "必填：主图、商品名称、三级分类、品牌、规格与成本价、市场价、库存、交付方式；资料不全的保存为草稿。"], ["交互", "「供给其他会员」对应 V3.4：把自营店商品一键导入专供店供给其他会员，需要企业认证，本版只预留入口。"]]}]; }
   prdCards() { return this.prdBaseCards(); }
 }
 </script>

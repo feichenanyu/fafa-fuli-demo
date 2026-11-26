@@ -73,7 +73,7 @@
 
   <div style="position: relative; display: flex; align-items: center; gap: 12px; padding: 8px 24px; background: #1F2329; color: #FFFFFF; font-size: 14px">
     <span style="font-weight: 600">原型演示 · 店铺 › 专供店铺（会员端）</span>
-    <span style="color: #9BA5B9">逻辑对齐卖家侧专供店：供应商给你配专供代发价 → 你审核价格和主图 → 通过后进资源广场；可点「审核」试一下；数据为示意</span>
+    <span style="color: #9BA5B9">输入手机号邀请供应商（可点「邀请供应商开店」）；供应商给你配专供商品 → 你审核价格和主图（信息变更要在有效期内确认）→ 通过后进资源广场；进「暖礼优选礼赠店」可试审核和超期重新审核；数据为示意</span>
   </div>
 
   <div style="position: relative; display: flex; align-items: stretch; min-height: 1900px">
@@ -132,13 +132,17 @@
           <div>
             <div style="font-size: 12px; color: var(--tx3)">店铺 › 专供店铺</div>
             <h1 style="margin: 2px 0 0; font-size: 20px; font-weight: 600">专供店铺</h1>
-            <div style="font-size: 12px; color: var(--tx2); margin-top: 4px">供应商为你开的专供店。商品经你审核通过后，才会出现在你的资源广场里供选品</div>
+            <div style="font-size: 12px; color: var(--tx2); margin-top: 4px">供应商为你开的专供店。你可以输入手机号邀请供应商，供应商也可以邀请你；商品经你审核通过后，才会出现在资源广场里供选品</div>
           </div>
           <div style="margin-left: auto; position: relative">
             <button onClick="{{soonInvite}}" class="btn-ai">邀请供应商开店</button>
             <template data-sc="if" value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div role="status" class="toast" style="right: 0; top: 44px">{{toastText}}</div></template>
           </div>
         </header>
+        <div data-prd="auto" class="card" role="status" style="display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin-bottom: 14px; border-radius: 14px">
+          <span style="flex: none; font-size: 12px; font-weight: 600; color: var(--info); background: var(--infobg); border-radius: 999px; padding: 0 9px; line-height: 22px">新的专供关系</span>
+          <span style="flex: 1; min-width: 0; font-size: 14px; color: var(--tx2)"><b style="color: var(--tx1)">织锦家纺专供店</b>（绍兴织锦家纺有限公司）邀请你成为它的客户，你已是平台会员，11-02 已自动建立专供关系。它供给你的商品仍需你审核后才进资源广场。</span>
+        </div>
         <section data-prd="sum" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px">
           <template data-sc="for" list="{{sums}}" as="k" hint-placeholder-count="4">
             <div class="card" style="padding: 14px 16px; border-radius: 14px">
@@ -154,7 +158,7 @@
               <span style="display: flex; align-items: center; gap: 12px; width: 100%">
                 <span style="{{s.logo}}">{{s.ini}}</span>
                 <span style="flex: 1; min-width: 0">
-                  <span style="display: flex; align-items: center; gap: 8px"><b style="font-size: 16px">{{s.name}}</b><span style="{{s.statusStyle}}">{{s.status}}</span></span>
+                  <span style="display: flex; align-items: center; gap: 8px"><b style="font-size: 16px">{{s.name}}</b><span style="{{s.statusStyle}}">{{s.status}}</span><span style="{{s.srcStyle}}">{{s.src}}</span></span>
                   <span style="display: block; font-size: 12px; color: var(--tx2); margin-top: 3px">{{s.corp}} · {{s.cert}}</span>
                 </span>
                 <template data-sc="if" value="{{s.hasPending}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: 12px; font-weight: 600; color: var(--warn); background: var(--warnbg); border-radius: 999px; padding: 0 10px; line-height: 24px">{{s.pending}} 件待审核</span></template>
@@ -168,12 +172,39 @@
             </button>
           </template>
         </section>
+        <section data-prd="invrec" class="card" aria-labelledby="inv-h" style="padding: 16px 18px; margin-top: 16px">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px"><h2 id="inv-h" style="margin: 0; font-size: 16px; font-weight: 600">邀请记录</h2><span style="font-size: 12px; color: var(--tx3)">{{invCount}} 条 · 我发出的供应商邀请</span><button onClick="{{soonInvite}}" class="btn-ghost" style="margin-left: auto; height: 30px; font-size: 12px">+ 邀请供应商</button></div>
+          <div style="display: grid; grid-template-columns: 1fr 1.6fr .7fr 1fr 2.6fr; gap: 12px; padding: 8px 4px; font-size: 12px; color: var(--tx3); border-bottom: 1px solid var(--bd)"><span>手机号</span><span>卖家主体</span><span>邀请时间</span><span>状态</span><span>说明</span></div>
+          <template data-sc="for" list="{{invites}}" as="v" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 1fr 1.6fr .7fr 1fr 2.6fr; gap: 12px; align-items: center; padding: 10px 4px; font-size: 14px; border-bottom: 1px solid var(--bd)"><span class="num">{{v.phone}}</span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{v.who}}</span><span class="num" style="color: var(--tx2)">{{v.at}}</span><span><span style="{{v.stStyle}}">{{v.st}}</span></span><span style="font-size: 12px; color: var(--tx2)">{{v.note}}</span></div>
+          </template>
+        </section>
+      </div>
+      </template>
+
+      <template data-sc="if" value="{{invOn}}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{closeInv}}" style="position: absolute; inset: 0; z-index: 60; background: rgba(15,23,42,.35)"></div>
+      <div data-prd="invite" role="dialog" aria-label="邀请供应商开店" style="position: absolute; left: 50%; top: 110px; transform: translateX(-50%); z-index: 61; width: 520px; background: var(--solid); border-radius: 18px; box-shadow: 0 24px 60px rgba(15,23,42,.24); padding: 20px 22px 22px; box-sizing: border-box">
+        <div style="display: flex; align-items: center; margin-bottom: 4px"><b style="font-size: 18px">邀请供应商开店</b><button onClick="{{closeInv}}" aria-label="关闭" style="margin-left: auto; width: 30px; height: 30px; border: 0; border-radius: 8px; background: var(--chip); cursor: pointer; font-size: 16px; color: var(--tx2)">×</button></div>
+        <template data-sc="if" value="{{invForm}}" hint-placeholder-val="{{ true }}"><div>
+          <div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin-bottom: 14px">输入供应商负责人的手机号，系统发通知到卖家侧：已是平台卖家的，卖家确认后建立专供关系；还不是的，按卖家入驻流程注册、认证、开店后自动建立。</div>
+          <label style="display: block; font-size: 12px; color: var(--tx2); margin-bottom: 6px">供应商手机号</label>
+          <input aria-label="供应商手机号" inputmode="numeric" maxlength="11" placeholder="请输入 11 位手机号" value="{{invPhoneVal}}" onInput="{{invInput}}" style="width: 100%; box-sizing: border-box; height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--bd); background: var(--solid); color: var(--tx1); font-size: 16px; font-family: inherit; outline: none">
+          <template data-sc="if" value="{{hasInvErr}}" hint-placeholder-val="{{ false }}"><div role="alert" style="font-size: 12px; color: var(--warn); margin-top: 6px">{{invErr}}</div></template>
+          <div style="font-size: 12px; color: var(--tx3); margin-top: 8px">演示：尾号为双数视为已入驻卖家，单数视为未入驻</div>
+          <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px"><button onClick="{{closeInv}}" class="btn-ghost" style="height: 38px">取消</button><button onClick="{{sendInv}}" class="btn-ai" style="height: 38px">发送邀请</button></div>
+        </div></template>
+        <template data-sc="if" value="{{invDone}}" hint-placeholder-val="{{ false }}"><div>
+          <div style="display: flex; gap: 10px; align-items: flex-start; border-radius: 12px; background: var(--chip); padding: 14px; margin-top: 10px"><span style="flex: none; width: 24px; height: 24px; border-radius: 999px; background: var(--brand); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">✓</span><span><b style="display: block; font-size: 15px">{{invTitle}}</b><span style="display: block; font-size: 12px; color: var(--tx2); line-height: 1.7; margin-top: 4px">{{invText}}</span></span></div>
+          <div style="display: flex; justify-content: flex-end; margin-top: 16px"><button onClick="{{closeInv}}" class="btn-ai" style="height: 38px">知道了</button></div>
+        </div></template>
       </div>
       </template>
 
       <template data-sc="if" value="{{isDetail}}" hint-placeholder-val="{{ false }}">
       <div>
         <button onClick="{{back}}" style="border: 0; background: transparent; color: var(--brand); font-size: 14px; font-family: inherit; cursor: pointer; padding: 0; margin-bottom: 10px">← 专供店铺</button>
+        <template data-sc="if" value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div role="status" style="margin: 0 0 10px; padding: 8px 12px; border-radius: 10px; background: rgba(15,143,132,.1); color: var(--brand); font-size: 14px">{{toastText}}</div></template>
         <section data-prd="info" class="card" style="padding: 18px 20px; margin-bottom: 16px; display: flex; gap: 16px; align-items: flex-start">
           <span style="{{cur.logoLg}}">{{cur.ini}}</span>
           <div style="flex: 1; min-width: 0">
@@ -195,9 +226,9 @@
             <template data-sc="for" list="{{tabs}}" as="t" hint-placeholder-count="2"><button role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" class="{{t.cls}}">{{t.label}}</button></template>
           </div>
           <template data-sc="if" value="{{isGoods}}" hint-placeholder-val="{{ true }}"><div style="display: flex; gap: 6px">
-            <template data-sc="for" list="{{filters}}" as="f" hint-placeholder-count="4"><button onClick="{{f.pick}}" style="{{f.style}}">{{f.label}}</button></template>
+            <template data-sc="for" list="{{filters}}" as="f" hint-placeholder-count="5"><button onClick="{{f.pick}}" style="{{f.style}}">{{f.label}}</button></template>
           </div></template>
-          <span style="margin-left: auto; font-size: 12px; color: var(--tx3)">新报价审核通过前，仍按当前有效价供货</span>
+          <span style="margin-left: auto; font-size: 12px; color: var(--tx3)">信息变更需在有效期内确认，期间按原信息售卖；超期自动下架</span>
         </div>
 
         <template data-sc="if" value="{{isGoods}}" hint-placeholder-val="{{ true }}">
@@ -264,6 +295,7 @@
       <div onClick="{{closeDrawer}}" style="position: absolute; inset: 0; z-index: 60; background: rgba(15,23,42,.35)"></div>
       <aside data-prd="review" role="dialog" aria-label="商品审核" style="position: absolute; top: 0; right: 0; z-index: 61; width: 560px; min-height: 100%; background: var(--solid); box-shadow: -16px 0 40px rgba(15,23,42,.16); padding: 20px 22px 24px; box-sizing: border-box">
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px"><b style="font-size: 16px">商品审核</b><span style="{{rv.typeStyle}}">{{rv.type}}</span><button onClick="{{closeDrawer}}" aria-label="关闭" style="margin-left: auto; width: 30px; height: 30px; border: 0; border-radius: 8px; background: var(--chip); cursor: pointer; font-size: 16px; color: var(--tx2)">×</button></div>
+        <template data-sc="if" value="{{rv.hasDue}}" hint-placeholder-val="{{ false }}"><div style="{{rv.dueStyle}}"><b style="display: block; font-size: 14px; margin-bottom: 2px">{{rv.dueTitle}}</b>{{rv.dueText}}</div></template>
         <div style="display: flex; gap: 14px; margin-bottom: 16px">
           <img src="{{rv.img}}" alt="{{rv.name}}" style="width: 180px; height: 180px; flex: none; border-radius: 12px; object-fit: cover; border: 1px solid var(--bd)">
           <div style="min-width: 0">
@@ -274,6 +306,11 @@
             <template data-sc="for" list="{{rv.imgChecks}}" as="c" hint-placeholder-count="4"><div style="display: flex; gap: 6px; font-size: 12px; margin-bottom: 4px"><span style="{{c.dot}}">{{c.mark}}</span><span style="color: var(--tx2)">{{c.t}}</span></div></template>
           </div>
         </div>
+        <template data-sc="if" value="{{rv.hasChanges}}" hint-placeholder-val="{{ false }}"><div style="margin-bottom: 14px">
+          <div style="font-weight: 600; margin-bottom: 8px">变更内容</div>
+          <div style="display: grid; grid-template-columns: 1fr 1.4fr 1.6fr; gap: 10px; font-size: 12px; color: var(--tx3); padding: 0 0 6px; border-bottom: 1px solid var(--bd)"><span>字段</span><span>原信息（有效期内继续使用）</span><span>新信息</span></div>
+          <template data-sc="for" list="{{rv.changes}}" as="c" hint-placeholder-count="2"><div style="display: grid; grid-template-columns: 1fr 1.4fr 1.6fr; gap: 10px; font-size: 12px; padding: 7px 0; border-bottom: 1px solid var(--bd)"><span style="color: var(--tx2)">{{c.f}}</span><span style="color: var(--tx3); text-decoration: line-through">{{c.o}}</span><b style="font-weight: 600; color: var(--tx1)">{{c.n}}</b></div></template>
+        </div></template>
         <div style="border-radius: 14px; background: var(--chip); padding: 14px 16px; margin-bottom: 14px">
           <div style="font-weight: 600; margin-bottom: 10px">价格审核</div>
           <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
@@ -288,13 +325,13 @@
             <template data-sc="for" list="{{reasons}}" as="r" hint-placeholder-count="5"><button onClick="{{r.pick}}" style="{{r.style}}">{{r.label}}</button></template>
           </div>
           <div style="display: flex; gap: 8px">
-            <button onClick="{{approve}}" class="btn-ai" style="flex: 1; justify-content: center; height: 40px">审核通过 · 进入资源广场</button>
+            <button onClick="{{approve}}" class="btn-ai" style="flex: 1; justify-content: center; height: 40px">{{rv.passLabel}}</button>
             <button onClick="{{reject}}" class="btn-ghost" style="height: 40px; padding: 0 18px">驳回</button>
           </div>
           <div style="font-size: 12px; color: var(--tx3); margin-top: 8px">{{rv.passNote}}</div>
           <template data-sc="if" value="{{toastOn}}" hint-placeholder-val="{{ false }}"><div role="status" style="margin-top: 10px; padding: 8px 12px; border-radius: 10px; background: var(--warnbg); color: var(--warn); font-size: 12px; font-weight: 600">{{toastText}}</div></template>
         </div></template>
-        <template data-sc="if" value="{{rv.done}}" hint-placeholder-val="{{ false }}"><div style="border-radius: 12px; background: var(--chip); padding: 12px 14px; font-size: 14px">{{rv.doneText}}</div></template>
+        <template data-sc="if" value="{{rv.done}}" hint-placeholder-val="{{ false }}"><div style="border-radius: 12px; background: var(--chip); padding: 12px 14px; font-size: 14px">{{rv.doneText}}<template data-sc="if" value="{{rv.canRelist}}" hint-placeholder-val="{{ false }}"><div style="margin-top: 10px"><button onClick="{{relistNow}}" class="btn-ai" style="height: 34px">{{rv.relistLabel}}</button></div></template></div></template>
       </aside>
       </template>
     </main>
@@ -373,7 +410,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { mod: 'store', store: '', tab: 'goods', filter: 'all', drawer: '', reason: '', reviews: {}, toast: '', pinned: false, hoverMod: '' };
+    this.state = { mod: 'store', store: '', tab: 'goods', filter: 'all', drawer: '', reason: '', reviews: {}, relist: {}, inv: false, invites: [], invResult: null, invErr: '', toast: '', pinned: false, hoverMod: '' };
   }
 
   menuData() {
@@ -385,7 +422,7 @@ class Component extends DCLogic {
         { t: '选货', items: [ { n: '资源广场', href: '#', renamed: true, tip: '平台货盘在这里看明细、上架、代发；原入口只在首页' }, { n: '挑选商品', top: true }, { n: '本地生活', top: true, renamed: true, tip: '原「本地资源场景」9 项合为一个入口' } ] },
         { t: '变更通知', top: true, items: [ { n: '商品变更', renamed: true, tip: '合并：商品变更审核、商品替换日志、代发商品变更通知' } ] } ] },
       { id: 'store', name: '店铺', hint: '我的 · 专供', top: true, sections: [
-        { t: '店铺', items: [ { n: '我的店铺', isNew: true, href: 'store-mine.html', tip: '会员自营店：上传和管理自有商品，与卖家侧同一套商品管理；原「商品库、商品发布、商品导入」' }, { n: '专供店铺', isNew: true, href: 'store-exclusive.html', tip: '供应商为你开的专供店：看店铺信息、审核供货商品、看铺货和订单；替代原「供应商管理」' } ] } ] },
+        { t: '店铺', items: [ { n: '我的店铺', isNew: true, href: 'store-mine.html', tip: '会员自营店：上传和管理自有商品，与卖家侧同一套商品管理；原「商品库、商品发布、商品导入」' }, { n: '专供店铺', isNew: true, href: 'store-exclusive.html', tip: '专供店：输入手机号邀请供应商开店，看店铺信息、审核供货商品（含信息变更）、看铺货和订单；替代原「供应商管理」' } ] } ] },
       { id: 'mall', name: '商城', sections: [
         { t: '商城管理', items: [ { n: '我的商城' }, { n: '我的礼包' }, { n: '扩展应用', top: true, renamed: true, tip: '原「商城扩展应用」6 项合为一个入口，弹窗广告也挪到这里' } ] } ] },
       { id: 'mkt', name: '营销', sections: [
@@ -404,7 +441,7 @@ class Component extends DCLogic {
         { t: '商城财务', items: [ { n: '短信管理' }, { n: '额度管理' }, { n: '额度明细' }, { n: '开票审核' }, { n: '微信支付配置' } ] },
         { t: '交易明细', items: [ { n: '服务交易明细' }, { n: '代发交易明细', renamed: true, tip: '原「猫超交易明细」，是否改名待确认' }, { n: '商品交易明细', top: true } ] } ] },
       { id: 'data', name: '数据', sections: [
-        { items: [ { n: '经营分析', isNew: true, href: 'biz.html', tip: '按商城项目看经营情况，为下一单做准备' }, { n: '订单分析' }, { n: '用户分析' }, { n: '订单明细' } ] } ] }
+        { items: [ { n: '经营分析', isNew: true, href: 'biz.html', tip: '按商城项目看整体和每个项目的经营情况' }, { n: '订单分析' }, { n: '用户分析' }, { n: '订单明细' } ] } ] }
     ];
   }
 
@@ -446,75 +483,84 @@ class Component extends DCLogic {
       : curG.sections.map((s) => ({ title: s.t || '', hasTitle: !!s.t, items: mk(s.items), spot: false, wrapStyle: plain }));
 
     const IMG = { rice: 'img/rice.jpg', cashew: 'img/cashew.png', mac: 'img/macadamia.png', crisps: 'img/crisps.png', blue: 'img/bluemoon.jpg', kleenex: 'img/kleenex.jpg', wine: 'img/wine.jpg', jingmi: 'img/jingmi.jpg', muji: 'img/muji.jpg' };
-    // review: new = 首次供货；price = 新报价版本；status: pending / approved / rejected
+    // review: new = 首次供货；chg = 信息变更（价格、主图、标题等，带确认有效期）；status: pending / approved / rejected / expired（超期未确认，自动下架）
+    const TODAY = new Date('2026-11-25');
+    const left = (d) => Math.round((new Date(d) - TODAY) / 86400000);
     const STORES = [
-      { id: 'nl', name: '暖礼优选礼赠店', ini: '暖', hue: '15,143,132', corp: '杭州暖礼商贸有限公司', cert: '企业已认证', status: '合作中', since: '2026-10-12', contact: '王经理 · 138****2061', cats: '粮油、零食、家清',
+      { id: 'nl', src: '我邀请', name: '暖礼优选礼赠店', ini: '暖', hue: '15,143,132', corp: '杭州暖礼商贸有限公司', cert: '企业已认证', status: '合作中', since: '2026-10-12', contact: '王经理 · 138****2061', cats: '粮油、零食、家清',
         note: '运费按实际收货地址核算，包装费用按具体要求确认；现货 3 天内出货',
         goods: [
           { id: 'rice', img: IMG.rice, name: '柴火大院 香稻贡米 5kg', spec: '5kg · 1 个规格', stock: '可供 860 袋', lead: '现货 2 天内出货', cat: '粮油米面 / 大米', brand: '柴火大院', now: 52.8, market: 79.9, ref: 54.9, ver: 'V1', review: 'approved', malls: ['杭州银行 · 年货节', '浙江电信 · 中秋国庆', '网易 · 生日'], orders: 186, gmv: 13207 },
           { id: 'cashew', img: IMG.cashew, name: '三只松鼠 炭烧腰果 500g', spec: '500g · 1 个规格', stock: '可供 420 袋', lead: '现货 3 天内出货', cat: '休闲零食 / 坚果', brand: '三只松鼠', now: 38.5, market: 59.9, ref: 41.2, ver: 'V1', review: 'approved', malls: ['杭州银行 · 年货节', '吉利 · 双十一'], orders: 94, gmv: 4982 },
-          { id: 'blue', img: IMG.blue, name: '蓝月亮 深层洁净洗衣液 3kg+1kg', spec: '套装 · 1 个规格', stock: '可供 300 套', lead: '现货 3 天内出货', cat: '家清日用 / 洗衣液', brand: '蓝月亮', now: 56.43, market: 79, ref: 57.9, ver: 'V1', review: 'approved', malls: ['浙江电信 · 中秋国庆', '吉利 · 双十一'], orders: 77, gmv: 5390 },
-          { id: 'mac', img: IMG.mac, name: '百草味 奶油味夏威夷果 500g', spec: '500g · 1 个规格', stock: '可供 380 袋', lead: '现货 3 天内出货', cat: '休闲零食 / 坚果', brand: '百草味', now: 49.12, next: 54.8, market: 69, ref: 52.6, ver: 'V2', type: 'price', review: 'pending', malls: ['杭州银行 · 年货节', '吉利 · 双十一'], orders: 63, gmv: 3870,
+          { id: 'blue', img: IMG.blue, name: '蓝月亮 深层洁净洗衣液 3kg+1kg', spec: '套装 · 1 个规格', stock: '可供 300 套', lead: '现货 3 天内出货', cat: '家清日用 / 洗衣液', brand: '蓝月亮', now: 56.43, market: 79, ref: 57.9, ver: 'V2', type: 'chg', review: 'expired', submitted: '2026-11-17', due: '2026-11-24', malls: [], prevMalls: ['浙江电信 · 中秋国庆', '吉利 · 双十一'], orders: 77, gmv: 5390,
+            changes: [['商品标题', '深层洁净洗衣液 3kg+1kg', '深层洁净洗衣液 3kg+1kg（2027 新包装）'], ['主图', '旧版包装图', '新版包装图（已上传）']], checks: [1, 1, 1, 1] },
+          { id: 'mac', img: IMG.mac, name: '百草味 奶油味夏威夷果 500g', spec: '500g · 1 个规格', stock: '可供 380 袋', lead: '现货 3 天内出货', cat: '休闲零食 / 坚果', brand: '百草味', now: 49.12, next: 54.8, market: 69, ref: 52.6, ver: 'V2', type: 'chg', review: 'pending', submitted: '2026-11-22', due: '2026-11-29', changes: [['专供代发价（含税）', '¥49.12', '¥54.80']], malls: ['杭州银行 · 年货节', '吉利 · 双十一'], orders: 63, gmv: 3870,
             checks: [1, 1, 1, 1] },
           { id: 'crisps', img: IMG.crisps, name: '良品铺子 酥脆薄饼礼盒 800g', spec: '800g · 1 个规格', stock: '可供 260 盒', lead: '现货 3 天内出货', cat: '休闲零食 / 饼干', brand: '良品铺子', now: 42.85, market: 59, ref: 44.5, ver: 'V1', type: 'new', review: 'pending', malls: [], orders: 0, gmv: 0,
             checks: [1, 1, 0, 1], imgWarn: '主图含促销文字「买二送一」，与专供价不一致' },
           { id: 'kleenex', img: IMG.kleenex, name: '舒洁 湿厕纸家庭装 80 抽 × 6 包', spec: '6 包 · 1 个规格', stock: '可供 500 提', lead: '现货次日发', cat: '家清日用 / 纸品', brand: '舒洁', now: 36.9, market: 45, ref: 33.44, ver: 'V1', type: 'new', review: 'pending', malls: [], orders: 0, gmv: 0,
             checks: [1, 1, 1, 1] }
         ] },
-      { id: 'pd', name: '拍档福利专供店', ini: '拍', hue: '91,107,213', corp: '宁波拍档贸易有限公司', cert: '企业已认证', status: '合作中', since: '2026-08-03', contact: '李总 · 139****8820', cats: '酒水、生鲜卡券',
+      { id: 'pd', src: '我邀请', name: '拍档福利专供店', ini: '拍', hue: '91,107,213', corp: '宁波拍档贸易有限公司', cert: '企业已认证', status: '合作中', since: '2026-08-03', contact: '李总 · 139****8820', cats: '酒水、生鲜卡券',
         note: '酒水类不支持七天无理由；卡券类发码后不退',
         goods: [
           { id: 'wine', img: IMG.wine, name: '窖藏五年 浓香型白酒礼盒 500ml×2', spec: '礼盒 · 1 个规格', stock: '可供 120 盒', lead: '现货 3 天内出货', cat: '酒水饮料 / 白酒', brand: '拍档精选', now: 268, market: 399, ref: 0, ver: 'V3', review: 'approved', malls: ['吉利 · 双十一', '杭州银行 · 年货节', '阿里巴巴 · 端午'], orders: 212, gmv: 81408 },
           { id: 'jingmi', img: IMG.jingmi, name: '京觅 全球优采生鲜礼品卡 300 元', spec: '电子卡 · 1 个规格', stock: '可供 1,000 张', lead: '发码即时', cat: '卡券 / 生鲜卡', brand: '京觅', now: 276, market: 300, ref: 279, ver: 'V1', type: 'new', review: 'rejected', reason: '主图不合规', malls: [], orders: 0, gmv: 0, checks: [1, 0, 1, 1] }
         ] },
-      { id: 'zj', name: '织锦家纺专供店', ini: '织', hue: '194,103,27', corp: '绍兴织锦家纺有限公司', cert: '企业已认证', status: '合作中', since: '2026-11-02', contact: '陈店长 · 136****5172', cats: '家纺床品',
+      { id: 'zj', src: '供应商邀请', name: '织锦家纺专供店', ini: '织', hue: '194,103,27', corp: '绍兴织锦家纺有限公司', cert: '企业已认证', status: '合作中', since: '2026-11-02', contact: '陈店长 · 136****5172', cats: '家纺床品',
         note: '大件默认德邦配送，偏远地区另计运费',
         goods: [
-          { id: 'muji', img: IMG.muji, name: '天然大豆纤维 冬被 200×230cm', spec: '200×230cm · 2 个规格', stock: '可供 90 床', lead: '现货 4 天内出货', cat: '家纺 / 被子', brand: '织锦', now: 189, next: 199, market: 359, ref: 0, ver: 'V2', type: 'price', review: 'pending', malls: ['杭州银行 · 年货节'], orders: 18, gmv: 5022, checks: [1, 1, 1, 1] }
+          { id: 'muji', img: IMG.muji, name: '天然大豆纤维 冬被 200×230cm', spec: '200×230cm · 2 个规格', stock: '可供 90 床', lead: '现货 4 天内出货', cat: '家纺 / 被子', brand: '织锦', now: 189, next: 199, market: 359, ref: 0, ver: 'V2', type: 'chg', review: 'pending', submitted: '2026-11-24', due: '2026-12-01', changes: [['专供代发价（含税）', '¥189.00', '¥199.00'], ['主图', '白底单品图', '卧室场景图'], ['规格', '200×230cm、220×240cm', '新增 150×200cm']], malls: ['杭州银行 · 年货节'], orders: 18, gmv: 5022, checks: [1, 1, 1, 1] }
         ] },
-      { id: 'xg', name: '鲜果时令专供店', ini: '鲜', hue: '94,140,46', corp: '嘉兴鲜果供应链有限公司', cert: '认证中', status: '待开店', since: '', contact: '周经理 · 137****0934', cats: '水果生鲜', note: '供应商已接受邀请，完成企业认证后开店供货', goods: [] }
+      { id: 'xg', src: '我邀请', name: '鲜果时令专供店', ini: '鲜', hue: '94,140,46', corp: '嘉兴鲜果供应链有限公司', cert: '认证中', status: '待开店', since: '', contact: '周经理 · 137****0934', cats: '水果生鲜', note: '供应商已接受邀请，完成企业认证后开店供货', goods: [] }
     ];
     const ov = st.reviews || {};
-    STORES.forEach((s) => s.goods.forEach((g) => { if (ov[g.id]) { g.review = ov[g.id].r; g.reason = ov[g.id].reason; if (g.review === 'approved' && g.next) { g.now = g.next; g.next = null; } } }));
+    const relist = st.relist || {};
+    STORES.forEach((s) => s.goods.forEach((g) => { if (ov[g.id]) { g.review = ov[g.id].r; g.reason = ov[g.id].reason; g.wasExpired = ov[g.id].was === 'expired'; if (g.review === 'approved' && g.next) { g.now = g.next; g.next = null; } if (g.review === 'approved') g.changes = null; if (g.review === 'approved' && g.prevMalls && relist[g.id]) { g.malls = g.prevMalls; g.prevMalls = null; } } }));
     const money = (v) => '¥' + Number(v).toFixed(2);
     const wan = (v) => v >= 10000 ? '¥' + (v / 10000).toFixed(1) + ' 万' : '¥' + Math.round(v).toLocaleString('en-US');
     const pill = (bg, c) => 'flex: none; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 0 9px; line-height: 22px; white-space: nowrap; background: ' + bg + '; color: ' + c;
-    const RS = { pending: ['待审核', pill('var(--warnbg)', 'var(--warn)')], approved: ['已通过', pill('rgba(15,143,132,.12)', 'var(--brand)')], rejected: ['已驳回', pill('var(--chip2)', 'var(--tx2)')] };
+    const RS = { pending: ['待审核', pill('var(--warnbg)', 'var(--warn)')], approved: ['已通过', pill('rgba(15,143,132,.12)', 'var(--brand)')], rejected: ['已驳回', pill('var(--chip2)', 'var(--tx2)')], expired: ['已下架', pill('rgba(229,72,77,.1)', '#C4323A')] };
+    const SRC = { '我邀请': pill('var(--chip2)', 'var(--tx2)'), '供应商邀请': pill('var(--infobg)', 'var(--info)') };
     const SS = { '合作中': pill('rgba(15,143,132,.12)', 'var(--brand)'), '待开店': pill('var(--infobg)', 'var(--info)') };
     const allGoods = [].concat.apply([], STORES.map((s) => s.goods));
-    const pendingAll = allGoods.filter((g) => g.review === 'pending').length;
+    const pendingAll = allGoods.filter((g) => g.review === 'pending' || g.review === 'expired').length;
+    const dues = allGoods.filter((g) => g.review === 'pending' && g.due).map((g) => g.due).sort();
     const sums = [
       { label: '合作中的专供店', value: STORES.filter((s) => s.status === '合作中').length + ' 家', sub: '另有 1 家待开店（认证中）' },
-      { label: '待我审核的商品', value: pendingAll + ' 件', sub: '新品与改价都需审核', warn: pendingAll > 0 },
+      { label: '待我审核的商品', value: pendingAll + ' 件', sub: dues.length ? '信息变更最早 ' + dues[0].slice(5) + ' 到期，超期自动下架' : '新品与信息变更都需审核', warn: pendingAll > 0 },
       { label: '已通过 · 可在资源广场选', value: allGoods.filter((g) => g.review === 'approved').length + ' 件', sub: '只对你可见' },
       { label: '专供商品 · 近 30 天订单', value: allGoods.reduce((a, g) => a + g.orders, 0) + ' 单', sub: '销售额 ' + wan(allGoods.reduce((a, g) => a + g.gmv, 0)) }
     ].map((k) => ({ ...k, numStyle: 'font-size: 24px; font-weight: 700; margin: 2px 0; color: ' + (k.warn ? 'var(--warn)' : 'var(--tx1)') }));
     const logo = (s, n) => 'width: ' + n + 'px; height: ' + n + 'px; flex: none; border-radius: ' + (n > 44 ? 14 : 12) + 'px; background: rgba(' + s.hue + ',.14); color: rgb(' + s.hue + '); font-size: ' + (n > 44 ? 22 : 18) + 'px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center';
     const stores = STORES.map((s) => {
-      const p = s.goods.filter((g) => g.review === 'pending').length;
+      const p = s.goods.filter((g) => g.review === 'pending' || g.review === 'expired').length;
       const mallSet = new Set([].concat.apply([], s.goods.map((g) => g.malls)));
-      return { name: s.name, ini: s.ini, corp: s.corp, cert: s.cert, status: s.status, statusStyle: SS[s.status], cats: s.cats,
+      return { name: s.name, ini: s.ini, corp: s.corp, cert: s.cert, status: s.status, statusStyle: SS[s.status], cats: s.cats, src: s.src === '供应商邀请' ? '供应商邀请 · 自动建立' : '我邀请', srcStyle: SRC[s.src],
         since: s.since ? '合作开始 ' + s.since : '供应商已接受邀请，认证通过后开店', logo: logo(s, 44), hasPending: p > 0, pending: p,
         kpis: [{ l: '供货商品', v: s.goods.length }, { l: '已通过', v: s.goods.filter((g) => g.review === 'approved').length }, { l: '已铺商城', v: mallSet.size }, { l: '近 30 天订单', v: s.goods.reduce((a, g) => a + g.orders, 0) }],
         open: () => this.setState({ store: s.id, tab: 'goods', filter: 'all', drawer: '' }) };
     });
     const cs = STORES.find((s) => s.id === st.store) || STORES[0];
-    const fmap = { all: () => true, pending: (g) => g.review === 'pending', approved: (g) => g.review === 'approved', rejected: (g) => g.review === 'rejected' };
+    const fmap = { all: () => true, pending: (g) => g.review === 'pending', approved: (g) => g.review === 'approved', rejected: (g) => g.review === 'rejected', expired: (g) => g.review === 'expired' };
     const shown = cs.goods.filter(fmap[st.filter] || fmap.all);
     const goods = shown.map((g) => {
       const warns = [];
       if (g.review === 'pending' && g.ref && (g.next || g.now) > g.ref) warns.push('高于平台同款');
       if (g.review === 'pending' && g.imgWarn) warns.push('主图待确认');
       if (g.review === 'rejected') warns.push('原因：' + (g.reason || '其他'));
+      if (g.review === 'pending' && g.due) warns.unshift((left(g.due) <= 3 ? '剩 ' + left(g.due) + ' 天' : g.due.slice(5) + ' 截止') + '，期间按原信息售卖');
+      if (g.review === 'expired') warns.push(g.due.slice(5) + ' 超期未确认，已自动下架');
+      const chgNames = g.changes ? g.changes.map((c) => c[0].replace('（含税）', '')).filter((n) => n.indexOf('专供代发价') < 0) : [];
       return { img: g.img, name: g.name, spec: g.spec, stock: g.stock, priceNow: money(g.now), hasNew: !!g.next, noNew: !g.next, ver: g.ver, priceNew: g.next ? money(g.next) : '',
-        chg: g.next ? '↑ ' + ((g.next / g.now - 1) * 100).toFixed(1) + '%' : '', verText: '当前有效版 ' + g.ver,
-        market: money(g.market), status: RS[g.review][0] + (g.review === 'pending' ? (g.type === 'price' ? ' · 改价' : ' · 新品') : ''), statusStyle: RS[g.review][1],
+        chg: g.next ? '↑ ' + ((g.next / g.now - 1) * 100).toFixed(1) + '%' : '', verText: chgNames.length && g.review !== 'approved' ? '变更：' + chgNames.join('、') : '当前有效版 ' + g.ver,
+        market: money(g.market), status: RS[g.review][0] + (g.review === 'pending' ? (g.type === 'chg' ? ' · 信息变更' : ' · 新品') : (g.review === 'expired' ? ' · 超期' : '')), statusStyle: RS[g.review][1],
         hasWarn: warns.length > 0, warn: warns.join('、'), malls: g.malls.slice(0, 2).concat(g.malls.length > 2 ? ['+' + (g.malls.length - 2)] : []), noMall: g.malls.length === 0,
-        noMallText: g.review === 'approved' ? '还未上架到商城' : '审核通过后可上架', orders: g.orders,
-        btn: g.review === 'pending' ? '审核' : '查看', btnCls: g.review === 'pending' ? 'btn-ai' : 'btn-ghost', review: () => this.setState({ drawer: g.id, reason: '' }) };
+        noMallText: g.prevMalls ? (g.review === 'approved' ? '需重新上架（原 ' + g.prevMalls.length + ' 个商城）' : '已从 ' + g.prevMalls.length + ' 个商城撤下') : (g.review === 'approved' ? '还未上架到商城' : '审核通过后可上架'), orders: g.orders,
+        btn: g.review === 'pending' || g.review === 'expired' ? (g.review === 'expired' ? '重新审核' : '审核') : '查看', btnCls: g.review === 'pending' || g.review === 'expired' ? 'btn-ai' : 'btn-ghost', review: () => this.setState({ drawer: g.id, reason: '' }) };
     });
     const cnt = (k) => cs.goods.filter(fmap[k]).length;
-    const filters = [['all', '全部'], ['pending', '待审核'], ['approved', '已通过'], ['rejected', '已驳回']].map((f) => {
+    const filters = [['all', '全部'], ['pending', '待审核'], ['approved', '已通过'], ['rejected', '已驳回'], ['expired', '已下架']].map((f) => {
       const on = (st.filter || 'all') === f[0];
       return { label: f[1] + ' ' + cnt(f[0]), pick: () => this.setState({ filter: f[0] }),
         style: 'height: 28px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-family: inherit; cursor: pointer; border: 1px solid ' + (on ? 'rgba(15,143,132,.4)' : 'var(--bd)') + '; background: ' + (on ? 'rgba(15,143,132,.1)' : 'var(--solid)') + '; color: ' + (on ? 'var(--brand)' : 'var(--tx2)') + '; font-weight: ' + (on ? 600 : 400) };
@@ -540,10 +586,15 @@ class Component extends DCLogic {
       const ck = rg.checks || [1, 1, 1, 1];
       const ckT = ['尺寸 ≥ 800 × 800，清晰无拉伸', '无水印、二维码和联系方式', rg.imgWarn || '主图文字与专供价一致，无促销误导', '与商品名称、规格一致'];
       const pw = [];
-      if (rg.next) pw.push('新报价比当前有效价上涨 ' + ((rg.next / rg.now - 1) * 100).toFixed(1) + '%；已上架的 ' + rg.malls.length + ' 个商城在新价生效后毛利会下降。');
+      if (rg.next && rg.review === 'pending') pw.push('新报价比当前有效价上涨 ' + ((rg.next / rg.now - 1) * 100).toFixed(1) + '%；已上架的 ' + rg.malls.length + ' 个商城在新价生效后毛利会下降。');
       if (rg.ref && price > rg.ref) pw.push('高于平台同款参考价 ' + money(rg.ref) + '（' + ((price / rg.ref - 1) * 100).toFixed(1) + '%），可要求供应商调整。');
       rv = { name: rg.name, img: rg.img, spec: rg.spec, stock: rg.stock, lead: rg.lead, cat: rg.cat, brand: rg.brand,
-        type: rg.review === 'pending' ? (rg.type === 'price' ? '改价 · ' + rg.ver : '新品 · 首次供货') : RS[rg.review][0], typeStyle: RS[rg.review][1],
+        type: rg.review === 'pending' ? (rg.type === 'chg' ? '信息变更 · ' + rg.ver : '新品 · 首次供货') : (rg.review === 'expired' ? '已下架 · 超期未确认' : RS[rg.review][0]), typeStyle: RS[rg.review][1],
+        hasDue: (rg.review === 'pending' || rg.review === 'expired') && !!rg.due, dueExpired: rg.review === 'expired',
+        dueTitle: rg.review === 'expired' ? '已于 ' + rg.due + ' 超期自动下架' : '请在 ' + rg.due + ' 前确认（剩 ' + left(rg.due) + ' 天）',
+        dueText: rg.review === 'expired' ? '供应商 ' + (rg.submitted || '').slice(5) + ' 提交的信息变更未在有效期内确认，商品已从资源广场和 ' + rg.prevMalls.length + ' 个商城撤下。重新审核通过后回到资源广场，需要再上架到商城。' : '供应商 ' + (rg.submitted || '').slice(5) + ' 提交变更并指定了确认有效期。确认前按原商品信息继续售卖；超期未确认会自动下架，之后需重新审核再上架、铺货到商城。',
+        dueStyle: 'border-radius: 12px; padding: 10px 12px; margin-bottom: 14px; font-size: 12px; line-height: 1.7; background: ' + (rg.review === 'expired' ? 'rgba(229,72,77,.08)' : 'var(--warnbg)') + '; color: ' + (rg.review === 'expired' ? '#C4323A' : 'var(--warn)'),
+        hasChanges: !!(rg.changes && rg.changes.length), changes: (rg.changes || []).map((c) => ({ f: c[0], o: c[1], n: c[2] })),
         imgChecks: ck.map((ok, i) => ({ t: ckT[i], mark: ok ? '✓' : '!', dot: 'width: 16px; flex: none; font-weight: 700; color: ' + (ok ? 'var(--brand)' : 'var(--warn)') })),
         prices: [
           { l: rg.next ? '新报价（' + rg.ver + '，含税）' : '专供代发价（含税）', v: money(price), s: '一件代发 · 起订 1 件', hl: true },
@@ -552,15 +603,27 @@ class Component extends DCLogic {
           { l: '建议零售价 · 毛利空间', v: money(rg.market), s: '按市场价售卖毛利 ' + ((1 - price / rg.market) * 100).toFixed(1) + '%' }
         ].map((p) => ({ ...p, style: 'font-size: 20px; font-weight: 700; margin: 2px 0; color: ' + (p.hl ? 'var(--brand)' : 'var(--tx1)') })),
         priceWarns: pw, after: rg.cat.indexOf('卡券') === 0 ? '发码后不退' : '支持七天无理由退换货', invoice: '供应商开具商品增值税专票',
-        pending: rg.review === 'pending', done: rg.review !== 'pending',
-        doneText: rg.review === 'approved' ? '已通过：在资源广场「专供」来源里可选，可上架商城或代发下单。' : '已驳回（' + (rg.reason || '其他') + '），已通知供应商修改后重新提交。',
-        passNote: rg.type === 'price' ? '通过后新价立即生效；驳回则继续按当前有效价 ' + money(rg.now) + ' 供货。' : '通过后进入资源广场，只对你可见；驳回原因会同步给供应商。' };
+        pending: rg.review === 'pending' || rg.review === 'expired', done: rg.review !== 'pending' && rg.review !== 'expired',
+        passLabel: rg.review === 'expired' ? '重新审核通过 · 回到资源广场' : (rg.type === 'chg' ? '确认变更 · 新信息立即生效' : '审核通过 · 进入资源广场'),
+        doneText: rg.review === 'approved' ? (rg.prevMalls ? '已通过，已回到资源广场。原来铺货的 ' + rg.prevMalls.length + ' 个商城需要重新上架。' : (rg.wasExpired ? '已通过，已回到资源广场并重新上架到原商城。' : '已通过：在资源广场「专供」来源里可选，可上架商城或代发下单。')) : '已驳回（' + (rg.reason || '其他') + '），已通知供应商修改后重新提交。',
+        canRelist: rg.review === 'approved' && !!rg.prevMalls, relistLabel: '一键上架到原 ' + (rg.prevMalls ? rg.prevMalls.length : 0) + ' 个商城',
+        passNote: rg.review === 'expired' ? '通过后回到资源广场，不会自动恢复到原商城，可在通过后一键上架到原商城。' : (rg.type === 'chg' ? '通过后新信息立即生效；驳回则有效期内仍按原信息售卖，供应商修改后重新提交，到期仍未确认则自动下架。' : '通过后进入资源广场，只对你可见；驳回原因会同步给供应商。') };
     }
     const reasons = ['价格偏高', '主图不合规', '信息不完整', '类目 / 品牌不符', '其他'].map((r) => {
       const on = st.reason === r;
       return { label: r, pick: () => this.setState({ reason: r }), style: 'height: 30px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-family: inherit; cursor: pointer; border: 1px solid ' + (on ? 'var(--warn)' : 'var(--bd)') + '; background: ' + (on ? 'var(--warnbg)' : 'var(--solid)') + '; color: ' + (on ? 'var(--warn)' : 'var(--tx2)') };
     });
-    const setRev = (r) => { const m = Object.assign({}, this.state.reviews || {}); m[rg.id] = { r, reason: this.state.reason }; this.setState({ reviews: m, drawer: '' }); };
+    const setRev = (r) => { const m = Object.assign({}, this.state.reviews || {}); m[rg.id] = { r, reason: this.state.reason, was: rg.review }; this.setState({ reviews: m, drawer: r === 'approved' && rg.prevMalls ? rg.id : '' }); };
+    // invite
+    const INV0 = [
+      { phone: '137****0934', who: '嘉兴鲜果供应链有限公司', at: '11-18', st: '入驻中', note: '未入驻平台，已发入驻短信；卖家注册完成，企业认证中' },
+      { phone: '186****3307', who: '义乌恒越日用品商行', at: '11-22', st: '待卖家确认', note: '已是平台卖家，已发到卖家后台「客户关系 › 合作邀请」' },
+      { phone: '138****2061', who: '杭州暖礼商贸有限公司', at: '10-12', st: '已建立', note: '卖家确认合作，已开专供店' },
+      { phone: '159****4410', who: '—', at: '10-20', st: '已过期', note: '14 天未入驻，可重新发送' }
+    ];
+    const IST = { '入驻中': pill('var(--infobg)', 'var(--info)'), '待卖家确认': pill('var(--warnbg)', 'var(--warn)'), '已建立': pill('rgba(15,143,132,.12)', 'var(--brand)'), '已过期': pill('var(--chip2)', 'var(--tx3)') };
+    const invites = (st.invites || []).concat(INV0).map((v) => ({ ...v, stStyle: IST[v.st] }));
+    const ir = st.invResult;
     const pageV = {
       isList: !st.store, isDetail: !!st.store, back: () => this.setState({ store: '', drawer: '' }),
       sums, stores, cur: { ...cs, statusStyle: SS[cs.status], logoLg: logo(cs, 56), sinceDate: cs.since || '待开店' },
@@ -571,7 +634,23 @@ class Component extends DCLogic {
       approve: () => setRev('approved'),
       reject: () => { if (!this.state.reason) { this.flash('请先选择驳回原因'); return; } setRev('rejected'); },
       toastOn: !!st.toast, toastText: st.toast,
-      soonInvite: () => this.flash('邀请供应商开店（V3.2）：生成邀请链接或二维码，供应商认证后开专供店')
+      soonInvite: () => { this.invPhone = ''; this.setState({ inv: true, invResult: null, invErr: '' }); },
+      invOn: !!st.inv, closeInv: () => this.setState({ inv: false, invResult: null, invErr: '' }),
+      invInput: (e) => { this.invPhone = (e && e.target ? e.target.value : '').replace(/\D/g, ''); },
+      invErr: st.invErr || '', hasInvErr: !!st.invErr, invPhoneVal: this.invPhone || '',
+      invForm: !ir, invDone: !!ir, invTitle: ir ? (ir.exists ? '已通知卖家，等待确认' : '已发送入驻邀请') : '',
+      invText: ir ? (ir.exists ? '手机号 ' + ir.phone + ' 已是平台卖家（' + ir.who + '）。已发短信，并推送到卖家后台「客户关系 › 合作邀请」。卖家确认后自动建立专供关系，店铺出现在列表里。' : '手机号 ' + ir.phone + ' 还不是平台卖家。已发送入驻短信，卖家按入驻流程注册、完成企业认证并开专供店后，自动和你建立专供关系；期间在邀请记录里显示「入驻中」。') : '',
+      sendInv: () => {
+        const ph = this.invPhone || '';
+        if (!/^1\d{10}$/.test(ph)) { this.setState({ invErr: '请输入 11 位手机号' }); return; }
+        const masked = ph.slice(0, 3) + '****' + ph.slice(7);
+        const exists = Number(ph.slice(-1)) % 2 === 0;
+        const rec = exists ? { phone: masked, who: '平台卖家（示例）', at: '11-25', st: '待卖家确认', note: '已是平台卖家，已发到卖家后台「客户关系 › 合作邀请」' } : { phone: masked, who: '—', at: '11-25', st: '入驻中', note: '未入驻平台，已发入驻短信，等待卖家注册认证' };
+        this.setState({ invResult: { exists, phone: masked, who: '平台卖家（示例）' }, invErr: '', invites: [rec].concat(this.state.invites || []) });
+      },
+      invites, invCount: invites.length,
+      relistNow: () => { const m = Object.assign({}, this.state.relist || {}); m[rg.id] = true; this.setState({ relist: m, drawer: '' }); this.flash('已上架到原商城，按商城原售价恢复售卖'); },
+      autoNotice: true
     };
     return {
       rootClass: 'ai', rail, panelSections, panelTitle: curG.link ? '工作台' : curG.name, panelHint: curG.hint || '', panelHasHint: !!curG.hint && !curG.link,
@@ -664,8 +743,8 @@ class Component extends DCLogic {
   }
 
   prdTitle() { return "会员端 · 专供店铺"; }
-  prdIntro() { return "逻辑对齐卖家侧专供店 PRD（prd.88buys.com · 商家版 · 专供店）：供应商在「客户关系 › 供货配置」给会员配专供代发价，每个报价版本需会员确认；会员侧的「审核」就是这一步。审核通过的商品才进入会员的资源广场。"; }
-  prdBaseCards() { return [{"k": "sum", "title": "专供店铺 · 概览", "secs": [["规则", "只展示供应商为当前会员开的专供店（卖家侧「客户关系」里与本会员合作中或已发邀请的店铺）。会员看不到这些店铺给其他会员的商品和价格。"], ["数据", "合作中的专供店数、待我审核的商品数、已通过商品数、专供商品近 30 天订单与销售额。"]]}, {"k": "stores", "title": "店铺列表", "secs": [["交互", "以店铺卡片展示：店铺名、企业主体、认证状态、合作状态（合作中 / 待开店）、主营类目、合作开始时间，以及供货商品、已通过、已铺商城、近 30 天订单四个数；有待审核商品时右上角标「N 件待审核」。点卡片进入店铺详情。"], ["规则", "合作状态取卖家侧：供应商接受邀请但未完成企业认证 → 待开店；认证通过开店 → 合作中；任一方终止合作 → 已终止（列表置底，商品自动从资源广场下架）。"], ["交互", "「邀请供应商开店」对应 V3.2：生成邀请链接或二维码，本版只预留入口。"], ["待确认", "已终止合作后，已上架到商城的专供商品怎么处理（立即下架 / 卖完下架）；原「供应商管理」里的存量供应商账号迁移节奏。"]]}, {"k": "info", "title": "店铺基本信息", "secs": [["数据", "店铺名、企业主体、认证状态、合作开始时间、联系人、主营类目、供货方式（一件代发 · 含税），以及供应商填写的供货说明（运费、包装等）。"]]}, {"k": "goods", "title": "供货商品 · 审核", "secs": [["规则", "供应商在卖家侧给本会员配置「专供代发价」后，每个新报价版本都要会员审核（对应卖家侧「待对方确认」）：\n· 新品：供应商首次给本会员供货的商品；\n· 改价：已供货商品提交了新报价版本（V2、V3…）。\n审核通过前，改价商品仍按当前有效价供货；新品不出现在资源广场。"], ["规则", "只有「已通过」的商品才进入会员的资源广场（来源标「专供 · 店铺名」，只对本会员可见），会员选品时才能选它上架商城或代发下单。"], ["交互", "按审核状态筛选：全部 / 待审核 / 已通过 / 已驳回。每行显示专供代发价（改价时并列新报价和涨幅）、市场价、审核状态和提醒（高于平台同款、主图待确认）、已铺商城、近 30 天订单；待审核商品点「审核」，其他点「查看」。"], {"label": "字段", "caption": "列表字段", "rows": [["专供代发价（含税）", "供应商给本会员的当前有效供价，一件代发、含税", "卖家侧·客户供货配置（当前有效版）"], ["新报价", "待审核的报价版本及较当前有效价的涨跌幅", "卖家侧·报价与版本"], ["市场价", "供应商填写的市场价", "卖家侧·商品库"], ["已铺商城", "已上架该商品的本会员商城（最多显示 2 个，其余 +N）", "业务库·商城商品"], ["近 30 天订单", "近 30 天含该商品的商城订单 + 代发订单数", "业务库·商城订单、代发订单"]]}]}, {"k": "review", "title": "审核抽屉", "secs": [["数据", "左侧大图 + 主图检查；下方价格审核：新报价 / 专供代发价、当前有效价或市场价、平台同款参考价、按市场价售卖的毛利空间；再下方售后与发票说明。"], ["规则", "主图检查由系统自动预检、会员人工确认：尺寸 ≥ 800 × 800、无水印 / 二维码 / 联系方式、主图文字与供价一致（无促销误导）、与名称规格一致。未通过的项标橙。"], ["规则", "价格提醒：改价时提示涨幅以及已上架商城毛利会下降；高于平台同款参考价（通过同品关联匹配猫超 / 京东同款）时提示差额。提醒不拦截，最终由会员决定。"], ["交互", "「审核通过 · 进入资源广场」：新品进入资源广场，改价则新价立即生效；「驳回」必须选原因（价格偏高、主图不合规、信息不完整、类目 / 品牌不符、其他），原因同步给供应商，卖家侧可修改后重新提交。"], ["待确认", "审核时效：供应商提交后多少天未审核是否提醒或自动处理；改价被驳回后供应商能否终止该商品供货；是否支持批量审核。"]]}, {"k": "stats", "title": "数据统计", "secs": [["数据", "按店铺统计：已通过商品数、已铺商城数、近 30 天订单和销售额；按商品看已铺商城数、订单、销售额；按商城看订单占比。"], {"label": "字段", "caption": "", "rows": [["已铺商城", "上架过该店任一商品的本会员商城数", "业务库·商城商品"], ["订单", "近 30 天含该店商品的商城订单 + 代发订单（一单多商品按商品分别计入）", "业务库·商城订单、代发订单"], ["销售额", "按商城售价 × 数量，扣除退款", "业务库·商城订单明细"]]}]}]; }
+  prdIntro() { return "逻辑对齐卖家侧专供店 PRD（prd.88buys.com · 商家版 · 专供店）：供应商在「客户关系 › 供货配置」给会员配专供商品和专供代发价；新品和信息变更都需要会员确认（信息变更带确认有效期，超期自动下架），会员侧的「审核」就是这一步。审核通过的商品才进入会员的资源广场。专供关系可以由会员输入手机号邀请供应商建立，也可以由供应商邀请会员建立。"; }
+  prdBaseCards() { return [{"k": "sum", "title": "专供店铺 · 概览", "secs": [["规则", "只展示和本会员建立了专供关系的店铺：会员邀请供应商建立的，和供应商邀请会员建立的（会员已存在时自动建立）。会员看不到这些店铺给其他会员的商品和价格。"], ["数据", "合作中的专供店数、待我审核的商品数（含超期下架待重新审核；副标题提示最早到期的信息变更）、已通过商品数、专供商品近 30 天订单与销售额。"]]}, {"k": "auto", "title": "新的专供关系提示", "secs": [["规则", "供应商在卖家侧邀请客户单位，手机号对应的会员已存在时自动建立专供关系，不需要会员确认；会员下次进入专供店铺时提示一次，可关闭。"], ["规则", "自动建立的只是关系：该店供给的商品仍需会员审核，通过后才进资源广场。"]]}, {"k": "stores", "title": "店铺列表", "secs": [["交互", "以店铺卡片展示：店铺名、合作状态、关系来源（我邀请 / 供应商邀请 · 自动建立）、企业主体、认证状态、主营类目、合作开始时间，以及供货商品、已通过、已铺商城、近 30 天订单四个数；有待审核或超期下架商品时右上角标「N 件待审核」。点卡片进入店铺详情。"], ["规则", "合作状态取卖家侧：供应商接受邀请但未完成企业认证 → 待开店；认证通过开店 → 合作中；任一方终止合作 → 已终止（列表置底，商品自动从资源广场下架）。"], ["规则", "供应商邀请会员：会员已存在时自动建立专供关系，列表顶部提示一次「新的专供关系」，卡片标「供应商邀请 · 自动建立」；会员不存在时只开会员账号（未认证、无权益），见画板「受邀会员账号」。"], ["待确认", "已终止合作后，已上架到商城的专供商品怎么处理（立即下架 / 卖完下架）；原「供应商管理」里的存量供应商账号迁移节奏。"]]}, {"k": "invite", "title": "邀请供应商开店", "secs": [["交互", "输入供应商负责人的 11 位手机号，点「发送邀请」；格式不对时提示。发送后显示结果并写入邀请记录。"], ["规则", "手机号已是平台卖家：发短信并推送到卖家后台「客户关系 › 合作邀请」，卖家确认后建立专供关系（未开专供店的先开店）。\n手机号不是平台卖家：发入驻短信，卖家按入驻流程注册、企业认证、开专供店，完成后自动建立专供关系。"], ["规则", "会员未完成企业认证时，邀请按钮置灰并提示先认证。"]]}, {"k": "invrec", "title": "邀请记录", "secs": [["数据", "会员发出的供应商邀请：手机号（脱敏）、卖家主体、邀请时间、状态、说明。"], {"label": "字段", "caption": "邀请状态", "rows": [["待卖家确认", "手机号已是平台卖家，邀请已推到卖家后台「客户关系 › 合作邀请」", "卖家侧·合作邀请"], ["入驻中", "手机号不是平台卖家，已发入驻短信；卖家在注册或认证中", "卖家侧·入驻流程"], ["已建立", "卖家确认（或入驻开店）后建立专供关系，店铺出现在列表", "卖家侧·客户关系"], ["已拒绝", "卖家在合作邀请里拒绝", "卖家侧·合作邀请"], ["已过期", "超过有效期未处理，可重新发送", "买家侧·邀请记录"]]}, ["待确认", "邀请有效期（原型按 14 天）；同一手机号重复邀请的处理；一个手机号对应多个卖家主体时让卖家选主体。"]]}, {"k": "info", "title": "店铺基本信息", "secs": [["数据", "店铺名、企业主体、认证状态、合作开始时间、联系人、主营类目、供货方式（一件代发 · 含税），以及供应商填写的供货说明（运费、包装等）。"]]}, {"k": "goods", "title": "供货商品 · 审核", "secs": [["规则", "供应商给本会员供货的商品，以下情况需要会员审核：\n· 新品：首次给本会员供货；\n· 信息变更：已通过的商品改了价格、主图、标题、规格等，供应商提交时指定确认有效期。\n有效期内按原商品信息继续售卖；会员确认后新信息立即生效。"], ["规则", "超期未确认：商品自动下架，从资源广场和所有已上架的商城撤下，状态「已下架 · 超期」。会员重新审核通过后回到资源广场，需要再上架、铺货到商城（可一键上架到原商城）。"], ["规则", "只有「已通过」的商品才进入会员的资源广场（来源标「专供 · 店铺名」，只对本会员可见），会员选品时才能选它上架商城或代发下单。"], ["交互", "按审核状态筛选：全部 / 待审核 / 已通过 / 已驳回 / 已下架。每行显示专供代发价（价格变更时并列新报价和涨幅；非价格变更显示变更了哪些字段）、市场价、审核状态和提醒（剩余天数或截止日、高于平台同款、主图待确认）、已铺商城、近 30 天订单；待审核点「审核」，已下架点「重新审核」，其他点「查看」。"], {"label": "字段", "caption": "列表字段", "rows": [["专供代发价（含税）", "供应商给本会员的当前有效供价，一件代发、含税", "卖家侧·客户供货配置（当前有效版）"], ["新报价", "待审核的报价版本及较当前有效价的涨跌幅", "卖家侧·报价与版本"], ["市场价", "供应商填写的市场价", "卖家侧·商品库"], ["已铺商城", "已上架该商品的本会员商城（最多显示 2 个，其余 +N）", "业务库·商城商品"], ["近 30 天订单", "近 30 天含该商品的商城订单 + 代发订单数", "业务库·商城订单、代发订单"]]}]}, {"k": "review", "title": "审核抽屉", "secs": [["数据", "信息变更和超期下架时，顶部显示有效期提示（截止日、剩余天数，或已下架时间和撤下的商城数），并列出变更内容：字段、原信息、新信息。"], ["数据", "左侧大图 + 主图检查；下方价格审核：新报价 / 专供代发价、当前有效价或市场价、平台同款参考价、按市场价售卖的毛利空间；再下方售后与发票说明。"], ["规则", "主图检查由系统自动预检、会员人工确认：尺寸 ≥ 800 × 800、无水印 / 二维码 / 联系方式、主图文字与供价一致（无促销误导）、与名称规格一致。未通过的项标橙。"], ["规则", "价格提醒：改价时提示涨幅以及已上架商城毛利会下降；高于平台同款参考价（通过同品关联匹配猫超 / 京东同款）时提示差额。提醒不拦截，最终由会员决定。"], ["交互", "按钮按情况显示：新品「审核通过 · 进入资源广场」；信息变更「确认变更 · 新信息立即生效」；超期下架「重新审核通过 · 回到资源广场」，通过后可「一键上架到原 N 个商城」。「驳回」必须选原因（价格偏高、主图不合规、信息不完整、类目 / 品牌不符、其他），原因同步给供应商；信息变更被驳回后，有效期内仍按原信息售卖，到期仍没有通过的版本则自动下架。"], ["待确认", "有效期由卖家设置的范围（最短 / 最长几天）和到期前的提醒节奏；信息变更被驳回后是否延长有效期；是否支持批量审核。"]]}, {"k": "stats", "title": "数据统计", "secs": [["数据", "按店铺统计：已通过商品数、已铺商城数、近 30 天订单和销售额；按商品看已铺商城数、订单、销售额；按商城看订单占比。"], {"label": "字段", "caption": "", "rows": [["已铺商城", "上架过该店任一商品的本会员商城数", "业务库·商城商品"], ["订单", "近 30 天含该店商品的商城订单 + 代发订单（一单多商品按商品分别计入）", "业务库·商城订单、代发订单"], ["销售额", "按商城售价 × 数量，扣除退款", "业务库·商城订单明细"]]}]}]; }
   prdCards() { return this.prdBaseCards(); }
 }
 </script>
