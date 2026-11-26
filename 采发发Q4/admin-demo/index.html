@@ -1000,15 +1000,15 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 <!-- ================= 会员与结算 · Q4 · 预付款迁移 · 万鲤余额退回 ================= -->
 <sc-if value="{{q4IsWl}}" hint-placeholder-val="{{ false }}">
 <div class="pg fu">
-<div class="ph"><div><h1>万鲤余额退回</h1><p>会员每次申请退回都会留下一条记录，客户运营可按会员、申请人或申请单号查询。财务线下打款后点「确认已退款」，万鲤预付款账户清零，并记录退款时间</p></div></div>
+<div class="ph"><div><h1>万鲤余额退回</h1><p>会员每次申请退回都会留下一条记录，客户运营可按会员、申请人或申请单号查询。财务在系统后台操作退款后，万鲤预付款账户自动清零，并在这里记录退款时间</p></div></div>
 <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
 <div class="seg" role="tablist"><sc-for list="{{q4WlTabs}}" as="t" hint-placeholder-count="3"><button class="{{t.cls}}" role="tab" onClick="{{t.pick}}">{{t.label}}<span>{{t.n}}</span></button></sc-for></div>
 <label style="flex: 1; min-width: 260px; max-width: 360px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">搜索退回申请</span><input class="ta" style="height: 34px; min-height: 0; padding: 0 12px; width: 100%" placeholder="会员 / 申请人 / 申请单号" value="{{q4WlQ}}" onChange="{{onQ4WlQ}}"></label>
 </div>
-<div class="tw"><table class="tbl"><thead><tr><th>申请单号</th><th>会员</th><th>申请人</th><th class="r">退回金额</th><th>申请时间</th><th>状态</th><th>退款时间</th><th class="r">操作</th></tr></thead><tbody>
-<sc-for list="{{q4WlRows}}" as="r" hint-placeholder-count="4"><tr><td class="mono">{{r.no}}</td><td><b style="font-weight: 600">{{r.member}}</b></td><td>{{r.contact}}</td><td class="r mono">{{r.amt}}</td><td>{{r.time}}</td><td><span class="pill {{r.sCls}}">{{r.sLabel}}</span></td><td>{{r.doneAt}}</td><td class="r" style="white-space: nowrap"><sc-if value="{{r.canPay}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p" style="height: 30px" onClick="{{r.pay}}">确认已退款</button></sc-if><sc-if value="{{r.hasLock}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--text-3)">待财务退款</span></sc-if></td></tr></sc-for>
+<div class="tw"><table class="tbl"><thead><tr><th>申请单号</th><th>会员</th><th>申请人</th><th class="r">退回金额</th><th>申请时间</th><th>状态</th><th>退款时间</th></tr></thead><tbody>
+<sc-for list="{{q4WlRows}}" as="r" hint-placeholder-count="4"><tr><td class="mono">{{r.no}}</td><td><b style="font-weight: 600">{{r.member}}</b></td><td>{{r.contact}}</td><td class="r mono">{{r.amt}}</td><td>{{r.time}}</td><td><span class="pill {{r.sCls}}">{{r.sLabel}}</span></td><td>{{r.doneAt}}</td></tr></sc-for>
 </tbody></table><sc-if value="{{q4WlEmpty}}" hint-placeholder-val="{{ false }}"><div class="empty">没有找到退回申请</div></sc-if></div>
-<div class="note">流程：会员申请退回（余额冻结）→ 客户运营收到后台待办和钉钉群机器人消息，在钉钉发起退款审批 → 审批通过后财务线下打款 → 财务在此点「确认已退款」，万鲤预付款账户清零并记录退款时间</div>
+<div class="note">流程：会员申请退回（余额冻结）→ 客户运营收到后台待办和钉钉群机器人消息，在钉钉发起退款审批 → 审批通过后财务在系统后台操作退款 → 万鲤预付款账户清零，记录退款时间</div>
 </div>
 </sc-if>
 <!-- ================= 会员与结算 · Q4 · 合同审批 ================= -->
@@ -2849,10 +2849,7 @@ class Component extends DCLogic {
     const q = st.q4WlQ.trim();
     const wlRows = st.q4Wl.filter((w) => (!st.q4WlTab || w.status === st.q4WlTab) && (!q || [w.member, w.no, w.contact].some((x) => x.includes(q)))).map((w) => ({
       no: w.no, member: w.member, contact: w.contact, amt: fmtM(w.amt), time: w.time, doneAt: w.doneAt || '—',
-      sLabel: S(WL_S, w.status)[0], sCls: S(WL_S, w.status)[1],
-      canPay: w.status === 'wait' && canFin, hasLock: w.status === 'wait' && !canFin,
-      pay: () => dlg({ title: '确认已退款', sub: '会员：' + w.member + '　退回金额：' + fmtM(w.amt) + '。请确认钉钉退款审批已通过、已线下打款。确认后万鲤预付款账户清零，记录退款时间，并通知会员。', okLabel: '确认已退款', danger: false, confirm: true, noNote: true, opts: [],
-        run: () => { upd('q4Wl', w.id, { status: 'done', doneAt: now() }); self.flash('已确认退款：「' + w.member + '」万鲤预付款账户已清零，已通知会员'); } })
+      sLabel: S(WL_S, w.status)[0], sCls: S(WL_S, w.status)[1]
     }));
 
     // ---------- 通用弹窗 ----------
