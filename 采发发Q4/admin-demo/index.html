@@ -1000,12 +1000,29 @@ tr.dimrow td{opacity:.55}tr.dimrow{cursor:default}.pl-ck.dis{background:var(--su
 <!-- ================= 会员与结算 · Q4 · 预付款迁移 · 万鲤余额退回 ================= -->
 <sc-if value="{{q4IsWl}}" hint-placeholder-val="{{ false }}">
 <div class="pg fu">
-<div class="ph"><div><h1>万鲤余额退回</h1><p>会员在万鲤订单全部完结后申请退回，申请即冻结余额。客户运营收到待办后在钉钉发起退款审批；审批通过后财务线下打款，并在此登记流水号，登记后冻结余额清零、万鲤账户关闭</p></div></div>
+<div class="ph"><div><h1>万鲤余额退回</h1><p>会员每次申请退回都会留下一条申请记录，可按会员、联系人、申请单号或钉钉审批单号查询，点开看完整处理记录。流程：会员申请并冻结余额 → 客户运营在钉钉发起退款审批 → 审批通过后财务打款并登记流水号 → 冻结余额清零</p></div></div>
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
 <div class="seg" role="tablist"><sc-for list="{{q4WlTabs}}" as="t" hint-placeholder-count="5"><button class="{{t.cls}}" role="tab" onClick="{{t.pick}}">{{t.label}}<span>{{t.n}}</span></button></sc-for></div>
-<div class="tw"><table class="tbl"><thead><tr><th>会员</th><th class="r">退回金额</th><th>万鲤订单</th><th>申请时间</th><th>状态</th><th class="r">操作</th></tr></thead><tbody>
-<sc-for list="{{q4WlRows}}" as="r" hint-placeholder-count="4"><tr><td><b style="font-weight: 600">{{r.member}}</b></td><td class="r mono">{{r.amt}}</td><td>已全部完结</td><td>{{r.time}}</td><td><span class="pill {{r.sCls}}">{{r.sLabel}}</span><sc-if value="{{r.hasNote}}" hint-placeholder-val="{{ false }}"><small style="display: block; color: var(--text-3); margin-top: 4px">{{r.note}}</small></sc-if></td><td class="r" style="white-space: nowrap"><sc-if value="{{r.canStart}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p" style="height: 30px" onClick="{{r.start}}">已在钉钉发起退款审批</button></sc-if><sc-if value="{{r.isDing}}" hint-placeholder-val="{{ false }}"><button class="lk" onClick="{{r.approve}}">演示：钉钉审批通过</button></sc-if><sc-if value="{{r.canPay}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p" style="height: 30px" onClick="{{r.pay}}">登记打款</button></sc-if><sc-if value="{{r.hasLock}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--text-3)">{{r.lockTxt}}</span></sc-if></td></tr></sc-for>
-</tbody></table><sc-if value="{{q4WlEmpty}}" hint-placeholder-val="{{ false }}"><div class="empty">暂无退回申请</div></sc-if></div>
+<label style="flex: 1; min-width: 260px; max-width: 360px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">搜索退款申请</span><input class="ta" style="height: 34px; width: 100%" placeholder="会员 / 联系人 / 申请单号 / 钉钉审批单号" value="{{q4WlQ}}" onChange="{{onQ4WlQ}}"></label>
+</div>
+<div class="tw"><table class="tbl"><thead><tr><th>申请单号</th><th>会员</th><th class="r">退回金额</th><th>申请时间</th><th>钉钉审批单号</th><th>状态</th><th class="r">操作</th></tr></thead><tbody>
+<sc-for list="{{q4WlRows}}" as="r" hint-placeholder-count="4"><tr class="rw" onClick="{{r.open}}"><td class="mono">{{r.no}}</td><td><b style="font-weight: 600">{{r.member}}</b></td><td class="r mono">{{r.amt}}</td><td>{{r.time}}</td><td class="mono">{{r.dingNo}}</td><td><span class="pill {{r.sCls}}">{{r.sLabel}}</span></td><td class="r" style="white-space: nowrap"><sc-if value="{{r.canStart}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p" style="height: 30px" onClick="{{r.start}}">记录钉钉审批</button></sc-if><sc-if value="{{r.isDing}}" hint-placeholder-val="{{ false }}"><button class="lk" onClick="{{r.approve}}">演示：钉钉审批通过</button></sc-if><sc-if value="{{r.canPay}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p" style="height: 30px" onClick="{{r.pay}}">登记打款</button></sc-if><sc-if value="{{r.hasLock}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--text-3)">{{r.lockTxt}}</span></sc-if><button class="lk" style="margin-left: 8px" onClick="{{r.open}}">记录</button></td></tr></sc-for>
+</tbody></table><sc-if value="{{q4WlEmpty}}" hint-placeholder-val="{{ false }}"><div class="empty">没有找到退款申请</div></sc-if></div>
 <div class="note">通知：会员提交申请 → 客户运营收到后台待办和钉钉群机器人消息；钉钉审批通过 → 财务收到后台待办和钉钉群机器人消息</div>
+</div>
+</sc-if>
+<sc-if value="{{q4IsWlDetail}}" hint-placeholder-val="{{ false }}">
+<div class="pg fu">
+<div><button class="back" onClick="{{q4WlBack}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>返回列表</button>
+<div class="ph"><div><h1>退款申请 {{wlD.no}}</h1><p>{{wlD.member}} · 申请于 {{wlD.time}} · <span class="pill {{wlD.sCls}}">{{wlD.sLabel}}</span></p></div>
+<div class="ph-a"><sc-if value="{{wlD.canStart}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p" onClick="{{wlD.start}}">记录钉钉审批</button></sc-if><sc-if value="{{wlD.isDing}}" hint-placeholder-val="{{ false }}"><button class="btn btn-o" onClick="{{wlD.approve}}">演示：钉钉审批通过</button></sc-if><sc-if value="{{wlD.canPay}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p" onClick="{{wlD.pay}}">登记打款</button></sc-if><sc-if value="{{wlD.hasLock}}" hint-placeholder-val="{{ false }}"><div class="lock">{{wlD.lockTxt}}</div></sc-if></div>
+</div></div>
+<div class="grid2">
+<div class="card"><h3>申请信息</h3><div class="kv"><span>申请单号</span><div class="mono">{{wlD.no}}</div><span>会员</span><div>{{wlD.member}}</div><span>申请人</span><div>{{wlD.contact}}</div><span>退回金额</span><b class="mono" style="font-weight: 600">{{wlD.amt}}</b><span>万鲤订单</span><div>{{wlD.orders}}</div><span>钉钉审批单号</span><div class="mono">{{wlD.dingNo}}</div><span>打款流水号</span><div class="mono">{{wlD.flow}}</div></div></div>
+<div class="card"><h3>处理记录<span>最新在上</span></h3>
+<sc-for list="{{wlD.log}}" as="l" hint-placeholder-count="4"><div style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 20px"><span class="mono" style="flex: none; width: 128px; color: var(--text-3)">{{l.t}}</span><div><b style="font-weight: 600">{{l.who}}</b><div style="color: var(--text-2)">{{l.what}}</div></div></div></sc-for>
+</div>
+</div>
 </div>
 </sc-if>
 <!-- ================= 会员与结算 · Q4 · 预付款迁移 · 客户预付款账户 ================= -->
@@ -2627,11 +2644,16 @@ class Component extends DCLogic {
       ],
       q4CtTab: 'pending', q4CtId: '', q4CtMan: {},
       q4Wl: [
-        { id: 'wl1', member: '上海云帆信息科技有限公司', amt: 1280, time: '今天 10:12', status: 'notify' },
-        { id: 'wl2', member: '深圳启明星电子有限公司', amt: 5620.5, time: '昨天 16:40', status: 'ding' },
-        { id: 'wl3', member: '南京禾田餐饮管理有限公司', amt: 860, time: '10-18 09:30', status: 'pay' },
-        { id: 'wl4', member: '苏州恒久精密制造有限公司', amt: 3400, time: '10-12 14:20', status: 'done', flow: '[打款流水号]' }
+        { id: 'wl1', no: 'TH20270210001', member: '上海云帆信息科技有限公司', contact: '王敏 138****2210', amt: 1280, orders: 3, time: '2027-02-10 10:12', status: 'notify',
+          log: [['2027-02-10 10:12', '会员 王敏', '提交退回申请；系统校验万鲤订单 3 笔全部完结，万鲤余额 ¥1,280.00 已冻结'], ['2027-02-10 10:12', '系统', '已给客户运营推送待办和钉钉群机器人消息']] },
+        { id: 'wl2', no: 'TH20270209003', member: '深圳启明星电子有限公司', contact: '刘洋 189****1177', amt: 5620.5, orders: 12, time: '2027-02-09 16:40', status: 'ding', dingNo: 'OA-20270209-0157',
+          log: [['2027-02-09 16:40', '会员 刘洋', '提交退回申请；系统校验万鲤订单 12 笔全部完结，万鲤余额 ¥5,620.50 已冻结'], ['2027-02-09 16:40', '系统', '已给客户运营推送待办和钉钉群机器人消息'], ['2027-02-09 17:05', '客户运营 张驰', '已在钉钉发起退款审批，审批单号 OA-20270209-0157']] },
+        { id: 'wl3', no: 'TH20270208002', member: '南京禾田餐饮管理有限公司', contact: '孙禾 137****1123', amt: 860, orders: 5, time: '2027-02-08 09:30', status: 'pay', dingNo: 'OA-20270208-0093',
+          log: [['2027-02-08 09:30', '会员 孙禾', '提交退回申请；系统校验万鲤订单 5 笔全部完结，万鲤余额 ¥860.00 已冻结'], ['2027-02-08 09:30', '系统', '已给客户运营推送待办和钉钉群机器人消息'], ['2027-02-08 10:02', '客户运营 王婷', '已在钉钉发起退款审批，审批单号 OA-20270208-0093'], ['2027-02-09 11:20', '系统', '钉钉审批已通过，已给财务推送待办和钉钉群机器人消息']] },
+        { id: 'wl4', no: 'TH20270201001', member: '苏州恒久精密制造有限公司', contact: '周敏 159****0025', amt: 3400, orders: 9, time: '2027-02-01 14:20', status: 'done', dingNo: 'OA-20270201-0021', flow: 'FX20270205001',
+          log: [['2027-02-01 14:20', '会员 周敏', '提交退回申请；系统校验万鲤订单 9 笔全部完结，万鲤余额 ¥3,400.00 已冻结'], ['2027-02-01 14:20', '系统', '已给客户运营推送待办和钉钉群机器人消息'], ['2027-02-01 15:10', '客户运营 李娜', '已在钉钉发起退款审批，审批单号 OA-20270201-0021'], ['2027-02-03 09:45', '系统', '钉钉审批已通过，已给财务推送待办和钉钉群机器人消息'], ['2027-02-05 14:30', '财务 紫萱', '已登记打款，流水号 FX20270205001；冻结余额已清零，万鲤账户已关闭，已通知会员']] }
       ],
+      q4WlId: '', q4WlQ: '',
       q4WlTab: '',
       q4Acct: [
         { member: '上海云帆信息科技有限公司', fx: 3560, wl: 1280, signed: false },
@@ -2852,18 +2874,31 @@ class Component extends DCLogic {
 
     // ---------- 预付款迁移 ----------
     const WL_S = { notify: ['待发起钉钉审批', 'p-warn'], ding: ['钉钉审批中', 'p-brand'], pay: ['待财务打款', 'p-warn'], done: ['已退回', 'p-ok'] };
-    const wlRows = st.q4Wl.filter((w) => !st.q4WlTab || w.status === st.q4WlTab).map((w) => ({
-      member: w.member, amt: fmtM(w.amt), time: w.time, sLabel: S(WL_S, w.status)[0], sCls: S(WL_S, w.status)[1],
-      note: w.status === 'done' ? '流水号 ' + w.flow + '，冻结余额已清零' : (w.status === 'pay' ? '审批已通过' : ''), hasNote: w.status === 'done' || w.status === 'pay',
+    const now = () => { const d = new Date(); const z = (n) => String(n).padStart(2, '0'); return '2027-02-12 ' + z(d.getHours()) + ':' + z(d.getMinutes()); };
+    const who = (r) => (r === 'fin' ? '财务' : '客户运营') + '（当前账号）';
+    const addLog = (w, patch, line) => upd('q4Wl', w.id, Object.assign({}, patch, { log: w.log.concat([[now(), who(role), line]]) }));
+    const wlAct = (w) => ({
       canStart: w.status === 'notify' && canMem, isDing: w.status === 'ding', canPay: w.status === 'pay' && canFin,
       lockTxt: (w.status === 'notify' && !canMem) ? '待客户运营处理' : ((w.status === 'pay' && !canFin) ? '待财务处理' : ''),
       hasLock: (w.status === 'notify' && !canMem) || (w.status === 'pay' && !canFin),
-      start: () => { upd('q4Wl', w.id, { status: 'ding' }); self.flash('已记录：「' + w.member + '」的钉钉退款审批已发起'); },
-      approve: () => { upd('q4Wl', w.id, { status: 'pay' }); self.flash('钉钉审批已通过，已给财务推送待办和钉钉群机器人消息'); },
-      pay: () => dlg({ title: '登记打款', sub: '会员：' + w.member + '　退回金额：' + fmtM(w.amt) + '。确认已线下打款后填写流水号，登记后冻结余额清零、万鲤账户关闭，并通知会员。', okLabel: '确认登记', danger: false, input: '打款流水号（必填）', opts: [],
-        run: (o, note) => { upd('q4Wl', w.id, { status: 'done', flow: note }); self.flash('已登记，冻结余额已清零，万鲤账户已关闭，已通知会员'); } })
-    }));
-    const wlOf = (m) => st.q4Wl.find((w) => w.member === m);
+      start: (e) => { stopE(e); dlg({ title: '记录钉钉退款审批', sub: '会员：' + w.member + '　退回金额：' + fmtM(w.amt) + '。请先在钉钉发起退款审批，再填写审批单号，便于之后查询。', okLabel: '确认已发起', danger: false, input: '钉钉审批单号（必填）', opts: [],
+        run: (o, note) => { addLog(w, { status: 'ding', dingNo: note }, '已在钉钉发起退款审批，审批单号 ' + note); self.flash('已记录钉钉审批单号 ' + note); } }); },
+      approve: (e) => { stopE(e); upd('q4Wl', w.id, { status: 'pay', log: w.log.concat([[now(), '系统', '钉钉审批已通过，已给财务推送待办和钉钉群机器人消息']]) }); self.flash('钉钉审批已通过，已给财务推送待办和钉钉群机器人消息'); },
+      pay: (e) => { stopE(e); dlg({ title: '登记打款', sub: '会员：' + w.member + '　退回金额：' + fmtM(w.amt) + '。确认已线下打款后填写流水号，登记后冻结余额清零、万鲤账户关闭，并通知会员。', okLabel: '确认登记', danger: false, input: '打款流水号（必填）', opts: [],
+        run: (o, note) => { addLog(w, { status: 'done', flow: note }, '已登记打款，流水号 ' + note + '；冻结余额已清零，万鲤账户已关闭，已通知会员'); self.flash('已登记，冻结余额已清零，万鲤账户已关闭，已通知会员'); } }); }
+    });
+    const q = st.q4WlQ.trim();
+    const wlRows = st.q4Wl.filter((w) => (!st.q4WlTab || w.status === st.q4WlTab) && (!q || [w.member, w.no, w.dingNo || '', w.contact].some((x) => x.includes(q)))).map((w) => Object.assign({
+      no: w.no, member: w.member, amt: fmtM(w.amt), time: w.time, dingNo: w.dingNo || '—', sLabel: S(WL_S, w.status)[0], sCls: S(WL_S, w.status)[1],
+      open: open('q4WlId', w.id)
+    }, wlAct(w)));
+    const wo = st.q4Wl.find((w) => w.id === st.q4WlId) || st.q4Wl[0];
+    const wlD = Object.assign({
+      no: wo.no, member: wo.member, contact: wo.contact, amt: fmtM(wo.amt), orders: wo.orders + ' 笔，全部完结', time: wo.time, dingNo: wo.dingNo || '未发起', flow: wo.flow || '未打款',
+      sLabel: S(WL_S, wo.status)[0], sCls: S(WL_S, wo.status)[1],
+      log: wo.log.slice().reverse().map((l, i) => ({ t: l[0], who: l[1], what: l[2], first: i === 0 }))
+    }, wlAct(wo));
+        const wlOf = (m) => st.q4Wl.find((w) => w.member === m);
     const acctRows = st.q4Acct.map((a) => {
       const w = wlOf(a.member), mig = st.q4Ct.find((c) => c.type === 'mig' && c.cust === a.member);
       const signed = a.signed || (mig && mig.status === 'approved');
@@ -2880,7 +2915,8 @@ class Component extends DCLogic {
     const dOpts = d ? d.opts.map((o, i) => ({ t: o.t, d: o.d, hasD: !!o.d, cls: st.q4DlgPick === String(i) ? 'on' : '', pick: () => set({ q4DlgPick: String(i) }) })) : [];
 
     return {
-      q4IsWl: P === 'q4wl' && this.canPage(P, role), q4WlRows: wlRows, q4WlEmpty: !wlRows.length,
+      q4IsWl: P === 'q4wl' && !st.q4WlId && this.canPage(P, role), q4IsWlDetail: P === 'q4wl' && !!st.q4WlId && this.canPage(P, role), q4WlRows: wlRows, q4WlEmpty: !wlRows.length, wlD: wlD, q4WlBack: back('q4WlId'),
+      q4WlQ: st.q4WlQ, onQ4WlQ: (e) => set({ q4WlQ: e.target.value }),
       q4WlTabs: tabsOf([['', '全部'], ['notify', '待发起钉钉审批'], ['ding', '钉钉审批中'], ['pay', '待财务打款'], ['done', '已退回']], st.q4Wl, 'q4WlTab'),
       q4IsAcct: P === 'q4acct' && this.canPage(P, role), q4AcctRows: acctRows,
       q4IsCtList: P === 'q4ct' && !st.q4CtId && this.canPage(P, role), q4IsCtDetail: P === 'q4ct' && !!st.q4CtId && this.canPage(P, role),
@@ -3021,7 +3057,7 @@ class Component extends DCLogic {
   }
   go(page, extra) {
     if (!Q4_OPEN.includes(page)) { this.flash('该入口暂未开放'); return; }
-    const o = Object.assign({ page: page, q4WlTab: '', q4CtId: '', q4ObId: '', q4RcId: '', q4StId: '', certId: '', afId: '', chId: '', cdet: null, scDet: '', scRd: null }, extra || {});
+    const o = Object.assign({ page: page, q4WlTab: '', q4WlId: '', q4CtId: '', q4ObId: '', q4RcId: '', q4StId: '', certId: '', afId: '', chId: '', cdet: null, scDet: '', scRd: null }, extra || {});
     const tabs = (this.state.pgTabs || ['home']).slice(); const tp = page === 'recon' ? 'flow' : ['kbmiss', 'kbpolicy', 'kbrule'].includes(page) ? 'kb' : page === 'tagtype' ? 'tag' : page;
     if (!tabs.includes(tp)) { tabs.push(tp); if (tabs.length > 8) tabs.splice(1, 1); }
     o.pgTabs = tabs;
@@ -3968,6 +4004,7 @@ class Component extends DCLogic {
     if (st.cdet && sub) crumbB = sub.name + ' / 详情';
     if (st.scDet && st.page === 'scene') crumbB = '场景管理 / 场景详情';
     if (st.page === 'q4ct' && st.q4CtId) crumbB = '合同审批 / 审核详情';
+    if (st.page === 'q4wl' && st.q4WlId) crumbB = '万鲤余额退回 / 申请记录';
     if (st.page === 'q4ob' && st.q4ObId) crumbB = '入驻审核 / 审核详情';
     if (st.page === 'q4rc' && st.q4RcId) crumbB = '认证变更 / 变更详情';
     if (st.page === 'q4st' && st.q4StId) crumbB = '结算单 / 结算详情';
