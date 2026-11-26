@@ -141,7 +141,7 @@
         </header>
         <div data-prd="auto" class="card" role="status" style="display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin-bottom: 14px; border-radius: 14px">
           <span style="flex: none; font-size: 12px; font-weight: 600; color: var(--info); background: var(--infobg); border-radius: 999px; padding: 0 9px; line-height: 22px">新的专供关系</span>
-          <span style="flex: 1; min-width: 0; font-size: 14px; color: var(--tx2)"><b style="color: var(--tx1)">织锦家纺专供店</b>（绍兴织锦家纺有限公司）邀请你成为它的客户，你已是平台会员，11-02 已自动建立专供关系。它供给你的商品仍需你审核后才进资源广场。</span>
+          <span style="flex: 1; min-width: 0; font-size: 14px; color: var(--tx2)"><b style="color: var(--tx1)">织锦家纺专供店</b>（绍兴织锦家纺有限公司）通过邀请链接邀请你成为它的客户，你已是平台会员，11-02 已自动建立专供关系。它供给你的商品仍需你审核后才进资源广场。</span>
         </div>
         <section data-prd="sum" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px">
           <template data-sc="for" list="{{sums}}" as="k" hint-placeholder-count="4">
@@ -173,11 +173,20 @@
           </template>
         </section>
         <section data-prd="invrec" class="card" aria-labelledby="inv-h" style="padding: 16px 18px; margin-top: 16px">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px"><h2 id="inv-h" style="margin: 0; font-size: 16px; font-weight: 600">邀请记录</h2><span style="font-size: 12px; color: var(--tx3)">{{invCount}} 条 · 我发出的供应商邀请</span><button onClick="{{soonInvite}}" class="btn-ghost" style="margin-left: auto; height: 30px; font-size: 12px">+ 邀请供应商</button></div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px"><h2 id="inv-h" style="margin: 0; font-size: 16px; font-weight: 600">邀请记录</h2><div role="tablist" style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--chip); margin-left: 6px"><template data-sc="for" list="{{invTabs}}" as="t" hint-placeholder-count="2"><button role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" class="{{t.cls}}">{{t.label}}</button></template></div><button onClick="{{soonInvite}}" class="btn-ghost" style="margin-left: auto; height: 30px; font-size: 12px">+ 邀请供应商</button></div>
+          <template data-sc="if" value="{{isSent}}" hint-placeholder-val="{{ true }}"><div>
           <div style="display: grid; grid-template-columns: 1fr 1.6fr .7fr 1fr 2.6fr; gap: 12px; padding: 8px 4px; font-size: 12px; color: var(--tx3); border-bottom: 1px solid var(--bd)"><span>手机号</span><span>卖家主体</span><span>邀请时间</span><span>状态</span><span>说明</span></div>
           <template data-sc="for" list="{{invites}}" as="v" hint-placeholder-count="4">
             <div style="display: grid; grid-template-columns: 1fr 1.6fr .7fr 1fr 2.6fr; gap: 12px; align-items: center; padding: 10px 4px; font-size: 14px; border-bottom: 1px solid var(--bd)"><span class="num">{{v.phone}}</span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{v.who}}</span><span class="num" style="color: var(--tx2)">{{v.at}}</span><span><span style="{{v.stStyle}}">{{v.st}}</span></span><span style="font-size: 12px; color: var(--tx2)">{{v.note}}</span></div>
           </template>
+          </div></template>
+          <template data-sc="if" value="{{isRecv}}" hint-placeholder-val="{{ false }}"><div>
+          <div style="font-size: 12px; color: var(--tx3); padding: 2px 4px 8px">卖家在「客户关系 › 合作邀请」生成邀请链接（7 天有效，带供货商品、代发价和报价截止时间）。你已是会员时，打开链接即自动建立专供关系，报价进该店「待审核」。</div>
+          <div style="display: grid; grid-template-columns: 1.5fr 1.2fr 1fr .6fr .9fr 2.6fr; gap: 12px; padding: 8px 4px; font-size: 12px; color: var(--tx3); border-bottom: 1px solid var(--bd)"><span>卖家主体</span><span>店铺</span><span>邀请方式</span><span>时间</span><span>状态</span><span>说明</span></div>
+          <template data-sc="for" list="{{recvs}}" as="v" hint-placeholder-count="2">
+            <div style="display: grid; grid-template-columns: 1.5fr 1.2fr 1fr .6fr .9fr 2.6fr; gap: 12px; align-items: center; padding: 10px 4px; font-size: 14px; border-bottom: 1px solid var(--bd)"><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{v.who}}</span><span>{{v.shop}}</span><span style="font-size: 12px; color: var(--tx2)">{{v.way}}</span><span class="num" style="color: var(--tx2)">{{v.at}}</span><span><span style="{{v.stStyle}}">{{v.st}}</span></span><span style="font-size: 12px; color: var(--tx2)">{{v.note}}</span></div>
+          </template>
+          </div></template>
         </section>
       </div>
       </template>
@@ -187,7 +196,8 @@
       <div data-prd="invite" role="dialog" aria-label="邀请供应商开店" style="position: absolute; left: 50%; top: 110px; transform: translateX(-50%); z-index: 61; width: 520px; background: var(--solid); border-radius: 18px; box-shadow: 0 24px 60px rgba(15,23,42,.24); padding: 20px 22px 22px; box-sizing: border-box">
         <div style="display: flex; align-items: center; margin-bottom: 4px"><b style="font-size: 18px">邀请供应商开店</b><button onClick="{{closeInv}}" aria-label="关闭" style="margin-left: auto; width: 30px; height: 30px; border: 0; border-radius: 8px; background: var(--chip); cursor: pointer; font-size: 16px; color: var(--tx2)">×</button></div>
         <template data-sc="if" value="{{invForm}}" hint-placeholder-val="{{ true }}"><div>
-          <div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin-bottom: 14px">输入供应商负责人的手机号，系统发通知到卖家侧：已是平台卖家的，卖家确认后建立专供关系；还不是的，按卖家入驻流程注册、认证、开店后自动建立。</div>
+          <div style="font-size: 12px; color: var(--tx2); line-height: 1.7; margin-bottom: 14px">输入供应商负责人的手机号，系统发短信通知卖家：已是平台卖家的，邀请进入卖家后台「合作邀请 › 合作申请」，卖家接受并报价后建立专供关系；还不是的，按卖家入驻流程注册、认证、开专供店后建立。</div>
+          <div style="display: flex; gap: 8px; margin-bottom: 14px; font-size: 12px"><span style="flex: 1; border-radius: 10px; background: var(--chip); padding: 8px 10px; line-height: 1.6"><b style="display: block; color: var(--tx1)">① 你发邀请</b>输入手机号</span><span style="flex: 1; border-radius: 10px; background: var(--chip); padding: 8px 10px; line-height: 1.6"><b style="display: block; color: var(--tx1)">② 卖家接受并报价</b>未入驻的先入驻开店</span><span style="flex: 1; border-radius: 10px; background: var(--chip); padding: 8px 10px; line-height: 1.6"><b style="display: block; color: var(--tx1)">③ 你确认报价</b>通过后进资源广场</span></div>
           <label style="display: block; font-size: 12px; color: var(--tx2); margin-bottom: 6px">供应商手机号</label>
           <input aria-label="供应商手机号" inputmode="numeric" maxlength="11" placeholder="请输入 11 位手机号" value="{{invPhoneVal}}" onInput="{{invInput}}" style="width: 100%; box-sizing: border-box; height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--bd); background: var(--solid); color: var(--tx1); font-size: 16px; font-family: inherit; outline: none">
           <template data-sc="if" value="{{hasInvErr}}" hint-placeholder-val="{{ false }}"><div role="alert" style="font-size: 12px; color: var(--warn); margin-top: 6px">{{invErr}}</div></template>
@@ -410,7 +420,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { mod: 'store', store: '', tab: 'goods', filter: 'all', drawer: '', reason: '', reviews: {}, relist: {}, inv: false, invites: [], invResult: null, invErr: '', toast: '', pinned: false, hoverMod: '' };
+    this.state = { mod: 'store', invTab: 'sent', store: '', tab: 'goods', filter: 'all', drawer: '', reason: '', reviews: {}, relist: {}, inv: false, invites: [], invResult: null, invErr: '', toast: '', pinned: false, hoverMod: '' };
   }
 
   menuData() {
@@ -422,7 +432,7 @@ class Component extends DCLogic {
         { t: '选货', items: [ { n: '资源广场', href: '#', renamed: true, tip: '平台货盘在这里看明细、上架、代发；原入口只在首页' }, { n: '挑选商品', top: true }, { n: '本地生活', top: true, renamed: true, tip: '原「本地资源场景」9 项合为一个入口' } ] },
         { t: '变更通知', top: true, items: [ { n: '商品变更', renamed: true, tip: '合并：商品变更审核、商品替换日志、代发商品变更通知' } ] } ] },
       { id: 'store', name: '店铺', hint: '我的 · 专供', top: true, sections: [
-        { t: '店铺', items: [ { n: '我的店铺', isNew: true, href: 'store-mine.html', tip: '会员自营店：上传和管理自有商品，与卖家侧同一套商品管理；原「商品库、商品发布、商品导入」' }, { n: '专供店铺', isNew: true, href: 'store-exclusive.html', tip: '专供店：输入手机号邀请供应商开店，看店铺信息、审核供货商品（含信息变更）、看铺货和订单；替代原「供应商管理」' } ] } ] },
+        { t: '店铺', items: [ { n: '我的店铺', isNew: true, href: 'store-mine.html', tip: '会员自营店：上传和管理自有商品，与卖家侧同一套商品管理；原「商品库、商品发布、商品导入」' }, { n: '专供店铺', isNew: true, href: 'store-exclusive.html', tip: '专供店：看店铺信息、审核供货商品（含信息变更）、看铺货和订单；替代原「供应商管理」' }, { n: '邀请供应商', isNew: true, href: 'store-exclusive.html', tip: '输入供应商手机号发邀请：已是卖家的接受并报价后建立专供关系，未入驻的走卖家入驻流程；邀请记录在专供店铺页' } ] } ] },
       { id: 'mall', name: '商城', sections: [
         { t: '商城管理', items: [ { n: '我的商城' }, { n: '我的礼包' }, { n: '扩展应用', top: true, renamed: true, tip: '原「商城扩展应用」6 项合为一个入口，弹窗广告也挪到这里' } ] } ] },
       { id: 'mkt', name: '营销', sections: [
@@ -617,12 +627,19 @@ class Component extends DCLogic {
     // invite
     const INV0 = [
       { phone: '137****0934', who: '嘉兴鲜果供应链有限公司', at: '11-18', st: '入驻中', note: '未入驻平台，已发入驻短信；卖家注册完成，企业认证中' },
-      { phone: '186****3307', who: '义乌恒越日用品商行', at: '11-22', st: '待卖家确认', note: '已是平台卖家，已发到卖家后台「客户关系 › 合作邀请」' },
-      { phone: '138****2061', who: '杭州暖礼商贸有限公司', at: '10-12', st: '已建立', note: '卖家确认合作，已开专供店' },
+      { phone: '186****3307', who: '义乌恒越日用品商行', at: '11-22', st: '待卖家报价', note: '已是平台卖家，已进卖家后台「客户关系 › 合作邀请 › 合作申请」，等卖家接受并报价' },
+      { phone: '139****5520', who: '温州瓯越礼品有限公司', at: '11-20', st: '待我确认报价', note: '卖家已接受并报价 4 件，专供关系已建立；报价在该店「待审核」里，12-04 截止' },
+      { phone: '138****2061', who: '杭州暖礼商贸有限公司', at: '10-12', st: '已建立', note: '卖家接受并报价，你已确认报价' },
       { phone: '159****4410', who: '—', at: '10-20', st: '已过期', note: '14 天未入驻，可重新发送' }
     ];
-    const IST = { '入驻中': pill('var(--infobg)', 'var(--info)'), '待卖家确认': pill('var(--warnbg)', 'var(--warn)'), '已建立': pill('rgba(15,143,132,.12)', 'var(--brand)'), '已过期': pill('var(--chip2)', 'var(--tx3)') };
+    const RECV = [
+      { who: '绍兴织锦家纺有限公司', shop: '织锦家纺专供店', way: '定向邀请链接', at: '11-02', st: '已建立', note: '你已是会员，打开链接即自动建立专供关系；报价 1 件待你审核，12-01 截止' },
+      { who: '台州润禾日用品有限公司', shop: '润禾日用专供店', way: '通用邀请链接', at: '10-28', st: '已失效', note: '链接 7 天有效，已过期未打开；可联系卖家重新生成' }
+    ];
+    const IST = { '入驻中': pill('var(--infobg)', 'var(--info)'), '待卖家报价': pill('var(--warnbg)', 'var(--warn)'), '待我确认报价': pill('rgba(229,72,77,.1)', '#C4323A'), '已失效': pill('var(--chip2)', 'var(--tx3)'), '已建立': pill('rgba(15,143,132,.12)', 'var(--brand)'), '已过期': pill('var(--chip2)', 'var(--tx3)') };
     const invites = (st.invites || []).concat(INV0).map((v) => ({ ...v, stStyle: IST[v.st] }));
+    const recvs = RECV.map((v) => ({ ...v, stStyle: IST[v.st] }));
+    const invTab = st.invTab || 'sent';
     const ir = st.invResult;
     const pageV = {
       isList: !st.store, isDetail: !!st.store, back: () => this.setState({ store: '', drawer: '' }),
@@ -639,16 +656,17 @@ class Component extends DCLogic {
       invInput: (e) => { this.invPhone = (e && e.target ? e.target.value : '').replace(/\D/g, ''); },
       invErr: st.invErr || '', hasInvErr: !!st.invErr, invPhoneVal: this.invPhone || '',
       invForm: !ir, invDone: !!ir, invTitle: ir ? (ir.exists ? '已通知卖家，等待确认' : '已发送入驻邀请') : '',
-      invText: ir ? (ir.exists ? '手机号 ' + ir.phone + ' 已是平台卖家（' + ir.who + '）。已发短信，并推送到卖家后台「客户关系 › 合作邀请」。卖家确认后自动建立专供关系，店铺出现在列表里。' : '手机号 ' + ir.phone + ' 还不是平台卖家。已发送入驻短信，卖家按入驻流程注册、完成企业认证并开专供店后，自动和你建立专供关系；期间在邀请记录里显示「入驻中」。') : '',
+      invText: ir ? (ir.exists ? '手机号 ' + ir.phone + ' 已是平台卖家（' + ir.who + '）。已发短信，并进入卖家后台「客户关系 › 合作邀请 › 合作申请」。卖家接受并选好商品、填写代发价后建立专供关系，报价会出现在该店「待审核」里等你确认。' : '手机号 ' + ir.phone + ' 还不是平台卖家。已发送入驻短信，卖家按入驻流程注册、完成企业认证并开专供店后，自动和你建立专供关系；期间在邀请记录里显示「入驻中」。') : '',
       sendInv: () => {
         const ph = this.invPhone || '';
         if (!/^1\d{10}$/.test(ph)) { this.setState({ invErr: '请输入 11 位手机号' }); return; }
         const masked = ph.slice(0, 3) + '****' + ph.slice(7);
         const exists = Number(ph.slice(-1)) % 2 === 0;
-        const rec = exists ? { phone: masked, who: '平台卖家（示例）', at: '11-25', st: '待卖家确认', note: '已是平台卖家，已发到卖家后台「客户关系 › 合作邀请」' } : { phone: masked, who: '—', at: '11-25', st: '入驻中', note: '未入驻平台，已发入驻短信，等待卖家注册认证' };
+        const rec = exists ? { phone: masked, who: '平台卖家（示例）', at: '11-25', st: '待卖家报价', note: '已是平台卖家，已进卖家后台「合作申请」，等卖家接受并报价' } : { phone: masked, who: '—', at: '11-25', st: '入驻中', note: '未入驻平台，已发入驻短信，等待卖家注册认证' };
         this.setState({ invResult: { exists, phone: masked, who: '平台卖家（示例）' }, invErr: '', invites: [rec].concat(this.state.invites || []) });
       },
-      invites, invCount: invites.length,
+      invites, invCount: invites.length, recvs, isSent: invTab === 'sent', isRecv: invTab === 'recv',
+      invTabs: [['sent', '我发出的 ' + invites.length], ['recv', '供应商发来的 ' + recvs.length]].map((t) => ({ label: t[1], sel: invTab === t[0] ? 'true' : 'false', cls: invTab === t[0] ? 'tabp on' : 'tabp', pick: () => this.setState({ invTab: t[0] }) })),
       relistNow: () => { const m = Object.assign({}, this.state.relist || {}); m[rg.id] = true; this.setState({ relist: m, drawer: '' }); this.flash('已上架到原商城，按商城原售价恢复售卖'); },
       autoNotice: true
     };
@@ -744,7 +762,7 @@ class Component extends DCLogic {
 
   prdTitle() { return "会员端 · 专供店铺"; }
   prdIntro() { return "逻辑对齐卖家侧专供店 PRD（prd.88buys.com · 商家版 · 专供店）：供应商在「客户关系 › 供货配置」给会员配专供商品和专供代发价；新品和信息变更都需要会员确认（信息变更带确认有效期，超期自动下架），会员侧的「审核」就是这一步。审核通过的商品才进入会员的资源广场。专供关系可以由会员输入手机号邀请供应商建立，也可以由供应商邀请会员建立。"; }
-  prdBaseCards() { return [{"k": "sum", "title": "专供店铺 · 概览", "secs": [["规则", "只展示和本会员建立了专供关系的店铺：会员邀请供应商建立的，和供应商邀请会员建立的（会员已存在时自动建立）。会员看不到这些店铺给其他会员的商品和价格。"], ["数据", "合作中的专供店数、待我审核的商品数（含超期下架待重新审核；副标题提示最早到期的信息变更）、已通过商品数、专供商品近 30 天订单与销售额。"]]}, {"k": "auto", "title": "新的专供关系提示", "secs": [["规则", "供应商在卖家侧邀请客户单位，手机号对应的会员已存在时自动建立专供关系，不需要会员确认；会员下次进入专供店铺时提示一次，可关闭。"], ["规则", "自动建立的只是关系：该店供给的商品仍需会员审核，通过后才进资源广场。"]]}, {"k": "stores", "title": "店铺列表", "secs": [["交互", "以店铺卡片展示：店铺名、合作状态、关系来源（我邀请 / 供应商邀请 · 自动建立）、企业主体、认证状态、主营类目、合作开始时间，以及供货商品、已通过、已铺商城、近 30 天订单四个数；有待审核或超期下架商品时右上角标「N 件待审核」。点卡片进入店铺详情。"], ["规则", "合作状态取卖家侧：供应商接受邀请但未完成企业认证 → 待开店；认证通过开店 → 合作中；任一方终止合作 → 已终止（列表置底，商品自动从资源广场下架）。"], ["规则", "供应商邀请会员：会员已存在时自动建立专供关系，列表顶部提示一次「新的专供关系」，卡片标「供应商邀请 · 自动建立」；会员不存在时只开会员账号（未认证、无权益），见画板「受邀会员账号」。"], ["待确认", "已终止合作后，已上架到商城的专供商品怎么处理（立即下架 / 卖完下架）；原「供应商管理」里的存量供应商账号迁移节奏。"]]}, {"k": "invite", "title": "邀请供应商开店", "secs": [["交互", "输入供应商负责人的 11 位手机号，点「发送邀请」；格式不对时提示。发送后显示结果并写入邀请记录。"], ["规则", "手机号已是平台卖家：发短信并推送到卖家后台「客户关系 › 合作邀请」，卖家确认后建立专供关系（未开专供店的先开店）。\n手机号不是平台卖家：发入驻短信，卖家按入驻流程注册、企业认证、开专供店，完成后自动建立专供关系。"], ["规则", "会员未完成企业认证时，邀请按钮置灰并提示先认证。"]]}, {"k": "invrec", "title": "邀请记录", "secs": [["数据", "会员发出的供应商邀请：手机号（脱敏）、卖家主体、邀请时间、状态、说明。"], {"label": "字段", "caption": "邀请状态", "rows": [["待卖家确认", "手机号已是平台卖家，邀请已推到卖家后台「客户关系 › 合作邀请」", "卖家侧·合作邀请"], ["入驻中", "手机号不是平台卖家，已发入驻短信；卖家在注册或认证中", "卖家侧·入驻流程"], ["已建立", "卖家确认（或入驻开店）后建立专供关系，店铺出现在列表", "卖家侧·客户关系"], ["已拒绝", "卖家在合作邀请里拒绝", "卖家侧·合作邀请"], ["已过期", "超过有效期未处理，可重新发送", "买家侧·邀请记录"]]}, ["待确认", "邀请有效期（原型按 14 天）；同一手机号重复邀请的处理；一个手机号对应多个卖家主体时让卖家选主体。"]]}, {"k": "info", "title": "店铺基本信息", "secs": [["数据", "店铺名、企业主体、认证状态、合作开始时间、联系人、主营类目、供货方式（一件代发 · 含税），以及供应商填写的供货说明（运费、包装等）。"]]}, {"k": "goods", "title": "供货商品 · 审核", "secs": [["规则", "供应商给本会员供货的商品，以下情况需要会员审核：\n· 新品：首次给本会员供货；\n· 信息变更：已通过的商品改了价格、主图、标题、规格等，供应商提交时指定确认有效期。\n有效期内按原商品信息继续售卖；会员确认后新信息立即生效。"], ["规则", "超期未确认：商品自动下架，从资源广场和所有已上架的商城撤下，状态「已下架 · 超期」。会员重新审核通过后回到资源广场，需要再上架、铺货到商城（可一键上架到原商城）。"], ["规则", "只有「已通过」的商品才进入会员的资源广场（来源标「专供 · 店铺名」，只对本会员可见），会员选品时才能选它上架商城或代发下单。"], ["交互", "按审核状态筛选：全部 / 待审核 / 已通过 / 已驳回 / 已下架。每行显示专供代发价（价格变更时并列新报价和涨幅；非价格变更显示变更了哪些字段）、市场价、审核状态和提醒（剩余天数或截止日、高于平台同款、主图待确认）、已铺商城、近 30 天订单；待审核点「审核」，已下架点「重新审核」，其他点「查看」。"], {"label": "字段", "caption": "列表字段", "rows": [["专供代发价（含税）", "供应商给本会员的当前有效供价，一件代发、含税", "卖家侧·客户供货配置（当前有效版）"], ["新报价", "待审核的报价版本及较当前有效价的涨跌幅", "卖家侧·报价与版本"], ["市场价", "供应商填写的市场价", "卖家侧·商品库"], ["已铺商城", "已上架该商品的本会员商城（最多显示 2 个，其余 +N）", "业务库·商城商品"], ["近 30 天订单", "近 30 天含该商品的商城订单 + 代发订单数", "业务库·商城订单、代发订单"]]}]}, {"k": "review", "title": "审核抽屉", "secs": [["数据", "信息变更和超期下架时，顶部显示有效期提示（截止日、剩余天数，或已下架时间和撤下的商城数），并列出变更内容：字段、原信息、新信息。"], ["数据", "左侧大图 + 主图检查；下方价格审核：新报价 / 专供代发价、当前有效价或市场价、平台同款参考价、按市场价售卖的毛利空间；再下方售后与发票说明。"], ["规则", "主图检查由系统自动预检、会员人工确认：尺寸 ≥ 800 × 800、无水印 / 二维码 / 联系方式、主图文字与供价一致（无促销误导）、与名称规格一致。未通过的项标橙。"], ["规则", "价格提醒：改价时提示涨幅以及已上架商城毛利会下降；高于平台同款参考价（通过同品关联匹配猫超 / 京东同款）时提示差额。提醒不拦截，最终由会员决定。"], ["交互", "按钮按情况显示：新品「审核通过 · 进入资源广场」；信息变更「确认变更 · 新信息立即生效」；超期下架「重新审核通过 · 回到资源广场」，通过后可「一键上架到原 N 个商城」。「驳回」必须选原因（价格偏高、主图不合规、信息不完整、类目 / 品牌不符、其他），原因同步给供应商；信息变更被驳回后，有效期内仍按原信息售卖，到期仍没有通过的版本则自动下架。"], ["待确认", "有效期由卖家设置的范围（最短 / 最长几天）和到期前的提醒节奏；信息变更被驳回后是否延长有效期；是否支持批量审核。"]]}, {"k": "stats", "title": "数据统计", "secs": [["数据", "按店铺统计：已通过商品数、已铺商城数、近 30 天订单和销售额；按商品看已铺商城数、订单、销售额；按商城看订单占比。"], {"label": "字段", "caption": "", "rows": [["已铺商城", "上架过该店任一商品的本会员商城数", "业务库·商城商品"], ["订单", "近 30 天含该店商品的商城订单 + 代发订单（一单多商品按商品分别计入）", "业务库·商城订单、代发订单"], ["销售额", "按商城售价 × 数量，扣除退款", "业务库·商城订单明细"]]}]}]; }
+  prdBaseCards() { return [{"k": "sum", "title": "专供店铺 · 概览", "secs": [["规则", "只展示和本会员建立了专供关系的店铺：会员邀请供应商建立的，和供应商邀请会员建立的（会员已存在时自动建立）。会员看不到这些店铺给其他会员的商品和价格。"], ["数据", "合作中的专供店数、待我审核的商品数（含超期下架待重新审核；副标题提示最早到期的信息变更）、已通过商品数、专供商品近 30 天订单与销售额。"]]}, {"k": "auto", "title": "新的专供关系提示", "secs": [["规则", "对齐卖家侧已上线的「邀请买家合作」：卖家选好供货商品、填写代发价和报价截止时间，生成邀请链接（通用或定向，7 天有效）。会员已存在时，打开链接即自动建立专供关系，不需要再确认；会员下次进入专供店铺时提示一次，可关闭。"], ["规则", "自动建立的只是关系：邀请里的报价进入该店「待审核 · 新品」，截止时间取卖家的报价截止时间，会员审核通过后才进资源广场。"]]}, {"k": "stores", "title": "店铺列表", "secs": [["交互", "以店铺卡片展示：店铺名、合作状态、关系来源（我邀请 / 供应商邀请 · 自动建立）、企业主体、认证状态、主营类目、合作开始时间，以及供货商品、已通过、已铺商城、近 30 天订单四个数；有待审核或超期下架商品时右上角标「N 件待审核」。点卡片进入店铺详情。"], ["规则", "合作状态取卖家侧：供应商接受邀请但未完成企业认证 → 待开店；认证通过开店 → 合作中；任一方终止合作 → 已终止（列表置底，商品自动从资源广场下架）。"], ["规则", "供应商邀请会员：会员已存在时自动建立专供关系，列表顶部提示一次「新的专供关系」，卡片标「供应商邀请 · 自动建立」；会员不存在时只开会员账号（未认证、无权益），见画板「受邀会员账号」。"], ["待确认", "已终止合作后，已上架到商城的专供商品怎么处理（立即下架 / 卖完下架）；原「供应商管理」里的存量供应商账号迁移节奏。"]]}, {"k": "invite", "title": "邀请供应商开店", "secs": [["交互", "入口三处：专供店铺右上「邀请供应商开店」、邀请记录「+ 邀请供应商」、店铺菜单「邀请供应商」。输入供应商负责人的 11 位手机号，点「发送邀请」；格式不对时提示。弹窗上方用三步说明流程，发送后显示结果并写入邀请记录。"], ["规则", "手机号已是平台卖家：发短信，邀请进入卖家后台「客户关系 › 合作邀请 › 合作申请」（卖家侧已上线，状态「待我报价」）。卖家接受并选好商品、填写代发价后建立专供关系，报价进该店「待审核」，由会员确认。\n手机号不是平台卖家：发入驻短信，链接带邀请标识；卖家按入驻流程注册、企业认证、开专供店，再按上面的方式报价。"], ["规则", "会员未完成企业认证时，邀请按钮置灰并提示先认证。"]]}, {"k": "invrec", "title": "邀请记录", "secs": [["数据", "两个页签：我发出的（手机号脱敏、卖家主体、邀请时间、状态、说明）；供应商发来的（卖家主体、店铺、邀请方式、时间、状态、说明）。"], {"label": "字段", "caption": "我发出的 · 状态", "rows": [["待卖家报价", "手机号已是平台卖家，邀请在卖家「合作申请」里，等卖家接受并报价", "卖家侧·合作申请"], ["入驻中", "手机号不是平台卖家，已发入驻短信；卖家在注册或认证中", "卖家侧·入驻流程"], ["待我确认报价", "卖家已报价、专供关系已建立；报价在该店「待审核」，按报价截止时间确认", "卖家侧·合作申请 + 买家侧审核"], ["已建立", "会员已确认报价", "买家侧·审核记录"], ["已拒绝", "卖家拒绝合作申请", "卖家侧·合作申请"], ["已过期", "超过有效期未处理，可重新发送", "买家侧·邀请记录"]]}, {"label": "字段", "caption": "供应商发来的 · 状态", "rows": [["已建立", "会员打开卖家的邀请链接，自动建立专供关系", "卖家侧·合作邀请"], ["已失效", "邀请链接 7 天有效期已过且未打开", "卖家侧·合作邀请"]]}, ["待确认", "会员发邀请的有效期（原型按 14 天）；同一手机号重复邀请的处理；一个手机号对应多个卖家主体时让卖家选主体。卖家 PRD 写「对方确认企业主体前不会生成合作关系」，与「会员已存在自动建立」需对齐：建议会员只有一个组织时直接建立，有多个组织时打开链接先选组织。"]]}, {"k": "info", "title": "店铺基本信息", "secs": [["数据", "店铺名、企业主体、认证状态、合作开始时间、联系人、主营类目、供货方式（一件代发 · 含税），以及供应商填写的供货说明（运费、包装等）。"]]}, {"k": "goods", "title": "供货商品 · 审核", "secs": [["规则", "供应商给本会员供货的商品，以下情况需要会员审核：\n· 新品：首次给本会员供货；\n· 信息变更：已通过的商品改了价格、主图、标题、规格等，供应商提交时指定确认有效期。\n有效期内按原商品信息继续售卖；会员确认后新信息立即生效。"], ["规则", "超期未确认：商品自动下架，从资源广场和所有已上架的商城撤下，状态「已下架 · 超期」。会员重新审核通过后回到资源广场，需要再上架、铺货到商城（可一键上架到原商城）。"], ["规则", "只有「已通过」的商品才进入会员的资源广场（来源标「专供 · 店铺名」，只对本会员可见），会员选品时才能选它上架商城或代发下单。"], ["交互", "按审核状态筛选：全部 / 待审核 / 已通过 / 已驳回 / 已下架。每行显示专供代发价（价格变更时并列新报价和涨幅；非价格变更显示变更了哪些字段）、市场价、审核状态和提醒（剩余天数或截止日、高于平台同款、主图待确认）、已铺商城、近 30 天订单；待审核点「审核」，已下架点「重新审核」，其他点「查看」。"], {"label": "字段", "caption": "列表字段", "rows": [["专供代发价（含税）", "供应商给本会员的当前有效供价，一件代发、含税", "卖家侧·客户供货配置（当前有效版）"], ["新报价", "待审核的报价版本及较当前有效价的涨跌幅", "卖家侧·报价与版本"], ["市场价", "供应商填写的市场价", "卖家侧·商品库"], ["已铺商城", "已上架该商品的本会员商城（最多显示 2 个，其余 +N）", "业务库·商城商品"], ["近 30 天订单", "近 30 天含该商品的商城订单 + 代发订单数", "业务库·商城订单、代发订单"]]}]}, {"k": "review", "title": "审核抽屉", "secs": [["数据", "信息变更和超期下架时，顶部显示有效期提示（截止日、剩余天数，或已下架时间和撤下的商城数），并列出变更内容：字段、原信息、新信息。"], ["数据", "左侧大图 + 主图检查；下方价格审核：新报价 / 专供代发价、当前有效价或市场价、平台同款参考价、按市场价售卖的毛利空间；再下方售后与发票说明。"], ["规则", "主图检查由系统自动预检、会员人工确认：尺寸 ≥ 800 × 800、无水印 / 二维码 / 联系方式、主图文字与供价一致（无促销误导）、与名称规格一致。未通过的项标橙。"], ["规则", "价格提醒：改价时提示涨幅以及已上架商城毛利会下降；高于平台同款参考价（通过同品关联匹配猫超 / 京东同款）时提示差额。提醒不拦截，最终由会员决定。"], ["交互", "按钮按情况显示：新品「审核通过 · 进入资源广场」；信息变更「确认变更 · 新信息立即生效」；超期下架「重新审核通过 · 回到资源广场」，通过后可「一键上架到原 N 个商城」。「驳回」必须选原因（价格偏高、主图不合规、信息不完整、类目 / 品牌不符、其他），原因同步给供应商；信息变更被驳回后，有效期内仍按原信息售卖，到期仍没有通过的版本则自动下架。"], ["待确认", "有效期由卖家设置的范围（最短 / 最长几天）和到期前的提醒节奏；信息变更被驳回后是否延长有效期；是否支持批量审核。"]]}, {"k": "stats", "title": "数据统计", "secs": [["数据", "按店铺统计：已通过商品数、已铺商城数、近 30 天订单和销售额；按商品看已铺商城数、订单、销售额；按商城看订单占比。"], {"label": "字段", "caption": "", "rows": [["已铺商城", "上架过该店任一商品的本会员商城数", "业务库·商城商品"], ["订单", "近 30 天含该店商品的商城订单 + 代发订单（一单多商品按商品分别计入）", "业务库·商城订单、代发订单"], ["销售额", "按商城售价 × 数量，扣除退款", "业务库·商城订单明细"]]}]}]; }
   prdCards() { return this.prdBaseCards(); }
 }
 </script>
