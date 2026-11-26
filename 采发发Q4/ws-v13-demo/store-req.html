@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>店铺 · 需求清单与需求说明 · 会员端工作台精简改版 Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="dc-lite.js"></script>
+</head>
+<body>
+<template id="dc-src">
+<helmet>
+<style>
+:root{--text-1:#1F2329;--text-2:#646A73;--text-3:#8F959E;--line-1:#E5E8EB;--line-2:#EEF0F2;--fill-1:#F7F8FA;--bg-page:#F3F5F7;--brand:#0B7A70;--brand-a08:rgba(15,143,132,.08);--warn:#B54708;--warn-a08:rgba(232,89,12,.08);--info:#3B4BB8;--info-a08:rgba(91,107,213,.08)}
+body{margin:0;background:var(--bg-page);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--text-1)}
+main{max-width:1480px;margin:0 auto;padding:40px 48px 80px}
+.doc{background:#fff;border-radius:16px;padding:40px 56px;border:1px solid var(--line-1)}
+.tag{display:inline-block;font-size:12px;font-weight:600;color:var(--brand);background:var(--brand-a08);border-radius:999px;padding:2px 10px;margin-bottom:12px}
+h1{font-size:28px;line-height:1.35;margin:0 0 8px}
+h2{font-size:20px;margin:36px 0 12px;padding:16px 0 0;border-top:1px solid var(--line-2);display:flex;align-items:center;gap:8px}
+h2::before{content:"";width:4px;height:18px;border-radius:2px;background:var(--brand)}
+h3{font-size:16px;margin:24px 0 8px}
+p,li{font-size:14px;line-height:24px;color:var(--text-1)}
+ul,ol{padding-left:22px}
+strong{font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 16px}
+th{font-size:12px;font-weight:500;color:var(--text-2);text-align:left;padding:8px 10px;background:var(--fill-1);border-bottom:1px solid var(--line-1);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:21px}
+td.id{font-weight:600;color:var(--brand);white-space:nowrap}
+td:first-child{white-space:nowrap}
+table.req td:nth-child(2),table.req td:nth-child(4),table.req td:nth-child(5){white-space:nowrap}
+table.req td:nth-child(3){min-width:180px}
+.pr{display:inline-block;font-size:12px;font-weight:600;border-radius:4px;padding:0 6px;line-height:20px}
+.p0{color:#fff;background:var(--brand)}.p1{color:var(--brand);background:var(--brand-a08)}.rs{color:var(--text-2);background:var(--fill-1);border:1px solid var(--line-1)}
+.ck{color:var(--warn)}
+</style>
+</helmet>
+<main><div class="doc"><span class="tag">需求说明 · 文档中心同步</span>
+<h1>会员端「店铺」模块需求说明（我的店铺 / 专供店铺）</h1>
+<p>2026-11-25</p>
+<p>会员端新增一级菜单「店铺」，下面两个页面：<strong>我的店铺</strong>（会员自营店，放会员自己的商品）和<strong>专供店铺</strong>（供应商为本会员开的专供店）。商品管理复用卖家侧，专供商品要经会员审核通过才能进资源广场。本文是这个模块的需求清单和需求说明，页面交互以画布「店铺 › 我的店铺」「店铺 › 专供店铺」两张画板为准。</p>
+<h2>一、背景与目标</h2>
+<p>现状：会员的自有商品放在「商品库 / 商品发布 / 商品导入」，自有供应商靠会员给对方开供应商账号来管。一家供应商常被十几家会员各开一个账号，商务要逐个登录上品、对单；会员和供应商之间的报价、改价、发货仍在微信群里。</p>
+<p>方向（11/07、11/11、11/12 会议与 Q4 规划 V3）：</p>
+<ul>
+<li>一切供给都以店铺出现，底层用卖家侧同一套店铺和商品模型，买家侧不另建。</li>
+<li>会员的自有商品 → <strong>会员自营店</strong>：自己给自己供货，不收佣、不需要认证。</li>
+<li>会员的自有供应商 → <strong>商家专供店</strong>：会员发邀请，供应商接受后开专供店（需认证），只对这个会员可见；会员像逛商城一样进店选货。</li>
+<li>专供店先做<strong>工具 + 信息流</strong>，不碰资金，不急着让双方和平台成交。</li>
+</ul>
+<p>本模块目标：</p>
+<ol>
+<li>会员在一个入口管好自己的商品和所有专供店；</li>
+<li>供应商给的价格和图片先经会员把关，再进入选品；</li>
+<li>会员能看到每个专供商品铺到了哪些商城、出了多少单。</li>
+</ol>
+<h2>二、范围</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>本期做</td>
+<td>店铺一级菜单与入口迁移；我的店铺（店铺信息、商品管理、四种添加方式、上架到商城）；专供店铺（店铺列表、店铺详情、供货商品审核、已铺商城与订单统计）；资源广场按来源区分平台 / 自营 / 专供；工作台待办「专供商品待审核」</td>
+</tr>
+<tr>
+<td>本期只留入口</td>
+<td>邀请供应商开店（V3.2，邀请链接机制待卖家侧补充）；自营商品供给其他会员（V3.4，一键导入专供店）</td>
+</tr>
+<tr>
+<td>本期不做</td>
+<td>专供订单推送与发货回传、对账与付款凭证、服务费账户（V3.3）；购物车和订单按店铺拆单（V3.5）；店铺评分（V4.2）；主店铺 + 子店铺的供货规则（V4.3）；店铺装修</td>
+</tr>
+</tbody>
+</table>
+<h2>三、概念与角色</h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>会员自营店</td>
+<td>会员自己的店，放自有商品，只供自己的商城和代发使用。成为会员即开通，店铺名默认取组织名</td>
+</tr>
+<tr>
+<td>商家专供店</td>
+<td>供应商在卖家侧为本会员开的店。会员只能看到对自己开放的商品和价格，看不到它给其他会员的</td>
+</tr>
+<tr>
+<td>专供代发价</td>
+<td>供应商在卖家侧「客户关系 › 供货配置」里给本会员配的一件代发价（含税），有版本（V1、V2…）</td>
+</tr>
+<tr>
+<td>当前有效价</td>
+<td>会员最近一次审核通过的专供代发价版本。新版本审核通过前一直按它供货（对应卖家侧「新版本确认前，仍使用当前有效供价」）</td>
+</tr>
+<tr>
+<td>资源广场</td>
+<td>会员选品的地方。来源分平台、自营、专供三类；专供商品只对本会员可见</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>在本模块做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>会员（服务商）</td>
+<td>管理自营店商品；审核专供商品；把商品上架到商城或代发下单；看铺货和订单统计</td>
+</tr>
+<tr>
+<td>供应商（卖家侧）</td>
+<td>为会员开专供店、配专供代发价和商品；看到会员的审核结果，被驳回后修改重提</td>
+</tr>
+<tr>
+<td>平台运营</td>
+<td>处理存量供应商账号迁移；不参与专供商品审核</td>
+</tr>
+</tbody>
+</table>
+<h2>四、业务流程</h2>
+<ol>
+<li><strong>建立合作</strong>：供应商接受会员邀请并完成企业认证后，专供店对该会员可见，状态「合作中」。（邀请本期只留入口；存量供应商走迁移，见 E16。）</li>
+<li><strong>供货配置</strong>：供应商在卖家侧选择给本会员供货的商品，配置专供代发价，提交后卖家侧显示「待对方确认」。</li>
+<li><strong>会员审核</strong>：会员在「专供店铺 › 店铺详情」看到待审核商品，重点检查价格和主图，通过或驳回。</li>
+<li><strong>进入资源广场</strong>：审核通过的商品进入会员资源广场（来源「专供 · 店铺名」），会员才能选它上架商城或代发下单。</li>
+<li><strong>改价</strong>：供应商提交新报价版本 → 会员再审。通过前仍按当前有效价供货，通过后新价立即生效。</li>
+<li><strong>统计</strong>：会员在店铺详情的「数据统计」里看每个商品铺到了哪些商城、出了多少单。</li>
+</ol>
+<p>我的店铺不经过审核：会员上架的商品直接进入资源广场的「自营」来源。</p>
+<h2>五、需求清单</h2>
+<p>共 33 项。优先级：P0 = 本期必须上线；P1 = 本期做，可晚于 P0 一个迭代；预留 = 本期只放入口。</p>
+<table class="req">
+<thead>
+<tr>
+<th>编号</th>
+<th>模块</th>
+<th>功能点</th>
+<th>优先级</th>
+<th>规划版本</th>
+<th>验收标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="id">D1</td>
+<td>入口</td>
+<td>新增一级菜单「店铺」：我的店铺、专供店铺</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.2</td>
+<td>工作台左侧菜单出现「店铺」，下含两个二级菜单；分步指引里有店铺这一步</td>
+</tr>
+<tr>
+<td class="id">D2</td>
+<td>入口</td>
+<td>旧入口迁移</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.2</td>
+<td>「商品库 / 商品发布 / 商品导入」并入我的店铺；「供应商管理」由专供店铺替代；旧链接打开后跳转到新页面并提示一次</td>
+</tr>
+<tr>
+<td class="id">D3</td>
+<td>入口</td>
+<td>可见范围</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.2</td>
+<td>我的店铺所有会员可见；专供店铺可见范围按待确认第 5 条执行</td>
+</tr>
+<tr>
+<td class="id">D4</td>
+<td>入口</td>
+<td>未认证时的限制与提醒</td>
+<td><span class="pr p1">P1</span></td>
+<td>V3.2</td>
+<td>未完成企业认证时，我的店铺可正常使用；「邀请供应商开店」「供给其他会员」置灰，提示先认证并给出认证入口</td>
+</tr>
+<tr>
+<td class="id">M1</td>
+<td>我的店铺</td>
+<td>店铺信息</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.4</td>
+<td>显示店铺名（默认组织名，可改）、店铺类型「会员自营店」、在售商品、草稿、已铺商城、近 30 天订单</td>
+</tr>
+<tr>
+<td class="id">M2</td>
+<td>我的店铺</td>
+<td>商品列表</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.4</td>
+<td>已上架 / 已下架 / 草稿三个页签带数量；可按名称、货号、SKU 编码搜索；字段见六.2</td>
+</tr>
+<tr>
+<td class="id">M3</td>
+<td>我的店铺</td>
+<td>批量操作</td>
+<td><span class="pr p1">P1</span></td>
+<td>V3.4</td>
+<td>支持批量改价、批量上下架、批量上架到商城；结果给出成功和失败条数，失败可查看原因</td>
+</tr>
+<tr>
+<td class="id">M4</td>
+<td>我的店铺</td>
+<td>添加商品 · 四种方式</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.4</td>
+<td>复用卖家侧：找同款发品、采集发品、表格发品、手工录入；表格导入有失败明细</td>
+</tr>
+<tr>
+<td class="id">M5</td>
+<td>我的店铺</td>
+<td>商品表单与字段映射</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.4</td>
+<td>卖家侧「成本价 / 市场价 / 代发价（含税）」在自营店显示为「成本价 / 市场价 / 建议售价」；必填项不全只能存草稿</td>
+</tr>
+<tr>
+<td class="id">M6</td>
+<td>我的店铺</td>
+<td>成本价仅自己可见</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.4</td>
+<td>成本价不出现在商城、C 端、导出给他人的任何页面；经营分析中自营商品毛利 = 商城售价 − 成本价</td>
+</tr>
+<tr>
+<td class="id">M7</td>
+<td>我的店铺</td>
+<td>上架即进资源广场</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.4</td>
+<td>上架的商品出现在资源广场「自营」来源，无需审核；下架后从资源广场消失，已上架商城的同步下架</td>
+</tr>
+<tr>
+<td class="id">M8</td>
+<td>我的店铺</td>
+<td>上架到商城 / 代发下单</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.4</td>
+<td>单个或批量上架到会员的商城，售价默认带出建议售价、可在商城里改；自营商品可在自己店里下代发单</td>
+</tr>
+<tr>
+<td class="id">M9</td>
+<td>我的店铺</td>
+<td>存量自有商品迁移</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.4</td>
+<td>原商品库的自有商品全部迁入自营店，状态、价格、已上架商城关系不变；迁移前后商城可正常下单</td>
+</tr>
+<tr>
+<td class="id">M10</td>
+<td>我的店铺</td>
+<td>阿里权益商品归入自营店</td>
+<td><span class="pr p1">P1</span></td>
+<td>V3.4</td>
+<td>自有猫超、优品商品在自营店中单独标注来源，按待确认第 6 条执行</td>
+</tr>
+<tr>
+<td class="id">M11</td>
+<td>我的店铺</td>
+<td>供给其他会员</td>
+<td><span class="pr rs">预留</span></td>
+<td>V3.4</td>
+<td>显示入口与说明「需要企业认证，即将开放」，点击不进入流程</td>
+</tr>
+<tr>
+<td class="id">E1</td>
+<td>专供店铺</td>
+<td>汇总数字</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>顶部显示合作中的店铺数、待我审核的商品数、已通过商品数、专供商品近 30 天订单与销售额</td>
+</tr>
+<tr>
+<td class="id">E2</td>
+<td>专供店铺</td>
+<td>店铺列表（卡片）</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.2</td>
+<td>每家店一张卡：店铺名、企业主体、认证状态、合作状态、主营类目、合作开始时间、供货商品 / 已通过 / 已铺商城 / 近 30 天订单；有待审核时标「N 件待审核」；按待审核数、合作开始时间排序</td>
+</tr>
+<tr>
+<td class="id">E3</td>
+<td>专供店铺</td>
+<td>合作状态</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.2</td>
+<td>状态取卖家侧：待开店 / 合作中 / 已终止，定义见七.2；已终止的置底并灰显</td>
+</tr>
+<tr>
+<td class="id">E4</td>
+<td>专供店铺</td>
+<td>邀请供应商开店</td>
+<td><span class="pr rs">预留</span></td>
+<td>V3.2</td>
+<td>显示入口，点击提示「邀请功能即将开放」；邀请链接机制待卖家侧补充</td>
+</tr>
+<tr>
+<td class="id">E5</td>
+<td>专供店铺</td>
+<td>店铺详情 · 基本信息</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.2</td>
+<td>显示店铺名、企业主体、认证状态、合作开始时间、联系人、主营类目、供货方式（一件代发 · 含税）、供应商填写的供货说明</td>
+</tr>
+<tr>
+<td class="id">E6</td>
+<td>专供店铺</td>
+<td>供货商品列表</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>按全部 / 待审核 / 已通过 / 已驳回筛选并显示数量；字段见六.3；待审核行显示「审核」，其他行显示「查看」</td>
+</tr>
+<tr>
+<td class="id">E7</td>
+<td>专供店铺</td>
+<td>审核 · 新品与改价</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>新品和改价都进入待审核，分别标「新品」「改价」；改价行同时显示当前有效价、新报价和涨跌幅</td>
+</tr>
+<tr>
+<td class="id">E8</td>
+<td>专供店铺</td>
+<td>审核 · 主图检查</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>系统预检四项（见六.4），未通过项标橙；会员确认后才能通过</td>
+</tr>
+<tr>
+<td class="id">E9</td>
+<td>专供店铺</td>
+<td>审核 · 价格检查</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>显示新报价、当前有效价、市场价、平台同款参考价、按市场价售卖的毛利；高于平台同款或改价导致已上架商城毛利下降时提醒，提醒不拦截</td>
+</tr>
+<tr>
+<td class="id">E10</td>
+<td>专供店铺</td>
+<td>审核通过</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>新品进入资源广场「专供 · 店铺名」；改价则新价立即成为当前有效价；结果回传卖家侧显示「客户供价已确认」</td>
+</tr>
+<tr>
+<td class="id">E11</td>
+<td>专供店铺</td>
+<td>审核驳回</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>驳回原因必选（价格偏高 / 主图不合规 / 信息不完整 / 类目或品牌不符 / 其他，其他需填写）；原因回传卖家侧；改价被驳回时继续按当前有效价供货</td>
+</tr>
+<tr>
+<td class="id">E12</td>
+<td>专供店铺</td>
+<td>待审核提醒</td>
+<td><span class="pr p1">P1</span></td>
+<td>V3.3</td>
+<td>工作台待办出现「专供商品待审核 N」，点击直达对应店铺的待审核列表；新提交时发站内消息</td>
+</tr>
+<tr>
+<td class="id">E13</td>
+<td>专供店铺</td>
+<td>数据统计</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>店铺详情「数据统计」页签：按商品看已铺商城、订单、销售额；按商城看订单数和占比；口径见第八节</td>
+</tr>
+<tr>
+<td class="id">E14</td>
+<td>专供店铺</td>
+<td>已铺商城查看</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>列表最多显示 2 个商城名，其余显示 +N，点开可看全部并跳转到对应商城的商品管理</td>
+</tr>
+<tr>
+<td class="id">E15</td>
+<td>专供店铺</td>
+<td>终止合作的处理</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>合作终止后该店商品从资源广场移除，已上架商城的商品按待确认第 3 条处理；历史订单和统计保留</td>
+</tr>
+<tr>
+<td class="id">E16</td>
+<td>专供店铺</td>
+<td>存量供应商账号迁移引导</td>
+<td><span class="pr p1">P1</span></td>
+<td>V3.2</td>
+<td>有存量供应商账号的会员进入专供店铺时看到迁移提示和进度；迁移策略按待确认第 4 条执行</td>
+</tr>
+<tr>
+<td class="id">R1</td>
+<td>资源广场</td>
+<td>按来源区分商品</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.2</td>
+<td>资源广场可按「平台 / 自营 / 专供」筛选，专供可再按店铺筛选；商品卡标来源；专供商品只对本会员可见</td>
+</tr>
+<tr>
+<td class="id">R2</td>
+<td>资源广场</td>
+<td>专供商品的价格</td>
+<td><span class="pr p0">P0</span></td>
+<td>V3.3</td>
+<td>资源广场、商城上架、经营分析里的成本价都取当前有效专供代发价；改价通过后已上架商城的售价不自动改，商品管理里提示毛利变化</td>
+</tr>
+</tbody>
+</table>
+<h2>六、需求说明</h2>
+<h3>1. 店铺入口（D1–D4）</h3>
+<ul>
+<li>一级菜单「店铺」位于「商品」之后，二级菜单两项：我的店铺、专供店铺。</li>
+<li>原菜单迁移：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>原入口</th>
+<th>去向</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商品库</td>
+<td>我的店铺 › 商品管理</td>
+<td>旧链接 302 跳转，首次进入顶部提示「商品库已搬到店铺 › 我的店铺」</td>
+</tr>
+<tr>
+<td>商品发布 / 商品导入</td>
+<td>我的店铺 › 添加商品</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>供应商管理</td>
+<td>专供店铺</td>
+<td>存量账号迁移完成前保留只读入口，见 E16</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>工作台分步指引的「店铺」一步说明：自有商品在我的店铺，供应商为你开的店在专供店铺，新商品要审核后才能选。</li>
+</ul>
+<h3>2. 我的店铺（M1–M11）</h3>
+<p><strong>页面结构</strong>：店铺信息卡 → 商品管理（页签 + 搜索 + 批量操作 + 列表）→「供给其他会员」预留区。</p>
+<p><strong>商品列表字段</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>口径</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商品</td>
+<td>主图、名称、规格数、货号</td>
+<td>商品库</td>
+</tr>
+<tr>
+<td>成本价</td>
+<td>会员录入的采购成本（含税），仅自己可见</td>
+<td>商品库 · 成本价</td>
+</tr>
+<tr>
+<td>市场价</td>
+<td>会员填写的市场价</td>
+<td>商品库 · 市场价</td>
+</tr>
+<tr>
+<td>建议售价</td>
+<td>上架到商城时默认带出的售价</td>
+<td>商品库 · 建议售价</td>
+</tr>
+<tr>
+<td>库存 / 交期</td>
+<td>现货库存；无现货时显示交期（天）</td>
+<td>商品库</td>
+</tr>
+<tr>
+<td>已铺商城</td>
+<td>已上架该商品的本会员商城</td>
+<td>业务库 · 商城商品</td>
+</tr>
+<tr>
+<td>近 30 天订单</td>
+<td>近 30 天含该商品的商城订单 + 代发订单数</td>
+<td>业务库 · 商城订单、代发订单</td>
+</tr>
+</tbody>
+</table>
+<p><strong>添加商品</strong>（复用卖家侧「新建商品」，会员侧只换入口）：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>找同款发品</td>
+<td>上传图片或输入名称，从平台商品库找同款，自动带出名称、类目、品牌、规格、图片</td>
+</tr>
+<tr>
+<td>采集发品</td>
+<td>粘贴电商商品链接采集信息</td>
+</tr>
+<tr>
+<td>表格发品</td>
+<td>下载模板批量导入，导入后给出成功数和失败明细</td>
+</tr>
+<tr>
+<td>手工录入</td>
+<td>分步表单：图片 / 视频 → 基础信息 → 规格与价格 → 履约与售后 → 详情</td>
+</tr>
+</tbody>
+</table>
+<p>必填项：主图、商品名称、三级分类、品牌、规格、成本价、市场价、建议售价、库存或交期、交付方式。缺必填项只能保存为草稿。</p>
+<p><strong>规则</strong>：</p>
+<ul>
+<li>自营店商品上架即进入资源广场「自营」来源，不需要审核。</li>
+<li>商品下架：资源广场同步移除；已上架到商城的同步下架，并在商品管理里提示受影响的商城数。</li>
+<li>建议售价只是默认值，各商城可单独定价（一个商城 = 一个项目，售价按商城定）。</li>
+<li>成本价只用于会员自己看毛利，不对外展示。</li>
+</ul>
+<h3>3. 专供店铺 · 店铺列表与详情（E1–E5、E14–E16）</h3>
+<p><strong>列表页</strong>：顶部汇总数字（E1）+ 店铺卡片网格（E2）。卡片点击进入店铺详情；待开店的店铺可以点开，但商品列表为空并提示「供应商完成认证后开始供货」。</p>
+<p><strong>店铺详情</strong>：返回列表 → 店铺基本信息 → 页签「供货商品」「数据统计」。</p>
+<p><strong>供货商品列表字段</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>口径</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商品</td>
+<td>主图、名称、规格、类目</td>
+<td>卖家侧 · 商品库</td>
+</tr>
+<tr>
+<td>专供代发价（含税）</td>
+<td>当前有效价；改价时并列新报价和涨跌幅</td>
+<td>卖家侧 · 客户供货配置</td>
+</tr>
+<tr>
+<td>市场价</td>
+<td>供应商填写的市场价</td>
+<td>卖家侧 · 商品库</td>
+</tr>
+<tr>
+<td>审核状态</td>
+<td>待审核（新品 / 改价）/ 已通过 / 已驳回</td>
+<td>买家侧 · 审核记录</td>
+</tr>
+<tr>
+<td>提醒</td>
+<td>高于平台同款、主图待确认、改价影响毛利</td>
+<td>系统预检</td>
+</tr>
+<tr>
+<td>已铺商城</td>
+<td>已上架该商品的本会员商城</td>
+<td>业务库 · 商城商品</td>
+</tr>
+<tr>
+<td>近 30 天订单</td>
+<td>近 30 天含该商品的商城订单 + 代发订单数</td>
+<td>业务库 · 商城订单、代发订单</td>
+</tr>
+</tbody>
+</table>
+<h3>4. 专供商品审核（E7–E12）</h3>
+<p>审核在右侧抽屉中完成，内容从上到下：</p>
+<ol>
+<li><strong>主图</strong>：大图 + 缩略图，系统预检四项，未通过项标橙：</li>
+<li>尺寸不小于 800 × 800；</li>
+<li>无水印、二维码、联系方式；</li>
+<li>图上文字与供价一致，无促销误导；</li>
+<li>与商品名称、规格一致。</li>
+<li><strong>价格</strong>：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新报价 / 专供代发价</td>
+<td>本次待审核的价格</td>
+</tr>
+<tr>
+<td>当前有效价</td>
+<td>改价时显示，并显示涨跌幅；新品不显示</td>
+</tr>
+<tr>
+<td>市场价</td>
+<td>供应商填写</td>
+</tr>
+<tr>
+<td>平台同款参考价</td>
+<td>通过卖家侧同品关联匹配猫超、京东同款的最低价；无同款时显示「暂无同款」</td>
+</tr>
+<tr>
+<td>毛利空间</td>
+<td>（市场价 − 新报价）÷ 市场价</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><strong>售后与发票</strong>：供应商填写的售后政策和开票说明，只读。</li>
+</ol>
+<p><strong>提醒规则</strong>（只提醒，不拦截）：</p>
+<ul>
+<li>新报价高于平台同款参考价：提示差额。</li>
+<li>改价涨价，且该商品已上架商城：提示「已上架 N 个商城，按当前售价毛利将从 x% 降到 y%」。</li>
+<li>主图预检有未通过项：通过按钮旁提示「主图有 N 项待确认」，需勾选「已确认主图」才能通过。</li>
+</ul>
+<p><strong>操作</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>审核通过 · 进入资源广场</td>
+<td>新品：进入资源广场「专供 · 店铺名」。改价：新价立即成为当前有效价，已上架商城的成本同步更新，售价不变。卖家侧显示「客户供价已确认」</td>
+</tr>
+<tr>
+<td>驳回</td>
+<td>必选原因，可补充说明；回传卖家侧。新品不进入资源广场；改价继续按当前有效价供货。供应商修改后重新提交，重新进入待审核</td>
+</tr>
+</tbody>
+</table>
+<p><strong>待审核提醒</strong>：工作台待办「专供商品待审核 N」，点击直达对应店铺并筛到待审核；供应商新提交时发站内消息。</p>
+<h3>5. 数据统计（E13）</h3>
+<ul>
+<li>店铺维度（列表卡片上）：已通过商品数、已铺商城数、近 30 天订单。</li>
+<li>商品维度：每个已通过商品的已铺商城数、近 30 天订单、近 30 天销售额，按订单数倒序。</li>
+<li>商城维度：本店商品在每个商城产生的订单数和占比。</li>
+<li>V1 只做基于现有数据的统计，不做预测、不给经营建议。</li>
+</ul>
+<h3>6. 资源广场联动（R1–R2）</h3>
+<ul>
+<li>资源广场增加来源筛选：全部 / 平台 / 自营 / 专供（可再选店铺）；商品卡左上角标来源。</li>
+<li>专供商品只对本会员可见，显示当前有效专供代发价。</li>
+<li>会员选专供商品上架商城或代发下单时，成本价取当前有效专供代发价；经营分析中专供商品毛利 = 商城售价 − 专供代发价。</li>
+</ul>
+<h2>七、状态定义</h2>
+<h3>1. 专供商品审核状态</h3>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>进入条件</th>
+<th>是否在资源广场</th>
+<th>供货价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>待审核 · 新品</td>
+<td>供应商首次给本会员配置该商品并提交</td>
+<td>否</td>
+<td>—</td>
+</tr>
+<tr>
+<td>待审核 · 改价</td>
+<td>已通过的商品提交了新报价版本</td>
+<td>是</td>
+<td>当前有效价</td>
+</tr>
+<tr>
+<td>已通过</td>
+<td>会员审核通过</td>
+<td>是</td>
+<td>本次通过的价格</td>
+</tr>
+<tr>
+<td>已驳回 · 新品</td>
+<td>会员驳回新品</td>
+<td>否</td>
+<td>—</td>
+</tr>
+<tr>
+<td>已驳回 · 改价</td>
+<td>会员驳回改价</td>
+<td>是</td>
+<td>当前有效价不变</td>
+</tr>
+<tr>
+<td>已停供</td>
+<td>供应商停止供货或合作终止</td>
+<td>否</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 专供店铺合作状态</h3>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>卖家侧条件</th>
+<th>会员侧表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>待开店</td>
+<td>供应商已接受邀请或已迁移，未完成企业认证</td>
+<td>列表显示，商品为空，提示等待认证</td>
+</tr>
+<tr>
+<td>合作中</td>
+<td>认证通过、专供店已开</td>
+<td>正常显示和审核</td>
+</tr>
+<tr>
+<td>已终止</td>
+<td>任一方终止合作</td>
+<td>置底灰显，商品从资源广场移除，历史数据保留</td>
+</tr>
+</tbody>
+</table>
+<h2>八、数据口径</h2>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>口径</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>供货商品</td>
+<td>该店给本会员配置过的商品数（不含已停供）</td>
+<td>卖家侧 · 客户供货配置</td>
+</tr>
+<tr>
+<td>已通过</td>
+<td>当前在资源广场里的商品数：已通过、待审核 · 改价、已驳回 · 改价</td>
+<td>买家侧 · 审核记录</td>
+</tr>
+<tr>
+<td>待审核</td>
+<td>待审核 · 新品 + 待审核 · 改价</td>
+<td>买家侧 · 审核记录</td>
+</tr>
+<tr>
+<td>已铺商城</td>
+<td>上架过该店任一商品、且当前仍在架的本会员商城数</td>
+<td>业务库 · 商城商品</td>
+</tr>
+<tr>
+<td>近 30 天订单</td>
+<td>近 30 天含该商品的商城订单 + 代发订单；一单多商品按商品分别计入</td>
+<td>业务库 · 商城订单、代发订单</td>
+</tr>
+<tr>
+<td>近 30 天销售额</td>
+<td>商城售价 × 数量，扣除退款；代发订单按代发价</td>
+<td>业务库 · 订单明细</td>
+</tr>
+<tr>
+<td>毛利</td>
+<td>商城售价 − 会员成本（自营取成本价，专供取当前有效专供代发价，平台取会员价）</td>
+<td>业务库 + 商品库</td>
+</tr>
+</tbody>
+</table>
+<h2>九、卖家侧依赖</h2>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>依赖</th>
+<th>说明</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>店铺与商品模型</td>
+<td>买家侧按「店铺 + 本店 SKU」读取，自营店与专供店共用（V3.1）</td>
+<td>卖家 1.0</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>客户供货配置与报价版本</td>
+<td>新报价提交后推给买家侧，买家侧回传审核结果</td>
+<td>卖家 2.0 客户专供</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>「客户已驳回」状态和驳回原因</td>
+<td>卖家侧目前只有「待对方确认」「客户供价已确认」，需新增</td>
+<td>待确认第 1 条</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>合作状态与终止事件</td>
+<td>待开店 / 合作中 / 已终止的变更推送给买家侧</td>
+<td>待卖家侧确认</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>同品关联</td>
+<td>用于平台同款参考价和找同款发品</td>
+<td>卖家 1.0</td>
+</tr>
+<tr>
+<td>S6</td>
+<td>新建商品组件</td>
+<td>四种发品方式和表单在会员侧复用</td>
+<td>待卖家侧确认复用方式</td>
+</tr>
+</tbody>
+</table>
+<h2>十、待确认事项</h2>
+<ol>
+<li><span class="ck">☐</span> 卖家侧是否新增「客户已驳回」状态和驳回原因（卖家 PRD 目前没有）。</li>
+<li><span class="ck">☐</span> 审核时效：供应商提交后多少天未审核要提醒或自动处理；是否支持批量审核。</li>
+<li><span class="ck">☐</span> 合作终止后，已上架到商城的专供商品是立即下架还是卖完下架。</li>
+<li><span class="ck">☐</span> 存量供应商账号的迁移节奏，「供应商管理」只读入口保留多久。</li>
+<li><span class="ck">☐</span> 专供店铺对哪些权益等级可见（目前原型只给最高权益；会员开自营店不设门槛）。</li>
+<li><span class="ck">☐</span> 阿里权益（自有猫超、优品）商品是否归入自营店，以及在自营店里能否编辑。</li>
+<li><span class="ck">☐</span> 自营店是否收费、是否收订单服务费（V3.4 评审点）。</li>
+<li><span class="ck">☐</span> 自营商品的采购成本录入方式：手填，还是从专供店订单带出（V3.4 评审点）。</li>
+</ol>
+<p>相关：卖家侧专供店 PRD（prd.88buys.com › merchant › ai-shop › exclusive）；《买家 Q4 产品版本规划与功能清单 V2》V3.2–V3.4；画布「店铺 › 我的店铺」「店铺 › 专供店铺」。</p>
+</div></main>
+</template>
+<div id="dc-mount"></div>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1600,"height":6000}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
